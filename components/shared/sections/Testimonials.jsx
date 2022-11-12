@@ -125,12 +125,7 @@ const Testimonials = () => {
                               industry
                             </h5>
                           </a>
-                          <a
-                            target={"_blank"}
-                            rel="noreferrer"
-                            href="/Applications/Animal-Health"
-                            className="h5 "
-                          >
+                          <a href="/Applications/Animal-Health" className="h5 ">
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>
