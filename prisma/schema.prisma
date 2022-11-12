@@ -1,0 +1,610 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model product_details {
+  id            Int      @id @default(autoincrement())
+  product_id    Int      @unique(map: "FK_Product_details")
+  SKU           String?  @db.VarChar(255)
+  MRP           Float?
+  regular_price Float?
+  sale_price    Float?
+  currency      String?  @db.VarChar(255)
+  product_unit  String?  @db.VarChar(255)
+  shipping_cost Float?   @db.Float
+  offer_price   Float?   @default(0) @db.Float
+  products      products @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "FK_Product_details")
+}
+
+model productdescription {
+  id             Int      @id @default(autoincrement())
+  product_id     Int      @unique(map: "FK_product_desc")
+  Features       String?  @db.Text
+  ProductTesting String?  @db.Text
+  Applications   String?  @db.Text
+  Compliance     String?  @db.Text
+  products       products @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "FK_product_desc")
+}
+
+model products {
+  id                          Int                          @id @default(autoincrement())
+  prod_id                     String?                      @db.VarChar(225)
+  product_name                String?                      @db.VarChar(255)
+  product_description         String?                      @db.Text
+  CatalogueNumber             String?                      @db.VarChar(255)
+  LotNumber                   String?                      @db.VarChar(255)
+  short_description           String?                      @db.VarChar(255)
+  Differentiation_tab         String?                      @db.VarChar(20)
+  Pluripotency_tab            String?                      @db.VarChar(20)
+  Product_details_pdf         String?                      @db.Text
+  ViralScreening_tab          String?                      @db.VarChar(20)
+  category_id                 Int?
+  description_tab             String?                      @db.VarChar(20)
+  product_image               String?                      @db.Text
+  specification_tab           String?                      @db.VarChar(20)
+  deliver_type                String?                      @db.VarChar(255)
+  stock                       String?                      @db.VarChar(255)
+  is_promotions               Boolean?                     @default(false)
+  type                        String?                      @db.VarChar(100)
+  product_slug                String?                      @unique(map: "slug") @db.VarChar(255)
+  resources_id                Int?                         @default(0)
+  category                    category?                    @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "FK_category")
+  microbiology_viralscreening microbiology_viralscreening?
+  product_details             product_details?
+  productdescription          productdescription?
+  productspecification        productspecification?
+
+  @@index([category_id], map: "FK_Product_cat")
+  @@index([id], map: "id")
+}
+
+model productspecification {
+  id                         Int      @id @default(autoincrement())
+  product_id                 Int      @unique(map: "FK_Product_spec")
+  LineHistory                String?  @db.VarChar(550)
+  CellType                   String?  @db.VarChar(550)
+  Cryopreservedvolume        String?  @db.VarChar(550)
+  Storage                    String?  @db.VarChar(550)
+  PostFreezeViability        String?  @db.VarChar(550)
+  Growth                     String?  @db.VarChar(550)
+  Ethnicity                  String?  @db.VarChar(550)
+  Age                        String?  @db.VarChar(100)
+  Sex                        String?  @db.VarChar(100)
+  Passage_Number             String?  @db.VarChar(100)
+  TissueSource               String?  @db.VarChar(100)
+  CellNumbers                String?  @db.VarChar(100)
+  Adherence                  String?  @db.VarChar(100)
+  Viability                  String?  @db.VarChar(100)
+  Base_Formulation           String?  @db.VarChar(100)
+  Serum                      String?  @db.VarChar(100)
+  Target_Species             String?  @db.VarChar(100)
+  Glutamine                  String?  @db.VarChar(100)
+  Buffer                     String?  @db.VarChar(100)
+  Indicator                  String?  @db.VarChar(100)
+  Growth_Factors             String?  @db.VarChar(100)
+  Target                     String?  @db.VarChar(100)
+  Detection_method           String?  @db.VarChar(100)
+  Reaction_Mix_1             String?  @db.VarChar(100)
+  Reaction_Mix_2             String?  @db.VarChar(100)
+  Internal_Control           String?  @db.VarChar(100)
+  Positive_Control_Templates String?  @db.VarChar(100)
+  products                   products @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "FK_Product_spec")
+}
+
+model verificationtokens {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model pages {
+  id           Int
+  pages_id     String   @db.VarChar(221)
+  pages_name   String?  @db.VarChar(255)
+  page_content String?  @db.Text
+  created_by   String?  @db.VarChar(199)
+  deleted_at   String?  @db.VarChar(199)
+  created_at   DateTime @default(now()) @db.Timestamp(0)
+
+  @@id([id, pages_id])
+}
+
+model customer_address_details {
+  id            Int        @id @default(autoincrement())
+  add_id        String?    @db.VarChar(255)
+  customer_id   Int?       @unique(map: "UNIQUE_CUSTOMER")
+  B_First       String?    @db.VarChar(255)
+  B_last        String?    @db.VarChar(255)
+  B_Email       String?    @db.VarChar(255)
+  B_PhoneNumber String?    @db.VarChar(255)
+  B_SameAsOrg   Boolean?
+  B_Country     String?    @db.VarChar(255)
+  B_County      String?    @db.VarChar(255)
+  B_Town        String?    @db.VarChar(255)
+  B_ZIP         String?    @db.VarChar(255)
+  B_Address1    String?    @db.VarChar(255)
+  B_Address2    String?    @db.VarChar(255)
+  S_First       String?    @db.VarChar(255)
+  S_last        String?    @db.VarChar(255)
+  S_Email       String?    @db.VarChar(255)
+  S_PhoneNumber String?    @db.VarChar(255)
+  S_SameAsOrg   Boolean?
+  S_Country     String?    @db.VarChar(255)
+  S_County      String?    @db.VarChar(255)
+  S_Town        String?    @db.VarChar(255)
+  S_ZIP         String?    @db.VarChar(255)
+  S_Address1    String?    @db.VarChar(255)
+  S_Address2    String?    @db.VarChar(255)
+  customers     customers? @relation(fields: [customer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "customer_address_details_ibfk_1")
+}
+
+model customer_application_details {
+  id                Int        @id @default(autoincrement())
+  customer_id       Int?       @unique(map: "customer_id")
+  Application_id    String?    @db.VarChar(98)
+  Scope             String?    @db.VarChar(255)
+  Compliance        String?    @db.VarChar(255)
+  Contact_Email     String?    @db.VarChar(122)
+  Organization_type String?    @db.VarChar(125)
+  Organization_Name String?    @db.VarChar(122)
+  Website           String?    @db.VarChar(255)
+  Country           String?    @db.VarChar(255)
+  County_States     String?    @db.VarChar(255)
+  Address_line1     String?    @db.VarChar(255)
+  Address_line2     String?    @db.VarChar(255)
+  Town_City         String?    @db.VarChar(255)
+  Postcode_ZIP      String?    @db.VarChar(255)
+  VAT_number        String?    @db.VarChar(255)
+  VAT_Exemption     String?    @db.VarChar(255)
+  customers         customers? @relation(fields: [customer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "customer_application_details_ibfk_1")
+}
+
+model order_details {
+  id                   Int      @id @default(autoincrement())
+  order_id             Int
+  product_id           Int
+  product_price        Float?   @db.Float
+  product_quantity     Int?
+  total_amount         Float?   @db.Float
+  total_tax            Float?   @db.Float
+  product_order_status String?  @db.VarChar(100)
+  created_at           DateTime @default(now()) @db.Timestamp(0)
+  updated_at           DateTime @default(now()) @db.Timestamp(0)
+  ProductName          String   @db.VarChar(200)
+  description          String?  @db.Text
+  imgUrl               String   @db.Text
+  orders               orders   @relation(fields: [order_id], references: [id], onDelete: Cascade, map: "order_id_fk")
+
+  @@index([order_id], map: "order_id_fk")
+  @@index([product_id], map: "product_id_fk")
+}
+
+model orders {
+  id                    Int             @id @default(autoincrement())
+  order_id              String?         @db.VarChar(100)
+  customer_id           Int
+  order_date            DateTime        @db.Date
+  order_status          String?         @db.VarChar(50)
+  total_amount          Float?          @db.Float
+  total_tax             Float?          @default(0) @db.Float
+  payment_type          String?         @db.VarChar(90)
+  payment_status        String?         @db.VarChar(100)
+  transaction_id        String?         @db.VarChar(150)
+  created_at            DateTime        @default(now()) @db.Timestamp(0)
+  updated_at            DateTime        @default(now()) @db.Timestamp(0)
+  vat_percent           Float?          @default(0) @db.Float
+  vat_amount            Float?          @default(0) @db.Float
+  total_shipping_cost   Float?          @default(0) @db.Float
+  product_shipping_cost Float?          @default(0) @db.Float
+  country_shipping_cost Float?          @default(0) @db.Float
+  po_number             String?         @db.Text
+  customers             customers       @relation(fields: [customer_id], references: [id], onDelete: Cascade, map: "customer_fk")
+  order_details         order_details[]
+
+  @@index([customer_id], map: "customer_fk")
+}
+
+model account {
+  id                 Int     @id @default(autoincrement())
+  provider           String  @db.VarChar(255)
+  providerAccountId  String  @db.VarChar(255)
+  refresh_token      String  @db.VarChar(255)
+  access_token       String? @db.VarChar(255)
+  expires_at         Int?
+  token_type         String? @db.VarChar(255)
+  scope              String  @db.VarChar(255)
+  id_token           String  @db.VarChar(255)
+  userId             Int
+  oauth_token_secret String  @db.VarChar(255)
+  oauth_token        String  @db.VarChar(255)
+  session_state      String  @db.VarChar(255)
+  user               user    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "UserId")
+
+  @@index([userId], map: "UserId")
+}
+
+model category {
+  id                Int        @id @default(autoincrement())
+  category_name     String     @db.VarChar(255)
+  slug              String?    @db.Text
+  cat_id            String?    @db.VarChar(255)
+  short_description String?    @db.Text
+  image             String?    @db.Text
+  menu_order        Int
+  is_page           String?    @db.VarChar(255)
+  urllink           String?    @db.Text
+  parentcategory    Int
+  is_perent         Int
+  status            Int
+  created_date      DateTime   @default(now()) @db.Timestamp(0)
+  updated_date      DateTime   @default(now()) @db.Timestamp(0)
+  deleted_at        String?    @db.VarChar(255)
+  category          category   @relation("categoryTocategory_parentcategory", fields: [parentcategory], references: [id], onUpdate: Restrict, map: "FK_Category_Subcategory")
+  other_category    category[] @relation("categoryTocategory_parentcategory")
+  products          products[]
+
+  @@index([parentcategory], map: "FK_Category_Subcategory")
+}
+
+model customers {
+  id                           Int                           @id @default(autoincrement())
+  customer_id                  String?                       @db.VarChar(50)
+  firstname                    String?                       @db.VarChar(225)
+  lastname                     String?                       @db.VarChar(255)
+  email                        String?                       @db.VarChar(255)
+  phoneno                      String?                       @db.VarChar(255)
+  location                     String?                       @db.VarChar(255)
+  password                     String?                       @db.Text
+  status                       Int
+  newsletter                   Boolean?
+  tnc                          Boolean?
+  created_at                   DateTime?                     @default(now()) @db.Timestamp(0)
+  deleted_at                   DateTime?                     @db.Timestamp(0)
+  is_verified                  Int?                          @default(0)
+  referral_link                String?                       @db.VarChar(50)
+  customer_address_details     customer_address_details?
+  customer_application_details customer_application_details?
+  form_details                 form_details[]
+  orders                       orders[]
+  resorces_purchese_details    resorces_purchese_details[]
+}
+
+model microbiology_viralscreening {
+  id                                  Int      @id @default(autoincrement())
+  product_id                          Int      @unique(map: "FK_Productspecs")
+  HepatitisA                          String?  @db.VarChar(50)
+  HepatitisB                          String?  @db.VarChar(50)
+  HepatitisC                          String?  @db.VarChar(50)
+  Mycoplasma                          String?  @db.VarChar(50)
+  Inoculationformicrobiologicalgrowth String?  @db.VarChar(100)
+  Genotype                            String?  @db.VarChar(50)
+  ReprogrammingMethod                 String?  @db.VarChar(50)
+  ReprogrammingConditions             String?  @db.VarChar(50)
+  Differentiation                     String?  @db.Text
+  Differentiationimages               String?  @db.Text
+  Pluripotencyimages                  String?  @db.Text
+  Pluripotency                        String?  @db.Text
+  HIV_1                               String?  @db.VarChar(50)
+  HIV_2                               String?  @db.VarChar(50)
+  Sterility                           String?  @db.Text
+  Fungi                               String?  @db.Text
+  Antibiotics_Added                   String?  @db.Text
+  Validation                          String?  @db.Text
+  Specificity                         String?  @db.Text
+  Positive_Controls                   String?  @db.Text
+  Biosafety_and_Handling              String?  @db.Text
+  products                            products @relation(fields: [product_id], references: [id], onDelete: Cascade, map: "FK_Productspecs")
+}
+
+model post {
+  id              Int       @id @default(autoincrement())
+  slug            String?   @db.Text
+  name            String    @db.VarChar(255)
+  description     String?   @db.Text
+  thumbnail       String?   @db.Text
+  banner_img      String?   @db.Text
+  content         String?   @db.LongText
+  post_categories Int?
+  authorId        String    @db.VarChar(100)
+  published       Boolean   @default(false)
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  updated_at      DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at      DateTime? @db.DateTime(0)
+  tag             String?   @db.VarChar(200)
+  features        Boolean?  @default(false)
+  authorName      String?   @db.VarChar(100)
+}
+
+model profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  userId Int     @unique(map: "Profile_userId_key")
+  user   user    @relation(fields: [userId], references: [id], map: "Profile_userId_fkey")
+}
+
+model session {
+  id           Int      @id @default(autoincrement())
+  expires      DateTime @default(now()) @db.Timestamp(0)
+  sessionToken String   @unique(map: "UNIQUE") @db.VarChar(255)
+  userId       Int
+  user         user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "SessionUser")
+
+  @@index([userId], map: "SessionUser")
+}
+
+model user {
+  id                    Int       @id @default(autoincrement())
+  name                  String?   @db.VarChar(255)
+  email                 String?   @unique(map: "UNIQUE") @db.VarChar(255)
+  email_verified        DateTime  @default(now()) @db.Timestamp(0)
+  image                 String?   @db.VarChar(255)
+  Account               Int
+  session               String?   @db.VarChar(255)
+  profile               Int
+  Password              String    @db.VarChar(255)
+  account               account[]
+  profile_profileTouser profile?
+  session_sessionTouser session[]
+}
+
+model country_shipping_cost {
+  id            Int      @id @default(autoincrement())
+  country_name  String?  @db.VarChar(100)
+  shipping_cost Float?   @db.Float
+  created_at    DateTime @default(now()) @db.Timestamp(0)
+  deleted_at    DateTime @default(now()) @db.Timestamp(0)
+}
+
+model tax_details {
+  id         Int      @id
+  tax_id     String?  @db.VarChar(100)
+  tax_name   String?  @db.VarChar(100)
+  tax_type   String?  @db.VarChar(100)
+  tax_value  Float?   @db.Float
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  created_by String?  @db.VarChar(100)
+  updated_at DateTime @default(now()) @db.Timestamp(0)
+}
+
+model campaign_data {
+  id                                       String         @db.VarChar(255)
+  slug                                     String?        @db.Text
+  title                                    String?        @db.Text
+  image                                    String?        @db.VarChar(100)
+  content                                  String?        @db.LongText
+  created_by                               String?        @db.Text
+  posted_at                                DateTime       @default(now()) @db.Timestamp(0)
+  tag                                      String?        @db.Text
+  status                                   Int?           @default(0)
+  campaign_id                              Int            @id @default(autoincrement())
+  form_details                             String?        @db.LongText
+  campaign_description                     String?        @db.LongText
+  deleted_at                               DateTime?      @db.DateTime(0)
+  form_details_campaign_dataToform_details form_details[]
+}
+
+model promotions_offer {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  title            String?   @db.Text
+  url              String?   @db.Text
+  image            String?   @db.VarChar(255)
+  start_date       DateTime? @db.Date
+  end_date         DateTime? @db.Date
+  customer_type    Int       @default(0)
+  product_category String?   @db.Text
+  product_id       String?   @db.Text
+  discount_percent Float?    @db.Float
+  status           Int?      @default(0)
+  coupan_code      String?   @db.Text
+  delivery_country String?   @db.Text
+  promo_type       String    @db.VarChar(100)
+  banner_type      String?   @db.VarChar(100)
+  btn_text         String?   @db.Text
+  promo_content    String?   @db.Text
+  promo_id         Int       @id @default(autoincrement())
+  delivery_type    String?   @db.LongText
+  gender           String?   @db.LongText
+  ethnicity        String?   @db.Text
+}
+
+model campaign_users {
+  user_id      Int       @id @default(autoincrement())
+  email        String    @db.VarChar(200)
+  campaign_id  Int?
+  created_date DateTime? @default(now()) @db.DateTime(0)
+  updated_at   DateTime? @default(now()) @db.DateTime(0)
+  deleted_at   DateTime? @default(now()) @db.DateTime(0)
+  status       Int?      @default(0)
+}
+
+model form_details {
+  form_id       Int            @id @default(autoincrement())
+  user_id       Int?
+  campaign_id   Int?
+  input_name    String?        @db.VarChar(200)
+  input_value   String?        @db.VarChar(200)
+  added_at      DateTime?      @default(now()) @db.DateTime(0)
+  fileType      String?        @db.VarChar(200)
+  campaign_data campaign_data? @relation(fields: [campaign_id], references: [campaign_id], onDelete: Cascade, map: "foreign_campaign_ids")
+  customers     customers?     @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "foreign_user_id")
+
+  @@index([campaign_id], map: "foreign_campaign_ids")
+  @@index([user_id], map: "foreign_user_id")
+}
+
+model terms_data {
+  id         Int       @id @default(autoincrement())
+  title      String?   @db.Text
+  updated_at DateTime? @default(now()) @db.DateTime(0)
+  content    String?   @db.LongText
+  updated_by DateTime? @default(now()) @db.DateTime(0)
+}
+
+model job_openings {
+  id              Int       @id @default(autoincrement())
+  job_id          String?   @db.Text
+  position_name   String?   @db.VarChar(255)
+  job_description String?   @db.Text
+  company         String?   @db.VarChar(255)
+  location        String?   @db.VarChar(255)
+  salary          String?   @db.VarChar(255)
+  Job_type        String?   @db.Text
+  Qualifications  String?   @db.Text
+  job_details     String?   @db.LongText
+  status          Boolean?
+  deleted_at      DateTime? @db.DateTime(0)
+  added_by        String?   @db.Text
+  created_at      DateTime? @default(now()) @db.DateTime(0)
+  internship      Boolean?  @default(false)
+  image           String?   @db.Text
+}
+
+model resorces_purchese_details {
+  id               Int        @id @default(autoincrement())
+  purchase_id      String?    @db.Text
+  user_id          Int?
+  resources_id     Int?
+  txn_id           String?    @db.Text
+  payment_id       String?    @db.Text
+  collected_amount Float?     @db.Float
+  strated_from     DateTime?  @default(now()) @db.DateTime(0)
+  expiry_date      DateTime?  @db.DateTime(0)
+  access_days      String?    @db.VarChar(100)
+  refrence_id      String?    @db.Text
+  created_at       DateTime?  @default(now()) @db.DateTime(0)
+  deleted_at       DateTime?  @db.DateTime(0)
+  updated_at       DateTime?  @default(now()) @db.DateTime(0)
+  customers        customers? @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "FK_Users")
+  resources        resources? @relation(fields: [resources_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "FK_resources")
+
+  @@index([user_id], map: "FK_Users")
+  @@index([resources_id], map: "FK_resources")
+}
+
+model resources {
+  id                                               Int                         @id @default(autoincrement())
+  resources_id                                     String                      @unique(map: "Unique_Res_ID") @db.VarChar(255)
+  resources_category_id                            Int?
+  resources_name                                   String?                     @db.VarChar(255)
+  resources_category                               String?                     @db.Text
+  access_type                                      Int?                        @default(1)
+  short_description                                String?                     @db.Text
+  resources_price                                  Float?                      @db.Float
+  resources_url                                    String?                     @db.Text
+  resources_preview                                String?                     @db.Text
+  resources_status                                 Int?                        @default(0) @db.TinyInt
+  resources_key                                    String?                     @db.Text
+  created_by                                       String?                     @db.Text
+  created_at                                       DateTime?                   @default(now()) @db.DateTime(0)
+  deleted_at                                       DateTime?                   @db.DateTime(0)
+  resources_content                                String?                     @db.Text
+  resourcesFileType                                String?                     @db.Text
+  downloads                                        String?                     @db.VarChar(100)
+  tags                                             String?                     @db.VarChar(100)
+  resources_category_tokan                         String?                     @db.Text
+  related_products                                 String?                     @db.LongText
+  product_List                                     String?                     @db.LongText
+  is_service                                       Boolean?                    @default(false)
+  resources_category_resourcesToresources_category resources_category?         @relation(fields: [resources_category_id], references: [cat_id], onDelete: Cascade, map: "FKResourcesCat")
+  resorces_purchese_details                        resorces_purchese_details[]
+
+  @@index([resources_category_id], map: "FKResourcesCat")
+}
+
+model resources_category {
+  cat_id                   Int                  @id @default(autoincrement())
+  cat_name                 String?              @db.Text
+  slug                     String?              @db.Text
+  short_description        String?              @db.Text
+  cat_access               Int?                 @db.TinyInt
+  created_at               DateTime?            @default(now()) @db.DateTime(0)
+  updated_at               DateTime?            @default(now()) @db.DateTime(0)
+  deleted_at               DateTime?            @db.DateTime(0)
+  created_by               String?              @db.VarChar(50)
+  category_image           String?              @db.Text
+  category_content         String?              @db.Text
+  master_id                Int?
+  resources_category       resources_category?  @relation("resources_categoryToresources_category", fields: [master_id], references: [cat_id], onDelete: Cascade, map: "FK_MasterKey")
+  resources                resources[]
+  other_resources_category resources_category[] @relation("resources_categoryToresources_category")
+
+  @@index([master_id], map: "FK_MasterKey")
+}
+
+model events_details {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.Text
+  slug        String    @db.Text
+  image       String?   @db.Text
+  location    String?   @db.Text
+  event_type  String?   @db.Text
+  application String?   @db.Text
+  content     String?   @db.LongText
+  date        DateTime  @db.DateTime(0)
+  timing      String?   @db.Text
+  start       DateTime? @db.DateTime(0)
+  end         DateTime? @db.DateTime(0)
+  is_campaign Boolean?
+  created_at  DateTime  @default(now()) @db.DateTime(0)
+  deleted_at  DateTime? @db.DateTime(0)
+  created_by  String?   @db.Text
+  Sponsor     String?   @db.Text
+  meetup_link String?   @db.Text
+  featured    Boolean?  @default(false)
+  gallery     String?   @db.LongText
+  banner      String?   @db.Text
+  status      Int?      @default(0)
+}
+
+model resources_data {
+  id                            Int                             @id @default(autoincrement())
+  uuid                          String?                         @db.VarChar(100)
+  resources_id                  Int?
+  datasheet_name                String?                         @db.Text
+  datasets_description          String?                         @db.Text
+  created_date                  DateTime?                       @db.DateTime(0)
+  updated_date                  DateTime?                       @db.DateTime(0)
+  sequencing                    String?                         @db.LongText
+  structural_variation          String?                         @db.LongText
+  deleted_at                    DateTime?                       @db.DateTime(0)
+  datasheet_files               String?                         @db.Text
+  resources_human_alignment     resources_human_alignment[]
+  resources_structural_analysis resources_structural_analysis[]
+}
+
+model resources_human_alignment {
+  id             Int             @id @default(autoincrement())
+  uuid           String?         @db.VarChar(100)
+  sequence_id    String?         @db.VarChar(20)
+  alignment      Int?
+  rel_resources  Int?
+  created_at     DateTime?       @db.DateTime(0)
+  created_by     String?         @db.VarChar(20)
+  resources_data resources_data? @relation(fields: [rel_resources], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Rel_FK_Resources")
+
+  @@index([rel_resources], map: "Rel_FK_Resources")
+}
+
+model resources_structural_analysis {
+  id             Int             @id @default(autoincrement())
+  uuid           String?         @db.VarChar(100)
+  rel_resources  Int?
+  type           String?         @db.VarChar(40)
+  length         Int?
+  read_support   Int?
+  location       String?         @db.VarChar(100)
+  created_at     DateTime?       @db.DateTime(0)
+  created_by     String?         @db.Text
+  updated_at     DateTime?       @db.DateTime(0)
+  position       String?         @db.Text
+  resources_data resources_data? @relation(fields: [rel_resources], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_stuctural")
+
+  @@index([rel_resources], map: "FK_stuctural")
+}

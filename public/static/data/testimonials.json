@@ -1,0 +1,20 @@
+{
+    "reviews": [
+        {
+            "name": "Prof Holland at the University of Oxford said -",
+            "images": ["img/reviews/testimonial1.jpg", "img/reviews/testimonial2.jpg"],
+            "avatar": "img/avatar/1-100x100.png",
+            "date": "October 30",
+            "rate": 5,
+            "text": "The experts at Stemnovate gave helpful advice and continue to show an interest in our work – a refreshing change to deal with such a professional and knowledgeable company"
+        },
+        {
+            "name": "Academic Institution-University of Bern",
+            "images": ["img/reviews/testimonial1.jpg", "img/reviews/testimonial2.jpg"],
+            "avatar": "img/avatar/1-100x100.png",
+            "date": "October 30",
+            "rate": 5,
+            "text": "Thank you for your presentations, they were really great and stimulating. I am very happy we met and that we could get the cells in culture !"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+#imgDiv {
+    /* Background pattern from Toptal Subtle Patterns */
+    background-image: url("https://stemnovateimages.s3.us-east-2.amazonaws.com/Vector-svg.svg");
+
+    width: 100%;
+    height: 451px;
+    background-size: 100% 100%;
+
+    background-color: #008f9c;
+    background-repeat: no-repeat;
+}
+
+#msgtext {
+    padding-top: 5%;
+    padding-left: 46%;
+}
+
+.text-color {
+    color: #008f9c;
+    padding: 1%;
+}
+
+.bg-orange {
+    background-color: #ef5f33;
+    padding: 5px;
+}

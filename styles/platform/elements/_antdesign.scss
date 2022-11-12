@@ -1,0 +1,114 @@
+.ant-select-dropdown {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .ant-select-item-option-content {
+        font-size: 14px;
+    }
+
+    .ant-select-item-option {
+        padding: 6px 10px;
+
+        .ant-select-item-option-selected {
+            background-color: $color-1st;
+        }
+    }
+}
+
+.ant-dropdown {
+    .ant-dropdown-menu-item {
+        a {
+            font-size: 14px !important;
+            font-weight: 400;
+        }
+    }
+}
+
+.ant-collapse {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, .85);
+    font-size: 16px;
+    font-variant: tabular-nums;
+    line-height: 1.66667;
+    list-style: none;
+    font-feature-settings: "tnum";
+    background-color: #fafafa;
+    border: 1px solid #d9d9d9;
+    border-bottom: 0;
+    border-radius: 2px;
+}
+
+.ant-skeleton {
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.ant-drawer {
+    z-index: 99999;
+
+    .ant-drawer-body {
+        padding: 0;
+    }
+}
+
+.ant-alert {
+    .ant-alert-message {
+        font-size: 14px;
+        color: $color-heading;
+    }
+}
+
+.ant-modal {
+    .ant-modal-content {
+        .ant-modal-confirm-body {
+            .ant-modal-confirm-title {
+                font-size: 16px;
+            }
+
+            .ant-modal-confirm-content {
+                font-size: 14px;
+            }
+        }
+    }
+
+}
+
+.ant-back-top {
+    right: 30px;
+    bottom: 115px;
+
+    .ps-btn--backtop {
+
+        border: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 4px;
+        background-color: $color-gray-light;
+
+        i {
+            position: relative;
+            top: 4px;
+            font-size: 27px;
+        }
+
+        &:hover {
+            background-color: $color-2nd;
+
+            i {
+                color: $color-heading;
+            }
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        right: 12px;
+        bottom: 133px;
+
+        .ps-btn--backtop {
+            height: 45px;
+            width: 45px;
+        }
+    }
+}

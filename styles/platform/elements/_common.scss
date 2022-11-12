@@ -1,0 +1,80 @@
+// .ps-logo {
+//     img {
+//         max-height: 54px;
+//     }
+// }
+
+.ps-section {
+    display: grid;
+}
+
+.resources-list {
+    &:nth-child(even) {
+        background-image: url("/static/image/aboutb1.webp");
+        background-size: cover;
+        background-position: 0 0%;
+        background-repeat: no-repeat;
+        position: relative;
+        min-height: 150px;
+        padding-top: 3%;
+
+
+
+        &.center-box p {
+            font-size: 18px;
+        }
+
+    }
+
+    &:nth-child(odd) {
+        background-image: url("/static/img/banners/aboutb2.webp");
+        background-size: cover;
+        background-position: 0 0%;
+        background-repeat: no-repeat;
+        position: relative;
+        padding-top: 2%;
+
+        // & .font-weight-bold {
+        //     color: #fff !important;
+        // }
+
+        p {
+            color: #fff !important;
+        }
+
+        strong {
+            color: #fff !important;
+        }
+
+        span {
+            color: #fff !important;
+        }
+
+        h1 {
+            color: #fff !important;
+        }
+
+        h2 {
+            color: #fff !important;
+        }
+
+        h3 {
+            color: #fff !important;
+        }
+
+        h4 {
+            color: #fff !important;
+        }
+
+        h5 {
+            color: #fff !important;
+        }
+
+        h6 {
+            color: #fff !important;
+        }
+
+
+
+    }
+}

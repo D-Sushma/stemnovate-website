@@ -1,0 +1,48 @@
+﻿{
+    "main_menu": [
+        {
+            "id": "1",
+            "text": "Products",
+            "external": "true",
+            "module": "homepages",
+            "url": "/"
+        },
+        {
+            "id": "2",
+            "text": "Services",
+            "url": "/shop",
+            "extraClass": "menu-item-has-children has-mega-menu",
+            "subClass": "sub-menu"
+        },
+        {
+            "id": "3",
+            "text": "Contact Us",
+            "url": "/about-us",
+            "extraClass": "menu-item-has-children mega-menu",
+            "subClass": "sub-menu"
+        }
+    ],
+
+    "header_topbar_menu": [
+        {
+            "id": "1",
+            "text": "About",
+            "url": "/about"
+        },
+        {
+            "id": "2",
+            "text": "Order Tracking",
+            "url": "/shop/order-tracking"
+        },
+        {
+            "id": "3",
+            "text": "Blog",
+            "url": "/shop/order-tracking"
+        },
+        {
+            "id": "4",
+            "text": "contact",
+            "url": "/contact"
+        }
+    ]
+}

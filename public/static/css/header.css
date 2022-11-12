@@ -1,0 +1,122 @@
+/* .fa {
+    padding-right: 10px;
+  } */
+
+.navbar {
+    background-color: #003e4c;
+
+    /* background: linear-gradient(90deg, rgba(192,230,240,1) 0%, rgba(31,155,165,1) 100%); */
+    width: 100%;
+    height: 53px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-top: 0;
+}
+
+.logo {
+    font-family: "Arial";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 50px;
+    color: #7a7a7a;
+    float: left;
+    margin-left: 20px;
+}
+
+.analytics .topButton {
+    font-family: "Arial";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 46px;
+    color: #fefefe;
+    float: left;
+    margin: 0 25px;
+    /* border-bottom: 3px solid transparent; */
+}
+
+.analytics:hover .topButton {
+    /* border-bottom: 3px solid #848484; */
+}
+
+.analyticsDropDown {
+    position: absolute;
+    top: 41px;
+    left: 0px;
+    display: none;
+    /* border-left: 1px solid #f2f2f2;
+      border-right: 1px solid #f2f2f2; */
+    width: 100%;
+    /* background: #ffffff; */
+    /* background: #f0f2f5; */
+    z-index: 99999;
+    height: 50vh;
+}
+
+.analyticsDropDown .moduleGroup {
+    width: 24vw;
+    list-style-type: none;
+    font-family: "Arial";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+    /* border-bottom: 1px solid #f2f2f2; */
+    border-top: 0px solid transparent;
+    border-left: 5px solid transparent;
+    padding: 10px;
+}
+
+.modulesSet1 {
+    position: absolute;
+    top: 15px;
+    left: 0vw;
+    border: 1px solid #f2f2f2;
+    display: none;
+    border-right: 2px solid #d3d3d3;
+    /* min-height: 50vh; */
+    background-color: #f2f2f2;
+}
+.modulesSet {
+    position: absolute;
+    top: 0px;
+    left: 24vw;
+    /* border: 1px solid #f2f2f2; */
+    display: none;
+    /* border-right: 2px solid #d3d3d3; */
+    min-height: 50vh;
+    /* background-color: #f2f2f2; */
+}
+
+.modulesbg {
+    /* position: absolute;
+    top: 0px;
+    left: 24vw; */
+    border: 1px solid #f2f2f2;
+    /* display: none; */
+    border-right: 2px solid #d3d3d3;
+    /* min-height: 50vh; */
+    background-color: #f2f2f2;
+    padding: 8px;
+}
+
+.singleModule {
+    width: 23vw;
+    list-style-type: none;
+    font-family: "Arial";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 32px;
+    border-bottom: 1px solid #f2f2f2;
+    border-left: 5px solid transparent;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+.visible {
+    display: block;
+}

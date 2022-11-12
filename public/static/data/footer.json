@@ -1,0 +1,46 @@
+{
+  "information": {
+    "title": "Company",
+    "items": [
+      {
+        "text": "Investor Relations",
+        "url": "/investor-relations"
+      },
+      {
+        "text": "Our Culture",
+        "url": "/our-culture"
+      },
+
+      {
+        "text": "Career",
+        "url": "/careers"
+      },
+      {
+        "text": "Events",
+        "url": "/events"
+      }
+    ]
+  },
+  "account": {
+    "title": "Media",
+    "items": [
+      {
+        "text": "News Room",
+        "url": "/blog-news"
+      },
+      {
+        "text": "Events",
+        "url": "/events"
+      }
+    ]
+  },
+  "store": {
+    "title": "Contact",
+    "items": [
+      {
+        "text": "Contact Us",
+        "url": "/contact-us"
+      }
+    ]
+  }
+}

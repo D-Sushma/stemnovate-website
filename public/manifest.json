@@ -1,0 +1,32 @@
+{
+    "theme_color": "#519FA7",
+    "background_color": "#519FA7",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "Stemnovate",
+    "short_name": "Stemnovate",
+    "description": "Our pioneering platform for targeted drug development is truly unique. In every sense. We account for individual variations in patients’ genetics, physiology and health",
+    "icons": [
+        {
+            "src": "https://stemnovate.co.uk/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://stemnovate.co.uk/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "https://stemnovate.co.uk/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "https://stemnovate.co.uk/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
