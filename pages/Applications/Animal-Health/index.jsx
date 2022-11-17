@@ -79,11 +79,16 @@ const texicologyScreen = () => {
                       </section>
                     </div>
                     <div className="container">
-                      <img
-                        className="p-3"
-                        src="/static/img/applications/news.jpg"
-                        alt="REDUCE"
-                      />
+                      <a
+                        className="ps-section__image"
+                        href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/"
+                      >
+                        <img
+                          className="p-3"
+                          src="/static/img/applications/news.jpg"
+                          alt="REDUCE"
+                        />
+                      </a>
                     </div>
                   </div>
                   <div className="row">
