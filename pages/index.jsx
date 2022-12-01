@@ -15,6 +15,7 @@ import OurClients from "~/components/shared/sections/OurClients"
 import PropTypes from "prop-types"
 import BlogGrid from "~/components/partials/blog/BlogGrid"
 import WomenHealth from "~/components/shared/sections/WomenHealth"
+import HomeOneTopBanners from "~/components/partials/homepages/home-1/HomeOneTopBanners"
 // import PromotionalBanner from "~/components/shared/sections/PromotionalBanner"
 
 // import { Modal } from "antd";
@@ -34,7 +35,7 @@ const HomeDefaultPage = (props) => {
     >
       <main id="homepage-one">
         <VideoBanner />
-
+        {/* <HomeOneTopBanners /> */}
         <AboutBanner />
         <OurService />
         {/* <PromotionalBanner /> */}
