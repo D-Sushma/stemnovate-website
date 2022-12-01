@@ -13,6 +13,24 @@
 }
 
 .ps-page {
+    .product-primary-animal-breadcrumb-bg {
+        background-image: url("/static/img/breadcrum/primary_animal.jpg");
+        background-size: cover;
+        background-position: 0 0%;
+        background-repeat: no-repeat;
+        position: relative;
+        background-color: #001a56;
+
+        & h1 {
+            text-transform: uppercase;
+            color: white;
+            text-align: center;
+            font-weight: 900;
+        }
+
+
+    }
+
     .product-breadcrumb-bg {
         background-image: url("/static/img/breadcrum/Product-Page.jpg");
         background-size: cover;
