@@ -50,8 +50,20 @@ const FooterDefault = () => {
                     }}
                   />
                 </div>
-                <div className="d-flex ">
+                <div className="d-flex flex-column">
                   {/* <WidgetFooterLinks source={FooterLinks.store} /> */}
+                  <p className="text-white p-4">
+                    <span>Secure Payments</span>
+                    <img
+                      src="/static/image/secure-payments.jpg"
+                      alt="secure"
+                      style={{
+                        width: "150px",
+                        height: "fit-content",
+                        marginBottom: "10px"
+                      }}
+                    />
+                  </p>
                 </div>
               </div>
             </div>
