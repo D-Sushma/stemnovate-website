@@ -158,58 +158,90 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   const stripePromise = loadStripe(publishableKey)
   const createCheckOutSession = async () => {
     try {
-      if (checkAllFelids()) {
-        // console.log("products", products);
-        if (!checkTnC) {
-          // console.log("tnc not checked");
-          toast.warning(
-            "Please accept our terms and conditions before proceeding.",
-            {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: false,
-              draggable: true,
-              progress: undefined,
-              theme: "colored"
-            }
-          )
-        } else {
-          // console.log("tnc checked");
+      var cust_address_details = myBillingdetails.customer_address_details
+      var cust_application_details =
+        myBillingdetails.customer_application_details
+      var is_proceed = 0
+      if (
+        cust_application_details == null ||
+        cust_application_details === "undefined"
+      ) {
+        is_proceed = 1
+      }
+      if (
+        cust_address_details == null ||
+        cust_address_details === "undefined"
+      ) {
+        is_proceed = 1
+      }
+      if (is_proceed == 1) {
+        toast.warning(
+          "Please fill organization and profile details before proceeding.",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+          }
+        )
+      } else {
+        if (checkAllFelids()) {
+          // console.log("products", products);
+          if (!checkTnC) {
+            // console.log("tnc not checked");
+            toast.warning(
+              "Please accept our terms and conditions before proceeding.",
+              {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"
+              }
+            )
+          } else {
+            // console.log("tnc checked");
 
-          setLoading(true)
-          const stripe = await stripePromise
-          const checkoutSession = await axios.post(
-            "/api/payments/checkout_sessions",
-            {
-              item: products,
-              userData: myBillingdetails,
-              pONumber: pONumber
-            }
-          )
+            setLoading(true)
+            const stripe = await stripePromise
+            const checkoutSession = await axios.post(
+              "/api/payments/checkout_sessions",
+              {
+                item: products,
+                userData: myBillingdetails,
+                pONumber: pONumber
+              }
+            )
 
-          const result = await stripe.redirectToCheckout({
-            sessionId: checkoutSession.data.id
-          })
-          if (result.error) {
-            // alert(result.error.message);
+            const result = await stripe.redirectToCheckout({
+              sessionId: checkoutSession.data.id
+            })
+            if (result.error) {
+              // alert(result.error.message);
+              setLoading(false)
+            }
             setLoading(false)
           }
-          setLoading(false)
+        } else {
+          // console.log("Some Filled Empty");
+          toast.warning("Please Filled " + blankField() + " fields.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+          })
         }
-      } else {
-        // console.log("Some Filled Empty");
-        toast.warning("Please Filled " + blankField() + " fields.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "colored"
-        })
       }
     } catch (error) {
       setLoading(false)

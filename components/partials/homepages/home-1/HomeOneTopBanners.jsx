@@ -5,14 +5,34 @@ import PrevArrow from "~/components/elements/carousel/PrevArrow"
 
 const carouselSetting = {
   infinite: true,
-  speed: 800,
+  speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: true,
   fade: true,
   lazyLoad: "progressive",
   autoplay: true,
+  autoplaySpeed: 7000,
   dots: true,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }
+  ],
+  // cssEase: "ease-in-out",
+  cssEase: "linear",
+  touchThreshold: 100,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />
 }
@@ -30,7 +50,7 @@ const HomeOneTopBanners = () => {
           <div
             className="ps-banner"
             style={{
-              backgroundImage: `url('/static/img/banners/1Banner.jpg')`,
+              backgroundImage: `url('/static/img/banners/homebanner-1.jpg')`,
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
@@ -42,14 +62,14 @@ const HomeOneTopBanners = () => {
             <div className="container container-initial">
               <div className="ps-banner__block ml-3">
                 <div className="ps-banner__content">
-                  <h1 className="ps-banner__title text-white text-weight-bolder">
-                    REDEFINING
+                  <h1 className="ps-banner__title text-center text-weight-bolder">
+                    Genetics, age, and gender define us.
                   </h1>
-                  <h1 className="ps-banner__desc text-white text-weight-bolder">
-                    DRUG DISCOVERY
-                  </h1>
+                  <div className="ps-banner__desc text-center">
+                    So why not include that for drug discovery?
+                  </div>
                 </div>
-                <div className="ps-banner__thumnail"></div>
+                {/* <div className="ps-banner__thumnail"></div> */}
               </div>
             </div>
           </div>
@@ -58,7 +78,7 @@ const HomeOneTopBanners = () => {
           <div
             className="ps-banner"
             style={{
-              backgroundImage: `url('/static/img/banners/3Banner.jpg')`,
+              backgroundImage: `url('/static/img/banners/homebanner-2.jpg')`,
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
@@ -70,11 +90,11 @@ const HomeOneTopBanners = () => {
             <div className="container container-initial">
               <div className="ps-banner__block ml-3">
                 <div className="ps-banner__content">
-                  <h2 className="ps-banner__title text-white text-weight-bolder">
-                    NEXT GENERATION
-                  </h2>
-                  <div className="ps-banner__desc text-white text-weight-bolder">
-                    TECHNOLOGY
+                  <h1 className="ps-banner__title text-center text-weight-bolder">
+                    Next-gen technology
+                  </h1>
+                  <div className="ps-banner__desc text-center">
+                    Reimagine data
                   </div>
                   <div className="ps-banner__btn-group"></div>
                 </div>
@@ -86,7 +106,7 @@ const HomeOneTopBanners = () => {
           <div
             className="ps-banner"
             style={{
-              backgroundImage: `url('/static/img/banners/2Banner.jpg')`,
+              backgroundImage: `url('/static/img/banners/homebanner-3.jpg')`,
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
@@ -98,11 +118,11 @@ const HomeOneTopBanners = () => {
             <div className="container container-initial">
               <div className="ps-banner__block ml-3">
                 <div className="ps-banner__content">
-                  <h2 className="ps-banner__title text-white text-weight-bolder">
-                    REDUCING
-                  </h2>
-                  <div className="ps-banner__desc text-white text-weight-bolder">
-                    ANIMAL TESTING
+                  <h1 className="ps-banner__title text-center text-weight-bolder">
+                    We are delivering science with kindness.
+                  </h1>
+                  <div className="ps-banner__desc text-center">
+                    Explore New Insights - Animal Platform.
                   </div>
                 </div>
               </div>

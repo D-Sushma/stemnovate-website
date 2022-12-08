@@ -34,8 +34,8 @@ const HomeDefaultPage = (props) => {
       header={<HeaderDefault classes="without-border" menus={props.menus} />}
     >
       <main id="homepage-one">
-        <VideoBanner />
-        {/* <HomeOneTopBanners /> */}
+        {/* <VideoBanner /> */}
+        <HomeOneTopBanners />
         <AboutBanner />
         <OurService />
         {/* <PromotionalBanner /> */}
