@@ -45,7 +45,7 @@ const OurService = ({ title = "OUR SERVICES" }) => {
             <div className="col-md-6 text-center">
               <div>
                 <a href="/Products">
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden mx-4">
                     <Image
                       className="ps-banner__image"
                       src={bioImg}
@@ -112,7 +112,7 @@ const OurService = ({ title = "OUR SERVICES" }) => {
             <div className="col-md-6 text-center">
               <div>
                 <a href="/Products">
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden mx-4">
                     <Image
                       className="ps-banner__image"
                       src={chipTechnology}
