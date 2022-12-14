@@ -55,7 +55,7 @@ const FooterDefault = () => {
                   <p className="text-white p-4">
                     <span>Secure Payments</span>
                     <img
-                      src="/static/image/secure-payments.jpg"
+                      src="/static/image/secure-payments.png"
                       alt="secure"
                       style={{
                         width: "150px",
