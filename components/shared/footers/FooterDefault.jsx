@@ -37,7 +37,8 @@ const FooterDefault = () => {
                     alt="QMS"
                     style={{
                       width: "150px",
-                      height: "fit-content",
+                      // height: "22%",
+                      // height: "fit-content",
                       marginBottom: "10px"
                     }}
                   />
@@ -45,8 +46,9 @@ const FooterDefault = () => {
                     src="/static/image/HTA.png"
                     alt="HTA"
                     style={{
-                      width: "150px",
-                      height: "fit-content"
+                      width: "150px"
+                      // height: "22%"
+                      // height: "fit-content"
                     }}
                   />
                 </div>
@@ -59,7 +61,7 @@ const FooterDefault = () => {
                       alt="secure"
                       style={{
                         width: "150px",
-                        height: "fit-content",
+                        // height: "fit-content",
                         marginBottom: "10px"
                       }}
                     />
