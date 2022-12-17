@@ -3210,6 +3210,10 @@ textarea.form-control {
   color: #103178;
 }
 
+.mt-20 {
+  margin-top: -20px;
+}
+
 .ps-banner .ps-banner__btn:last-child {
   padding-right: 0;
 }

@@ -113,7 +113,7 @@ const FooterDefault = () => {
                       <a
                         target="_blank"
                         className="ps-social__link facebook"
-                        href="https://www.facebook.com/StemnovateL"
+                        href="https://www.facebook.com/profile.php?id=100088444964661"
                         rel="noreferrer"
                       >
                         <i className="fa fa-facebook text-white"> </i>
@@ -124,7 +124,7 @@ const FooterDefault = () => {
                       <a
                         target="_blank"
                         className="ps-social__link instagram"
-                        href="https://www.instagram.com/stemnovate"
+                        href="https://www.instagram.com/stemnovateltd/"
                         rel="noreferrer"
                       >
                         <i className="fa fa-instagram text-white"></i>

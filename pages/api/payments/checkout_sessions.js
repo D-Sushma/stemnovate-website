@@ -24,6 +24,8 @@ async function CreateStripeSession(req, res) {
   const totalTax = parseFloat(percentage) + parseFloat(maxShippingCost)
 
   const orderId = uuidv1()
+  const purchaseId = uuidv1()
+  const paymentId = uuidv1()
 
   const redirectURL = `${baseUrl}order/order-confirmation/`
 
@@ -45,7 +47,6 @@ async function CreateStripeSession(req, res) {
       quantity: element.quantity
     })
   })
-
   // add orders details to database
   const orderData = await prisma.orders.create({
     data: {
@@ -250,6 +251,26 @@ async function CreateStripeSession(req, res) {
 
   await prisma.order_details.createMany({
     data: ProductData
+  })
+
+  var resourcesData = []
+  item.forEach((rd) => {
+    console.log("rd: ", rd)
+    var chk_res_id = Object.keys(rd).some((key) => key === "resources_id")
+    if (chk_res_id) {
+      resourcesData.push({
+        purchase_id: purchaseId,
+        user_id: mySession.id,
+        resources_id: rd.id,
+        txn_id: session.id,
+        payment_id: paymentId,
+        collected_amount: rd.resources_price
+      })
+    }
+  })
+
+  await prisma.resorces_purchese_details.createMany({
+    data: resourcesData
   })
   // console.log(productDetails);
 

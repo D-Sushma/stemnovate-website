@@ -12,7 +12,7 @@ const carouselSetting = {
   fade: true,
   lazyLoad: "progressive",
   autoplay: true,
-  autoplaySpeed: 7000,
+  autoplaySpeed: 5000,
   dots: true,
   responsive: [
     {
@@ -31,6 +31,7 @@ const carouselSetting = {
     }
   ],
   // cssEase: "ease-in-out",
+  easing: "linear",
   cssEase: "linear",
   touchThreshold: 100,
   nextArrow: <NextArrow />,
@@ -50,7 +51,7 @@ const HomeOneTopBanners = () => {
           <div
             className="ps-banner"
             style={{
-              backgroundImage: `url('/static/img/banners/homebanner-1.jpg')`,
+              backgroundImage: `url('/static/img/banners/home-banner-1.jpg')`,
               backgroundPosition: "center",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
@@ -62,11 +63,11 @@ const HomeOneTopBanners = () => {
             <div className="container container-initial">
               <div className="ps-banner__block ml-3">
                 <div className="ps-banner__content">
-                  <h1 className="ps-banner__title text-center text-weight-bolder">
-                    Genetics, age, and gender define us.
+                  <h1 className="ps-banner__title text-center text-weight-bolder mt-20">
+                    Precision in drug discovery
                   </h1>
                   <div className="ps-banner__desc text-center">
-                    So why not include that for drug discovery?
+                    {/* So why not include that for drug discovery? */}
                   </div>
                 </div>
                 {/* <div className="ps-banner__thumnail"></div> */}
@@ -94,7 +95,7 @@ const HomeOneTopBanners = () => {
                     Next-gen technology
                   </h1>
                   <div className="ps-banner__desc text-center">
-                    Reimagine data
+                    Data reimagined
                   </div>
                   <div className="ps-banner__btn-group"></div>
                 </div>
@@ -119,10 +120,10 @@ const HomeOneTopBanners = () => {
               <div className="ps-banner__block ml-3">
                 <div className="ps-banner__content">
                   <h1 className="ps-banner__title text-center text-weight-bolder">
-                    We are delivering science with kindness.
+                    Delivering kindness in science
                   </h1>
                   <div className="ps-banner__desc text-center">
-                    Explore New Insights - Animal Platform.
+                    Explore our animal platform
                   </div>
                 </div>
               </div>
