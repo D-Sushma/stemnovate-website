@@ -35,7 +35,33 @@ export default async function handler(req, res) {
         })
 
         if (ResourcesData.length > 0) {
-          res.status(200).json({ status: 200, data: ResourcesData })
+          var ResourcesFilesData = []
+          var resource_id = ResourcesData[0].id
+          if (resource_id > 0) {
+            ResourcesFilesData = await prisma.resources_data.findMany({
+              orderBy: {
+                id: "asc"
+              },
+              where: {
+                resources_id: resource_id
+              },
+              select: {
+                id: true,
+                resources_id: true,
+                datasheet_name: true,
+                datasets_description: true,
+                sequencing: true,
+                structural_variation: true,
+                datasheet_files: true,
+                created_date: true
+              }
+            })
+          }
+          res.status(200).json({
+            status: 200,
+            data: ResourcesData,
+            filedata: ResourcesFilesData
+          })
         } else {
           console.log("Error")
           res.status(200).json({ status: 201, data: [] })

@@ -5,11 +5,11 @@ export default async function handler(req, res) {
     const { UserId, ResourcesID } = req.body
     console.log("req.body", req.body)
     if (ResourcesID !== "") {
-      if (UserId) {
+      if (UserId !== "") {
         var ResourcesData = await prisma.resources_data.findMany({
           where: {
             deleted_at: null,
-            id: ResourcesID
+            resources_id: ResourcesID
           },
           select: {
             id: true,
@@ -21,9 +21,9 @@ export default async function handler(req, res) {
             sequencing: true,
             structural_variation: true,
             deleted_at: true,
-            datasheet_files: true,
-            resources_human_alignment: true,
-            resources_structural_analysis: true
+            datasheet_files: true
+            // resources_human_alignment: true,
+            // resources_structural_analysis: true
           }
         })
         console.log("ResourcesData", ResourcesData)
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
           res.status(200).json({ status: 200, data: ResourcesData })
         } else {
           console.log("Error")
-          res.status(200).json({ status: 201, data: [] })
+          res.status(200).json({ status: 202, data: [] })
         }
       } else {
         res

@@ -24,6 +24,7 @@ const ResourcesData = (props) => {
   const { resources_Name } = Router.query
   const [breadCrumb, setBreadCrumb] = React.useState([])
   const { resourcesData } = props
+  console.log("resourcesData", resourcesData)
   const [resourcesFiles] = useState([])
   const [readMore, setReadMore] = useState(false)
   const [userData, setUserData] = React.useState(null)
@@ -179,18 +180,22 @@ const ResourcesData = (props) => {
                         File type - {resourcesData.data[0].resourcesFileType}
                       </p>
                       {/* <p>Resolution - 7819×5213</p> */}
+                      <p className="ps-product__price sale">
+                        Price - <span>£</span>{" "}
+                        {resourcesData.data[0].resources_price}
+                      </p>
                       <p>
                         Published -{" "}
                         {moment(resourcesData.data[0].created_at).format(
                           "DD-MMM-YYYY"
                         )}
                       </p>
-                      <p>
+                      {/* <p>
                         Downloads -{" "}
                         {resourcesData.data[0].downloads === null
                           ? "0"
                           : resourcesData.data[0].downloads}
-                      </p>
+                      </p> */}
                       <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
@@ -199,7 +204,7 @@ const ResourcesData = (props) => {
                             >
                               <a>
                                 <button className="button button--green mr-2">
-                                  Download
+                                  Access Data
                                 </button>
                               </a>
                             </Link>
@@ -215,7 +220,7 @@ const ResourcesData = (props) => {
                           >
                             <a>
                               <button className="button button--green mr-2">
-                                Download
+                                Access Data
                               </button>
                             </a>
                           </Link>

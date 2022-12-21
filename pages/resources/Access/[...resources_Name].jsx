@@ -31,8 +31,12 @@ const ResourcesData = (props) => {
   const [isActive, setIsActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [resourcesFiles, setResourcesFiles] = useState([])
+  const [resources_structural, setResources_structural] = useState([])
+  const [resources_sequence, setResources_sequence] = useState([])
   const [filePath, setFilePath] = useState(null)
   const { data: session } = useSession()
+  var file_count = 0
+  var seqfile_count = 0
   useEffect(() => {
     var searchURL = "/resources"
     if (resources_Name != undefined) {
@@ -94,7 +98,7 @@ const ResourcesData = (props) => {
       UserId: session?.id,
       ResourcesID: resourcesData.data[0].id
     })
-    console.log("raw", raw)
+    console.log("newraw", raw)
 
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
@@ -112,6 +116,21 @@ const ResourcesData = (props) => {
         setIsLoading(false)
         if (data.status == 200) {
           setResourcesFiles(data.data[0])
+          setIsActive(true)
+          console.log("resourcesFiles_new", data.data[0])
+          const sv = JSON.parse(data.data[0].structural_variation)
+          const seq = JSON.parse(data.data[0].sequencing)
+          console.log("sv : ", data.data[0].structural_variation)
+          file_count = sv.filter((item) => item.type !== "").length
+          if (file_count > 0) {
+            setResources_structural(sv)
+          }
+          seqfile_count = seq.filter((item) => item.sequence_id !== "").length
+          if (seqfile_count > 0) {
+            setResources_sequence(seq)
+          }
+          console.log("file_count", file_count)
+          //  console.log("resources_structural", data.data[0].structural_variation)
           getURLLink(data.data[0].datasheet_files)
         }
       })
@@ -246,12 +265,12 @@ const ResourcesData = (props) => {
                           "DD-MMM-YYYY"
                         )}
                       </p>
-                      <p>
+                      {/* <p>
                         Downloads -{" "}
                         {resourcesData.data[0].downloads === null
                           ? "0"
                           : resourcesData.data[0].downloads}
-                      </p>
+                      </p> */}
                       <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
@@ -340,7 +359,7 @@ const ResourcesData = (props) => {
                             <th className="ps-table__th">Sequence ID</th>
                             <th className="ps-table__th">Alignment</th>
                           </tr>
-                          {resourcesFiles?.resources_human_alignment?.map(
+                          {/* {resourcesFiles?.resources_human_alignment?.map(
                             (data, k) => (
                               <tr key={k}>
                                 <th className="ps-table__th">
@@ -352,7 +371,21 @@ const ResourcesData = (props) => {
                                 </th>
                               </tr>
                             )
-                          )}
+                          )} */}
+                          {seqfile_count > 0
+                            ? seqfile_count
+                            : resources_sequence.map((sq, k) => {
+                                return (
+                                  <tr key={k}>
+                                    <th className="ps-table__th">
+                                      {sq.sequence_id}
+                                    </th>
+                                    <th className="ps-table__th">
+                                      {sq.alignment}
+                                    </th>
+                                  </tr>
+                                )
+                              })}
                         </tbody>
                       </table>
                     </div>
@@ -369,7 +402,18 @@ const ResourcesData = (props) => {
                             <th className="ps-table__th">Location</th>
                             <th className="ps-table__th">Position</th>
                           </tr>
-                          {resourcesFiles?.resources_structural_analysis?.map(
+                          {/* {Object.keys(
+                            resourcesFiles?.resources_structural_analysis
+                          ).map((data, k) => (
+                            <tr key={k}>
+                              <th className="ps-table__th">{k + 1}</th>
+                              <th className="ps-table__th">{data.type}</th>
+                              <th className="ps-table__th">{data.length}</th>
+                              <th className="ps-table__th">{data.location}</th>
+                              <th className="ps-table__th">{data.position}</th>
+                            </tr>
+                          ))} */}
+                          {/* {resourcesFiles?.structural_variation?.map(
                             (data, k) => (
                               <tr key={k}>
                                 <th className="ps-table__th">{k + 1}</th>
@@ -383,7 +427,28 @@ const ResourcesData = (props) => {
                                 </th>
                               </tr>
                             )
-                          )}
+                          )} */}
+                          {file_count > 0
+                            ? file_count
+                            : resources_structural.map((struct, k) => {
+                                return (
+                                  <tr key={k}>
+                                    <th className="ps-table__th">{k + 1}</th>
+                                    <th className="ps-table__th">
+                                      {struct.type}
+                                    </th>
+                                    <th className="ps-table__th">
+                                      {struct.length}
+                                    </th>
+                                    <th className="ps-table__th">
+                                      {struct.location}
+                                    </th>
+                                    <th className="ps-table__th">
+                                      {struct.position}
+                                    </th>
+                                  </tr>
+                                )
+                              })}
                         </tbody>
                       </table>
                     </div>
