@@ -194,7 +194,7 @@ const ResourcesData = (props) => {
       },
       {
         id: 2,
-        text: "resources",
+        text: "Resources",
         url: "/resources"
       }
     ]
@@ -207,9 +207,10 @@ const ResourcesData = (props) => {
         } else {
           uRLData = null
         }
+        const new_last_elem = element.charAt(0).toUpperCase() + element.slice(1)
         var bdc = {
           id: 3 + index,
-          text: element
+          text: new_last_elem
         }
         if (uRLData !== null) {
           bdc.url = uRLData

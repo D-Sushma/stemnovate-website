@@ -19,7 +19,7 @@ const breadcrumb = [
 
   {
     id: 2,
-    text: "Blog"
+    text: "Newsroom"
   }
 ]
 
@@ -49,7 +49,7 @@ const Blogs = (props) => {
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1 className="text-center  text-white p-2">News Room</h1>
+            <h1 className="text-center  text-white p-2">NewsRoom</h1>
           </div>
         </div>
         <div className="ps-page__content">
@@ -118,7 +118,7 @@ const Blogs = (props) => {
                       className="ps-blog-items row row-reverse"
                       data-columns="4"
                     >
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+                      {/* <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid blog-news">
                           <div className="ps-post__thumbnail">
                             <a className="ps-post__overlay" href="/blogs/5"></a>
@@ -287,7 +287,7 @@ const Blogs = (props) => {
                             </div>
                           </div>
                         </article>
-                      </div>
+                      </div> */}
                       {/* ------------------------------ map All Blog ------------------------------  */}
                       {postLists.map((data, key) => (
                         <div

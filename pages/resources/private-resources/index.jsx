@@ -55,9 +55,7 @@ const Resources = ({ resourcesList }) => {
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1 className="text-center  text-white p-2">
-              Subscription Only Resources
-            </h1>
+            <h1 className="text-center  text-white p-2">Subscription Access</h1>
           </div>
         </div>
         <div className="ps-page__content">
@@ -84,7 +82,7 @@ const Resources = ({ resourcesList }) => {
                               </h1>
                               {myCat.cat_access ? (
                                 <span className="badge badge-pill badge-primary">
-                                  Member only
+                                  Subscription Access
                                 </span>
                               ) : (
                                 <span className="badge badge-pill badge-success">
