@@ -561,7 +561,7 @@ const Blogs = (props) => {
                         </article>
                       </div>
 
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+                      {/* <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid blog-news">
                           <div className="ps-post__thumbnail">
                             <a
@@ -600,7 +600,7 @@ const Blogs = (props) => {
                             </div>
                           </div>
                         </article>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

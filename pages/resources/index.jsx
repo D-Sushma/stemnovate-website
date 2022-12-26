@@ -53,8 +53,12 @@ function Resources({ resourcesList }) {
                               </b>
                             </h1>
                             <p className="text-white">
-                              Stemnovate has collected a great deal of
-                              educational material. Among them are handbooks,
+                              Stemnovate core value is to advance science for
+                              the benefit of humanity. The subscription to our
+                              platform creates a unique partnership between the
+                              customers and us, where they benefit from services
+                              tailored to their needs. Here you have access to
+                              karyotyping, genotyping and R&D platforms.
                             </p>
                             <Link href="/resources/private-resources">
                               <a className="link-btn">
