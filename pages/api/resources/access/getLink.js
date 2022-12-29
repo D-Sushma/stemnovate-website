@@ -58,11 +58,11 @@ export default async function handle(req, res) {
     } else {
       res.status(200).send({
         code: "201",
-        message: "Bed Method"
+        message: "Bad Method"
       })
     }
   } else {
-    res.status(200).send({ message: "Bed Method" })
+    res.status(200).send({ message: "Bad Method" })
   }
 
   //
