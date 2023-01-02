@@ -43,7 +43,7 @@ export default async function handle(req, res) {
             res.status(501).send({
               code: "501",
               url: "",
-              message: "something went to wrong"
+              message: "Second try something went to wrong"
             })
           }
         }
@@ -52,7 +52,7 @@ export default async function handle(req, res) {
         res.status(501).send({
           code: "501",
           url: "",
-          message: "something went to wrong"
+          message: "First try something went to wrong"
         })
       }
     } else {
