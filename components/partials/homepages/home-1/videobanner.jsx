@@ -23,7 +23,7 @@ const VideoBanner = () => {
 
       <div className="player-wrapper">
         <video
-          src="https://stemnovateimages.s3.us-east-2.amazonaws.com/HomeVideo2.mp4"
+          src="https://stemnovateimages.s3.us-east-2.amazonaws.com/BannerHomeVideo2.mp4"
           autoPlay
           loop
           muted
