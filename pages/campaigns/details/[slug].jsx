@@ -96,10 +96,10 @@ const EventsDetails = ({ EventsData }) => {
                   <img
                     src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
                     alt="IMG"
-                    style={{ width: "100%", height: "10em" }}
+                    style={{ width: "100%" }}
                   />
                   <div className="container">
-                    <div className="top-left-event-details">
+                    <div className="top-left">
                       <BreadCrumb breacrumb={breadcrumb} />
                     </div>
 
