@@ -47,7 +47,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
     },
     {
       id: 3,
-      text: "Disease-Modelling",
+      text: "Disease Modelling",
       url: "/Applications/Disease-Modelling"
     },
     {
@@ -131,7 +131,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
                         <h2 className="  font-weight-bold">
-                          HUMAN iPSC-DERIVED SENSORY NEURONS FOR HEARING LOSS
+                          Human IPSC-Derived Sensory Neurons For Hearing Loss
                         </h2>
                         <p>
                           <Tooltip title="WHO: 1 in 4 people projected to have hearing problems by 2050">
@@ -181,8 +181,8 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                       <div className="ps-section__desc">
                         {/* {" "} */}
                         <h2 className="  font-weight-bold">
-                          HUMAN iPSC-DERIVED SENSORY NEURONS FOR NEUROPATHIC
-                          PAIN
+                          Human IPSC-Derived Sensory Neurons For Neuropathic
+                          Pain
                         </h2>
                         <p>
                           Dorsal root ganglia (DRG) neurons are critical
@@ -232,7 +232,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
                         <h2 className="  font-weight-bold">
-                          HUMAN iPSC-DERIVED MICROGLIA FOR NEUROLOGICAL DISEASES
+                          Human IPSC-Derived Microglia For Neurological Diseases
                         </h2>
                         <p>
                           Microglia are a specialised type of macrophage-like

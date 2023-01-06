@@ -1,228 +1,325 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import useGetProducts from "~/hooks/useGetProducts";
-import useProductGroup from "~/hooks/useProductGroup";
-import BreadCrumb from "~/components/elements/BreadCrumb";
-import SidebarShop from "~/components/shared/sidebar/SidebarShop";
-import Shop from "~/components/partials/shop/Shop";
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
-import Container from "~/components/layouts/Container";
-import Loader from "~/components/reuseable/Loader";
-import Image from "~/components/elements/Image";
-import { API } from "~/lib/constant";
-import Link from "next/link";
-import { Input, Button } from "antd";
-import { baseUrl } from "~/repositories/Repository";
-import { connect, useDispatch } from "react-redux";
-import { toggleDrawer } from "~/store/app/action";
-import useEcomerce from "~/hooks/useEcomerce";
-import { Modal } from "antd";
-import ReactHtmlParser from "react-html-parser";
-import ProductList from "~/components/productList/productList";
-import { ParallaxBanner } from "react-scroll-parallax";
-import Subscribe from "~/components/shared/sections/Subscribe";
-import ReactPlayer from "react-player";
+import React, { useState, useEffect } from "react"
+import { useRouter } from "next/router"
+import useGetProducts from "~/hooks/useGetProducts"
+import useProductGroup from "~/hooks/useProductGroup"
+import BreadCrumb from "~/components/elements/BreadCrumb"
+import SidebarShop from "~/components/shared/sidebar/SidebarShop"
+import Shop from "~/components/partials/shop/Shop"
+import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation"
+import Container from "~/components/layouts/Container"
+import Loader from "~/components/reuseable/Loader"
+import Image from "~/components/elements/Image"
+import { API } from "~/lib/constant"
+import Link from "next/link"
+import { Input, Button } from "antd"
+import { baseUrl } from "~/repositories/Repository"
+import { connect, useDispatch } from "react-redux"
+import { toggleDrawer } from "~/store/app/action"
+import useEcomerce from "~/hooks/useEcomerce"
+import { Modal } from "antd"
+import ReactHtmlParser from "react-html-parser"
+import ProductList from "~/components/productList/productList"
+import { ParallaxBanner } from "react-scroll-parallax"
+import Subscribe from "~/components/shared/sections/Subscribe"
+import ReactPlayer from "react-player"
 
 const texicologyScreen = ({ ProductData, ecomerce }) => {
-    const Router = useRouter();
-    const { slug } = Router.query;
-    const { proload, product, getProductById } = useGetProducts();
-    const [isLoading, setisLoading] = React.useState(false);
-    const [searchterms, setsearchterms] = React.useState("");
-    const [searchUrl, setsearchUrl] = React.useState("");
-    const { withGrid } = useProductGroup();
-    const [AddtoCart, setAddtoCart] = useState([]);
-    const [isModalVisible, setIsModalVisible] = useState(false);
+  const Router = useRouter()
+  const { slug } = Router.query
+  const { proload, product, getProductById } = useGetProducts()
+  const [isLoading, setisLoading] = React.useState(false)
+  const [searchterms, setsearchterms] = React.useState("")
+  const [searchUrl, setsearchUrl] = React.useState("")
+  const { withGrid } = useProductGroup()
+  const [AddtoCart, setAddtoCart] = useState([])
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
-    const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(1);
-    const { loading, addItem } = useEcomerce();
-    const breadcrumb = [
-        {
-            id: 1,
-            text: "Home",
-            url: "/",
-        },
+  const dispatch = useDispatch()
+  const [quantity, setQuantity] = useState(1)
+  const { loading, addItem } = useEcomerce()
+  const breadcrumb = [
+    {
+      id: 1,
+      text: "Home",
+      url: "/"
+    },
 
-        {
-            id: 2,
-            text: "Applications",
-            url: "/Applications",
-        },
-        {
-            id: 3,
-            text: "DNA-Synthesis",
-        },
-    ];
+    {
+      id: 2,
+      text: "Applications",
+      url: "/Applications"
+    },
+    {
+      id: 3,
+      text: "DNA Synthesis"
+    }
+  ]
 
-    return (
-        <>
-            <Container title="DNA-Synthesis">
-                <main className="ps-page ps-page--inner">
-                    <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
-                        <div className="container ">
-                            <BreadCrumb breacrumb={breadcrumb} />
-                            <h1 className="text-center  text-white ">DNA Synthesis</h1>
-                        </div>
+  return (
+    <>
+      <Container title="DNA-Synthesis">
+        <main className="ps-page ps-page--inner">
+          <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+            <div className="container ">
+              <BreadCrumb breacrumb={breadcrumb} />
+              <h1 className="text-center  text-white ">DNA Synthesis</h1>
+            </div>
+          </div>
+
+          <div className="ps-page__content">
+            <div className="ps-about">
+              <div className=" about-section ">
+                <div className="container">
+                  <div className="center-box">
+                    <p className=" vertical-center">
+                      Stemnovate is soon introducing a microfluidic platform for
+                      DNA synthesis. This disruptive technology allows template
+                      free DNA/RNA synthesis that can potentially accelerate the
+                      development of new therapeutics in the pharmaceutical
+                      sector, e.g. antibody research, drug bio-production and
+                      RNAi based therapeutics. This microfluidic platform
+                      technology overcomes the current limitations of DNA
+                      synthetic technology.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-02-section">
+                <div className="container ">
+                  <section className="ps-section--block-grid ">
+                    <div className="ps-section__thumbnail">
+                      <a className="ps-section__image" href="#">
+                        <img
+                          src="/static/img/applications/DNA-synthesis-update.jpg"
+                          alt="Applications"
+                        />
+                      </a>
                     </div>
+                    <div className="ps-section__content">
+                      <h2 className="text-white font-weight-bold">
+                        Applications
+                      </h2>
 
-                    <div className="ps-page__content">
-                        <div className="ps-about">
-                            <div className=" about-section ">
-                                <div className="container">
-                                    <div className="center-box">
-                                        <p className=" vertical-center">Stemnovate is soon introducing a microfluidic platform for DNA synthesis. This disruptive technology allows template free DNA/RNA synthesis that can potentially accelerate the development of new therapeutics in the pharmaceutical sector, e.g. antibody research, drug bio-production and RNAi based therapeutics. This microfluidic platform technology overcomes the current limitations of DNA synthetic technology.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="bg-02-section">
-                                <div className="container ">
-                                    <section className="ps-section--block-grid ">
-                                        <div className="ps-section__thumbnail">
-                                            <a className="ps-section__image" href="#">
-                                                <img src="/static/img/applications/DNA-synthesis-update.jpg" alt="Applications" />
-                                            </a>
-                                        </div>
-                                        <div className="ps-section__content">
-                                            <h2 className="text-white font-weight-bold">Applications</h2>
-
-                                            <div className="ps-section__desc ">
-                                                <p className="text-white">DNA synthesis has the potential to revolutionise the field of drug discovery, biotechnology, nanotechnology and oligonucleotides synthesis.</p>
-                                                <h3 className="text-white mt-4">Drug Discovery</h3>
-                                                <p className="text-white">The applications are varied, such as RNA therapy, antibody research and vaccine development.</p>
-                                                <h3 className="text-white mt-4">Biotechnology</h3>
-                                                <p className="text-white">DNA synthesis helps facilitate drug bio-production, biofuel research, crop production and research for food security.</p>
-                                                <h3 className="text-white mt-4">Nanotechnology</h3>
-                                                <p className="text-white">DNA synthesis is being explored for novel DNA data storage and nano-material discoveries.</p>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                            <div className="about-section">
-                                <div className="container">
-                                    <h3 className="text-center">PLATFORM FEATURES</h3>
-                                    <section className="ps-section--block-grid">
-                                        <div className="col-md-3">
-                                            <div className="ion-wrapper text-center">
-                                                <img width="75" height="75" className="mb-5" src="/static/img/applications/accuracy.svg" alt="Accuracy" />
-                                                <h3>Accuracy</h3>
-                                                <p>Precision DNA synthesis and high yield with purity harnessing novel enzymatic methodology.</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <div className="ion-wrapper text-center">
-                                                <img width="75" height="75" className="mb-5" src="/static/img/applications/scalability.svg" alt="Scalability" />
-                                                <h3>Scalability</h3>
-                                                <p>The faster synthesis method surpasses conventional technology for achieving longer product size.</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <div className="ion-wrapper text-center">
-                                                <img width="75" height="75" className="mb-5" src="/static/img/applications/ecofriendly.svg" alt="Eco-Friendly" />
-                                                <h3>Eco-Friendly</h3>
-                                                <p>The technology is environmentally friendly with no impact from any harmful reagents.</p>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <div className="ion-wrapper text-center">
-                                                <img width="75" height="75" className="mb-5" src="/static/img/applications/speed.svg" alt="Speed" />
-                                                <h3>Speed</h3>
-                                                <p>Rapid template free-Enzymatic DNA Synthesis for short and long oligos.</p>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                            <div className="about-section">
-                                <div className="container">
-                                    <h3 className="text-center ">How It Works</h3>
-                                    <div className="overflow-hidden">
-                                        <div className="ps-banner__image ml-auto mr-auto" style={{ width: "100%" }}>
-                                            <video src="/static/img/applications/DNA synthesis_1.mp4" autoPlay loop muted playsInline width="100%" height="100%"></video>
-                                            {/* <ReactPlayer playing loop className="react-player" url="/static/img/applications/DNA synthesis_1.mp4" width="100%" height="100%" />
-                                             */}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="about-section">
-                                <div className="container">
-                                    <h3 className="text-center mb-5">ADVANTAGES OF STEMNOVATE’S ETFDS</h3>
-                                    <div
-                                        className="mb-5"
-                                        style={{
-                                            overflow: "auto",
-                                        }}>
-                                        <table id="products">
-                                            <thead>
-                                                <tr>
-                                                    <th>Parameters</th>
-                                                    <th>Stemnovate’s enzymatic DNA synthesis platform.</th>
-                                                    <th>Chemical DNA synthesis and Centralized services.</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Length</td>
-                                                    <td>ETFDS is capable of generating short to long to ultra-long DNA.</td>
-                                                    <td>Phosphoramidite synthetic DNA is limited to &lt; 150mers for a polynucleotide strand.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quality</td>
-                                                    <td>High quality with low impurities.</td>
-                                                    <td>Level of impurities increases as DNA length exceeds &gt;150mers.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Synthesis Method</td>
-                                                    <td>Uses natural enzymes in aqueous solution.</td>
-                                                    <td>Uses harsh environmentally unfriendly chemicals.</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <Subscribe />
-                        </div>
+                      <div className="ps-section__desc ">
+                        <p className="text-white">
+                          DNA synthesis has the potential to revolutionise the
+                          field of drug discovery, biotechnology, nanotechnology
+                          and oligonucleotides synthesis.
+                        </p>
+                        <h3 className="text-white mt-4">Drug Discovery</h3>
+                        <p className="text-white">
+                          The applications are varied, such as RNA therapy,
+                          antibody research and vaccine development.
+                        </p>
+                        <h3 className="text-white mt-4">Biotechnology</h3>
+                        <p className="text-white">
+                          DNA synthesis helps facilitate drug bio-production,
+                          biofuel research, crop production and research for
+                          food security.
+                        </p>
+                        <h3 className="text-white mt-4">Nanotechnology</h3>
+                        <p className="text-white">
+                          DNA synthesis is being explored for novel DNA data
+                          storage and nano-material discoveries.
+                        </p>
+                      </div>
                     </div>
-                </main>
-                {/* <ProductList slug="Biobanking" /> */}
-            </Container>
-        </>
-    );
-};
+                  </section>
+                </div>
+              </div>
+              <div className="about-section">
+                <div className="container">
+                  <h2 className="text-center p-1 font-weight-bold">
+                    Platform Features
+                  </h2>
+                  <section className="ps-section--block-grid">
+                    <div className="col-md-3">
+                      <div className="ion-wrapper text-center">
+                        <img
+                          width="75"
+                          height="75"
+                          className="mb-5"
+                          src="/static/img/applications/accuracy.svg"
+                          alt="Accuracy"
+                        />
+                        <h3>Accuracy</h3>
+                        <p>
+                          Precision DNA synthesis and high yield with purity
+                          harnessing novel enzymatic methodology.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-3">
+                      <div className="ion-wrapper text-center">
+                        <img
+                          width="75"
+                          height="75"
+                          className="mb-5"
+                          src="/static/img/applications/scalability.svg"
+                          alt="Scalability"
+                        />
+                        <h3>Scalability</h3>
+                        <p>
+                          The faster synthesis method surpasses conventional
+                          technology for achieving longer product size.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-3">
+                      <div className="ion-wrapper text-center">
+                        <img
+                          width="75"
+                          height="75"
+                          className="mb-5"
+                          src="/static/img/applications/ecofriendly.svg"
+                          alt="Eco-Friendly"
+                        />
+                        <h3>Eco-Friendly</h3>
+                        <p>
+                          The technology is environmentally friendly with no
+                          impact from any harmful reagents.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-3">
+                      <div className="ion-wrapper text-center">
+                        <img
+                          width="75"
+                          height="75"
+                          className="mb-5"
+                          src="/static/img/applications/speed.svg"
+                          alt="Speed"
+                        />
+                        <h3>Speed</h3>
+                        <p>
+                          Rapid template free-Enzymatic DNA Synthesis for short
+                          and long oligos.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div className="about-section">
+                <div className="container">
+                  <h2 className="text-center p-1 font-weight-bold">
+                    How It Works
+                  </h2>
+                  <div className="overflow-hidden">
+                    <div
+                      className="ps-banner__image ml-auto mr-auto"
+                      style={{ width: "100%" }}
+                    >
+                      <video
+                        src="/static/img/applications/DNA synthesis_1.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        width="100%"
+                        height="100%"
+                      ></video>
+                      {/* <ReactPlayer playing loop className="react-player" url="/static/img/applications/DNA synthesis_1.mp4" width="100%" height="100%" />
+                       */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="about-section">
+                <div className="container">
+                  <h2 className="text-center mb-5 p-1 font-weight-bold">
+                    Advantages Of Stemnovate’s ETFDS
+                  </h2>
+                  <div
+                    className="mb-5"
+                    style={{
+                      overflow: "auto"
+                    }}
+                  >
+                    <table id="products">
+                      <thead>
+                        <tr>
+                          <th>Parameters</th>
+                          <th>
+                            Stemnovate’s enzymatic DNA synthesis platform.
+                          </th>
+                          <th>
+                            Chemical DNA synthesis and Centralized services.
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Length</td>
+                          <td>
+                            ETFDS is capable of generating short to long to
+                            ultra-long DNA.
+                          </td>
+                          <td>
+                            Phosphoramidite synthetic DNA is limited to &lt;
+                            150mers for a polynucleotide strand.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Quality</td>
+                          <td>High quality with low impurities.</td>
+                          <td>
+                            Level of impurities increases as DNA length exceeds
+                            &gt;150mers.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Synthesis Method</td>
+                          <td>Uses natural enzymes in aqueous solution.</td>
+                          <td>
+                            Uses harsh environmentally unfriendly chemicals.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <Subscribe />
+            </div>
+          </div>
+        </main>
+        {/* <ProductList slug="Biobanking" /> */}
+      </Container>
+    </>
+  )
+}
 
 export async function getServerSideProps({ query }) {
-    const slug = query.slug;
-    var ProductData = [];
-    var categoryListList = [];
-    var data = "";
-    if (slug != undefined) {
-        data = slug[slug.length - 1];
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+  const slug = query.slug
+  var ProductData = []
+  var categoryListList = []
+  var data = ""
+  if (slug != undefined) {
+    data = slug[slug.length - 1]
+    var myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
 
-        var raw = JSON.stringify({
-            slug: data,
-        });
+    var raw = JSON.stringify({
+      slug: data
+    })
 
-        var requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-            redirect: "follow",
-        };
-
-        const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions);
-        const myProductData = await res.json();
-        (ProductData = myProductData), (categoryListList = myProductData.Products);
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
     }
 
-    // // Pass data to the page via props
-    return { props: { ProductData } };
+    const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
+    const myProductData = await res.json()
+    ;(ProductData = myProductData), (categoryListList = myProductData.Products)
+  }
+
+  // // Pass data to the page via props
+  return { props: { ProductData } }
 }
 
 // export default texicologyScreen;
-export default connect((state) => state)(texicologyScreen);
+export default connect((state) => state)(texicologyScreen)
