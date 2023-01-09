@@ -63,7 +63,8 @@ const ResourcesData = (props) => {
       } else {
         uRLData = uRLData + "/" + element
       }
-      const new_last_elem = element.charAt(0).toUpperCase() + element.slice(1)
+      var new_last_elem = element.charAt(0).toUpperCase() + element.slice(1)
+      new_last_elem = new_last_elem.replace("-", " ")
       var bdc = {
         id: 3 + index,
         text: new_last_elem

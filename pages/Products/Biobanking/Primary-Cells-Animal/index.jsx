@@ -151,7 +151,7 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
               <BreadCrumb breacrumb={breadcrumb} />
             </div>
             <h1 className="text-center  text-white p-2">
-              Primary Cells - Animals
+              Primary Cells Animals
             </h1>
           </div>
 

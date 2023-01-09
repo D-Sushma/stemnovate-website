@@ -20,7 +20,7 @@ const texicologyScreen = () => {
     },
     {
       id: 3,
-      text: "Animal-Health"
+      text: "Animal Health"
     }
   ]
 
@@ -32,7 +32,7 @@ const texicologyScreen = () => {
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />
               <h1 className="text-center  text-white ">
-                NEW INSIGHTS PLATFORM-ANIMAL HEALTH
+                NEW INSIGHTS PLATFORM - ANIMAL HEALTH
               </h1>
             </div>
           </div>

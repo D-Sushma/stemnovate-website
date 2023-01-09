@@ -12,6 +12,7 @@ import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
 import BreadCrumb from "~/components/elements/BreadCrumb"
+import ProductList from "~/components/eventDetailList/productList"
 
 const EventsDetails = ({ EventsData }) => {
   console.log("EventsData", EventsData)
@@ -135,8 +136,7 @@ const EventsDetails = ({ EventsData }) => {
                                     rel="noreferrer"
                                     className="btn btn-lg button-meetup text-white rounded m-4 m-5"
                                   >
-                                    Confirm your attendance!{" "}
-                                    <HiArrowSmRight size={25} />
+                                    Donate Now! <HiArrowSmRight size={25} />
                                   </a>
                                 ) : null}
                               </div>
@@ -244,9 +244,7 @@ const EventsDetails = ({ EventsData }) => {
 
                       {galleryIMG.length > 0 ? (
                         <div className="col-md-12 mt-5">
-                          <h2 className="py-3">
-                            Glimpses of Events And Gallery
-                          </h2>
+                          <h2 className="py-3">Gallery</h2>
                           <Gallery
                             photos={galleryIMG}
                             originalClass="image-gallery"
@@ -275,6 +273,11 @@ const EventsDetails = ({ EventsData }) => {
             ))}
           <div className="container">
             <UpcomingEvents currentEvent={EventsData.data[0]?.id} />
+          </div>
+          <div className="about-section">
+            <div className="container">
+              <ProductList slug="Applications" />
+            </div>
           </div>
           <Subscribe />
         </div>
