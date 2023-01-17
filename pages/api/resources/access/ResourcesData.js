@@ -30,7 +30,8 @@ export default async function handler(req, res) {
             short_description: true,
             downloads: true,
             resources_status: true,
-            resources_category_resourcesToresources_category: true
+            resources_category_resourcesToresources_category: true,
+            related_products: true
           }
         })
 

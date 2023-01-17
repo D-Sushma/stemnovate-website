@@ -10,6 +10,8 @@ import { useSession } from "next-auth/react"
 
 import PropTypes from "prop-types"
 import Link from "next/link"
+import ProductList from "~/components/productList/resourcesRecommendedProductList";
+
 import {
   FaArrowRight,
   FaRegArrowAltCircleDown,
@@ -30,6 +32,14 @@ const ResourcesData = (props) => {
   const [userData, setUserData] = React.useState(null)
   const [isActive, setIsActive] = useState(false)
   const { data: session } = useSession()
+  
+  // resourcesData.data[0].related_products.map(
+  //                     (resData, index) => (
+  //                         product_related.push(resData.id)
+  //                     )
+  // )
+  //setproductCatList(product_related) 
+  //console.log("product_related", relatedProducts)
   useEffect(() => {
     var searchURL = "/resources"
     if (resources_Name != undefined) {
@@ -345,6 +355,14 @@ const ResourcesData = (props) => {
                 </div>
               </div>
             ) : null}
+
+            <div className="about-section">
+                <div className="container">
+                    <p className="base-bg-primary text-white p-2">Products with {resourcesData.data[0].resources_name}</p>
+                    <ProductList slug={resourcesData.data[0].related_products} />
+                </div>
+            </div>
+
             <Subscribe />
           </div>
         </div>

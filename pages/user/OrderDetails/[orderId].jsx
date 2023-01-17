@@ -15,7 +15,7 @@ function orderConfirmation({ UserData }) {
   const { status, orderId } = router.query
   const [orderData, setOrderdata] = useState("")
   const MySummery = useRef(null)
-
+  const [resourcesData, setResourcesdata] = useState([])
   useEffect(() => {
     // console.log("UserData", UserData.result);
     // if (status) {
@@ -47,7 +47,30 @@ function orderConfirmation({ UserData }) {
       const orders_Array = userOrders.userOrders
       const orders_Details_Array = orders_Array[1]
       if (orders_Details_Array.length > 0) {
+        var userResourcesArr = []
         console.log("order_details", orders_Details_Array)
+        for (let i = 0; i < orders_Details_Array.length; i++) {
+          console.log("product_id", orders_Details_Array[i].product_id)
+          var resourcesID = orders_Details_Array[i].product_id
+          var raw1 = JSON.stringify({ resourcesID: resourcesID })
+
+          var requestOptions1 = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw1
+          }
+          const response1 = await fetch(
+            `${baseUrl}/api/resources/getResourcesById`,
+            requestOptions1
+          )
+          const userResources = await response1.json()
+          console.log("userResources", userResources)
+          if (userResources.data.length > 0) {
+            userResourcesArr.push(userResources.data)
+          }
+        }
+        console.log("userResourcesArr", userResourcesArr)
+        setResourcesdata(userResourcesArr)
       }
     }
   }
@@ -309,8 +332,10 @@ function orderConfirmation({ UserData }) {
                               <h4 className="my-3">ORDER SUMMARY</h4>
                               <table className="table" width="100%">
                                 <tr>
-                                  <th width="60%">product Description</th>
-                                  <th width="16%">Price</th>
+                                  <th width="10%">Catalogue Number</th>
+                                  <th width="46%">Product Description</th>
+                                  <th width="10%">Resource Link</th>
+                                  <th width="10%">Price</th>
                                   <th width="8%">Quantity</th>
                                   <th width="16%">Total</th>
                                 </tr>
@@ -318,8 +343,15 @@ function orderConfirmation({ UserData }) {
                                   {orderData &&
                                     orderData[1].map((item, key) => (
                                       <tr key={key}>
-                                        <td width="60%">
-                                          <div className="d-flex justify-content-start flex-row ">
+                                        <td width="10%"> {item.ProductName}</td>
+                                        <td width="46%">
+                                           <span
+                                                dangerouslySetInnerHTML={{
+                                                  __html: item.description
+                                                }}
+                                              />
+                                          {/* <div className="d-flex justify-content-start flex-row ">
+                                           
                                             <img
                                               className="d-flex m-2"
                                               src={item.imgUrl}
@@ -328,18 +360,33 @@ function orderConfirmation({ UserData }) {
                                               alt={item.ProductName}
                                             />
                                             <div className="d-flex flex-column">
-                                              {item.ProductName}
-                                              <br />
-
                                               <span
                                                 dangerouslySetInnerHTML={{
                                                   __html: item.description
                                                 }}
                                               />
-                                            </div>
-                                          </div>
+                                            </div> 
+                                          </div> */}
                                         </td>
-                                        <td width="16%">
+                                        <td width="10%">
+                                          {
+                                            /* {resourcesData?.filter(function (el) {
+                                            return el.id
+                                          })} */
+                                            //target={"_blank"}
+                                          }
+                                          {resourcesData?.map((data, key) => (
+                                            <a
+                                              href={`/resources/Access/${data[0].resources_category_resourcesToresources_category.slug}/${data[0].resources_id}/${data[0].access_type}`}
+                                              rel="noreferrer"
+                                            >
+                                              <button className="button button--green mr-2">
+                                                Access
+                                              </button>
+                                            </a>
+                                          ))}
+                                        </td>
+                                        <td width="10%">
                                           £{item.product_price}
                                         </td>
                                         <td width="8%">
