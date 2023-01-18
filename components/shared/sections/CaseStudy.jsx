@@ -20,11 +20,11 @@ const CaseStudy = () => {
                     <div className="col-md-8 mt-1">
                         <h2 className="text-white ">Partnerships</h2>
                         <p className=" text-white text-justify">
-                            We have global partnerships that include top tier pharmaceutical companies and world-renowned academia. As a result, we have successfully delivered projects that incorporate innovation and integration of advanced microengineering and cellular technologies.
+                            Our global partnerships include top-tier pharmaceutical companies and world-renowned academia. As a result, we have successfully delivered projects incorporating innovation with the integration of advanced microengineering and cellular technologies.
                             <br />
-                            We have industrial partnerships on several PhD studentships with the National Physical Laboratory, the University of Edinburgh, the University of Northumbria, and the Babraham Institute, to name a few.
+                            We often partner with institutes for industrial PhD studentships, such as the National Physical Laboratory, the University of Edinburgh, the University of Northumbria, and the Babraham Institute, to name a few.
                             <br />
-                            Stemnovate is certified as an ISO 9001: 2015 company. We have an experienced team of Phds and Postdocs from top institutes across the world, and hence are well equipped to overcome challenges in research and development.
+                            Stemnovate is certified as an ISO 9001: 2015 company. Our team comprises scientists holding PhDs and Postdocs from worldwide, and hence are well equipped to overcome challenges in research and development.
                         </p>
                         <a className=" float-right button button--yellow" href="/About-Us">
                             READ MORE <FaArrowRight />
