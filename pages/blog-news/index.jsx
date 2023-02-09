@@ -91,10 +91,14 @@ const Blogs = (props) => {
                                   <div className="container container-initial">
                                     <div className="ps-banner__block">
                                       <div className="ps-banner__content">
-                                        <h1 className="ps-banner__title text-white">
+                                        <h1 className="ps-banner__title">
                                           {featuredPostLists[0].tag}
                                         </h1>
-                                        <div className="ps-banner__desc text-white">
+                                        <div className="ps-banner__desc" 
+                                             style={{
+                                              fontSize:"27px",
+                                              fontWeight:"800"
+                                              }}>
                                           {featuredPostLists[0].name}
                                         </div>
                                         <div className="ps-banner__btn-group"></div>
