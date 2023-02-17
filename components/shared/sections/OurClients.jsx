@@ -120,7 +120,7 @@ export default function OurClients() {
                 </div>
               </a>
             </div>
-            <div className="card card-h-min align-items-center p-1 justify-content-center ">
+            {/* <div className="card card-h-min align-items-center p-1 justify-content-center ">
               <a
                 href="https://www.ox.ac.uk/"
                 target={"_blank"}
@@ -130,7 +130,7 @@ export default function OurClients() {
                   <Image src={brand11} alt="ox" />
                 </div>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
