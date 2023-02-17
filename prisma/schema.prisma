@@ -575,6 +575,14 @@ model resources_data {
   structural_variation          String?                         @db.LongText
   deleted_at                    DateTime?                       @db.DateTime(0)
   datasheet_files               String?                         @db.Text
+  pdf_po                        String?                         @db.VarChar(100)
+  pdf_company                   String?                         @db.VarChar(100)
+  pdf_reportno                  String?                         @db.VarChar(100)
+  pdf_catalogue_no              String?                         @db.VarChar(100)
+  pdf_desc                      String?                         @db.Text
+  pdf_result                    String?                         @db.Text
+  pdf_bottom_name               String?                         @db.VarChar(100)
+  pdf_bottom_sign               String?                         @db.Text
   resources_human_alignment     resources_human_alignment[]
   resources_structural_analysis resources_structural_analysis[]
 }

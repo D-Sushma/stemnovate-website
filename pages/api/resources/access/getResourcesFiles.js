@@ -21,7 +21,15 @@ export default async function handler(req, res) {
             sequencing: true,
             structural_variation: true,
             deleted_at: true,
-            datasheet_files: true
+            datasheet_files: true,
+            pdf_po: true,
+            pdf_company: true,
+            pdf_reportno: true,
+            pdf_catalogue_no: true,
+            pdf_desc: true,
+            pdf_result: true,
+            pdf_bottom_name: true,
+            pdf_bottom_sign: true  
             // resources_human_alignment: true,
             // resources_structural_analysis: true
           }
