@@ -136,7 +136,7 @@ const EventsDetails = ({ EventsData }) => {
                                     rel="noreferrer"
                                     className="btn btn-lg button-meetup text-white rounded m-4 m-5"
                                   >
-                                    Donate Now! <HiArrowSmRight size={25} />
+                                    Register here <HiArrowSmRight size={25} />
                                   </a>
                                 ) : null}
                               </div>
@@ -276,10 +276,11 @@ const EventsDetails = ({ EventsData }) => {
           </div>
           <div className="about-section">
             <div className="container">
-              { EventsData.data[0]?.id !== 7 ?
+               <ProductList slug="Applications" />
+              {/* { EventsData.data[0]?.id !== 7 ?
               ( <ProductList slug="Applications" /> ) : null
 
-              }
+              } */}
             </div>
           </div>
           <Subscribe />

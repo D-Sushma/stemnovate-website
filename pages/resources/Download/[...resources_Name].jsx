@@ -254,7 +254,7 @@ const ResourcesData = (props) => {
       <div className="row">
         <div className="col-md-12 text-center my-5">
              <div>
-              <button className="ps-btn ps-btn--warning ps-btn--curve" onClick={handlePdf}>Generate PDF</button>
+              <button className="ps-btn ps-btn--warning ps-btn--curve" onClick={handlePdf}>Download PDF</button>
             </div>
         </div>
       </div>

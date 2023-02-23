@@ -276,15 +276,24 @@ const ResourcesData = (props) => {
                       <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
-                            <a
-                              target={"_blank"}
-                              href={filePath ? `${filePath}` : "#"}
-                              rel="noreferrer"
+                            // <a
+                            //   target={"_blank"}
+                            //   href={filePath ? `${filePath}` : "#"}
+                            //   rel="noreferrer"
+                            // >
+                            //   <button className="button button--green mr-2">
+                            //     Download
+                            //   </button>
+                            // </a>
+                            <Link
+                              href={`/resources/Download/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
                             >
-                              <button className="button button--green mr-2">
-                                Download
-                              </button>
-                            </a>
+                              <a>
+                                <button className="button button--green mr-2">
+                                  View & Download PDF
+                                </button>
+                              </a>
+                            </Link>
                           ) : (
                             <AddToCartResources
                               userData={userData}
