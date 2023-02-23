@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react"
 import PropTypes from "prop-types"
 import Link from "next/link"
 import pdfHelper from "~/lib/pdfHelper"
-
+  
 import jsPDF from "jspdf"
 import html2canvas from "html2canvas"
 
