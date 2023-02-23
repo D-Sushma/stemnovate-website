@@ -244,7 +244,7 @@ const ResourcesData = (props) => {
         pdf.save('download.pdf');
       });
   };
-
+    
   return (
     <Container
       title={
