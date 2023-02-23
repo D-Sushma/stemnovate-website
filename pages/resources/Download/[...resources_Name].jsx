@@ -260,10 +260,10 @@ const ResourcesData = (props) => {
       </div>
       
       
-      <div className="ps-page ps-page--shopping" id="page">
+      <div className="ps-page ps-page--shopping">
         <div className="ps-page__content">
           <div className="ps-about">
-            <div className="about-section">
+            <div className="about-section" id="page">
               <div className="container-fluid">
                 <div className="ps-page__content">
                   <div className="card">
