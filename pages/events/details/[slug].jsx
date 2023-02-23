@@ -276,7 +276,10 @@ const EventsDetails = ({ EventsData }) => {
           </div>
           <div className="about-section">
             <div className="container">
-              <ProductList slug="Applications" />
+              { EventsData.data[0]?.id !== 7 ?
+              ( <ProductList slug="Applications" /> ) : null
+
+              }
             </div>
           </div>
           <Subscribe />

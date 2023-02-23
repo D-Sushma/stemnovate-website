@@ -9,10 +9,6 @@ import { useSession } from "next-auth/react"
 
 import PropTypes from "prop-types"
 import Link from "next/link"
-import pdfHelper from "~/lib/pdfHelper"
-
-import jsPDF from "jspdf"
-import html2canvas from "html2canvas"
 
 import {
   FaArrowRight,
@@ -225,34 +221,13 @@ const ResourcesData = (props) => {
     setBreadCrumb(newBreadCrumb)
   }
 
-  /*  generate PDF */
-  let handlePdf = () => {
-    const input = document.getElementById('page');
-
-    html2canvas(input)
-      .then((canvas) => {
-       const imgData = canvas.toDataURL('image/png');
-       // const imgData1 = canvas.toDataURL('image/svg');
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-        });
-        const imgProps= pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      //  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('download.pdf');
-      });
-  };
-
   return (
     <Container
       title={
         resourcesData ? resourcesData.data[0].resources_name : resources_Name[0]
       }
     >
-      <button onClick={handlePdf}>Generate PDF</button>
-      <div className="ps-page ps-page--shopping" id="page">
+      <div className="ps-page ps-page--shopping">
         <div className="ps-page__content">
           <div className="ps-about">
             <div className="about-section">
@@ -265,7 +240,7 @@ const ResourcesData = (props) => {
                           className="col-md-12 mb-3"
                           style={{ borderBottom: "1px solid black" }}
                         >
-                          <img src="/static/img/LogoFINAL.png" alt="Stemnovate Limited" style={{width:"40%"}} />
+                          <img src="/static/image/LogoFINAL-2.svg" alt="Stemnovate Limited" style={{width:"40%"}} />
                           
                         </div>
                         <div className="col-md-12 ">
@@ -451,7 +426,7 @@ const ResourcesData = (props) => {
   )
 }
 
-export async function getServerSideProps({ req, res,query }) {
+export async function getServerSideProps({ query }) {
   const slug = query.resources_Name
   console.log("slug", slug)
   var resourcesData = []
@@ -485,6 +460,8 @@ export async function getServerSideProps({ req, res,query }) {
       resourcesData = myProductData
     }
   }
+
+  // // Pass data to the page via props
   return { props: { resourcesData } }
 }
 
