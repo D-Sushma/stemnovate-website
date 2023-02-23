@@ -251,7 +251,15 @@ const ResourcesData = (props) => {
         resourcesData ? resourcesData.data[0].resources_name : resources_Name[0]
       }
     >
-      <button onClick={handlePdf}>Generate PDF</button>
+      <div className="row">
+        <div className="col-md-12 text-center my-5">
+             <div>
+              <button className="ps-btn ps-btn--warning ps-btn--curve" onClick={handlePdf}>Generate PDF</button>
+            </div>
+        </div>
+      </div>
+      
+      
       <div className="ps-page ps-page--shopping" id="page">
         <div className="ps-page__content">
           <div className="ps-about">
