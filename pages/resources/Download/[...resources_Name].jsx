@@ -273,7 +273,7 @@ const ResourcesData = (props) => {
                           className="col-md-12 mb-3"
                           style={{ borderBottom: "1px solid black" }}
                         >
-                          <img src="/static/img/LogoFINAL.png" alt="Stemnovate Limited" style={{width:"40%"}} />
+                          <img src="/static/img/pdf_logo.png" alt="Stemnovate Limited" style={{width:"40%"}} />
                           
                         </div>
                         <div className="col-md-12 ">
