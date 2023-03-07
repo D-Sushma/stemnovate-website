@@ -414,6 +414,20 @@ model promotions_offer {
   ethnicity        String?   @db.Text
 }
 
+model home_banner {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  title            String?   @db.Text
+  url              String?   @db.Text
+  image            String?   @db.VarChar(255)
+  btn_text         String?   @db.Text
+  banner_content    String?   @db.Text
+  banner_id         Int       @id @default(autoincrement())
+  published       Boolean   @default(false)
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  updated_at      DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at      DateTime? @db.DateTime(0)
+}
+
 model campaign_users {
   user_id      Int       @id @default(autoincrement())
   email        String    @db.VarChar(200)
