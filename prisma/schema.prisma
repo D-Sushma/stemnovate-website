@@ -320,6 +320,7 @@ model post {
   tag             String?   @db.VarChar(200)
   features        Boolean?  @default(false)
   authorName      String?   @db.VarChar(100)
+  banner_title    String?   @db.VarChar(255)
 }
 
 model profile {

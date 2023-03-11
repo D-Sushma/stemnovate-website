@@ -80,7 +80,7 @@ const Blogs = (props) => {
                 <div className="ps-page__header  breadcrumb-h breadcrumb-bg" style={{ backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${blogData?.banner_img})` }}>
                     <div className="container ">
                         <BreadCrumb breacrumb={breadcrumb} />
-                        <h1 className="text-center h1 text-white p-2">{blogData?.name}</h1>
+                        <h1 className="text-center h1 text-white p-2">{blogData?.banner_title}</h1>
                     </div>
                 </div>
                 <div className="ps-page__content">

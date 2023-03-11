@@ -221,6 +221,89 @@ const AboutUsScreen = () => {
 
                         <div className="bg-02-section">
                             <div className="container">
+                                <section className="ps-section--block-grid">
+                                    <div className="ps-section__thumbnail">
+                                        <a className="ps-section__image" href="#">
+                                            <img src="/static/img/about/babraham.jpg" alt="Babraham" />
+                                        </a>
+                                    </div>
+                                    <div className="ps-section__content">
+                                        <h2 className="">
+                                            <u>
+                                                <a href="https://www.babraham.ac.uk/news/2023/02/stemnovate-and-babraham-institute-collaboration" target={"_blank"} className="font-weight-bold">
+                                                    Stemnovate and Babraham Institute come together to untangle the tauopathy in Alzheimer’s disease
+                                                </a>
+                                            </u>{" "}
+                                            
+                                        </h2>
+                                        <div className="ps-section__desc">
+                                            <p>Stemnovate Ltd. and Dr Nick Ktistakis from the Babraham Institute will support a proof-of-principle project to understand how the cellular quality control process of autophagy targets protein aggregates in the brain. Using blood or skin samples from volunteer donors, the research project will look to provide an important piece in the puzzle to determine how autophagy is important for brain health. </p>
+                                            <p>Autophagy is a process of nutrient recycling and elimination of unnecessary or damaged cellular material in cells, leading to a periodic clean-up of the cell interior and recycling of nutrients during times of low resources.</p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        
+                        <div className="about-section">
+                            <div className="container">
+                                <section className="ps-section--block-grid flex-wrap ">
+                                    <div className="ps-section__thumbnail">
+                                        <a className="ps-section__image" href="#">
+                                            <img src="/static/img/about/European-Space-Agency--Microgravity.jpg" alt="European-Space-Agency--Microgravity" />
+                                        </a>
+                                    </div>
+                                    <div className="ps-section__content">
+                                        <h2 className="">
+                                            <u>
+                                                <a target={"_blank"} href="https://www.esa.int/" className="font-weight-bold">
+                                                    European Space Agency
+                                                </a>
+                                            </u>{" "}
+                                            : Microgravity Application Promotion Programme
+                                        </h2>
+                                        <div className="ps-section__desc ">
+                                            <p>
+                                                Stemnovate has partnered with multinational collaborators on a project coordinated by the MEDES Institute of space medicine and physiology.
+                                                <br />
+                                                The project focuses on developing technology to study the effect on astronauts' musculoskeletal systems while living in space. Despite extensive use of exercise countermeasures, the astronauts' body displays a reduction in muscle volume and strength, bone mass decrease, and microarchitectural alterations. In addition to spaceflight-related conditions, ageing and sedentariness of the population are often accompanied by sarcopenia (loss of muscle mass and strength) and osteoporosis (bone weakness), conditions without efficient treatment available. There is, therefore, an urgent need for the development of new therapeutic strategies acting on the two arms of the musculoskeletal system.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <div className="bg-02-section">
+                            <div className="container">
+                                <section className="ps-section--block-grid">
+                                    <div className="ps-section__thumbnail">
+                                        <a className="ps-section__image" href="#">
+                                            <img src="/static/img/about/Hep2.webp" alt="Hepatitis C research" />
+                                        </a>
+                                    </div>
+                                    <div className="ps-section__content">
+                                        <h2 className="">
+                                            <u>
+                                                <a href="https://www.tcd.ie/" target={"_blank"} className="font-weight-bold">
+                                                    Trinity College, Dublin
+                                                </a>
+                                            </u>{" "}
+                                            : Hepatitis C research
+                                        </h2>
+                                        <div className="ps-section__desc ">
+                                            <p>
+                                                Stemnovate partners Prof Cliona O’Farrelly at Trinity College, Ireland to find out why some people can block infection by hepatitis C, in a bid to improve treatment. Prof Cliona O’Farrelly has made exciting discoveries about the liver immune system, and now she is keen to know what antiviral strategies we can learn from women whose immune systems seem to block hepatitis C virus from establishing an infection. Stemnovate has expertise in reprogramming cells to multiple cell types. The adult cells, blood cells or skin cells are reprogrammed with human genes expressed in embryonic stages but without the use of any embryos. The cells acquire properties like Embryonic stem cells that can then differentiate to form neurons, heart cells and liver
+                                                cells.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        {/* <div className="bg-02-section">
+                            <div className="container">
                                 <section className="ps-section--block-grid ">
                                     <div className="ps-section__thumbnail">
                                         <a className="ps-section__image" href="#">
@@ -299,7 +382,7 @@ const AboutUsScreen = () => {
                                     </div>
                                 </section>
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="about-section">
                             <div className="container">
