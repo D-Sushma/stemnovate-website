@@ -412,6 +412,44 @@ const Blogs = (props) => {
                             <a
                               className="ps-post__overlay"
                               target={"_blank"}
+                              href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
+                              rel="noreferrer"
+                            ></a>
+                            <img
+                              src="/static/img/blog/science_tech.jpg"
+                              alt="Stemnovate is a finalist for the life science company of the year at the Cambridge Independent Science and Technology awards"
+                            />
+                          </div>
+                          <div className="ps-post__wrapper justify-content-center">
+                            <div className="ps-post__content justify-content-center">
+                              <a
+                                className="ps-post__title text-center blog-news-title"
+                                target={"_blank"}
+                                href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
+                                rel="noreferrer"
+                              >
+                                Stemnovate is a finalist for the life science company of the year at the Cambridge Independent Science and Technology awards
+                              </a>
+                              <div className="ps-post__meta justify-content-center py-4">
+                                <a
+                                  className="ps-post__author blog-author"
+                                  target={"_blank"}
+                                  href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
+                                  rel="noreferrer"
+                                >
+                                  <span className="h3 my-4"> Read More</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+                        <article className="ps-post ps-post--grid blog-news">
+                          <div className="ps-post__thumbnail">
+                            <a
+                              className="ps-post__overlay"
+                              target={"_blank"}
                               href="http://ow.ly/FIa450KbHet"
                               rel="noreferrer"
                             ></a>
@@ -445,6 +483,7 @@ const Blogs = (props) => {
                           </div>
                         </article>
                       </div>
+
                       <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid blog-news">
                           <div className="ps-post__thumbnail">
@@ -525,46 +564,6 @@ const Blogs = (props) => {
                         </article>
                       </div>
 
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a
-                              className="ps-post__overlay"
-                              target={"_blank"}
-                              href="https://youtu.be/OOplDmqtNac"
-                              rel="noreferrer"
-                            ></a>
-                            <img
-                              src="/static/img/blog/7.jpg"
-                              alt="CEO recognised as #21 to watch in Cambridge in 2020"
-                            />
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                target={"_blank"}
-                                href="https://youtu.be/OOplDmqtNac"
-                                rel="noreferrer"
-                              >
-                                Our CEO recognised as #21 to watch in Cambridge
-                                in 2020
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  target={"_blank"}
-                                  href="https://youtu.be/OOplDmqtNac"
-                                  rel="noreferrer"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-
                       {/* <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid blog-news">
                           <div className="ps-post__thumbnail">
@@ -606,6 +605,47 @@ const Blogs = (props) => {
                         </article>
                       </div> */}
                     </div>
+                     <div className="ps-blog-items row" data-columns="4">
+                         <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
+                            <article className="ps-post ps-post--grid blog-news">
+                              <div className="ps-post__thumbnail">
+                                <a
+                                  className="ps-post__overlay"
+                                  target={"_blank"}
+                                  href="https://youtu.be/OOplDmqtNac"
+                                  rel="noreferrer"
+                                ></a>
+                                <img
+                                  src="/static/img/blog/7.jpg"
+                                  alt="CEO recognised as #21 to watch in Cambridge in 2020"
+                                />
+                              </div>
+                              <div className="ps-post__wrapper justify-content-center">
+                                <div className="ps-post__content justify-content-center">
+                                  <a
+                                    className="ps-post__title text-center blog-news-title"
+                                    target={"_blank"}
+                                    href="https://youtu.be/OOplDmqtNac"
+                                    rel="noreferrer"
+                                  >
+                                    Our CEO recognised as #21 to watch in Cambridge
+                                    in 2020
+                                  </a>
+                                  <div className="ps-post__meta justify-content-center py-4">
+                                    <a
+                                      className="ps-post__author blog-author"
+                                      target={"_blank"}
+                                      href="https://youtu.be/OOplDmqtNac"
+                                      rel="noreferrer"
+                                    >
+                                      <span className="h3 my-4"> Read More</span>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </article>
+                          </div>
+                      </div>
                   </div>
                 </div>
               </div>
