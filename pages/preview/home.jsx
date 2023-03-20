@@ -136,7 +136,7 @@ export async function getServerSideProps() {
         method: "GET",
     };
 
-    const res1 = await fetch(baseUrl + "/api/homebanner/getAllbanner", requestOptions);
+    const res1 = await fetch(baseUrl + "/api/homebanner/getAllPreviewbanner", requestOptions);
     const myPromotionData = await res1.json();
     console.log("myPromotionData", myPromotionData);
     if (myPromotionData.status == 200) {

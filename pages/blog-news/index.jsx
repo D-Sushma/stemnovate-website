@@ -416,6 +416,9 @@ const Blogs = (props) => {
                               rel="noreferrer"
                             ></a>
                             <img
+                              style={{
+                                height: "141px"
+                              }}
                               src="/static/img/blog/science_tech.jpg"
                               alt="Stemnovate is a finalist for the life science company of the year at the Cambridge Independent Science and Technology awards"
                             />
@@ -428,7 +431,7 @@ const Blogs = (props) => {
                                 href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
                                 rel="noreferrer"
                               >
-                                Stemnovate is a finalist for the life science company of the year at the Cambridge Independent Science and Technology awards
+                                Stemnovate is a finalist for the life science company of the year awards
                               </a>
                               <div className="ps-post__meta justify-content-center py-4">
                                 <a
@@ -454,6 +457,9 @@ const Blogs = (props) => {
                               rel="noreferrer"
                             ></a>
                             <img
+                              style={{
+                                height: "141px"
+                              }}
                               src="/static/img/blog/stemnovate-team.jpg"
                               alt="Good prognosis for drug discovery pioneer after £1M investment"
                             />
@@ -494,6 +500,9 @@ const Blogs = (props) => {
                               rel="noreferrer"
                             ></a>
                             <img
+                              style={{
+                                height: "141px"
+                              }}
                               src="/static/img/blog/5.jpg"
                               alt="Dr Ruchi is one of the judges for #21 to watch 2022"
                             />
@@ -534,6 +543,9 @@ const Blogs = (props) => {
                               rel="noreferrer"
                             ></a>
                             <img
+                              style={{
+                                height: "141px"
+                              }}
                               src="/static/img/blog/6.jpg"
                               alt="Stemnovate raises million for commercialisation of drug discovery platforms 2021"
                             />
@@ -616,6 +628,9 @@ const Blogs = (props) => {
                                   rel="noreferrer"
                                 ></a>
                                 <img
+                                  style={{
+                                    height: "141px"
+                                  }}
                                   src="/static/img/blog/7.jpg"
                                   alt="CEO recognised as #21 to watch in Cambridge in 2020"
                                 />
