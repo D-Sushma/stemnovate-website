@@ -31,11 +31,18 @@ export default async function handler(req, res) {
             where: { deleted_at: null, published: true, features: true },
         });
 
+        const blogNewsDetails = await prisma.blog_news.findMany({
+            orderBy: {
+                id: "desc",
+            },
+            where: { deleted_at: null, published: true },
+        });
+
         if (blogDetails.length > 0) {
-            res.status(200).json({ status: 200, data: blogDetails, featuredBlog: featuredBlogDetails });
+            res.status(200).json({ status: 200, data: blogDetails, featuredBlog: featuredBlogDetails, blogNewsDetails: blogNewsDetails });
         } else {
             console.log("Error");
-            res.status(200).json({ status: 201, data: [], featuredBlog: [] });
+            res.status(200).json({ status: 201, data: [], featuredBlog: [], blogNewsDetails: [] });
         }
     }
 }

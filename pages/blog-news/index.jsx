@@ -27,6 +27,7 @@ const Blogs = (props) => {
   const { PostList } = props
   const [postLists] = useState(PostList.data)
   const [featuredPostLists] = useState(PostList.featuredBlog)
+  const [blogNewsLists] = useState(PostList.blogNewsDetails)
   const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 55}`
   }
@@ -348,7 +349,6 @@ const Blogs = (props) => {
             <div className="container">
               <div className="row">
                 <div className="col-md-12 my-5">
-                  {/* <BlogSlider /> */}
                   {featuredPostLists[1] ? (
                     <section className="ps-section--banner ps-top-banners">
                       <div className="ps-section__overlay">
@@ -405,7 +405,64 @@ const Blogs = (props) => {
                 </div>
                 <div className="ps-page__content">
                   <div className="ps-blog">
-                    <div className="ps-blog-items row" data-columns="4">
+                      <div
+                      className="ps-blog-items row row-reverse"
+                      data-columns="4"
+                    >
+                      
+                     {blogNewsLists.map((data, key) => (
+                        <div 
+                          className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12"
+                          key={key}
+                          >
+                          <article className="ps-post ps-post--grid blog-news">
+                            <div className="ps-post__thumbnail">
+                              <a
+                                className="ps-post__overlay"
+                                target={"_blank"}
+                                href={`${data.url}`}
+                                rel="noreferrer"
+                              ></a>
+                              <img
+                                style={{
+                                  height: "141px"
+                                }}
+                                src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
+                                alt={data.title}
+                              />
+                            </div>
+                            <div className="ps-post__wrapper justify-content-center">
+                              <div className="ps-post__content justify-content-center">
+                                <a
+                                  className="ps-post__title text-center blog-news-title"
+                                  target={"_blank"}
+                                  href={`${data.url}`}
+                                  rel="noreferrer"
+                                >
+                                  {data.title}
+                                </a>
+                                <div className="ps-post__meta justify-content-center py-4">
+                                  <a
+                                    className="ps-post__author blog-author"
+                                    target={"_blank"}
+                                    href={`${data.url}`}
+                                    rel="noreferrer"
+                                  >
+                                    <span className="h3 my-4"> Read More</span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+
+
+                      ))}
+
+                      {/* ------------------------------ map All Blog ------------------------------  */}
+                    </div> 
+                       
+                    {/* <div className="ps-blog-items row" data-columns="4">
                       <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid blog-news">
                           <div className="ps-post__thumbnail">
@@ -575,49 +632,8 @@ const Blogs = (props) => {
                           </div>
                         </article>
                       </div>
-
-                      {/* <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a
-                              className="ps-post__overlay"
-                              target={"_blank"}
-                              href="https://www.businessweekly.co.uk/news/biomedtech/1-million-funding-cambridge-‘liver-chip’-pioneers"
-                              rel="noreferrer"
-                            ></a>
-                            <img
-                              src="/static/img/blog/8.jpg"
-                              alt="Stemnovate receives prestigious Innovate UK funding"
-                            />
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                target={"_blank"}
-                                href="https://www.businessweekly.co.uk/news/biomedtech/1-million-funding-cambridge-‘liver-chip’-pioneers"
-                                rel="noreferrer"
-                              >
-                                Stemnovate receives prestigious Innovate UK
-                                funding for a million to develop chip technology
-                                - 2017
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  target={"_blank"}
-                                  href="https://www.businessweekly.co.uk/news/biomedtech/1-million-funding-cambridge-‘liver-chip’-pioneers"
-                                  rel="noreferrer"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div> */}
-                    </div>
-                     <div className="ps-blog-items row" data-columns="4">
+                    </div> */}
+                     {/* <div className="ps-blog-items row" data-columns="4">
                          <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
                             <article className="ps-post ps-post--grid blog-news">
                               <div className="ps-post__thumbnail">
@@ -660,7 +676,7 @@ const Blogs = (props) => {
                               </div>
                             </article>
                           </div>
-                      </div>
+                      </div> */}
                   </div>
                 </div>
               </div>
