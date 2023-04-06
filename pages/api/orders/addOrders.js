@@ -73,6 +73,7 @@ export default async function handle(req, res) {
                             to: email,
                             subject: "Your Orders  !",
                             html: data,
+                            bcc: "info@stemnovate.co.uk"
                         };
 
                         smtpTransport.sendMail(mainOptions, function (err, info) {
