@@ -12,6 +12,16 @@ const DetailLayoutThree = ({ ProductData }) => {
   const htmlContent = ProductData?.ProductsList[0].short_description
   var stripedHtml = htmlContent.replace(/<[^>]+>/g, "")
 
+  var ogImage = "";
+  var images = [];
+  var products_img = ProductData?.ProductsList[0].product_image.split(",");
+        if (products_img && products_img.length > 0) {
+            products_img.map((item) => {
+                images.push(`${process.env.AWS_S3BUCKET_URL}${item}`);
+            });
+            ogImage = images[0];
+        }
+
   useEffect(() => {
     console.log("ProductData", ProductData)
     if (ProductData.status == undefined) {
@@ -67,6 +77,7 @@ const DetailLayoutThree = ({ ProductData }) => {
   return (
     <Container
       title={ProductData?.ProductsList[0]?.product_name}
+      ogimg={ogImage}
       description={stripedHtml}
       cronical={myConical}
     >
