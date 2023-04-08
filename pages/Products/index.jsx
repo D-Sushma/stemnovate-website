@@ -36,6 +36,7 @@ const ProductScreen = () => {
 
     const [productList, setProductList] = useState([]);
     var titleName = "Our Products ";
+    var ogImg = "https://stemnovate.co.uk/static/img/products/Products_Image.jpeg";
 
     useEffect(() => {
         // console.log("myQuery", myQuery);
@@ -140,7 +141,7 @@ const ProductScreen = () => {
     }
 
     return (
-        <Container title={titleName}>
+        <Container title={titleName} ogimg={ogImg}>
             <ToastContainer />
             <div className="ps-page ps-page--shopping">
                 <div className="ps-page__header breadcrumb-h product-breadcrumb-bg">
