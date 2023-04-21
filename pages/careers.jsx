@@ -63,7 +63,7 @@ const CareerScreen = () => {
                 <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
                     <div className="container ">
                         <BreadCrumb breacrumb={breadcrumb} />
-                        <h1 className="text-center  text-white ">Careers</h1>
+                        <h1 className="text-center  text-white ">Career</h1>
                     </div>
                 </div>
                 <div className="ps-page__content">

@@ -65,6 +65,40 @@ function CareersGrid({ postLists, internShip }) {
                     {/* ------------------------------ map All Blog ------------------------------  */}
                 </div>
             </div>
+            
+           
+                <div className="ps-blog-items my-5" data-columns="4">
+                    {/* ------------------------------ map All Blog ------------------------------  */}
+                        <div className="resources-list p-2">
+                            <div className="container">
+                                <section className="ps-section--block-grid ">
+                                    <div className="ps-section__thumbnail">
+                                        <a className="ps-section__image" href="#">
+                                            <img src="static/image/research-campaign.webp" alt="Sharing pictures of your work could win you an Amazon voucher" />
+                                        </a>
+                                    </div>
+                                    <div className="ps-section__content">
+                                        <Link href="https://stemnovate.co.uk/campaign/monthly-shine-through-your-research-campaign">
+                                            <a>
+                                                <h1 className="font-weight-bold">Sharing pictures of your work could win you an Amazon voucher</h1>
+                                            </a>
+                                        </Link>
+                                        <div className="ps-section__desc ">
+                                            <p>Sharing pictures of your work could win you an Amazon voucher</p>
+                                            
+                                            <a href="https://stemnovate.co.uk/campaign/monthly-shine-through-your-research-campaign" className="btn btn-lg button-orange text-white m-4 m-5">
+                                                Get More details <HiArrowSmRight size={25} />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                
+                    {/* ------------------------------ map All Blog ------------------------------  */}
+                </div>
+
+
             <div className="" data-columns="4">
                 {/* ------------------------------ map All Blog ------------------------------  */}
 
