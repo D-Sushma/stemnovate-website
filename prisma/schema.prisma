@@ -443,6 +443,81 @@ model blog_news {
   deleted_at       DateTime? @db.DateTime(0)
 }
 
+model about_us {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  intro            String?   @db.Text
+  banner_img       String?   @db.VarChar(255)
+  banner_title     String?   @db.Text
+  created_at       DateTime  @default(now()) @db.Timestamp(0)
+  updated_at       DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at       DateTime? @db.DateTime(0)
+  created_by       String?   @db.VarChar(255)
+}
+
+model aboutus_team {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  image            String?   @db.VarChar(255)
+  team_id          Int       @id @default(autoincrement())
+  team_content     String?   @db.Text
+  published        Boolean   @default(false)
+  created_at       DateTime  @default(now()) @db.Timestamp(0)
+  updated_at       DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at       DateTime? @db.DateTime(0)
+}
+
+model aboutus_history {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  title            String?   @db.Text
+  url              String?   @db.Text
+  image            String?   @db.VarChar(255)
+  btn_text         String?   @db.Text
+  history_content     String?   @db.Text
+  history_id          Int       @id @default(autoincrement())
+  published        Boolean   @default(false)
+  created_at       DateTime  @default(now()) @db.Timestamp(0)
+  updated_at       DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at       DateTime? @db.DateTime(0)
+}
+
+model aboutus_partners {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  title            String?   @db.Text
+  url              String?   @db.Text
+  image            String?   @db.VarChar(255)
+  partners_content     String?   @db.Text
+  partners_id          Int       @id @default(autoincrement())
+  published        Boolean   @default(false)
+  created_at       DateTime  @default(now()) @db.Timestamp(0)
+  updated_at       DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at       DateTime? @db.DateTime(0)
+}
+
+
+model aboutus_announce {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  title            String?   @db.Text
+  url              String?   @db.Text
+  image            String?   @db.VarChar(255)
+  btn_text         String?   @db.Text
+  announce_id          Int       @id @default(autoincrement())
+  published        Boolean   @default(false)
+  created_at       DateTime  @default(now()) @db.Timestamp(0)
+  updated_at       DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at       DateTime? @db.DateTime(0)
+}
+
+model aboutus_reviews {
+  id               String    @unique(map: "id") @db.VarChar(200)
+  title            String?   @db.Text
+  review_id        Int       @id @default(autoincrement())
+  review_content   String?   @db.Text
+  review_count     Int        @default(0)
+  published        Boolean   @default(false)
+  created_at       DateTime  @default(now()) @db.Timestamp(0)
+  updated_at       DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at       DateTime? @db.DateTime(0)
+}
+
 model campaign_users {
   user_id      Int       @id @default(autoincrement())
   email        String    @db.VarChar(200)

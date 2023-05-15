@@ -80,31 +80,33 @@ const HomeDefaultPage = (props) => {
                     {promotions &&
                         promotions?.map((data, key) =>
                            
-                                <div className="carousel-item" key={key}>
-                                    <div className="ps-banner" style={{ background: "#103178" }}>
-                                        <div className="container-no-round">
-                                            <div className="ps-banner__block">
-                                                <div className="ps-banner__content d-flex  justify-content-between">
-                                                    <div className="d-flex flex-column ">
-                                                        <div
-                                                            className="ps-banner__title text-white"
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: data?.banner_content,
-                                                            }}></div>
-                                                        <div>
-                                                            <a className="bg-warning ps-banner__shop" href={`${data.url}`}>
-                                                                {data.btn_text}
-                                                            </a>
-                                                        </div>
+                            <div className="carousel-item" key={key}>
+                                <div className="ps-banner" style={{ background: "#103178" }}>
+                                    <div className="container-no-round">
+                                        <div className="ps-banner__block">
+                                            <div className="ps-banner__content d-flex  justify-content-between">
+                                                <div className="d-flex flex-column ">
+                                                    <div
+                                                        className="ps-banner__title text-white"
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: data?.banner_content,
+                                                        }}></div>
+                                                    <div>
+                                                      { data.url == '' ? '' :
+                                                        <a className="bg-warning ps-banner__shop" href={`${data?.url}`}>
+                                                            {data?.btn_text}
+                                                        </a>
+                                                        }
                                                     </div>
                                                 </div>
-                                                <div className="ps-banner__thumnail ps-banner__fluid">
-                                                    <img className="ps-banner__image" src={`${process.env.AWS_S3BUCKET_URL}${data.image}`} alt="alt" />
-                                                </div>
+                                            </div>
+                                            <div className="ps-banner__thumnail ps-banner__fluid">
+                                                <img className="ps-banner__image" src={`${process.env.AWS_S3BUCKET_URL}${data.image}`} alt="alt" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             
                         )}
                 </Slider>

@@ -79,7 +79,7 @@ const CategoryScreen = () => {
                             <BreadCrumb breacrumb={breadcrumb} />
                             <h1 className="ps-page__heading text-white">
                                 {category ? category.category_name : "Category"}
-                                <sup>({category && category.ProductsList.length > 0 ? category.ProductsList.length : 0})</sup>
+                                {/* <sup>({category && category.ProductsList.length > 0 ? category.ProductsList.length : 0})</sup> */}
                             </h1>
                         </div>
                     </div>

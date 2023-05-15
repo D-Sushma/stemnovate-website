@@ -464,7 +464,11 @@ const ProductList = ({ ecomerce, slug }) => {
                                     value.product_details.sale_price}
                                 </div>
                                 <div className=" bd-highlight w-15 align-items-center  ">
-                                  <div className="d-flex bd-highlight justify-content-around align-items-center">
+                                  <div className="d-flex bd-highlight justify-content-around align-items-center"
+                                  style={{
+                                    width: "75%"
+                                  }}
+                                  >
                                     <div className="p-2 bd-highlight ">
                                       <Input
                                         size="large"
