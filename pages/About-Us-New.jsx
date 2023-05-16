@@ -242,7 +242,7 @@ const AboutUsScreen = ({ ProductData, HistoryData, PartnerData, TeamData, Review
                                                     target="_blank"
                                                 >
                                                     <h4 className="card-title text-center pt-2 px-2">{data.title}</h4>
-                                                    <h6 className="card-title  px-2">{data.history_content}</h6>
+                                                    <h6 className="card-title  px-2" style={{ height: "50%" }}>{data.history_content}</h6>
                                                 </a>
                                                 <a 
                                                    href={`${data.url}`}
