@@ -76,7 +76,6 @@ const CareerScreen = () => {
                             </div>
                         </div> */}
                         <CareersGrid postLists={postLists} internShip={internShip} />
-
                         <div className="bg-02-section">
                             <div className="container">
                                 <section className="ps-section--block-grid">
