@@ -485,6 +485,11 @@ model aboutus_partners {
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
   partners_content     String?   @db.Text
+  is_feature       Boolean   @default(false)
+  feature_title     String?   @db.Text
+  feature_url       String?   @db.Text
+  feature_image     String?   @db.VarChar(255)
+  feature_content     String?   @db.Text
   partners_id          Int       @id @default(autoincrement())
   published        Boolean   @default(false)
   created_at       DateTime  @default(now()) @db.Timestamp(0)

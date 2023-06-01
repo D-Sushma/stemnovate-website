@@ -15,7 +15,6 @@ import NextArrow from "~/components/elements/carousel/NextArrow";
 import PrevArrow from "~/components/elements/carousel/PrevArrow";
 import Slider from "react-slick";
 
-
 const carouselreviewSetting = {
   infinite: true,
   autoplay: true,
@@ -265,40 +264,102 @@ const AboutUsScreen = ({ ProductData, HistoryData, PartnerData, TeamData, Review
                         </div>
 
                          {PartnerData.data.map((data, key) => ( 
-                            
-                                 <div className={key%2 ? 'about-section' : 'bg-02-section'}>
+                            <>
+                                <div className={key%2 ? 'about-section' : 'bg-02-section'}>
                                     <div className="container">
-                                        <section className={key%2 ? 'ps-section--block-grid flex-wrap' : 'ps-section--block-grid'}>
-                                            <div className="ps-section__thumbnail">
-                                                <a className="ps-section__image" href="#">
-                                                    <img src={`${process.env.AWS_S3BUCKET_URL}${data.image}`} alt={data.title} />
-                                                    {/* <img src="/static/img/about/babraham.jpg" alt="Babraham" /> */}
-                                                </a>
-                                            </div>
-                                            <div className="ps-section__content">
-                                                <h2 className="">
-                                                    <u>
-                                                        <a href={`${data.url}`} target={"_blank"} className="font-weight-bold">
-                                                            {data.title}
+                                        {data.is_feature ? (
+                                        <Slider {...carouselSetting} className="ps-carousel">
+                                            
+                                            <div className="ps-carousel__item">
+                                                <section className="ps-section--block-grid ">
+                                                    <div className="ps-section__thumbnail">
+                                                        <a className="ps-section__image" href="#">
+                                                            <img src={`${process.env.AWS_S3BUCKET_URL}${data.image}`} alt={data.title} />
                                                         </a>
-                                                    </u>{" "}
-                                                    
-                                                </h2>
-                                                <div className="ps-section__desc">
-                                                     <div
-                                                        className="center-box"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: data.partners_content,
-                                                        }}></div>
-                                                </div>
+                                                    </div>
+                                                    <div className="ps-section__content">
+                                                                <h2 className="">
+                                                                    <u>
+                                                                        <a href={`${data.url}`} target={"_blank"} className="font-weight-bold">
+                                                                            {data.title}
+                                                                        </a>
+                                                                    </u>{" "}
+                                                                    
+                                                                </h2>
+                                                                <div className="ps-section__desc">
+                                                                    <div
+                                                                        className="center-box"
+                                                                        dangerouslySetInnerHTML={{
+                                                                            __html: data.partners_content,
+                                                                        }}></div>
+                                                                </div>
+                                                    </div>
+                                                </section>
                                             </div>
-                                        </section>
+                                            
+                                            <div className="ps-carousel__item">
+                                                <section className="ps-section__desc my-2 text-left ">
+                                                    <h1 className={key%2 ? 'p-2' : 'p-2 text-white'} >Featured Project</h1>
+                                                </section>
+                                                <section className="ps-section--block-grid ">
+                                                    <div className="ps-section__thumbnail">
+                                                        <a className="ps-section__image" href="#">
+                                                            <img src={`${process.env.AWS_S3BUCKET_URL}${data.feature_image}`} alt={data.feature_title} />
+                                                        </a>
+                                                    </div>
+                                                    <div className="ps-section__content">
+                                                                <h2 className="">
+                                                                    <u>
+                                                                        <a href={`${data.feature_url}`}
+                                                                        target={"_blank"} 
+                                                                        className="font-weight-bold">
+                                                                            {data.feature_title}
+                                                                        </a>
+                                                                    </u>{" "}
+                                                                    
+                                                                </h2>
+                                                                 <div
+                                                                    className="center-box"
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: data.feature_content,
+                                                                    }}></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                    
+                                        </Slider>
+                                         ) : (
+                                            <section className={key%2 ? 'ps-section--block-grid flex-wrap' : 'ps-section--block-grid'}>
+                                                <div className="ps-section__thumbnail">
+                                                    <a className="ps-section__image" href="#">
+                                                        <img src={`${process.env.AWS_S3BUCKET_URL}${data.image}`} alt={data.title} />
+                                                        {/* <img src="/static/img/about/babraham.jpg" alt="Babraham" /> */}
+                                                    </a>
+                                                </div>
+                                                <div className="ps-section__content">
+                                                    <h2 className="">
+                                                        <u>
+                                                            <a href={`${data.url}`} target={"_blank"} className="font-weight-bold">
+                                                                {data.title}
+                                                            </a>
+                                                        </u>{" "}
+                                                        
+                                                    </h2>
+                                                    <div className="ps-section__desc">
+                                                        <div
+                                                            className="center-box"
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: data.partners_content,
+                                                            }}></div>
+                                                    </div>
+                                                </div>
+                                            </section>           
+                                         )}
                                     </div>
                                 </div>
-                            
-                        ) )} 
 
-                       
+                            </>   ) )} 
+
                        <div>
                             <div className="about-section">
                                 <section className="container">

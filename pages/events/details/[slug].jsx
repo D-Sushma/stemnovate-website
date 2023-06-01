@@ -227,7 +227,7 @@ const EventsDetails = ({ EventsData }) => {
                                             <img
                                               src={data.file}
                                               alt={data.name}
-                                              width="150px"
+                                              width="300px"
                                             />
                                           </a>
                                           {/* <p className=" mr-3">{data.name}</p> */}
