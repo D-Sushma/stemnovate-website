@@ -296,7 +296,6 @@ const AboutUsScreen = ({ ProductData, HistoryData, PartnerData, TeamData, Review
                                                     </div>
                                                 </section>
                                             </div>
-                                            
                                             <div className="ps-carousel__item">
                                                 <section className="ps-section__desc my-2 text-left ">
                                                     <h1 className={key%2 ? 'p-2' : 'p-2 text-white'} >Featured Project</h1>
