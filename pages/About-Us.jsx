@@ -325,7 +325,6 @@ const AboutUsScreen = ({ ProductData, HistoryData, PartnerData, TeamData, Review
                                                     </div>
                                                 </section>
                                             </div>
-                                    
                                         </Slider>
                                          ) : (
                                             <section className={key%2 ? 'ps-section--block-grid flex-wrap' : 'ps-section--block-grid'}>

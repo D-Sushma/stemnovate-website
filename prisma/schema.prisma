@@ -495,7 +495,7 @@ model aboutus_partners {
   created_at       DateTime  @default(now()) @db.Timestamp(0)
   updated_at       DateTime? @default(now()) @db.Timestamp(0)
   deleted_at       DateTime? @db.DateTime(0)
-}
+}  
 
 model aboutus_announce {
   id               String    @unique(map: "id") @db.VarChar(200)
