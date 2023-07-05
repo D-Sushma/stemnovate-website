@@ -157,6 +157,7 @@ const ResourcesData = (props) => {
       title={
         resourcesData ? resourcesData.data[0].resources_name : resources_Name[0]
       }
+      description="Stemnovate page is about new digital karyotyping to study chromsomal changes, mutaions, gender identity for human diseases and cell line authentication"
     >
       <ToastContainer />
       <main className="ps-page ps-page--inner">

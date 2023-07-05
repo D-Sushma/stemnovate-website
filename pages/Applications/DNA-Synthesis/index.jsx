@@ -57,7 +57,10 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
 
   return (
     <>
-      <Container title="DNA-Synthesis">
+      <Container 
+        title="DNA-Synthesis"
+        description="Stemnovate page is for new developments and innovation in field of DNA synthesis."  
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">

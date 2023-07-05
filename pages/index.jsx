@@ -10,20 +10,10 @@ import { baseUrl } from "~/repositories/Repository"
 import HowItsWork from "~/components/shared/sections/HowItWorks"
 import CaseStudy from "~/components/shared/sections/CaseStudy"
 import AboutBanner from "~/components/partials/pages/about-us/AboutBanner"
-import VideoBanner from "~/components/partials/homepages/home-1/videobanner"
 import OurClients from "~/components/shared/sections/OurClients"
 import PropTypes from "prop-types"
 import BlogGrid from "~/components/partials/blog/BlogGrid"
 import WomenHealth from "~/components/shared/sections/WomenHealth"
-import HomeOneTopBanners from "~/components/partials/homepages/home-1/HomeOneTopBanners"
-import AnnouncementsPopup from "~/components/partials/homepages/home-1/AnnouncementsPopup"
-import HomeTopBanner from "~/components/partials/homepages/home-1/HomeTopBanner"
-// import PromotionalBanner from "~/components/shared/sections/PromotionalBanner"
-
-// import { Modal } from "antd";
-import SubscribePopup from "~/components/shared/SubscribePopup"
-
-import { FaArrowCircleRight } from "react-icons/fa";
 import Slider from "react-slick";
 import NextArrow from "~/components/elements/carousel/NextArrow";
 import PrevArrow from "~/components/elements/carousel/PrevArrow";
@@ -74,20 +64,15 @@ const HomeDefaultPage = (props) => {
     props.SetMainMenuhandler(props.menus)
   }, [])
 
-  let products = "";
 
     const [promotions, setPromotions] = useState([]);
 
     useEffect(() => {
-        // console.log("promotionDetails", promotionDetails);
         if (props.promotionDetails.status === 200) {
             setPromotions(props.promotionDetails.data);
         }
     }, []);
-    const boxStyle = {
-        forP: { lineHeight: 1.3 },
-    };
-
+    
   return (
     <Container
       title="Your Drug Discovery Partner"
@@ -95,8 +80,6 @@ const HomeDefaultPage = (props) => {
       header={<HeaderDefault classes="without-border" menus={props.menus} />}
     >
       <main id="homepage-one">
-        {/* <VideoBanner /> */}
-        {/* <HomeOneTopBanners /> */}
         <div className="ps-top-banners">
             <div className="ps-section--banner ps-banner--container">
                 <div className="ps-section__overlay">
@@ -138,10 +121,8 @@ const HomeDefaultPage = (props) => {
                 </Slider>
             </div>
         </div>
-        {/* <HomeTopBanner /> */}
         <AboutBanner />
         <OurService />
-        {/* <PromotionalBanner /> */}
         <HowItsWork />
         <WomenHealth />
         <CaseStudy />
@@ -149,8 +130,7 @@ const HomeDefaultPage = (props) => {
         <OurClients />
         <BlogGrid />
         <Subscribe />
-        {/* <AnnouncementsPopup /> */}
-      </main>
+        </main>
     </Container>
   )
 }

@@ -17,7 +17,10 @@ const breadcrumb = [
 
 const TermsUse = () => {
     return (
-        <Container title="Terms Of Use">
+        <Container 
+           title="Terms Of Use"
+           description="On this page you will find the terms and conditions governing Stemnovate's website, products and services."   
+        >
             <main className="ps-page ps-page--inner">
                 <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
                     <div className="container ">

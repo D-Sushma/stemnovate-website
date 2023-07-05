@@ -49,7 +49,10 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
 
   return (
     <>
-      <Container title="Liver">
+      <Container 
+        title="Liver"
+        description="Stemnovate Liver research page shows our platform capabiliity for cellular reprogramming, liver differentiation from IPSC and liver disease modelling for NASH & drug discovery."  
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">

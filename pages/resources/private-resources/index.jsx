@@ -50,7 +50,10 @@ const Resources = ({ resourcesList }) => {
   //     }
   // };
   return (
-    <Container title="Resources">
+    <Container 
+      title="Resources"
+      description="Stemnovate resources page is for information on techniques, learning materials, updates, blogs and newsletters."  
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

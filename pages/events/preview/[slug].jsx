@@ -326,6 +326,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/events/getEvents", requestOptions)
     EventsData = await res.json()
+    console.log("Events : ",EventsData)
   }
 
   // // Pass data to the page via props

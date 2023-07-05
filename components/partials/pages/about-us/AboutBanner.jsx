@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
+import Link from 'next/link';
 const AboutBanner = () => {
     return (
         <div className="about-section">
@@ -13,9 +14,9 @@ const AboutBanner = () => {
                     </div>
                 </div>
                 <div className="container text-center ">
-                    <a href="/About-Us" className="button button--green">
-                        LEARN MORE <FaArrowRight />
-                    </a>
+                    <Link href="/About-Us">
+                        <div className="button button--green">LEARN MORE <FaArrowRight /></div>
+                    </Link>
                 </div>
             </section>
         </div>

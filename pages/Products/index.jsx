@@ -141,7 +141,11 @@ const ProductScreen = () => {
     }
 
     return (
-        <Container title={titleName} ogimg={ogImg}>
+        <Container 
+           title={titleName} 
+           ogimg={ogImg}
+           description="Stemnovate's Product and biobank information. Our 100% products are guranteed ethically sources with inforrmed consent in the United Kingdom."
+        >
             <ToastContainer />
             <div className="ps-page ps-page--shopping">
                 <div className="ps-page__header breadcrumb-h product-breadcrumb-bg">

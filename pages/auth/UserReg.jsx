@@ -78,11 +78,14 @@ const UserReg = ({ reffrals }) => {
             body: raw,
         };
 
-        fetch(process.env.NEXT_BASE_URL + "/api/Email/welcomeEmail", requestOptions)
-            .then((response) => response.text())
+       await fetch(process.env.NEXT_BASE_URL + "/api/Email/welcomeEmail", requestOptions)
+            .then((response) => response.json())
             .then(async (result) => {
                 console.log(result);
+                if(result.msg == 'success'){
                 sendVerifyLink(name, email);
+
+                }
             })
             .catch((error) => console.log("error", error));
     };
@@ -169,8 +172,8 @@ const UserReg = ({ reffrals }) => {
                     progress: undefined,
                     theme: "colored",
                 });
-                // await SendEmail(userFullName, username);
-                await sendVerifyLink(userFullName, username);
+                await SendEmail(userFullName, username);
+                // await sendVerifyLink(userFullName, username);
                 const res = await signIn("credentials", {
                     username,
                     password,

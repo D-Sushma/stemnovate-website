@@ -40,10 +40,15 @@ const ModuleHeaderNotice = ({ classes }) => {
             <div className="d-flex flex-row justify-content-start">
               <span className="mr-2">
                 <img
-                  src="/static/img/new_blink.gif"
+                  src="/static/img/new_blink.svg"
                   style={{ width: "30px" }}
                   alt="new"
                 />
+                {/* <img
+                  src="/static/img/new_blink.gif"
+                  style={{ width: "30px" }}
+                  alt="new"
+                /> */}
               </span>
               <h3 className="text-dark font-weight-bolder h3">
                 Stemnovate leading the way in building animal models for Pharma

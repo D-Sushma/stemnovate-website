@@ -300,7 +300,10 @@ const CampaignPage = (props) => {
     };
 
     return (
-        <Container title="Promotions Products">
+        <Container 
+            title="Promotions Products"
+            description="Stemnovate Shine through your research is for community building for early stage reserachers and scientists. See notifications and terms of use."    
+        >
             <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <main className="ps-page ps-page--inner">
                 {isLoading ? <Loader /> : null}

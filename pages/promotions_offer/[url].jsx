@@ -77,7 +77,10 @@ function promotionOffer({ ProductData }) {
   }
 
   return (
-    <Container title={ProductData?.data[0]?.title}>
+    <Container 
+       title={ProductData?.data[0]?.title}
+       description="Stemnovate promotion is for new sales offers, discounts and multibuy savings. Subject to change so check regularly"   
+    >
       <ToastContainer />
       <div className="ps-page ps-page--shopping">
         <div className="ps-page__header breadcrumb-h product-breadcrumb-bg">

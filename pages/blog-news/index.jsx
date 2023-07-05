@@ -9,6 +9,7 @@ import Image from "next/image"
 import Slider from "react-slick"
 import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
+import { FaArrowRight } from "react-icons/fa"
 
 const breadcrumb = [
   {
@@ -76,7 +77,57 @@ const Blogs = (props) => {
                               {...carouselSetting}
                               className="ps-carousel ps-carousel--fullwidth "
                             >
-                              <div>
+                             
+                              <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <article className="ps-post ps-post--grid blog-news">
+                                      <div className="ps-post__thumbnail">
+                                        <a
+                                          className="ps-post__overlay"
+                                          href={`/blogs/${featuredPostLists[0].slug}`}
+                                        ></a>
+                                        <Image
+                                          loader={myLoader}
+                                          src={`${process.env.AWS_S3BUCKET_URL}${featuredPostLists[0].thumbnail}`}
+                                          unoptimized={false}
+                                          alt={featuredPostLists[0].name}
+                                          width="251"
+                                          height="141"
+                                          layout="responsive"
+                                        />
+                                        
+                                      </div>
+                                      <div className="ps-post__wrapper justify-content-center " 
+                                      style={{
+                                       background : "#041b4a"
+                                     }}
+                                      >
+                                        <div className="ps-post__content justify-content-center">
+                                          <a
+                                            className="ps-post__title text-center blog-news-title text-white"
+                                            href={`/blogs/${featuredPostLists[0].slug}`}
+                                          >
+                                            {featuredPostLists[0].name}
+                                          </a>
+                                          <div className="ps-post__meta justify-content-center py-4 text-white">
+                                            <a
+                                              className="button button--yellow"
+                                              href={`/blogs/${featuredPostLists[0].slug}`}
+                                            >
+                                              <span className="h3 my-2"
+                                               style={{
+                                                        fontSize : "22px"
+                                                      }}
+                                              > Read More</span>
+                                            </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </article>
+                                  </div>
+
+
+                              {/* <article className="ps-post ps-post--grid blog-news">
+                              
                                 <div
                                   className="ps-banner"
                                   style={{
@@ -89,31 +140,55 @@ const Blogs = (props) => {
                                     margin: "0 auto"
                                   }}
                                 >
-                                  <div className="container container-initial">
-                                    <div className="ps-banner__block">
-                                      <div className="ps-banner__content">
-                                        <h1 className="ps-banner__title">
-                                          {featuredPostLists[0].tag}
-                                        </h1>
-                                        <div className="ps-banner__desc" 
-                                             style={{
-                                              fontSize:"27px",
-                                              fontWeight:"800"
-                                              }}>
-                                          {featuredPostLists[0].name}
+                                   </div>
+                                
+                                  <div 
+                                     className="ps-post__wrapper text-center text-white"
+                                     style={{
+                                       background : "#041b4a"
+                                     }}
+                                  >
+                                    <div 
+                                      className="ps-post__content justify-content-center"
+                                      style={{
+                                        padding : "20px 0 0"
+                                      }}
+                                    >
+                                      <a
+                                        className="ps-post__title text-center blog-news-title"
+                                        href={`/blogs/${featuredPostLists[0].slug}`}
+                                        style={{
+                                          fontSize : "22px"
+                                        }}
+                                      >
+                                        {featuredPostLists[0].name}
+                                      </a>
+                                      <div className="row">
+                                        <div className="col-md-12 text-center">
+                                              <div className="ps-post__meta justify-content-center py-2 button button--yellow">
+                                        
+                                                <a
+                                                  className="ps-post__author blog-author"
+                                                  href={`/blogs/${featuredPostLists[0].slug}`}
+                                                >
+                                                  <span className="h3" 
+                                                    style={{
+                                                              fontSize : "22px"
+                                                            }}
+                                                  > 
+                                                  READ MORE 
+                                                  </span>
+                                                </a>
+                                              </div>
                                         </div>
-                                        <div className="ps-banner__btn-group"></div>
-                                        <a
-                                          className="bg-warning ps-banner__shop"
-                                          href={`/blogs/${featuredPostLists[0].slug}`}
-                                        >
-                                          Read More
-                                        </a>
+                                            
                                       </div>
+                                      
                                     </div>
                                   </div>
-                                </div>
-                              </div>
+
+                               
+                              </article> */}
                             </Slider>
                           </section>
                         ) : null}

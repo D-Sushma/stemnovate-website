@@ -19,7 +19,10 @@ const breadcrumb = [
 
 const ContactUsScreen = ({ mytitile }) => {
   return (
-    <Container title={mytitile ? mytitile : "Contact Us"}>
+    <Container 
+       title={mytitile ? mytitile : "Contact Us"}
+       description="Stemnovate contact form allows you to send your request or enquires. Fill the information and our team will contact you asap"    
+    >
       <div className="ps-page ps-page--inner">
         <div className="container">
           <div className="ps-page__header">

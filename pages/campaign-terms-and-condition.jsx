@@ -17,7 +17,10 @@ const breadcrumb = [
 
 const TermsUse = () => {
     return (
-        <Container title="Terms Of Use">
+        <Container 
+            title="Terms Of Use"
+            description="The terms are for campaign and contests, subject to change without notice. Keep up to date by regularly checking and following our website."
+        >
             <main className="ps-page ps-page--inner">
                 <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
                     <div className="container ">

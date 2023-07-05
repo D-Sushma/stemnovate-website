@@ -31,7 +31,10 @@ const InvestorRelationScreen = () => {
         // investorRef.current.scrollIntoView();
     };
     return (
-        <Container title={"Investor Relations"}>
+        <Container 
+            title={"Investor Relations"}
+            description="Stemnovate page is about company vision, new announcements and information relevant for investors, partners and collaborators."    
+        >
             <main className="ps-page ps-page--inner">
                 <div className="ps-page__header  breadcrumb-h investor-relations-breadcrumb-bg">
                     <div className="container ">

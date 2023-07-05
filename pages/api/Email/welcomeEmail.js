@@ -10,7 +10,7 @@ export default async function handle(req, res) {
         const url = process.env.NEXT_BASE_URL;
 
         var smtpTransport = nodemailer.createTransport({
-            service: "Gmail",
+            service: "gmail",
             secure: false,
             auth: EmailConfig,
             tls: {

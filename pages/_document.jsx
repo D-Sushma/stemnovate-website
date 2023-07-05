@@ -18,14 +18,14 @@ class MyDocument extends Document {
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
                     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"></link>
-                    <Script src="https://www.googletagmanager.com/gtag/js?id=G-FMDRW8XRWZ" strategy="afterInteractive" />
+                    <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-10846076758" strategy="afterInteractive" />
                     <Script id="google-analytics" strategy="afterInteractive">
                         {`
                             window.dataLayer = window.dataLayer || [];
-                            function gtag(){window.dataLayer.push(arguments);}
+                            function gtag(){dataLayer.push(arguments);}
                             gtag('js', new Date());
 
-                            gtag('config', 'G-FMDRW8XRWZ');
+                            gtag('config', 'AW-10846076758');
                         `}
                     </Script>
                 </Head>

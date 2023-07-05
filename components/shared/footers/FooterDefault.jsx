@@ -4,6 +4,8 @@ import ModuleFooterAddress from "~/components/shared/footers/modules/ModuleFoote
 import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks"
 import ModuleFooterBottom from "~/components/shared/footers/modules/ModuleFooterBottom"
 import FooterLinks from "~/public/static/data/footer.json"
+//import Image from "next/image"
+//import securePayment from "~/public/static/image/securepayments.svg"
 
 const FooterDefault = () => {
   return (
@@ -33,7 +35,7 @@ const FooterDefault = () => {
                 <div className="d-flex flex-column">
                   {/* <WidgetFooterLinks source={FooterLinks.account} /> */}
                   <img
-                    src="/static/image/QMS.png"
+                    src="/static/image/QMS_new.svg"
                     alt="QMS"
                     style={{
                       width: "150px",
@@ -43,7 +45,7 @@ const FooterDefault = () => {
                     }}
                   />
                   <img
-                    src="/static/image/HTA.png"
+                    src="/static/image/HTA.svg"
                     alt="HTA"
                     style={{
                       width: "150px"
@@ -57,6 +59,19 @@ const FooterDefault = () => {
                   <p className="text-white p-4">
                     <span>Secure Payments</span>
                     <img
+                      src="/static/image/securepayments.svg"
+                      alt="secure"
+                      style={{
+                        width: "150px",
+                        // height: "100%",
+                       }}
+                    /> 
+                    {/* <Image
+                        priority
+                        src={securePayment}
+                        alt="secure"
+                      /> */}
+                    {/* <img
                       src="/static/image/secure-payments.png"
                       alt="secure"
                       style={{
@@ -64,7 +79,7 @@ const FooterDefault = () => {
                         // height: "fit-content",
                         marginBottom: "10px"
                       }}
-                    />
+                    /> */}
                   </p>
                 </div>
               </div>
