@@ -1,7 +1,4 @@
 import React from "react";
-import ActiveLink from "~/components/elements/basic/ActiveLink";
-import Logo from "~/components/elements/basic/Logo";
-import Link from "next/link";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const FooterAddress = () => {

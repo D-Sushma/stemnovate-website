@@ -5,6 +5,8 @@ import Investors from "~/components/shared/sections/Investors";
 import { IoIosArrowDown } from "react-icons/io";
 import { Tooltip } from "antd";
 import BlogGrid from "~/components/partials/blog/BlogGrid";
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 
 const breadcrumb = [
     {
@@ -24,12 +26,10 @@ const InvestorRelationScreen = () => {
     const gotoInvestor = () => {
         console.log(investorRef.current);
         if (investorRef && investorRef.current) {
-            // investorRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
             console.log("first", investorRef.current.offsetTop);
             window.scrollTo({ behavior: "smooth", top: investorRef.current.offsetTop });
         }
-        // investorRef.current.scrollIntoView();
-    };
+        };
     return (
         <Container 
             title={"Investor Relations"}
@@ -47,9 +47,6 @@ const InvestorRelationScreen = () => {
                     <div className="ps-about">
                         <div className="investor-relations-section">
                             <section className="container">
-                                {/* <Reveal effect="fadeInUp"> */}
-                                {/* <h4 className="text-center font-weight-bold text-black">About</h4> */}
-                                {/* <h2 className="text-center font-weight-bolder base-text-primary">STEMNOVATE</h2> */}
                                 <div className="center-box">
                                     <div className="vertical-center">
                                         <h1 className="text-white">
@@ -59,7 +56,7 @@ const InvestorRelationScreen = () => {
                                         <p className="text-white" style={{ fontSize: "1.17em" }}>
                                             The company is{" "}
                                             <Tooltip title="Britain’s Most Exciting Human Health Companies (o2h.com)">
-                                                <a rel="noreferrer" href="https://o2h.com/chaitimepost/britains-most-exciting-human-health-companies/" className="reference-website" target={"_blank"}>
+                                                <a rel="noopener noreferrer" href="https://o2h.com/chaitimepost/britains-most-exciting-human-health-companies/" className="reference-website" target={"_blank"}>
                                                     recognized among the most innovative companies in the UK
                                                 </a>
                                             </Tooltip>
@@ -81,17 +78,31 @@ const InvestorRelationScreen = () => {
                         <div className="container">
                             <h1 className="text-center base-text-secondary p-2 pt-3 font-weight text-uppercase">
                                 Stemnovate Timeline
-                                <a className="ps-section__image" href="#">
-                                    <img src="/static/img/investors/Info-Graphics.jpg" alt="Stemnovate Timeline" />
-                                </a>
+                                <Link href="#">
+                                    <div className="ps-section__image">
+                                    <Image 
+                                    src="/static/img/investors/Info-Graphics.jpg" 
+                                    alt="Stemnovate Timeline"
+                                    width={1290}
+                                    height={678}
+                                    />
+                                    </div>
+                                </Link>
                             </h1>
                         </div>
 
                         <div className="">
                             <h1 className="text-center base-text-secondary p-2 font-weight text-uppercase">
-                                <a className="ps-section__image" href="#">
-                                    <img src="/static/img/investors/vision-update.jpg" alt="vision-stemnovate" />
-                                </a>
+                                <Link href="#">
+                                    <div className="ps-section__image">
+                                    <Image 
+                                    src="/static/img/investors/vision-update.jpg"
+                                    alt="vision-stemnovate" 
+                                    width={2000}
+                                    height={1030}
+                                    />
+                                    </div>
+                                </Link>
                             </h1>
                         </div>
 
@@ -105,11 +116,18 @@ const InvestorRelationScreen = () => {
                             </div>
                         </div>
 
-                        <div className="" style={{ marginBottom: "10%" }}>
+                        <div className="">
                             <h1 className="text-center base-text-secondary p-2 font-weight text-uppercase">
-                                <a className="ps-section__image" href="#">
-                                    <img src="/static/img/investors/mission-update.jpg" alt="mission-stemnovate" />
-                                </a>
+                                <Link href="#">
+                                    <div className="ps-section__image">
+                                    <Image 
+                                    src="/static/img/investors/mission-update.jpg" 
+                                    alt="mission-stemnovate" 
+                                    width={2000}
+                                    height={1030}
+                                    />
+                                    </div>
+                                </Link>
                             </h1>
                         </div>
 
@@ -117,9 +135,18 @@ const InvestorRelationScreen = () => {
                             <div className="container">
                                 <section className="ps-section--block-grid">
                                     <div className="ps-section__thumbnail">
-                                        <a className="ps-section__image" href="#">
-                                            <img src="/static/img/investors/STEM-EDUCATION.jpg" style={{ height: "342px", width: "auto" }} alt="Stem Education" />
-                                        </a>
+                                        <Link href="#">
+                                            <div className="ps-section__image">
+                                            <Image 
+                                            src="/static/img/investors/STEM-EDUCATION.jpg" 
+                                            // style={{ height: "342px", width: "auto" }} 
+                                            alt="Stem Education" 
+                                            width={270}
+                                            height={350}
+                                            />
+                                            {/* <img src="/static/img/investors/STEM-EDUCATION.jpg" style={{ height: "342px", width: "auto" }} alt="Stem Education" /> */}
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="ps-section__content ">
                                         <div className="ps-section__desc ">
@@ -131,7 +158,6 @@ const InvestorRelationScreen = () => {
                             </div>
                         </div>
                         <div className="about-section my-3">
-                            {/* <div className="bg-02-section-animal"></div> */}
                             <div className="container">
                                 <h1 className="text-center base-text-secondary text-uppercase ">3R-REDUCTION, REPLACEMENT, REFINEMENT</h1>
                                 <p className=" text-center ">
@@ -141,16 +167,20 @@ const InvestorRelationScreen = () => {
                             </div>
                         </div>
 
-                        {/* <div className="investor-3r-section">
-                            <div className="container"></div>
-                        </div> */}
                         <div className=" bg-02-section">
                             <div className="container">
                                 <section className="ps-section--block-grid">
                                     <div className="ps-section__thumbnail">
-                                        <a className="ps-section__image" href="#">
-                                            <img src="/static/img/investors/WOMEN-IN-SCIENCE.jpg" alt="WOMEN IN SCIENCE" />
-                                        </a>
+                                        <Link href="#">
+                                            <div className="ps-section__image">
+                                            <Image 
+                                            src="/static/img/investors/WOMEN-IN-SCIENCE.jpg" 
+                                            alt="WOMEN IN SCIENCE" 
+                                            width={1000}
+                                            height={560}
+                                            />
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="ps-section__content ">
                                         <div className="ps-section__desc ">
@@ -164,9 +194,16 @@ const InvestorRelationScreen = () => {
                         <div className="container">
                             <div className="MissionSection">
                                 <div className="ps-section__thumbnail">
-                                    <a className="ps-section__image" href="#">
-                                        <img src="/static/img/mission/bg-01.jpg" alt="DIVERSITY & INCLUSION" />
-                                    </a>
+                                    <Link href="#">
+                                        <div className="ps-section__image">
+                                        <Image 
+                                        src="/static/img/mission/bg-01.jpg" 
+                                        alt="DIVERSITY & INCLUSION" 
+                                        width={1000}
+                                        height={487}
+                                        />
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

@@ -104,20 +104,34 @@ const Testimonials = () => {
                   <div className=" row d-flex justify-content-center">
                     <div className="col-md-3 col-sm-6 d-flex flex-grow-1">
                       <div className="card mt-3  align-items-center p-1">
-                        <a href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/">
+                        <a
+                          target={"_blank"}
+                          rel="noreferrer"
+                          href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
+                        >
                           <Image
                             src={newcambridge}
                             alt="Our 3Rs mission: Zero animal testing"
                           />
                         </a>
                         <div className="card-body  p-0 ps-btn-link-bottom">
-                          <a href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/">
+                          <a
+                            target={"_blank"}
+                            rel="noreferrer"
+                            href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
+                          >
                             <h5 className="card-title  pt-2 px-2">
-                              Stemnovate partners with Babraham Institute on Alzheimer’s disease project...
+                              Stemnovate partners with Babraham Institute on
+                              Alzheimer’s disease project...
                             </h5>
                           </a>
 
-                          <a href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/" className="h5">
+                          <a
+                            target={"_blank"}
+                            rel="noreferrer"
+                            href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
+                            className="h5"
+                          >
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>
@@ -148,7 +162,12 @@ const Testimonials = () => {
                               industry
                             </h5>
                           </a>
-                          <a href="/Applications/Animal-Health" className="h5 ">
+                          <a
+                            target={"_blank"}
+                            rel="noreferrer"
+                            href="/Applications/Animal-Health"
+                            className="h5 "
+                          >
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>
@@ -190,27 +209,39 @@ const Testimonials = () => {
                     </div>
                     <div className="col-md-3 col-sm-6 d-flex flex-grow-1">
                       <div className="card mt-3  align-items-center p-1">
-                        <a href="/Products/Biobanking">
+                        <a
+                          target={"_blank"}
+                          rel="noreferrer"
+                          href="/Products/Biobanking"
+                        >
                           <Image
                             src={announcementimg}
                             alt="Our 3Rs mission: Zero animal testing"
                           />
                         </a>
                         <div className="card-body  p-0 ps-btn-link-bottom">
-                          <a href="/Products/Biobanking">
+                          <a
+                            target={"_blank"}
+                            rel="noreferrer"
+                            href="/Products/Biobanking"
+                          >
                             <h5 className="card-title  pt-2 px-2">
                               Our 3Rs mission: Zero animal testing. We innovate
                               technology for reducing, refining ...
                             </h5>
                           </a>
 
-                          <a href="/Products/Biobanking" className="h5">
+                          <a
+                            target={"_blank"}
+                            rel="noreferrer"
+                            href="/Products/Biobanking"
+                            className="h5"
+                          >
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
               </div>

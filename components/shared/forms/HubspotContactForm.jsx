@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
     
-    const HubspotContactForm = props => {
+    const HubspotContactForm = () => {
       
         useEffect(() => {
             const script = document.createElement('script');

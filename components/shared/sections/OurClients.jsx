@@ -10,7 +10,6 @@ import brand7 from "~/public/brand/7.png"
 import brand8 from "~/public/brand/8.png"
 import brand9 from "~/public/brand/9.png"
 import brand10 from "~/public/brand/10.png"
-import brand11 from "~/public/brand/11.jpg"
 export default function OurClients() {
   return (
     <div className="about-section">
@@ -120,17 +119,7 @@ export default function OurClients() {
                 </div>
               </a>
             </div>
-            {/* <div className="card card-h-min align-items-center p-1 justify-content-center ">
-              <a
-                href="https://www.ox.ac.uk/"
-                target={"_blank"}
-                rel="noreferrer"
-              >
-                <div className="d-flex align-items-center our-client-images">
-                  <Image src={brand11} alt="ox" />
-                </div>
-              </a>
-            </div> */}
+            
           </div>
         </div>
       </div>

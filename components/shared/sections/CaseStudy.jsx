@@ -1,5 +1,6 @@
 import Image from "~/components/elements/Image";
 import React from "react";
+import Link from 'next/link';
 import Partnership from "~/public/static/image/Partnership.jpg";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -9,14 +10,8 @@ const CaseStudy = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-4 my-auto">
-                        {/* <div className="image-responsive img-con">
-                            <div className="cent-img">
-                                <div className="overflow-hidden"> */}
-                        <Image className="rounded" src={Partnership} alt="Partnership" />
-                        {/* </div>
-                            </div>
-                        </div> */}
-                    </div>
+                       <Image className="rounded" src={Partnership} alt="Partnership" />
+                         </div>
                     <div className="col-md-8 mt-1">
                         <h2 className="text-white ">Partnerships</h2>
                         <p className=" text-white text-justify">
@@ -26,9 +21,9 @@ const CaseStudy = () => {
                             <br />
                             Stemnovate is certified as an ISO 9001: 2015 company. Our team comprises scientists holding PhDs and Postdocs from worldwide, and hence are well equipped to overcome challenges in research and development.
                         </p>
-                        <a className=" float-right button button--yellow" href="/About-Us">
-                            READ MORE <FaArrowRight />
-                        </a>
+                        <Link href="/About-Us">
+                            <div className=" float-right button button--yellow">READ MORE <FaArrowRight /></div>
+                        </Link>
                     </div>
                 </div>
             </div>

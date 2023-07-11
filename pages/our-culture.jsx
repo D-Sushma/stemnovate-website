@@ -1,9 +1,9 @@
 import React from "react"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import { RiHandHeartLine } from "react-icons/ri"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import Link from "next/link"
+import Image from '~/components/elements/Image'
 
 const breadcrumb = [
   {
@@ -48,12 +48,17 @@ const OurCulture = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
-                        src="/static/img/our-culture/our-culture-1.jpg"
-                        alt="our-culture"
+                    <Link href="#">
+                      <div className="ps-section__image">
+                      <Image 
+                      src="/static/img/our-culture/our-culture-1.jpg" 
+                      alt="our-culture" 
+                      width={1000}
+                      height={650}
                       />
-                    </a>
+                      {/* <img src="/static/img/our-culture/our-culture-1.jpg" alt="our-culture" /> */}
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc ">
@@ -64,9 +69,9 @@ const OurCulture = () => {
                         we have the best chance of achieving our mission
                       </p>
                       <Link href="/investor-relations">
-                        <a className=" btn btn-lg button-orange text-white m-4">
+                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
                           Read More
-                        </a>
+                        </div>
                       </Link>
                     </div>
                   </div>
@@ -78,25 +83,29 @@ const OurCulture = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image">
+                      <Image
                         src="/static/img/our-culture/02.png"
                         alt="our-culture-2"
+                        width={1000}
+                        height={555}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc">
                       <p>
                         We encourage our staff always to keep learning through
                         training courses and collaborations inside and outside
-                        the company. We work with some of the industry's best,
+                        the company. We work with some of the industry&apos;s best,
                         most fascinating people and institutions.
                       </p>
                       <Link href="/About-Us">
-                        <a className=" btn btn-lg button-orange text-white m-4">
+                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
                           Read More
-                        </a>
+                        </div>
                       </Link>
                     </div>
                   </div>
@@ -108,12 +117,16 @@ const OurCulture = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image">
+                      <Image
                         src="/static/img/our-culture/04.png"
                         alt="our-culture 4"
+                        width={1000}
+                        height={555}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc">
@@ -126,16 +139,11 @@ const OurCulture = () => {
                         cake and a coffee.
                       </p>
                       <Link href="/About-Us">
-                        <a className=" btn btn-lg button-orange text-white m-4">
+                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
                           Read More
-                        </a>
+                        </div>
                       </Link>
-                      {/* <p className="p-3">
-                                                <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button>
-                                            </p> */}
-                    </div>
+                      </div>
                   </div>
                 </section>
               </div>
@@ -144,12 +152,16 @@ const OurCulture = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image">
+                      <Image
                         src="/static/img/our-culture/03.png"
                         alt="our-culture 3"
+                        width={1000}
+                        height={555}
                       />
-                    </a>
+                     </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc">
@@ -159,16 +171,11 @@ const OurCulture = () => {
                         like to be a part of, visit our careers page.
                       </p>
                       <Link href="/careers">
-                        <a className=" btn btn-lg button-orange text-white m-4">
+                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
                           Read More
-                        </a>
+                        </div>
                       </Link>
-                      {/* <p className="p-3">
-                                                <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button>
-                                            </p> */}
-                    </div>
+                      </div>
                   </div>
                 </section>
               </div>
@@ -178,12 +185,16 @@ const OurCulture = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image">
+                      <Image
                         src="/static/img/women-in-stem/JACOB.png"
                         alt="Equality and Opportunity-Stemnovate"
+                        width={1000}
+                        height={740}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <h3 className="text-white">Equality and Opportunity</h3>
@@ -204,26 +215,15 @@ const OurCulture = () => {
                         course of science
                       </p>
                       <Link href="/blogs/women-in-stemnovate">
-                        <a className=" btn btn-lg button-orange text-white m-4">
+                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
                           Read More
-                        </a>
+                        </div>
                       </Link>
-                      {/* <p className="p-3">
-                                                <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button>
-                                            </p> */}
-                    </div>
+                     </div>
                   </div>
                 </section>
               </div>
             </div>
-            {/* <div className="about-section">
-                            <div className="container">
-                                <ProductList slug="Drug-Discovery-Platform" />
-                            </div>
-                        </div> */}
-
             <Subscribe />
           </div>
         </div>

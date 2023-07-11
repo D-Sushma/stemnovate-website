@@ -16256,7 +16256,9 @@ html .bg--parallax {
   position: absolute;
   left: 20%;
   right: 20%;
-  top: 100%;
+  /* top: 100%; */
+  top: 50%;
+  z-index: 1;
   background: #d07548;
   padding: 1%;
   color: white;
@@ -16269,7 +16271,7 @@ html .bg--parallax {
     font-size: 14px;
   }
   .women-expander {
-    top: 94%;
+    /* top: 94%; */
     background: #d07548;
     padding: 2%;
     color: white;

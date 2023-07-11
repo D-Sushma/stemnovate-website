@@ -13,8 +13,6 @@ const HeaderDefault = (props, { classes = "" }) => {
   var type = "white"
 
   useEffect(() => {
-    // console.log("FromRedux", props.mainmenu);
-    // console.log("FromProps", props.menus);
     if (props.menus !== undefined) {
       props.SetMainMenuhandler(props.menus)
     }
@@ -52,9 +50,7 @@ const HeaderDefault = (props, { classes = "" }) => {
   }
 
   useEffect(() => {
-    // if (typeof window === "undefined") {
-    window.addEventListener("scroll", handleStickyHeader)
-    // }
+   window.addEventListener("scroll", handleStickyHeader)
     if (props.menus == undefined && props.mainmenu.length == 0) {
       if (availableModules.length == 0) {
         getmenu()
@@ -97,8 +93,7 @@ const HeaderDefault = (props, { classes = "" }) => {
             </div>
           </div>
           <div className="header__right justify-content-center">
-            {/* <ModuleHeaderSwichers /> */}
-            <ModuleHeaderActions />
+           <ModuleHeaderActions />
           </div>
         </div>
       </div>
@@ -127,4 +122,3 @@ const mapDispathToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispathToProps)(HeaderDefault)
-// export default HeaderDefault;

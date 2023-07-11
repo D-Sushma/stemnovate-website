@@ -8,7 +8,6 @@ import "~/public/static/css/bootstrap.min.css"
 import "react-toastify/dist/ReactToastify.css"
 import "react-date-picker/dist/DatePicker.css"
 import "react-calendar/dist/Calendar.css"
-// import 'bootstrap/dist/css/bootstrap.css'; // Add this line
 import "~/public/static/fonts/feather-font/css/iconfont.css"
 import "~/public/static/fonts/Linearicons/Font/demo-files/demo.css"
 import "~/public/static/fonts/font-awesome/css/font-awesome.min.css"
@@ -23,10 +22,7 @@ import { SessionProvider } from "next-auth/react"
 import NextNProgress from "nextjs-progressbar"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 
-// import "@react-pdf-viewer/core/lib/styles/index.css";
-// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-
-function App({ Component, pageProps: { session, ...pageProps } }) {
+function App({ Component, pageProps: {...pageProps } }) {
   useEffect(() => {
     setTimeout(function () {
       document.getElementById("__next").classList.add("ps-loaded")

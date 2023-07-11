@@ -1,4 +1,7 @@
 import React from "react"
+import Link from "next/link"
+import Image from '~/components/elements/Image'
+import vector from '~/public/static/img/Home/vector.png'
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import { FiPhone, FiMail } from "react-icons/fi"
@@ -19,9 +22,9 @@ const breadcrumb = [
 
 const ContactUsScreen = ({ mytitile }) => {
   return (
-    <Container 
-       title={mytitile ? mytitile : "Contact Us"}
-       description="Stemnovate contact form allows you to send your request or enquires. Fill the information and our team will contact you asap"    
+    <Container
+      title={mytitile ? mytitile : "Contact Us"}
+      description="Stemnovate contact form allows you to send your request or enquires. Fill the information and our team will contact you asap"
     >
       <div className="ps-page ps-page--inner">
         <div className="container">
@@ -31,12 +34,14 @@ const ContactUsScreen = ({ mytitile }) => {
           <div className="ps-page__content">
             <h1 className="text-center  h1">Contact Us</h1>
             <div className="container text-center mb-5 contact-img">
-              <img
-                src="/static/img/Home/vector.png"
+              <Image
+                src={vector}
                 alt="stemnovate-Contact Us"
-                style={{ width: "80%", height: "auto" }}
+                // style={{ width: "80%", height: "auto" }}
+                width={900}
+                height={600}
               />
-            </div>
+             </div>
             <div className="ps-contact mt-5">
               <h1 className=" text-center m-3">GET IN TOUCH</h1>
               <p className="text-center mb-5">
@@ -84,40 +89,36 @@ const ContactUsScreen = ({ mytitile }) => {
                     </div>
                     <ul className="ps-social ">
                       <li>
-                        <a
-                          className="ps-social__link facebook"
-                          href="https://www.facebook.com/StemnovateL"
-                        >
-                          <i className="fa fa-facebook"> </i>
-                          <span className="ps-tooltip">Facebook</span>
-                        </a>
+                        <Link href="https://www.facebook.com/StemnovateL">
+                          <div className="ps-social__link facebook">
+                            <i className="fa fa-facebook"> </i>
+                            <span className="ps-tooltip">Facebook</span>
+                          </div>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          className="ps-social__link instagram"
-                          href="https://www.instagram.com/stemnovate"
-                        >
-                          <i className="fa fa-instagram"></i>
-                          <span className="ps-tooltip">Instagram</span>
-                        </a>
+                        <Link href="https://www.instagram.com/stemnovate">
+                          <div className="ps-social__link instagram">
+                            <i className="fa fa-instagram"></i>
+                            <span className="ps-tooltip">Instagram</span>
+                          </div>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          className="ps-social__link facebook"
-                          href="https://twitter.com/StemnovateL"
-                        >
-                          <i className="fa fa-twitter"></i>
-                          <span className="ps-tooltip">Twitter</span>
-                        </a>
+                        <Link href="https://twitter.com/StemnovateL">
+                          <div className="ps-social__link facebook">
+                            <i className="fa fa-twitter"></i>
+                            <span className="ps-tooltip">Twitter</span>
+                          </div>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          className="ps-social__link pinterest"
-                          href="https://www.pinterest.co.uk/Stemnovate"
-                        >
-                          <i className="fa fa-pinterest-p"></i>
-                          <span className="ps-tooltip">Pinterest</span>
-                        </a>
+                        <Link href="https://www.pinterest.co.uk/Stemnovate">
+                          <div className="ps-social__link pinterest">
+                            <i className="fa fa-pinterest-p"></i>
+                            <span className="ps-tooltip">Pinterest</span>
+                          </div>
+                        </Link>
                       </li>
                       <li>
                         <a
@@ -137,7 +138,6 @@ const ContactUsScreen = ({ mytitile }) => {
                         width="600"
                         height="450"
                         allowFullScreen
-                        loading="lazy"
                       ></iframe>
                     </div>
                   </div>

@@ -13,12 +13,13 @@ const ArticleGrid = ({ post }) => {
         <article className="ps-post ps-post--grid">
             <div className="ps-post__thumbnail">
                 <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
-                    <a className="ps-post__overlay"></a>
+                    <div style={{cursor:"pointer"}} ></div>
+                    {/* <a className="ps-post__overlay" ></a> */}
                 </Link>
                 {thumbnail}
                 <div className="ps-post__categories">
                     <Link href="/blog-news">
-                        <a> {post.tag}</a>
+                        <div className="div-with-link"> {post.tag}</div>
                     </Link>
                 </div>
             </div>
@@ -28,7 +29,7 @@ const ArticleGrid = ({ post }) => {
                     <div className="ps-post__meta">
                         <span className="ps-post__created-at">{createdBy}</span>
                         <Link href="/blog">
-                            <a className="ps-post__author">{author}</a>
+                            <span className="ps-post__author">{author}</span>
                         </Link>
                     </div>
                 </div>
