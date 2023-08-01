@@ -1,42 +1,13 @@
-import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
-import useGetProducts from "~/hooks/useGetProducts"
-import useProductGroup from "~/hooks/useProductGroup"
+import React from "react"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import SidebarShop from "~/components/shared/sidebar/SidebarShop"
-import Shop from "~/components/partials/shop/Shop"
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation"
 import Container from "~/components/layouts/Container"
-import Loader from "~/components/reuseable/Loader"
 import Image from "~/components/elements/Image"
-import { API } from "~/lib/constant"
-import Link from "next/link"
-import { Input, Button } from "antd"
+import Link from 'next/link'
 import { baseUrl } from "~/repositories/Repository"
-import { connect, useDispatch } from "react-redux"
-import { toggleDrawer } from "~/store/app/action"
-import useEcomerce from "~/hooks/useEcomerce"
-import { Modal } from "antd"
-import ReactHtmlParser from "react-html-parser"
-import ProductList from "~/components/productList/productList"
-import { ParallaxBanner } from "react-scroll-parallax"
+import { connect } from "react-redux"
 import Subscribe from "~/components/shared/sections/Subscribe"
-import ReactPlayer from "react-player"
 
-const texicologyScreen = ({ ProductData, ecomerce }) => {
-  const Router = useRouter()
-  const { slug } = Router.query
-  const { proload, product, getProductById } = useGetProducts()
-  const [isLoading, setisLoading] = React.useState(false)
-  const [searchterms, setsearchterms] = React.useState("")
-  const [searchUrl, setsearchUrl] = React.useState("")
-  const { withGrid } = useProductGroup()
-  const [AddtoCart, setAddtoCart] = useState([])
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
-  const { loading, addItem } = useEcomerce()
+const texicologyScreen = () => {
   const breadcrumb = [
     {
       id: 1,
@@ -91,12 +62,16 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                 <div className="container ">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
                           src="/static/img/applications/DNA-synthesis-update.jpg"
                           alt="Applications"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <h2 className="text-white font-weight-bold">
@@ -138,10 +113,10 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                   <section className="ps-section--block-grid">
                     <div className="col-md-3">
                       <div className="ion-wrapper text-center">
-                        <img
+                        <Image
                           width="75"
                           height="75"
-                          className="mb-5"
+                          // className="mb-5"
                           src="/static/img/applications/accuracy.svg"
                           alt="Accuracy"
                         />
@@ -154,10 +129,10 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                     </div>
                     <div className="col-md-3">
                       <div className="ion-wrapper text-center">
-                        <img
+                        <Image
                           width="75"
                           height="75"
-                          className="mb-5"
+                          // className="mb-5"
                           src="/static/img/applications/scalability.svg"
                           alt="Scalability"
                         />
@@ -170,10 +145,10 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                     </div>
                     <div className="col-md-3">
                       <div className="ion-wrapper text-center">
-                        <img
+                        <Image
                           width="75"
                           height="75"
-                          className="mb-5"
+                          // className="mb-5"
                           src="/static/img/applications/ecofriendly.svg"
                           alt="Eco-Friendly"
                         />
@@ -186,10 +161,10 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                     </div>
                     <div className="col-md-3">
                       <div className="ion-wrapper text-center">
-                        <img
+                        <Image
                           width="75"
                           height="75"
-                          className="mb-5"
+                          // className="mb-5"
                           src="/static/img/applications/speed.svg"
                           alt="Speed"
                         />
@@ -222,9 +197,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                         width="100%"
                         height="100%"
                       ></video>
-                      {/* <ReactPlayer playing loop className="react-player" url="/static/img/applications/DNA synthesis_1.mp4" width="100%" height="100%" />
-                       */}
-                    </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -288,8 +261,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
             </div>
           </div>
         </main>
-        {/* <ProductList slug="Biobanking" /> */}
-      </Container>
+        </Container>
     </>
   )
 }
@@ -297,7 +269,6 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
   const slug = query.slug
   var ProductData = []
-  var categoryListList = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -317,7 +288,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData), (categoryListList = myProductData.Products)
+    ;(ProductData = myProductData)
   }
 
   // // Pass data to the page via props

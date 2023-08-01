@@ -3,7 +3,7 @@ import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
+import Image from "~/components/elements/Image"
 
 const breadcrumb = [
   {
@@ -49,14 +49,13 @@ const OurCulture = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image">
-                      <Image 
-                      src="/static/img/our-culture/our-culture-1.jpg" 
-                      alt="our-culture" 
-                      width={1000}
-                      height={650}
-                      />
-                      {/* <img src="/static/img/our-culture/our-culture-1.jpg" alt="our-culture" /> */}
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src="/static/img/our-culture/our-culture-1.jpg"
+                          alt="our-culture"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -69,7 +68,10 @@ const OurCulture = () => {
                         we have the best chance of achieving our mission
                       </p>
                       <Link href="/investor-relations">
-                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
+                        <div
+                          className=" btn btn-lg button-orange text-white m-4"
+                          style={{ cursor: "pointer" }}
+                        >
                           Read More
                         </div>
                       </Link>
@@ -84,13 +86,13 @@ const OurCulture = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image">
-                      <Image
-                        src="/static/img/our-culture/02.png"
-                        alt="our-culture-2"
-                        width={1000}
-                        height={555}
-                      />
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src="/static/img/our-culture/02.jpg"
+                          alt="our-culture-2"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -99,11 +101,14 @@ const OurCulture = () => {
                       <p>
                         We encourage our staff always to keep learning through
                         training courses and collaborations inside and outside
-                        the company. We work with some of the industry&apos;s best,
-                        most fascinating people and institutions.
+                        the company. We work with some of the industry&apos;s
+                        best, most fascinating people and institutions.
                       </p>
                       <Link href="/About-Us">
-                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
+                        <div
+                          className=" btn btn-lg button-orange text-white m-4"
+                          style={{ cursor: "pointer" }}
+                        >
                           Read More
                         </div>
                       </Link>
@@ -118,13 +123,13 @@ const OurCulture = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image">
-                      <Image
-                        src="/static/img/our-culture/04.png"
-                        alt="our-culture 4"
-                        width={1000}
-                        height={555}
-                      />
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src="/static/img/our-culture/04.jpg"
+                          alt="our-culture 4"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -139,11 +144,14 @@ const OurCulture = () => {
                         cake and a coffee.
                       </p>
                       <Link href="/About-Us">
-                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
+                        <div
+                          className=" btn btn-lg button-orange text-white m-4"
+                          style={{ cursor: "pointer" }}
+                        >
                           Read More
                         </div>
                       </Link>
-                      </div>
+                    </div>
                   </div>
                 </section>
               </div>
@@ -153,14 +161,14 @@ const OurCulture = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image">
-                      <Image
-                        src="/static/img/our-culture/03.png"
-                        alt="our-culture 3"
-                        width={1000}
-                        height={555}
-                      />
-                     </div>
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src="/static/img/our-culture/03.jpg"
+                          alt="our-culture 3"
+                          width={1200}
+                          height={675}
+                        />
+                      </div>
                     </Link>
                   </div>
                   <div className="ps-section__content">
@@ -171,11 +179,14 @@ const OurCulture = () => {
                         like to be a part of, visit our careers page.
                       </p>
                       <Link href="/careers">
-                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
+                        <div
+                          className=" btn btn-lg button-orange text-white m-4"
+                          style={{ cursor: "pointer" }}
+                        >
                           Read More
                         </div>
                       </Link>
-                      </div>
+                    </div>
                   </div>
                 </section>
               </div>
@@ -186,13 +197,13 @@ const OurCulture = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image">
-                      <Image
-                        src="/static/img/women-in-stem/JACOB.png"
-                        alt="Equality and Opportunity-Stemnovate"
-                        width={1000}
-                        height={740}
-                      />
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src="/static/img/women-in-stem/WOMEN-IN-SCIENCE.jpg"
+                          alt="Equality and Opportunity-Stemnovate"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -215,11 +226,14 @@ const OurCulture = () => {
                         course of science
                       </p>
                       <Link href="/blogs/women-in-stemnovate">
-                        <div className=" btn btn-lg button-orange text-white m-4" style={{cursor:"pointer"}}>
+                        <div
+                          className=" btn btn-lg button-orange text-white m-4"
+                          style={{ cursor: "pointer" }}
+                        >
                           Read More
                         </div>
                       </Link>
-                     </div>
+                    </div>
                   </div>
                 </section>
               </div>

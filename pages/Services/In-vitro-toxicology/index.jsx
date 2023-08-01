@@ -1,41 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import useGetProducts from "~/hooks/useGetProducts";
-import useProductGroup from "~/hooks/useProductGroup";
+import React from "react";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import SidebarShop from "~/components/shared/sidebar/SidebarShop";
-import Shop from "~/components/partials/shop/Shop";
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
 import Container from "~/components/layouts/Container";
-import Loader from "~/components/reuseable/Loader";
 import Image from "~/components/elements/Image";
-import { API } from "~/lib/constant";
 import Link from "next/link";
-import { Input, Button } from "antd";
 import { baseUrl } from "~/repositories/Repository";
-import { connect, useDispatch } from "react-redux";
-import { toggleDrawer } from "~/store/app/action";
-import useEcomerce from "~/hooks/useEcomerce";
-import { Modal } from "antd";
-import ReactHtmlParser from "react-html-parser";
-import ProductList from "~/components/productList/productList";
-import { ParallaxBanner } from "react-scroll-parallax";
+import { connect } from "react-redux";
 import Subscribe from "~/components/shared/sections/Subscribe";
 
-const texicologyScreen = ({ ProductData, ecomerce }) => {
-    const Router = useRouter();
-    const { slug } = Router.query;
-    const { proload, product, getProductById } = useGetProducts();
-    const [isLoading, setisLoading] = React.useState(false);
-    const [searchterms, setsearchterms] = React.useState("");
-    const [searchUrl, setsearchUrl] = React.useState("");
-    const { withGrid } = useProductGroup();
-    const [AddtoCart, setAddtoCart] = useState([]);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(1);
-    const { loading, addItem } = useEcomerce();
+const texicologyScreen = () => {
     const breadcrumb = [
         {
             id: 1,
@@ -79,14 +51,19 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                                 <div className="container">
                                     <section className="ps-section--block-grid">
                                         <div className="ps-section__thumbnail">
-                                            <a className="ps-section__image" href="#">
-                                                <img src="/static/img/services/In-vitro-toxicology-assay.jpg" alt="In-vitro toxicology" />
-                                            </a>
+                                            <Link href="#">
+                                                <div className="ps-section__image link-hover-thumb-shape">
+                                                <Image 
+                                                src="/static/img/services/In-vitro-toxicology-assay.jpg" 
+                                                alt="In-vitro toxicology" 
+                                                width={1200}
+                                                height={675}
+                                                />
+                                                </div>
+                                            </Link>
                                         </div>
                                         <div className="ps-section__content ">
                                             <div className="ps-section__desc center-box">
-                                                {/* <div className="">
-                                                    <div className="vertical-center"> */}
                                                 <h3 className="text-white font-weight-bold">Platform features</h3>
                                                 <p className="text-white">
                                                     Stemnovate is capable of designing and manufacturing a bespoke fluidic component to enhance repeatability of complex cell culture.
@@ -98,9 +75,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                                                     <br />
                                                     We support projects to achieve a higher standard of accuracy, evaluating biocompatibility and tolerance.
                                                 </p>
-                                                {/* </div>
-                                                </div> */}
-                                            </div>
+                                                </div>
                                         </div>
                                     </section>
                                 </div>
@@ -110,37 +85,37 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                                     <div className="py-5">
                                         <section className="ps-section--block-grid">
                                             <div className="col-md-4">
-                                                <a href="/Applications/Disease-Modelling/Liver">
-                                                    <div className="ion-wrapper text-center">
-                                                        <img width="100" className="mb-5" src="/static/img/services/Liver-Platform.jpg" alt="Liver Platform Hepatotoxicity" />
+                                                <Link href="/Applications/Disease-Modelling/Liver" >
+                                                    <div className="ion-wrapper text-center span-with-link" >
+                                                        <Image width="100" height="100px" src="/static/img/services/Liver-Platform.jpg" alt="Liver Platform Hepatotoxicity" />
                                                         <h3>
                                                             Liver Platform <br />
                                                             Hepatotoxicity
                                                         </h3>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="col-md-4">
-                                                <a href="/Applications/Disease-Modelling/Heart">
-                                                    <div className="ion-wrapper text-center">
-                                                        <img width="100" className="mb-5" src="/static/img/services/Heart-cell-Platform.jpg" alt="Heart cell Platform Cardiac toxicity" />
+                                                <Link href="/Applications/Disease-Modelling/Heart">
+                                                    <div className="ion-wrapper text-center span-with-link">
+                                                        <Image width="100" height="100px" src="/static/img/services/Heart-cell-Platform.jpg" alt="Heart cell Platform Cardiac toxicity" />
                                                         <h3>
                                                             Heart cell Platform <br />
                                                             Cardiac toxicity
                                                         </h3>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                             <div className="col-md-4">
-                                                <a href="/Applications/Disease-Modelling/Neuron">
-                                                    <div className="ion-wrapper text-center">
-                                                        <img width="100" className="mb-5" src="/static/img/services/Neuron.jpg" alt="Neuronal cell Platform Neurotoxicity" />
+                                                <Link href="/Applications/Disease-Modelling/Neuron">
+                                                    <div className="ion-wrapper text-center span-with-link">
+                                                        <Image width="100" height="100px" src="/static/img/services/Neuron.jpg" alt="Neuronal cell Platform Neurotoxicity" />
                                                         <h3>
                                                             Neuronal cell Platform <br />
                                                             Neurotoxicity
                                                         </h3>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             </div>
                                         </section>
                                     </div>
@@ -150,14 +125,19 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                                 <div className="container">
                                     <section className="ps-section--block-grid ">
                                         <div className="ps-section__thumbnail">
-                                            <a className="ps-section__image" href="#">
-                                                <img src="/static/img/services/in-vitro-tox-lab.jpg" alt="Stemnovate in vitro toxicology" />
-                                            </a>
+                                            <Link href="#">
+                                                <div className="ps-section__image link-hover-thumb-shape">
+                                                <Image 
+                                                src="/static/img/services/Stemnovate-in-vitro-toxicology.jpg" 
+                                                alt="Stemnovate in vitro toxicology"
+                                                width={1200}
+                                                height={675} 
+                                                />
+                                                </div>
+                                            </Link>
                                         </div>
                                         <div className="ps-section__content ">
                                             <div className="ps-section__desc">
-                                                {/* <div className="center-box">
-                                                    <div className="vertical-center"> */}
                                                 <h3 className="p-1 text-white font-weight-bold">Stemnovate in vitro toxicology</h3>
                                                 <p className="text-white ">
                                                     Stemnovate in vitro toxicology assays use primary cells or induced pluripotent stem cell-derived cells such as heart, liver and neurons in controlled laboratory conditions to examine the toxic properties of compounds and mixtures.
@@ -165,9 +145,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                                                     <br />
                                                     We develop assays to examine the toxicity of xenobiotics at the cellular level replacing animal testing, where species differences often fail to represent human physiological responses.
                                                 </p>
-                                                {/* </div>
-                                                </div> */}
-                                            </div>
+                                                </div>
                                         </div>
                                     </section>
                                 </div>
@@ -188,8 +166,7 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                         </div>
                     </div>
                 </main>
-                {/* <ProductList slug="Biobanking" /> */}
-            </Container>
+                </Container>
         </>
     );
 };
@@ -197,7 +174,6 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
     const slug = query.slug;
     var ProductData = [];
-    var categoryListList = [];
     var data = "";
     if (slug != undefined) {
         data = slug[slug.length - 1];
@@ -217,7 +193,7 @@ export async function getServerSideProps({ query }) {
 
         const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions);
         const myProductData = await res.json();
-        (ProductData = myProductData), (categoryListList = myProductData.Products);
+        (ProductData = myProductData)
     }
 
     // // Pass data to the page via props

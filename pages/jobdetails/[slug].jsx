@@ -98,14 +98,13 @@ const CareersList = (props) => {
                 <div className="card-body">
                   <div className="row px-5">
                     <div className="col-md-12 ">
-                      <h1>{JobsList.position_name}</h1>
+                      <h2>{JobsList.position_name}</h2>
                       <p
                         dangerouslySetInnerHTML={{
                           __html: JobsList.job_description
                         }}
                       ></p>
-                      {/* <p>{JobsList.job_description}</p> */}
-                    </div>
+                     </div>
                     <div className="col-md-8 my-3">
                       <p className="text-left">
                         <TbBuildingCommunity className="mr-3 mb-1" />
@@ -119,12 +118,7 @@ const CareersList = (props) => {
                         <TbCalendarTime className="mr-3" />
                         {moment(JobsList.created_at).format("DD-MM-YYYY")}
                       </p>
-                      {/* <p className="text-left">
-                                                <a href={`mailto:hr@stemnovate.co.uk?subject=Application for ${JobsList.position_name} - (${JobsList.job_id})&body=Upload Updated Resume`}>
-                                                    <TbSend /> Mail Us at hr@stemnovate.co.uk
-                                                </a>
-                                            </p> */}
-                    </div>
+                       </div>
 
                     <div className="col-md-4 my-3">
                       <FacebookShareButton

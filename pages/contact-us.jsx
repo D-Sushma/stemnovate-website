@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
-import vector from '~/public/static/img/Home/vector.png'
+import Image from "~/components/elements/Image"
+import vector from "~/public/static/img/Home/vector.png"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import { FiPhone, FiMail } from "react-icons/fi"
@@ -32,16 +32,16 @@ const ContactUsScreen = ({ mytitile }) => {
             <BreadCrumb breacrumb={breadcrumb} />
           </div>
           <div className="ps-page__content">
-            <h1 className="text-center  h1">Contact Us</h1>
+            <h2 className="text-center  h1">Contact Us</h2>
             <div className="container text-center mb-5 contact-img">
               <Image
                 src={vector}
                 alt="stemnovate-Contact Us"
                 // style={{ width: "80%", height: "auto" }}
-                width={900}
-                height={600}
+                width={1588}
+                height={960}
               />
-             </div>
+            </div>
             <div className="ps-contact mt-5">
               <h1 className=" text-center m-3">GET IN TOUCH</h1>
               <p className="text-center mb-5">
@@ -73,19 +73,17 @@ const ContactUsScreen = ({ mytitile }) => {
                   </div>
                   <div className="col-12 col-lg-6 text-center">
                     <div className="m-2 h3">
-                      <a
-                        className="ps-footer__email"
-                        href="telto:+44 (0)1223830192"
-                      >
-                        <FiPhone /> +44 (0)1223830192
-                      </a>
+                      <Link href="telto:+44 (0)1223830192">
+                        <span className="ps-footer__email span-with-link">
+                          <FiPhone /> +44 (0)1223830192
+                        </span>
+                      </Link>
                       <br />
-                      <a
-                        className="ps-footer__email"
-                        href="mailto:info@stemnovate.co.uk"
-                      >
-                        <FiMail /> info@stemnovate.co.uk
-                      </a>
+                      <Link href="mailto:info@stemnovate.co.uk">
+                        <span className="ps-footer__email span-with-link">
+                          <FiMail /> info@stemnovate.co.uk
+                        </span>
+                      </Link>
                     </div>
                     <ul className="ps-social ">
                       <li>
@@ -121,13 +119,12 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <a
-                          className="ps-social__link linkedin"
-                          href="https://www.linkedin.com/company/stemnovate-limited"
-                        >
-                          <i className="fa fa-linkedin"></i>
-                          <span className="ps-tooltip">Linkedin</span>
-                        </a>
+                        <Link href="https://www.linkedin.com/company/stemnovate-limited">
+                          <div className="ps-social__link linkedin">
+                            <i className="fa fa-linkedin"></i>
+                            <span className="ps-tooltip">Linkedin</span>
+                          </div>
+                        </Link>
                       </li>
                     </ul>
                   </div>

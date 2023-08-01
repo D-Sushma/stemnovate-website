@@ -4,6 +4,8 @@ import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import ProductList from "~/components/productList/productList"
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 
 const breadcrumb = [
   {
@@ -47,12 +49,16 @@ const Applications = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
                         src="/static/img/applications/Drug-Discovery.jpg"
                         alt="Drug Discovery Platform"
+                        width={1200}
+                        height={675}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc ">
@@ -69,23 +75,14 @@ const Applications = () => {
                         that, we are creating heart and brain cells in the
                         laboratory. These novel models have the potential to
                         predict human drug response and ensure patient safety...{" "}
-                        <a
-                          href="/Applications/Drug-Discovery-Platform"
-                          className="text-white font-weight-bold"
-                        >
-                          Read More
-                        </a>
+                        <Link href="/Applications/Drug-Discovery-Platform" >
+                          <span className="text-white font-weight-bold span-with-link">Read More</span>
+                        </Link>
                       </p>
                       <p className="">
-                        {/* <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button> */}
-                        <a
-                          href="/contact-us"
-                          className="btn btn-lg button-orange text-white m-4 m-5"
-                        >
-                          Request A Quote
-                        </a>
+                        <Link href="/contact-us">
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -96,12 +93,16 @@ const Applications = () => {
               <div className="container">
                 <section className="ps-section--block-grid">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
                         src="/static/img/applications/Disease-modelling.jpg"
                         alt="Disease Modelling"
+                        width={1200}
+                        height={675}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc">
@@ -114,23 +115,14 @@ const Applications = () => {
                         71% of all deaths worldwide. We provide innovative
                         solutions for discovering new medicines and therapies
                         for non-communicable diseases....{" "}
-                        <a
-                          href="/Applications/Disease-Modelling"
-                          className=" font-weight-bold"
-                        >
-                          Read More
-                        </a>
+                        <Link href="/Applications/Disease-Modelling" >
+                          <span className=" font-weight-bold span-with-link">Read More</span>
+                        </Link>
                       </p>
                       <p className="">
-                        {/* <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button> */}
-                        <a
-                          href="/contact-us"
-                          className="btn btn-lg button-orange text-white m-4 m-5"
-                        >
-                          Request A Quote
-                        </a>
+                        <Link href="/contact-us" >
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -141,12 +133,16 @@ const Applications = () => {
               <div className="container">
                 <section className="ps-section--block-grid">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
                         src="/static/img/applications/Diagnostics.jpg"
                         alt="Diagnostics"
+                        width={1200}
+                        height={675}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc ">
@@ -160,23 +156,15 @@ const Applications = () => {
                         diagnose liver and heart diseases early. During COVID,
                         we also developed new technology and assays for rapid
                         diagnostic ....{" "}
-                        <a
-                          href="/Applications/Diagnostics"
-                          className="text-white font-weight-bold"
-                        >
-                          Read More
-                        </a>
+                        <Link href="/Applications/Diagnostics" >
+                          <span className="text-white font-weight-bold span-with-link">Read More</span>
+                        </Link>
                       </p>
                       <p className="">
-                        {/* <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button> */}
-                        <a
-                          href="/contact-us"
-                          className="btn btn-lg button-orange text-white m-4 m-5"
-                        >
-                          Request A Quote
-                        </a>
+                        <Link href="/contact-us"
+                         >
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                        </Link>
                       </p>
                     </div>
                   </div>
@@ -187,12 +175,16 @@ const Applications = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
                         src="/static/img/applications/DNA-synthesis.jpg"
                         alt="DNA Synthesis"
+                        width={1200}
+                        height={675}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc">
@@ -206,23 +198,14 @@ const Applications = () => {
                         therapeutics developing in the pharmaceutical sector,
                         e.g. antibody research, drug bio-production and RNAi
                         based therapeutics.....{" "}
-                        <a
-                          href="/Applications/DNA-Synthesis"
-                          className=" font-weight-bold"
-                        >
-                          Read More
-                        </a>
+                        <Link href="/Applications/DNA-Synthesis" >
+                          <span className=" font-weight-bold span-with-link">Read More</span>
+                        </Link>
                       </p>
                       <p className="">
-                        {/* <button type="button" className="btn btn-lg button-orange text-white m-4 m-5">
-                                                    Build Your Project
-                                                </button> */}
-                        <a
-                          href="/contact-us"
-                          className="btn btn-lg button-orange text-white m-4 m-5"
-                        >
-                          Request A Quote
-                        </a>
+                       <Link href="/contact-us" >
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                        </Link>
                       </p>
                     </div>
                   </div>

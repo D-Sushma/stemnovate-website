@@ -10,31 +10,29 @@ const ArticleGrid = ({ post }) => {
     }, [post]);
 
     return (
-        <article className="ps-post ps-post--grid">
-            <div className="ps-post__thumbnail">
-                <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
-                    <div style={{cursor:"pointer"}} ></div>
-                    {/* <a className="ps-post__overlay" ></a> */}
-                </Link>
-                {thumbnail}
-                <div className="ps-post__categories">
-                    <Link href="/blog-news">
-                        <div className="div-with-link"> {post.tag}</div>
+        <>
+            <article className="ps-post ps-post--grid">
+                <div className="ps-post__thumbnail image-article-blog rounded-0">
+                    <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
+                        <div className="ps-post__overlay link-hover-thumb-shape" ></div>
+                        {/* <a className="ps-post__overlay" ></a> */}
                     </Link>
+                    {thumbnail}
+
                 </div>
-            </div>
-            <div className="ps-post__wrapper">
-                <div className="ps-post__content px-2 mb-3">
-                    {title}
-                    <div className="ps-post__meta">
-                        <span className="ps-post__created-at">{createdBy}</span>
-                        <Link href="/blog">
-                            <span className="ps-post__author">{author}</span>
-                        </Link>
+                <div className="">
+                    <div className="ps-post__content text-white px-2 mb-3 pt-0">
+                        <div className="title-article-blog">{title}</div>
+                        <div className="ps-post__meta mt-3">
+                            <span className="created-at-article-blog">{createdBy},</span>
+                            <Link href="/blog">
+                                <span className="author-article-blog ml-1">{author}</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        </>
     );
 };
 

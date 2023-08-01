@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
 import Subscribe from "~/components/shared/sections/Subscribe";
-import ProductList from "~/components/productList/productList";
-import { FacebookShareButton, FacebookIcon, PinterestShareButton, PinterestIcon, TwitterShareButton, TwitterIcon, WhatsappShareButton, WhatsappIcon, LinkedinShareButton, LinkedinIcon } from "next-share";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from '~/components/elements/Image'
 
 const breadcrumb = [
     {
@@ -41,24 +40,20 @@ export default function index() {
                 </div>
                 <div className="ps-page__content">
                     <div className="ps-about">
-                        {/* <div className=" about-section ">
-                            <div className="container">
-                                <div className="center-box">
-                                    <p className=" vertical-center">
-                                        It is worrying that only less than one in 10,000 potential drug compounds reach the clinic. Drug discovery remains a complicated process.
-                                        <br /> We provide phenotypic screening that evaluates the effects of potential drugs in vitro on the cultured cell lines. In addition, we effciently analyze multiparametric data sets to predict drug response much earlier in the drug discovery process.
-                                    </p>
-                                </div>
-                            </div>
-                        </div> */}
-
                         <div className="bg-section-women">
                             <div className="container">
                                 <section className="ps-section--block-grid ">
                                     <div className="ps-section__thumbnail">
-                                        <a className="ps-section__image" href="#">
-                                            <img src="/static/img/women-in-stem/ruchi-sharma.png" alt="RUCHI SHARMA, CEO STEMNOVATE LIMITED" />
-                                        </a>
+                                        <Link href="#">
+                                            <div className="ps-section__image link-hover-thumb-shape">
+                                            <Image 
+                                            src="/static/img/women-in-stem/ruchi-sharma.png" 
+                                            alt="RUCHI SHARMA, CEO STEMNOVATE LIMITED" 
+                                            width={1000}
+                                            height={960}
+                                             />
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="ps-section__content">
                                         <h3 className="text-white ">RUCHI SHARMA, CEO STEMNOVATE LIMITED</h3>
@@ -67,7 +62,7 @@ export default function index() {
                                             <p className="text-white">Instead of forgetting and excusing the past, we should learn about the people who were denied opportunities but still managed to create impactful discoveries. One such person was Rosalind Franklin, who, against all adversaries, discovered one of the most significant findings of the 20th century. The discovery she made was of the double helix structure of DNA, which changed the course of science</p>
                                             <br />
                                             <p>
-                                                <i className="font-weight-light">"In my view, all that is necessary for faith is the belief that by doing our best, we shall succeed in our aims: the improvement of mankind."</i>
+                                                <i className="font-weight-light">&quot;In my view, all that is necessary for faith is the belief that by doing our best, we shall succeed in our aims: the improvement of mankind.&quot;</i>
                                             </p>
                                             <p>
                                                 <b>-Rosalind Franklin.</b>
@@ -82,20 +77,27 @@ export default function index() {
                             <div className="container">
                                 <section className="ps-section--block-grid ">
                                     <div className="ps-section__thumbnail">
-                                        <a className="ps-section__image" href="#">
-                                            <img src="/static/img/women-in-stem/GIULIA.png" alt="GIULIA: SENIOR SCIENTIST" />
-                                        </a>
+                                        <Link href="#">
+                                            <div className="ps-section__image link-hover-thumb-shape">
+                                            <Image 
+                                            src="/static/img/women-in-stem/GIULIA.png" 
+                                            alt="GIULIA: SENIOR SCIENTIST" 
+                                            width={1000}
+                                            height={960}
+                                            />
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="ps-section__content">
                                         <h3 className="">GIULIA: SENIOR SCIENTIST, PHD NEUROSCIENCES, IMBB/FORTH (GR) AMP; AIX-MARSEILLE UNIVERSITY (FR)</h3>
                                         <div className="ps-section__desc ">
                                             <p>
-                                                <i className="font-weight-light">"Above all, don't fear difficult moments. The best comes from them"</i>
+                                                <i className="font-weight-light">&quot;Above all, don&apos;t fear difficult moments. The best comes from them&quot;</i>
                                             </p>
                                             <p>
                                                 <b>- Rita Levi Montalcini</b>
                                             </p>
-                                            <p className="">My career in STEM has been profoundly inspired by Rita Levi Montalcini, an Italian Nobel laureate born in my hometown. Once banned by Mussolini's laws from working in academia, Rita set up a makeshift laboratory in her bedroom where, using scalpels constructed from sewing needles, she conducted experiments with chicken embryos to understand how embryonic nerves grow into a fully developed nervous system. This knowledge underpins current investigation into how these processes go wrong in diseases like dementia and cancer.</p>
+                                            <p className="">My career in STEM has been profoundly inspired by Rita Levi Montalcini, an Italian Nobel laureate born in my hometown. Once banned by Mussolini&apos;s laws from working in academia, Rita set up a makeshift laboratory in her bedroom where, using scalpels constructed from sewing needles, she conducted experiments with chicken embryos to understand how embryonic nerves grow into a fully developed nervous system. This knowledge underpins current investigation into how these processes go wrong in diseases like dementia and cancer.</p>
                                             <br />
                                             <p className="">As a woman and mother of a young child working in Science, Stemnovate provides an environment that respects flexibility and reasonable working hours, thereby encouraging employees to work smartly, not endlessly.</p>
                                             <br />
@@ -109,9 +111,16 @@ export default function index() {
                             <div className="container">
                                 <section className="ps-section--block-grid ">
                                     <div className="ps-section__thumbnail">
-                                        <a className="ps-section__image" href="#">
-                                            <img src="/static/img/women-in-stem/ABI-PARNELL.png" alt="ABI PARNELL: HR ADMINISTRATOR" />
-                                        </a>
+                                        <Link href="#">
+                                            <div className="ps-section__image link-hover-thumb-shape">
+                                            <Image 
+                                            src="/static/img/women-in-stem/ABI-PARNELL.png" 
+                                            alt="ABI PARNELL: HR ADMINISTRATOR" 
+                                            width={1000}
+                                            height={960}
+                                            />
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="ps-section__content">
                                         <h3 className="text-white ">ABI PARNELL: HR ADMINISTRATOR</h3>
@@ -129,23 +138,23 @@ export default function index() {
                                     <div className="col-md-12 text-center">
                                         <div>
                                             <div className="overflow-hidden">
-                                                <img className="ps-banner__image" src="/static/img/women-in-stem/JACOB.jpg" alt="JACOB: RESEARCH SCIENTIST" width="500px" />
-                                            </div>
+                                                <Image 
+                                                className="ps-banner__image" 
+                                                src="/static/img/women-in-stem/JACOB.jpg" 
+                                                alt="JACOB: RESEARCH SCIENTIST" 
+                                                width={500}
+                                                height={350}
+                                                 />
+                                                </div>
                                             <h3 className="m-4">JACOB: RESEARCH SCIENTIST</h3>
                                             <p>
-                                                <i className="font-weight-light">"Let us develop respect for all living things. Let us try to replace violence and intolerance with understanding and compassion. And love."</i>
+                                                <i className="font-weight-light">&quot;Let us develop respect for all living things. Let us try to replace violence and intolerance with understanding and compassion. And love.&quot;</i>
                                             </p>
                                             <p>
                                                 <b> - Jane Goodall.</b>
                                             </p>
                                             <p className="mx-4 text-left">For me, renowned primatologist Jane Goodall has always stood out as a revolutionary figure in science, she poured humanity into her dedication to her field, and in doing so achieved wonderful things. I think that her influence is none so important as it is now, where compassion and empathy seem set aside in the pursuit of greatness, she taught that compassion and empathy are necessary for greatness.</p>
-                                            {/* </a> */}
-                                            {/* <a
-                                                    className=" btn btn-lg button-orange text-white m-4 m-5"
-                                                    href="/Applications/Drug-Discovery-Platform">
-                                                    READ MORE
-                                                </a> */}
-                                        </div>
+                                             </div>
                                     </div>
                                 </div>
                             </div>

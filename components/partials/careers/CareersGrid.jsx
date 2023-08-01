@@ -73,7 +73,10 @@ function CareersGrid({ postLists, internShip }) {
 
                   <div className="text-right">
                     <Link href={`/jobdetails/${data.job_id}`}>
-                      <div className="btn btn-lg btn-primary" style={{cursor:"pointer"}}>
+                      <div
+                        className="btn btn-lg btn-primary"
+                        style={{ cursor: "pointer" }}
+                      >
                         Apply Now <TbSend />
                       </div>
                     </Link>
@@ -94,17 +97,13 @@ function CareersGrid({ postLists, internShip }) {
             <section className="ps-section--block-grid ">
               <div className="ps-section__thumbnail">
                 <Link href="#">
-                  <div className="ps-section__image">
+                  <div className="ps-section__image link-hover-thumb-shape">
                     <Image
                       src="static/image/research-campaign.webp"
                       alt="Sharing pictures of your work could win you an Amazon voucher"
-                      width={1000}
-                      height={600}
+                      width={1200}
+                      height={675}
                     />
-                    {/* <img
-                    src="static/image/research-campaign.webp"
-                    alt="Sharing pictures of your work could win you an Amazon voucher"
-                  /> */}
                   </div>
                 </Link>
               </div>
@@ -147,22 +146,26 @@ function CareersGrid({ postLists, internShip }) {
               <section className="ps-section--block-grid ">
                 <div className="ps-section__thumbnail">
                   <Link href="#">
-                    <div className="ps-section__image">
+                    <div className="ps-section__image link-hover-thumb-shape">
                       <Image
                         src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                         alt={data.position_name}
-                        width={1000}
-                        height={600}
+                        width={1200}
+                        height={676}
+                        placeholder="blur"
+                        blurDataURL="/static/image/blurred.png"
                       />
-                      {/* <img src={`${process.env.AWS_S3BUCKET_URL}${data.image}`} alt={data.position_name} /> */}
                     </div>
                   </Link>
                 </div>
                 <div className="ps-section__content">
                   <Link href={`/jobdetails/${data.job_id}`}>
-                   
-                      <h1 className="font-weight-bold" style={{cursor:"pointer"}}>{data.position_name}</h1>
-                    
+                    <h1
+                      className="font-weight-bold"
+                      style={{ cursor: "pointer" }}
+                    >
+                      {data.position_name}
+                    </h1>
                   </Link>
                   <div className="ps-section__desc ">
                     <p

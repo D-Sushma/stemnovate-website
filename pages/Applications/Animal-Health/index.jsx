@@ -4,6 +4,8 @@ import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
 import { connect } from "react-redux"
 import Subscribe from "~/components/shared/sections/Subscribe"
+import Image from "~/components/elements/Image"
+import Link from "next/link"
 
 const texicologyScreen = () => {
   const breadcrumb = [
@@ -45,19 +47,17 @@ const texicologyScreen = () => {
                     <div className="container">
                       <section className="ps-section--block-grid ">
                         <div className="ps-section__thumbnail ">
-                          <a className="ps-section__image" href="#">
-                            <img
-                              className="p-4"
-                              src="/static/img/applications/Neurons.jpg"
-                              alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
-                            />
-                            {/* <div style={{ width: "100%" }}>
-                              <h2 className="text-white text-center">
-                                MULTISPECIES STEM CELL DIFFERENTIATION TO
-                                NEURONS, LIVER & HEART CELLS
-                              </h2>
-                            </div> */}
-                          </a>
+                          <Link href="#">
+                            <div className="ps-section__image">
+                              <Image
+                                className="p-4 link-hover-thumb-shape"
+                                src="/static/img/applications/Neurons.jpg"
+                                alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
+                                width={1200}
+                                height={675}
+                              />
+                            </div>
+                          </Link>
                         </div>
                         <div className="ps-section__content">
                           <div className="ps-section__desc ">
@@ -79,59 +79,77 @@ const texicologyScreen = () => {
                       </section>
                     </div>
                     <div className="container">
-                      <a
-                        className="ps-section__image"
-                        href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/"
-                      >
-                        <img
-                          className="p-3"
-                          src="/static/img/applications/news.jpg"
-                          alt="REDUCE"
-                        />
-                      </a>
+                      <Link href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/">
+                        <div className="ps-section__image">
+                          <Image
+                            className="p-3 link-hover-thumb-shape"
+                            src="/static/img/applications/news.jpg"
+                            alt="REDUCE"
+                            width={1302}
+                            height={722}
+                            />
+                        </div>
+                      </Link>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-4">
                       <div className="ps-section__thumbnail plus-section-new">
-                        <a className="ps-section__image" href="#">
-                          <img
-                            className="p-3"
-                            src="/static/img/animal-health/Reduce.jpg"
-                            alt="REDUCE"
-                          />
-                          <div style={{ width: "100%" }}>
-                            <h2 className="text-white text-center">REDUCE</h2>
+                        <Link href="#">
+                          <div className="ps-section__image">
+                            <Image
+                              className="p-3 link-hover-thumb-shape"
+                              src="/static/img/animal-health/Reduce.jpg"
+                              alt="REDUCE"
+                              width={1200}
+                              height={675}
+                            />
+
+                            <div style={{ width: "100%" }}>
+                              <h2 className="text-white text-center link-hover-thumb-shape">REDUCE</h2>
+                            </div>
                           </div>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="ps-section__thumbnail plus-section-new">
-                        <a className="ps-section__image" href="#">
-                          <img
-                            className="p-3"
-                            src="/static/img/animal-health/Replace.jpg"
-                            alt="REPLACE"
-                          />
-                          <div style={{ width: "100%" }}>
-                            <h2 className="text-white text-center">REPLACE</h2>
+                        <Link href="#">
+                          <div className="ps-section__image">
+                            <Image
+                              className="p-3 link-hover-thumb-shape"
+                              src="/static/img/animal-health/Replace.jpg"
+                              alt="REPLACE"
+                              width={1200}
+                              height={675}
+                            />
+
+                            <div style={{ width: "100%" }}>
+                              <h2 className="text-white text-center link-hover-thumb-shape">
+                                REPLACE
+                              </h2>
+                            </div>
                           </div>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="col-md-4">
                       <div className="ps-section__thumbnail plus-section-new">
-                        <a className="ps-section__image" href="#">
-                          <img
-                            className="p-3"
-                            src="/static/img/animal-health/Refine.jpg"
-                            alt="REFINE"
-                          />
-                          <div style={{ width: "100%" }}>
-                            <h2 className="text-white text-center">REFINE</h2>
+                        <Link href="#">
+                          <div className="ps-section__image">
+                            <Image
+                              className="p-3 link-hover-thumb-shape"
+                              src="/static/img/animal-health/Refine.jpg"
+                              alt="REFINE"
+                              width={1200}
+                              height={675}
+                            />
+
+                            <div style={{ width: "100%" }}>
+                              <h2 className="text-white text-center link-hover-thumb-shape">REFINE</h2>
+                            </div>
                           </div>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -155,19 +173,23 @@ const texicologyScreen = () => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail plus-section-new">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          className="p-4"
-                          src="/static/img/animal-health/Multispecies-stem.jpg"
-                          alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
-                        />
-                        <div style={{ width: "100%" }}>
-                          <h2 className="text-white text-center">
-                            MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS,
-                            LIVER & HEART CELLS
-                          </h2>
+                      <Link href="#">
+                        <div className="ps-section__image">
+                          <Image
+                            className="p-4 link-hover-thumb-shape"
+                            src="/static/img/animal-health/Multispecies-stem.jpg"
+                            alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
+                            width={1200}
+                            height={675}
+                          />
+                          <div style={{ width: "100%" }}>
+                            <h2 className="text-white text-center link-hover-thumb-shape">
+                              MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS,
+                              LIVER & HEART CELLS
+                            </h2>
+                          </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc ">
@@ -216,7 +238,7 @@ const texicologyScreen = () => {
                           Stem cells hold great potential for cellular
                           therapies, drug discovery and disease modelling.
                           However, It requires a laboratory assay that consists
-                          of injecting cells under mice's skin, allowing cells
+                          of injecting cells under mice&apos;s skin, allowing cells
                           to differentiate spontaneously and is a determinant of
                           stemness and capability to form multiple cell types.
                           We have integrated stem cell research with tissue
@@ -229,19 +251,24 @@ const texicologyScreen = () => {
                       </div>
                     </div>
                     <div className="ps-section__thumbnail plus-section-new">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          className="p-4"
-                          src="/static/img/animal-health/Refine-section.jpg"
-                          alt="BIOINFORMATICS AND ANALYSIS OF PLURIPOTENCY-ASSOCIATED BIOMARKERS"
-                        />
-                        <div style={{ width: "100%" }}>
-                          <h2 className="text-white text-center">
-                            BIOINFORMATICS AND ANALYSIS OF
-                            PLURIPOTENCY-ASSOCIATED BIOMARKERS
-                          </h2>
+                      <Link href="#">
+                        <div className="ps-section__image">
+                          <Image
+                            className="p-4 link-hover-thumb-shape"
+                            src="/static/img/animal-health/Refine-section.jpg"
+                            alt="BIOINFORMATICS AND ANALYSIS OF PLURIPOTENCY-ASSOCIATED BIOMARKERS"
+                            width={1200}
+                            height={675}
+                          />
+
+                          <div style={{ width: "100%" }}>
+                            <h2 className="text-white text-center link-hover-thumb-shape">
+                              BIOINFORMATICS AND ANALYSIS OF
+                              PLURIPOTENCY-ASSOCIATED BIOMARKERS
+                            </h2>
+                          </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </section>
                 </div>
@@ -250,19 +277,24 @@ const texicologyScreen = () => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail plus-section-new">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          className="p-4"
-                          src="/static/img/animal-health/Functionality-assessment-through.jpg"
-                          alt="FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE ARRAY OR CHIP STUDY"
-                        />
-                        <div style={{ width: "100%" }}>
-                          <h2 className="text-white text-center">
-                            FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE
-                            ARRAY OR CHIP STUDY
-                          </h2>
+                      <Link href="#">
+                        <div className="ps-section__image">
+                          <Image
+                            className="p-4 link-hover-thumb-shape"
+                            src="/static/img/animal-health/Functionality-assessment-through.jpg"
+                            alt="FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE ARRAY OR CHIP STUDY"
+                            width={1200}
+                            height={675}
+                          />
+
+                          <div style={{ width: "100%" }}>
+                            <h2 className="text-white text-center link-hover-thumb-shape">
+                              FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE
+                              ARRAY OR CHIP STUDY
+                            </h2>
+                          </div>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc ">

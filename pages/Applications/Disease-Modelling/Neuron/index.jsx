@@ -1,38 +1,14 @@
-import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
-import useGetProducts from "~/hooks/useGetProducts"
-import useProductGroup from "~/hooks/useProductGroup"
+import React from "react"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import SidebarShop from "~/components/shared/sidebar/SidebarShop"
-import Shop from "~/components/partials/shop/Shop"
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation"
 import Container from "~/components/layouts/Container"
-import Loader from "~/components/reuseable/Loader"
 import Image from "~/components/elements/Image"
-import { API } from "~/lib/constant"
 import Link from "next/link"
-import { Input, Button } from "antd"
 import { baseUrl } from "~/repositories/Repository"
-import { connect, useDispatch } from "react-redux"
-import { toggleDrawer } from "~/store/app/action"
-import useEcomerce from "~/hooks/useEcomerce"
+import { connect } from "react-redux"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import { Tooltip } from "antd"
 
-const texicologyScreen = ({ ProductData, ecomerce }) => {
-  const Router = useRouter()
-  const { slug } = Router.query
-  const { proload, product, getProductById } = useGetProducts()
-  const [isLoading, setisLoading] = React.useState(false)
-  const [searchterms, setsearchterms] = React.useState("")
-  const [searchUrl, setsearchUrl] = React.useState("")
-  const { withGrid } = useProductGroup()
-  const [AddtoCart, setAddtoCart] = useState([])
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
-  const { loading, addItem } = useEcomerce()
+const texicologyScreen = () => {
   const breadcrumb = [
     {
       id: 1,
@@ -121,12 +97,16 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
+                      <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
                           src="/static/img/applications/Neuron/01.jpg"
                           alt="HUMAN iPSC-DERIVED SENSORY NEURONS FOR HEARING LOSS"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
@@ -170,17 +150,20 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
                           src="/static/img/applications/Neuron/02.jpg"
                           alt="HUMAN iPSC-DERIVED SENSORY NEURONS"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
-                        {/* {" "} */}
-                        <h2 className="  font-weight-bold">
+                       <h2 className="  font-weight-bold">
                           Human IPSC-Derived Sensory Neurons For Neuropathic
                           Pain
                         </h2>
@@ -222,12 +205,16 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
+                      <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
                           src="/static/img/applications/Neuron/03.jpg"
                           alt="HUMAN iPSC-DERIVED MICROGLIA"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
@@ -263,7 +250,6 @@ const texicologyScreen = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
   const slug = query.slug
   var ProductData = []
-  var categoryListList = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -283,7 +269,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData), (categoryListList = myProductData.Products)
+    ;(ProductData = myProductData)
   }
 
   // // Pass data to the page via props

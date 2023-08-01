@@ -7,6 +7,7 @@ import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
+import Image from "~/components/elements/Image"
 import { useState } from "react"
 
 const breadcrumb = [
@@ -26,33 +27,13 @@ const Resources = ({ resourcesList }) => {
   const [privateList, setPrivateList] = useState([])
 
   useEffect(() => {
-    // getPrivateResources();
     setPrivateList(resourcesList.data)
   }, [])
 
-  // const getPrivateResources = async () => {
-  //     var myHeaders = new Headers();
-  //     myHeaders.append("Content-Type", "application/json");
-
-  //     var raw = JSON.stringify({ accessType: 1, accessCode: "=65nvgv_hgygjaxbcgrwesfcy" });
-
-  //     var requestOptions = {
-  //         method: "POST",
-  //         headers: myHeaders,
-  //         body: raw,
-  //     };
-
-  //     const response = await fetch(baseUrl + "/api/resources/getResources", requestOptions);
-  //     const privateList = await response.json();
-  //     console.log("privateList", privateList);
-  //     if (privateList.status === 200) {
-  //         setPrivateList(resourcesList.data);
-  //     }
-  // };
   return (
-    <Container 
+    <Container
       title="Resources"
-      description="Stemnovate resources page is for information on techniques, learning materials, updates, blogs and newsletters."  
+      description="Stemnovate resources page is for information on techniques, learning materials, updates, blogs and newsletters."
     >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
@@ -73,16 +54,20 @@ const Resources = ({ resourcesList }) => {
                         key={index}
                       >
                         <div className="card rounded-lg align-items-center p-0 ">
-                          <img
+                          <Image
                             src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
                             className="rounded"
                             alt={myCat.cat_name}
+                            width={1200}
+                            height={675}
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
                           />
                           <div className="card-body  rounded-lg p-0 overlay-content">
                             <div className="p-5">
-                              <h1 className="h1 text-white">
+                              <h2 className="h1 text-white">
                                 <b>{myCat.cat_name}</b>
-                              </h1>
+                              </h2>
                               {myCat.cat_access ? (
                                 <span className="badge badge-pill badge-primary">
                                   Subscription Access
@@ -96,11 +81,11 @@ const Resources = ({ resourcesList }) => {
                                 {myCat.short_description}
                               </p>
                               <Link href={`/resources/r/${myCat.slug}`}>
-                                <a className="link-btn">
+                                <div className="link-btn">
                                   <b>
                                     Get Resources <FaArrowRight />
                                   </b>
-                                </a>
+                                </div>
                               </Link>
                             </div>
                           </div>

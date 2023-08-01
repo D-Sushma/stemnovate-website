@@ -5,6 +5,7 @@ import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import Subscribe from "~/components/shared/sections/Subscribe"
+import Image from "~/components/elements/Image"
 
 import PropTypes from "prop-types"
 import Link from "next/link"
@@ -122,10 +123,14 @@ const ResourcesData = (props) => {
               <div className="container">
                 <div className="row">
                   <div className="col-md-6 my-2">
-                    <img
+                    <Image
                       src={`${process.env.AWS_S3BUCKET_URL}${resourcesData.data[0].category_image}`}
                       className="rounded"
                       alt={resourcesData.data[0].cat_name}
+                      width={1200}
+                      height={675}
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
                     />
                   </div>
 
@@ -203,7 +208,6 @@ const ResourcesData = (props) => {
                         <h2>
                           <b>Resources</b>
                         </h2>
-                        {/* <FaLongArrowAltRight size={25} className="mr-5" /> */}
                       </div>
                     </div>
                     {resourcesFiles.map((myRes, index) => (
@@ -212,10 +216,14 @@ const ResourcesData = (props) => {
                         key={index}
                       >
                         <div className="card  d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
-                          <img
+                          <Image
                             src={`${process.env.AWS_S3BUCKET_URL}${myRes.resources_preview}`}
                             className="rounded"
                             alt={myRes.resources_name}
+                            width={1200}
+                            height={675}
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
                           />
                           <div className="card-body p-0 container-fluid">
                             <div className="p-3">
@@ -247,11 +255,11 @@ const ResourcesData = (props) => {
                               <Link
                                 href={`/resources/details/${resourcesData.data[0].slug}/${myRes.resources_id}/${myRes.access_type}`}
                               >
-                                <a className="link-btn-b">
+                                <div className="link-btn-b">
                                   <b>
                                     Buy Now <FaArrowRight />
                                   </b>
-                                </a>
+                                </div>
                               </Link>
                             </div>
                           </div>
@@ -283,10 +291,14 @@ const ResourcesData = (props) => {
                         >
                           <Link href={`/resources/r/${myCat.slug}`}>
                             <div className="card  d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
-                              <img
+                              <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
                                 className="rounded"
                                 alt={myCat.cat_name}
+                                width={1200}
+                                height={675}
+                                placeholder="blur"
+                                blurDataURL="/static/image/blurred.png"
                               />
                               <div className="card-body p-0 container-fluid">
                                 <div className="p-3">
@@ -307,11 +319,11 @@ const ResourcesData = (props) => {
                                       myCat.short_description.substring(0, 90)}
                                   </p>
                                   <Link href={`/resources/r/${myCat.slug}`}>
-                                    <a className="link-btn-b">
+                                    <div className="link-btn-b">
                                       <b>
                                         Get Resources <FaArrowRight />
                                       </b>
-                                    </a>
+                                    </div>
                                   </Link>
                                 </div>
                               </div>
@@ -324,22 +336,6 @@ const ResourcesData = (props) => {
                 </div>
               </div>
             ) : null}
-
-            {/* <div className="about-section py-3">
-                            <div className="container">
-                                <h2>Description -</h2>
-                                <div className="row">
-                                    <div className="col-12">
-                                        <div
-                                            className=""
-                                            dangerouslySetInnerHTML={{
-                                                __html: resourcesData.data[0].category_content,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
 
             <Subscribe />
           </div>

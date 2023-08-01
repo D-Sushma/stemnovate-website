@@ -12,7 +12,6 @@ import PropTypes from "prop-types"
 import Link from "next/link"
 
 import {
-  FaArrowRight,
   FaRegArrowAltCircleDown,
   FaRegArrowAltCircleUp
 } from "react-icons/fa"
@@ -89,8 +88,7 @@ const ResourcesData = (props) => {
           } else {
             setIsActive(false)
           }
-          // setUserData(data.result)
-        }
+          }
       })
   }
 
@@ -179,8 +177,7 @@ const ResourcesData = (props) => {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Session", data);
-        if (data.code == 200) {
+         if (data.code == 200) {
           setUserData(data.result)
         }
       })
@@ -267,32 +264,17 @@ const ResourcesData = (props) => {
                           "DD-MMM-YYYY"
                         )}
                       </p>
-                      {/* <p>
-                        Downloads -{" "}
-                        {resourcesData.data[0].downloads === null
-                          ? "0"
-                          : resourcesData.data[0].downloads}
-                      </p> */}
-                      <div className="my-3">
+                     <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
-                            // <a
-                            //   target={"_blank"}
-                            //   href={filePath ? `${filePath}` : "#"}
-                            //   rel="noreferrer"
-                            // >
-                            //   <button className="button button--green mr-2">
-                            //     Download
-                            //   </button>
-                            // </a>
                             <Link
                               href={`/resources/Download/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
                             >
-                              <a>
+                              <div style={{cursor:"pointer"}}>
                                 <button className="button button--green mr-2">
                                   View & Download PDF
                                 </button>
-                              </a>
+                              </div>
                             </Link>
                           ) : (
                             <AddToCartResources
@@ -370,19 +352,7 @@ const ResourcesData = (props) => {
                             <th className="ps-table__th">Sequence ID</th>
                             <th className="ps-table__th">Alignment</th>
                           </tr>
-                          {/* {resourcesFiles?.resources_human_alignment?.map(
-                            (data, k) => (
-                              <tr key={k}>
-                                <th className="ps-table__th">
-                                  {data.sequence_id}
-                                </th>
-                                <th className="ps-table__th">
-                                  {" "}
-                                  {data.alignment}
-                                </th>
-                              </tr>
-                            )
-                          )} */}
+                          
                           {seqfile_count > 0
                             ? seqfile_count
                             : resources_sequence.map((sq, k) => {
@@ -413,32 +383,7 @@ const ResourcesData = (props) => {
                             <th className="ps-table__th">Location</th>
                             <th className="ps-table__th">Position</th>
                           </tr>
-                          {/* {Object.keys(
-                            resourcesFiles?.resources_structural_analysis
-                          ).map((data, k) => (
-                            <tr key={k}>
-                              <th className="ps-table__th">{k + 1}</th>
-                              <th className="ps-table__th">{data.type}</th>
-                              <th className="ps-table__th">{data.length}</th>
-                              <th className="ps-table__th">{data.location}</th>
-                              <th className="ps-table__th">{data.position}</th>
-                            </tr>
-                          ))} */}
-                          {/* {resourcesFiles?.structural_variation?.map(
-                            (data, k) => (
-                              <tr key={k}>
-                                <th className="ps-table__th">{k + 1}</th>
-                                <th className="ps-table__th">{data.type}</th>
-                                <th className="ps-table__th">{data.length}</th>
-                                <th className="ps-table__th">
-                                  {data.location}
-                                </th>
-                                <th className="ps-table__th">
-                                  {data.position}
-                                </th>
-                              </tr>
-                            )
-                          )} */}
+                          
                           {file_count > 0
                             ? file_count
                             : resources_structural.map((struct, k) => {

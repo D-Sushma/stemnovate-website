@@ -7,10 +7,10 @@ import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import { useSession } from "next-auth/react"
-
-import PropTypes from "prop-types"
 import Link from "next/link"
-import ProductList from "~/components/productList/resourcesRecommendedProductList";
+import Image from "~/components/elements/Image"
+import PropTypes from "prop-types"
+import ProductList from "~/components/productList/resourcesRecommendedProductList"
 
 import {
   FaArrowRight,
@@ -32,14 +32,6 @@ const ResourcesData = (props) => {
   const [userData, setUserData] = React.useState(null)
   const [isActive, setIsActive] = useState(false)
   const { data: session } = useSession()
-  
-  // resourcesData.data[0].related_products.map(
-  //                     (resData, index) => (
-  //                         product_related.push(resData.id)
-  //                     )
-  // )
-  //setproductCatList(product_related) 
-  //console.log("product_related", relatedProducts)
   useEffect(() => {
     var searchURL = "/resources"
     if (resources_Name != undefined) {
@@ -54,13 +46,10 @@ const ResourcesData = (props) => {
 
   React.useEffect(() => {
     if (session) {
-      // console.log(session);
       getResourcesAccess()
       if (userData !== null) {
         getUserData()
       }
-    } else {
-      // console.log("Not Session");
     }
   }, [session, userData])
 
@@ -89,7 +78,6 @@ const ResourcesData = (props) => {
           } else {
             setIsActive(false)
           }
-          // setUserData(data.result)
         }
       })
   }
@@ -109,7 +97,6 @@ const ResourcesData = (props) => {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Session", data);
         if (data.code == 200) {
           setUserData(data.result)
         }
@@ -178,10 +165,14 @@ const ResourcesData = (props) => {
               <div className="container">
                 <div className="row">
                   <div className="col-md-6 my-3">
-                    <img
+                    <Image
                       src={`${process.env.AWS_S3BUCKET_URL}${resourcesData.data[0].resources_preview}`}
                       className="rounded"
                       alt={resourcesData.data[0].resources_name}
+                      width={1200}
+                      height={675}
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
                     />
                   </div>
 
@@ -191,7 +182,6 @@ const ResourcesData = (props) => {
                       <p>
                         File type - {resourcesData.data[0].resourcesFileType}
                       </p>
-                      {/* <p>Resolution - 7819×5213</p> */}
                       <p className="ps-product__price sale">
                         Price - <span>£</span>{" "}
                         {resourcesData.data[0].resources_price}
@@ -202,23 +192,17 @@ const ResourcesData = (props) => {
                           "DD-MMM-YYYY"
                         )}
                       </p>
-                      {/* <p>
-                        Downloads -{" "}
-                        {resourcesData.data[0].downloads === null
-                          ? "0"
-                          : resourcesData.data[0].downloads}
-                      </p> */}
                       <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
                             <Link
                               href={`/resources/Access/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
                             >
-                              <a>
+                              <div style={{ cursor: "pointer" }}>
                                 <button className="button button--green mr-2">
                                   Access Data
                                 </button>
-                              </a>
+                              </div>
                             </Link>
                           ) : (
                             <AddToCartResources
@@ -230,11 +214,11 @@ const ResourcesData = (props) => {
                           <Link
                             href={`/resources/Access/${resourcesData.data[0].resources_name}`}
                           >
-                            <a>
+                            <div style={{ cursor: "pointer" }}>
                               <button className="button button--green mr-2">
                                 Access Data
                               </button>
-                            </a>
+                            </div>
                           </Link>
                         )}
                       </div>
@@ -306,10 +290,12 @@ const ResourcesData = (props) => {
                         key={index}
                       >
                         <div className="card  d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
-                          <img
+                          <Image
                             src={`${process.env.AWS_S3BUCKET_URL}${myRes.resources_preview}`}
                             className="rounded"
                             alt={myRes.resources_name}
+                            width={1000}
+                            height={563}
                           />
                           <div className="card-body p-0 container-fluid">
                             <div className="p-3">
@@ -341,11 +327,14 @@ const ResourcesData = (props) => {
                               <Link
                                 href={`/resources/r/${myRes.resources_name}`}
                               >
-                                <a className="link-btn-b">
+                                <div
+                                  className="link-btn-b"
+                                  style={{ cursor: "pointer" }}
+                                >
                                   <b>
                                     Get Resources <FaArrowRight />
                                   </b>
-                                </a>
+                                </div>
                               </Link>
                             </div>
                           </div>
@@ -358,10 +347,12 @@ const ResourcesData = (props) => {
             ) : null}
 
             <div className="about-section">
-                <div className="container">
-                    <p className="base-bg-primary text-white p-2">Products with {resourcesData.data[0].resources_name}</p>
-                    <ProductList slug={resourcesData.data[0].related_products} />
-                </div>
+              <div className="container">
+                <p className="base-bg-primary text-white p-2">
+                  Products with {resourcesData.data[0].resources_name}
+                </p>
+                <ProductList slug={resourcesData.data[0].related_products} />
+              </div>
             </div>
 
             <Subscribe />

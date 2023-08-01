@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostRepository from "~/repositories/PostRepository";
-import ArticleGrid from "~/components/elements/articles/ArticleGrid";
+import ArticleGrid from "~/components/elements/articles/ArticleGrid-old";
 import PropTypes from "prop-types";
 
 const BlogGrid = ({ collectionSlug, column }) => {
@@ -53,7 +53,7 @@ const BlogGrid = ({ collectionSlug, column }) => {
                 } else {
                     return (
                         <div className="col-md-3 d-flex flex-grow-1 p-2" key={item.id}>
-                            <div className="p-0  m-1 ">
+                            <div className="p-0 border  m-1 ">
                                 <ArticleGrid post={item} />
                             </div>
                         </div>
@@ -64,11 +64,11 @@ const BlogGrid = ({ collectionSlug, column }) => {
     }
 
     return (
-        <div className="ps-blog ps-blog--grid plus-section">
-            <div className="container container-blog">
+        <div className="ps-blog ps-blog--grid about-section">
+            <div className="container">
                 <div className="ps-blog__content">
-                    <div className="ps-page__header header-blog text-center mb-3 ">
-                        <h4 className="font-weight-bolder text-uppercase text-white">Recent posts</h4>
+                    <div className="ps-page__header text-center mb-3">
+                        <h1 className="h1">Recent posts</h1>
                     </div>
                     <div className="ps-post-items">
                         <div className="row d-flex justify-content-center">{viewPostItems}</div>

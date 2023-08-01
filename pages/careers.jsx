@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
-import ourCulture from "~/public/static/img/our-culture/02.png"
+import ourCulture from "~/public/static/img/our-culture/02.jpg"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Subscribe from "~/components/shared/sections/Subscribe"
@@ -81,16 +81,15 @@ const CareerScreen = () => {
                 <section className="ps-section--block-grid">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image">
+                      <div className="ps-section__image link-hover-thumb-shape">
                         <Image
                           className="ps-section__image"
                           src={ourCulture}
                           alt="our-culture"
-                          width={1000}
-                          height={600}
+                          width={1200}
+                          height={675}
                         />
-                        {/* <img src="/static/img/our-culture/02.png" alt="our-culture" /> */}
-                      </div>
+                         </div>
                     </Link>
                   </div>
                   <div className="ps-section__content">

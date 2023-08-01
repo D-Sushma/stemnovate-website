@@ -9,7 +9,7 @@ import Image from "next/image"
 import Slider from "react-slick"
 import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
-import { FaArrowRight } from "react-icons/fa"
+import Link from "next/link"
 
 const breadcrumb = [
   {
@@ -56,8 +56,6 @@ const Blogs = (props) => {
         </div>
         <div className="ps-page__content">
           <div className="ps-about">
-            {/* <div className="about-section"></div>  */}
-
             <div className=" bg-02-section">
               <div className="container">
                 <div className="ps-page__header">
@@ -77,118 +75,61 @@ const Blogs = (props) => {
                               {...carouselSetting}
                               className="ps-carousel ps-carousel--fullwidth "
                             >
-                             
                               <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <article className="ps-post ps-post--grid blog-news">
-                                      <div className="ps-post__thumbnail">
-                                        <a
-                                          className="ps-post__overlay"
-                                          href={`/blogs/${featuredPostLists[0].slug}`}
-                                        ></a>
-                                        <Image
-                                          loader={myLoader}
-                                          src={`${process.env.AWS_S3BUCKET_URL}${featuredPostLists[0].thumbnail}`}
-                                          unoptimized={false}
-                                          alt={featuredPostLists[0].name}
-                                          width="251"
-                                          height="141"
-                                          layout="responsive"
-                                        />
-                                        
-                                      </div>
-                                      <div className="ps-post__wrapper justify-content-center " 
-                                      style={{
-                                       background : "#041b4a"
-                                     }}
-                                      >
-                                        <div className="ps-post__content justify-content-center">
-                                          <a
-                                            className="ps-post__title text-center blog-news-title text-white"
-                                            href={`/blogs/${featuredPostLists[0].slug}`}
-                                          >
-                                            {featuredPostLists[0].name}
-                                          </a>
-                                          <div className="ps-post__meta justify-content-center py-4 text-white">
-                                            <a
-                                              className="button button--yellow"
-                                              href={`/blogs/${featuredPostLists[0].slug}`}
-                                            >
-                                              <span className="h3 my-2"
-                                               style={{
-                                                        fontSize : "22px"
-                                                      }}
-                                              > Read More</span>
-                                            </a>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </article>
-                                  </div>
-
-
-                              {/* <article className="ps-post ps-post--grid blog-news">
-                              
-                                <div
-                                  className="ps-banner"
-                                  style={{
-                                    backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${featuredPostLists[0].thumbnail})`,
-                                    backgroundPosition: "center",
-                                    backgroundSize: "cover",
-                                    backgroundRepeat: "no-repeat",
-                                    width: "100%",
-                                    maxWidth: "1440px",
-                                    margin: "0 auto"
-                                  }}
-                                >
-                                   </div>
-                                
-                                  <div 
-                                     className="ps-post__wrapper text-center text-white"
-                                     style={{
-                                       background : "#041b4a"
-                                     }}
-                                  >
-                                    <div 
-                                      className="ps-post__content justify-content-center"
-                                      style={{
-                                        padding : "20px 0 0"
-                                      }}
+                                <article className="ps-post ps-post--grid blog-news">
+                                  <div className="ps-post__thumbnail">
+                                    <Link
+                                      href={`/blogs/${featuredPostLists[0].slug}`}
                                     >
-                                      <a
-                                        className="ps-post__title text-center blog-news-title"
+                                      <div className="ps-post__overlay link-hover-thumb-shape"></div>
+                                    </Link>
+                                    <Image
+                                      loader={myLoader}
+                                      src={`${process.env.AWS_S3BUCKET_URL}${featuredPostLists[0].thumbnail}`}
+                                      unoptimized={false}
+                                      alt={featuredPostLists[0].name}
+                                      width="251"
+                                      height="141"
+                                      layout="responsive"
+                                      placeholder="blur"
+                                      blurDataURL="/static/image/blurred.png"
+                                    />
+                                  </div>
+                                  <div
+                                    className="ps-post__wrapper justify-content-center "
+                                    style={{
+                                      background: "#041b4a"
+                                    }}
+                                  >
+                                    <div className="ps-post__content justify-content-center">
+                                      <Link
                                         href={`/blogs/${featuredPostLists[0].slug}`}
-                                        style={{
-                                          fontSize : "22px"
-                                        }}
                                       >
-                                        {featuredPostLists[0].name}
-                                      </a>
-                                      <div className="row">
-                                        <div className="col-md-12 text-center">
-                                              <div className="ps-post__meta justify-content-center py-2 button button--yellow">
-                                        
-                                                <a
-                                                  className="ps-post__author blog-author"
-                                                  href={`/blogs/${featuredPostLists[0].slug}`}
-                                                >
-                                                  <span className="h3" 
-                                                    style={{
-                                                              fontSize : "22px"
-                                                            }}
-                                                  > 
-                                                  READ MORE 
-                                                  </span>
-                                                </a>
-                                              </div>
+                                        <div className="ps-post__title text-center blog-news-title text-white span-with-link">
+                                          {featuredPostLists[0].name}
                                         </div>
-                                            
+                                      </Link>
+                                      <div className="ps-post__meta justify-content-center py-4 text-white">
+                                        <Link
+                                          href={`/blogs/${featuredPostLists[0].slug}`}
+                                        >
+                                          <div className="button button--yellow">
+                                            <span
+                                              className="h3 my-2 span-with-link"
+                                              style={{
+                                                fontSize: "22px"
+                                              }}
+                                            >
+                                              {" "}
+                                              Read More
+                                            </span>
+                                          </div>
+                                        </Link>
                                       </div>
-                                      
                                     </div>
                                   </div>
-
-                               
-                              </article> */}
+                                </article>
+                              </div>
                             </Slider>
                           </section>
                         ) : null}
@@ -198,176 +139,6 @@ const Blogs = (props) => {
                       className="ps-blog-items row row-reverse"
                       data-columns="4"
                     >
-                      {/* <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a className="ps-post__overlay" href="/blogs/5"></a>
-                            <img
-                              src="/static/img/blog/blog5.jpg"
-                              alt="Stemnovate´s visit to Anglia Ruskin University"
-                            />
-                            <div className="ps-post__categories">
-                              <a href="/blogs/5">SCIENCE</a>
-                            </div>
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                href="/blogs/5"
-                              >
-                                Stemnovate´s visit to Anglia Ruskin University
-                                to support young scientists.
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4 py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  href="/blogs/5"
-                                >
-                                  <span className="h3 my-4">
-                                    <span className="h3 my-4"> Read More</span>
-                                  </span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a className="ps-post__overlay" href="/blogs/1"></a>
-                            <img
-                              src="/static/img/blog/1.jpg"
-                              alt="ENHANCED MICROFLUIDIC DEVICES FOR BIOMEDICAL APPLICATIONS."
-                            />
-                            <div className="ps-post__categories">
-                              <a href="/blogs/1">SCIENCE</a>
-                            </div>
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                href="/blogs/1"
-                              >
-                                ENHANCED MICROFLUIDIC DEVICES FOR BIOMEDICAL
-                                APPLICATIONS.....
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  href="/blogs/1"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a className="ps-post__overlay" href="/blogs/2"></a>
-                            <img
-                              src="/static/img/blog/2.jpg"
-                              alt="THE CREATION OF NEW SCALABLE MANUFACTURING PROCESS"
-                            />
-                            <div className="ps-post__categories">
-                              <a href="/blogs/2">PRODUCT</a>
-                            </div>
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                href="/blogs/2"
-                              >
-                                THE CREATION OF NEW SCALABLE MANUFACTURING
-                                PROCESS.....
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  href="/blogs/2"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a className="ps-post__overlay" href="/blogs/3"></a>
-                            <img
-                              src="/static/img/blog/3.jpg"
-                              alt="HOW STEMNOVATE WILL CHANGE DRUG DEVELOPMENT"
-                            />
-                            <div className="ps-post__categories">
-                              <a href="/blogs/3">SCIENCE</a>
-                            </div>
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                href="/blogs/3"
-                              >
-                                HOW STEMNOVATE WILL CHANGE DRUG DEVELOPMENT
-                                .....
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  href="/blogs/3"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a className="ps-post__overlay" href="/blogs/4"></a>
-                            <img
-                              src="/static/img/blog/4.jpg"
-                              alt="HOW A ‘CYP OF COFFEE’ CAN HELP US TO UNDERSTAND"
-                            />
-                            <div className="ps-post__categories">
-                              <a href="/blogs/4">PRODUCT</a>
-                            </div>
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                href="/blogs/4"
-                              >
-                                HOW A ‘CYP OF COFFEE’ CAN HELP US TO
-                                UNDERSTAND....
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  href="/blogs/4"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div> */}
                       {/* ------------------------------ map All Blog ------------------------------  */}
                       {postLists.map((data, key) => (
                         <div
@@ -376,10 +147,9 @@ const Blogs = (props) => {
                         >
                           <article className="ps-post ps-post--grid blog-news">
                             <div className="ps-post__thumbnail">
-                              <a
-                                className="ps-post__overlay"
-                                href={`/blogs/${data.slug}`}
-                              ></a>
+                              <Link href={`/blogs/${data.slug}`}>
+                                <div className="ps-post__overlay link-hover-thumb-shape"></div>
+                              </Link>
                               <Image
                                 loader={myLoader}
                                 src={`${process.env.AWS_S3BUCKET_URL}${data.thumbnail}`}
@@ -388,26 +158,34 @@ const Blogs = (props) => {
                                 width="251"
                                 height="141"
                                 layout="responsive"
+                                placeholder="blur"
+                                blurDataURL="/static/image/blurred.png"
                               />
                               <div className="ps-post__categories">
-                                <a href={`/blogs/${data.slug}`}>{data.tag}</a>
+                                <div
+                                  className="div-link"
+                                  href={`/blogs/${data.slug}`}
+                                >
+                                  {data.tag}
+                                </div>
                               </div>
                             </div>
                             <div className="ps-post__wrapper justify-content-center">
                               <div className="ps-post__content justify-content-center">
-                                <a
-                                  className="ps-post__title text-center blog-news-title"
-                                  href={`/blogs/${data.slug}`}
-                                >
-                                  {data.name}
-                                </a>
+                                <Link href={`/blogs/${data.slug}`}>
+                                  <div className="ps-post__title text-center blog-news-title span-with-link">
+                                    {data.name}
+                                  </div>
+                                </Link>
                                 <div className="ps-post__meta justify-content-center py-4">
-                                  <a
-                                    className="ps-post__author blog-author"
-                                    href={`/blogs/${data.slug}`}
-                                  >
-                                    <span className="h3 my-4"> Read More</span>
-                                  </a>
+                                  <Link href={`/blogs/${data.slug}`}>
+                                    <div className="ps-post__author blog-author">
+                                      <span className="h3 my-4 span-with-link">
+                                        {" "}
+                                        Read More
+                                      </span>
+                                    </div>
+                                  </Link>
                                 </div>
                               </div>
                             </div>
@@ -456,12 +234,13 @@ const Blogs = (props) => {
                                     {featuredPostLists[1].name}
                                   </div>
                                   <div className="ps-banner__btn-group"></div>
-                                  <a
-                                    className="bg-warning ps-banner__shop"
+                                  <Link
                                     href={`/blogs/${featuredPostLists[1].slug}`}
                                   >
-                                    Read More
-                                  </a>
+                                    <div className="bg-warning ps-banner__shop link-hover-thumb-shape">
+                                      Read More
+                                    </div>
+                                  </Link>
                                 </div>
                               </div>
                             </div>
@@ -480,16 +259,15 @@ const Blogs = (props) => {
                 </div>
                 <div className="ps-page__content">
                   <div className="ps-blog">
-                      <div
+                    <div
                       className="ps-blog-items row row-reverse"
                       data-columns="4"
                     >
-                      
-                     {blogNewsLists.map((data, key) => (
-                        <div 
+                      {blogNewsLists.map((data, key) => (
+                        <div
                           className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12"
                           key={key}
-                          >
+                        >
                           <article className="ps-post ps-post--grid blog-news">
                             <div className="ps-post__thumbnail">
                               <a
@@ -498,12 +276,13 @@ const Blogs = (props) => {
                                 href={`${data.url}`}
                                 rel="noreferrer"
                               ></a>
-                              <img
-                                style={{
-                                  height: "141px"
-                                }}
+                              <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                 alt={data.title}
+                                width={1000}
+                                height={545}
+                                placeholder="blur"
+                                blurDataURL="/static/image/blurred.png"
                               />
                             </div>
                             <div className="ps-post__wrapper justify-content-center">
@@ -530,234 +309,15 @@ const Blogs = (props) => {
                             </div>
                           </article>
                         </div>
-
-
                       ))}
 
                       {/* ------------------------------ map All Blog ------------------------------  */}
-                    </div> 
-                       
-                    {/* <div className="ps-blog-items row" data-columns="4">
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a
-                              className="ps-post__overlay"
-                              target={"_blank"}
-                              href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
-                              rel="noreferrer"
-                            ></a>
-                            <img
-                              style={{
-                                height: "141px"
-                              }}
-                              src="/static/img/blog/science_tech.jpg"
-                              alt="Stemnovate is a finalist for the life science company of the year at the Cambridge Independent Science and Technology awards"
-                            />
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                target={"_blank"}
-                                href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
-                                rel="noreferrer"
-                              >
-                                Stemnovate is a finalist for the life science company of the year awards
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  target={"_blank"}
-                                  href="https://www-cambridgeindependent-co-uk.cdn.ampproject.org/c/s/www.cambridgeindependent.co.uk/business/amp/finalists-for-cambridge-independent-science-and-technology-a-9303658/"
-                                  rel="noreferrer"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a
-                              className="ps-post__overlay"
-                              target={"_blank"}
-                              href="http://ow.ly/FIa450KbHet"
-                              rel="noreferrer"
-                            ></a>
-                            <img
-                              style={{
-                                height: "141px"
-                              }}
-                              src="/static/img/blog/stemnovate-team.jpg"
-                              alt="Good prognosis for drug discovery pioneer after £1M investment"
-                            />
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                target={"_blank"}
-                                href="http://ow.ly/FIa450KbHet"
-                                rel="noreferrer"
-                              >
-                                Good prognosis for drug discovery pioneer after
-                                £1M investment
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  target={"_blank"}
-                                  href="http://ow.ly/FIa450KbHet"
-                                  rel="noreferrer"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a
-                              className="ps-post__overlay"
-                              target={"_blank"}
-                              href="https://www.cambridgeindependent.co.uk/business/21towatch-shortlist-of-innovative-people-companies-and-th-9238051/"
-                              rel="noreferrer"
-                            ></a>
-                            <img
-                              style={{
-                                height: "141px"
-                              }}
-                              src="/static/img/blog/5.jpg"
-                              alt="Dr Ruchi is one of the judges for #21 to watch 2022"
-                            />
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                target={"_blank"}
-                                href="https://www.cambridgeindependent.co.uk/business/21towatch-shortlist-of-innovative-people-companies-and-th-9238051/"
-                                rel="noreferrer"
-                              >
-                                Our CEO Dr Ruchi is one of the judges for #21 to
-                                watch 2022.
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  target={"_blank"}
-                                  href="https://www.cambridgeindependent.co.uk/business/21towatch-shortlist-of-innovative-people-companies-and-th-9238051/"
-                                  rel="noreferrer"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-
-                      <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                        <article className="ps-post ps-post--grid blog-news">
-                          <div className="ps-post__thumbnail">
-                            <a
-                              className="ps-post__overlay"
-                              target={"_blank"}
-                              href="https://www.cambridgeindependent.co.uk/business/stemnovate-raises-more-than-1m-to-expand-commercialisation-9210105/"
-                              rel="noreferrer"
-                            ></a>
-                            <img
-                              style={{
-                                height: "141px"
-                              }}
-                              src="/static/img/blog/6.jpg"
-                              alt="Stemnovate raises million for commercialisation of drug discovery platforms 2021"
-                            />
-                          </div>
-                          <div className="ps-post__wrapper justify-content-center">
-                            <div className="ps-post__content justify-content-center">
-                              <a
-                                className="ps-post__title text-center blog-news-title"
-                                target={"_blank"}
-                                href="https://www.cambridgeindependent.co.uk/business/stemnovate-raises-more-than-1m-to-expand-commercialisation-9210105/"
-                                rel="noreferrer"
-                              >
-                                Stemnovate raises million for commercialisation
-                                of drug discovery platforms 2021
-                              </a>
-                              <div className="ps-post__meta justify-content-center py-4">
-                                <a
-                                  className="ps-post__author blog-author"
-                                  target={"_blank"}
-                                  href="https://www.cambridgeindependent.co.uk/business/stemnovate-raises-more-than-1m-to-expand-commercialisation-9210105/"
-                                  rel="noreferrer"
-                                >
-                                  <span className="h3 my-4"> Read More</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-                    </div> */}
-                     {/* <div className="ps-blog-items row" data-columns="4">
-                         <div className="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-12">
-                            <article className="ps-post ps-post--grid blog-news">
-                              <div className="ps-post__thumbnail">
-                                <a
-                                  className="ps-post__overlay"
-                                  target={"_blank"}
-                                  href="https://youtu.be/OOplDmqtNac"
-                                  rel="noreferrer"
-                                ></a>
-                                <img
-                                  style={{
-                                    height: "141px"
-                                  }}
-                                  src="/static/img/blog/7.jpg"
-                                  alt="CEO recognised as #21 to watch in Cambridge in 2020"
-                                />
-                              </div>
-                              <div className="ps-post__wrapper justify-content-center">
-                                <div className="ps-post__content justify-content-center">
-                                  <a
-                                    className="ps-post__title text-center blog-news-title"
-                                    target={"_blank"}
-                                    href="https://youtu.be/OOplDmqtNac"
-                                    rel="noreferrer"
-                                  >
-                                    Our CEO recognised as #21 to watch in Cambridge
-                                    in 2020
-                                  </a>
-                                  <div className="ps-post__meta justify-content-center py-4">
-                                    <a
-                                      className="ps-post__author blog-author"
-                                      target={"_blank"}
-                                      href="https://youtu.be/OOplDmqtNac"
-                                      rel="noreferrer"
-                                    >
-                                      <span className="h3 my-4"> Read More</span>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </article>
-                          </div>
-                      </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <Subscribe />
-            {/* <BlogGrid /> */}
           </div>
         </div>
       </main>
@@ -766,7 +326,6 @@ const Blogs = (props) => {
 }
 export async function getServerSideProps() {
   // Fetch data from external API
-
   const response = await fetch(baseUrl + "/api/blog/getBlogs")
   const PostList = await response.json()
   // Pass data to the page via props

@@ -79,12 +79,12 @@ const InvestorRelationScreen = () => {
                             <h1 className="text-center base-text-secondary p-2 pt-3 font-weight text-uppercase">
                                 Stemnovate Timeline
                                 <Link href="#">
-                                    <div className="ps-section__image">
+                                    <div className="ps-section__image link-hover-thumb-shape">
                                     <Image 
                                     src="/static/img/investors/Info-Graphics.jpg" 
                                     alt="Stemnovate Timeline"
-                                    width={1290}
-                                    height={678}
+                                    width={1920}
+                                    height={988}
                                     />
                                     </div>
                                 </Link>
@@ -94,12 +94,12 @@ const InvestorRelationScreen = () => {
                         <div className="">
                             <h1 className="text-center base-text-secondary p-2 font-weight text-uppercase">
                                 <Link href="#">
-                                    <div className="ps-section__image">
+                                    <div className="ps-section__image link-hover-thumb-shape">
                                     <Image 
                                     src="/static/img/investors/vision-update.jpg"
                                     alt="vision-stemnovate" 
-                                    width={2000}
-                                    height={1030}
+                                    width={1920}
+                                    height={988}
                                     />
                                     </div>
                                 </Link>
@@ -119,12 +119,12 @@ const InvestorRelationScreen = () => {
                         <div className="">
                             <h1 className="text-center base-text-secondary p-2 font-weight text-uppercase">
                                 <Link href="#">
-                                    <div className="ps-section__image">
+                                    <div className="ps-section__image link-hover-thumb-shape">
                                     <Image 
                                     src="/static/img/investors/mission-update.jpg" 
                                     alt="mission-stemnovate" 
-                                    width={2000}
-                                    height={1030}
+                                    width={1920}
+                                    height={988}
                                     />
                                     </div>
                                 </Link>
@@ -136,7 +136,7 @@ const InvestorRelationScreen = () => {
                                 <section className="ps-section--block-grid">
                                     <div className="ps-section__thumbnail">
                                         <Link href="#">
-                                            <div className="ps-section__image">
+                                            <div className="ps-section__image link-hover-thumb-shape">
                                             <Image 
                                             src="/static/img/investors/STEM-EDUCATION.jpg" 
                                             // style={{ height: "342px", width: "auto" }} 
@@ -144,7 +144,6 @@ const InvestorRelationScreen = () => {
                                             width={270}
                                             height={350}
                                             />
-                                            {/* <img src="/static/img/investors/STEM-EDUCATION.jpg" style={{ height: "342px", width: "auto" }} alt="Stem Education" /> */}
                                             </div>
                                         </Link>
                                     </div>
@@ -172,12 +171,12 @@ const InvestorRelationScreen = () => {
                                 <section className="ps-section--block-grid">
                                     <div className="ps-section__thumbnail">
                                         <Link href="#">
-                                            <div className="ps-section__image">
+                                            <div className="ps-section__image link-hover-thumb-shape">
                                             <Image 
                                             src="/static/img/investors/WOMEN-IN-SCIENCE.jpg" 
                                             alt="WOMEN IN SCIENCE" 
-                                            width={1000}
-                                            height={560}
+                                            width={1200}
+                                            height={675}
                                             />
                                             </div>
                                         </Link>
@@ -195,12 +194,12 @@ const InvestorRelationScreen = () => {
                             <div className="MissionSection">
                                 <div className="ps-section__thumbnail">
                                     <Link href="#">
-                                        <div className="ps-section__image">
+                                        <div className="ps-section__image link-hover-thumb-shape">
                                         <Image 
                                         src="/static/img/mission/bg-01.jpg" 
                                         alt="DIVERSITY & INCLUSION" 
-                                        width={1000}
-                                        height={487}
+                                        width={1920}
+                                        height={593}
                                         />
                                         </div>
                                     </Link>
