@@ -42,8 +42,18 @@
         justify-content: flex-start;
         align-items: center;
 
-        a {
+        // a {
+        //     margin-right: 15px;
+
+        //     &:last-child {
+        //         margin-right: 0;
+        //     }
+        // }
+        .div-shop__layout-switcher {
             margin-right: 15px;
+            cursor:pointer;
+            width: 20px;
+            height: 20px;
 
             &:last-child {
                 margin-right: 0;

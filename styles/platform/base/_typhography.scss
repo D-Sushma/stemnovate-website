@@ -73,6 +73,17 @@ p {
     }
 }
 
+.span-with-link {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    transition: all .4s ease;
+    &:hover {
+        color: $color-2nd;
+        cursor: pointer;
+    }
+}
+
 a {
     position: relative;
     color: inherit;

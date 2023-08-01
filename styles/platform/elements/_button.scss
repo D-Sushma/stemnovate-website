@@ -272,6 +272,7 @@ button.ps-btn {
     &:hover {
         color: #4848ff;
         text-decoration: underline;
+        cursor: pointer;
     }
 }
 
@@ -283,6 +284,7 @@ button.ps-btn {
     &:hover {
         color: #4848ff;
         text-decoration: underline;
+        cursor: pointer;
     }
 }
 
@@ -352,6 +354,9 @@ input[type='submit'] {
     padding: 0 30px;
     min-width: 44px;
     height: 44px;
+    margin-top: 2.5rem;
+    min-width: 32px;
+    height: 32px;
     font-size: 16px;
     line-height: 44px;
     transition: 250ms linear;
@@ -679,7 +684,7 @@ input[type='submit'] {
 .button--green {
     background: #2bc48a;
     color: #fff;
-}
+   }
 
 .button--green:hover,
 .button--green:focus {

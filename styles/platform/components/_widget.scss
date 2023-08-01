@@ -25,6 +25,16 @@
                     color: $color-orange-new;
                 }
             }
+            .div-link--line {
+                font-size: 18px;
+                font-weight: 500;
+                color: $color-1st;
+
+                &:hover {
+                    color: $color-orange-new;
+                    cursor:pointer;
+                }
+            }
 
             &:last-child {
                 margin-bottom: 0;

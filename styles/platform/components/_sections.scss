@@ -236,7 +236,8 @@
     }
 
     .about-section {
-        background-image: url("/static/image/aboutb1.webp");
+        // background-image: url("/static/image/aboutb1.webp"); 
+        background-image: url("/static/home-images/bg-02.jpg"); 
         background-size: contain;
         background-position: 0 0%;
         background-repeat: repeat;
@@ -318,7 +319,8 @@
     }
 
     .plus-section {
-        background-image: url("/static/img/banners/aboutb2.webp");
+        // background-image: url("/static/img/banners/aboutb2.webp");
+        background-image: url("/static/home-images/Bg01.jpg");
         background-size: cover;
         background-position: 0 0%;
         background-repeat: no-repeat;

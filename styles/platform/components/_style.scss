@@ -1,0 +1,280 @@
+$small: 300px;
+$medium: 900px;
+
+.zoom-in:hover{
+    transform: scale(1.1, 1.1);
+}
+.plus-section{
+    .container-section{
+        padding: 16px;
+        text-align: center;
+        
+        @media screen and (min-width: $medium){
+            font-size: 30px;
+            padding: 30px 110px 30px;
+            text-align: left;
+        }
+    }
+    .button-about-us{
+        background: linear-gradient(315deg, #d46a09 0%, #faad14 100%);
+        border-radius: 0;
+        font-weight: normal;
+        margin-top: 2.5rem;
+        min-width: 32px;
+        height: 32px;
+        font-size: 16px;
+        line-height: 30px;
+        text-transform: uppercase;
+
+        @media screen and (min-width: $medium){
+            margin-left:200px;
+            padding: 3px 40px;
+            font-size: 30px;
+            height: 55px;
+            border-radius: 8px;
+            background: #f49239;
+            line-height: 44px;
+        } 
+    }
+    .button-about-us:hover{
+        background-color: white !important;
+        color: #fd8d27 !important;
+        border: 1px solid #fd8d27;
+    }
+    .container-services{
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+    .content-services{
+        width: 100%;
+
+        @media screen and (min-width: $medium){
+            width: 50%;
+            margin-top: 20px;
+            margin-right:15px;
+        } 
+    }
+    .content-services--link{
+        color: #faad14;
+        cursor: pointer;
+    }
+    .button-services{
+        background: #f49239;
+        border-radius: 8px;
+        font-weight: normal;
+        margin-top: 1rem;
+        min-width: 32px;
+        height: 32px;
+        font-size: 16px;
+        line-height: 30px;
+        // padding: 0px 15px;
+
+        @media screen and (min-width: $medium){
+            font-size: 20px;
+            margin-top: 2.5rem;
+        } 
+    }
+    .button-services:hover{
+        background: white !important;
+        color: #fd8d27 !important;
+        border: 1px solid #fd8d27;
+    }
+    // testimonials announcement
+    .row-testimonials{
+        padding-top: 3%;
+        padding-bottom: 4%; 
+    }
+    .heading-testimonials{
+        @media screen and (min-width: $medium){
+                font-size: xx-large;
+        } 
+    }
+    .container-how-work{
+        // padding-top: 58px;
+        // padding-bottom: 58px;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .container-blog{
+        padding-top: 1%;
+        padding-bottom: 0%;
+    }
+    .header-blog{
+        font-weight: 600;
+        @media screen and (min-width: $medium){
+            font-size: xx-large;
+         }
+    }
+}
+
+.about-section{
+    .container-services{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    .heading-services{
+        color: brown;
+    }
+    .content-services{
+        width: 100%;
+
+        @media screen and (min-width: $medium){
+            width: 50%;
+            margin-top: 20px;
+            margin-right:15px;
+        } 
+    }
+    .button-services{
+        background: #f49239;
+        border-radius: 8px;
+        font-weight: normal;
+        margin-top: 1rem;
+        min-width: 32px;
+        height: 32px;
+        font-size: 16px;
+        line-height: 30px;
+        // padding: 0px 15px;
+
+        @media screen and (min-width: $medium){
+            font-size: 20px;
+            margin-top: 2.5rem;
+        } 
+    }
+    .button-services:hover{
+        background: white !important;
+        color: #fd8d27 !important;
+        border: 1px solid #fd8d27;
+    }
+    .row-testimonials{
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+    .heading-testimonials{
+        font-size: xx-large;
+    }
+    .container-our-clients{
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+    .card-container{
+        width: 154px;
+        height: 115px;
+        margin: 5px;
+        box-shadow: 5px 4px 5.5px 0px rgba(0, 0, 0, 0.7);
+        @media screen and (min-width: $medium){
+           margin: 10px;
+        }
+    }
+}
+// testimonials
+.container-testimonials{
+    @media screen and (min-width: $medium){
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    } 
+    .name-testimonials{
+        background: linear-gradient(315deg, #d46a09 0%, #faad14 100%);
+        color:white;
+        font-size: large;
+        
+        @media screen and (min-width: $medium){
+            width: fit-content;
+            height: 50px;
+            line-height: 44px;
+            font-size: x-large;
+        } 
+    }
+    .text-testimonials{
+        color: black;
+
+        @media screen and (min-width: $medium){
+            font-size: 24px;
+        } 
+    }
+}
+// blog grid
+.image-article-blog{
+    background-color: white;
+    padding: 20px 40px;
+}
+.title-article-blog{
+    font-size: 13px;
+}
+.created-at-article-blog{
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+}
+.author-article-blog{
+    color: white;
+    font-size: 13px;
+}
+
+// subscribe
+.newsletter-section{
+    .container-title-subscribe{
+        @media screen and (min-width: $medium){
+            width: fit-content;
+        }
+    }
+    .title-subscribe-1{
+        font-size: 20px;
+        font-weight: 300;
+        @media screen and (min-width: $medium){
+           font-size: 40px;
+        }
+    }
+    .title-subscribe-2{
+        @media screen and (min-width: $medium){
+            font-size: 40px;
+        }
+    }
+    .form-input-subscribe{
+        background-color: #f8e8ebcc;
+        opacity: 0.8;
+        outline: none;
+        border: 1px solid #000;
+        padding: 0px 15px;
+        height: 50px;
+        width: 100%;
+        font-weight: 400;
+        @media screen and (min-width: $medium){
+            width: 400px;
+            height: 60px;
+            margin-left: 40px;
+            font-size: 22px;
+            line-height: 30px;
+            font-weight: 700;
+        }
+    }
+    .form-input-subscribe::-webkit-input-placeholder{
+        color: gray;
+        opacity: 0.6;
+    }
+    .button-subscribe{
+        background-color: #762e0bd9;
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 16px;
+        line-height: 24px;
+        @media screen and (min-width: $medium){
+            width: auto;
+            margin-left: 40px;
+            font-size: 30px;
+            line-height: 30px;
+        }
+    }
+    .button-subscribe:hover{
+        background-color: white !important;
+        color: #762e0bd9 !important;
+        border: 1px solid #762e0bd9;
+    }
+    .form-container-subscribe{
+        @media screen and (min-width: $medium){
+            margin-top: 65px;
+        } 
+    }
+}
