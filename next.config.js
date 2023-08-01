@@ -41,6 +41,7 @@ const nextSettings = {
     return config
   },
   images: {
+    minimumCacheTTL: 60,
     domains: [
       "stemnovate.co.uk",
       "localhost:3000",

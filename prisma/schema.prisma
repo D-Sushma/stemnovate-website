@@ -420,6 +420,7 @@ model home_banner {
   title            String?   @db.Text
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
+  mobimage            String?   @db.VarChar(255)
   btn_text         String?   @db.Text
   banner_content    String?   @db.Text
   banner_id         Int       @id @default(autoincrement())
