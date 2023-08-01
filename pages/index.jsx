@@ -40,7 +40,7 @@ const DynamicCaseStudy = dynamic(
   }
 )
 const DynamicTestimonials = dynamic(
-  () => import("~/components/shared/sections/Testimonials_new"),
+  () => import("~/components/shared/sections/Testimonials"),
   {
     loading: () => <p>Loading...</p>
   }

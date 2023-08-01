@@ -1,226 +1,197 @@
 import Image from "~/components/elements/Image"
-import bioImg from "~/public/static/img/landing/bio-banking.gif"
-import Reprogramming from "~/public/static/img/landing/Reprogramming-and-Differentiation.jpg"
-import chipTechnology from "~/public/static/img/landing/Chip-Technology.webp"
-import automation from "~/public/static/img/landing/Automation-for-drug-discovery.jpg"
-import Discovery from "~/public/static/img/landing/Drug-Discovery.jpg"
+import DataPlatform from "~/public/static/home-images/Data-Platform.jpg"
+import StemCells from "~/public/static/home-images/Stem-Cells-Cellular-Reprogramming.jpg"
+import Molecular from "~/public/static/home-images/Molecular-&-Microengineering.jpg"
+import Discovery from "~/public/static/home-images/Drug-Discovery-Platform.jpg"
 import Link from "next/link"
-import { FaArrowRight } from "react-icons/fa"
 
 const OurService = () => {
   return (
-    <section className="ps-section--standard ps-featured-products ">
-      <div className="plus-section ">
-        <div className="container">
+    <>
+      <section className="about-section">
+        <div className="container container-services">
           <div className="row">
-            <div className="col-md-6 text-center">
-              <div>
-                <div className="row">
-                  <Link href="/Applications/Drug-Discovery-Platform">
-                    <div>
-                      <div className="overflow-hidden mx-4">
+            <div className="col-md-6">
+              <div className="row">
+                <Link href="/Applications/Drug-Discovery-Platform">
+                  <div>
+                    <h2 className="heading-services text-left m-4 font-weight-bolder">
+                      Drug Discovery Platform
+                    </h2>
+                    <p className="mx-4 text-left font-weight-bolder">
+                      We use novel multi-organ modelling to evaluate drug
+                      molecule metabolism and toxicity, ensuring better clinical
+                      trials and patient safety outcomes. Our projects include
+                      Hepatitis research and many more.
+                    </p>
+                    <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
+                      <div className="overflow-hidden link-hover-thumb-shape">
                         <Image
-                          className="ps-banner__image"
+                          // className="ps-banner__image"
+                          className="zoom-in"
                           src={Discovery}
                           alt="Drug Discovery Platform"
-                          width="500px"
-                          height="281px"
+                          width={386}
+                          height={218}
                         />
                       </div>
-
-                      <h3 className="text-white m-4">
-                        Drug Discovery Platform
-                      </h3>
-                      <p className="text-left  text-white">
-                        We use novel multi-organ modelling to evaluate drug
-                        molecule metabolism and toxicity, ensuring better
-                        clinical trials and patient safety outcomes. Our
-                        projects include Hepatitis research and many more.
+                      <p className="text-left font-weight-bolder content-services">
+                        Our work on automation for cell based assays save cost
+                        and time and revolutionize the pharmaceutical industry.
                       </p>
                     </div>
-                  </Link>
-                </div>
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <div className="button button--yellow">
-                      <Link href="/Applications/Drug-Discovery-Platform">
-                        <div>
-                          READ MORE <FaArrowRight />
-                        </div>
-                      </Link>
-                    </div>
                   </div>
+                </Link>
+              </div>
+              <div className="row">
+                <div className="mx-4 button button-services">
+                  <Link href="/Applications/Drug-Discovery-Platform">
+                    Learn More
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="col-md-6 text-center">
-              <div>
-                <div className="row">
-                  <Link href="/Products">
-                    <div>
-                      <div className="overflow-hidden mx-4">
+            <div className="col-md-6">
+              <div className="row">
+                <Link href="/Products">
+                  <div>
+                    <h2 className="heading-services text-left m-4 font-weight-bolder">
+                      Bio Banking
+                    </h2>
+                    <p className="mx-4 text-left font-weight-bolder">
+                      Ethical sourcing is core to our biobank, reflecting human
+                      diversity in age, gender & ethnicities. We are experts in
+                      cellular reprogramming with the capability for human and
+                      animal reprogramming.
+                    </p>
+                    <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
+                      <div className="overflow-hidden link-hover-thumb-shape">
                         <Image
-                          className="ps-banner__image"
-                          src={bioImg}
-                          alt="Bio Banking"
-                          width={"500px"}
-                          height="281px"
+                          // className="ps-banner__image"
+                          className="zoom-in"
+                          src={StemCells}
+                          alt="Stem Cells Cellular Reprogramming"
+                          width={386}
+                          height={218}
                         />
                       </div>
-                      <h3 className="text-white m-4">Bio Banking</h3>
-                      <p className="mx-4 text-left text-white">
-                        Ethical sourcing is core to our biobank, reflecting
-                        human diversity in age, gender & ethnicities. In
-                        addition, we offer a multispecies cell platform ensuring
-                        quality through advanced profiling & bioinformatics.
+                      <p className="text-left font-weight-bolder content-services">
+                        For industry and academia, we routinely differentiate
+                        stem cells into the liver, heart, and neuronal cells.
                       </p>
                     </div>
-                  </Link>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <div className="button button--yellow">
-                      <Link href="/Products">
-                        <div>VIEW PRODUCTS <FaArrowRight /></div>
-                      </Link>
-                    </div>
                   </div>
+                </Link>
+              </div>
+
+              <div className="row">
+                <div className="mx-4 button button-services">
+                  <Link href="/Products">View Product</Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="about-section">
-        <div className="container">
+      </section>
+
+      <section className="plus-section">
+        <div className="container container-services">
           <div className="row">
-            <div className="col-md-6 text-center">
+            <div className="col-md-6">
+              <div className="row">
+                <Link href="/Services">
+                  <div>
+                    <h2 className="text-white m-4 text-left font-weight-bolder">
+                      Molecular & Microengineering
+                    </h2>
+                    <p className=" mx-4 text-left text-white font-weight-bolder">
+                      We design vectors with an industrial process to generate
+                      induced pluripotent stem cell In addition, we offer a
+                      multispecies cell platform ensuring quality through
+                      advanced profiling and bioinformatics.
+                    </p>
+                    <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
+                      <div className="overflow-hidden link-hover-thumb-shape">
+                        <Image
+                          // className="ps-banner__image"
+                          className="zoom-in"
+                          src={Molecular}
+                          alt="Molecular and Microengineering"
+                          width={386}
+                          height={218}
+                        />
+                      </div>
+                      <p className="text-left text-white font-weight-bolder content-services">
+                        We provide digital{" "}
+                        <Link href="/resources/r/karyotyping">
+                          <span className="font-weight-bold content-services--link">
+                            karyotyping
+                          </span>
+                        </Link>{" "}
+                        and{" "}
+                        <Link href="/resources/r/genotyping">
+                          <span className="font-weight-bold content-services--link">
+                            genotyping
+                          </span>
+                        </Link>{" "}
+                        for disease profiling and understanding drug metabolism
+                        response.
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+              <div className="row">
+                <div className="mx-4 button button-services">
+                  <Link href="/Services">Resources</Link>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
               <div>
                 <div className="row">
                   <Link href="/Services">
                     <div>
-                      <div className="overflow-hidden mx-4">
-                        <Image
-                          className="ps-banner__image"
-                          src={Reprogramming}
-                          alt="Reprogramming and Differentiation"
-                          width={"500px"}
-                          height="281px"
-                        />
-                      </div>
-                      <h3 className="text-black m-4">
-                        Reprogramming and Differentiation
-                      </h3>
-                      <p className="mx-4 text-left text-black">
-                        We are experts in cellular reprogramming and one of the
-                        only companies globally with the capability for human
-                        and animal reprogramming. We design vectors with an
-                        industrial process to generate induced pluripotent stem
-                        cells. For industry and academia, we routinely
-                        differentiate stem cells into the liver, heart, and
-                        neuronal cells.
+                      <h2 className="text-white m-4 text-left font-weight-bolder">
+                        Data Platform
+                      </h2>
+                      <p className=" mx-4 text-left text-white font-weight-bolder">
+                        The drug discovery data often cannot be reproduced with
+                        conventional techniques. Therefore, we integrate
+                        computational modelling and microengineering to enable
+                        next-gen drug development.
                       </p>
-                    </div>
-                  </Link>
-                </div>
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <div className="button button--yellow">
-                      <Link href="/Services">
-                        <div>READ MORE <FaArrowRight /></div>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 text-center">
-              <div>
-                <div className="row">
-                  <Link href="/Products">
-                    <div>
-                      <div className="overflow-hidden mx-4">
-                        <Image
-                          className="ps-banner__image"
-                          src={chipTechnology}
-                          alt="Chip Technology"
-                          width={"500px"}
-                          height="281px"
-                        />
-                      </div>
-                      <h3 className="text-black m-4">Chip Technology</h3>
-                      <p className="mx-4 text-left text-black">
-                        We are innovating organs-on-chip platforms to provide a
-                        physiological alternative to cancer lines and animal
-                        models for advanced drug discovery. From 2017 to 2019,
-                        our research was co-funded by Innovate UK to develop a
-                        liver on chip platform. This million-pound funding
-                        resulted in patenting innovation that we aim to launch
-                        to market soon.
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-                <div className="row">
-                  <div className="col-md-12 text-center">
-                    <div className="button button--yellow">
-                      <Link href="/Products">
-                        <div>
-                          VIEW PRODUCTS <FaArrowRight />
+                      <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
+                        <div className="overflow-hidden link-hover-thumb-shape">
+                          <Image
+                            // className="ps-banner__image"
+                            className="zoom-in"
+                            src={DataPlatform}
+                            alt="Data Platform"
+                            width={386}
+                            height={218}
+                          />
                         </div>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="plus-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12 text-center mb-5">
-              <div>
-                <Link href="/Applications/Drug-Discovery-Platform">
-                  <div>
-                    <div className="overflow-hidden">
-                      <Image
-                        className="ps-banner__image"
-                        src={automation}
-                        alt="Automation for drug discovery"
-                        width={"500px"}
-                        height="281px"
-                      />
-                    </div>
-                    <h3 className="text-white m-4">
-                      Automation for drug discovery
-                    </h3>
-                    <p className="mx-4  text-white">
-                      The drug discovery data often cannot be reproduced with
-                      conventional techniques. Therefore, we integrate
-                      computational modelling and microengineering to enable
-                      next-gen drug development. Automation for preclinical
-                      research and development will save cost and time and
-                      revolutionize the pharmaceutical industry.
-                    </p>
-                  </div>
-                </Link>
-                <div className="button button--yellow">
-                  <Link href="/Applications/Drug-Discovery-Platform">
-                    <div>
-                      READ MORE <FaArrowRight />
+                        <p className=" text-left text-white font-weight-bolder content-services">
+                          Stemnovate aims to make precision medicine a global
+                          reality through unique data platforms and novel
+                          devices.
+                        </p>
+                      </div>
                     </div>
                   </Link>
                 </div>
+                <div className="row">
+                  <div className="mx-4 button button-services">
+                    <Link href="/Services">Learn More</Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

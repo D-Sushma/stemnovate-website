@@ -4,16 +4,16 @@ import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
 import testimonials from "~/public/static/data/testimonials.json"
-import TestimonialItem from "~/components/elements/TestimonialItem"
+import TestimonialItem from "~/components/elements/TestimonialItem-old"
 import Image from "~/components/elements/Image"
-import newcambridge from "~/public/static/home-images/newcambridge.jpg"
-import Cambridge from "~/public/static/home-images/Cambridge-Independent.jpg"
-import discoverymatters from "~/public/static/home-images/discoverymatters.jpg"
-import announcementimg from "~/public/static/home-images/announcement.jpg"
+import discoverymatters from "~/public/static/image/News.png"
+import announcementimg from "~/public/static/image/announcement.png"
+import Cambridge from "~/public/static/img/blog/Cambridge-Independent.jpg"
+import newcambridge from "~/public/static/image/newcambridge.jpg"
 
 const carouselSetting = {
   infinite: true,
-  autoplay: false,
+  autoplay: true,
   speed: 700,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -71,15 +71,14 @@ const Testimonials = () => {
     <div>
       <div className="about-section">
         <section className="container">
-          <div className="row row-testimonials">
-            <div className="col-md-12 col-sm-12 text-center">
+          <div className="row">
+            <div className="col-md-12 col-sm-12 text-center  mt-5">
               <h3 className="ps-section__title text-uppercase">
-                <span className="font-weight-bolder px-4 py-2 heading-testimonials">
+                <span className="font-weight-bolder  px-4 py-2">
                   Latest reviews
                 </span>
               </h3>
-              {/* py-5 */}
-              <div className="ps-section__content">
+              <div className="ps-section__content py-5">
                 <div className="container">
                   <Slider {...carouselSetting} className="ps-carousel">
                     {items}
@@ -93,27 +92,24 @@ const Testimonials = () => {
 
       <div className="plus-section My-Announcements">
         <section className="container">
-          <div className="row row-testimonials">
-            {/* mt-5 */}
-            <div className="col-md-12 col-sm-12 text-center">
-              <h3 className="ps-section__title text-uppercase heading-testimonials">
+          <div className="row">
+            <div className="col-md-12 col-sm-12 text-center mt-5">
+              <h3 className="ps-section__title text-uppercase ">
                 <span className="font-weight-bolder text-white  px-4 py-2">
                   Announcements
                 </span>
               </h3>
-              {/* py-5 */}
-              <div className="ps-section__content">
-                <div className="container d-flex justify-content-center align-items-center">
+              <div className="ps-section__content py-5">
+                <div className="container">
                   <div className=" row d-flex justify-content-center">
                     <div className="col-md-3 col-sm-6 d-flex flex-grow-1">
-                      <div className="card mt-3 align-items-center p-1">
+                      <div className="card mt-3  align-items-center p-1">
                         <a
                           target={"_blank"}
                           rel="noreferrer"
                           href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
                         >
                           <Image
-                            className="zoom-in"
                             src={newcambridge}
                             alt="Our 3Rs mission: Zero animal testing"
                           />
@@ -142,17 +138,16 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div className="col-md-3 col-sm-6 d-flex flex-grow-1">
-                      <div className="card mt-3  align-items-center p-1">
+                      <div className="card mt-3  align-items-center p-0 ">
                         <a
                           target={"_blank"}
                           rel="noreferrer"
                           href="/Applications/Animal-Health"
                         >
                           <Image
-                            className="zoom-in"
                             src={Cambridge}
                             alt="Stemnovate leading the way in building animal models for Pharma
-                                 drug discovery and animal health industry"
+                drug discovery and animal health industry"
                           />
                         </a>
                         <div className="card-body p-0 ps-btn-link-bottom">
@@ -163,9 +158,9 @@ const Testimonials = () => {
                           >
                             <h5 className="card-title  pt-2 px-2">
                               Stemnovate leading the way in building animal
-                              models for Pharma drug discovery and animal health ...
-                              {/* industry */}
-                             </h5>
+                              models for Pharma drug discovery and animal health
+                              industry
+                            </h5>
                           </a>
                           <a
                             target={"_blank"}
@@ -179,14 +174,13 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div className="col-md-3 col-sm-6 d-flex flex-grow-1">
-                      <div className="card mt-3  align-items-center p-1 ">
+                      <div className="card mt-3  align-items-center p-0 ">
                         <a
                           target={"_blank"}
                           rel="noreferrer"
                           href="https://podcasts.apple.com/gb/podcast/discovery-matters/id1466149440"
                         >
                           <Image
-                            className="zoom-in"
                             src={discoverymatters}
                             alt="Ruchi Sharma-Women in Stem"
                           />
@@ -221,7 +215,6 @@ const Testimonials = () => {
                           href="/Products/Biobanking"
                         >
                           <Image
-                            className="zoom-in"
                             src={announcementimg}
                             alt="Our 3Rs mission: Zero animal testing"
                           />

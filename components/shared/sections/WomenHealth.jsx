@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react"
 import Image from "~/components/elements/Image"
+import Link from "next/link"
 import FemaleHealth from "~/public/static/img/Home/focus-female-health-01-new.jpg"
 
 export default function WomenHealth() {
@@ -8,8 +9,8 @@ export default function WomenHealth() {
     <div>
       {" "}
       <div className="womenHealth">
-        <a className="ps-section__image" href="#">
-          <div className="women-expander" >
+        <div className="ps-section__image link-hover-thumb-shape" >
+          <div className="women-expander">
             <p className=" display-4 font-weight-bolder text-white">
               FOCUS - FEMALE HEALTH
             </p>
@@ -19,28 +20,20 @@ export default function WomenHealth() {
                 diversity in research.
               </i>{" "}
             </p>
-            <a
-              className=" text-uppercase btn btn-lg bg-white text-orange m-4"
-              href="/Products?gender=Female"
-            >
-              Find Out More
-            </a>
+            <Link href="/Products?gender=Female">
+              <button className=" text-uppercase btn btn-lg bg-white text-orange m-4">
+                Find Out More
+              </button>
+            </Link>
           </div>
-          {/* <Image
+          <Image
             src={FemaleHealth}
             alt="focus-female-health"
-            // style={{ display:"none"}}
             layout="responsive"
             width={1000}
-            height={500}
-          /> */}
-          <img
-            src="/static/img/Home/focus-female-health-01-new.jpg"
-            // src="/static/img/Home/focus-female-health-01-new.webp"
-            width={"100%"}
-            alt="focus-female-health"
+            height={658}
           />
-        </a>
+        </div>
       </div>
     </div>
   )

@@ -4,10 +4,9 @@ import HowitWorksmain from "~/public/static/img/how-it-work/how-it-works-white-m
 const HowItsWork = () => {
   return (
     <div>
-      <div className="plus-section">
+      <div className="">
         <div
-          // className="how-it-work-section"
-          className="container-how-work d-flex flex-column justify-content-center align-items-center"
+          className="how-it-work-section"
           style={{
             boxSizing: "border-box",
             WebkitFontSmoothing: "antialiased"
