@@ -168,10 +168,7 @@ const HomeDefaultPage = (props) => {
                                     )}
                                   </div>
                                 </div>
-                                <div
-                                  className="d-md-none position-absolute top-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center "
-                                  // style={{ border: "2px solid blue" }}
-                                >
+                                <div className="d-md-none position-absolute top-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center ">
                                   <Image
                                     // style={{minWidth:"60%",maxWidth:"60%", minHeight:"200px",maxHeight:"200px"}}
                                     // src="/static/image/Partnership.png"

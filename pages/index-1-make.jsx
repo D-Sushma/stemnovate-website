@@ -1,69 +1,35 @@
-import dynamic from "next/dynamic"
 import React, { useState, useEffect } from "react"
 import Container from "~/components/layouts/Container"
+import Subscribe from "~/components/shared/sections/Subscribe"
+import Testimonials from "~/components/shared/sections/Testimonials"
 import HeaderDefault from "~/components/shared/headers/HeaderDefault"
+import OurService from "~/components/shared/sections/OurServices"
 import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
+import HowItsWork from "~/components/shared/sections/HowItWorks"
+import CaseStudy from "~/components/shared/sections/CaseStudy"
+import AboutBanner from "~/components/partials/pages/about-us/AboutBanner-old"
+// import VideoBanner from "~/components/partials/homepages/home-1/videobanner"
+import OurClients from "~/components/shared/sections/OurClients"
 import PropTypes from "prop-types"
+// import BlogGrid from "~/components/partials/blog/BlogGrid"
+import WomenHealth from "~/components/shared/sections/WomenHealth"
+// import HomeOneTopBanners from "~/components/partials/homepages/home-1/HomeOneTopBanners"
+// import AnnouncementsPopup from "~/components/partials/homepages/home-1/AnnouncementsPopup"
+// import HomeTopBanner from "~/components/partials/homepages/home-1/HomeTopBanner"
+// import PromotionalBanner from "~/components/shared/sections/PromotionalBanner"
+
+// import { Modal } from "antd";
+import SubscribePopup from "~/components/shared/SubscribePopup"
+
+import { FaArrowCircleRight } from "react-icons/fa"
 import Slider from "react-slick"
 import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
 
-const DynamicAboutBanner = dynamic(
-  () => import("~/components/partials/pages/about-us/AboutBanner-old"),
-  { loading: () => <p>Loading...</p> }
-)
-const DynamicOurService = dynamic(
-  () => import("~/components/shared/sections/OurServices"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicHowItsWork = dynamic(
-  () => import("~/components/shared/sections/HowItWorks"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicWomenHealth = dynamic(
-  () => import("~/components/shared/sections/WomenHealth"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicCaseStudy = dynamic(
-  () => import("~/components/shared/sections/CaseStudy"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicTestimonials = dynamic(
-  () => import("~/components/shared/sections/Testimonials"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicOurClients = dynamic(
-  () => import("~/components/shared/sections/OurClients"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicBlogGrid = dynamic(
-  () => import("~/components/partials/blog/BlogGrid"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-const DynamicSubscribe = dynamic(
-  () => import("~/components/shared/sections/Subscribe"),
-  {
-    loading: () => <p>Loading...</p>
-  }
-)
-
 const carouselSetting = {
+  dots: true,
   infinite: true,
   speed: 1500,
   slidesToShow: 1,
@@ -71,7 +37,6 @@ const carouselSetting = {
   arrows: true,
   fade: true,
   autoplay: true,
-  dots: true,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   responsive: [
@@ -103,17 +68,25 @@ const carouselSetting = {
 }
 
 const HomeDefaultPage = (props) => {
+  // const [visible, setVisible] = useState(false);
   useEffect(() => {
+    // setVisible(true);
     props.SetMainMenuhandler(props.menus)
   }, [])
+
+  let products = ""
 
   const [promotions, setPromotions] = useState([])
 
   useEffect(() => {
+    // console.log("promotionDetails", promotionDetails);
     if (props.promotionDetails.status === 200) {
       setPromotions(props.promotionDetails.data)
     }
   }, [])
+  const boxStyle = {
+    forP: { lineHeight: 1.3 }
+  }
 
   return (
     <Container
@@ -122,11 +95,14 @@ const HomeDefaultPage = (props) => {
       header={<HeaderDefault classes="without-border" menus={props.menus} />}
     >
       <main id="homepage-one">
+        {/* <VideoBanner /> */}
+        {/* <HomeOneTopBanners /> */}
         <div className="ps-top-banners">
           <div className="ps-section--banner ps-banner--container">
             <div className="ps-section__overlay">
               <div className="ps-section__loading"></div>
             </div>
+           
             <Slider {...carouselSetting} className="ps-carousel">
               {promotions &&
                 promotions?.map((data, key) => (
@@ -137,17 +113,15 @@ const HomeDefaultPage = (props) => {
                     >
                       <div className="container-no-round">
                         <div className="ps-banner__block">
-                          <div className="ps-banner__content">
-                            <div className=" d-flex justify-content-between ">
-                              <div className="d-flex flex-column content-section">
-                                <div className="d-md-none w-100 h-100 d-flex flex-column justify-content-center align-items-center mt-10">
-                                  <img
-                                    // style={{minWidth:"60%",maxWidth:"60%", minHeight:"200px",maxHeight:"200px"}}
-                                    // src="/static/image/Partnership.png"
-                                    src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
-                                    alt="alt"
-                                  />
-                                </div>
+                          <div
+                            className="ps-banner__content"
+                          >
+                            <div
+                              className=" d-flex justify-content-between "
+                            >
+                              <div
+                                className="d-flex flex-column content-section"
+                              >
                                 <div
                                   className="ps-banner__title text-white mt-40"
                                   dangerouslySetInnerHTML={{
@@ -166,14 +140,16 @@ const HomeDefaultPage = (props) => {
                                     </a>
                                   )}
                                 </div>
-                                {/* <div className="d-md-none w-100 h-100 d-flex flex-column justify-content-center align-items-center mt-10">
+                                <div
+                                  className="d-md-none w-100 h-100 d-flex justify-content-center align-items-center mt-10"
+                                >
                                   <img
-                                    // style={{minWidth:"60%",maxWidth:"60%", minHeight:"200px",maxHeight:"200px"}}
+                                    style={{minWidth:"60%",maxWidth:"60%", minHeight:"200px",maxHeight:"200px"}}
                                     // src="/static/image/Partnership.png"
-                                    src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
+                                    src="/static/mobile-view/img_3.jpg"
                                     alt="alt"
                                   />
-                                </div> */}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -184,6 +160,7 @@ const HomeDefaultPage = (props) => {
                               src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                               alt="alt"
                             />
+                            
                           </div>
                         </div>
                       </div>
@@ -193,16 +170,18 @@ const HomeDefaultPage = (props) => {
             </Slider>
           </div>
         </div>
-
-        <DynamicAboutBanner />
-        <DynamicOurService />
-        <DynamicHowItsWork />
-        <DynamicWomenHealth />
-        <DynamicCaseStudy />
-        <DynamicTestimonials />
-        <DynamicOurClients />
-        <DynamicBlogGrid />
-        <DynamicSubscribe />
+        {/* <HomeTopBanner /> */}
+        <AboutBanner />
+        <OurService />
+        {/* <PromotionalBanner /> */}
+        <HowItsWork />
+        <WomenHealth />
+        <CaseStudy />
+        <Testimonials />
+        <OurClients />
+        {/* <BlogGrid /> */}
+        <Subscribe />
+        {/* <AnnouncementsPopup /> */}
       </main>
     </Container>
   )
