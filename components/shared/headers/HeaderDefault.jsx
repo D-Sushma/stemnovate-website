@@ -8,6 +8,7 @@ import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
 import Loader from "~/components/reuseable/Loader"
 import ModuleHeaderNotice from "./modules/ModuleHeaderNotice"
+import Link from "next/link"
 
 const HeaderDefault = (props, { classes = "" }) => {
   var type = "white"
@@ -50,7 +51,7 @@ const HeaderDefault = (props, { classes = "" }) => {
   }
 
   useEffect(() => {
-   window.addEventListener("scroll", handleStickyHeader)
+    window.addEventListener("scroll", handleStickyHeader)
     if (props.menus == undefined && props.mainmenu.length == 0) {
       if (availableModules.length == 0) {
         getmenu()
@@ -79,13 +80,14 @@ const HeaderDefault = (props, { classes = "" }) => {
         <div className="container">
           <div className="header__left">
             <Logo type={type} />
-            <a
-              href="#"
-              className="header__top-toggle"
-              onClick={(e) => handleShownav(e)}
-            >
-              <i className="fa fa-bars"></i>
-            </a>
+            <Link href="#">
+              <div
+                className="header__top-toggle"
+                onClick={(e) => handleShownav(e)}
+              >
+                <i className="fa fa-bars"></i>
+              </div>
+            </Link>
           </div>
           <div className="header__center">
             <div className="ps-header__search">
@@ -93,7 +95,7 @@ const HeaderDefault = (props, { classes = "" }) => {
             </div>
           </div>
           <div className="header__right justify-content-center">
-           <ModuleHeaderActions />
+            <ModuleHeaderActions />
           </div>
         </div>
       </div>

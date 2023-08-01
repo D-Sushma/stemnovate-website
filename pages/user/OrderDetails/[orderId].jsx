@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import ModulEcomerceOrderSummary from "~/components/ecomerce/modules/ModulEcomerceOrderSummary"
-import FormCheckout from "~/components/shared/forms/FormCheckout"
-import { useSession, getSession } from "next-auth/react"
-import useEcomerce from "~/hooks/useEcomerce"
+import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
 import Subscribe from "~/components/shared/sections/Subscribe"
@@ -101,8 +98,7 @@ function orderConfirmation({ UserData }) {
     var resp = await res.json()
     // console.log(resp);
   }
-  var boxStyle = { position: "initial" }
-
+  
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 83 && window.scrollY < 750) {
@@ -172,8 +168,7 @@ function orderConfirmation({ UserData }) {
                           </h5>
                         </div>
                         <div className="col-md-8 ">
-                          {/* <span class="border-top border-dark"></span> */}
-
+                          
                           <div
                             className="row mb-2"
                             style={{ borderBottom: "1px solid black" }}
@@ -350,35 +345,13 @@ function orderConfirmation({ UserData }) {
                                                   __html: item.description
                                                 }}
                                               />
-                                          {/* <div className="d-flex justify-content-start flex-row ">
-                                           
-                                            <img
-                                              className="d-flex m-2"
-                                              src={item.imgUrl}
-                                              width="100px"
-                                              height={"70px"}
-                                              alt={item.ProductName}
-                                            />
-                                            <div className="d-flex flex-column">
-                                              <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                            </div> 
-                                          </div> */}
-                                        </td>
+                                          </td>
                                         <td width="10%">
-                                          {
-                                            /* {resourcesData?.filter(function (el) {
-                                            return el.id
-                                          })} */
-                                            //target={"_blank"}
-                                          }
                                           {resourcesData?.map((data, key) => (
                                             <a
                                               href={`/resources/Access/${data[0].resources_category_resourcesToresources_category.slug}/${data[0].resources_id}/${data[0].access_type}`}
                                               rel="noreferrer"
+                                              key={key}
                                             >
                                               <button className="button button--green mr-2">
                                                 Access
@@ -486,8 +459,7 @@ export async function getServerSideProps(ctx) {
   if (session) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    // myHeaders.append("cookie", ctx.req.headers.cookie);
-
+    
     var raw = JSON.stringify({
       UserLoginId: session.id
     })

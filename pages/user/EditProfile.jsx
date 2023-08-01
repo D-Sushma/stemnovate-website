@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
 import { Form, Input, Button, Row, Col, Checkbox } from "antd";
-import { FcGoogle } from "react-icons/fc";
 import { baseUrl } from "~/repositories/Repository";
-// import {auth} from "~/lib/CheckUser";
 import { auth } from "~/lib/CheckUser";
 import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 
-import { signIn, getSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 const breadcrumb = [
     {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
+import Link from 'next/link'
 
 const FormSearchHeader = () => {
     const [keyword, setKeyword] = useState(null);
@@ -26,9 +27,11 @@ const FormSearchHeader = () => {
                 <div className="input-group">
                     <input className="form-control ps-input" type="text" placeholder="Search for products" onChange={(e) => handleSetKeyword(e)} />
                     <div className="input-group-append">
-                        <a href="#" onClick={(e) => handleSubmit(e)}>
-                            <i className="fa fa-search"></i>
-                        </a>
+                        <Link href="#">
+                            <div onClick={(e) => handleSubmit(e)} style={{cursor:"pointer"}}>
+                                <i className="fa fa-search"></i>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

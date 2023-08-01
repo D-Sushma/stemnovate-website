@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import { Steps, message, Col, Row, Form, Input, Button, Select, Checkbox } from "antd";
-import { AiOutlineBank, AiOutlineGlobal, AiOutlineHome, AiOutlineUser, AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
+import { Steps, Col, Row, Form, Input, Button, Select, Checkbox } from "antd";
+import { AiOutlineBank, AiOutlineGlobal, AiOutlineUser, AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import { BsSignpost2, BsSignpost, BsSignpostSplit } from "react-icons/bs";
 import { HiOutlineReceiptTax } from "react-icons/hi";
-import { GrMap, GrLocation } from "react-icons/gr";
+import { GrMap } from "react-icons/gr";
 import Countries from "../../public/static/data/AllCountries.json";
 import { getSession } from "next-auth/react";
 import { baseUrl } from "~/repositories/Repository";
@@ -37,7 +37,7 @@ const steps = [
     },
 ];
 
-const MyApplication = ({ UserData, session }) => {
+const MyApplication = ({ UserData }) => {
     const [current, setCurrent] = React.useState(0);
     const [BSameAsOrg, setBSameAsOrg] = React.useState(false);
     const [SSameAsOrg, setSSameAsOrg] = React.useState(false);
@@ -66,7 +66,6 @@ const MyApplication = ({ UserData, session }) => {
 
             if (UserData.result.customer_address_details !== null) {
                 form.setFieldsValue(UserData.result.customer_address_details);
-                // form.setFieldsValue(UserData[0]);
                 setBSameAsOrg(UserData.result.customer_address_details.B_SameAsOrg);
 
                 setSSameAsOrg(UserData.result.customer_address_details.S_SameAsOrg);
@@ -212,9 +211,8 @@ const MyApplication = ({ UserData, session }) => {
         }
     };
 
-    const onFinishFailed = (errorInfo) => {
-        // console.log("Failed:", errorInfo);
-        if (current === 0) {
+    const onFinishFailed = () => {
+       if (current === 0) {
             console.log("Orgination");
         }
 

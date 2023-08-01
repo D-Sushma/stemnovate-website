@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import { Menu } from "antd";
 import { getSession } from "next-auth/react";
 import { baseUrl } from "~/repositories/Repository";
 import { Table, Tag, Space } from "antd";
@@ -114,19 +113,14 @@ const Orders = ({ userOrders }) => {
             dataIndex: "Amount",
             key: "Amount",
         },
-        // {
-        //     title: "Transaction Id",
-        //     dataIndex: "transactionId",
-        //     key: "transactionId",
-        // },
-        {
+       {
             title: "Action",
             key: "action",
             dataIndex: "action",
             render: (action) => (
                 <Space size="middle">
                     <Link href={`/user/OrderDetails/${action}`}>
-                        <a className="btn btn-info ">View</a>
+                        <button className="btn btn-info ">View</button>
                     </Link>
                 </Space>
             ),
@@ -141,11 +135,11 @@ const Orders = ({ userOrders }) => {
                         <BreadCrumb breacrumb={breadcrumb} />
                     </div>
                 </div>
-                <div className="ps-page__content">
+                <div className="ps-page__content mb-5">
                     <div className="ps-about">
                         <div className="container">
                             <div className="card">
-                            <h5 class="card-header">Order Details</h5>
+                            <h5 className="card-header">Order Details</h5>
                                 <div className="card-body">
                                     {console.log("data", userOrders)}
                                     <Table
@@ -153,7 +147,6 @@ const Orders = ({ userOrders }) => {
                                         dataSource={
                                             userOrders && JSON.parse(userOrders)
                                         }
-                                        // dataSource={[]}
                                     />
                                 </div>
                             </div>
@@ -191,13 +184,11 @@ export async function getServerSideProps(ctx) {
             PaymentStatus: [ord.payment_status],
             OrderStatus: [ord.order_status],
             Amount: ord.total_amount,
-            // transactionId: ord.transaction_id,
             action: ord.order_id,
         });
     });
     // console.log(orderData)
     const myResponse = JSON.stringify(orderData);
-    //   const myResponse =orderData;
     return {
         props: { userOrders: myResponse },
     };

@@ -1,15 +1,12 @@
-import { decode } from "hex-encode-decode"
 import { useRouter } from "next/router"
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { baseUrl } from "~/repositories/Repository"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Shop from "~/components/partials/shop/Shop"
 import SidebarShop from "~/components/shared/sidebar/SidebarShop"
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-import ShopBestSellers from "~/components/partials/shop/ShopBestSellers"
 import { ToastContainer } from "react-toastify"
 import Subscribe from "~/components/shared/sections/Subscribe"
 
@@ -29,13 +26,10 @@ const breadcrumb = [
 function promotionOffer({ ProductData }) {
   const router = useRouter()
   const query = router.query
-  const { promoId } = router.query
   console.log("ProductData", ProductData.data[0].title)
   const { loading, productItems, getPromotionalProducts } = useGetProducts()
   const { withGrid, withList } = useProductGroup()
   let products = ""
-
-  const [productList, setProductList] = useState([])
 
   useEffect(() => {
     var queries = {}
@@ -99,10 +93,8 @@ function promotionOffer({ ProductData }) {
                       <SidebarShop />
                     </div>
                     <div className="ps-layout__right">
-                      {/* <ShopBestSellers /> */}
                       <Shop classes="ps-shop--grid">{products}</Shop>
-                      {/* <PromotionSecureInformation /> */}
-                    </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -118,8 +110,6 @@ function promotionOffer({ ProductData }) {
 export async function getServerSideProps({ query }) {
   var url = query.url
   var ProductData = []
-  var categoryListList = []
-  // console.log(url, "promoId");
   if (url) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")

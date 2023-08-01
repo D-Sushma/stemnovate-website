@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { toggleDrawer } from "~/store/app/action";
 import { useDispatch, connect } from "react-redux";
 import Link from "next/link";
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, Divider } from "antd";
 import { useSession, signOut } from "next-auth/react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineUserSwitch, AiOutlineUserAdd } from "react-icons/ai";
+
 import { FiBox } from "react-icons/fi";
 import { FaUserEdit, FaWpforms } from "react-icons/fa";
 import { CgUser, CgShoppingCart } from "react-icons/cg";
 import { RiHeartAddLine } from "react-icons/ri";
+const { SubMenu } = Menu;
+
 import { caculateArrayQuantity, calculateCartQuantity } from "~/utilities/ecomerce-helpers";
+import { baseUrl } from "~/repositories/Repository";
 
 const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
     const dispatch = useDispatch();
@@ -29,18 +33,17 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
             setWishlistTotal(caculateArrayQuantity(ecomerce.wishlistItems));
         }
     }, [ecomerce]);
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+    // console.log(session);
 
     // view
     let searchBtnView;
     if (search) {
         searchBtnView = (
             <li>
-                <Link href="#">
-                    <div className="header__action link-hover-thumb-shape">
-                        <i className="icon-magnifier"></i>
-                    </div>
-                </Link>
+                <a className="header__action" href="#">
+                    <i className="icon-magnifier"></i>
+                </a>
             </li>
         );
     }
@@ -52,76 +55,95 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
                     {/* dashboard */}
                     <p className="m-4 text-left">{`Hello ${session.user.name}`}</p>
 
-                    <Menu.Item
-                        key="1"
-                        style={{
-                            width: 200,
-                            margin: "0 10px",
-                            textAlign: "left",
-                            cursor: "pointer",
-                        }}>
-                        <Link href="/user/dashboard">
+                    <Divider className="m-1" />
+                    <a href="/user/dashboard">
+                        <Menu.Item
+                            key="1"
+                            // onClick={() => Router.push(process.env.NEXT_BASE_URL + "/user/dashboard")}
+                            style={{
+                                width: 200,
+                                margin: "0 10px",
+                                textAlign: "left",
+                            }}>
                             <p>
                                 <AiOutlineUserSwitch className="site-form-item-icon mr-2 mb-1" />
                                 Dashboard
                             </p>
-                        </Link>
-                    </Menu.Item>
+                        </Menu.Item>
+                    </a>
 
                     {/* orders */}
-                    <Menu.Item
-                        key="2"
-                        style={{
-                            width: 200,
-                            margin: "0 10px",
-                            textAlign: "left",
-                            cursor: "pointer",
-                        }}>
-                        <Link href="/user/Orders">
+                    <a href="/user/Orders">
+                        <Menu.Item
+                            key="2"
+                            // onClick={() => Router.push(process.env.NEXT_BASE_URL + "/user/Orders")}
+                            style={{
+                                width: 200,
+                                margin: "0 10px",
+                                textAlign: "left",
+                            }}>
                             <p>
                                 <FiBox className="site-form-item-icon mr-2 mb-1" />
                                 Orders
                             </p>
-                        </Link>
-                    </Menu.Item>
+                        </Menu.Item>
+                    </a>
+                    
+                        <Menu.Item
+                            key="2"
+                            style={{
+                                width: 200,
+                                margin: "0 10px",
+                                textAlign: "left",
+                                cursor:"pointer",
+                            }}>
+                                <Link href="/user/Orders">
+                            <p>
+                                <FiBox className="site-form-item-icon mr-2 mb-1" />
+                                Orders
+                            </p>
+                            </Link>
+                        </Menu.Item>
+                    
 
                     {/* Edit Account */}
-                    <Menu.Item
-                        key="3"
-                        style={{
-                            width: 200,
-                            margin: "0 10px",
-                            textAlign: "left",
-                            cursor: "pointer",
-                        }}>
-                        <Link href="/user/EditProfile">
+                    <a href="/user/EditProfile">
+                        <Menu.Item
+                            key="3"
+                            // onClick={() => Router.push(process.env.NEXT_BASE_URL + )}
+                            style={{
+                                width: 200,
+                                margin: "0 10px",
+                                textAlign: "left",
+                            }}>
                             <p>
                                 {" "}
                                 <FaUserEdit className="site-form-item-icon mr-2 mb-1" />
                                 Edit Profile
                             </p>
-                        </Link>
-                    </Menu.Item>
+                        </Menu.Item>
+                    </a>
 
                     {/* Application Form */}
-                    <Menu.Item
-                        key="4"
-                        style={{
-                            width: 200,
-                            margin: "0 10px",
-                            marginBottom: "10px",
-                            textAlign: "left",
-                            cursor: "pointer",
-                        }}>
-                        <Link href="/user/MyApplication">
+                    <a href="/user/MyApplication">
+                        <Menu.Item
+                            key="4"
+                            // onClick={() => {
+                            //     Router.push(process.env.NEXT_BASE_URL + "");
+                            // }}
+                            style={{
+                                width: 200,
+                                margin: "0 10px",
+                                marginBottom: "10px",
+                                textAlign: "left",
+                            }}>
                             <p>
                                 <FaWpforms className="site-form-item-icon mr-2 mb-1" />
                                 Organization Profile
                             </p>
-                        </Link>
-
-                    </Menu.Item>
-
+                        </Menu.Item>
+                    </a>
+                    
                     <Menu.Item
                         key="5"
                         style={{
@@ -151,7 +173,7 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
                             textAlign: "center",
                         }}>
                         <Link href="/auth/UserLogin">
-                            <Button type="primary" size="large" className="link-hover-thumb-shape m-2 w-100">
+                            <Button type="primary" size="large" style={{ width: "100%", margin: "5" }}>
                                 Login
                                 <AiOutlineLogin className="site-form-item-icon ml-2" />
                             </Button>
@@ -166,7 +188,7 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
                         }}>
                         <p>Don&apos;t Have An Account?</p>
                         <Link href="/auth/UserReg">
-                            <Button size="large" className="link-hover-thumb-shape m-2 w-100">
+                            <Button size="large" style={{ width: "100%", margin: "5" }}>
                                 Register <AiOutlineUserAdd className="site-form-item-icon ml-2" />
                             </Button>
                         </Link>
@@ -182,38 +204,45 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
             <li>
                 <Link href="#">
                     <Dropdown overlay={menu}>
-                        <div className="ant- dropdown-link link-hover-thumb-shape" onClick={(e) => e.preventDefault()}>
-                            <div className="header__action ">
-                                <CgUser />
-                            </div>
-                        </div>
+                        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                            <a className="header__action">
+                                <CgUser
+                                // className="site-form-item-icon ml-1"
+                                // size={"1.2em"}
+                                />
+                            </a>
+                        </a>
                     </Dropdown>
                 </Link>
-
             </li>
             <li>
                 <Link href="/shop/wishlist">
-                    <div className="header__action link-hover-thumb-shape">
-                        <RiHeartAddLine />
+                    <a className="header__action">
+                        <RiHeartAddLine
+                        // className="site-form-item-icon ml-1"
+                        // size={"1.2em"}
+                        />
+
                         <span className="header__action-badge">{wishlistTotal ? wishlistTotal : 0}</span>
-                    </div>
+                    </a>
                 </Link>
             </li>
             <li>
-                <Link href="#">
-                    <div id="cart-mini" onClick={(e) => handleOpenDrawer(e)}>
-                        <div className="header__action link-hover-thumb-shape" >
-                            <CgShoppingCart />
-                            <span className="header__action-badge">{cartTotal ? cartTotal : 0}</span>
-                        </div>
-                    </div>
-                </Link>
+                <a className="header__action" href="#" id="cart-mini" onClick={(e) => handleOpenDrawer(e)}>
+                    <CgShoppingCart
+                    // className="site-form-item-icon ml-1"
+                    // size={"1.2em"}
+                    />
+
+                    <span className="header__action-badge">{cartTotal ? cartTotal : 0}</span>
+                </a>
             </li>
         </ul>
     );
 };
 
 export async function getServerSideProps(context) {
+    // console.log(context.req.headers.referer);
     var reffrals = context.req.headers.referer;
     return { props: { reffrals } };
 }

@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb2";
-import { Form, Input, Button, Row, Col, Checkbox } from "antd";
+import { Form } from "antd";
 import { baseUrl } from "~/repositories/Repository";
 import { auth } from "~/lib/CheckUser";
-import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import { getSession } from "next-auth/react";
 
@@ -69,9 +68,6 @@ const referFriends = ({ UserData }) => {
                     <div className="ps-about min-vh-100">
                         <div className="container bg-gray">
                             <div className="row py-5">
-                                {/* <div className="col-md-6">
-                                    <input type="text" className="form-control" name="" id="" />
-                                </div> */}
                                 <div className="col-md-6">
                                     <h3>You Dont have Reffral Code, Ganerate Now</h3>
                                     <input type="button" onClick={GanerateReffCode} value="ganerate" className="btn btn-lg btn-danger" />
@@ -91,8 +87,7 @@ export async function getServerSideProps(ctx) {
     if (session) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        // myHeaders.append("cookie", ctx.req.headers.cookie);
-
+        
         var raw = JSON.stringify({
             UserLoginId: session.id,
         });

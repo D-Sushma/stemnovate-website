@@ -4,12 +4,12 @@ import BreadCrumb from "~/components/elements/BreadCrumb";
 import { Card, Col, Row } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { baseUrl } from "~/repositories/Repository";
-import { signIn, getSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { auth } from "~/lib/CheckUser";
 import Loader from "~/components/reuseable/Loader";
-
-import { encode, decode } from "hex-encode-decode";
-import { GrContactInfo, GrUserSettings, GrList, GrBasket, GrShareOption } from "react-icons/gr";
+import Link from 'next/link'
+import { encode } from "hex-encode-decode";
+import { GrContactInfo, GrUserSettings, GrList, GrBasket } from "react-icons/gr";
 
 const breadcrumb = [
     {
@@ -67,8 +67,7 @@ const dashboard = ({ UserData }) => {
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        // theme: "colored",
-                    });
+                        });
                 } else {
                     setIsLoading(false);
                     toast.error("something went to wrong", {
@@ -108,10 +107,10 @@ const dashboard = ({ UserData }) => {
                                 {UserData && UserData.result.is_verified ? null : (
                                     <div className="alert alert-primary" role="alert">
                                         Welcome to Stemnovate! We have sent you a verification email. If you have not received it, please click the
-                                        <a onClick={() => sendVerifyLink()} className="alert-link">
+                                        <span onClick={() => sendVerifyLink()} className="alert-link span-with-link">
                                             {" "}
                                             <u>resend.</u>
-                                        </a>{" "}
+                                        </span>{" "}
                                         link
                                         {isLoading ? <Loader /> : null}
                                     </div>
@@ -136,11 +135,10 @@ const dashboard = ({ UserData }) => {
                             <div className="site-card-wrapper my-5 flex-grow-1 row-eq-height">
                                 <Row gutter={16}>
                                     <Col md={6} sm={24} style={{ width: "100%" }}>
-                                        <a href="/user/EditProfile">
+                                        <Link href="/user/EditProfile">
                                             <Card className="card-bg-color m-2 " hoverable bordered>
                                                 <div className="d-flex justify-content-between flex-row">
                                                     <div className="rounded-circle d-flex align-items-center m-2">
-                                                        {/* <img src="/static/img/user/user.svg" alt="next" /> */}
                                                         <GrUserSettings size={40} color={"#003e4c"} />
                                                     </div>
                                                     <div className="d-flex flex-column align-items-center m-2">
@@ -149,14 +147,13 @@ const dashboard = ({ UserData }) => {
                                                     </div>
                                                 </div>
                                             </Card>
-                                        </a>
+                                        </Link>
                                     </Col>
                                     <Col md={6} sm={24} style={{ width: "100%" }}>
-                                        <a href="/user/Orders">
+                                        <Link href="/user/Orders">
                                             <Card className="card-bg-color m-2" hoverable bordered>
                                                 <div className="d-flex justify-content-between flex-row">
                                                     <div className="rounded-circle d-flex align-items-center m-2">
-                                                        {/* <img src="/static/img/user/perference.svg" alt="next" /> */}
                                                         <GrList size={40} color={"#003e4c"} />
                                                     </div>
                                                     <div className="d-flex flex-column align-items-center m-2">
@@ -165,14 +162,13 @@ const dashboard = ({ UserData }) => {
                                                     </div>
                                                 </div>
                                             </Card>
-                                        </a>
+                                        </Link>
                                     </Col>
                                     <Col md={6} sm={24} style={{ width: "100%" }}>
-                                        <a href={"/user/MyApplication"}>
+                                        <Link href={"/user/MyApplication"}>
                                             <Card className="card-bg-color m-2" hoverable bordered>
                                                 <div className="d-flex justify-content-between flex-row">
                                                     <div className="rounded-circle d-flex align-items-center m-2">
-                                                        {/* <img src="/static/img/user/E- Mail.svg" alt="next" /> */}
                                                         <GrContactInfo size={40} color={"#003e4c"} />
                                                     </div>
                                                     <div className="d-flex flex-column align-items-center m-2">
@@ -181,11 +177,11 @@ const dashboard = ({ UserData }) => {
                                                     </div>
                                                 </div>
                                             </Card>
-                                        </a>
+                                        </Link>
                                     </Col>
 
                                     <Col md={6} sm={24} style={{ width: "100%" }}>
-                                        <a href={`${baseUrl}${"/promotions-products"}`}>
+                                        <Link href={`${baseUrl}${"/promotions-products"}`}>
                                             <Card className="card-bg-color m-2" hoverable bordered>
                                                 <div className="d-flex justify-content-between flex-row">
                                                     <div className="rounded-circle d-flex align-items-center m-2">
@@ -197,24 +193,9 @@ const dashboard = ({ UserData }) => {
                                                     </div>
                                                 </div>
                                             </Card>
-                                        </a>
+                                        </Link>
                                     </Col>
-                                    {/* <Col md={6} sm={24} style={{ width: "100%" }}>
-                                        <a href={`${baseUrl}${"user/referFriends"}`}>
-                                            <Card className="card-bg-color m-2" hoverable bordered>
-                                                <div className="d-flex justify-content-between flex-row">
-                                                    <div className="rounded-circle d-flex align-items-center m-2">
-                                                        <GrShareOption size={30} color="red" />
-                                                    </div>
-                                                    <div className="d-flex flex-column align-items-center m-2">
-                                                        <h4 className="align-self-start mb-1">Refer a Friend</h4>
-                                                        <p>Refer your friends to earn rewards</p>
-                                                    </div>
-                                                </div>
-                                            </Card>
-                                        </a>
-                                    </Col> */}
-                                </Row>
+                                    </Row>
                             </div>
                         </div>
                     </div>

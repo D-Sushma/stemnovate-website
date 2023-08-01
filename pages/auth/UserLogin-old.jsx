@@ -1,60 +1,56 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Container from "~/components/layouts/Container"
-import { Form, Input, Button} from "antd"
+import { useRouter } from "next/router"
+import { Form, Input, Button, Checkbox } from "antd"
+import { AiOutlineLock, AiOutlineUser } from "react-icons/ai"
+import { ToastContainer, toast } from "react-toastify"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
-import {AiOutlineUser} from "react-icons/ai"
-import { ToastContainer, toast } from "react-toastify"
+import { getSession } from "next-auth/react"
 
-const ForgotPassword = () => {
-  const [isLoading, setisLoading] = useState(false)
+const UserLogin = ({ reffrals }) => {
+  const router = useRouter()
+  console.log("router", router)
+  console.log("reffrals", reffrals)
 
-  const SendEmail = async (name, email, code) => {
-    var myHeaders = new Headers()
-    myHeaders.append("Content-Type", "application/json")
-
-    var raw = JSON.stringify({
-      name: name,
-      email: email,
-      code: code
-    })
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw
+  useEffect(() => {
+    const auth = async () => {
+      const session = await getSession()
+      if (session) {
+        router.push({
+          pathname: reffrals
+        })
+      }
     }
 
-    fetch(
-      process.env.NEXT_BASE_URL + "/api/Email/forgotPassEmail",
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then(async (result) => {
-        console.log(result)
-      })
-      .catch((error) => console.log("error", error))
-  }
+    auth()
+  }, [])
+
+  const [isLoading, setisLoading] = useState(false)
 
   const onFinish = async (values) => {
-    console.log(values)
-    setisLoading(true)
+   setisLoading(true)
+    var username = values.username
+    var password = values.password
+
     try {
       const response = await fetch(
-        process.env.NEXT_BASE_URL + "/api/auth/ForgotPassword",
+        process.env.NEXT_BASE_URL + "/api/auth/check-login",
         {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(values)
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
         }
       )
       const json = await response.json()
-      console.log(json)
       if (json.code == "200") {
-        toast.success(json.result.message, {
+        toast.success(json.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -64,8 +60,7 @@ const ForgotPassword = () => {
           progress: undefined,
           theme: "colored"
         })
-        SendEmail(json.result.firstname, json.result.email, json.result.code)
-        setisLoading(false)
+
       } else {
         toast.error(json.message, {
           position: "top-right",
@@ -97,8 +92,8 @@ const ForgotPassword = () => {
     }
   }
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo)
+  const onFinishFailed = () => {
+    // console.log("Failed:", errorInfo);
   }
 
   return (
@@ -117,28 +112,25 @@ const ForgotPassword = () => {
       <div className="ps-page ps-page--inner ">
         <div className="container">
           <div className="ps-page__header"></div>
-          <div className="ps-page__content ps-account">
+          <div className="ps-page__content ps-account my-5">
             <div className="row">
               <div className="p-0 col-12 col-md-6 d-sm-none d-md-block bg-login-page">
                 <Image
                   src="/static/img/Home/signin-img.jpg"
                   alt="Stemnovate Limited"
                   width={1000}
-                  height={788}
-                  //   style={{ width: "100%" }}
+                  height={789}
+                //   style={{ width: "100%" }}
                 />
-              </div>
+               </div>
               <div className="p-4 col-12 col-md-6 card">
                 <div className="ps-form--review m-5">
-                  <h2 className="ps-form__title">Forgot Password</h2>
-                  <p className="m-3">
-                    {" "}
-                    Enter your email address to receive a link to reset your
-                    password.
-                  </p>
+                  <h2 className="ps-form__title">Sign in</h2>
+
                   <Form
                     layout="vertical"
                     size={"large"}
+                    id="CollectedForms-5456750"
                     className="login-form"
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
@@ -146,11 +138,11 @@ const ForgotPassword = () => {
                   >
                     <Form.Item
                       label="Email"
-                      name="Email"
+                      name="username"
                       rules={[
                         {
                           required: true,
-                          message: "Please input your Email!"
+                          message: "Please input your username!"
                         }
                       ]}
                     >
@@ -161,30 +153,63 @@ const ForgotPassword = () => {
                       />
                     </Form.Item>
 
-                    <Form.Item className="mt-5">
-                      <Link href={"/"}>
-                        <Button
-                          type="primary"
-                          htmlType="Cancel"
-                          size={"large"}
-                          className="mx-4 span-with-link"
-                        >
-                          Cancel
-                        </Button>
-                      </Link>
+                    <Form.Item
+                      label="Password"
+                      name="password"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your password!"
+                        }
+                      ]}
+                    >
+                      <Input.Password
+                        prefix={
+                          <AiOutlineLock className="site-form-item-icon" />
+                        }
+                        type="password"
+                        placeholder="Password"
+                      />
+                    </Form.Item>
 
+                    <Form.Item>
+                      <Form.Item
+                        name="remember"
+                        valuePropName="checked"
+                        noStyle
+                      >
+                        <Checkbox>Remember me</Checkbox>
+                      </Form.Item>
+                      <span className="float-right">
+                        <Link href={"/auth/ForgotPassword"}>
+                          <div
+                            className="login-form-forgot text-primary"
+                            style={{ cursor: "pointer" }}
+                          >
+                            Forgot password ?
+                          </div>
+                        </Link>
+                      </span>
+                    </Form.Item>
+                    <Form.Item className="mt-5">
                       {isLoading ? (
                         <Button
                           type="danger"
                           htmlType="submit"
                           size={"large"}
+                          block
                           loading
                         >
-                          Sending
+                          Submit
                         </Button>
                       ) : (
-                        <Button type="danger" htmlType="submit" size={"large"}>
-                          Send Mail
+                        <Button
+                          type="danger"
+                          htmlType="submit"
+                          size={"large"}
+                          block
+                        >
+                          Submit
                         </Button>
                       )}
                     </Form.Item>
@@ -193,10 +218,14 @@ const ForgotPassword = () => {
               </div>
             </div>
           </div>
+          <div className="ps-page__header"></div>
         </div>
       </div>
     </Container>
   )
 }
-
-export default ForgotPassword
+export async function getServerSideProps(context) {
+  var reffrals = context.req.headers.referer
+  return { props: { reffrals } }
+}
+export default UserLogin

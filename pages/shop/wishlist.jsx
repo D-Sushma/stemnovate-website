@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import Shop from "~/components/partials/shop/Shop";
 import { connect } from "react-redux";
 import { caculateArrayQuantity } from "~/utilities/ecomerce-helpers";
 import useEcomerce from "~/hooks/useEcomerce";
