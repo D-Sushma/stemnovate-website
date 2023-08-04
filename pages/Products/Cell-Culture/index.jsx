@@ -5,6 +5,8 @@ import { connect } from "react-redux"
 import ProductList from "~/components/productList/productList"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import ReactPlayer from "react-player"
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 
 const categoryListScreen = () => {
   const breadcrumb = [
@@ -62,13 +64,14 @@ const categoryListScreen = () => {
                   <div className="col-md-6 text-center">
                     <div>
                       <div className="overflow-hidden">
-                        <img
+                        <Image
                           className="ps-banner__image"
                           src="/static/img/products/cell-culture/Chemically-Defined-Media.jpg"
                           alt="CHEMICALLY DEFINED MEDIA"
-                          width="500px"
+                          width={1200}
+                          height={675}
                         />
-                      </div>
+                        </div>
                       <h2 className="m-4">Chemically Defined Media</h2>
                       <p className="mx-4">
                         This media is for in vitro human or animal cell culture.
@@ -81,11 +84,12 @@ const categoryListScreen = () => {
                   <div className="col-md-6 text-center">
                     <div>
                       <div className="overflow-hidden">
-                        <img
+                        <Image
                           className="ps-banner__image"
                           src="/static/img/products/cell-culture/Animal-Component-Free-Media.jpg"
                           alt="ANIMAL COMPONENT FREE MEDIA"
-                          width="500px"
+                          width={1200}
+                          height={675}
                         />
                       </div>
                       <h2 className=" m-4">Animal Component Free Media</h2>
@@ -105,12 +109,16 @@ const categoryListScreen = () => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
                         src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
                         alt="CLASSICAL CELL CULTURE MEDIA"
+                        width={1200}
+                        height={675}
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <h2 className=" font-weight-bold">
@@ -134,11 +142,7 @@ const categoryListScreen = () => {
                   <div className="col-md-12 text-left">
                     <div>
                       <div className="overflow-hidden">
-                        {/* <div className="ps-banner__image ml-auto mr-auto" style={{ width: "500px" }}>
-                                                        <ReactPlayer playing loop className="react-player" url="/static/img/products/cell-culture/work-with-us-video-cell-culture-page.mp4" width="100%" height="100%" />
-                                                    </div> */}
-                        {/* <img className="ps-banner__image" src="/static/img/products/cell-culture/work-with-us-video-cell-culture-page.mp4" alt="alt" width="500px" /> */}
-                      </div>
+                        </div>
                       <h2>Cell Culture Handbook</h2>
                       <p>
                         Cell culture is a method used in biological research to
@@ -199,7 +203,7 @@ const categoryListScreen = () => {
                       </p>
                       <br />
                       <h3 className="text-left mb-5">
-                        Advantages Of Stemnovate's ETFDS
+                        Advantages Of Stemnovate&apos;s ETFDS
                       </h3>
 
                       <table id="products">
@@ -481,8 +485,7 @@ const categoryListScreen = () => {
                             height="100%"
                           />
                         </div>
-                        {/* <img className="ps-banner__image" src="/static/img/products/cell-culture/work-with-us-video-cell-culture-page.mp4" alt="alt" width="500px" /> */}
-                      </div>
+                        </div>
                       <h2 className="m-4">Work With Us!</h2>
                       <p className="mx-4">
                         At Stemnovate we have developed ready-to-use cell

@@ -1,22 +1,12 @@
-import React from "react";
-import Link from "next/link";
-import Rating from "~/components/elements/Rating";
-import useProduct from "~/hooks/useProduct";
+import React from "react"
 
 const ModuleDetailTopInformation = ({ product }) => {
-    // Views
-    const { brand } = useProduct();
+  // Views
+  return (
+    <header className="ps-product__top-info">
+      <h1 className="ps-product__title">{product.product_name}</h1>
+    </header>
+  )
+}
 
-    return (
-        <header className="ps-product__top-info">
-            {/* <div className="ps-product__categories">{brand(product)}</div> */}
-            <h1 className="ps-product__title">{product.product_name}</h1>
-            {/* <div className="ps-product__rating">
-                <Rating />
-                <span className="ml-20">(1 review)</span>
-            </div> */}
-        </header>
-    );
-};
-
-export default ModuleDetailTopInformation;
+export default ModuleDetailTopInformation

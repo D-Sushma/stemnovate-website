@@ -1,6 +1,5 @@
 import React from "react";
 import ModuleShopActions from "~/components/partials/shop/modules/ModuleShopActions";
-import CustomPagination from "~/components/elements/basic/CustomPagination";
 
 const Shop = ({ children, classes, fullwidth = false, actions = true }) => {
     let actionsView;
@@ -18,8 +17,7 @@ const Shop = ({ children, classes, fullwidth = false, actions = true }) => {
             <div className={`ps-shop ${classes}`}>
                 {actionsView}
                 <div className="ps-shop__content">{children}</div>
-                <div className="ps-shop__footer">{/* <CustomPagination /> */}</div>
-            </div>
+                </div>
         );
     } else {
         return (
@@ -27,7 +25,7 @@ const Shop = ({ children, classes, fullwidth = false, actions = true }) => {
                 {actionsView}
                 <div className="ps-shop__content">
                     <div className="container">{children}</div>
-                    <div className="ps-shop__footer">{/* <CustomPagination /> */}</div>
+                    <div className="ps-shop__footer"></div>
                 </div>
             </div>
         );

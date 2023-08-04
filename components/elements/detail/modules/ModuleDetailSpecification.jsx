@@ -48,11 +48,6 @@ const ModuleDetailSpecification = ({ Specification, type }) => {
                             <td>{Specification.Storage !== "" ? Specification.Storage : "-"}</td>
                         </tr>
                     )}
-                    {/* {myInputBoxes.includes("Growth_Factors") && (
-                    <tr>
-                        <th className="ps-table__th">Post Freeze Viability</th>
-                        <td>{Specification.PostFreezeViability !== "" ? Specification.PostFreezeViability : "-"}</td>
-                    </tr>)} */}
                     {myInputBoxes.includes("Growth") && (
                         <tr>
                             <th className="ps-table__th">Growth</th>
@@ -83,23 +78,6 @@ const ModuleDetailSpecification = ({ Specification, type }) => {
                             <td>{Specification.TissueSource !== "" ? Specification.TissueSource : "-"}</td>
                         </tr>
                     )}
-                    {/* {myInputBoxes.includes("Growth_Factors") && (
-                    <tr>
-                        <th className="ps-table__th">Cell Numbers</th>
-                        <td>{Specification.CellNumbers !== "" ? Specification.CellNumbers : "-"}</td>
-                    </tr>)} */}
-                    {/* {myInputBoxes.includes("Growth_Factors") && (
-                    <tr>
-                        <th className="ps-table__th">Adherence</th>
-                        <td>{Specification.Adherence !== "" ? Specification.Adherence : "-"}</td>
-                    </tr>)} */}
-                    {/* {myInputBoxes.includes("Viability") && (
-                    <tr>
-                        <th className="ps-table__th">Viability</th>
-                        <td>{Specification.Viability !== "" ? Specification.Viability : "-"}</td>
-                    </tr>
-                    )} */}
-
                     {myInputBoxes.includes("Base_Formulation") && (
                         <tr>
                             <th className="ps-table__th">Base Formulation</th>

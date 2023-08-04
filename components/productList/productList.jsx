@@ -1,44 +1,24 @@
 import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
-import useGetProducts from "~/hooks/useGetProducts"
-import useProductGroup from "~/hooks/useProductGroup"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import SidebarShop from "~/components/shared/sidebar/SidebarShop"
-import Shop from "~/components/partials/shop/Shop"
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation"
-import Container from "~/components/layouts/Container"
-import Loader from "~/components/reuseable/Loader"
 import Image from "next/image"
-import { API } from "~/lib/constant"
 import Link from "next/link"
 import { Input, Button } from "antd"
-import { baseUrl } from "~/repositories/Repository"
 import { connect, useDispatch } from "react-redux"
 import { toggleDrawer } from "~/store/app/action"
 import useEcomerce from "~/hooks/useEcomerce"
-import { Modal } from "antd"
-import ReactHtmlParser from "react-html-parser"
 import useProduct from "~/hooks/useProduct"
-
-import { useSession, signIn } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { ToastContainer, toast } from "react-toastify"
 import { FaArrowRight } from "react-icons/fa"
 
 const ProductList = ({ ecomerce, slug }) => {
-  const Router = useRouter()
   const { price } = useProduct()
   const [ProductData, setProductData] = useState("")
-  const [isLoading, setisLoading] = React.useState(false)
-  const [breadcrumb, setbreadcrumb] = React.useState([])
-  const [searchUrl, setsearchUrl] = React.useState("")
-  const { withGrid } = useProductGroup()
   const [AddtoCart, setAddtoCart] = useState([])
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isLoading, setisLoading] = React.useState(false)
 
   const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
   const { loading, addItem } = useEcomerce()
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   const handleAddItemToCart = (id, price, key) => {
     if (session) {
@@ -56,13 +36,23 @@ const ProductList = ({ ecomerce, slug }) => {
             Please{"  "}
             <Link href={"/auth/UserLogin"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Login</a>
+                <span
+                  className="Toast-link font-weight-bolder"
+                  style={{ cursor: "pointer" }}
+                >
+                  Login
+                </span>
               </u>
             </Link>
             {"  "}/{"  "}
             <Link href={"/auth/UserReg"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Signup</a>
+                <span
+                  className="Toast-link font-weight-bolder"
+                  style={{ cursor: "pointer" }}
+                >
+                  Signup
+                </span>
               </u>
             </Link>{" "}
             to proceed
@@ -80,18 +70,6 @@ const ProductList = ({ ecomerce, slug }) => {
         theme: "colored"
       })
     }
-  }
-
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
   }
 
   const AddCart = (index) => {
@@ -173,30 +151,6 @@ const ProductList = ({ ecomerce, slug }) => {
             <div className=" row d-flex my-4 justify-content-center">
               {ProductData.Products &&
                 ProductData.Products.map((post, key) => (
-                  // <div key={key} style={{ cursor: "pointer" }} className="col-md-2 col-sm-4 d-flex flex-grow-1">
-                  //     <div className="card mt-3  align-items-center p-1">
-                  //         <Link href={`${slug}/${post.slug}`} passHref>
-                  //             <a>
-                  //                 <img
-                  //                     className="responsive-img announcement-img"
-                  //                     src={post.image == null ? `/no-image.png` : `${process.env.AWS_S3BUCKET_URL}${post.image}`}
-                  //                     alt={post?.category_name}
-                  //                     style={{
-                  //                         width: "100%",
-                  //                         // minHeight: "100px",
-                  //                     }}
-                  //                 />
-                  //             </a>
-                  //         </Link>
-                  //         <div className="card-body  p-0 ps-ProductList-bottom">
-                  //             <Link href={`${slug}/${post.slug}`} passHref>
-                  //                 <a>
-                  //                     <h5 className="card-title  pt-2 px-2">{post.category_name}</h5>
-                  //                 </a>
-                  //             </Link>
-                  //         </div>
-                  //     </div>
-                  //     </div>
                   <div
                     className="col-md-3 mb-3 p-2 d-flex flex-column flex-grow-1"
                     key={key}
@@ -211,22 +165,33 @@ const ProductList = ({ ecomerce, slug }) => {
                         className="rounded"
                         alt={post.category_name}
                       />
+                      {/* <Image
+                        src={
+                          post.image == null
+                            ? `/no-image.png`
+                            : `${process.env.AWS_S3BUCKET_URL}${post.image}`
+                        }
+                        className="rounded"
+                        alt={post.category_name}
+                        width={1200}
+                        height={675}
+                        placeholder="blur"
+                        blurDataURL="/static/image/blurred.png"
+                      /> */}
                       <div className="card-body  rounded-lg p-0 overlay-content-p">
                         <div className="p-5">
                           <Link href={`${slug}/${post.slug}`}>
-                            <a>
-                              <h2 className="h2 text-white">
-                                <b>{post.category_name}</b>
-                              </h2>
-                            </a>
+                            <h2 className="h2 text-white span-with-link">
+                              <b>{post.category_name}</b>
+                            </h2>
                           </Link>
 
                           <Link href={`${slug}/${post.slug}`}>
-                            <a className="link-btn-c">
+                            <span className="link-btn-c span-with-link">
                               <b>
                                 Read More <FaArrowRight />
                               </b>
-                            </a>
+                            </span>
                           </Link>
                         </div>
                       </div>
@@ -251,7 +216,20 @@ const ProductList = ({ ecomerce, slug }) => {
                             href={`/product/${value.product_slug}`}
                             as={`/product/${value.product_slug}`}
                           >
-                            <a href="">
+                            <div>
+                              <img
+                                loader={myLoader}
+                                src={`${process.env.AWS_S3BUCKET_URL}${
+                                  value?.product_image.split(",")[0]
+                                }`}
+                                unoptimized={false}
+                                alt={value?.product_slug}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "cover"
+                                }}
+                              />
                               <Image
                                 loader={myLoader}
                                 src={`${process.env.AWS_S3BUCKET_URL}${
@@ -261,8 +239,10 @@ const ProductList = ({ ecomerce, slug }) => {
                                 alt={value?.product_slug}
                                 width="480"
                                 height="360"
+                                placeholder="blur"
+                                blurDataURL="/static/image/blurred.png"
                               />
-                            </a>
+                            </div>
                           </Link>
 
                           <div className="card-body">
@@ -272,9 +252,12 @@ const ProductList = ({ ecomerce, slug }) => {
                                   href={`/product/${value.product_slug}`}
                                   as={`/product/${value.product_slug}`}
                                 >
-                                  <a className="reference-website">
+                                  <div
+                                    className="reference-website"
+                                    style={{ cursor: "pointer" }}
+                                  >
                                     {value && value.CatalogueNumber}
-                                  </a>
+                                  </div>
                                 </Link>
                               </div>
 
@@ -293,9 +276,12 @@ const ProductList = ({ ecomerce, slug }) => {
                                     href={`/product/${value.product_slug}`}
                                     as={`/product/${value.product_slug}`}
                                   >
-                                    <a className=" reference-website">
+                                    <div
+                                      className=" reference-website"
+                                      style={{ cursor: "pointer" }}
+                                    >
                                       View Details
-                                    </a>
+                                    </div>
                                   </Link>
                                 </div>
                               </div>
@@ -330,9 +316,7 @@ const ProductList = ({ ecomerce, slug }) => {
                           <p className="text-white ">Pricing</p>
                         </div>
                       </div>
-                      {/* ---------------------------------- Items ---------------------------------  */}
-
-                      {/* --------------------------------- Item 2 ---------------------------------  */}
+                      {/* --------------------------------- Items ---------------------------------  */}
                       {ProductData.ProductsList.map((value, key) => (
                         <div key={key}>
                           <div className="d-flex bd-highlight border-bottom ">
@@ -341,7 +325,9 @@ const ProductList = ({ ecomerce, slug }) => {
                                 href={`/product/${value.product_slug}`}
                                 as={`/product/${value.product_slug}`}
                               >
-                                <a>{value && value.CatalogueNumber}</a>
+                                <span className="span-with-link">
+                                  {value && value.CatalogueNumber}
+                                </span>
                               </Link>
                             </div>
                             <div
@@ -351,7 +337,7 @@ const ProductList = ({ ecomerce, slug }) => {
                               }}
                             ></div>
                             <div className="p-2 w-10 bd-highlight  text-right font-weight-bold">
-                              <h5
+                              <div
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target={`#expand${key}`}
@@ -359,14 +345,16 @@ const ProductList = ({ ecomerce, slug }) => {
                                 aria-expanded="false"
                                 aria-controls={`expand${key}`}
                               >
-                                <span className="help">
-                                  <span className="expander font-weight-bold"></span>
-                                  <i
-                                    className="fa font-weight-bold ml-1"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-                              </h5>
+                                <h5>
+                                  <span className="help">
+                                    <span className="expander font-weight-bold"></span>
+                                    <i
+                                      className="fa font-weight-bold ml-1"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </span>
+                                </h5>
+                              </div>
                             </div>
                           </div>
                           <div className="collapse" id={`expand${key}`}>
@@ -411,7 +399,9 @@ const ProductList = ({ ecomerce, slug }) => {
                                     href={`/product/${value.product_slug}`}
                                     as={`/product/${value.product_slug}`}
                                   >
-                                    <a>{value && value.CatalogueNumber}</a>
+                                    <span className="span-with-link">
+                                      {value && value.CatalogueNumber}
+                                    </span>
                                   </Link>
                                 </div>
                                 <div className="p-2 bd-highlight w-15  ">
@@ -464,10 +454,11 @@ const ProductList = ({ ecomerce, slug }) => {
                                     value.product_details.sale_price}
                                 </div>
                                 <div className=" bd-highlight w-15 align-items-center  ">
-                                  <div className="d-flex bd-highlight justify-content-around align-items-center"
-                                  style={{
-                                    width: "75%"
-                                  }}
+                                  <div
+                                    className="d-flex bd-highlight justify-content-around align-items-center"
+                                    style={{
+                                      width: "75%"
+                                    }}
                                   >
                                     <div className="p-2 bd-highlight ">
                                       <Input
@@ -506,17 +497,6 @@ const ProductList = ({ ecomerce, slug }) => {
                                         value={AddtoCart[key]}
                                       />
                                     </div>
-                                    {/* <div className="p-2 bd-highlight">
-                                                                    <i onClick={showModal} className="fa fa-info-circle font-weight-bold" aria-hidden="true"></i>
-
-                                                                    <Modal title="Product Info" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                                                                        <div
-                                                                            className="p-2 w-72 bd-highlight  "
-                                                                            dangerouslySetInnerHTML={{
-                                                                                __html: value.short_description,
-                                                                            }}></div>
-                                                                    </Modal>
-                                                                </div> */}
                                   </div>
                                 </div>
                               </div>
@@ -526,7 +506,7 @@ const ProductList = ({ ecomerce, slug }) => {
                                   {AddtoCart[key] > 0 ? (
                                     <Button
                                       type="primary"
-                                      onClick={(e) => {
+                                      onClick={() => {
                                         !loading
                                           ? handleAddItemToCart(
                                               value.id,

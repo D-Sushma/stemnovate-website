@@ -1,126 +1,18 @@
-import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
-import useGetProducts from "~/hooks/useGetProducts"
-import useProductGroup from "~/hooks/useProductGroup"
+import React from "react"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import SidebarShop from "~/components/shared/sidebar/SidebarShop"
-import Shop from "~/components/partials/shop/Shop"
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation"
 import Container from "~/components/layouts/Container"
-import Loader from "~/components/reuseable/Loader"
-import Image from "~/components/elements/Image"
-import { API } from "~/lib/constant"
 import Link from "next/link"
-import { Input, Button } from "antd"
+import Image from "~/components/elements/Image"
+import EthicalTissueSourcing from '~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg'
+import OurAnimalCellPlatform from '~/public/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif'
+import InternationalShipping from '~/public/static/img/products/Primary-Cells-Animal/International-Shipping.jpg'
+import AnimalCellCultureMedium from '~/public/static/img/products/Primary-Cells-Animal/Animal-Cell-Culture-Medium-and-reagents.jpg'
+import AnimalWelfare from '~/public/static/img/products/Primary-Cells-Animal/Animal-welfare.jpg'
 import { baseUrl } from "~/repositories/Repository"
-import { connect, useDispatch } from "react-redux"
-import { toggleDrawer } from "~/store/app/action"
-import useEcomerce from "~/hooks/useEcomerce"
-import { Modal } from "antd"
-import ReactHtmlParser from "react-html-parser"
+import { connect } from "react-redux"
 import ProductList from "~/components/productList/productList"
 import Subscribe from "~/components/shared/sections/Subscribe"
-import { Tooltip } from "antd"
-const categoryListScreen = ({ ProductData, ecomerce }) => {
-  const Router = useRouter()
-  const { slug } = Router.query
-  const { proload, product, getProductById } = useGetProducts()
-  const [isLoading, setisLoading] = React.useState(false)
-  const [searchterms, setsearchterms] = React.useState("")
-  const [searchUrl, setsearchUrl] = React.useState("")
-  const { withGrid } = useProductGroup()
-  const [AddtoCart, setAddtoCart] = useState([])
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
-  const { loading, addItem } = useEcomerce()
-
-  const handleAddItemToCart = (id, price, key) => {
-    console.log("handleAddItemToCart", AddtoCart[key])
-    addItem(
-      { id: id, quantity: AddtoCart[key], price: price },
-      ecomerce.cartItems,
-      "cart"
-    )
-    dispatch(toggleDrawer(true))
-  }
-
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
-
-  const AddCart = (index) => {
-    console.log("index", index)
-
-    const NewCart = [...AddtoCart]
-    const cartval = parseInt(AddtoCart[index])
-    var newval = cartval + parseInt(1)
-    NewCart[index] = newval
-    setAddtoCart(NewCart)
-    console.log(NewCart)
-  }
-
-  const RemoveCart = (index) => {
-    if (AddtoCart) {
-      console.log("index", index)
-
-      const NewCart = [...AddtoCart]
-      const cartval = parseInt(AddtoCart[index])
-      var newval = cartval - parseInt(1)
-      NewCart[index] = newval
-      setAddtoCart(NewCart)
-      console.log(NewCart)
-    }
-  }
-
-  const getcategoryListBySlug = async (params) => {
-    const newbreadcrumb = [
-      {
-        id: 1,
-        text: "Home",
-        url: "/"
-      },
-      {
-        id: 2,
-        text: "Product",
-        url: "/Products"
-      },
-      {
-        id: 3,
-        text: "Biobanking"
-      }
-    ]
-    var urldata = "/Products"
-    for (let index = 0; index < slug.length; index++) {
-      const element = slug[index]
-      if (index <= slug.length) {
-        var urldata = urldata + "/" + element
-      } else {
-        var urldata = urldata + "/#"
-      }
-      var bdc = {
-        id: 3 + index,
-        text: element,
-        url: urldata
-      }
-      newbreadcrumb.push(bdc)
-    }
-    setbreadcrumb(newbreadcrumb)
-  }
-
-  const myLoader = ({ src }) => {
-    return src
-  }
-
+const categoryListScreen = () => {
   const breadcrumb = [
     {
       id: 1,
@@ -191,12 +83,16 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          src="/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg"
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src={EthicalTissueSourcing}
                           alt="ANIMAL PRIMARY DERMAL CELLS"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                      </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc ">
@@ -224,21 +120,16 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      {/* <video
-                        src="/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        width="100%"
-                        height="100%"
-                      ></video> */}
-                      <a className="ps-section__image" href="#">
-                        <img
-                          src="/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif"
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src={OurAnimalCellPlatform}
                           alt="LIVE PRIMARY DERMAL CELLS"
+                          width={400}
+                          height={220}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
@@ -292,12 +183,9 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                         <p>Cell models for infectious diseases</p>
                       </li>
                     </ol>
-                    <a
-                      href="/Applications/Animal-Health"
-                      className="btn btn-lg button-orange text-white m-4 m-5"
-                    >
-                      Read More
-                    </a>
+                    <Link href="/Applications/Animal-Health" >
+                      <button className="btn btn-lg button-orange text-white m-4 m-5">Read More</button>
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -306,12 +194,16 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          src="/static/img/products/Primary-Cells-Animal/International-Shipping.jpg"
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src={InternationalShipping}
                           alt="INTERNATIONAL SHIPPING"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
@@ -334,12 +226,16 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          src="/static/img/products/Primary-Cells-Animal/Animal-Cell-Culture-Medium-and-reagents.jpg"
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src={AnimalCellCultureMedium}
                           alt="ANIMAL CELL CULTURE MEDIUM AND REAGENTS"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
@@ -363,12 +259,16 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          src="/static/img/products/Primary-Cells-Animal/Animal-welfare.jpg"
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape" >
+                        <Image
+                          src={AnimalWelfare}
                           alt="ANIMAL WELFARE"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
@@ -384,12 +284,9 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                           world through scientific aptitude and discoveries for
                           our furry friends.
                         </p>
-                        <a
-                          href="/Applications/Animal-Health"
-                          className="btn btn-lg button-orange text-white m-4 m-5"
-                        >
-                          Read More
-                        </a>
+                        <Link href="/Applications/Animal-Health" >
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">Read More</button>
+                        </Link>
                       </div>
                     </div>
                   </section>
@@ -401,12 +298,9 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                   <p className="p-1">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
-                    <a
-                      href="mailto:info@stemnovate.co.uk"
-                      className="text-orange"
-                    >
-                      contact us.
-                    </a>{" "}
+                    <Link href="mailto:info@stemnovate.co.uk" >
+                     <span className="text-orange span-with-link" >contact us.</span> 
+                    </Link>{" "}
                   </p>
                   <p className="base-bg-primary text-white p-2">
                     Stemnovate cell production follows compliance and
@@ -430,7 +324,6 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
   const slug = query.slug
   var ProductData = []
-  var categoryListList = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -450,7 +343,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData), (categoryListList = myProductData.Products)
+    ;(ProductData = myProductData)
   }
 
   // // Pass data to the page via props

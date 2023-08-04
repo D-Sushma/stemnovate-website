@@ -60,8 +60,7 @@ const AddResourcesModule = ({
             offerData.customer_type === 1 &&
             userData?.orders?.length >= 1
           ) {
-            // toast.error("this Offer is for " + UserType(userType));
-            e.preventDefault()
+           e.preventDefault()
             addItem(
               {
                 id: product.id,
@@ -76,7 +75,6 @@ const AddResourcesModule = ({
             offerData.customer_type === 2 &&
             userData?.orders?.length === 0
           ) {
-            // toast.error("this Offer is for " + UserType(userType));
             e.preventDefault()
             addItem(
               {
@@ -91,12 +89,10 @@ const AddResourcesModule = ({
           } else {
             toast.error("Sorry ! this Offer is Not for " + UserType(userType))
           }
-          // console.log("userData", userData?.orders?.length);
-        } else {
+          } else {
           toast.error("sorry ! this offer has expaired")
         }
-        // console.log(checkDate(offerData.end_date));
-      } else {
+        } else {
         if (product.resources_status) {
           e.preventDefault()
           addItem(
@@ -130,13 +126,13 @@ const AddResourcesModule = ({
             Please{"  "}
             <Link href={"/auth/UserLogin"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Login</a>
+                <span className="Toast-link font-weight-bolder span-with-link">Login</span>
               </u>
             </Link>
             {"  "}/{"  "}
             <Link href={"/auth/UserReg"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Signup</a>
+                <span className="Toast-link font-weight-bolder span-with-link">Signup</span>
               </u>
             </Link>{" "}
             to proceed

@@ -13,11 +13,11 @@ const ModuleShopPaginationRange = () => {
     React.useEffect(() => {
         console.log("shopping range", router.query);
     }, [router]);
-    let ranges = [10, 20, 50, 100];
+    const ranges = [10, 20, 50, 100];
     const paginationRangeItems = ranges.map((item) => (
         <Menu.Item key={item}>
             <Link href={`${pathname}?_limit=${item}${layout ? "&layout=" + layout : ""}${columns ? "&columns=" + columns : "&columns=4"}${_orderBy ? "&_orderBy=" + _orderBy : ""}`}>
-                <a>{item}</a>
+                <div>{item}</div>
             </Link>
         </Menu.Item>
     ));

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-
+import Image from '~/components/elements/Image'
 import ModuleShopSortBy from "~/components/partials/shop/modules/ModuleShopSortBy";
 import ModuleShopPaginationRange from "~/components/partials/shop/modules/ModuleShopPaginationRange";
 import { useRouter } from "next/router";
-import ModuleFilterBy from "./ModuleFilterBy";
 
 const ModuleShopActions = () => {
     const router = useRouter();
-    const { layout, _orderBy, _limit, columns } = router.query;
+    const { layout, _orderBy, _limit } = router.query;
     const pathname = router.pathname;
 
     React.useEffect(() => {
@@ -52,30 +51,22 @@ const ModuleShopActions = () => {
     // Views
 
     const swichersItemsView = layoutItems.map((item) => (
-        <a className={`ps-shop__layout-switcher ${item.id === selectedLayout.id ? "active" : ""}`} onClick={(e) => handleSelecteLayout(e, item)} key={item.id}>
-            <img src={item.image} alt={item.image} />
-        </a>
+        <div className={`div-shop__layout-switcher ${item.id === selectedLayout.id ? "active" : ""}`} onClick={(e) => handleSelecteLayout(e, item)} key={item.id}>
+            <Image
+                src={item.image}
+                alt={item.image}
+                width={1000}
+                height={800}
+            />
+        </div>
     ));
 
     return (
         <div className="ps-shop__actions">
             <div className="ps-shop__actions-left">
                 <div className="ps-shop__layout-switchers">{swichersItemsView}</div>
-                {/* <div className="ps-checkbox">
-                    <input
-                        className="form-control"
-                        type="checkbox"
-                        id="show-onsale"
-                        name="show-onsale"
-                    />
-                    <label htmlFor="show-onsale">
-                        Show only products on sale
-                    </label>
-                </div> */}
             </div>
             <div className="ps-shop__actions-right">
-                {/* <ModuleFilterBy /> */}
-
                 <ModuleShopSortBy />
                 <ModuleShopPaginationRange />
             </div>

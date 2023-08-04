@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ProductRepository from "~/repositories/ProductRepository";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import CategoryList from "./CategoryList";
 
@@ -31,8 +30,7 @@ const WidgetShopCategories = () => {
     let categoriesView;
     if (!loading) {
         if (categories && categories.length > 0) {
-            // categoriesView = <CategoryList getList={'Products'} categories={categories} slug={slug} />
-            categoriesView = categories.map((item, k) => <CategoryList key={k} getList={item.slug} type="main" categories={item.category_name} slug={slug} />);
+             categoriesView = categories.map((item, k) => <CategoryList key={k} getList={item.slug} type="main" categories={item.category_name} slug={slug} />);
         } else {
             categoriesView = <p>No category found.</p>;
         }

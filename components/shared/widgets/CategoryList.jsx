@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import axios from "axios";
 
-function CategoryList({ categories, slug, getList, type }) {
+function CategoryList({ slug, getList, type }) {
     const [ShowM, setShowM] = useState([]);
     const [categoriesList, setcategoriesList] = useState(null);
 
     useEffect(() => {
-        // console.log("catList", catList);
-        // console.log("slug", slug);
         const getcategories = async () => {
             try {
                 const response = await fetch(`${process.env.NEXT_BASE_URL}api/products/getAllcategories?slug=${getList}`);
@@ -19,8 +16,7 @@ function CategoryList({ categories, slug, getList, type }) {
                         setcategoriesList(myCategory.result);
                         const CatArray = myCategory.result;
                         var datafalse = [];
-                        CatArray.forEach((element, key) => {
-                            //  console.log(key)
+                        CatArray.forEach(() => {
                             datafalse.push(false);
                         });
                         setShowM(datafalse);
@@ -44,13 +40,12 @@ function CategoryList({ categories, slug, getList, type }) {
                         <div className="h4">
                             {item.slug == "Diagnostics-products" ? (
                                 <Link href={`/category/${item.slug}`}>
-                                    <a className={`ps-link--line`}>
+                                    <div className={`div-link--line`}>
                                         <span className="h4 ml-5">{item.category_name.length > 20 ? item.category_name.slice(0, 20) + ".." : item.category_name}</span>
-                                    </a>
+                                    </div>
                                 </Link>
                             ) : (
                                 <>
-                                    {/* {catList && (catList.length > 0 && catList[0].slug == slug ? setShowM({ ...ShowM, [key]: !ShowM[key] }) : null)} */}
                                     {item.other_category.length > 0 && (
                                         <span className="m-3" onClick={() => setShowM({ ...ShowM, [key]: !ShowM[key] })}>
                                             {ShowM[key] ? <i onClick={() => setShowM({ ...ShowM, [key]: !ShowM[key] })} className="fa fa-minus"></i> : <i onClick={() => setShowM({ ...ShowM, [key]: !ShowM[key] })} className="fa fa-plus"></i>}
@@ -58,7 +53,7 @@ function CategoryList({ categories, slug, getList, type }) {
                                     )}
 
                                     {/* set Open Menu */}
-                                    {item.other_category.map((data, k) => {
+                                    {item.other_category.map((data) => {
                                         {
                                             data.slug == slug ? "true -" + data.slug : null;
                                         }
@@ -77,15 +72,15 @@ function CategoryList({ categories, slug, getList, type }) {
                                             onClick={() => {
                                                 type == "main" ? setShowM({ ...ShowM, [key]: !ShowM[key] }) : null;
                                             }}>
-                                            <a className={`ps-link--line  ${slug && slug === item.category_name ? "active" : null}`}>
+                                            <span className={`div-link--line  ${slug && slug === item.category_name ? "active" : null}`}>
                                                 <span className="h4">{item.category_name.length > 20 ? item.category_name.slice(0, 20) + ".." : item.category_name}</span>
-                                            </a>
+                                            </span>
                                         </span>
                                     ) : (
                                         <Link href={`${type == "main" ? "#" : "/category/"}${item.slug}`}>
-                                            <a className={`ps-link--line  ${slug && slug === item.category_name ? "active" : null}`}>
+                                            <div className={`div-link--line  ${slug && slug === item.category_name ? "active" : null}`}>
                                                 <span className="h4">{item.category_name.length > 20 ? item.category_name.slice(0, 20) + ".." : item.category_name}</span>
-                                            </a>
+                                            </div>
                                         </Link>
                                     )}
                                 </>

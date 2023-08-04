@@ -27,7 +27,7 @@ const ModuleShopSortBy = () => {
     const viewItems = sortByItems.map((item) => (
         <Menu.Item key={item.id}>
             <Link href={item.url}>
-                <a>{item.text}</a>
+                <div>{item.text}</div>
             </Link>
         </Menu.Item>
     ));

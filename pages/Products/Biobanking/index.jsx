@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import ProductList from "~/components/productList/productList";
 import Subscribe from "~/components/shared/sections/Subscribe";
 import { Tooltip } from "antd";
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 const categoryListScreen = () => {
     const breadcrumb = [
         {
@@ -43,9 +45,15 @@ const categoryListScreen = () => {
                                 <div className="container">
                                     <section className="ps-section--block-grid ">
                                         <div className="ps-section__thumbnail">
-                                            <a className="ps-section__image" href="#">
-                                                <img src="/static/img/products/bio-banking/Compliant-_-Ethical-biobanking.jpg" alt="Compliant & Ethical biobanking" />
-                                            </a>
+                                            <Link href="#">
+                                                <div className="ps-section__image link-hover-thumb-shape">
+                                                <Image src="/static/img/products/bio-banking/Compliant-_-Ethical-biobanking.jpg" 
+                                                alt="Compliant & Ethical biobanking" 
+                                                width={1200}
+                                                height={675}
+                                               />
+                                               </div>
+                                            </Link>
                                         </div>
                                         <div className="ps-section__content">
                                             <h2 className="p-1 text-white font-weight-bold">Compliant & Ethical biobanking</h2>
@@ -53,7 +61,7 @@ const categoryListScreen = () => {
                                                 <p className="text-white">
                                                     Through commercial brokers, cells could be coming from anywhere - In a recent survey, the{" "}
                                                     <Tooltip title="Helping UK SMEs access tissue samples - Medicines Discovery Catapult">
-                                                        <a rel="noreferrer" className="reference-website" target={"_blank"} href="https://md.catapult.org.uk/success-stories/helping-uk-smes-access-tissue-samples/">
+                                                        <a rel="noopener noreferrer" className="reference-website" target={"_blank"} href="https://md.catapult.org.uk/success-stories/helping-uk-smes-access-tissue-samples/">
                                                             Medicines Discovery Catapult
                                                         </a>
                                                     </Tooltip>{" "}
@@ -69,23 +77,33 @@ const categoryListScreen = () => {
                                     <div className="row py-5">
                                         <div className="col-md-6 text-center">
                                             <div>
-                                                <div className="overflow-hidden">
-                                                    <img className="ps-banner__image" src="/static/img/products/bio-banking/Quality-Assured.jpg" alt="Quality Assured" width="500px" />
-                                                </div>
+                                                <div className="overflow-hidden ">
+                                                    <Image className="ps-banner__image" 
+                                                    src="/static/img/products/bio-banking/Quality-Assured.jpg" 
+                                                    alt="Quality Assured" 
+                                                    width={1200}
+                                                    height={675} 
+                                                    />
+                                                    </div>
                                                 <h3 className="m-4">Quality Assured</h3>
                                                 <p className="mx-4 text-left">With Stemnovate you can be sure of the quality of our cells, we have a dedicated team growing and testing our cells and all cells will have tested negative for HIV-1, HIV-2, Hepatitis-A, Hepatitis-B, bacteria, and mycoplasma. Our cells are cultured in defined conditions and are profiled for cell growth and the expression of key biomarkers. We also offer profiling and bioinformatics to analyse the cells and offer more information, such as genotype information for major drug-metabolizing enzymes such as Cytochrome P450.</p>
                                             </div>
                                         </div>
                                         <div className="col-md-6 text-center">
                                             <div>
-                                                <div className="overflow-hidden">
-                                                    <img className="ps-banner__image" src="/static/img/products/bio-banking/Gender-_-Ethnic-Diversity.jpg" alt="Gender & Ethnic Diversity" width="500px" />
+                                                <div className="overflow-hidden ">
+                                                    <Image className="ps-banner__image" 
+                                                    src="/static/img/products/bio-banking/Gender-_-Ethnic-Diversity.jpg" 
+                                                    alt="Gender & Ethnic Diversity" 
+                                                    width={1200}
+                                                    height={675}
+                                                    />
                                                 </div>
                                                 <h3 className=" m-4">Gender & Ethnic Diversity</h3>
                                                 <p className="mx-4 text-left ">
                                                     According to a{" "}
                                                     <Tooltip title="Gender-based differences in the toxicity of pharmaceuticals--the Food and Drug Administration's perspective - PubMed (nih.gov)">
-                                                        <a rel="noreferrer" className="reference-website" target={"_blank"} href="https://pubmed.ncbi.nlm.nih.gov/11488556/">
+                                                        <a rel=" noopener noreferrer" className="reference-website" target={"_blank"} href="https://pubmed.ncbi.nlm.nih.gov/11488556/">
                                                             2001 article by Margaret Ann Miller
                                                         </a>
                                                     </Tooltip>{" "}
@@ -100,9 +118,16 @@ const categoryListScreen = () => {
                                 <div className="container">
                                     <section className="ps-section--block-grid py-5">
                                         <div className="ps-section__thumbnail">
-                                            <a className="ps-section__image" href="#">
-                                                <img src="/static/img/products/bio-banking/Reducing-Animal-Testing.jpg" alt="Reducing Animal Testing" />
-                                            </a>
+                                            <Link href="#">
+                                                <div className="ps-section__image link-hover-thumb-shape">
+                                                <Image 
+                                                src="/static/img/products/bio-banking/Reducing-Animal-Testing.jpg" 
+                                                alt="Reducing Animal Testing"
+                                                width={1200}
+                                                height={675}
+                                                 />
+                                                </div>
+                                            </Link>
                                         </div>
                                         <div className="ps-section__content">
                                             <h2 className="p-1 text-white font-weight-bold">Reducing Animal Testing</h2>

@@ -5,6 +5,8 @@ import { Collapse } from "antd"
 import { connect } from "react-redux"
 import Subscribe from "~/components/shared/sections/Subscribe"
 import ProductList from "~/components/productList/productList"
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 const IPSCellsScreen = () => {
   const { Panel } = Collapse
   const breadcrumb = [
@@ -60,12 +62,16 @@ const IPSCellsScreen = () => {
                 <div className="container">
                   <section className="ps-section--block-grid py-5">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
-                          src="/static/img/services/Cell-reprogramming.webp"
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
+                          src="/static/img/services/Cell-Reprogramming.jpg"
                           alt="Cell Reprogramming"
+                          width={1200}
+                          height={675}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content ">
                       <div className="ps-section__desc ">
@@ -92,12 +98,9 @@ const IPSCellsScreen = () => {
                   <p className="p-1">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
-                    <a
-                      href="mailto:info@stemnovate.co.uk"
-                      className="text-orange"
-                    >
-                      contact us.
-                    </a>
+                    <Link href="mailto:info@stemnovate.co.uk" >
+                      <span className="text-orange span-with-link">contact us.</span>
+                    </Link>
                   </p>
                   <p className="base-bg-primary text-white p-2">
                     Stemnovate cell production follows compliance and
@@ -110,7 +113,7 @@ const IPSCellsScreen = () => {
               </div>
               <div className="about-section">
                 <div className="container">
-                  <h1 className="h1">FAQ (Frequently Ask questions)</h1>
+                  <h2 className="h1">FAQ (Frequently Ask questions)</h2>
                   <p className="base-bg-primary text-white p-2 pl-5">
                     If you have any doubts or any questions please see
                     followings

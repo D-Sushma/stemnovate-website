@@ -24,13 +24,13 @@ const DetailThree = ({ product }) => {
           Please{"  "}
           <Link href={"/auth/UserLogin"}>
             <u>
-              <a className="Toast-link font-weight-bolder">Login</a>
+              <span className="Toast-link font-weight-bolder link-hover-thumb-shape">Login</span>
             </u>
           </Link>
           {"  "}/{"  "}
           <Link href={"/auth/UserReg"}>
             <u>
-              <a className="Toast-link font-weight-bolder">Signup</a>
+              <span className="Toast-link font-weight-bolder link-hover-thumb-shape">Signup</span>
             </u>
           </Link>{" "}
           to proceed
@@ -58,11 +58,6 @@ const DetailThree = ({ product }) => {
           <div className="ps-product__left">
             <ModuleDetailTopInformation product={product} />
             <ModuleProductDetailDescription product={product} />
-            {/* <div className="ps-product__variants">
-                                <ModuleDetailFeatures />
-                                <ModuleDetailMeta />
-                                <ModuleProductDetailSharing />
-                            </div> */}
             <div className="ps-product__ecomerce-actions">
               <strong>SDS</strong>
               <br />
@@ -101,12 +96,7 @@ const DetailThree = ({ product }) => {
           </div>
           <div className="ps-product__right">
             <div className="ps-product__shopping-wrapper">
-              {/* <p className="ps-product__log-status">
-                                Only 3 left in stock
-                            </p> */}
               {price(product.product_details)}
-              {/* <ModuleDetailColors /> */}
-              {/* <ModuleDetailSizes simple={true} /> */}
               <ModuleDetailShoppingActions product={product} />
             </div>
           </div>

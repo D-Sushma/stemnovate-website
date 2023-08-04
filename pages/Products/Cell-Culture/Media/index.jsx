@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from "react"
-import { useRouter } from "next/router"
-import useGetProducts from "~/hooks/useGetProducts"
-import useProductGroup from "~/hooks/useProductGroup"
+import React from "react"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
-import { connect, useDispatch } from "react-redux"
-import useEcomerce from "~/hooks/useEcomerce"
+import { connect } from "react-redux"
 import ProductList from "~/components/productList/productList"
 import Subscribe from "~/components/shared/sections/Subscribe"
-import ReactPlayer from "react-player"
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 
-const categoryListScreen = ({ ProductData, ecomerce }) => {
-  const Router = useRouter()
-  const { slug } = Router.query
-  const { proload, product, getProductById } = useGetProducts()
-  const [isLoading, setisLoading] = React.useState(false)
-  const [searchterms, setsearchterms] = React.useState("")
-  const [searchUrl, setsearchUrl] = React.useState("")
-  const { withGrid } = useProductGroup()
-  const [AddtoCart, setAddtoCart] = useState([])
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
-  const { loading, addItem } = useEcomerce()
+const categoryListScreen = () => {
   const breadcrumb = [
     {
       id: 1,
@@ -86,11 +70,12 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                     <div className="col-md-6 text-center">
                       <div>
                         <div className="overflow-hidden">
-                          <img
+                          <Image
                             className="ps-banner__image"
                             src="/static/img/products/cell-culture/Chemically-Defined-Media.jpg"
                             alt="CHEMICALLY DEFINED MEDIA"
                             width="500px"
+                            height="285px"
                           />
                         </div>
                         <h2 className="m-4">CHEMICALLY DEFINED MEDIA</h2>
@@ -105,11 +90,12 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                     <div className="col-md-6 text-center">
                       <div>
                         <div className="overflow-hidden">
-                          <img
+                          <Image
                             className="ps-banner__image"
                             src="/static/img/products/cell-culture/Animal-Component-Free-Media.jpg"
                             alt="ANIMAL COMPONENT FREE MEDIA"
                             width="500px"
+                            height="285px"
                           />
                         </div>
                         <h2 className=" m-4">ANIMAL COMPONENT FREE MEDIA</h2>
@@ -129,12 +115,16 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <a className="ps-section__image" href="#">
-                        <img
+                      <Link href="#">
+                        <div className="ps-section__image link-hover-thumb-shape">
+                        <Image
                           src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
                           alt="CLASSICAL CELL CULTURE MEDIA"
+                          width={1000}
+                          height={563}
                         />
-                      </a>
+                        </div>
+                      </Link>
                     </div>
                     <div className="ps-section__content">
                       <h2 className=" font-weight-bold">
@@ -171,7 +161,6 @@ const categoryListScreen = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
   const slug = query.slug
   var ProductData = []
-  var categoryListList = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -191,7 +180,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData), (categoryListList = myProductData.Products)
+    ;(ProductData = myProductData)
   }
 
   // // Pass data to the page via props

@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
 import AddResourcesModule from "~/components/elements/products/modules/AddResourcesModule"
+import Link from "next/link"
+import Image from "~/components/elements/Image"
 
 const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
   const {
@@ -73,25 +75,31 @@ const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
                   resources.map((data, key) => (
                     <div key={key} className="col-md-2 border resources-Box">
                       <div>
-                        <a
+                        <Link
                           href={`/resources/details/${data.resources_category_resourcesToresources_category.slug}/${data.resources_id}/${data.access_type}`}
                         >
-                          <img
-                            src={`${process.env.AWS_S3BUCKET_URL}${data.resources_preview}`}
-                            className="rounded-lg"
-                            alt={data.resources_name}
-                          />
-                        </a>
-                        <a
+                          <div>
+                            <Image
+                              src={`${process.env.AWS_S3BUCKET_URL}${data.resources_preview}`}
+                              className="rounded-lg"
+                              alt={data.resources_name}
+                              width={1000}
+                              height={563}
+                            />
+                          </div>
+                        </Link>
+                        <Link
                           href={`/resources/details/${data.resources_category_resourcesToresources_category.slug}/${data.resources_id}/${data.access_type}`}
                         >
-                          <p className="text-center my-2">
-                            {data.resources_name}
-                          </p>
-                          <p className="ps-product__price sale text-center">
-                            <span>£</span> {data.resources_price}
-                          </p>
-                        </a>
+                          <div className="link-hover-thumb-shape">
+                            <p className="text-center my-2">
+                              {data.resources_name}
+                            </p>
+                            <p className="ps-product__price sale text-center">
+                              <span>£</span> {data.resources_price}
+                            </p>
+                          </div>
+                        </Link>
 
                         <AddResourcesModule
                           userData={userData}
