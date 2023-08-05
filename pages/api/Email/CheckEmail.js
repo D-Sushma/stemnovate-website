@@ -1,5 +1,4 @@
 import prisma from "~/lib/prisma";
-import bcrypt from "bcrypt";
 export default async function handle(req, res) {
     try {
         const { email } = req.body;
@@ -12,8 +11,7 @@ export default async function handle(req, res) {
                 is_verified: parseInt(1),
             },
         });
-        // console.log(checkuser);
-
+       
         if (parseInt(checkuser.count)) {
             var response = {
                 code: "200",

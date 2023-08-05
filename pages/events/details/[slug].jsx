@@ -13,6 +13,7 @@ import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import ProductList from "~/components/eventDetailList/productList"
+import Image from '~/components/elements/Image'
 
 const EventsDetails = ({ EventsData }) => {
   console.log("EventsData", EventsData)
@@ -79,25 +80,16 @@ const EventsDetails = ({ EventsData }) => {
           {EventsData &&
             EventsData.data.map((data, key) => (
               <div key={key}>
-                {/* <div
-                  className="ps-page__header  breadcrumb-h2 breadcrumb-bg"
-                  style={{
-                    backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${data?.banner})`,
-                    backgroundSize: "cover"
-                  }}
-                >
-                  <div className="container ">
-                    <BreadCrumb breacrumb={breadcrumb} />
-                    <h1 className="text-center h1  text-white p-2">
-                      <strong>{data.title}</strong>
-                    </h1>
-                  </div>
-                </div> */}
+                
                 <div className="position-relative text-center">
-                  <img
+                 <Image 
                     src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
                     alt="IMG"
-                    style={{ width: "100%", height: "10em" }}
+                    width={2000}
+                    height={230}
+                    placeholder="blur"
+                    blurDataURL="/static/image/blurred.png"
+                    // style={{ width: "100%", height: "10em" }}
                   />
                   <div className="container">
                     <div className="top-left-event-details">
@@ -118,9 +110,9 @@ const EventsDetails = ({ EventsData }) => {
                         <div className="ps-section__content">
                           <div className="d-flex justify-content-center flex-col">
                             <div style={{ width: "100%" }}>
-                              <h1 className="font-weight-bold ">
+                              <h2 className="font-weight-bold h1">
                                 {data.title}
-                              </h1>
+                              </h2>
                               <div className="ps-section__desc ">
                                 <p
                                   className=""
@@ -179,14 +171,15 @@ const EventsDetails = ({ EventsData }) => {
                                                 rel="noreferrer"
                                                 title={data.name}
                                               >
-                                                <img
+                                                <Image
                                                   src={data.file}
                                                   alt={data.name}
-                                                  width="300px"
+                                                  // width="300px"
+                                                  width={300}
+                                                  height={100}
                                                 />
                                               </a>
-                                              {/* <p className=" mr-3">{data.name}</p> */}
-                                            </div>
+                                              </div>
                                           ))}
                                         </div>
                                       </div>
@@ -224,14 +217,15 @@ const EventsDetails = ({ EventsData }) => {
                                             rel="noreferrer"
                                             title={data.name}
                                           >
-                                            <img
+                                            <Image
                                               src={data.file}
                                               alt={data.name}
-                                              width="300px"
+                                              // width="300px"
+                                              width={300}
+                                              height={100}
                                             />
                                           </a>
-                                          {/* <p className=" mr-3">{data.name}</p> */}
-                                        </div>
+                                          </div>
                                       ))}
                                     </div>
                                   </div>

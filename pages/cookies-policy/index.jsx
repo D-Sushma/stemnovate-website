@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
+import Link from "next/link";
 
 const breadcrumb = [
     {
@@ -155,9 +156,9 @@ const CookiesPolicy = () => {
                         one of the features you use on our site. However if you
                         are still looking for more information then you can
                         contact us at{" "}
-                        <a href="mailto:info@stemnovate.co.uk">
+                        <Link href="mailto:info@stemnovate.co.uk">
                             info@stemnovate.co.uk
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </main>

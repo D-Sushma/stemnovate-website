@@ -8,7 +8,6 @@ import {
 import useEcomerce from "~/hooks/useEcomerce"
 import Link from "next/link"
 import axios from "axios"
-import { useRouter } from "next/router"
 import { loadStripe } from "@stripe/stripe-js"
 import { toast } from "react-toastify"
 import Countries from "~/public/static/data/AllCountries.json"
@@ -18,7 +17,6 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   const [myBillingdetails, setMybillingDetails] = useState("")
   const [deliveryAdd, setDeliveryAdd] = useState("")
   React.useEffect(() => {
-    // console.log("myBillingdetails?.customer_address_details");
     setMybillingDetails(UserData.result)
     setDeliveryAdd(UserData?.result?.customer_address_details?.B_County)
   }, [])
@@ -26,11 +24,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   const handleUpdate = (index, name, todo) => {
     console.log("billing", myBillingdetails.customer_address_details)
     if (myBillingdetails[index] && myBillingdetails[index][name] != null) {
-      //   const newDetails = { ...myBillingdetails }
-      //const newDetails = myBillingdetails
-      //   newDetails[index][name] = todo
-      // console.log("newDetails exist", newDetails);
-      var newDetails = myBillingdetails.customer_address_details
+       var newDetails = myBillingdetails.customer_address_details
       if (myBillingdetails.customer_address_details != null) {
         newDetails[name] = myBillingdetails[index][name]
       } else {
@@ -44,20 +38,11 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
       newDetailsAdd[index] = {}
       newDetailsAdd[index][name] = todo
       setMybillingDetails(newDetailsAdd)
-      // console.log("billing", newDetailsAdd)
-      // console.log("newDetails new", newDetailsAdd);
-    }
+       }
   }
 
   const { products, getProducts } = useEcomerce()
-  const router = useRouter()
-  const { status } = router.query
-
-  // useEffect(() => {
-  //     console.log("Products", products);
-  //     console.log("userStatus", userStatus);
-  // }, []);
-
+  
   const [loading, setLoading] = useState(false)
   const [checkTnC, setCheckTnC] = useState(false)
   const [pONumber, setPONumber] = useState("")
@@ -190,9 +175,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
         )
       } else {
         if (checkAllFelids()) {
-          // console.log("products", products);
           if (!checkTnC) {
-            // console.log("tnc not checked");
             toast.warning(
               "Please accept our terms and conditions before proceeding.",
               {
@@ -207,8 +190,6 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
               }
             )
           } else {
-            // console.log("tnc checked");
-
             setLoading(true)
             const stripe = await stripePromise
             const checkoutSession = await axios.post(
@@ -528,13 +509,12 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
             </div>
           </form>
         ) : (
-          <a href="/auth/UserLogin">
-            <button className="ps-btn ps-btn--warning">Login</button>
-          </a>
+          <Link href="/auth/UserLogin">
+            <button className="ps-btn ps-btn--warning link-hover-thumb-shape">Login</button>
+          </Link>
         )}
       </div>
       <div className="col-md-4">
-        {/* <ModulEcomerceOrderSummary UserData={UserData} userStatus={UserData && UserData.result.status} /> */}
         <div className="ps-checkout__order">
           <h3 className="ps-checkout__heading">Your order</h3>
           <div className="ps-checkout__row">
@@ -579,16 +559,14 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                   {" "}
                   I have read and agree to the website{" "}
-                  <a target={"_blank"} href="/terms-of-use">
-                    <u className="text-info">terms and conditions</u>
-                  </a>{" "}
+                  <Link target={"_blank"} href="/terms-of-use">
+                    <u className="text-info link-hover-thumb-shape">terms and conditions</u>
+                  </Link>{" "}
                   *
                 </label>
               </div>
             </div>
-            {/* <Link href="/shop/PreviewPage">
-                        <a className="ps-btn ps-btn--warning">Place order</a>
-                    </Link> */}
+           
             <button
               disabled={
                 userStatus

@@ -16,10 +16,6 @@ const addPrice = (getProducts, promotionsData) => {
         getProducts[index].offers_details = promotionsData[0];
     }
 
-    // for (const element of getProducts) {
-    //     // const element = getProducts[index];
-    //     getProducts["price"] = getDiscountedAmaount(element.product_details.sale_price, promotionsData[0].discount_percent);
-    // }
     return getProducts;
 };
 export default async (req, res) => {

@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
 import Shop from "~/components/partials/shop/Shop";
 import SidebarShop from "~/components/shared/sidebar/SidebarShop";
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
 import useGetProducts from "~/hooks/useGetProducts";
 import useProductGroup from "~/hooks/useProductGroup";
-import ShopBestSellers from "~/components/partials/shop/ShopBestSellers";
 import { useRouter } from "next/router";
-import { baseUrl } from "~/repositories/Repository";
 import { ToastContainer } from "react-toastify";
 import Subscribe from "~/components/shared/sections/Subscribe";
 
@@ -33,8 +30,6 @@ const offers = () => {
     const { _limit, _orderBy, gender, Delivery_Type, pType } = router.query;
     let products = "";
 
-    const [productList, setProductList] = useState([]);
-
     useEffect(() => {
         var queries = {
             _limit: 10,
@@ -42,42 +37,26 @@ const offers = () => {
         };
 
         if (_limit || _orderBy) {
-            // queries = {
-            //     _limit: _limit,
-            //     _orderBy: _orderBy,
-            // };
+            
             queries = Object.assign(queries, query);
         }
 
-        // if (_limit) {
-        //     queries = {
-        //         _limit: _limit,
-        //     };
-        // }
-
         if (gender) {
-            // queries = {
-            //     gender: gender,
-            // };
+           
             queries = Object.assign(queries, query);
         }
 
         if (Delivery_Type) {
-            // queries = {
-            //     Delivery_Type: Delivery_Type,
-            // };
+           
             queries = Object.assign(queries, query);
         }
 
         if (pType) {
-            // queries = {
-            //     pType: pType,
-            // };
+           
             queries = Object.assign(queries, query);
         }
 
         getProducts(queries);
-        // getAllProductList()
     }, [query]);
 
     if (productItems && productItems.length > 0) {
@@ -126,9 +105,7 @@ const offers = () => {
                                             <SidebarShop />
                                         </div>
                                         <div className="ps-layout__right">
-                                            {/* <ShopBestSellers /> */}
                                             <Shop classes="ps-shop--grid">{products}</Shop>
-                                            {/* <PromotionSecureInformation /> */}
                                         </div>
                                     </div>
                                 </div>

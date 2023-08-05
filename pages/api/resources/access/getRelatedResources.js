@@ -3,9 +3,7 @@ import prisma from "~/lib/prisma"
 export default async function handler(req, res) {
   if (req.method == "POST") {
     const { tokenId, category_token } = req.body
-    // console.log("tokenId", tokenId);
-    // console.log("category_token", category_token);
-    if (category_token !== "") {
+     if (category_token !== "") {
       if (tokenId !== "") {
         var ResourcesData = await prisma.resources.findMany({
           orderBy: {

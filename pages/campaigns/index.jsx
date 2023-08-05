@@ -33,12 +33,6 @@ const Events = ({ resourcesList }) => {
         <div className="ps-page__content">
           <div className="ps-about">
             <CampaignsList resources={resourcesList && resourcesList.data} />
-            {/* <div className="about-section">
-                            <div className="container">
-                                <p className="text-center">Latest blog from Stemnovate</p>
-                            </div>
-                        </div> */}
-
             <Subscribe />
           </div>
         </div>

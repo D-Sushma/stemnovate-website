@@ -5,9 +5,8 @@ import useProductGroup from "~/hooks/useProductGroup";
 import BreadCrumb from "~/components/elements/BreadCrumb";
 import SidebarShop from "~/components/shared/sidebar/SidebarShop";
 import Shop from "~/components/partials/shop/Shop";
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
 import Container from "~/components/layouts/Container";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const CategoryScreen = () => {
     const Router = useRouter();
@@ -79,8 +78,7 @@ const CategoryScreen = () => {
                             <BreadCrumb breacrumb={breadcrumb} />
                             <h1 className="ps-page__heading text-white">
                                 {category ? category.category_name : "Category"}
-                                {/* <sup>({category && category.ProductsList.length > 0 ? category.ProductsList.length : 0})</sup> */}
-                            </h1>
+                                </h1>
                         </div>
                     </div>
                     <div className="about-section">
@@ -91,38 +89,15 @@ const CategoryScreen = () => {
                                         <SidebarShop />
                                     </div>
                                     <div className="ps-layout__right">
-                                        {/* <ShopBestSellers /> */}
                                         <Shop classes="ps-shop--grid">{products}</Shop>
-                                        {/* <PromotionSecureInformation /> */}
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </Container>
-            {/* <Container title={category ? category.category_name : "Category"}>
-                <ToastContainer />
-                <div className="ps-page ps-page--shopping">
-                    <div className="ps-page__header breadcrumb-h product-breadcrumb-bg">
-                        <div className="container">
-                            <BreadCrumb breacrumb={breadcrumb} />
-                            <h1 className="ps-page__heading text-white">
-                                {category ? category.category_name : "Category"}
-                                <sup>({category && category.ProductsList.length > 0 ? category.ProductsList.length : 0})</sup>
-                            </h1>
-                        </div>
-                    </div>
-                    <div className="container">
-                        <div className="ps-page__content mt-3">
-                            <Shop classes="ps-shop--grid" actions={false}>
-                                {products}
-                            </Shop>
-                        </div>
-                    </div>
-                </div>
-            </Container> */}
-        </>
+           </>
     );
 };
 

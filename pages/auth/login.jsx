@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Container from "~/components/layouts/Container";
-import { useRouter } from "next/router";
 import { Alert } from "antd";
 import { signIn } from "next-auth/react";
 
@@ -14,11 +13,6 @@ const MyAccountScreen = () => {
         f(e);
     };
 
-    const router = useRouter();
-    const [query, setQuery] = useState("");
-
-    const handleParam = (setValue) => (e) => setValue(e.target.value);
-    const action = "/api/check-login";
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
     const [message, setmessage] = useState("");

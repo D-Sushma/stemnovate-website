@@ -5,7 +5,6 @@ export default async function handler(req, res) {
     const { resourcesID } = req.body
     console.log("resourcesID", resourcesID)
     if (resourcesID) {
-      // var resourcesID_val = 14
       var ResourcesData = await prisma.resources.findMany({
         orderBy: {
           id: "asc"
@@ -37,32 +36,6 @@ export default async function handler(req, res) {
       }
     } else {
       res.status(200).json("unAuthenticated Access")
-      // var ResourcesCat = await prisma.resources_category.findMany({
-      //     orderBy: {
-      //         cat_id: "asc",
-      //     },
-      //     where: { deleted_at: null, cat_access: 0, master_id: null },
-      //     select: {
-      //         cat_id: true,
-      //         cat_name: true,
-      //         cat_access: true,
-      //         created_at: true,
-      //         updated_at: true,
-      //         deleted_at: true,
-      //         created_by: true,
-      //         category_image: true,
-      //         category_content: true,
-      //         master_id: true,
-      //         other_resources_category: true,
-      //     },
-      // });
-
-      // if (ResourcesCat.length > 0) {
-      //     res.status(200).json({ status: 200, data: ResourcesCat });
-      // } else {
-      //     console.log("Error");
-      //     res.status(200).json({ status: 201, data: [] });
-      // }
     }
   }
 }

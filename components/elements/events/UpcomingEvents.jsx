@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 import { FaCalendarAlt, FaLocationArrow } from "react-icons/fa"
 import Loader from "~/components/reuseable/Loader"
 import { baseUrl } from "~/repositories/Repository"
+import Link from "next/link"
 
 function UpcomingEvents({ currentEvent }) {
   const [events, setEvents] = useState([])
@@ -54,13 +55,15 @@ function UpcomingEvents({ currentEvent }) {
               {events &&
                 events.map((data, key) => (
                   <div className="col-md-4" key={key}>
-                    <a href={`/events/details/${data.slug}`}>
+                    <Link href={`/events/details/${data.slug}`}>
                       <div className="card p-1">
                         <div className="card-body">
                           <div className="d-flex flex-column">
-                            <img
+                            <Image
                               src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                               alt={data.title}
+                              width={1200}
+                              height={675}
                             />
                             <h3 className="  mt-3">{data.title}</h3>
                             <div className="d-flex m-2">
@@ -78,7 +81,7 @@ function UpcomingEvents({ currentEvent }) {
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 ))}
             </div>

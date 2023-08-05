@@ -19,6 +19,8 @@ import moment from "moment"
 import Loader from "~/components/reuseable/Loader"
 import { scroller } from "react-scroll"
 import { TbEdit, TbCalendarEvent } from "react-icons/tb"
+import Link from 'next/link'
+import Image from '~/components/elements/Image'
 
 const breadcrumb = [
   {
@@ -98,16 +100,22 @@ const Blogs = (props) => {
               <div className="container">
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
-                    <a className="ps-section__image" href="#">
-                      <img
+                    <Link href="#">
+                      <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
                         src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
                         alt={blogData?.name}
+                        width={1200}
+                        height={675}
+                        placeholder={blur}
+                        blurDataURl="/static/image/blurred.png"
                       />
-                    </a>
+                      </div>
+                    </Link>
                   </div>
                   <div className="ps-section__content">
                     <div className="ps-section__desc">
-                      <h1>{blogData?.name}</h1>
+                      <h2 className="h1">{blogData?.name}</h2>
                       <p>{blogData?.description}</p>
                     </div>
                     <div className="row">

@@ -1,6 +1,5 @@
 import prisma from "~/lib/prisma";
 import { Prisma } from "@prisma/client";
-import { NULL } from "node-sass";
 export default async (req, res) => {
     try {
         if (req.method == "GET") {

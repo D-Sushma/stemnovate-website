@@ -1,8 +1,6 @@
 import prisma from "~/lib/prisma";
 
 import bcrypt from "bcrypt";
-import moment from "moment";
-// moment.locale().tz('Europe/London');
 export default async function handle(req, res) {
     const { First, last, Email, Country, password, amex, agreement, promotions } = req.body;
     const checkuser = await prisma.customers.findMany({

@@ -1,6 +1,6 @@
 import prisma from "~/lib/prisma";
 import bcrypt from "bcrypt";
-import { encode, decode } from "hex-encode-decode";
+import { decode } from "hex-encode-decode";
 export default async function handle(req, res) {
     if (req.method == "POST") {
         try {

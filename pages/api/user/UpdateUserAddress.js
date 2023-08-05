@@ -2,7 +2,6 @@ import prisma from "~/lib/prisma";
 import { getSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 import { Prisma } from "@prisma/client";
-import { update } from "lodash";
 
 export default async function handle(req, res) {
     try {

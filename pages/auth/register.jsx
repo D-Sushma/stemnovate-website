@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Container from "~/components/layouts/Container";
 import Countries from "../../public/static/data/AllCountries.json";
-
-import { useRouter } from "next/router";
 import { Alert } from "antd";
-import Loader from "~/components/reuseable/Loader";
-
 import { ToastContainer, toast } from "react-toastify";
 
 const MyAccountScreen = () => {
@@ -24,8 +20,7 @@ const MyAccountScreen = () => {
     const Togglepass = () => {
         setshowpass(!showpass);
     };
-    const router = useRouter();
-
+    
     const Checkpassword = (value) => {
         setPassword(value);
         const isWhitespace = /^(?=.*\s)/;

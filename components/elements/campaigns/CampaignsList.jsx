@@ -3,6 +3,8 @@ import React from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { HiArrowSmRight } from "react-icons/hi"
+import Link from "next/link"
+import Image from "~/components/elements/Image"
 
 const EventsList = ({ resources }) => {
   return (
@@ -13,12 +15,18 @@ const EventsList = ({ resources }) => {
             <div className="container">
               <section className="ps-section--block-grid ">
                 <div className="ps-section__thumbnail">
-                  <a className="ps-section__image" href="#">
-                    <img
-                      src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
-                      alt={data.title}
-                    />
-                  </a>
+                  <Link href="#">
+                    <div className="ps-section__image link-hover-thumb-shape">
+                      <Image
+                        src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
+                        alt={data.title}
+                        width={1200}
+                        height={675}
+                        placeholder="blur"
+                        blurDataURL="/static/image/blurred.png"
+                      />
+                    </div>
+                  </Link>
                 </div>
                 <div className="ps-section__content">
                   <h2 className="font-weight-bold">{data.title}</h2>
@@ -29,12 +37,11 @@ const EventsList = ({ resources }) => {
                         __html: data.campaign_description
                       }}
                     ></p>
-                    <a
-                      href={`/campaign/${data.slug}`}
-                      className="btn btn-lg button-orange text-white m-4 m-5"
-                    >
-                      Get More details <HiArrowSmRight size={25} />
-                    </a>
+                    <Link href={`/campaign/${data.slug}`}>
+                      <button className="btn btn-lg button-orange text-white m-4 m-5">
+                        Get More details <HiArrowSmRight size={25} />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </section>

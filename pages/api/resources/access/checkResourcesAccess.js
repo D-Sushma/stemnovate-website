@@ -11,21 +11,7 @@ export default async function handler(req, res) {
             user_id: parseInt(UserId),
             resources_id: parseInt(ResourcesID)
           }
-          //   select: {
-          //     id: true,
-          //     resources_id: true,
-          //     access_type: true,
-          //     resources_name: true,
-          //     resources_category: true,
-          //     resources_price: true,
-          //     resources_preview: true,
-          //     created_at: true,
-          //     resources_content: true,
-          //     resourcesFileType: true,
-          //     short_description: true,
-          //     downloads: true,
-          //     resources_status: true
-          //   }
+          
         })
         if (ResourcesData.length > 0) {
           res.status(200).json({ status: 200, data: ResourcesData })

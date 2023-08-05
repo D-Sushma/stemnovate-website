@@ -8,27 +8,16 @@ export default async (req, res) => {
             const newQuery = {};
             if (Delivery_Type) {
                 newQuery["deliver_type"] = Delivery_Type;
-                // newQuery.push({
-                //     deliver_type: Delivery_Type,
-                // });
-            }
+                 }
             if (pType) {
-                // newQuery.push({
-                //     category_id: parseInt(pType),
-                // });
-                newQuery["category_id"] = parseInt(pType);
+                 newQuery["category_id"] = parseInt(pType);
             }
 
             if (gender) {
                 newQuery["productspecification"] = {
                     Sex: gender,
                 };
-                // newQuery.push({
-                //     productspecification: {
-                //         Sex: gender,
-                //     },
-                // });
-            }
+                 }
 
             console.log("newQuery", newQuery);
 
@@ -64,13 +53,7 @@ export default async (req, res) => {
                             },
                         },
                     },
-                    // take: parseInt(_limit),
-                    // orderBy: {
-                    //     product_details: {
-                    //         sale_price: _orderBy,
-                    //     },
-                    // },
-                });
+                    });
             } else if (name_contains) {
                 var getProducts = await prisma.products.findMany({
                     where: {
@@ -106,22 +89,10 @@ export default async (req, res) => {
                             },
                         },
                     },
-                    // take: parseInt(_limit),
-                    // orderBy: {
-                    //     product_details: {
-                    //         sale_price: _orderBy,
-                    //     },
-                    // },
-                });
+                    });
             } else if (Delivery_Type || pType || gender) {
                 // console.log("newQuery", newQuery);
                 var getProducts = await prisma.products.findMany({
-                    // where: {
-                    //     category_id: parseInt(pType),
-                    //     deliver_type: Delivery_Type,
-                    //     productspecification: {
-                    //         Sex: gender,
-                    //     },
                     where: newQuery,
                     select: {
                         id: true,

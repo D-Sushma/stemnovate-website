@@ -14,10 +14,6 @@ const addPrice = (getProducts, promotionsData) => {
         getProducts[index]["offers_details"] = promotionsData[0];
     }
 
-    // for (const element of getProducts) {
-    //     // const element = getProducts[index];
-    //     getProducts["price"] = getDiscountedAmaount(element.product_details.sale_price, promotionsData[0].discount_percent);
-    // }
     return getProducts;
 };
 export default async (req, res) => {
@@ -51,14 +47,12 @@ export default async (req, res) => {
                         }
                     }
 
-                    // newQuery["in"] = category_id;
 
                     const delivery_type = promotionsData[0].delivery_type;
                     const gender = promotionsData[0].gender;
                     const ethnicity = promotionsData[0].ethnicity;
                     const discount_percent = promotionsData[0].discount_percent;
 
-                    // const newQuery = {};
 
                     if (product_id.length > 0) {
                         newQuery["id"] = { in: product_id };
@@ -93,22 +87,8 @@ export default async (req, res) => {
                             product_name: true,
                             product_slug: true,
                             product_description: true,
-                            // CatalogueNumber: true,
-                            // LotNumber: true,
                             short_description: true,
-                            // category_id: true,
-                            // stock: true,
-                            // deliver_type: true,
                             product_image: true,
-                            // Product_details_pdf: true,
-                            // description_tab: true,
-                            // specification_tab: true,
-                            // ViralScreening_tab: true,
-                            // Pluripotency_tab: true,
-                            // Differentiation_tab: true,
-                            // microbiology_viralscreening: true,
-                            // productdescription: true,
-                            // productspecification: true,
                             product_details: true,
                             category: {
                                 select: {
@@ -117,14 +97,9 @@ export default async (req, res) => {
                             },
                         },
                     });
-                    // if (discount_percent > 0) {
                     var mydata = await addPrice(getProducts, promotionsData);
                     res.status(200).json(mydata);
-                    // } else {
-                    //     res.status(200).json(getProducts);
-                    // }
 
-                    // console.log("PROMOPRO", mydata);
                 } else {
                     console.log("Error");
                     res.status(200).json({ status: 201, data: [] });

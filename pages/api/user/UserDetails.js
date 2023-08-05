@@ -25,19 +25,8 @@ export default async function handle(req, res) {
                     referral_link: true,
                 },
             });
-            // console.log(checkuser)
 
             if (checkuser !== null) {
-                // const resullt = {
-                //     id: checkuser.id,
-                //     email: checkuser.email,
-                //     firstname: checkuser.firstname,
-                //     lastname: checkuser.lastname,
-                //     location: checkuser.location,
-                //     newsletter: checkuser.newsletter,
-                //     status: checkuser.status,
-                //     tnc: checkuser.tnc,
-                // };
 
                 var response = {
                     code: "200",

@@ -130,7 +130,7 @@ const CheckoutScreen = ({ UserData }) => {
                   <p className="ps-checkout__text">
                     Returning customer?{" "}
                     <Link href="/auth/UserLogin">
-                      <a>Click here to login</a>
+                      <span className="span-with-link">Click here to login</span>
                     </Link>
                   </p>
                 )}
