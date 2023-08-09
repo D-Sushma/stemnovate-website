@@ -30,7 +30,10 @@ const diseaseScreen = () => {
 
   return (
     <>
-      <Container title="Disease-Modelling">
+      <Container
+        title="Disease-Modelling"
+        description="Stemnovate page for R&D services, cellualr differentiation to liver, heart and neurons."
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">
@@ -60,12 +63,12 @@ const diseaseScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Liver.jpg"
-                          alt="LIVER"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/Liver.jpg"
+                            alt="LIVER"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -81,9 +84,11 @@ const diseaseScreen = () => {
                           bioavailability.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us" >
-                            <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
-                         </Link>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
+                          </Link>
                         </p>
                       </div>
                     </div>
@@ -97,12 +102,12 @@ const diseaseScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Heart.jpg"
-                          alt="HEART"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/Heart.jpg"
+                            alt="HEART"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -116,8 +121,10 @@ const diseaseScreen = () => {
                           traditional testing models.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us" >
-                            <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -131,13 +138,13 @@ const diseaseScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Neurons.jpg"
-                          alt="NEURONS"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/applications/Neurons.jpg"
+                            alt="NEURONS"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -154,8 +161,10 @@ const diseaseScreen = () => {
                           potential for new drug screening.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us" >
-                            <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -168,13 +177,13 @@ const diseaseScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Multispecies-Platform.webp"
-                          alt="Multispecies Platform"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/applications/Multispecies-Platform.webp"
+                            alt="Multispecies Platform"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -202,8 +211,10 @@ const diseaseScreen = () => {
                           animal species for industry and academia usage.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us" >
-                            <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -221,7 +232,7 @@ const diseaseScreen = () => {
             </div>
           </div>
         </main>
-        </Container>
+      </Container>
     </>
   )
 }
@@ -248,7 +259,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

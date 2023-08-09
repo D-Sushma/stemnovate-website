@@ -31,7 +31,10 @@ const Resources = ({ resourcesList }) => {
   }, [])
 
   return (
-    <Container title="Resources">
+    <Container
+      title="Resources"
+      description="Stemnovate page on trainings, webinars, techniques, newsletters. Subject to change and review"
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

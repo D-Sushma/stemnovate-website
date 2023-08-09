@@ -34,7 +34,10 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container title="Heart">
+      <Container 
+      title="Heart"
+      description="Stemnovate page on cardiac modelling, IPSC differentiation, and cardiac cell functional assays and use for drug discovery"
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">

@@ -25,7 +25,10 @@ const breadcrumb = [
 
 function Resources({ resourcesList }) {
   return (
-    <Container title="Resources">
+    <Container
+      title="Resources"
+      description="Stemnovate page on resources for scientists, PhD students. Follow up for trainings, webinars and create progrressive scientific community"
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

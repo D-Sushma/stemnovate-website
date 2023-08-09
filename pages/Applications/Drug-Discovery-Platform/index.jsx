@@ -29,7 +29,10 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container title="Drug-Discovery-Platform">
+      <Container
+        title="Drug-Discovery-Platform"
+        description="Stemnovate page for information on R&D for cell based assays and preclinical research"
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">
@@ -74,12 +77,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/02.jpg"
-                          alt="advanced molecular techniques"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/02.jpg"
+                            alt="advanced molecular techniques"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -92,8 +95,10 @@ const texicologyScreen = () => {
                           potentially deliver safer drugs to market.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us" >
-                            <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -108,12 +113,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Drug-Discovery.jpg"
-                          alt="Cell-based approaches"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/Drug-Discovery.jpg"
+                            alt="Cell-based approaches"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -127,8 +132,10 @@ const texicologyScreen = () => {
                           safety in clinical trials.
                         </p>
                         <p className="p-3">
-                           <Link href="/contact-us"  >
-                             <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -143,12 +150,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/01.jpg"
-                          alt="iPSC-derived liver"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/01.jpg"
+                            alt="iPSC-derived liver"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -162,8 +169,10 @@ const texicologyScreen = () => {
                           safety/toxicity risk in a population.
                         </p>
                         <p className="p-3">
-                         <Link href="/contact-us" >
-                             <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -177,12 +186,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/05.jpg"
-                          alt="highly data-driven with high-resolution images"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/05.jpg"
+                            alt="highly data-driven with high-resolution images"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -199,8 +208,10 @@ const texicologyScreen = () => {
                           discovery.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us" >
-                             <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <Link href="/contact-us">
+                            <button className="btn btn-lg button-orange text-white m-4 m-5">
+                              Request A Quote
+                            </button>
                           </Link>
                         </p>
                       </div>
@@ -208,11 +219,11 @@ const texicologyScreen = () => {
                   </section>
                 </div>
               </div>
-             <Subscribe />
+              <Subscribe />
             </div>
           </div>
         </main>
-         </Container>
+      </Container>
     </>
   )
 }
@@ -239,7 +250,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

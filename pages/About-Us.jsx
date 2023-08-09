@@ -138,7 +138,10 @@ const AboutUsScreen = ({
   }, [])
 
   return (
-    <Container title="About Us">
+    <Container 
+    title="About Us"
+    description="Stemnovate page for founders, mission, vission and values"
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

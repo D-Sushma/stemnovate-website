@@ -65,6 +65,7 @@ const CareerScreen = () => {
       title="Careers"
       cronical={"/careers"}
       ogimg={`https://stemnovate.co.uk/static/img/our-culture/02.png`}
+      description="Stemnovate page for job vacancies, apprenticeships and student learning"
     >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">

@@ -46,7 +46,10 @@ const Blogs = (props) => {
   }
 
   return (
-    <Container title="Blogs">
+    <Container
+      title="Blogs"
+      description="Stemnovate page for blogs and compnay news"
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

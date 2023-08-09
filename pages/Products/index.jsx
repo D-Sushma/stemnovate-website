@@ -107,7 +107,7 @@ const ProductScreen = () => {
     <Container
       title={titleName}
       ogimg={ogImg}
-      description="Stemnovate's Product and biobank information. Our 100% products are guranteed ethically sources with inforrmed consent in the United Kingdom."
+      description="Stemnovate product pages for human diverse biobank, well defined cell culturre media. Cell products for induced pluripotent stem cells and multispecies cells."
     >
       <ToastContainer />
       <div className="ps-page ps-page--shopping">

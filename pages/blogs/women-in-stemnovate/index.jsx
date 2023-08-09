@@ -30,7 +30,10 @@ export default function index() {
     }, [router.pathname]);
 
     return (
-        <Container title="women in stemnovate">
+        <Container 
+        title="women in stemnovate"
+        description="Stemnovate page promoting women in science, careers and opportuniities"
+        >
             <main className="ps-page ps-page--inner">
                 <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
                     <div className="container ">

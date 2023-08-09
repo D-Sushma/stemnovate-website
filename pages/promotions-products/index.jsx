@@ -34,7 +34,10 @@ const ProductScreen = ({ promotionDetails }) => {
   }, [])
 
   return (
-    <Container title="Promotions Products">
+    <Container
+      title="Promotions Products"
+      description="Stemnovate page on sales, discounts, promotions"
+    >
       <ToastContainer />
       <main id="homepage-one">
         <div className="ps-page ps-page--shopping">
@@ -89,7 +92,7 @@ const ProductScreen = ({ promotionDetails }) => {
                                       layout="fill"
                                       placeholder="blur"
                                       blurDataURL="/static/image/blurred.png"
-                                      />
+                                    />
                                   </div>
                                 </div>
                               </div>

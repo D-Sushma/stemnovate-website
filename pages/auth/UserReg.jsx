@@ -229,7 +229,10 @@ const UserReg = ({ reffrals }) => {
   }
 
   return (
-    <Container title="My Account">
+    <Container 
+    title="My Account"
+    description="Stemnovate page for new sign up, registartion. Check our term of use"
+    >
       <ToastContainer />
       <div className="ps-page ps-page--inner ">
         <div className="container">

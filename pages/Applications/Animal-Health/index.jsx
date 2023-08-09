@@ -28,7 +28,10 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container title="Animal-Health">
+      <Container
+        title="Animal-Health"
+        description="Stemnovate page for animal health industry, zero animal testing and in vitro research holding high values on ethical sourcing and guranteed no harm to any life form."
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">
@@ -87,7 +90,7 @@ const texicologyScreen = () => {
                             alt="REDUCE"
                             width={1302}
                             height={722}
-                            />
+                          />
                         </div>
                       </Link>
                     </div>
@@ -106,7 +109,9 @@ const texicologyScreen = () => {
                             />
 
                             <div style={{ width: "100%" }}>
-                              <h2 className="text-white text-center link-hover-thumb-shape">REDUCE</h2>
+                              <h2 className="text-white text-center link-hover-thumb-shape">
+                                REDUCE
+                              </h2>
                             </div>
                           </div>
                         </Link>
@@ -146,7 +151,9 @@ const texicologyScreen = () => {
                             />
 
                             <div style={{ width: "100%" }}>
-                              <h2 className="text-white text-center link-hover-thumb-shape">REFINE</h2>
+                              <h2 className="text-white text-center link-hover-thumb-shape">
+                                REFINE
+                              </h2>
                             </div>
                           </div>
                         </Link>
@@ -238,15 +245,16 @@ const texicologyScreen = () => {
                           Stem cells hold great potential for cellular
                           therapies, drug discovery and disease modelling.
                           However, It requires a laboratory assay that consists
-                          of injecting cells under mice&apos;s skin, allowing cells
-                          to differentiate spontaneously and is a determinant of
-                          stemness and capability to form multiple cell types.
-                          We have integrated stem cell research with tissue
-                          engineering, advanced imaging, and molecular analysis,
-                          allowing similar data to be generated in the
-                          laboratory without animal experiments. This technology
-                          further allows fast turnaround, saving costs and
-                          unnecessary experimentation.
+                          of injecting cells under mice&apos;s skin, allowing
+                          cells to differentiate spontaneously and is a
+                          determinant of stemness and capability to form
+                          multiple cell types. We have integrated stem cell
+                          research with tissue engineering, advanced imaging,
+                          and molecular analysis, allowing similar data to be
+                          generated in the laboratory without animal
+                          experiments. This technology further allows fast
+                          turnaround, saving costs and unnecessary
+                          experimentation.
                         </p>
                       </div>
                     </div>

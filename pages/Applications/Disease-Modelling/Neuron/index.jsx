@@ -34,7 +34,10 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container title="Neuron">
+      <Container 
+      title="Neuron"
+      description="Stemnovate page for IPSC neuronal differentiation and disease modelling."
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
             <div className="container ">

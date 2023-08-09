@@ -29,7 +29,10 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container title="Molecular Analysis">
+      <Container
+        title="Molecular Analysis"
+        description="Stemnovate page on molecular technology and advancements"
+      >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h service-breadcrumb-bg">
             <div className="container ">
@@ -59,14 +62,14 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape" >
-                        <Image
-                          className="ps-banner__image"
-                          src="/static/img/services/Whole-transcriptomics.jpg"
-                          alt="Whole transcriptomics"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            className="ps-banner__image"
+                            src="/static/img/services/Whole-transcriptomics.jpg"
+                            alt="Whole transcriptomics"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -129,13 +132,13 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          className="ps-banner__image"
-                          src="/static/img/services/Bioinformatics.jpg"
-                          alt="BIOINFORMATICS"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            className="ps-banner__image"
+                            src="/static/img/services/Bioinformatics.jpg"
+                            alt="BIOINFORMATICS"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -147,15 +150,16 @@ const texicologyScreen = () => {
                               Bioinformatics
                             </h2>
                             <p className=" ">
-                              Stemnovate&apos;s Bioinformatic platform provides a
-                              robust computational analysis of biological data.
-                              Stemnovate harnesses an interdisciplinary approach
-                              integrating biological data sets with advanced
-                              mathematical analysis and computational science to
-                              capture and interpret complex data. Our platform
-                              is already being used by industry and academia for
-                              new drug discovery and understanding diseases of
-                              the heart, liver and sensory systems in the body.
+                              Stemnovate&apos;s Bioinformatic platform provides
+                              a robust computational analysis of biological
+                              data. Stemnovate harnesses an interdisciplinary
+                              approach integrating biological data sets with
+                              advanced mathematical analysis and computational
+                              science to capture and interpret complex data. Our
+                              platform is already being used by industry and
+                              academia for new drug discovery and understanding
+                              diseases of the heart, liver and sensory systems
+                              in the body.
                               <br />
                               Some bioinformatic workflow include :
                               <ol>
@@ -208,13 +212,13 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape" >
-                        <Image
-                          src="/static/img/services/Genotyping.jpg"
-                          alt="Genotyping"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/services/Genotyping.jpg"
+                            alt="Genotyping"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -255,7 +259,7 @@ const texicologyScreen = () => {
             </div>
           </div>
         </main>
-        </Container>
+      </Container>
     </>
   )
 }
@@ -282,7 +286,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

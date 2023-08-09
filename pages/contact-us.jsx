@@ -24,7 +24,7 @@ const ContactUsScreen = ({ mytitile }) => {
   return (
     <Container
       title={mytitile ? mytitile : "Contact Us"}
-      description="Stemnovate contact form allows you to send your request or enquires. Fill the information and our team will contact you asap"
+      description="Stemnovate page to contact for information, enquire about company, product and services"
     >
       <div className="ps-page ps-page--inner">
         <div className="container">

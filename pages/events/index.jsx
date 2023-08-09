@@ -22,7 +22,10 @@ const breadcrumb = [
 
 const Events = ({ resourcesList }) => {
   return (
-    <Container title="Events">
+    <Container
+      title="Events"
+      description="Stemnovate page on events, conferrences, meeting and partnering opportunities. Keep up with new events by following and sign up on our website"
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

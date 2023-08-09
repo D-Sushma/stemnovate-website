@@ -22,7 +22,10 @@ const breadcrumb = [
 
 const Applications = () => {
   return (
-    <Container title="Applications">
+    <Container 
+    title="Applications"
+    description="Stemnovate page on disesae modelling, in vitro assays and new innovations for liver, heart and brain."
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">

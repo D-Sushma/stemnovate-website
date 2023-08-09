@@ -20,7 +20,10 @@ const breadcrumb = [
 
 const OurCulture = () => {
   return (
-    <Container title="Culture">
+    <Container 
+    title="Culture"
+    description="Stemnovate page for employees, careers and opportunities"
+    >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">
