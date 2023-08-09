@@ -33,6 +33,9 @@ const OurService = () => {
                           alt="Drug Discovery Platform"
                           width={386}
                           height={218}
+                          placeholder="blur"
+                          blurDataURL="/static/image/blurred.png"
+                          priority 
                         />
                       </div>
                       <p className="text-left font-weight-bolder content-services">
@@ -73,6 +76,9 @@ const OurService = () => {
                           alt="Stem Cells Cellular Reprogramming"
                           width={386}
                           height={218}
+                          placeholder="blur"
+                          blurDataURL="/static/image/blurred.png"
+                          priority 
                         />
                       </div>
                       <p className="text-left font-weight-bolder content-services">
@@ -119,6 +125,9 @@ const OurService = () => {
                           alt="Molecular and Microengineering"
                           width={386}
                           height={218}
+                          placeholder="blur"
+                          blurDataURL="/static/image/blurred.png"
+                          priority 
                         />
                       </div>
                       <p className="text-left text-white font-weight-bolder content-services">
@@ -170,6 +179,9 @@ const OurService = () => {
                             alt="Data Platform"
                             width={386}
                             height={218}
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
+                            priority 
                           />
                         </div>
                         <p className=" text-left text-white font-weight-bolder content-services">

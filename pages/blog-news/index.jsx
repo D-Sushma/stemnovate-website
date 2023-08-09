@@ -283,6 +283,9 @@ const Blogs = (props) => {
                                 height={545}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
+                                loader={myLoader}
+                                unoptimized={false}
+                                layout="responsive"
                               />
                             </div>
                             <div className="ps-post__wrapper justify-content-center">

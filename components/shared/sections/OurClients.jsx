@@ -24,7 +24,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand1} alt="rvc" />
+                    <Image
+                      className="zoom-in"
+                      src={brand1}
+                      alt="rvc"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -35,7 +42,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand2} alt="cam" />
+                    <Image
+                      className="zoom-in"
+                      src={brand2}
+                      alt="cam"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -46,7 +60,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand3} alt="babraham" />
+                    <Image
+                      className="zoom-in"
+                      src={brand3}
+                      alt="babraham"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -57,7 +78,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand4} alt="ed" />
+                    <Image
+                      className="zoom-in"
+                      src={brand4}
+                      alt="ed"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -68,7 +96,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand5} alt="ed" />
+                    <Image
+                      className="zoom-in"
+                      src={brand5}
+                      alt="ed"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -79,7 +114,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand6} alt="qkine" />
+                    <Image
+                      className="zoom-in"
+                      src={brand6}
+                      alt="qkine"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -91,7 +133,14 @@ export default function OurClients() {
                 >
                   {" "}
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand7} alt="tcd" />
+                    <Image
+                      className="zoom-in"
+                      src={brand7}
+                      alt="tcd"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -102,7 +151,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand8} alt="unibe" />
+                    <Image
+                      className="zoom-in"
+                      src={brand8}
+                      alt="unibe"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -113,7 +169,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand9} alt="nhs" />
+                    <Image
+                      className="zoom-in"
+                      src={brand9}
+                      alt="nhs"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>
@@ -124,7 +187,14 @@ export default function OurClients() {
                   rel="noreferrer"
                 >
                   <div className="d-flex align-items-center our-client-images px-3">
-                    <Image className="zoom-in" src={brand10} alt="ox" />
+                    <Image
+                      className="zoom-in"
+                      src={brand10}
+                      alt="ox"
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      priority
+                    />
                   </div>
                 </a>
               </div>

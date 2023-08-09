@@ -13,7 +13,7 @@ import announcementimg from "~/public/static/home-images/announcement.jpg"
 
 const carouselSetting = {
   infinite: true,
-  autoplay: false,
+  autoplay: true,
   speed: 700,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -116,6 +116,9 @@ const Testimonials = () => {
                             className="zoom-in"
                             src={newcambridge}
                             alt="Our 3Rs mission: Zero animal testing"
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
+                            priority
                           />
                         </a>
                         <div className="card-body  p-0 ps-btn-link-bottom">
@@ -153,6 +156,9 @@ const Testimonials = () => {
                             src={Cambridge}
                             alt="Stemnovate leading the way in building animal models for Pharma
                                  drug discovery and animal health industry"
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
+                            priority
                           />
                         </a>
                         <div className="card-body p-0 ps-btn-link-bottom">
@@ -163,9 +169,10 @@ const Testimonials = () => {
                           >
                             <h5 className="card-title  pt-2 px-2">
                               Stemnovate leading the way in building animal
-                              models for Pharma drug discovery and animal health ...
+                              models for Pharma drug discovery and animal health
+                              ...
                               {/* industry */}
-                             </h5>
+                            </h5>
                           </a>
                           <a
                             target={"_blank"}
@@ -189,6 +196,9 @@ const Testimonials = () => {
                             className="zoom-in"
                             src={discoverymatters}
                             alt="Ruchi Sharma-Women in Stem"
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
+                            priority
                           />
                         </a>
                         <div className="card-body p-0 ps-btn-link-bottom">
@@ -224,6 +234,9 @@ const Testimonials = () => {
                             className="zoom-in"
                             src={announcementimg}
                             alt="Our 3Rs mission: Zero animal testing"
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
+                            priority
                           />
                         </a>
                         <div className="card-body  p-0 ps-btn-link-bottom">

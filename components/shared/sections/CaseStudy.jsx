@@ -29,6 +29,9 @@ const CaseStudy = () => {
                         alt="Partnership"
                         width={386}
                         height={218}
+                        placeholder="blur"
+                        blurDataURL="/static/image/blurred.png"
+                        priority
                       />
                     </div>
                     <p className="text-left font-weight-bolder content-services">
@@ -71,6 +74,9 @@ const CaseStudy = () => {
                         alt="Tale of twin cities"
                         width={386}
                         height={218}
+                        placeholder="blur"
+                        blurDataURL="/static/image/blurred.png"
+                        priority
                       />
                     </div>
                     <p className=" text-left font-weight-bolder content-services">
