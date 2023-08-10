@@ -49,10 +49,10 @@ const InvestorRelationScreen = () => {
                             <section className="container">
                                 <div className="center-box">
                                     <div className="vertical-center">
-                                        <h1 className="text-white">
+                                        <h2 className="text-white">
                                             STEMNOVATE IS PIONEERING INNOVATIVE <br />
                                             PLATFORMS FOR DRUG DISCOVERY AND DIAGNOSTICS.
-                                        </h1>
+                                        </h2>
                                         <p className="text-white" style={{ fontSize: "1.17em" }}>
                                             The company is{" "}
                                             <Tooltip title="Britain’s Most Exciting Human Health Companies (o2h.com)">
@@ -76,7 +76,7 @@ const InvestorRelationScreen = () => {
                         </div>
 
                         <div className="container">
-                            <h1 className="text-center base-text-secondary p-2 pt-3 font-weight text-uppercase">
+                            <h2 className="text-center base-text-secondary p-2 pt-3 font-weight text-uppercase">
                                 Stemnovate Timeline
                                 <Link href="#">
                                     <div className="ps-section__image link-hover-thumb-shape">
@@ -88,11 +88,11 @@ const InvestorRelationScreen = () => {
                                     />
                                     </div>
                                 </Link>
-                            </h1>
+                            </h2>
                         </div>
 
                         <div className="">
-                            <h1 className="text-center base-text-secondary p-2 font-weight text-uppercase">
+                            <h2 className="text-center base-text-secondary p-2 font-weight text-uppercase">
                                 <Link href="#">
                                     <div className="ps-section__image link-hover-thumb-shape">
                                     <Image 
@@ -103,7 +103,7 @@ const InvestorRelationScreen = () => {
                                     />
                                     </div>
                                 </Link>
-                            </h1>
+                            </h2>
                         </div>
 
                         <div className="about-section">
@@ -117,7 +117,7 @@ const InvestorRelationScreen = () => {
                         </div>
 
                         <div className="">
-                            <h1 className="text-center base-text-secondary p-2 font-weight text-uppercase">
+                            <h2 className="text-center base-text-secondary p-2 font-weight text-uppercase">
                                 <Link href="#">
                                     <div className="ps-section__image link-hover-thumb-shape">
                                     <Image 
@@ -128,7 +128,7 @@ const InvestorRelationScreen = () => {
                                     />
                                     </div>
                                 </Link>
-                            </h1>
+                            </h2>
                         </div>
 
                         <div className=" bg-02-section">
@@ -158,7 +158,7 @@ const InvestorRelationScreen = () => {
                         </div>
                         <div className="about-section my-3">
                             <div className="container">
-                                <h1 className="text-center base-text-secondary text-uppercase ">3R-REDUCTION, REPLACEMENT, REFINEMENT</h1>
+                                <h2 className="text-center base-text-secondary text-uppercase ">3R-REDUCTION, REPLACEMENT, REFINEMENT</h2>
                                 <p className=" text-center ">
                                     We can categorically state that we do not utilise animal testing as part of our work. This is an area of our ethos that <br />
                                     we refuse to compromise on.

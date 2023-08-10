@@ -3,6 +3,9 @@ import Link from "next/link"
 const AboutBanner = () => {
   return (
     <div className="plus-section">
+      <h1 className="text-center m-4 text-white font-weight-bolder">
+        Stemnovate Next-Gen Platforms
+      </h1>
       <section className="container-section d-flex justify-content-center flex-column align-items-center align-items-md-start">
         <div className="text-center text-md-left text-white font-weight-bolder ">
           Our mission is to accelerate drug discovery from decades to years and
@@ -10,12 +13,10 @@ const AboutBanner = () => {
           animal lives. We are Stemnovate<sup>TM</sup> .
         </div>
         {/* background: linear-gradient(315deg, #EF5F33 0%, #F49239 100%); */}
-    
+
         <div>
           <Link href="/About-Us">
-            <div className="button button-about-us">
-              About Us
-            </div>
+            <div className="button button-about-us">About Us</div>
           </Link>
         </div>
       </section>

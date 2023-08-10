@@ -138,9 +138,9 @@ const AboutUsScreen = ({
   }, [])
 
   return (
-    <Container 
-    title="About Us"
-    description="Stemnovate page for founders, mission, vission and values"
+    <Container
+      title="About Us"
+      description="Stemnovate page for founders, mission, vission and values"
     >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
@@ -159,6 +159,10 @@ const AboutUsScreen = ({
         <div className="ps-page__content">
           <div className="ps-about">
             <div className="about-section">
+              <h1 className="text-center m-4 font-weight-bolder">
+                Our People - Our Story
+              </h1>
+              
               <section className="container">
                 <div className="center-box">
                   <div className="vertical-center">
@@ -183,7 +187,10 @@ const AboutUsScreen = ({
                       <section className="ps-section--block-grid ">
                         <div className="ps-section__thumbnail">
                           <Link href="#">
-                            <div className="ps-section__image link-hover-thumb-shape"style={{ width: '100%', height: 'auto' }}>
+                            <div
+                              className="ps-section__image link-hover-thumb-shape"
+                              style={{ width: "100%", height: "auto" }}
+                            >
                               <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                 alt={key}
@@ -191,7 +198,7 @@ const AboutUsScreen = ({
                                 height={675}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                                priority 
+                                priority
                                 layout="responsive"
                               />
                             </div>
@@ -230,7 +237,10 @@ const AboutUsScreen = ({
                             target="_blank"
                             rel="noreferrer"
                           >
-                            <div className="d-flex align-items-center our-client-images" style={{ width: '100%', height: 'auto' }}>
+                            <div
+                              className="d-flex align-items-center our-client-images"
+                              style={{ width: "100%", height: "auto" }}
+                            >
                               <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                 alt={data.title}
@@ -238,7 +248,7 @@ const AboutUsScreen = ({
                                 height={245}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                                priority 
+                                priority
                                 // layout="responsive"
                               />
                             </div>
@@ -291,7 +301,10 @@ const AboutUsScreen = ({
                           <section className="ps-section--block-grid ">
                             <div className="ps-section__thumbnail">
                               <Link href="#">
-                                <div className="ps-section__image link-hover-thumb-shape" style={{ width: '100%', height: 'auto' }}>
+                                <div
+                                  className="ps-section__image link-hover-thumb-shape"
+                                  style={{ width: "100%", height: "auto" }}
+                                >
                                   <Image
                                     src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                     alt={data.title}
@@ -299,7 +312,7 @@ const AboutUsScreen = ({
                                     height={675}
                                     placeholder="blur"
                                     blurDataURL="/static/image/blurred.png"
-                                    priority 
+                                    priority
                                     layout="responsive"
                                   />
                                 </div>
@@ -331,14 +344,17 @@ const AboutUsScreen = ({
                         </div>
                         <div className="ps-carousel__item">
                           <section className="ps-section__desc my-2 text-left ">
-                            <h1 className={key % 2 ? "p-2" : "p-2 text-white"}>
+                            <h2 className={key % 2 ? "p-2" : "p-2 text-white"}>
                               Featured Project
-                            </h1>
+                            </h2>
                           </section>
                           <section className="ps-section--block-grid ">
                             <div className="ps-section__thumbnail">
                               <Link href="#">
-                                <div className="ps-section__image link-hover-thumb-shape"style={{ width: '100%', height: 'auto' }}>
+                                <div
+                                  className="ps-section__image link-hover-thumb-shape"
+                                  style={{ width: "100%", height: "auto" }}
+                                >
                                   <Image
                                     src={`${process.env.AWS_S3BUCKET_URL}${data.feature_image}`}
                                     alt={data.feature_title}
@@ -346,7 +362,7 @@ const AboutUsScreen = ({
                                     height={675}
                                     placeholder="blur"
                                     blurDataURL="/static/image/blurred.png"
-                                    priority 
+                                    priority
                                     layout="responsive"
                                   />
                                 </div>
@@ -385,7 +401,10 @@ const AboutUsScreen = ({
                       >
                         <div className="ps-section__thumbnail">
                           <Link href="#">
-                            <div className="ps-section__image link-hover-thumb-shape" style={{ width: '100%', height: 'auto' }}>
+                            <div
+                              className="ps-section__image link-hover-thumb-shape"
+                              style={{ width: "100%", height: "auto" }}
+                            >
                               <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                 alt={data.title}
@@ -393,7 +412,7 @@ const AboutUsScreen = ({
                                 height={675}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                                priority 
+                                priority
                                 layout="responsive"
                               />
                             </div>
@@ -500,13 +519,13 @@ const AboutUsScreen = ({
                                 key={key}
                                 className="col-md-3 col-sm-6 d-flex flex-grow-1"
                               >
-                                <div className="card mt-3  align-items-center p-1" >
+                                <div className="card mt-3  align-items-center p-1">
                                   <a
                                     href={`${data.url}`}
                                     target={"_blank"}
                                     rel="noreferrer"
                                     className="font-weight-bold"
-                                    style={{ width: '100%', height: 'auto' }}
+                                    style={{ width: "100%", height: "auto" }}
                                   >
                                     <Image
                                       src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
@@ -515,7 +534,7 @@ const AboutUsScreen = ({
                                       height={1000}
                                       placeholder="blur"
                                       blurDataURL="/static/image/blurred.png"
-                                      priority 
+                                      priority
                                       layout="responsive"
                                     />
                                   </a>

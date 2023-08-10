@@ -109,13 +109,13 @@ function CareersGrid({ postLists, internShip }) {
               </div>
               <div className="ps-section__content">
                 <Link href="https://stemnovate.co.uk/campaign/monthly-shine-through-your-research-campaign">
-                  <h1
+                  <h2
                     className="font-weight-bold"
                     style={{ cursor: "pointer" }}
                   >
                     Sharing pictures of your work could win you an Amazon
                     voucher
-                  </h1>
+                  </h2>
                 </Link>
                 <div className="ps-section__desc ">
                   <p>
@@ -160,12 +160,12 @@ function CareersGrid({ postLists, internShip }) {
                 </div>
                 <div className="ps-section__content">
                   <Link href={`/jobdetails/${data.job_id}`}>
-                    <h1
+                    <h2
                       className="font-weight-bold"
                       style={{ cursor: "pointer" }}
                     >
                       {data.position_name}
-                    </h1>
+                    </h2>
                   </Link>
                   <div className="ps-section__desc ">
                     <p
