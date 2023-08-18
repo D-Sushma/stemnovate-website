@@ -1,15 +1,28 @@
 import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import Shop from "~/components/partials/shop/Shop";
 import Link from "next/link";
-import ModuleEcomerceCartItems from "~/components/ecomerce/modules/ModuleEcomerceCartItems";
-import ModuleEcomerceCartSummary from "~/components/ecomerce/modules/ModuleEcomerceCartSummary";
+// import ModuleEcomerceCartItems from "~/components/ecomerce/modules/ModuleEcomerceCartItems";
+// import ModuleEcomerceCartSummary from "~/components/ecomerce/modules/ModuleEcomerceCartSummary";
 import { connect } from "react-redux";
 import { calculateCartQuantity } from "~/utilities/ecomerce-helpers";
 import useEcomerce from "~/hooks/useEcomerce";
 import { Result } from "antd";
-import SkeletonTable from "~/components/elements/skeletons/SkeletonTable";
+// import SkeletonTable from "~/components/elements/skeletons/SkeletonTable";
+import dynamic from 'next/dynamic'
+
+const ModuleEcomerceCartItems = dynamic(
+  () => import("~/components/ecomerce/modules/ModuleEcomerceCartItems"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleEcomerceCartSummary = dynamic(
+  () => import("~/components/ecomerce/modules/ModuleEcomerceCartSummary"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const SkeletonTable = dynamic(
+  () => import("~/components/elements/skeletons/SkeletonTable"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const breadcrumb = [
     {

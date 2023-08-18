@@ -2,8 +2,6 @@ import React from "react";
 import useEcomerce from "~/hooks/useEcomerce";
 import { connect, useDispatch } from "react-redux";
 import { toggleDrawer } from "~/store/app/action";
-import ProductOnCart from "~/components/elements/products/ProductOnCart";
-import SkeletonTable from "~/components/elements/skeletons/SkeletonTable";
 import Link from "next/link";
 
 const EcomerceCompareTables = ({ ecomerce, products }) => {

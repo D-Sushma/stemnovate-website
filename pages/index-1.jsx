@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 import React, { useState, useEffect } from "react"
 import Container from "~/components/layouts/Container"
-import HeaderDefault from "~/components/shared/headers/HeaderDefault"
+// import HeaderDefault from "~/components/shared/headers/HeaderDefault"
 import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
@@ -20,6 +20,10 @@ import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Image from '~/components/elements/Image'
 
+const HeaderDefault = dynamic(
+  () => import("~/components/shared/headers/HeaderDefault"),
+    { loading: () => <p>Loading...</p>} 
+)
 const DynamicAboutBanner = dynamic(
   () => import("~/components/partials/pages/about-us/AboutBanner-old"),
     { loading: () => <p>Loading...</p>} 

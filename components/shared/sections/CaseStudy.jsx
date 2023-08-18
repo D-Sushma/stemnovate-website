@@ -45,7 +45,7 @@ const CaseStudy = () => {
             </div>
             <div className="row">
               <div className="mx-4 button button-services">
-                <Link href="/Services">Our Projects</Link>
+                <Link href="/About-Us">Learn More</Link>
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@ const CaseStudy = () => {
             </div>
             <div className="row">
               <div className="mx-4 button button-services">
-                <Link href="/Services">Read More</Link>
+                <Link href="/blog-news">Read More</Link>
               </div>
             </div>
           </div>

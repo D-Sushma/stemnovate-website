@@ -2,12 +2,18 @@ import React, { useEffect } from "react"
 import Link from "next/link"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import { baseUrl } from "~/repositories/Repository"
 import Image from "~/components/elements/Image"
 import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const carouselreviewSetting = {
   infinite: true,

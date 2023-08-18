@@ -4,9 +4,19 @@ import Image from "~/components/elements/Image"
 import ourCulture from "~/public/static/img/our-culture/02.jpg"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import { useEffect } from "react"
-import CareersGrid from "~/components/partials/careers/CareersGrid"
+// import CareersGrid from "~/components/partials/careers/CareersGrid"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const CareersGrid = dynamic(
+    () => import("~/components/partials/careers/CareersGrid"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const breadcrumb = [
   {

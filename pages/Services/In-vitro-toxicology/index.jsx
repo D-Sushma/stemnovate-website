@@ -5,7 +5,13 @@ import Image from "~/components/elements/Image"
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const texicologyScreen = () => {
   const breadcrumb = [
@@ -30,7 +36,7 @@ const texicologyScreen = () => {
     <>
       <Container
         title="In-vitro toxicology"
-        description="Stemnovate provides animal alternative in vitro human and multispecies cell based models, promoting reduce animal testing, replacing and refining use in research"
+        description="Stemnovate page on in vitro solutions for liver, heart and brain."
       >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h service-breadcrumb-bg">

@@ -2,11 +2,21 @@ import React from "react"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
 import { connect } from "react-redux"
-import ProductList from "~/components/productList/productList"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import ProductList from "~/components/productList/productList"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import ReactPlayer from "react-player"
 import Link from 'next/link'
 import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic'
+
+const ProductList = dynamic(
+    () => import("~/components/productList/productList"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const categoryListScreen = () => {
   const breadcrumb = [
@@ -30,8 +40,7 @@ const categoryListScreen = () => {
   return (
     <Container
       title="Cell Culture"
-      description={`We produce cell culture in various formats, with or without serum, and 
-	containing different types of supplements to support several cell types and applications`}
+      description={`Stemnovate cell culture media are customized for skin, liver, keratinocytes, heart and brain in vitro modelling`}
     >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h product-breadcrumb-bg">

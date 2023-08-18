@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import { useSession } from "next-auth/react"
-
 import PropTypes from "prop-types"
-import Link from "next/link"
-import pdfHelper from "~/lib/pdfHelper"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
   
 import jsPDF from "jspdf"
 import html2canvas from "html2canvas"

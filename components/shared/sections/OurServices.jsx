@@ -49,7 +49,7 @@ const OurService = () => {
               <div className="row">
                 <div className="mx-4 button button-services">
                   <Link href="/Applications/Drug-Discovery-Platform">
-                    Learn More
+                    Discover More
                   </Link>
                 </div>
               </div>

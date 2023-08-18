@@ -1,11 +1,25 @@
 import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import SidebarShop from "~/components/shared/sidebar/SidebarShop";
-import Shop from "~/components/partials/shop/Shop";
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
+// import SidebarShop from "~/components/shared/sidebar/SidebarShop";
+// import Shop from "~/components/partials/shop/Shop";
+// import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
 import useGetProducts from "~/hooks/useGetProducts";
 import useProductGroup from "~/hooks/useProductGroup";
+import dynamic from 'next/dynamic'
+
+const Shop = dynamic(
+  () => import("~/components/partials/shop/Shop"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const SidebarShop = dynamic(
+  () => import("~/components/shared/sidebar/SidebarShop"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const PromotionSecureInformation = dynamic(
+  () => import("~/components/shared/sections/PromotionSecureInformation"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const breadcrumb = [
     {

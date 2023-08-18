@@ -2,10 +2,20 @@
 import React from "react"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import Subscribe from "~/components/shared/sections/Subscribe"
-import ProductList from "~/components/productList/productList"
+// import Subscribe from "~/components/shared/sections/Subscribe"
+// import ProductList from "~/components/productList/productList"
 import Link from 'next/link'
 import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic';
+
+const ProductList = dynamic(
+  () => import("~/components/productList/productList"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const Subscribe = dynamic(
+  () => import("~/components/shared/sections/Subscribe"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const breadcrumb = [
   {
@@ -79,7 +89,7 @@ const Applications = () => {
                         laboratory. These novel models have the potential to
                         predict human drug response and ensure patient safety...{" "}
                         <Link href="/Applications/Drug-Discovery-Platform" >
-                          <span className="text-white font-weight-bold span-with-link">Read More</span>
+                          <span className="text-white font-weight-bold span-with-link">Discover More</span>
                         </Link>
                       </p>
                       <p className="">
@@ -160,7 +170,7 @@ const Applications = () => {
                         we also developed new technology and assays for rapid
                         diagnostic ....{" "}
                         <Link href="/Applications/Diagnostics" >
-                          <span className="text-white font-weight-bold span-with-link">Read More</span>
+                          <span className="text-white font-weight-bold span-with-link">View More</span>
                         </Link>
                       </p>
                       <p className="">

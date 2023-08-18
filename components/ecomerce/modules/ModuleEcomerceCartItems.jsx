@@ -1,8 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import ProductOnCart from "~/components/elements/products/ProductOnCart";
+// import ProductOnCart from "~/components/elements/products/ProductOnCart";
 import useEcomerce from "~/hooks/useEcomerce";
 import { Result } from "antd";
+import dynamic from 'next/dynamic'
+
+const ProductOnCart = dynamic(
+  () => import("~/components/elements/products/ProductOnCart"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleEcomerceCartItems = ({ ecomerce, cartItems }) => {
     const { increaseQty, decreaseQty, removeItem } = useEcomerce();

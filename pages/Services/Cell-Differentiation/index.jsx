@@ -5,7 +5,13 @@ import Image from "~/components/elements/Image"
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const texicologyScreen = () => {
   const breadcrumb = [

@@ -1,13 +1,27 @@
 import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import Shop from "~/components/partials/shop/Shop";
-import SidebarShop from "~/components/shared/sidebar/SidebarShop";
+// import Shop from "~/components/partials/shop/Shop";
+// import SidebarShop from "~/components/shared/sidebar/SidebarShop";
 import useGetProducts from "~/hooks/useGetProducts";
 import useProductGroup from "~/hooks/useProductGroup";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
-import Subscribe from "~/components/shared/sections/Subscribe";
+// import Subscribe from "~/components/shared/sections/Subscribe";
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const Shop = dynamic(
+    () => import("~/components/partials/shop/Shop"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const SidebarShop = dynamic(
+    () => import("~/components/shared/sidebar/SidebarShop"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const breadcrumb = [
     {

@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 import React, { useState, useEffect } from "react"
 import Container from "~/components/layouts/Container"
-import HeaderDefault from "~/components/shared/headers/HeaderDefault"
+// import HeaderDefault from "~/components/shared/headers/HeaderDefault"
 import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
@@ -11,6 +11,10 @@ import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Image from "~/components/elements/Image"
 
+const HeaderDefault = dynamic(
+  () => import("~/components/shared/headers/HeaderDefault"),
+  { loading: () => <p>Loading...</p> }
+)
 const DynamicAboutBanner = dynamic(
   () => import("~/components/partials/pages/about-us/AboutBanner"),
   { loading: () => <p>Loading...</p> }
@@ -52,7 +56,7 @@ const DynamicOurClients = dynamic(
   }
 )
 const DynamicBlogGrid = dynamic(
-  () => import("~/components/partials/blog/BlogGrid"),
+  () => import("~/components/partials/blog/BlogGrid-New"),
   {
     loading: () => <p>Loading...</p>
   }
@@ -121,6 +125,7 @@ const HomeDefaultPage = (props) => {
       title="Your Drug Discovery Partner"
       menus={props.menus}
       header={<HeaderDefault classes="without-border" menus={props.menus} />}
+      description="Stemnovate page on drug discovery. The platforms provide solutions for next gen liver, heart and brain cell modelling. "
     >
       <main id="homepage-one">
         <div className="ps-top-banners">
@@ -162,6 +167,7 @@ const HomeDefaultPage = (props) => {
                                       <a
                                         className="bg-warning ps-banner__shop py-1 pl-30 pr-30 rounded-10"
                                         href={`${data?.url}`}
+                                        rel="noreferrer"
                                       >
                                         {data?.btn_text}
                                       </a>
@@ -203,6 +209,7 @@ const HomeDefaultPage = (props) => {
                                         marginTop: "51px"
                                       }}
                                       href={`${data?.url}`}
+                                      rel="noreferrer"
                                     >
                                       {data?.btn_text}
                                     </a>

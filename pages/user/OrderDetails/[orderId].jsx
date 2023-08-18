@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useRef } from "react"
 import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import moment from "moment"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+  () => import("~/components/shared/sections/Subscribe")
+)
 
 function orderConfirmation({ UserData }) {
   const router = useRouter()

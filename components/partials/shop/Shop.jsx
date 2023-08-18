@@ -1,5 +1,11 @@
 import React from "react";
-import ModuleShopActions from "~/components/partials/shop/modules/ModuleShopActions";
+// import ModuleShopActions from "~/components/partials/shop/modules/ModuleShopActions";
+import dynamic from 'next/dynamic'
+
+const ModuleShopActions = dynamic(
+    () => import("~/components/partials/shop/modules/ModuleShopActions"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const Shop = ({ children, classes, fullwidth = false, actions = true }) => {
     let actionsView;

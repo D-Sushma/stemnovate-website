@@ -7,13 +7,24 @@ import Container from "~/components/layouts/Container"
 import moment from "moment"
 import { HiArrowSmRight } from "react-icons/hi"
 import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import ProductList from "~/components/eventDetailList/productList"
+// import ProductList from "~/components/eventDetailList/productList"
 import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+
+const ProductList = dynamic(
+    () => import("~/components/eventDetailList/productList"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const EventsDetails = ({ EventsData }) => {
   console.log("EventsData", EventsData)

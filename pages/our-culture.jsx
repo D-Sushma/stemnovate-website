@@ -1,9 +1,15 @@
 import React from "react"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const breadcrumb = [
   {
@@ -112,7 +118,7 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Read More
+                          Learn More
                         </div>
                       </Link>
                     </div>
@@ -151,7 +157,7 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Read More
+                          Learn More
                         </div>
                       </Link>
                     </div>
@@ -186,7 +192,7 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Read More
+                          Uncover More
                         </div>
                       </Link>
                     </div>

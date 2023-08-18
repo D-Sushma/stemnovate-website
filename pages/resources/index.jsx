@@ -6,9 +6,15 @@ import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
 import { baseUrl } from "~/repositories/Repository"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const breadcrumb = [
   {

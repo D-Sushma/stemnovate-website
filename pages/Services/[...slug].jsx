@@ -3,21 +3,18 @@ import { useRouter } from "next/router";
 import useGetProducts from "~/hooks/useGetProducts";
 import useProductGroup from "~/hooks/useProductGroup";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import SidebarShop from "~/components/shared/sidebar/SidebarShop";
-import Shop from "~/components/partials/shop/Shop";
-import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
 import Container from "~/components/layouts/Container";
-import Loader from "~/components/reuseable/Loader";
-import Image from "~/components/elements/Image";
-import { API } from "~/lib/constant";
-import Link from "next/link";
-import { Input, Button } from "antd";
 import { baseUrl } from "~/repositories/Repository";
 import { connect, useDispatch } from "react-redux";
 import { toggleDrawer } from "~/store/app/action";
 import useEcomerce from "~/hooks/useEcomerce";
-import { Modal } from "antd";
-import Subscribe from "~/components/shared/sections/Subscribe";
+// import Subscribe from "~/components/shared/sections/Subscribe";
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const Applications = ({ ProductData, ecomerce }) => {
     const Router = useRouter();

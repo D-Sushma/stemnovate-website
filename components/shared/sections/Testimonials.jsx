@@ -4,12 +4,18 @@ import NextArrow from "~/components/elements/carousel/NextArrow"
 import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
 import testimonials from "~/public/static/data/testimonials.json"
-import TestimonialItem from "~/components/elements/TestimonialItem"
+// import TestimonialItem from "~/components/elements/TestimonialItem"
 import Image from "~/components/elements/Image"
 import newcambridge from "~/public/static/home-images/newcambridge.jpg"
 import Cambridge from "~/public/static/home-images/Cambridge-Independent.jpg"
 import discoverymatters from "~/public/static/home-images/discoverymatters.jpg"
 import announcementimg from "~/public/static/home-images/announcement.jpg"
+import dynamic from "next/dynamic"
+
+const TestimonialItem = dynamic(
+  () => import("~/components/elements/TestimonialItem"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const carouselSetting = {
   infinite: true,
@@ -180,7 +186,7 @@ const Testimonials = () => {
                             href="/Applications/Animal-Health"
                             className="h5 "
                           >
-                            <span className="button-link">READ MORE</span>
+                            <span className="button-link">FIND OUT MORE</span>
                           </a>
                         </div>
                       </div>

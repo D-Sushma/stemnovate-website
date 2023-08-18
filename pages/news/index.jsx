@@ -3,8 +3,14 @@ import BreadCrumb from "~/components/elements/BreadCrumb";
 import Container from "~/components/layouts/Container";
 import useGetPost from "~/hooks/useGetPost";
 import usePostGroup from "~/hooks/usePostGroup";
-import CustomPagination from "~/components/elements/basic/CustomPagination";
+// import CustomPagination from "~/components/elements/basic/CustomPagination";
 import { useRouter } from "next/router";
+import dynamic from 'next/dynamic'
+
+const CustomPagination = dynamic(
+    () => import("~/components/elements/basic/CustomPagination"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const BlogGridScreen = () => {
     const { getPosts, postItems, loading } = useGetPost();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -17,8 +17,19 @@ import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import { TbCalendarTime, TbBuildingCommunity, TbLiveView } from "react-icons/tb"
 import moment from "moment"
-import CareerForm from "~/components/shared/forms/CareerForm"
+// import CareerForm from "~/components/shared/forms/CareerForm"
 import { Divider } from "antd"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const CareerForm = dynamic(
+    () => import("~/components/shared/forms/CareerForm"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  
 const breadcrumb = [
   {
     id: 1,

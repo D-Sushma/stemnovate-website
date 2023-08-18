@@ -4,9 +4,19 @@ import BreadCrumb from "~/components/elements/BreadCrumb"
 import { connect } from "react-redux"
 import { caculateArrayQuantity } from "~/utilities/ecomerce-helpers"
 import useEcomerce from "~/hooks/useEcomerce"
-import ModuleEcomerceWishlist from "~/components/ecomerce/modules/ModuleEcomerceWishlist"
-import SkeletonTable from "~/components/elements/skeletons/SkeletonTable"
+// import ModuleEcomerceWishlist from "~/components/ecomerce/modules/ModuleEcomerceWishlist"
+// import SkeletonTable from "~/components/elements/skeletons/SkeletonTable"
 import { Result } from "antd"
+import dynamic from 'next/dynamic'
+
+const ModuleEcomerceWishlist = dynamic(
+  () => import("~/components/ecomerce/modules/ModuleEcomerceWishlist"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const SkeletonTable = dynamic(
+  () => import("~/components/elements/skeletons/SkeletonTable"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const breadcrumb = [
   {

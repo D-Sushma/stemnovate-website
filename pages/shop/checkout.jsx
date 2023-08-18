@@ -7,8 +7,14 @@ import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
 import { Alert } from "antd"
 import { ToastContainer } from "react-toastify"
-import BothFormCheckout from "~/components/shared/forms/BothFormCheckout"
+// import BothFormCheckout from "~/components/shared/forms/BothFormCheckout"
 import Link from "next/link"
+import dynamic from 'next/dynamic'
+
+const BothFormCheckout = dynamic(
+  () => import("~/components/shared/forms/BothFormCheckout"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const CheckoutScreen = ({ UserData }) => {
   const router = useRouter()

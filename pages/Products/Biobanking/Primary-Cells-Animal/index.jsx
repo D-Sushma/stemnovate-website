@@ -10,8 +10,18 @@ import AnimalCellCultureMedium from '~/public/static/img/products/Primary-Cells-
 import AnimalWelfare from '~/public/static/img/products/Primary-Cells-Animal/Animal-welfare.jpg'
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import ProductList from "~/components/productList/productList"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import ProductList from "~/components/productList/productList"
+// import Subscribe from "~/components/shared/sections/Subscribe"
+import dynamic from 'next/dynamic'
+
+const ProductList = dynamic(
+    () => import("~/components/productList/productList"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 const categoryListScreen = () => {
   const breadcrumb = [
     {
@@ -184,7 +194,7 @@ const categoryListScreen = () => {
                       </li>
                     </ol>
                     <Link href="/Applications/Animal-Health" >
-                      <button className="btn btn-lg button-orange text-white m-4 m-5">Read More</button>
+                      <button className="btn btn-lg button-orange text-white m-4 m-5">Find Out More</button>
                     </Link>
                   </p>
                 </div>
@@ -285,7 +295,7 @@ const categoryListScreen = () => {
                           our furry friends.
                         </p>
                         <Link href="/Applications/Animal-Health" >
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">Read More</button>
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">Find Out More</button>
                         </Link>
                       </div>
                     </div>

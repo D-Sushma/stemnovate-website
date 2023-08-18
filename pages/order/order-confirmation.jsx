@@ -5,8 +5,14 @@ import { getSession } from "next-auth/react"
 import useEcomerce from "~/hooks/useEcomerce"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import moment from "moment"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 function OrderConfirmation({ UserData }) {
   const router = useRouter()

@@ -5,8 +5,18 @@ import vector from "~/public/static/img/Home/vector.png"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import { FiPhone, FiMail } from "react-icons/fi"
-import FooterAddress from "~/components/shared/footers/modules/addresscontact"
-import HubspotContactForm from "~/components/shared/forms/HubspotContactForm"
+// import FooterAddress from "~/components/shared/footers/modules/addresscontact"
+// import HubspotContactForm from "~/components/shared/forms/HubspotContactForm"
+import dynamic from 'next/dynamic'
+
+const FooterAddress = dynamic(
+    () => import("~/components/shared/footers/modules/addresscontact"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const HubspotContactForm = dynamic(
+    () => import("~/components/shared/forms/HubspotContactForm"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const breadcrumb = [
   {

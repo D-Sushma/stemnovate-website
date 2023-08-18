@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PostRepository from "~/repositories/PostRepository";
-import ArticleGrid from "~/components/elements/articles/ArticleGrid";
+// import ArticleGrid from "~/components/elements/articles/ArticleGrid";
 import PropTypes from "prop-types";
+import dynamic from 'next/dynamic'
+
+const ArticleGrid = dynamic(
+    () => import("~/components/elements/articles/ArticleGrid"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const BlogGrid = ({ collectionSlug, column }) => {
     const [loading, setLoading] = useState(true);

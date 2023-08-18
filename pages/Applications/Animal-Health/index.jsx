@@ -3,9 +3,15 @@ import React from "react"
 import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
 import { connect } from "react-redux"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import Image from "~/components/elements/Image"
 import Link from "next/link"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+  () => import("~/components/shared/sections/Subscribe"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const texicologyScreen = () => {
   const breadcrumb = [
@@ -30,7 +36,7 @@ const texicologyScreen = () => {
     <>
       <Container
         title="Animal-Health"
-        description="Stemnovate page for animal health industry, zero animal testing and in vitro research holding high values on ethical sourcing and guranteed no harm to any life form."
+        description="Stemnovate page on animal drug discovery, research and development. In vitro solution reducing animal testing."
       >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">

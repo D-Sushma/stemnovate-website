@@ -3,10 +3,16 @@ import { useRouter } from "next/router";
 import useGetProducts from "~/hooks/useGetProducts";
 import useProductGroup from "~/hooks/useProductGroup";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import SidebarShop from "~/components/shared/sidebar/SidebarShop";
+// import SidebarShop from "~/components/shared/sidebar/SidebarShop";
 import Shop from "~/components/partials/shop/Shop";
 import Container from "~/components/layouts/Container";
 import { ToastContainer } from "react-toastify";
+import dynamic from 'next/dynamic'
+
+const SidebarShop = dynamic(
+    () => import("~/components/shared/sidebar/SidebarShop"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const CategoryScreen = () => {
     const Router = useRouter();

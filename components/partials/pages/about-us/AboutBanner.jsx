@@ -16,7 +16,7 @@ const AboutBanner = () => {
 
         <div>
           <Link href="/About-Us">
-            <div className="button button-about-us">About Us</div>
+            <div className="button button-about-us">Learn More</div>
           </Link>
         </div>
       </section>

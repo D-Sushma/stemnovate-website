@@ -3,10 +3,16 @@ import BreadCrumb from "~/components/elements/BreadCrumb"
 import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import { Tooltip } from "antd"
 import Link from 'next/link'
 import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic';
+
+const Subscribe = dynamic(
+  () => import("~/components/shared/sections/Subscribe"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const texicologyScreen = () => {
   const breadcrumb = [
@@ -36,7 +42,7 @@ const texicologyScreen = () => {
     <>
       <Container 
         title="Liver"
-        description="Stemnovate Liver research page shows our platform capabiliity for cellular reprogramming, liver differentiation from IPSC and liver disease modelling for NASH & drug discovery."  
+        description="Stemnovate Liver page shows our platform capability for cellular reprogramming and liver modelling."  
       >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">

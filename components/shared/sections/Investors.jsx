@@ -3,7 +3,13 @@ import NextArrow from "~/components/elements/carousel/NextArrow";
 import PrevArrow from "~/components/elements/carousel/PrevArrow";
 import Slider from "react-slick";
 import investors from "~/public/static/data/investors.json";
-import InvestorsItem from "~/components/elements/InvestorsItem";
+// import InvestorsItem from "~/components/elements/InvestorsItem";
+import dynamic from 'next/dynamic'
+
+const InvestorsItem = dynamic(
+    () => import("~/components/elements/InvestorsItem"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const carouselSetting = {
     infinite: true,

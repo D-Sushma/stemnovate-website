@@ -1,11 +1,21 @@
 import React from "react"
 import Container from "~/components/layouts/Container"
 import BreadCrumb from "~/components/elements/BreadCrumb"
-import Subscribe from "~/components/shared/sections/Subscribe"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
-import CampaignsList from "~/components/elements/campaigns/CampaignsList"
+// import CampaignsList from "~/components/elements/campaigns/CampaignsList"
+import dynamic from 'next/dynamic'
+
+const Subscribe = dynamic(
+    () => import("~/components/shared/sections/Subscribe"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const CampaignsList = dynamic(
+    () => import("~/components/elements/campaigns/CampaignsList"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const breadcrumb = [
   {

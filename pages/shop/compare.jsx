@@ -1,13 +1,22 @@
 import React, { useEffect } from "react";
 import Container from "~/components/layouts/Container";
 import BreadCrumb from "~/components/elements/BreadCrumb";
-import Shop from "~/components/partials/shop/Shop";
 import { connect } from "react-redux";
 import { caculateArrayQuantity } from "~/utilities/ecomerce-helpers";
 import useEcomerce from "~/hooks/useEcomerce";
-import SkeletonTable from "~/components/elements/skeletons/SkeletonTable";
+// import SkeletonTable from "~/components/elements/skeletons/SkeletonTable";
 import { Result } from "antd";
-import EcomerceCompareTables from "~/components/ecomerce/EcomerceCompareTables";
+// import EcomerceCompareTables from "~/components/ecomerce/EcomerceCompareTables";
+import dynamic from 'next/dynamic'
+
+const SkeletonTable = dynamic(
+  () => import("~/components/elements/skeletons/SkeletonTable"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const EcomerceCompareTables = dynamic(
+  () => import("~/components/ecomerce/EcomerceCompareTables"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const breadcrumb = [
     {
