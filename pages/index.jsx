@@ -56,7 +56,7 @@ const DynamicOurClients = dynamic(
   }
 )
 const DynamicBlogGrid = dynamic(
-  () => import("~/components/partials/blog/BlogGrid-New"),
+  () => import("~/components/partials/blog/BlogGrid-New-1"),
   {
     loading: () => <p>Loading...</p>
   }
