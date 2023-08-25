@@ -43,7 +43,7 @@ class SubscribePopup extends Component {
                                 </div>
                                 <div className="ps-checkbox">
                                     <input className="form-control" type="checkbox" id="not-show" name="not-show" />
-                                    <label htmlFor="not-show">Don't show this popup again</label>
+                                    <label htmlFor="not-show">Don&apos;t show this popup again</label>
                                 </div>
                             </div>
                         </form>

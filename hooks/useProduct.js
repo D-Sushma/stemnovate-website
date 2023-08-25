@@ -3,6 +3,7 @@ import LazyLoad from "react-lazyload";
 import { baseUrlProduct } from "~/repositories/Repository";
 import { formatCurrency } from "~/utilities/product-helper";
 import Link from "next/link";
+import Image from '~/components/elements/Image'
 
 function getImageURL(source, size) {
     let image, imageURL;
@@ -49,25 +50,26 @@ export default function useProduct() {
                 if (payload.product_image) {
                     const images = payload.product_image.split(",");
                     return (
-                        // <>
-                        // {images.map((item)=>
-                        //     <LazyLoad>
-
-                        //     <img
-                        //         src={`${process.env.AWS_S3BUCKET_URL}${item}`}
-                        //         alt=""
-                        //     />
-                        // </LazyLoad>
-                        // )}
-
-                        // </>
                         <div>
                             <LazyLoad>
-                                <img src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`} alt={payload?.product_name} />
+                                <Image
+                                    src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`}
+                                    alt={payload?.product_name}
+                                    width={1000}
+                                    height={758}
+                                />
+                                {/* <img src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`} alt={payload?.product_name} /> */}
                             </LazyLoad>
-                            <LazyLoad>
-                                <img src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`} className="second" alt={payload?.product_name} />
-                            </LazyLoad>
+                            {/* <LazyLoad> */}
+                                {/* <Image
+                                    src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`}
+                                    className="second"
+                                    alt={payload?.product_name}
+                                    width={1000}
+                                    height={758}
+                                /> */}
+                                {/* <img src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`} className="second" alt={payload?.product_name} /> */}
+                            {/* </LazyLoad> */}
                         </div>
                     );
                 }
@@ -147,13 +149,13 @@ export default function useProduct() {
             if (payload.product_brands && payload.product_brands.length > 0) {
                 view = (
                     <Link href="/shop">
-                        <a className="text-capitalize">{payload.product_brands[0].name}</a>
+                        <div className="text-capitalize">{payload.product_brands[0].name}</div>
                     </Link>
                 );
             } else {
                 view = (
                     <Link href="/shop">
-                        <a className="text-capitalize">No Brand</a>
+                        <div className="text-capitalize">No Brand</div>
                     </Link>
                 );
             }

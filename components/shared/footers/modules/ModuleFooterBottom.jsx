@@ -1,5 +1,6 @@
 import React from "react";
 import ModuleFooterCopyright from "~/components/shared/footers/modules/ModuleFooterCopyright";
+import Link from 'next/link'
 
 const ModuleFooterBottom = () => {
     return (
@@ -12,13 +13,13 @@ const ModuleFooterBottom = () => {
                     <div className="col-md-6">
                         <div className="flex-row d-flex justify-content-around">
                             <div className="d-flex text-white">
-                                <a href="/terms-of-use">Terms Of Use</a>
+                                <Link href="/terms-of-use">Terms Of Use</Link>
                             </div>
                             <div className=" d-flex  text-white">
-                                <a href="/privacy-policy"> Privacy Policy</a>
+                                <Link href="/privacy-policy"> Privacy Policy</Link>
                             </div>
                             <div className=" d-flex  text-white">
-                                <a href="/cookies-policy">Cookies Policy</a>
+                                <Link href="/cookies-policy">Cookies Policy</Link>
                             </div>
                         </div>
                     </div>

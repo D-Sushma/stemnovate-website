@@ -4,22 +4,15 @@ import ModuleFooterAddress from "~/components/shared/footers/modules/ModuleFoote
 import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks"
 import ModuleFooterBottom from "~/components/shared/footers/modules/ModuleFooterBottom"
 import FooterLinks from "~/public/static/data/footer.json"
-//import Image from "next/image"
-//import securePayment from "~/public/static/image/securepayments.svg"
+import Image from "next/image"
+import Link from "next/link"
 
 const FooterDefault = () => {
   return (
     <footer className="ps-footer ps-footer--1 bg-black mb-5">
-      {/* <ModuleFooterTop /> */}
-
       <div className="ps-footer__middle">
         <div className="container">
           <div className="row">
-            {/* <div className="container">
-              <div style={{ width: "345px" }}>
-                <Logo type="white" style={{ width: "200px" }} />
-              </div>
-            </div> */}
             <div className="col-12 col-lg-7 my-4">
               <div className="row ps-footer__information">
                 <div className="col-12 col-lg-12 col-md-12 col-sm-12">
@@ -33,20 +26,22 @@ const FooterDefault = () => {
                   <WidgetFooterLinks source={FooterLinks.information} />
                 </div>
                 <div className="d-flex flex-column">
-                  {/* <WidgetFooterLinks source={FooterLinks.account} /> */}
-                  <img
+                  <Image
                     src="/static/image/QMS_new.svg"
                     alt="QMS"
+                    width={1000}
+                    height={500}
                     style={{
                       width: "150px",
                       // height: "22%",
-                      // height: "fit-content",
                       marginBottom: "10px"
                     }}
                   />
-                  <img
+                  <Image
                     src="/static/image/HTA.svg"
                     alt="HTA"
+                    width={1000}
+                    height={500}
                     style={{
                       width: "150px"
                       // height: "22%"
@@ -55,31 +50,18 @@ const FooterDefault = () => {
                   />
                 </div>
                 <div className="d-flex">
-                  {/* <WidgetFooterLinks source={FooterLinks.store} /> */}
                   <p className="text-white p-4">
                     <span>Secure Payments</span>
-                    <img
+                    <Image
                       src="/static/image/securepayments.svg"
                       alt="secure"
+                      width={1000}
+                      height={500}
                       style={{
-                        width: "150px",
+                        width: "150px"
                         // height: "100%",
-                       }}
-                    /> 
-                    {/* <Image
-                        priority
-                        src={securePayment}
-                        alt="secure"
-                      /> */}
-                    {/* <img
-                      src="/static/image/secure-payments.png"
-                      alt="secure"
-                      style={{
-                        width: "150px",
-                        // height: "fit-content",
-                        marginBottom: "10px"
                       }}
-                    /> */}
+                    />
                   </p>
                 </div>
               </div>
@@ -94,30 +76,26 @@ const FooterDefault = () => {
                   <p className="text-white">
                     <span>Contact us on - </span>{" "}
                     <b>
-                      <a
-                        className="ps-footer__email"
-                        href="tel:+44 (0)1223830192"
-                      >
-                        <span className="text-white font-weight-bold">
-                          +44&nbsp;(0)1223830192
+                      <Link href="tel:+44 (0)1223830192">
+                        <span className="ps-footer__email">
+                          <span className="text-white font-weight-bold">
+                            +44&nbsp;(0)1223830192
+                          </span>
                         </span>
-                      </a>
+                      </Link>
                     </b>
                   </p>
                   <p className="text-white">
                     <span>Email us on - </span>{" "}
                     <b>
                       {" "}
-                      <a
-                        className="ps-footer__email"
-                        href="mailto:info@stemnovate.co.uk"
-                      >
-                        {/* <FiMail />  */}
-
-                        <span className="text-white font-weight-bold">
-                          info@stemnovate.co.uk
+                      <Link href="mailto:info@stemnovate.co.uk">
+                        <span className="ps-footer__email">
+                          <span className="text-white font-weight-bold">
+                            info@stemnovate.co.uk
+                          </span>
                         </span>
-                      </a>
+                      </Link>
                     </b>
                   </p>
                 </div>

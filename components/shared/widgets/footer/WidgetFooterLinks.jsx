@@ -4,9 +4,11 @@ import Link from "next/link"
 const WidgetFooterLinks = ({ source, classes = "" }) => {
   const linksView = source.items.map((item, index) => (
     <li key={index}>
+      <div className="text-white">
       <Link href={item.url}>
-        <a>{item.text}</a>
+        <span className="span-with-link">{item.text}</span>
       </Link>
+      </div>
     </li>
   ))
   return (
@@ -14,7 +16,6 @@ const WidgetFooterLinks = ({ source, classes = "" }) => {
       <div
         className={`ps-footer--block widget--footer widget--footer-links ${classes}`}
       >
-        {/* <h5 className="ps-block__title">{source.title}</h5> */}
         <ul className="ps-block__list">{linksView}</ul>
       </div>
     </>

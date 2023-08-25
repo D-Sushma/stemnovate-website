@@ -7,13 +7,12 @@ const HomeOneFeaturedProducts = ({
     title = "Featured Products",
     showAll = false,
 }) => {
-    const { loading, productItems, getProducts, getProductsByCollection } =
+    const { loading, productItems, getProductsByCollection } =
         useGetProducts();
     const { withGrid } = useProductGroup();
 
     useEffect(() => {
         getProductsByCollection("featured-products");
-        /*getProducts({ _limit: 10 });*/
     }, [collectionSlug]);
     const products = withGrid(productItems, loading);
     let showAllView;
@@ -21,7 +20,7 @@ const HomeOneFeaturedProducts = ({
         showAllView = (
             <div className="ps-section__bottom">
                 <Link href="/shop">
-                    <a className="ps-btn ps-btn--outline ps-btn--">Show all</a>
+                    <span className="ps-btn ps-btn--outline ps-btn-- link-hover-thumb-shape">Show all</span>
                 </Link>
             </div>
         );

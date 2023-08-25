@@ -32,7 +32,8 @@ class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
-                    <Script strategy="beforeInteractive" type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5456750.js"></Script>
+                    {/* beforeInteractive */}
+                    <Script strategy="lazyOnload" type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5456750.js"></Script>
                 </body>
             </Html>
         );

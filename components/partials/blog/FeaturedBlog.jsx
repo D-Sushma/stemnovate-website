@@ -2,8 +2,8 @@ import React from "react";
 import Slider from "react-slick";
 import NextArrow from "~/components/elements/carousel/NextArrow";
 import PrevArrow from "~/components/elements/carousel/PrevArrow";
-
 import PropTypes from "prop-types";
+import Link from 'next/link'
 
 const carouselSetting = {
     infinite: true,
@@ -32,9 +32,9 @@ const FeaturedBlog = ({ List }) => {
                                         <h1 className="ps-banner__title text-white">{data.tag}</h1>
                                         <div className="ps-banner__desc text-white">{data.name}</div>
                                         <div className="ps-banner__btn-group"></div>
-                                        <a className="bg-warning ps-banner__shop" href={`/blogs/${data.slug}`}>
-                                            Read More
-                                        </a>
+                                        <Link href={`/blogs/${data.slug}`}>
+                                            <button className="bg-warning ps-banner__shop link-hover-thumb-shape">Read More</button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

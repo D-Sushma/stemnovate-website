@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Moment from "moment";
 import Link from "next/link";
 import LazyLoad from "react-lazyload";
+import Image from '~/components/elements/Image'
 
 export default function usePost() {
     const [createdBy, setCreatedBy] = useState("Jan 1, 2021");
     const [categories, setCategories] = useState(
         <Link href="/blog-news">
-            <a>uncategoried</a>
+            <div className="link-hover-thumb-shape">uncategoried</div>
         </Link>
     );
     const [author, setAuthor] = useState("Unknown");
@@ -33,13 +34,13 @@ export default function usePost() {
             if (post.name) {
                 titleView = (
                     <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
-                        <a className="button-link pl-0">{post.name}</a>
+                        <div className="button-link pl-0 link-hover-thumb-shape">{post.name}</div>
                     </Link>
                 );
             } else {
                 titleView = (
                     <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
-                        <a className="button-link pl-0">No title here.</a>
+                        <div className="button-link pl-0 link-hover-thumb-shape">No title here.</div>
                     </Link>
                 );
             }
@@ -52,7 +53,7 @@ export default function usePost() {
             if (post.categories && post.categories.length > 0) {
                 const categoryItems = post.tag.map((item, index) => (
                     <Link href="/category/[slug]" as={`/categories/${item.tag}`} key={index}>
-                        <a>{item.tag}</a>
+                        <div className="link-hover-thumb-shape">{item.tag}</div>
                     </Link>
                 ));
 
@@ -61,7 +62,14 @@ export default function usePost() {
             if (post.thumbnail) {
                 const thumbnailImage = (
                     <LazyLoad>
-                        <img src={`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`} alt="img" />
+                        <Image
+                            className="zoom-in"
+                            src={`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`}
+                            alt="img"
+                            width={1000}
+                            height={759}
+                        />
+                        {/* <img src={`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`} alt="img" /> */}
                     </LazyLoad>
                 );
                 setThumbnail(thumbnailImage);

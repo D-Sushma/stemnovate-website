@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PostRepository from '~/repositories/PostRepository';
-import ArticleGrid from '~/components/elements/articles/ArticleGrid';
 import ArticleList from '~/components/elements/articles/ArticleList';
 
 const BlogGrid = ({ collectionSlug }) => {
