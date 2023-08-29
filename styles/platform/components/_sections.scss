@@ -262,11 +262,16 @@
         &.center-box p {
             font-size: 18px;
         }
+        @media (max-width: 700px) {
+            padding-top: 5%;
+            padding-bottom: 5%;
+        }
     }
 
     .investor-section {
         background-image: url("/static/image/investor-relation-bg01.jpg");
-        background-size: 100% 100%;
+        // background-size: 100% 100%;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: left top;
         padding-top: 5%;
@@ -291,6 +296,9 @@
         }
     }
 
+    .mission{
+        margin-bottom: -15px;
+    }
     .investor-mission-section {
         // background-image: url("/static/img/investors/Map-Background.jpg");
         background-image: url("/static/img/investors/mission-update.jpg");

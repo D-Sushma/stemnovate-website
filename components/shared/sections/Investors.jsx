@@ -72,8 +72,8 @@ const Investors = () => {
             <div className="investor-section">
                 <section className="container">
                     <div className="row">
-                        <div className="col-md-12 col-sm-12 text-center  mt-5">
-                            <div className="ps-section__content py-5">
+                        <div className="col-md-12 col-sm-12 text-center  mt-md-5">
+                            <div className="ps-section__content py-md-5">
                                 <div className="container">
                                     <Slider {...carouselSetting} className="ps-carousel">
                                         {items}
