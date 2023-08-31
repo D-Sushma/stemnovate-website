@@ -13,7 +13,7 @@ const Investors = dynamic(
   () => import("~/components/shared/sections/Investors"),
   { loading: () => <p>Loading...</p> }
 )
-const BlogGrid = dynamic(() => import("~/components/partials/blog/BlogGrid"), {
+const BlogGrid = dynamic(() => import("~/components/partials/blog/BlogGrid-New-1"), {
   loading: () => <p>Loading...</p>
 })
 
@@ -71,7 +71,7 @@ const InvestorRelationScreen = () => {
                         <a
                           rel="noopener noreferrer"
                           href="https://o2h.com/chaitimepost/britains-most-exciting-human-health-companies/"
-                          className="reference-website"
+                          className="reference-website text-white"
                           target={"_blank"}
                         >
                           recognized among the most innovative companies in the
@@ -116,8 +116,8 @@ const InvestorRelationScreen = () => {
               </h2>
             </div>
 
-            <div className="">
-              <h2 className="text-center base-text-secondary p-2 font-weight text-uppercase">
+            <div className="vision">
+              <h2 className="text-center base-text-secondary font-weight text-uppercase">
                 <Link href="#">
                   <div className="ps-section__image link-hover-thumb-shape">
                     <Image
