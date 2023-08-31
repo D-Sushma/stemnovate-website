@@ -91,6 +91,7 @@ const Blogs = (props) => {
   return (
     <Container
       title={blogData?.name}
+      description={blogData?.blog_meta_desc}
       cronical={"/blog-news"}
       ogimg={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
     >

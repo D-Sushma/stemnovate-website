@@ -54,6 +54,7 @@ model products {
   product_slug                String?                      @unique(map: "slug") @db.VarChar(255)
   resources_id                Int?                         @default(0)
   category                    category?                    @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "FK_category")
+  prod_meta_desc              String?                      @db.VarChar(255)
   microbiology_viralscreening microbiology_viralscreening?
   product_details             product_details?
   productdescription          productdescription?
@@ -321,6 +322,7 @@ model post {
   features        Boolean?  @default(false)
   authorName      String?   @db.VarChar(100)
   banner_title    String?   @db.VarChar(255)
+  blog_meta_desc  String?   @db.Text
 }
 
 model profile {

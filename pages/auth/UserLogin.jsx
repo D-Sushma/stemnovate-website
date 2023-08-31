@@ -117,14 +117,18 @@ const UserLogin = ({ reffrals }) => {
       <div className="ps-page ps-page--inner ">
         <div className="container">
           <div className="ps-page__header"></div>
-          <div className="ps-page__content ps-account my-5">
+          <div className="ps-page__content ps-account">
             <div className="row">
-              <div className="p-0 col-12 col-md-6 d-sm-none d-md-block bg-login-page">
+              {/* <div className="p-0 col-12 col-md-6 d-sm-none d-md-block bg-login-page"> */}
+              <div className="col col-12 col-md-6 d-sm-none d-md-block">
                 <Image
-                  src="/static/img/Home/signin-img.jpg"
+                  src="/static/img/Home/sinup-img.jpg"
+                  // src="/static/img/Home/signin-img.jpg"
                   alt="Stemnovate Limited"
-                  width={1000}
-                  height={789}
+                  width={955}
+                  height={1080}
+                  // width={1000}
+                  // height={789}
                   //   style={{ width: "100%" }}
                 />
               </div>

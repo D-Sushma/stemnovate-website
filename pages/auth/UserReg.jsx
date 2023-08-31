@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import Container from "~/components/layouts/Container"
 import { Form, Input, Button, Modal, Checkbox, Tooltip } from "antd"
-import {
-  AiOutlineLock,
-  AiOutlineUser,
-  AiOutlineMail,
-} from "react-icons/ai"
+import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
 import { Row, Col, Select } from "antd"
 const { Option } = Select
@@ -16,7 +12,7 @@ import Link from "next/link"
 import Image from "~/components/elements/Image"
 
 const UserReg = ({ reffrals }) => {
- const [isModalVisible, setIsModalVisible] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const [Checktnc, setChecktnc] = useState(false)
 
@@ -107,7 +103,7 @@ const UserReg = ({ reffrals }) => {
 
   const sendVerifyLink = async (name, myPlaintextPassword) => {
     const EncodedText = encode(myPlaintextPassword)
-    
+
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -151,7 +147,7 @@ const UserReg = ({ reffrals }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined
-            })
+          })
         }
       })
       .catch((error) => console.log("error", error))
@@ -229,11 +225,11 @@ const UserReg = ({ reffrals }) => {
   }
 
   return (
-    <Container 
-    title="My Account"
-    description="Stemnovate page for new sign up, registartion. Check our term of use"
+    <Container
+      title="My Account"
+      description="Stemnovate page for new sign up, registartion. Check our term of use"
     >
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <div className="ps-page ps-page--inner ">
         <div className="container">
           <div className="ps-page__header"></div>
@@ -243,14 +239,14 @@ const UserReg = ({ reffrals }) => {
                 <Image
                   src="/static/img/Home/sinup-img.jpg"
                   alt="Stemnovate Limited"
-                  width={1000}
-                  height={1120}
+                  width={955}
+                  height={1080}
                   //   style={{ width: "100%" }}
                 />
               </div>
               <div className="p-4 col-12 col-md-6 card">
                 <div className="ps-form--review m-5">
-                  <h2 className="ps-form__title">Sign up</h2>
+                  <h1 className="ps-form__title">Sign up</h1>
                   <Form
                     layout="vertical"
                     size={"large"}
@@ -623,23 +619,23 @@ const UserReg = ({ reffrals }) => {
                                 WebkitFontSmoothing: "antialiased"
                               }}
                             >
-                             Our 
-                              <Link href="https://stemnovate.co.uk/privacy-policy/" >
-                                <span >
-                                <strong
-                                  style={{
-                                    boxSizing: "border-box",
-                                    WebkitFontSmoothing: "antialiased",
-                                    fontWeight: 600,
-                                    backgroundColor: "transparent",
-                                    textDecoration: "none",
-                                    color: "rgb(61, 149, 165)",
-                                    cursor:"pointer"
-                                  }}
-                                >
-                                  Privacy Policy
-                                </strong>
-                                ,
+                              Our 
+                              <Link href="https://stemnovate.co.uk/privacy-policy/">
+                                <span>
+                                  <strong
+                                    style={{
+                                      boxSizing: "border-box",
+                                      WebkitFontSmoothing: "antialiased",
+                                      fontWeight: 600,
+                                      backgroundColor: "transparent",
+                                      textDecoration: "none",
+                                      color: "rgb(61, 149, 165)",
+                                      cursor: "pointer"
+                                    }}
+                                  >
+                                    Privacy Policy
+                                  </strong>
+                                  ,
                                 </span>
                               </Link>{" "}
                               which sets out the terms on which we process any
@@ -655,22 +651,22 @@ const UserReg = ({ reffrals }) => {
                               }}
                             >
                               Our 
-                              <Link href="https://stemnovate.co.uk/cookies-policy/" >
+                              <Link href="https://stemnovate.co.uk/cookies-policy/">
                                 <span>
-                                <strong
-                                  style={{
-                                    boxSizing: "border-box",
-                                    WebkitFontSmoothing: "antialiased",
-                                    fontWeight: 600,
-                                    backgroundColor: "transparent",
-                                  textDecoration: "none",
-                                  color: "rgb(61, 149, 165)",
-                                  cursor:"pointer"
-                                  }}
-                                >
-                                  Cookie Policy
-                                </strong>
-                                ,
+                                  <strong
+                                    style={{
+                                      boxSizing: "border-box",
+                                      WebkitFontSmoothing: "antialiased",
+                                      fontWeight: 600,
+                                      backgroundColor: "transparent",
+                                      textDecoration: "none",
+                                      color: "rgb(61, 149, 165)",
+                                      cursor: "pointer"
+                                    }}
+                                  >
+                                    Cookie Policy
+                                  </strong>
+                                  ,
                                 </span>
                               </Link>{" "}
                               also sets out information about the cookies on our
