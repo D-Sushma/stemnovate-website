@@ -67,6 +67,7 @@ const CareersList = (props) => {
   return (
     <Container
       title={JobsList.position_name}
+      description = "Stemnovate page on volunteering opportunities, apprenticeships, trainings and learning"
       cronical={"/careers"}
       ogimg={
         JobsList.image !== null
