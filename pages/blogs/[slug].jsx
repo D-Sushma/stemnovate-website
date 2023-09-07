@@ -117,18 +117,18 @@ const Blogs = (props) => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                        <img
+                        {/* <img
                           src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
                           alt={blogData?.name}
-                         />
-                        {/* <Image
+                         /> */}
+                        <Image
                           src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
                           alt={blogData?.name}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          width="1200"
-                          height="675"
-                        /> */}
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>

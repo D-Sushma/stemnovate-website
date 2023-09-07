@@ -1850,7 +1850,7 @@ textarea.form-control {
 }
 @media (max-width: 700px) {
     .vertical-center {
-        font-size: x-small;
+        font-size: smaller;
     }
   }
 

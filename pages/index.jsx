@@ -126,6 +126,7 @@ const HomeDefaultPage = (props) => {
       menus={props.menus}
       header={<HeaderDefault classes="without-border" menus={props.menus} />}
       description="Stemnovate page on drug discovery. The platforms provide solutions for next gen liver, heart and brain cell modelling. "
+      // style={{ maxWidth: '100%', margin: '0 auto', padding: '16px'}}
     >
       <main id="homepage-one">
         <div className="ps-top-banners">
@@ -180,8 +181,8 @@ const HomeDefaultPage = (props) => {
                                     // src="/static/image/Partnership.png"
                                     src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
                                     alt="alt"
-                                    width={1200}
-                                    height={675}
+                                    width={390}
+                                    height={219}
                                     placeholder="blur"
                                     blurDataURL="/static/image/blurred.png"
                                   />

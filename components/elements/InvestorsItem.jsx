@@ -12,8 +12,8 @@ const InvestorsItem = ({ source }) => {
               <Image
                 src={source.avatar}
                 alt={source?.name}
-                width={1200}
-                height={675}
+                width={416}
+                height={255}
                />
               </div>
 

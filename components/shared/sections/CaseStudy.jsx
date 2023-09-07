@@ -31,7 +31,7 @@ const CaseStudy = () => {
                         height={218}
                         placeholder="blur"
                         blurDataURL="/static/image/blurred.png"
-                        priority
+                        priority 
                       />
                     </div>
                     <p className="text-left font-weight-bolder content-services">
@@ -76,7 +76,7 @@ const CaseStudy = () => {
                         height={218}
                         placeholder="blur"
                         blurDataURL="/static/image/blurred.png"
-                        priority
+                        priority 
                       />
                     </div>
                     <p className=" text-left font-weight-bolder content-services">
@@ -88,7 +88,7 @@ const CaseStudy = () => {
             </div>
             <div className="row">
               <div className="mx-4 button button-services">
-                <Link href="/blog-news">Read More</Link>
+                <Link href="/blog-news" aria-label="Read More about Blog News">Read More</Link>
               </div>
             </div>
           </div>

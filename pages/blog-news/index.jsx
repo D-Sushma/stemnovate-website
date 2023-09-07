@@ -189,10 +189,10 @@ const Blogs = (props) => {
                                 <div className="ps-post__meta justify-content-center py-4">
                                   <Link href={`/blogs/${data.slug}`}>
                                     <div className="ps-post__author blog-author">
-                                      <span className="h3 my-4 span-with-link">
+                                      <span className="h3 my-4 span-with-link" aria-label={`Read More about ${data.name}`}>
                                         {" "}
                                         Read More
-                                      </span>
+                                      </span> 
                                     </div>
                                   </Link>
                                 </div>

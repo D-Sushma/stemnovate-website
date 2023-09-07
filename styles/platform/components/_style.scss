@@ -278,3 +278,13 @@ $medium: 900px;
         } 
     }
 }
+.card-resource p{
+    @media screen and (max-width: $medium){
+        font-size: 14px;
+    }
+}
+.card-resource .link-btn{
+    @media screen and (max-width: $medium){
+        bottom: 3%;
+    }
+}

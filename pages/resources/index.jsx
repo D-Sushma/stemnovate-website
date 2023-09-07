@@ -58,7 +58,7 @@ function Resources({ resourcesList }) {
                           height={563}
                         />
                         <div className="card-body  rounded-lg p-0 overlay-content">
-                          <div className="p-5">
+                          <div className="p-2 p-md-5 card-resource">
                             <h2 className="h1 text-white">
                               <b className="gradient-heading">
                                 Subscription Access
@@ -92,8 +92,8 @@ function Resources({ resourcesList }) {
                           width={1000}
                           height={563}
                         />
-                        <div className="card-body  rounded-lg p-0 overlay-content">
-                          <div className="p-5">
+                        <div className="card-body rounded-lg p-0 overlay-content">
+                          <div className="p-2 p-md-5 card-resource">
                             <h2 className="h1 text-white">
                               <b>Open Access</b>
                             </h2>

@@ -536,8 +536,8 @@ const AboutUsScreen = ({
                                     <Image
                                       src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                       alt={data.title}
-                                      width={1200}
-                                      height={1000}
+                                      width={263}
+                                      height={219}
                                       placeholder="blur"
                                       blurDataURL="/static/image/blurred.png"
                                       priority

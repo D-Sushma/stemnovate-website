@@ -84,8 +84,8 @@ const categoryListScreen = () => {
                             className="ps-banner__image"
                             src="/static/img/products/cell-culture/Chemically-Defined-Media.jpg"
                             alt="CHEMICALLY DEFINED MEDIA"
-                            width="500px"
-                            height="285px"
+                            width={1200}
+                            height={675}
                           />
                         </div>
                         <h2 className="m-4">CHEMICALLY DEFINED MEDIA</h2>

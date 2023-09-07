@@ -144,6 +144,7 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
                             className="h5"
+                            aria-label="Read more about Stemnovate's partnership with Babraham Institute on Alzheimer's disease"
                           >
                             <span className="button-link">READ MORE</span>
                           </a>
@@ -223,6 +224,7 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="https://podcasts.apple.com/gb/podcast/discovery-matters/id1466149440"
                             className="h5 "
+                            aria-label="Explore the Discovery Matters Podcast on Apple Podcasts"
                           >
                             <span className="button-link">READ MORE</span>
                           </a>
@@ -262,6 +264,7 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="/Products/Biobanking"
                             className="h5"
+                            aria-label="Learn more about our Biobanking products"
                           >
                             <span className="button-link">READ MORE</span>
                           </a>
