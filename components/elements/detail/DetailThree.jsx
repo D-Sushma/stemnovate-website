@@ -1,17 +1,42 @@
 import React from "react"
-
-import ModuleDetailTopInformation from "~/components/elements/detail/modules/ModuleDetailTopInformation"
-import ModuleProductDetailDescription from "~/components/elements/detail/modules/ModuleProductDetailDescription"
-import ModuleDetailShoppingActions from "~/components/elements/detail/modules/ModuleDetailShoppingActions"
-import ModuleDetailThumbnail from "~/components/elements/detail/modules/ModuleDetailThumbnail"
+// import ModuleDetailTopInformation from "~/components/elements/detail/modules/ModuleDetailTopInformation"
+// import ModuleProductDetailDescription from "~/components/elements/detail/modules/ModuleProductDetailDescription"
+// import ModuleDetailShoppingActions from "~/components/elements/detail/modules/ModuleDetailShoppingActions"
+// import ModuleDetailThumbnail from "~/components/elements/detail/modules/ModuleDetailThumbnail"
+// import ModuleDetailTabs from "./modules/ModuleDetailTabs"
+// import FrequentlyBoughtTogether from "~/components/partials/products/FrequentlyBoughtTogether"
 import useProduct from "~/hooks/useProduct"
-import ModuleDetailTabs from "./modules/ModuleDetailTabs"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { ToastContainer, toast } from "react-toastify"
-import FrequentlyBoughtTogether from "~/components/partials/products/FrequentlyBoughtTogether"
 import { Tooltip } from "antd"
 import { HiDownload } from "react-icons/hi"
+import dynamic from 'next/dynamic'
+
+const ModuleDetailTopInformation = dynamic(
+  () => import("~/components/elements/detail/modules/ModuleDetailTopInformation"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleProductDetailDescription = dynamic(
+  () => import("~/components/elements/detail/modules/ModuleDetailShoppingActions"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleDetailShoppingActions = dynamic(
+  () => import("~/components/elements/detail/modules/ModuleDetailShoppingActions"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleDetailThumbnail = dynamic(
+  () => import("~/components/elements/detail/modules/ModuleDetailThumbnail"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleDetailTabs = dynamic(
+  () => import("./modules/ModuleDetailTabs"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const FrequentlyBoughtTogether = dynamic(
+  () => import("~/components/partials/products/FrequentlyBoughtTogether"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const DetailThree = ({ product }) => {
   const { price } = useProduct()

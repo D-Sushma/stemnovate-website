@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Subscribe from "~/components/shared/sections/Subscribe"
 import {
   FacebookShareButton,
@@ -16,13 +16,25 @@ import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import moment from "moment"
-import Loader from "~/components/reuseable/Loader"
+// import Loader from "~/components/reuseable/Loader"
 import { scroller } from "react-scroll"
 import { TbEdit, TbCalendarEvent } from "react-icons/tb"
 import Image from "next/image"
 import Link from "next/link"
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const Loader = dynamic(
+  () => import("~/components/reuseable/Loader"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
     () => import("~/components/shared/sections/Subscribe"),
     {loading: ()=> <p>Loading...</p>}

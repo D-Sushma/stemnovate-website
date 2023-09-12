@@ -4,13 +4,18 @@ import {
   calculateCartQuantity,
   calculateAmount
 } from "~/utilities/ecomerce-helpers"
-import ProductOnCart from "~/components/elements/products/ProductOnCart"
+// import ProductOnCart from "~/components/elements/products/ProductOnCart"
 import { Alert } from "antd"
 import Link from "next/link"
 import { toggleDrawer } from "~/store/app/action"
 import useEcomerce from "~/hooks/useEcomerce"
-
 import { useSession } from "next-auth/react"
+import dynamic from "next/dynamic"
+
+const ProductOnCart = dynamic(
+  () => import("~/components/elements/products/ProductOnCart"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const EcomerceMiniCart = ({ ecomerce }) => {
   const { data: session } = useSession()

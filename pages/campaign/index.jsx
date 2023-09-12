@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react"
-import Container from "~/components/layouts/Container"
+// import Container from "~/components/layouts/Container"
 import { useRouter } from "next/router"
 import { ToastContainer } from "react-toastify"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import { baseUrl } from "~/repositories/Repository"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
     () => import("~/components/shared/sections/Subscribe"),
     {loading: ()=> <p>Loading...</p>}

@@ -1,25 +1,30 @@
 import React, { useEffect } from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+import { useRouter } from "next/router"
+import dynamic from "next/dynamic"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Shop from "~/components/partials/shop/Shop"
 // import SidebarShop from "~/components/shared/sidebar/SidebarShop"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-import { useRouter } from "next/router"
-// import Subscribe from "~/components/shared/sections/Subscribe"
-import dynamic from 'next/dynamic';
 
-const Shop = dynamic(
-  () => import("~/components/partials/shop/Shop"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Shop = dynamic(() => import("~/components/partials/shop/Shop"), {
+  loading: () => <p>Loading...</p>
+})
 const SidebarShop = dynamic(
   () => import("~/components/shared/sidebar/SidebarShop"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 import { ToastContainer } from "react-toastify"

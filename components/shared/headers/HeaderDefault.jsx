@@ -1,14 +1,36 @@
 import React, { useEffect, useState } from "react"
-import FormSearchHeader from "~/components/shared/forms/FormSearchHeader"
-import ModuleHeaderActions from "~/components/shared/headers/modules/ModuleHeaderActions"
-import Logo from "~/components/elements/basic/Logo"
 import Menu from "./Menu"
 import fetch from "node-fetch"
 import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
-import Loader from "~/components/reuseable/Loader"
-import ModuleHeaderNotice from "./modules/ModuleHeaderNotice"
+// import FormSearchHeader from "~/components/shared/forms/FormSearchHeader"
+// import ModuleHeaderActions from "~/components/shared/headers/modules/ModuleHeaderActions"
+// import Logo from "~/components/elements/basic/Logo"
+// import Loader from "~/components/reuseable/Loader"
+// import ModuleHeaderNotice from "./modules/ModuleHeaderNotice"
 import Link from "next/link"
+import dynamic from 'next/dynamic';
+
+const FormSearchHeader = dynamic(
+  () => import("~/components/shared/forms/FormSearchHeader"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleHeaderActions = dynamic(
+  () => import("~/components/shared/headers/modules/ModuleHeaderActions"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const Logo = dynamic(
+  () => import("~/components/elements/basic/Logo"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const Loader = dynamic(
+  () => import("~/components/reuseable/Loader"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleHeaderNotice = dynamic(
+  () => import("./modules/ModuleHeaderNotice"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const HeaderDefault = (props, { classes = "" }) => {
   var type = "white"

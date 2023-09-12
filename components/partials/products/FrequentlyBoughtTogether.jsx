@@ -3,9 +3,15 @@ import React, { useEffect } from "react"
 import { useSession } from "next-auth/react"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-import AddResourcesModule from "~/components/elements/products/modules/AddResourcesModule"
+// import AddResourcesModule from "~/components/elements/products/modules/AddResourcesModule"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
+import dynamic from 'next/dynamic'
+
+const AddResourcesModule = dynamic(
+  () => import("~/components/elements/products/modules/AddResourcesModule"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
   const {

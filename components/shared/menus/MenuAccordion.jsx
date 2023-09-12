@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Collapse from "~/components/elements/basic/Collapse";
+// import Collapse from "~/components/elements/basic/Collapse";
+import dynamic from "next/dynamic"
+
+const Collapse = dynamic(
+  () => import("~/components/elements/basic/Collapse"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const MenuAccordion = ({ data, classes = "menu", parent, is_page }) => {
     const [isOpen, setIsOpen] = useState(null);

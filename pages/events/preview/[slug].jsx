@@ -3,18 +3,30 @@ import React, { useCallback, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { baseUrl } from "~/repositories/Repository"
-import Container from "~/components/layouts/Container"
 import moment from "moment"
 import { HiArrowSmRight } from "react-icons/hi"
-import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-// import ProductList from "~/components/eventDetailList/productList"
 import dynamic from 'next/dynamic'
+// import Container from "~/components/layouts/Container"
+// import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Subscribe from "~/components/shared/sections/Subscribe"
+// import ProductList from "~/components/eventDetailList/productList"
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const UpcomingEvents = dynamic(
+  () => import("~/components/elements/events/UpcomingEvents"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
     () => import("~/components/shared/sections/Subscribe"),
     {loading: ()=> <p>Loading...</p>}

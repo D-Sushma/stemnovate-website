@@ -1,14 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState, useRef } from "react"
-import Container from "~/components/layouts/Container"
+// import Container from "~/components/layouts/Container"
 import { getSession } from "next-auth/react"
 import useEcomerce from "~/hooks/useEcomerce"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import moment from "moment"
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
     () => import("~/components/shared/sections/Subscribe"),
     {loading: ()=> <p>Loading...</p>}

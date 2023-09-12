@@ -1,10 +1,18 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
-import Container from "~/components/layouts/Container"
+// import Container from "~/components/layouts/Container"
 import { useRouter } from "next/router"
+// import LatestProducts from "~/components/partials/homepages/sections/LatestProducts"
+import dynamic from "next/dynamic"
 
-import LatestProducts from "~/components/partials/homepages/sections/LatestProducts"
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const LatestProducts = dynamic(
+  () => import("~/components/partials/homepages/sections/LatestProducts"),
+  { loading: () => <p>Loading...</p> }
+)
 
 function Error() {
   const router = useRouter()
@@ -30,8 +38,8 @@ function Error() {
             Please use the navigation above to find your
             <Link href="/">
               <div className="text-white font-weight-bolder">
-              {" "}
-              way back to our website.
+                {" "}
+                way back to our website.
               </div>
             </Link>
           </h2>

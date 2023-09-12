@@ -1,21 +1,29 @@
 import React, { useRef } from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Investors from "~/components/shared/sections/Investors";
 import { IoIosArrowDown } from "react-icons/io"
 import { Tooltip } from "antd"
-// import BlogGrid from "~/components/partials/blog/BlogGrid";
 import Link from "next/link"
 import Image from "~/components/elements/Image"
 import dynamic from "next/dynamic"
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Investors = dynamic(
   () => import("~/components/shared/sections/Investors"),
   { loading: () => <p>Loading...</p> }
 )
-const BlogGrid = dynamic(() => import("~/components/partials/blog/BlogGrid-New-1"), {
-  loading: () => <p>Loading...</p>
-})
+const BlogGrid = dynamic(
+  () => import("~/components/partials/blog/BlogGrid-New-1"),
+  {
+    loading: () => <p>Loading...</p>
+  }
+)
 
 const breadcrumb = [
   {

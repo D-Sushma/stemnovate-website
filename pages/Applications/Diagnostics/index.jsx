@@ -1,13 +1,17 @@
 import React from "react"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import Container from "~/components/layouts/Container"
 import { connect } from "react-redux"
-// import ProductList from "~/components/productList/productList"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
 import dynamic from 'next/dynamic';
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const ProductList = dynamic(
   () => import("~/components/productList/productList"),
   {loading: ()=> <p>Loading...</p>}
@@ -39,7 +43,7 @@ const texicologyScreen = () => {
   return (
     <>
       <Container
-        title="Diagnostics"
+        title="Stemnovate | Diagnostics"
         description="Stemnovate page for  diagnostic products and reserach and development."
       >
         <main className="ps-page ps-page--inner">

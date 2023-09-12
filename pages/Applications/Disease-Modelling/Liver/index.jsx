@@ -1,14 +1,19 @@
 import React from "react"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import { Tooltip } from "antd"
 import Link from 'next/link'
 import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic';
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   {loading: ()=> <p>Loading...</p>}
@@ -41,7 +46,7 @@ const texicologyScreen = () => {
   return (
     <>
       <Container 
-        title="Liver"
+        title="Stemnovate | Liver"
         description="Stemnovate Liver page shows our platform capability for cellular reprogramming and liver modelling."  
       >
         <main className="ps-page ps-page--inner">

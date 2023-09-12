@@ -6,12 +6,30 @@ import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import Link from "next/link";
 import { toggleDrawer } from "~/store/app/action";
-import DrawerPrimary from "~/components/shared/drawers/DrawerPrimary";
+// import DrawerPrimary from "~/components/shared/drawers/DrawerPrimary";
 // BsArrowUp
-import ModuleDrawerOverlay from "~/components/shared/drawers/modules/ModuleDrawerOverlay";
-import NavigationBottom from "~/components/shared/navigations/NavigationBottom";
 import { setCartItems, setCompareItems, setWishlistTtems } from "~/store/ecomerce/action";
-import ModuleCustomHead from "~/components/layouts/modules/ModuleCustomHead";
+// import ModuleDrawerOverlay from "~/components/shared/drawers/modules/ModuleDrawerOverlay";
+// import NavigationBottom from "~/components/shared/navigations/NavigationBottom";
+// import ModuleCustomHead from "~/components/layouts/modules/ModuleCustomHead";
+import dynamic from 'next/dynamic'
+
+const DrawerPrimary = dynamic(
+    () => import('~/components/shared/drawers/DrawerPrimary'),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleDrawerOverlay = dynamic(
+  () => import("~/components/shared/drawers/modules/ModuleDrawerOverlay"),
+  { loading: () => <p>Loading...</p> }
+)
+const NavigationBottom = dynamic(
+  () => import("~/components/shared/navigations/NavigationBottom"),
+  { loading: () => <p>Loading...</p> }
+)
+const ModuleCustomHead = dynamic(
+  () => import("~/components/layouts/modules/ModuleCustomHead"),
+  { loading: () => <p>Loading...</p> }
+)
 
 function MasterLayout({ children, stars }, props) {
     const dispatch = useDispatch();

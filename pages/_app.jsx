@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { wrapper } from "../store/store"
-import MasterLayout from "~/components/layouts/MasterLayout"
+// import MasterLayout from "~/components/layouts/MasterLayout"
 import { CookiesProvider } from "react-cookie"
 import "swiper/swiper-bundle.min.css"
 import "antd/dist/antd.compact.min.css"
@@ -21,8 +21,14 @@ import { ErrorBoundary } from "react-error-boundary"
 import { SessionProvider } from "next-auth/react"
 import NextNProgress from "nextjs-progressbar"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
+import dynamic from "next/dynamic"
 
-function App({ Component, pageProps: {...pageProps } }) {
+const MasterLayout = dynamic(
+  () => import("~/components/layouts/MasterLayout"),
+  { loading: () => <p>Loading...</p> }
+)
+
+function App({ Component, pageProps: { ...pageProps } }) {
   useEffect(() => {
     setTimeout(function () {
       document.getElementById("__next").classList.add("ps-loaded")

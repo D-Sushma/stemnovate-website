@@ -1,25 +1,41 @@
 import React, { useEffect, useState } from "react";
-import ActiveLink from "~/components/elements/basic/ActiveLink";
+// import ActiveLink from "~/components/elements/basic/ActiveLink";
 import { Drawer } from "antd";
 import { useRouter } from "next/router";
-import MenuAccordion from "~/components/shared/menus/MenuAccordion";
-import menu from "~/public/static/data/menu.json";
 import { connect } from "react-redux";
-import ModuleHeaderSwichers from "~/components/shared/headers/modules/ModuleHeaderSwitcher";
-import ModuleHeaderContactNumber from "~/components/shared/headers/modules/ModuleHeaderContactNumber";
-import FormSearchHeader from "~/components/shared/forms/FormSearchHeader";
-
-import { Menu, Dropdown, Button, Divider, Space } from "antd";
+// import MenuAccordion from "~/components/shared/menus/MenuAccordion";
+// import ModuleHeaderSwichers from "~/components/shared/headers/modules/ModuleHeaderSwitcher";
+// import ModuleHeaderContactNumber from "~/components/shared/headers/modules/ModuleHeaderContactNumber";
+// import FormSearchHeader from "~/components/shared/forms/FormSearchHeader";
+import { Menu, Dropdown, Button, Divider } from "antd";
 import { useSession, signOut } from "next-auth/react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineUserSwitch, AiOutlineUserAdd } from "react-icons/ai";
-
 import { FiBox } from "react-icons/fi";
 import { FaUserEdit, FaWpforms } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
-const { SubMenu } = Menu;
 import Link from "next/link";
 import { SetMainMenu } from "~/store/app/action";
-import Loader from "~/components/reuseable/Loader";
+import dynamic from "next/dynamic"
+
+const ActiveLink = dynamic(
+  () => import("~/components/elements/basic/ActiveLink"),
+  { loading: () => <p>Loading...</p> }
+)
+const MenuAccordion = dynamic(
+  () => import("~/components/shared/menus/MenuAccordion"),
+  { loading: () => <p>Loading...</p> }
+)
+const ModuleHeaderSwichers = dynamic(
+  () => import("~/components/shared/headers/modules/ModuleHeaderSwitcher"),
+  { loading: () => <p>Loading...</p> }
+)
+const ModuleHeaderContactNumber = dynamic(
+  () => import("~/components/shared/headers/modules/ModuleHeaderContactNumber"),
+  { loading: () => <p>Loading...</p> }
+)
+const FormSearchHeader = dynamic(
+  () => import("~/components/shared/forms/FormSearchHeader"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
     const [isMenu, setIsMenu] = useState(false);

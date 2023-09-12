@@ -1,9 +1,23 @@
 import React from "react";
 import Head from "next/head";
-import HeaderDefault from "~/components/shared/headers/HeaderDefault";
-import FooterDefault from "~/components/shared/footers/FooterDefault";
-import HeaderMobile from "~/components/shared/mobiles/HeaderMobile";
 import { useRouter } from "next/router";
+import dynamic from 'next/dynamic';
+// import HeaderDefault from "~/components/shared/headers/HeaderDefault";
+// import FooterDefault from "~/components/shared/footers/FooterDefault";
+// import HeaderMobile from "~/components/shared/mobiles/HeaderMobile";
+
+const HeaderDefault = dynamic(
+    () => import("~/components/shared/headers/HeaderDefault"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const FooterDefault = dynamic(
+    () => import("~/components/shared/footers/FooterDefault"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+const HeaderMobile = dynamic(
+    () => import("~/components/shared/mobiles/HeaderMobile"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 
 const Container = ({ children, ogimg, description, cronical, title = "Your Drug Discovery Partner", header = <HeaderDefault />, footer = <FooterDefault />, menus }) => {
     let titleView;
@@ -17,7 +31,7 @@ const Container = ({ children, ogimg, description, cronical, title = "Your Drug 
 
     const canonicalURL = site + useRouter().asPath;
     const defaultDescription = `Our mission is to accelerate drug discovery from decades to years and from months to days.
-Building the future, caring for both human and animal lives. We are StemnovateTM.`;
+We are StemnovateTM.`;
     return (
         <div className="ps-root">
             <Head>

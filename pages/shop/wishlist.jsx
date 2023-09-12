@@ -1,21 +1,25 @@
 import React, { useEffect } from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { connect } from "react-redux"
 import { caculateArrayQuantity } from "~/utilities/ecomerce-helpers"
 import useEcomerce from "~/hooks/useEcomerce"
-// import ModuleEcomerceWishlist from "~/components/ecomerce/modules/ModuleEcomerceWishlist"
-// import SkeletonTable from "~/components/elements/skeletons/SkeletonTable"
 import { Result } from "antd"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const ModuleEcomerceWishlist = dynamic(
   () => import("~/components/ecomerce/modules/ModuleEcomerceWishlist"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const SkeletonTable = dynamic(
   () => import("~/components/elements/skeletons/SkeletonTable"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const breadcrumb = [

@@ -1,12 +1,20 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import BreadCrumb from "~/components/elements/BreadCrumb";
-import Container from "~/components/layouts/Container";
+// import BreadCrumb from "~/components/elements/BreadCrumb";
+// import Container from "~/components/layouts/Container";
+// import Subscribe from "~/components/shared/sections/Subscribe";
 import { baseUrl } from "~/repositories/Repository";
 import { connect } from "react-redux";
-// import Subscribe from "~/components/shared/sections/Subscribe";
 import dynamic from 'next/dynamic';
 
+const Container = dynamic(
+    () => import("~/components/layouts/Container"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const BreadCrumb = dynamic(
+    () => import("~/components/elements/BreadCrumb"),
+    {loading: ()=> <p>Loading...</p>}
+  )
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   {loading: ()=> <p>Loading...</p>}

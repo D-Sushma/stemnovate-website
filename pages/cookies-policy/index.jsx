@@ -1,7 +1,16 @@
 import React from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import Link from "next/link"
+import dynamic from 'next/dynamic'
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const breadcrumb = [
   {

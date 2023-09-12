@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Container from "~/components/layouts/Container"
+// import Container from "~/components/layouts/Container"
 import { Form, Input, Button, Modal, Checkbox, Tooltip } from "antd"
 import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
@@ -10,6 +10,12 @@ import Countries from "../../public/static/data/AllCountries.json"
 import { encode } from "hex-encode-decode"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
+import dynamic from 'next/dynamic'
+
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const UserReg = ({ reffrals }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)

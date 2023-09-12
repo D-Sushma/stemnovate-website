@@ -18,8 +18,8 @@ class MyDocument extends Document {
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
                     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet"></link>
-                    <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-10846076758" strategy="afterInteractive" />
-                    <Script id="google-analytics" strategy="afterInteractive">
+                    <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-10846076758" strategy="lazyOnload" />
+                    <Script async id="google-analytics" strategy="lazyOnload">
                         {`
                             window.dataLayer = window.dataLayer || [];
                             function gtag(){dataLayer.push(arguments);}
@@ -32,7 +32,7 @@ class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
-                    {/* beforeInteractive */}
+                    {/* beforeInteractive afterInteractive lazyOnload*/}
                     <Script strategy="lazyOnload" type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5456750.js"></Script>
                 </body>
             </Html>

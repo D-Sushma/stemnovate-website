@@ -12,8 +12,7 @@ const AboutBanner = () => {
           from months to days. Building the future, caring for both human and
           animal lives. We are Stemnovate<sup>TM</sup> .
         </div>
-        {/* background: linear-gradient(315deg, #EF5F33 0%, #F49239 100%); */}
-      
+       
         <div>
           <Link href="/About-Us">
             <div className="button button-about-us" aria-label="Learn More About Us">Learn More</div>

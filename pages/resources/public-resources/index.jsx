@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Subscribe from "~/components/shared/sections/Subscribe"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
@@ -9,12 +8,18 @@ import { FaArrowRight } from "react-icons/fa"
 import Image from "~/components/elements/Image"
 import Link from "next/link"
 import { useState } from "react"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const breadcrumb = [
   {

@@ -1,19 +1,25 @@
 import React, { useEffect } from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import { useSession, getSession } from "next-auth/react"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import useEcomerce from "~/hooks/useEcomerce"
+import { useSession, getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
 import { Alert } from "antd"
 import { ToastContainer } from "react-toastify"
-// import BothFormCheckout from "~/components/shared/forms/BothFormCheckout"
 import Link from "next/link"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
+
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 
 const BothFormCheckout = dynamic(
   () => import("~/components/shared/forms/BothFormCheckout"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const CheckoutScreen = ({ UserData }) => {
@@ -136,7 +142,9 @@ const CheckoutScreen = ({ UserData }) => {
                   <p className="ps-checkout__text">
                     Returning customer?{" "}
                     <Link href="/auth/UserLogin">
-                      <span className="span-with-link">Click here to login</span>
+                      <span className="span-with-link">
+                        Click here to login
+                      </span>
                     </Link>
                   </p>
                 )}

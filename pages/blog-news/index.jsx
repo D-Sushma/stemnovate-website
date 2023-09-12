@@ -1,17 +1,30 @@
 import React from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import { useState } from "react"
 import Image from "next/image"
 import Slider from "react-slick"
-import NextArrow from "~/components/elements/carousel/NextArrow"
-import PrevArrow from "~/components/elements/carousel/PrevArrow"
+// import NextArrow from "~/components/elements/carousel/NextArrow"
+// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const NextArrow = dynamic(
+  () => import("~/components/elements/carousel/NextArrow"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const PrevArrow = dynamic(
+  () => import("~/components/elements/carousel/PrevArrow"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
     () => import("~/components/shared/sections/Subscribe"),
     {loading: ()=> <p>Loading...</p>}

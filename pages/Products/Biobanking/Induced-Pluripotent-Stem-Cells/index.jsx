@@ -1,14 +1,20 @@
 import React from "react"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
 import { Collapse } from "antd"
 import { connect } from "react-redux"
-// import Subscribe from "~/components/shared/sections/Subscribe"
-// import ProductList from "~/components/productList/productList"
 import Link from 'next/link'
 import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const ProductList = dynamic(
     () => import("~/components/productList/productList"),
     {loading: ()=> <p>Loading...</p>}

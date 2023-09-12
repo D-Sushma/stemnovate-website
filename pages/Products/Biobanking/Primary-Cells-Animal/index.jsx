@@ -1,27 +1,31 @@
 import React from "react"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
-import EthicalTissueSourcing from '~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg'
-import OurAnimalCellPlatform from '~/public/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif'
-import InternationalShipping from '~/public/static/img/products/Primary-Cells-Animal/International-Shipping.jpg'
-import AnimalCellCultureMedium from '~/public/static/img/products/Primary-Cells-Animal/Animal-Cell-Culture-Medium-and-reagents.jpg'
-import AnimalWelfare from '~/public/static/img/products/Primary-Cells-Animal/Animal-welfare.jpg'
+import EthicalTissueSourcing from "~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg"
+import OurAnimalCellPlatform from "~/public/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif"
+import InternationalShipping from "~/public/static/img/products/Primary-Cells-Animal/International-Shipping.jpg"
+import AnimalCellCultureMedium from "~/public/static/img/products/Primary-Cells-Animal/Animal-Cell-Culture-Medium-and-reagents.jpg"
+import AnimalWelfare from "~/public/static/img/products/Primary-Cells-Animal/Animal-welfare.jpg"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-// import ProductList from "~/components/productList/productList"
-// import Subscribe from "~/components/shared/sections/Subscribe"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
-    () => import("~/components/productList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/productList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 const categoryListScreen = () => {
   const breadcrumb = [
     {
@@ -95,13 +99,13 @@ const categoryListScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src={EthicalTissueSourcing}
-                          alt="ANIMAL PRIMARY DERMAL CELLS"
-                          width={1200}
-                          height={675}
-                        />
-                      </div>
+                          <Image
+                            src={EthicalTissueSourcing}
+                            alt="ANIMAL PRIMARY DERMAL CELLS"
+                            width={1200}
+                            height={675}
+                          />
+                        </div>
                       </Link>
                     </div>
                     <div className="ps-section__content">
@@ -132,12 +136,12 @@ const categoryListScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src={OurAnimalCellPlatform}
-                          alt="LIVE PRIMARY DERMAL CELLS"
-                          width={400}
-                          height={220}
-                        />
+                          <Image
+                            src={OurAnimalCellPlatform}
+                            alt="LIVE PRIMARY DERMAL CELLS"
+                            width={400}
+                            height={220}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -193,8 +197,10 @@ const categoryListScreen = () => {
                         <p>Cell models for infectious diseases</p>
                       </li>
                     </ol>
-                    <Link href="/Applications/Animal-Health" >
-                      <button className="btn btn-lg button-orange text-white m-4 m-5">Find Out More</button>
+                    <Link href="/Applications/Animal-Health">
+                      <button className="btn btn-lg button-orange text-white m-4 m-5">
+                        Find Out More
+                      </button>
                     </Link>
                   </p>
                 </div>
@@ -206,12 +212,12 @@ const categoryListScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src={InternationalShipping}
-                          alt="INTERNATIONAL SHIPPING"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src={InternationalShipping}
+                            alt="INTERNATIONAL SHIPPING"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -238,12 +244,12 @@ const categoryListScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src={AnimalCellCultureMedium}
-                          alt="ANIMAL CELL CULTURE MEDIUM AND REAGENTS"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src={AnimalCellCultureMedium}
+                            alt="ANIMAL CELL CULTURE MEDIUM AND REAGENTS"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -270,13 +276,13 @@ const categoryListScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape" >
-                        <Image
-                          src={AnimalWelfare}
-                          alt="ANIMAL WELFARE"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src={AnimalWelfare}
+                            alt="ANIMAL WELFARE"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -294,8 +300,10 @@ const categoryListScreen = () => {
                           world through scientific aptitude and discoveries for
                           our furry friends.
                         </p>
-                        <Link href="/Applications/Animal-Health" >
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">Find Out More</button>
+                        <Link href="/Applications/Animal-Health">
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">
+                            Find Out More
+                          </button>
                         </Link>
                       </div>
                     </div>
@@ -308,8 +316,10 @@ const categoryListScreen = () => {
                   <p className="p-1">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
-                    <Link href="mailto:info@stemnovate.co.uk" >
-                     <span className="text-orange span-with-link" >contact us.</span> 
+                    <Link href="mailto:info@stemnovate.co.uk">
+                      <span className="text-orange span-with-link">
+                        contact us.
+                      </span>
                     </Link>{" "}
                   </p>
                   <p className="base-bg-primary text-white p-2">
@@ -353,7 +363,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

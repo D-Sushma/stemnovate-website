@@ -1,6 +1,10 @@
 import React from "react"
+// import Container from "~/components/layouts/Container"
+import dynamic from "next/dynamic"
 
-import Container from "~/components/layouts/Container"
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
 
 export default function _error() {
   return (

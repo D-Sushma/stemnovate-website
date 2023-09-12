@@ -1,10 +1,28 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
-import SkeletonProductDetail from "~/components/elements/skeletons/SkeletonProductDetail"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import Container from "~/components/layouts/Container"
-import DetailThree from "~/components/elements/detail/DetailThree"
 import { baseUrl } from "~/repositories/Repository"
+// import SkeletonProductDetail from "~/components/elements/skeletons/SkeletonProductDetail"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
+// import DetailThree from "~/components/elements/detail/DetailThree"
+import dynamic from 'next/dynamic'
+
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const SkeletonProductDetail = dynamic(
+  () => import("~/components/elements/skeletons/SkeletonProductDetail"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const DetailThree = dynamic(
+  () => import("~/components/elements/detail/DetailThree"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const DetailLayoutThree = ({ ProductData }) => {
   const router = useRouter()

@@ -1,16 +1,22 @@
 import React from "react"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
 import { Collapse } from "antd"
 import { connect } from "react-redux"
-// import ProductList from "~/components/productList/productList"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
 import FibroplastLiveCulture from "~/public/static/img/products/primary-human-fibroblasts/primary-Human-Fibroplast-Live-Culture.jpg"
 import FrozenFibroblasts from "~/public/static/img/products/human-fibroblast/Frozen-Fibroblasts.jpg"
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const BreadCrumb = dynamic(
+  () => import("~/components/elements/BreadCrumb"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const ProductList = dynamic(
     () => import("~/components/productList/productList"),
     {loading: ()=> <p>Loading...</p>}

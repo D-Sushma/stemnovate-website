@@ -1,11 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react"
-import ModuleFooterAddress from "~/components/shared/footers/modules/ModuleFooterAddress"
-import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks"
-import ModuleFooterBottom from "~/components/shared/footers/modules/ModuleFooterBottom"
+// import ModuleFooterAddress from "~/components/shared/footers/modules/ModuleFooterAddress"
+// import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks"
+// import ModuleFooterBottom from "~/components/shared/footers/modules/ModuleFooterBottom"
 import FooterLinks from "~/public/static/data/footer.json"
 import Image from "next/image"
 import Link from "next/link"
+import dynamic from 'next/dynamic';
+
+const ModuleFooterAddress = dynamic(
+  () => import("~/components/shared/footers/modules/ModuleFooterAddress"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const WidgetFooterLinks = dynamic(
+  () => import("~/components/shared/widgets/footer/WidgetFooterLinks"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleFooterBottom = dynamic(
+  () => import("~/components/shared/footers/modules/ModuleFooterBottom"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const FooterDefault = () => {
   return (

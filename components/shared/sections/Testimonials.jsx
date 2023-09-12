@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react"
-import NextArrow from "~/components/elements/carousel/NextArrow"
-import PrevArrow from "~/components/elements/carousel/PrevArrow"
+// import NextArrow from "~/components/elements/carousel/NextArrow"
+// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
 import testimonials from "~/public/static/data/testimonials.json"
 // import TestimonialItem from "~/components/elements/TestimonialItem"
@@ -12,6 +12,14 @@ import discoverymatters from "~/public/static/home-images/discoverymatters.jpg"
 import announcementimg from "~/public/static/home-images/announcement.jpg"
 import dynamic from "next/dynamic"
 
+const NextArrow = dynamic(
+  () => import("~/components/elements/carousel/NextArrow"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const PrevArrow = dynamic(
+  () => import("~/components/elements/carousel/PrevArrow"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const TestimonialItem = dynamic(
   () => import("~/components/elements/TestimonialItem"),
   { loading: () => <p>Loading...</p> }

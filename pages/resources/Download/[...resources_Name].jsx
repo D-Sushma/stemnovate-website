@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import Container from "~/components/layouts/Container"
+// import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import { useSession } from "next-auth/react"
 import PropTypes from "prop-types"
 import dynamic from 'next/dynamic'
 
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
 const Subscribe = dynamic(
     () => import("~/components/shared/sections/Subscribe"),
     {loading: ()=> <p>Loading...</p>}

@@ -1,15 +1,20 @@
 import React from "react"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Subscribe from "~/components/shared/sections/Subscribe"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const breadcrumb = [
   {
@@ -26,9 +31,9 @@ const breadcrumb = [
 
 const OurCulture = () => {
   return (
-    <Container 
-    title="Culture"
-    description="Stemnovate page for employees, careers and opportunities"
+    <Container
+      title="Culture"
+      description="Stemnovate page for employees, careers and opportunities"
     >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">

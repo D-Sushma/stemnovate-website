@@ -2,21 +2,25 @@ import React from "react"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
 import vector from "~/public/static/img/Home/vector.png"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { FiPhone, FiMail } from "react-icons/fi"
-// import FooterAddress from "~/components/shared/footers/modules/addresscontact"
-// import HubspotContactForm from "~/components/shared/forms/HubspotContactForm"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const FooterAddress = dynamic(
-    () => import("~/components/shared/footers/modules/addresscontact"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/footers/modules/addresscontact"),
+  { loading: () => <p>Loading...</p> }
+)
 const HubspotContactForm = dynamic(
-    () => import("~/components/shared/forms/HubspotContactForm"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/forms/HubspotContactForm"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const breadcrumb = [
   {

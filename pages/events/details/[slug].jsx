@@ -3,28 +3,37 @@ import React, { useCallback, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { baseUrl } from "~/repositories/Repository"
-import Container from "~/components/layouts/Container"
 import moment from "moment"
 import { HiArrowSmRight } from "react-icons/hi"
-import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import BreadCrumb from "~/components/elements/BreadCrumb"
+import Image from "~/components/elements/Image"
+import dynamic from "next/dynamic"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
+// import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
+// import Subscribe from "~/components/shared/sections/Subscribe"
 // import ProductList from "~/components/eventDetailList/productList"
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
 
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const UpcomingEvents = dynamic(
+  () => import("~/components/elements/events/UpcomingEvents"),
+  { loading: () => <p>Loading...</p> }
+)
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
-
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 const ProductList = dynamic(
-    () => import("~/components/eventDetailList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/eventDetailList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const EventsDetails = ({ EventsData }) => {
   console.log("EventsData", EventsData)
@@ -91,9 +100,8 @@ const EventsDetails = ({ EventsData }) => {
           {EventsData &&
             EventsData.data.map((data, key) => (
               <div key={key}>
-                
                 <div className="position-relative text-center">
-                 <Image 
+                  <Image
                     src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
                     alt="IMG"
                     width={2000}
@@ -190,7 +198,7 @@ const EventsDetails = ({ EventsData }) => {
                                                   height={100}
                                                 />
                                               </a>
-                                              </div>
+                                            </div>
                                           ))}
                                         </div>
                                       </div>
@@ -236,7 +244,7 @@ const EventsDetails = ({ EventsData }) => {
                                               height={100}
                                             />
                                           </a>
-                                          </div>
+                                        </div>
                                       ))}
                                     </div>
                                   </div>
@@ -276,16 +284,16 @@ const EventsDetails = ({ EventsData }) => {
                       <div className="col-md-12">
                         <div className="ps-section__content">
                           <div className="d-flex justify-content-center flex-col">
-                              <div style={{ width: "100%" }}>
-                                <div className="ps-section__desc ">
-                                  <p
-                                    className=""
-                                    dangerouslySetInnerHTML={{
-                                      __html: data.longcontent
-                                    }}
-                                  ></p>
-                                </div>
+                            <div style={{ width: "100%" }}>
+                              <div className="ps-section__desc ">
+                                <p
+                                  className=""
+                                  dangerouslySetInnerHTML={{
+                                    __html: data.longcontent
+                                  }}
+                                ></p>
                               </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -299,7 +307,7 @@ const EventsDetails = ({ EventsData }) => {
           </div>
           <div className="about-section">
             <div className="container">
-               <ProductList slug="Applications" />
+              <ProductList slug="Applications" />
               {/* { EventsData.data[0]?.id !== 7 ?
               ( <ProductList slug="Applications" /> ) : null
 

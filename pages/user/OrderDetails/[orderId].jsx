@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from "react"
-import Container from "~/components/layouts/Container"
+// import Container from "~/components/layouts/Container"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import moment from "moment"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Subscribe = dynamic(
-  () => import("~/components/shared/sections/Subscribe")
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Subscribe = dynamic(() =>
+  import("~/components/shared/sections/Subscribe")
 )
 
 function orderConfirmation({ UserData }) {
@@ -102,7 +104,7 @@ function orderConfirmation({ UserData }) {
     var resp = await res.json()
     // console.log(resp);
   }
-  
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 83 && window.scrollY < 750) {
@@ -172,7 +174,6 @@ function orderConfirmation({ UserData }) {
                           </h5>
                         </div>
                         <div className="col-md-8 ">
-                          
                           <div
                             className="row mb-2"
                             style={{ borderBottom: "1px solid black" }}
@@ -344,12 +345,12 @@ function orderConfirmation({ UserData }) {
                                       <tr key={key}>
                                         <td width="10%"> {item.ProductName}</td>
                                         <td width="46%">
-                                           <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                          </td>
+                                          <span
+                                            dangerouslySetInnerHTML={{
+                                              __html: item.description
+                                            }}
+                                          />
+                                        </td>
                                         <td width="10%">
                                           {resourcesData?.map((data, key) => (
                                             <a
@@ -463,7 +464,7 @@ export async function getServerSideProps(ctx) {
   if (session) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    
+
     var raw = JSON.stringify({
       UserLoginId: session.id
     })

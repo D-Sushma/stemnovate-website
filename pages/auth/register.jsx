@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import Container from "~/components/layouts/Container";
+// import Container from "~/components/layouts/Container";
 import Countries from "../../public/static/data/AllCountries.json";
 import { Alert } from "antd";
 import { ToastContainer, toast } from "react-toastify";
+import dynamic from 'next/dynamic'
+
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const MyAccountScreen = () => {
     const [showpass, setshowpass] = useState(false);

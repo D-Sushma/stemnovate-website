@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Container from "~/components/layouts/Container";
+// import Container from "~/components/layouts/Container";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import { decode } from "hex-encode-decode";
+import dynamic from 'next/dynamic'
+
+const Container = dynamic(
+  () => import("~/components/layouts/Container"),
+  {loading: ()=> <p>Loading...</p>}
+)
+
 function ResetPassword() {
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState(false);

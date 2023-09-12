@@ -1,27 +1,29 @@
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
 import { baseUrl } from "~/repositories/Repository"
-import Container from "~/components/layouts/Container"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Shop from "~/components/partials/shop/Shop"
-// import SidebarShop from "~/components/shared/sidebar/SidebarShop"
+import { ToastContainer } from "react-toastify"
+import dynamic from "next/dynamic"
+// import Container from "~/components/layouts/Container"
+// import BreadCrumb from "~/components/elements/BreadCrumb"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-import { ToastContainer } from "react-toastify"
-// import Subscribe from "~/components/shared/sections/Subscribe"
-import dynamic from 'next/dynamic'
 
-const Shop = dynamic(
-  () => import("~/components/partials/shop/Shop"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Shop = dynamic(() => import("~/components/partials/shop/Shop"), {
+  loading: () => <p>Loading...</p>
+})
 const SidebarShop = dynamic(
   () => import("~/components/shared/sidebar/SidebarShop"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const breadcrumb = [
@@ -85,9 +87,9 @@ function promotionOffer({ ProductData }) {
   }
 
   return (
-    <Container 
-       title={ProductData?.data[0]?.title}
-       description="Stemnovate promotion is for new sales offers, discounts and multibuy savings. Subject to change so check regularly"   
+    <Container
+      title={ProductData?.data[0]?.title}
+      description="Stemnovate promotion is for new sales offers, discounts and multibuy savings. Subject to change so check regularly"
     >
       <ToastContainer />
       <div className="ps-page ps-page--shopping">
@@ -108,7 +110,7 @@ function promotionOffer({ ProductData }) {
                     </div>
                     <div className="ps-layout__right">
                       <Shop classes="ps-shop--grid">{products}</Shop>
-                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
