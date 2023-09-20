@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 // import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic'
 
 const Container = dynamic(
@@ -267,6 +267,7 @@ const ResourcesData = (props) => {
                               ) : null}
                               <Link
                                 href={`/resources/details/${resourcesData.data[0].slug}/${myRes.resources_id}/${myRes.access_type}`}
+                                prefetch={false}
                               >
                                 <div className="link-btn-b">
                                   <b>
@@ -302,7 +303,7 @@ const ResourcesData = (props) => {
                           className="col-md-3 my-6 col-sm-3 col-6 d-flex flex-column flex-grow-1"
                           key={index}
                         >
-                          <Link href={`/resources/r/${myCat.slug}`}>
+                          <Link href={`/resources/r/${myCat.slug}`} prefetch={false}>
                             <div className="card  d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
                               <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
@@ -331,7 +332,7 @@ const ResourcesData = (props) => {
                                     {myCat.short_description &&
                                       myCat.short_description.substring(0, 90)}
                                   </p>
-                                  <Link href={`/resources/r/${myCat.slug}`}>
+                                  <Link href={`/resources/r/${myCat.slug}`} prefetch={false}>
                                     <div className="link-btn-b">
                                       <b>
                                         Get Resources <FaArrowRight />

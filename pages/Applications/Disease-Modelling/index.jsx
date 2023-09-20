@@ -1,5 +1,5 @@
 import React from "react"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
@@ -98,7 +98,7 @@ const diseaseScreen = () => {
                           bioavailability.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>
@@ -135,7 +135,7 @@ const diseaseScreen = () => {
                           traditional testing models.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>
@@ -175,7 +175,7 @@ const diseaseScreen = () => {
                           potential for new drug screening.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>
@@ -225,7 +225,7 @@ const diseaseScreen = () => {
                           animal species for industry and academia usage.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>

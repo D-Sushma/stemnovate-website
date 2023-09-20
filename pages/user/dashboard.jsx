@@ -170,7 +170,7 @@ const dashboard = ({ UserData }) => {
               <div className="site-card-wrapper my-5 flex-grow-1 row-eq-height">
                 <Row gutter={16}>
                   <Col md={6} sm={24} style={{ width: "100%" }}>
-                    <Link href="/user/EditProfile">
+                    <Link href="/user/EditProfile" prefetch={false}>
                       <Card className="card-bg-color m-2 " hoverable bordered>
                         <div className="d-flex justify-content-between flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
@@ -187,7 +187,7 @@ const dashboard = ({ UserData }) => {
                     </Link>
                   </Col>
                   <Col md={6} sm={24} style={{ width: "100%" }}>
-                    <Link href="/user/Orders">
+                    <Link href="/user/Orders" prefetch={false}>
                       <Card className="card-bg-color m-2" hoverable bordered>
                         <div className="d-flex justify-content-between flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
@@ -202,7 +202,7 @@ const dashboard = ({ UserData }) => {
                     </Link>
                   </Col>
                   <Col md={6} sm={24} style={{ width: "100%" }}>
-                    <Link href={"/user/MyApplication"}>
+                    <Link href={"/user/MyApplication"} prefetch={false}>
                       <Card className="card-bg-color m-2" hoverable bordered>
                         <div className="d-flex justify-content-between flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
@@ -220,7 +220,7 @@ const dashboard = ({ UserData }) => {
                   </Col>
 
                   <Col md={6} sm={24} style={{ width: "100%" }}>
-                    <Link href={`${baseUrl}${"/promotions-products"}`}>
+                    <Link href={`${baseUrl}${"/promotions-products"}`} prefetch={false}>
                       <Card className="card-bg-color m-2" hoverable bordered>
                         <div className="d-flex justify-content-between flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">

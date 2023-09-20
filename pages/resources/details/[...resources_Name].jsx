@@ -7,7 +7,7 @@ import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import PropTypes from "prop-types"
 import dynamic from 'next/dynamic'
 
@@ -213,6 +213,7 @@ const ResourcesData = (props) => {
                           isActive ? (
                             <Link
                               href={`/resources/Access/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
+                              prefetch={false}
                             >
                               <div style={{ cursor: "pointer" }}>
                                 <button className="button button--green mr-2">
@@ -229,6 +230,7 @@ const ResourcesData = (props) => {
                         ) : (
                           <Link
                             href={`/resources/Access/${resourcesData.data[0].resources_name}`}
+                            prefetch={false}
                           >
                             <div style={{ cursor: "pointer" }}>
                               <button className="button button--green mr-2">
@@ -340,9 +342,7 @@ const ResourcesData = (props) => {
                                   }}
                                 ></p>
                               ) : null}
-                              <Link
-                                href={`/resources/r/${myRes.resources_name}`}
-                              >
+                              <Link href={`/resources/r/${myRes.resources_name}`} prefetch={false}>
                                 <div
                                   className="link-btn-b"
                                   style={{ cursor: "pointer" }}

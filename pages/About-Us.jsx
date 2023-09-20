@@ -3,7 +3,7 @@ import Link from "next/link"
 // import Container from "~/components/layouts/Container"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 import { baseUrl } from "~/repositories/Repository"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 // import NextArrow from "~/components/elements/carousel/NextArrow"
 // import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
@@ -296,6 +296,7 @@ const AboutUsScreen = ({
                             className="h3 py-4 float-right "
                           >
                             <span className="button-link">{data.btn_text}</span>
+                            <span className="visually-hidden">{data.history_content}</span>
                           </a>
                         </div>
                       </div>
@@ -578,6 +579,7 @@ const AboutUsScreen = ({
                                       <span className="button-link">
                                         READ MORE
                                       </span>
+                                      <span className="visually-hidden">Read more about {data.title}</span>
                                     </a>
                                   </div>
                                 </div>

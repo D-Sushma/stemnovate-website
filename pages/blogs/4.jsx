@@ -13,7 +13,7 @@ import {
   LinkedinIcon
 } from "next-share"
 import { useRouter } from "next/router"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import Link from "next/link"
 import dynamic from 'next/dynamic'
 

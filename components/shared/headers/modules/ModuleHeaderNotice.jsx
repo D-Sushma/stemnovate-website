@@ -42,7 +42,7 @@ const ModuleHeaderNotice = ({ classes }) => {
               <h3 className="text-dark font-weight-bolder h3">
                 Stemnovate leading the way in building animal models for Pharma
                 drug discovery and animal health industry{" "}
-                <Link href="/#My-Announcements" >
+                <Link href="/#My-Announcements" prefetch={false}>
                   <span className="button-link text-primary span-with-link" >Read more</span>
                 </Link>
               </h3>

@@ -5,7 +5,7 @@ import React, { useRef } from "react"
 import { IoIosArrowDown } from "react-icons/io"
 import { Tooltip } from "antd"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {

@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import { baseUrl } from "~/repositories/Repository"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Container from "~/components/layouts/Container"
@@ -59,7 +59,7 @@ function Resources({ resourcesList }) {
                         <Image
                           src="https://stemnovateimages.s3.us-east-2.amazonaws.com/learn1662019838689.jpg"
                           className="rounded-lg"
-                          alt=""
+                          alt="Stemnovate Karyotyping"
                           width={1000}
                           height={563}
                         />
@@ -78,7 +78,7 @@ function Resources({ resourcesList }) {
                               tailored to their needs. Here you have access to
                               karyotyping, genotyping and R&D platforms.
                             </p>
-                            <Link href="/resources/private-resources">
+                            <Link href="/resources/private-resources" prefetch={false}>
                               <div className="link-btn">
                                 <b>
                                   Get Resources <FaArrowRight />
@@ -94,7 +94,7 @@ function Resources({ resourcesList }) {
                         <Image
                           src="https://stemnovateimages.s3.us-east-2.amazonaws.com/test-public1662015244812.jpg"
                           className="rounded-lg"
-                          alt=""
+                          alt="Stemnovate Public Resources"
                           width={1000}
                           height={563}
                         />
@@ -112,7 +112,7 @@ function Resources({ resourcesList }) {
                               reprogramming, bioengineering and computational
                               modelling.
                             </p>
-                            <Link href="/resources/public-resources">
+                            <Link href="/resources/public-resources" prefetch={false}>
                               <div className="link-btn">
                                 <b>
                                   Get Resources <FaArrowRight />
@@ -160,7 +160,7 @@ function Resources({ resourcesList }) {
                                 {myCat.short_description &&
                                   myCat.short_description.substring(0, 90)}
                               </p>
-                              <Link href={`/resources/r/${myCat.slug}`}>
+                              <Link href={`/resources/r/${myCat.slug}`} prefetch={false}>
                                 <div className="link-btn-b">
                                   <b>
                                     Get Resources <FaArrowRight />

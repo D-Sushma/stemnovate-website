@@ -6,7 +6,7 @@ import Slider from "react-slick"
 // import NextArrow from "~/components/elements/carousel/NextArrow"
 // import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic'
 
 const Container = dynamic(
@@ -91,6 +91,7 @@ const ProductScreen = ({ promotionDetails }) => {
                                               ? "/promotions_offer/"
                                               : ""
                                           }${data.url}`}
+                                          prefetch={false}
                                         >
                                           <button className="bg-warning ps-banner__shop">
                                             {data.btn_text}
@@ -161,6 +162,7 @@ const ProductScreen = ({ promotionDetails }) => {
                                           ? "/promotions_offer/"
                                           : ""
                                       }${data.url}`}
+                                      prefetch={false}
                                     >
                                       <div className="h3 text-right mt-2">
                                         <span className="button-link text-orange span-with-link">

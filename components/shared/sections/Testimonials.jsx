@@ -5,7 +5,7 @@ import React from "react"
 import Slider from "react-slick"
 import testimonials from "~/public/static/data/testimonials.json"
 // import TestimonialItem from "~/components/elements/TestimonialItem"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import newcambridge from "~/public/static/home-images/newcambridge.jpg"
 import Cambridge from "~/public/static/home-images/Cambridge-Independent.jpg"
 import discoverymatters from "~/public/static/home-images/discoverymatters.jpg"
@@ -152,8 +152,8 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
                             className="h5"
-                            aria-label="Read more about Stemnovate's partnership with Babraham Institute on Alzheimer's disease"
-                          >
+                            >
+                            <span className="visually-hidden">Read more about Stemnovate&apos;s partnership with Babraham Institute on Alzheimer&apos;s disease</span>
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>
@@ -232,8 +232,8 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="https://podcasts.apple.com/gb/podcast/discovery-matters/id1466149440"
                             className="h5 "
-                            aria-label="Explore the Discovery Matters Podcast on Apple Podcasts"
-                          >
+                            >
+                            <span className="visually-hidden">Explore the Discovery Matters Podcast on Apple Podcasts</span>
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>
@@ -272,8 +272,8 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="/Products/Biobanking"
                             className="h5"
-                            aria-label="Learn more about our Biobanking products"
                           >
+                            <span className="visually-hidden">Learn more about our Biobanking products</span>
                             <span className="button-link">READ MORE</span>
                           </a>
                         </div>

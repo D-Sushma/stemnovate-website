@@ -19,10 +19,13 @@ import moment from "moment"
 // import Loader from "~/components/reuseable/Loader"
 import { scroller } from "react-scroll"
 import { TbEdit, TbCalendarEvent } from "react-icons/tb"
-import Image from "next/image"
 import Link from "next/link"
 import dynamic from 'next/dynamic'
 
+// const Image = dynamic(
+//   () => import("~/components/elements/Image"),
+//   {loading: ()=> <p>Loading...</p>}
+// )
 const Container = dynamic(
   () => import("~/components/layouts/Container"),
   {loading: ()=> <p>Loading...</p>}
@@ -129,18 +132,18 @@ const Blogs = (props) => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                        {/* <img
+                        <img
                           src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
                           alt={blogData?.name}
-                         /> */}
-                        <Image
+                         />
+                        {/* <Image
                           src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
                           alt={blogData?.name}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
                           width={1200}
                           height={675}
-                        />
+                        /> */}
                       </div>
                     </Link>
                   </div>

@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import vector from "~/public/static/img/Home/vector.png"
 // import Container from "~/components/layouts/Container"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
@@ -87,13 +87,13 @@ const ContactUsScreen = ({ mytitile }) => {
                   </div>
                   <div className="col-12 col-lg-6 text-center">
                     <div className="m-2 h3">
-                      <Link href="telto:+44 (0)1223830192">
+                      <Link href="telto:+44 (0)1223830192" prefetch={false}>
                         <span className="ps-footer__email span-with-link">
                           <FiPhone /> +44 (0)1223830192
                         </span>
                       </Link>
                       <br />
-                      <Link href="mailto:info@stemnovate.co.uk">
+                      <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
                         <span className="ps-footer__email span-with-link">
                           <FiMail /> info@stemnovate.co.uk
                         </span>
@@ -101,7 +101,7 @@ const ContactUsScreen = ({ mytitile }) => {
                     </div>
                     <ul className="ps-social ">
                       <li>
-                        <Link href="https://www.facebook.com/StemnovateL">
+                        <Link href="https://www.facebook.com/StemnovateL" prefetch={false}>
                           <div className="ps-social__link facebook">
                             <i className="fa fa-facebook"> </i>
                             <span className="ps-tooltip">Facebook</span>
@@ -109,7 +109,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.instagram.com/stemnovate">
+                        <Link href="https://www.instagram.com/stemnovate" prefetch={false}>
                           <div className="ps-social__link instagram">
                             <i className="fa fa-instagram"></i>
                             <span className="ps-tooltip">Instagram</span>
@@ -117,7 +117,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://twitter.com/StemnovateL">
+                        <Link href="https://twitter.com/StemnovateL" prefetch={false}>
                           <div className="ps-social__link facebook">
                             <i className="fa fa-twitter"></i>
                             <span className="ps-tooltip">Twitter</span>
@@ -125,7 +125,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.pinterest.co.uk/Stemnovate">
+                        <Link href="https://www.pinterest.co.uk/Stemnovate" prefetch={false}>
                           <div className="ps-social__link pinterest">
                             <i className="fa fa-pinterest-p"></i>
                             <span className="ps-tooltip">Pinterest</span>
@@ -133,7 +133,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.linkedin.com/company/stemnovate-limited">
+                        <Link href="https://www.linkedin.com/company/stemnovate-limited" prefetch={false}>
                           <div className="ps-social__link linkedin">
                             <i className="fa fa-linkedin"></i>
                             <span className="ps-tooltip">Linkedin</span>

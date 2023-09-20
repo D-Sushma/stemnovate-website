@@ -1,7 +1,7 @@
 import React from "react"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Container from "~/components/layouts/Container"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
@@ -116,7 +116,7 @@ const texicologyScreen = () => {
                   <div className="py-5">
                     <section className="ps-section--block-grid">
                       <div className="col-md-4">
-                        <Link href="/Applications/Disease-Modelling/Liver">
+                        <Link href="/Applications/Disease-Modelling/Liver" prefetch={false}>
                           <div className="ion-wrapper text-center span-with-link">
                             <Image
                               width="100"
@@ -132,7 +132,7 @@ const texicologyScreen = () => {
                         </Link>
                       </div>
                       <div className="col-md-4">
-                        <Link href="/Applications/Disease-Modelling/Heart">
+                        <Link href="/Applications/Disease-Modelling/Heart" prefetch={false}>
                           <div className="ion-wrapper text-center span-with-link">
                             <Image
                               width="100"
@@ -148,7 +148,7 @@ const texicologyScreen = () => {
                         </Link>
                       </div>
                       <div className="col-md-4">
-                        <Link href="/Applications/Disease-Modelling/Neuron">
+                        <Link href="/Applications/Disease-Modelling/Neuron" prefetch={false}>
                           <div className="ion-wrapper text-center span-with-link">
                             <Image
                               width="100"

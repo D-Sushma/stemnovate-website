@@ -14,8 +14,10 @@ const AboutBanner = () => {
         </div>
        
         <div>
-          <Link href="/About-Us">
-            <div className="button button-about-us" aria-label="Learn More About Us">Learn More</div>
+          <Link href="/About-Us" prefetch={false}>
+            <div className="button button-about-us">
+              Learn More <span className="visually-hidden">Learn More About Us</span>
+            </div>
           </Link>
         </div>
       </section>

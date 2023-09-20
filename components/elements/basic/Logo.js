@@ -6,7 +6,7 @@ const baseurl = "";
 const Logo = ({ url = "/", type = "default" }) => {
     if (type == "white") {
         return (
-            <Link href={url}>
+            <Link href={url} prefetch={false}>
                 <div className="ps-logo link-hover-thumb-shape" title="Stemnovate Limited">
                     <Image
                         src={baseurl + "/static/image/LogoFINAL.svg"}
@@ -19,7 +19,7 @@ const Logo = ({ url = "/", type = "default" }) => {
         );
     } else if (type == "mobile") {
         return (
-            <Link href={url}>
+            <Link href={url} prefetch={false}>
                 <div className="ps-logo" title="Stemnovate Limited" style={{ width: "150px", height: "auto" }}>
                     {/* <Image
                         src={baseurl + "/static/image/LogoFINAL.svg"}
@@ -38,7 +38,7 @@ const Logo = ({ url = "/", type = "default" }) => {
         );
     } else {
         return (
-            <Link href={url}>
+            <Link href={url} prefetch={false}>
                 <dic className="ps-logo" title="Stemnovate Limited">
                     <Image
                         src={baseurl + "/static/img/logo.svg"}

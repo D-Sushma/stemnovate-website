@@ -3,7 +3,7 @@ import React from "react"
 // import Container from "~/components/layouts/Container";
 import { connect } from "react-redux"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {

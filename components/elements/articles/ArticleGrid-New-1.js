@@ -13,7 +13,7 @@ const ArticleGrid = ({ post }) => {
         <>
             <div className="card mt-3 align-items-center p-1 " 
             style={{width:"308px", height:"auto"}}>
-                <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
+                <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`} prefetch={false}>
                     <div className="link-hover-thumb-shape">{thumbnail}</div>
                 </Link>
                 <div className="card-body  p-0 ps-btn-link-bottom">
@@ -22,7 +22,7 @@ const ArticleGrid = ({ post }) => {
                     </h5>
                     <div className="h5 text-center">
                         <span className="">{createdBy}</span>
-                        <Link href="/blog">
+                        <Link href="/blog" prefetch={false}>
                             <span className="button-link link-hover-thumb-shape">{author}</span>
                         </Link>
                     </div>

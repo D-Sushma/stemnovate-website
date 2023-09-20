@@ -4,7 +4,7 @@ import React from "react"
 import { Collapse } from "antd"
 import { connect } from "react-redux"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import FibroplastLiveCulture from "~/public/static/img/products/primary-human-fibroblasts/primary-Human-Fibroplast-Live-Culture.jpg"
 import FrozenFibroblasts from "~/public/static/img/products/human-fibroblast/Frozen-Fibroblasts.jpg"
 import dynamic from 'next/dynamic'
@@ -111,7 +111,7 @@ const categoryListScreen = () => {
                           <br /> Our live cells are available in T-25 flasks
                           (~400,000 Cells)
                         </p>
-                        <Link href="/Products?Delivery_Type=Live&pType=13">
+                        <Link href="/Products?Delivery_Type=Live&pType=13" prefetch={false}>
                           <div className="btn btn-lg button-orange text-white m-4 m-5">
                             View Products
                           </div>
@@ -151,7 +151,7 @@ const categoryListScreen = () => {
                           cells per vial) and are available as single vials or
                           reserved lot.
                         </p>
-                        <Link href="/Products?Delivery_Type=Frozen&pType=13">
+                        <Link href="/Products?Delivery_Type=Frozen&pType=13" prefetch={false}>
                           <div className="btn btn-lg button-orange text-white m-4 m-5">
                             View Products
                           </div>
@@ -166,7 +166,7 @@ const categoryListScreen = () => {
                   <p className="p-1">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
-                    <Link href="/contact-us">
+                    <Link href="/contact-us" prefetch={false}>
                       <span className="text-orange span-with-link">
                         contact us.
                       </span>

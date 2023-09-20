@@ -3,19 +3,17 @@ import React from "react"
 import { connect } from "react-redux"
 import Image from "~/components/elements/Image"
 import Link from "next/link"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const texicologyScreen = () => {
@@ -93,7 +91,10 @@ const texicologyScreen = () => {
                       </section>
                     </div>
                     <div className="container">
-                      <Link href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/">
+                      <Link
+                        href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/"
+                        prefetch={false}
+                      >
                         <div className="ps-section__image">
                           <Image
                             className="p-3 link-hover-thumb-shape"
@@ -234,6 +235,9 @@ const texicologyScreen = () => {
                             rel="noreferrer"
                           >
                             Read More
+                            <span className="visually-hidden">
+                              Read more about the scientific discovery on ScienceDaily
+                            </span>
                           </a>
                         </p>
                         <p className="mt-2">

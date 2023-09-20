@@ -3,7 +3,7 @@ import React, { useState } from "react"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 import { Modal } from "antd"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
@@ -90,7 +90,7 @@ const ServicesScreen = () => {
                         the potential for testing drugs and developing
                         treatments for currently incurable diseases affecting
                         the liver, heart and brain, and even diabetes...{" "}
-                        <Link href="/Services/Cell-Reprogramming">
+                        <Link href="/Services/Cell-Reprogramming" prefetch={false}>
                           <span className="text-white font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -98,7 +98,7 @@ const ServicesScreen = () => {
                         </Link>
                       </p>
                       <p className="p-3">
-                        <Link href="/contact-us">
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">
                             Request A Quote
                           </button>
@@ -138,7 +138,7 @@ const ServicesScreen = () => {
                         reprogramming to form liver, heart and brain cells.
                         Interestingly, the differentiation process in our
                         laboratory reveals some of the development ...{" "}
-                        <Link href="/Services/Cell-Differentiation">
+                        <Link href="/Services/Cell-Differentiation" prefetch={false}>
                           <span className=" font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -146,7 +146,7 @@ const ServicesScreen = () => {
                         </Link>
                       </p>
                       <p className="">
-                        <Link href="/contact-us">
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">
                             Request A Quote
                           </button>
@@ -186,7 +186,7 @@ const ServicesScreen = () => {
                         clinical applications. We use bioinformatics and
                         molecular technology for disease modelling for early
                         diagnosis and to help develop better treatments...
-                        <Link href="/Services/Molecular-Analysis">
+                        <Link href="/Services/Molecular-Analysis" prefetch={false}>
                           <span className="text-white font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -194,7 +194,7 @@ const ServicesScreen = () => {
                         </Link>
                       </p>
                       <p className="">
-                        <Link href="/contact-us">
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">
                             Request A Quote
                           </button>
@@ -232,7 +232,7 @@ const ServicesScreen = () => {
                         genotyping services to understand the role of cytochrome
                         P450s and predict human drug response from the early
                         stages of drug development...
-                        <Link href="/Services/In-vitro-toxicology">
+                        <Link href="/Services/In-vitro-toxicology" prefetch={false}>
                           <span className="font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -240,7 +240,7 @@ const ServicesScreen = () => {
                         </Link>
                       </p>
                       <p className="">
-                        <Link href="/contact-us">
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">
                             Request A Quote
                           </button>

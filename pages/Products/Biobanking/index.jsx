@@ -2,7 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { Tooltip } from "antd"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 // import BreadCrumb from "~/components/elements/BreadCrumb";
 // import Container from "~/components/layouts/Container";

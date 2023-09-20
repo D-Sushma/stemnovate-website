@@ -6,7 +6,7 @@ import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import { useState } from "react"
 import dynamic from 'next/dynamic'
 
@@ -93,7 +93,7 @@ const Resources = ({ resourcesList }) => {
                               <p className="text-white">
                                 {myCat.short_description}
                               </p>
-                              <Link href={`/resources/r/${myCat.slug}`}>
+                              <Link href={`/resources/r/${myCat.slug}`} prefetch={false}>
                                 <div className="link-btn">
                                   <b>
                                     Get Resources <FaArrowRight />

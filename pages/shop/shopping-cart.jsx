@@ -63,7 +63,7 @@ const ShoppingCart = ({ ecomerce }) => {
             </div>
             <div className="ps-cart__actions">
               <div className="ps-cart__link my-4">
-                <Link href="/Products">
+                <Link href="/Products" prefetch={false}>
                   <a className="ps-btn ps-btn--orange">Back to shop</a>
                 </Link>
               </div>

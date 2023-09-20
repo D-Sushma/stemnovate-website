@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic';
 
 const Container = dynamic(
@@ -103,7 +103,7 @@ const texicologyScreen = () => {
                           activity.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>
@@ -150,7 +150,7 @@ const texicologyScreen = () => {
                           research that can contribute to early diagnosis.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>
@@ -192,7 +192,7 @@ const texicologyScreen = () => {
                           make sure you obtain reliable diagnostic results.
                         </p>
                         <p className="p-3">
-                          <Link href="/contact-us">
+                          <Link href="/contact-us" prefetch={false}>
                             <button className="btn btn-lg button-orange text-white m-4 m-5">
                               Request A Quote
                             </button>

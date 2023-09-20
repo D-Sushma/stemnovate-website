@@ -2,7 +2,7 @@ import React from "react"
 // import Container from "~/components/layouts/Container"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Subscribe from "~/components/shared/sections/Subscribe"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import Link from "next/link"
 import dynamic from 'next/dynamic'
 
@@ -73,7 +73,7 @@ const Blogs = () => {
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards">
+                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
                                   ENHANCED MICROFLUIDIC DEVICES FOR BIOMEDICAL
                                   APPLICATIONS.....
@@ -108,10 +108,7 @@ const Blogs = () => {
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link
-                                
-                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
-                              >
+                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
                                 THE CREATION OF NEW SCALABLE MANUFACTURING
                                 PROCESS.....
@@ -121,7 +118,7 @@ const Blogs = () => {
                                 <span className="ps-post__created-at ">
                                   May 05, 2020
                                 </span>
-                                <Link href="/blogs">
+                                <Link href="/blogs" prefetch={false}>
                                   <span className="ps-post__author span-with-link" >Ruchi Sharma</span>
                                 </Link>
                               </div>
@@ -146,9 +143,7 @@ const Blogs = () => {
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link
-                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
-                              >
+                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
                                 
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
                                 HOW STEMNOVATE WILL CHANGE DRUG DEVELOPMENT
@@ -159,7 +154,7 @@ const Blogs = () => {
                                 <span className="ps-post__created-at ">
                                   Aug 24, 2019
                                 </span>
-                                <Link href="/blogs">
+                                <Link href="/blogs" prefetch={false}>
                                   <span className="ps-post__author span-with-link">Ruchi Sharma</span>
                                 </Link>
                               </div>
@@ -186,10 +181,7 @@ const Blogs = () => {
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link
-                                
-                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
-                              >
+                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
                                 HOW A ‘CYP OF COFFEE’ CAN HELP US TO
                                 UNDERSTAND....
@@ -199,7 +191,7 @@ const Blogs = () => {
                                 <span className="ps-post__created-at ">
                                   Aug 24, 2019
                                 </span>
-                                <Link href="/blogs">
+                                <Link href="/blogs" prefetch={false}>
                                   <span className="ps-post__author span-with-link">Ruchi Sharma</span>
                                 </Link>
                               </div>

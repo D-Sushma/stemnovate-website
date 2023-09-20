@@ -282,6 +282,7 @@ const ResourcesData = (props) => {
                           isActive ? (
                             <Link
                               href={`/resources/Download/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
+                              prefetch={false}
                             >
                               <div style={{cursor:"pointer"}}>
                                 <button className="button button--green mr-2">

@@ -92,12 +92,12 @@ const Applications = () => {
                         that, we are creating heart and brain cells in the
                         laboratory. These novel models have the potential to
                         predict human drug response and ensure patient safety...{" "}
-                        <Link href="/Applications/Drug-Discovery-Platform" >
+                        <Link href="/Applications/Drug-Discovery-Platform" prefetch={false}>
                           <span className="text-white font-weight-bold span-with-link">Discover More</span>
                         </Link>
                       </p>
                       <p className="">
-                        <Link href="/contact-us">
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
                         </Link>
                       </p>
@@ -132,12 +132,12 @@ const Applications = () => {
                         71% of all deaths worldwide. We provide innovative
                         solutions for discovering new medicines and therapies
                         for non-communicable diseases....{" "}
-                        <Link href="/Applications/Disease-Modelling" >
+                        <Link href="/Applications/Disease-Modelling" prefetch={false}>
                           <span className=" font-weight-bold span-with-link">Read More</span>
                         </Link>
                       </p>
                       <p className="">
-                        <Link href="/contact-us" >
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
                         </Link>
                       </p>
@@ -173,13 +173,12 @@ const Applications = () => {
                         diagnose liver and heart diseases early. During COVID,
                         we also developed new technology and assays for rapid
                         diagnostic ....{" "}
-                        <Link href="/Applications/Diagnostics" >
+                        <Link href="/Applications/Diagnostics" prefetch={false}>
                           <span className="text-white font-weight-bold span-with-link">View More</span>
                         </Link>
                       </p>
                       <p className="">
-                        <Link href="/contact-us"
-                         >
+                        <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
                         </Link>
                       </p>
@@ -215,12 +214,12 @@ const Applications = () => {
                         therapeutics developing in the pharmaceutical sector,
                         e.g. antibody research, drug bio-production and RNAi
                         based therapeutics.....{" "}
-                        <Link href="/Applications/DNA-Synthesis" >
+                        <Link href="/Applications/DNA-Synthesis" prefetch={false}>
                           <span className=" font-weight-bold span-with-link">Read More</span>
                         </Link>
                       </p>
                       <p className="">
-                       <Link href="/contact-us" >
+                       <Link href="/contact-us" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
                         </Link>
                       </p>

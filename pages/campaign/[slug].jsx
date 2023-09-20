@@ -14,7 +14,7 @@ import {
   LinkedinIcon
 } from "next-share"
 import { baseUrl } from "~/repositories/Repository"
-import Image from "~/components/elements/Image"
+import Image from "next/image"
 import Loader from "~/components/reuseable/Loader"
 import dayjs from "dayjs"
 import { useSession } from "next-auth/react"
@@ -219,7 +219,7 @@ const CampaignPage = (props) => {
         <div>
           <p className="">
             Please{" "}
-            <Link href={"/auth/UserLogin"}>
+            <Link href={"/auth/UserLogin"} prefetch={false}>
               <u>
                 <div className="text-primary font-weight-bolder link-hover-thumb-shape">
                   Login
@@ -227,7 +227,7 @@ const CampaignPage = (props) => {
               </u>
             </Link>{" "}
             before submitting. If you don&apos;t have an account. Create one{" "}
-            <Link href={"/auth/UserReg"}>
+            <Link href={"/auth/UserReg"} prefetch={false}>
               <u>
                 <div className="text-primary font-weight-bolder link-hover-thumb-shape">
                   here
@@ -562,6 +562,7 @@ const CampaignPage = (props) => {
                                         <Link
                                           href="/campaign-terms-and-condition"
                                           target={"_blank"}
+                                          prefetch={false}
                                         >
                                           <div className="btn btn-link btn-lg link-hover-thumb-shape">
                                             <u> {val.helpingText} </u>

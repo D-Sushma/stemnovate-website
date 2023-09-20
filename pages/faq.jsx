@@ -121,6 +121,7 @@ const AboutUsScreen = () => {
                     color: "rgb(61, 149, 165)"
                   }}
                 >
+                  <span className="visually-hidden">Contact us for more information:</span>
                   <b
                     style={{
                       boxSizing: "border-box",
@@ -182,6 +183,7 @@ const AboutUsScreen = () => {
                     color: "rgb(61, 149, 165)"
                   }}
                 >
+                  <span className="visually-hidden">Contact us to discuss your requirements and get a personalized quotation. Click here.</span>
                   <b
                     style={{
                       boxSizing: "border-box",
@@ -250,6 +252,7 @@ const AboutUsScreen = () => {
                     color: "rgb(61, 149, 165)"
                   }}
                 >
+                  <span className="visually-hidden">Learn more about our contact options</span>
                   <b
                     style={{
                       boxSizing: "border-box",
@@ -574,6 +577,7 @@ const AboutUsScreen = () => {
                     color: "rgb(61, 149, 165)"
                   }}
                 >
+                  <span className="visually-hidden">Contact us for more details: </span>
                   <b
                     style={{
                       boxSizing: "border-box",

@@ -114,7 +114,7 @@ const IPSCellsScreen = () => {
                   <p className="p-1">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
-                    <Link href="mailto:info@stemnovate.co.uk" >
+                    <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
                       <span className="text-orange span-with-link">contact us.</span>
                     </Link>
                   </p>

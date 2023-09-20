@@ -8,7 +8,7 @@ import { HiArrowSmRight } from "react-icons/hi"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 // import Container from "~/components/layouts/Container"
 // import BreadCrumb from "~/components/elements/BreadCrumb"

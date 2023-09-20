@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import Slider from "react-slick"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 
 const Container = dynamic(
   () => import("~/components/layouts/Container"),

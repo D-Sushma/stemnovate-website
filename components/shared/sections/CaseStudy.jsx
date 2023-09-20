@@ -10,7 +10,7 @@ const CaseStudy = () => {
         <div className="row">
           <div className="col-md-6">
             <div className="row">
-              <Link href="/Services">
+              <Link href="/Services" prefetch={false}>
                 <div>
                   <h2 className="heading-services text-left m-4 font-weight-bolder">
                     Partnerships
@@ -31,7 +31,7 @@ const CaseStudy = () => {
                         height={218}
                         placeholder="blur"
                         blurDataURL="/static/image/blurred.png"
-                        priority 
+                        priority
                       />
                     </div>
                     <p className="text-left font-weight-bolder content-services">
@@ -45,14 +45,19 @@ const CaseStudy = () => {
             </div>
             <div className="row">
               <div className="mx-4 button button-services">
-                <Link href="/About-Us">Learn More</Link>
+                <Link href="/About-Us" prefetch={false}>
+                  <div>
+                    Learn More{" "}
+                    <span className="visually-hidden">Learn More About Us</span>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
 
           <div className="col-md-6">
             <div className="row">
-              <Link href="/Services">
+              <Link href="/Services" prefetch={false}>
                 <div>
                   <h2 className="heading-services text-left m-4 font-weight-bolder">
                     Featured Blog
@@ -76,7 +81,7 @@ const CaseStudy = () => {
                         height={218}
                         placeholder="blur"
                         blurDataURL="/static/image/blurred.png"
-                        priority 
+                        priority
                       />
                     </div>
                     <p className=" text-left font-weight-bolder content-services">
@@ -88,7 +93,14 @@ const CaseStudy = () => {
             </div>
             <div className="row">
               <div className="mx-4 button button-services">
-                <Link href="/blog-news" aria-label="Read More about Blog News">Read More</Link>
+                <Link href="/blog-news" prefetch={false}>
+                  <div>
+                    Read More
+                    <span className="visually-hidden">
+                      Read More About Our Blog News
+                    </span>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

@@ -7,28 +7,26 @@ import Slider from "react-slick"
 // import NextArrow from "~/components/elements/carousel/NextArrow"
 // import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const NextArrow = dynamic(
   () => import("~/components/elements/carousel/NextArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const PrevArrow = dynamic(
   () => import("~/components/elements/carousel/PrevArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const breadcrumb = [
   {
@@ -102,6 +100,7 @@ const Blogs = (props) => {
                                   <div className="ps-post__thumbnail">
                                     <Link
                                       href={`/blogs/${featuredPostLists[0].slug}`}
+                                      prefetch={false}
                                     >
                                       <div className="ps-post__overlay link-hover-thumb-shape"></div>
                                     </Link>
@@ -126,6 +125,7 @@ const Blogs = (props) => {
                                     <div className="ps-post__content justify-content-center">
                                       <Link
                                         href={`/blogs/${featuredPostLists[0].slug}`}
+                                        prefetch={false}
                                       >
                                         <div className="ps-post__title text-center blog-news-title text-white span-with-link">
                                           {featuredPostLists[0].name}
@@ -134,6 +134,7 @@ const Blogs = (props) => {
                                       <div className="ps-post__meta justify-content-center py-4 text-white">
                                         <Link
                                           href={`/blogs/${featuredPostLists[0].slug}`}
+                                          prefetch={false}
                                         >
                                           <div className="button button--yellow">
                                             <span
@@ -169,7 +170,10 @@ const Blogs = (props) => {
                         >
                           <article className="ps-post ps-post--grid blog-news">
                             <div className="ps-post__thumbnail">
-                              <Link href={`/blogs/${data.slug}`}>
+                              <Link
+                                href={`/blogs/${data.slug}`}
+                                prefetch={false}
+                              >
                                 <div className="ps-post__overlay link-hover-thumb-shape"></div>
                               </Link>
                               <Image
@@ -194,18 +198,24 @@ const Blogs = (props) => {
                             </div>
                             <div className="ps-post__wrapper justify-content-center">
                               <div className="ps-post__content justify-content-center">
-                                <Link href={`/blogs/${data.slug}`}>
+                                <Link
+                                  href={`/blogs/${data.slug}`}
+                                  prefetch={false}
+                                >
                                   <div className="ps-post__title text-center blog-news-title span-with-link">
                                     {data.name}
                                   </div>
                                 </Link>
                                 <div className="ps-post__meta justify-content-center py-4">
-                                  <Link href={`/blogs/${data.slug}`}>
+                                  <Link
+                                    href={`/blogs/${data.slug}`}
+                                    prefetch={false}
+                                  >
                                     <div className="ps-post__author blog-author">
-                                      <span className="h3 my-4 span-with-link" aria-label={`Read More about ${data.name}`}>
+                                      <span className="h3 my-4 span-with-link">
                                         {" "}
                                         Read More
-                                      </span> 
+                                      </span>
                                     </div>
                                   </Link>
                                 </div>
@@ -258,6 +268,7 @@ const Blogs = (props) => {
                                   <div className="ps-banner__btn-group"></div>
                                   <Link
                                     href={`/blogs/${featuredPostLists[1].slug}`}
+                                    prefetch={false}
                                   >
                                     <div className="bg-warning ps-banner__shop link-hover-thumb-shape">
                                       Read More
@@ -327,7 +338,11 @@ const Blogs = (props) => {
                                     href={`${data.url}`}
                                     rel="noreferrer"
                                   >
-                                    <span className="h3 my-4"> Read More</span>
+                                    <span className="h3 my-4"> Read More </span>
+                                    <span className="h3 my-4 visually-hidden">
+                                      Read more about the author and their blog
+                                      post
+                                    </span>
                                   </a>
                                 </div>
                               </div>

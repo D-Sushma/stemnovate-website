@@ -2,7 +2,7 @@ import React from "react"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 // import Container from "~/components/layouts/Container"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import EthicalTissueSourcing from "~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg"
 import OurAnimalCellPlatform from "~/public/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif"
 import InternationalShipping from "~/public/static/img/products/Primary-Cells-Animal/International-Shipping.jpg"
@@ -197,7 +197,7 @@ const categoryListScreen = () => {
                         <p>Cell models for infectious diseases</p>
                       </li>
                     </ol>
-                    <Link href="/Applications/Animal-Health">
+                    <Link href="/Applications/Animal-Health" prefetch={false}>
                       <button className="btn btn-lg button-orange text-white m-4 m-5">
                         Find Out More
                       </button>
@@ -300,7 +300,7 @@ const categoryListScreen = () => {
                           world through scientific aptitude and discoveries for
                           our furry friends.
                         </p>
-                        <Link href="/Applications/Animal-Health">
+                        <Link href="/Applications/Animal-Health" prefetch={false}>
                           <button className="btn btn-lg button-orange text-white m-4 m-5">
                             Find Out More
                           </button>
@@ -316,7 +316,7 @@ const categoryListScreen = () => {
                   <p className="p-1">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
-                    <Link href="mailto:info@stemnovate.co.uk">
+                    <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
                       <span className="text-orange span-with-link">
                         contact us.
                       </span>

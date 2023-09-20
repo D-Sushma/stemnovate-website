@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { ToastContainer } from "react-toastify"
 import { baseUrl } from "~/repositories/Repository"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic'
 
 const Container = dynamic(
@@ -75,7 +75,7 @@ const CampaignPage = ({ ProductData }) => {
                 } else {
                   return (
                     <li className="" key={item.text}>
-                      <Link href={item.url}>
+                      <Link href={item.url} prefetch={false}>
                         <div className="link-hover-thumb-shape">
                           {item.text}
                         </div>

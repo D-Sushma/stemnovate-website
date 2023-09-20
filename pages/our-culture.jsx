@@ -2,7 +2,7 @@ import React from "react"
 // import Container from "~/components/layouts/Container"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
@@ -81,7 +81,7 @@ const OurCulture = () => {
                         understand that by building a diverse and skilled team,
                         we have the best chance of achieving our mission
                       </p>
-                      <Link href="/investor-relations">
+                      <Link href="/investor-relations" prefetch={false}>
                         <div
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
@@ -118,7 +118,7 @@ const OurCulture = () => {
                         the company. We work with some of the industry&apos;s
                         best, most fascinating people and institutions.
                       </p>
-                      <Link href="/About-Us">
+                      <Link href="/About-Us" prefetch={false}>
                         <div
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
@@ -157,7 +157,7 @@ const OurCulture = () => {
                         they feel they have an issue or want to chat over some
                         cake and a coffee.
                       </p>
-                      <Link href="/About-Us">
+                      <Link href="/About-Us" prefetch={false}>
                         <div
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
@@ -192,7 +192,7 @@ const OurCulture = () => {
                         innovate and thrive if this is something that you would
                         like to be a part of, visit our careers page.
                       </p>
-                      <Link href="/careers">
+                      <Link href="/careers" prefetch={false}>
                         <div
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
@@ -239,7 +239,7 @@ const OurCulture = () => {
                         of the double helix structure of DNA, which changed the
                         course of science
                       </p>
-                      <Link href="/blogs/women-in-stemnovate">
+                      <Link href="/blogs/women-in-stemnovate" prefetch={false}>
                         <div
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}

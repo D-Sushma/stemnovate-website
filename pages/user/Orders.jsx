@@ -123,7 +123,7 @@ const Orders = ({ userOrders }) => {
       dataIndex: "action",
       render: (action) => (
         <Space size="middle">
-          <Link href={`/user/OrderDetails/${action}`}>
+          <Link href={`/user/OrderDetails/${action}`} prefetch={false}>
             <button className="btn btn-info ">View</button>
           </Link>
         </Space>

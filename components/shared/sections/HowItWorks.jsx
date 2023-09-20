@@ -1,5 +1,5 @@
 import React from "react"
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import HowitWorksmain from "~/public/static/img/how-it-work/how-it-works-white-main.png"
 const HowItsWork = () => {
   return (

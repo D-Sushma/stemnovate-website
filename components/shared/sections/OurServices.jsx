@@ -1,4 +1,4 @@
-import Image from "~/components/elements/Image"
+import Image from '~/components/elements/Image'
 import DataPlatform from "~/public/static/home-images/Data-Platform.jpg"
 import StemCells from "~/public/static/home-images/Stem-Cells-Cellular-Reprogramming.jpg"
 import Molecular from "~/public/static/home-images/Molecular-&-Microengineering.jpg"
@@ -13,7 +13,7 @@ const OurService = () => {
           <div className="row">
             <div className="col-md-6">
               <div className="row">
-                <Link href="/Applications/Drug-Discovery-Platform">
+                <Link href="/Applications/Drug-Discovery-Platform" prefetch={false}>
                   <div>
                     <h2 className="heading-services text-left m-4 font-weight-bolder">
                       Drug Discovery Platform
@@ -48,7 +48,7 @@ const OurService = () => {
               </div>
               <div className="row">
                 <div className="mx-4 button button-services">
-                  <Link href="/Applications/Drug-Discovery-Platform">
+                  <Link href="/Applications/Drug-Discovery-Platform" prefetch={false}>
                     Discover More
                   </Link>
                 </div>
@@ -56,7 +56,7 @@ const OurService = () => {
             </div>
             <div className="col-md-6">
               <div className="row">
-                <Link href="/Products">
+                <Link href="/Products" prefetch={false}>
                   <div>
                     <h2 className="heading-services text-left m-4 font-weight-bolder">
                       Bio Banking
@@ -92,7 +92,7 @@ const OurService = () => {
 
               <div className="row">
                 <div className="mx-4 button button-services">
-                  <Link href="/Products">View Product</Link>
+                  <Link href="/Products" prefetch={false}>View Product</Link>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ const OurService = () => {
           <div className="row">
             <div className="col-md-6">
               <div className="row">
-                <Link href="/Services">
+                <Link href="/Services" prefetch={false}>
                   <div>
                     <h2 className="text-white m-4 text-left font-weight-bolder">
                       Molecular & Microengineering
@@ -132,13 +132,13 @@ const OurService = () => {
                       </div>
                       <p className="text-left text-white font-weight-bolder content-services">
                         We provide digital{" "}
-                        <Link href="/resources/r/karyotyping">
+                        <Link href="/resources/r/karyotyping" prefetch={false}>
                           <span className="font-weight-bold content-services--link">
                             karyotyping
                           </span>
                         </Link>{" "}
                         and{" "}
-                        <Link href="/resources/r/genotyping">
+                        <Link href="/resources/r/genotyping" prefetch={false}>
                           <span className="font-weight-bold content-services--link">
                             genotyping
                           </span>
@@ -152,14 +152,14 @@ const OurService = () => {
               </div>
               <div className="row">
                 <div className="mx-4 button button-services">
-                  <Link href="/Services">Resources</Link>
+                  <Link href="/Services" prefetch={false}>Resources</Link>
                 </div>
               </div>
             </div>
             <div className="col-md-6">
               <div>
                 <div className="row">
-                  <Link href="/Services">
+                  <Link href="/Services" prefetch={false}>
                     <div>
                       <h2 className="text-white m-4 text-left font-weight-bolder">
                         Data Platform
@@ -195,7 +195,7 @@ const OurService = () => {
                 </div>
                 <div className="row">
                   <div className="mx-4 button button-services">
-                    <Link href="/Services" aria-label="Learn More about Services">Learn More</Link>
+                    <Link href="/Services" prefetch={false} aria-label="Learn More about Services">Learn More</Link>
                   </div>
                 </div>
               </div>

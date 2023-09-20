@@ -152,7 +152,7 @@ const CookiesPolicy = () => {
             does interact with one of the features you use on our site. However
             if you are still looking for more information then you can contact
             us at{" "}
-            <Link href="mailto:info@stemnovate.co.uk">
+            <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
               info@stemnovate.co.uk
             </Link>
           </p>
