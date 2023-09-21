@@ -151,7 +151,16 @@ const ProductList = ({ ecomerce, slug }) => {
                       key={key}
                     >
                       <div className="card d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
-                        <Image
+                        <img
+                          src={
+                            post.image == null
+                              ? `/no-image.png`
+                              : `${process.env.AWS_S3BUCKET_URL}${post.image}`
+                          }
+                          className="rounded"
+                          alt={post.category_name}
+                          />
+                        {/* <Image
                           src={
                             post.image == null
                               ? `/no-image.png`
@@ -163,7 +172,7 @@ const ProductList = ({ ecomerce, slug }) => {
                           height="675"
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                        />
+                        /> */}
                         <div className="card-body  rounded-lg p-0 overlay-content-p">
                           <div className="p-5">
                             <Link href={`${slug}/${post.slug}`}>
@@ -208,7 +217,15 @@ const ProductList = ({ ecomerce, slug }) => {
                             as={`/product/${value.product_slug}`}
                           >
                             <div className="link-hover-thumb-shape">
-                              <Image
+                              <img
+                                loader={myLoader}
+                                src={`${process.env.AWS_S3BUCKET_URL}${
+                                  value?.product_image.split(",")[0]
+                                }`}
+                                unoptimized={false}
+                                alt={value?.product_slug}
+                                />
+                              {/* <Image
                                 loader={myLoader}
                                 src={`${process.env.AWS_S3BUCKET_URL}${
                                   value?.product_image.split(",")[0]
@@ -219,7 +236,7 @@ const ProductList = ({ ecomerce, slug }) => {
                                 height="360"
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                              />
+                              /> */}
                             </div>
                           </Link>
 

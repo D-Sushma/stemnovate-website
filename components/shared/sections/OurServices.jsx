@@ -1,4 +1,4 @@
-import Image from '~/components/elements/Image'
+import Image from "~/components/elements/Image"
 import DataPlatform from "~/public/static/home-images/Data-Platform.jpg"
 import StemCells from "~/public/static/home-images/Stem-Cells-Cellular-Reprogramming.jpg"
 import Molecular from "~/public/static/home-images/Molecular-&-Microengineering.jpg"
@@ -13,7 +13,10 @@ const OurService = () => {
           <div className="row">
             <div className="col-md-6">
               <div className="row">
-                <Link href="/Applications/Drug-Discovery-Platform" prefetch={false}>
+                <Link
+                  href="/Applications/Drug-Discovery-Platform"
+                  prefetch={false}
+                >
                   <div>
                     <h2 className="heading-services text-left m-4 font-weight-bolder">
                       Drug Discovery Platform
@@ -35,7 +38,7 @@ const OurService = () => {
                           height={218}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          priority 
+                          priority
                         />
                       </div>
                       <p className="text-left font-weight-bolder content-services">
@@ -48,7 +51,10 @@ const OurService = () => {
               </div>
               <div className="row">
                 <div className="mx-4 button button-services">
-                  <Link href="/Applications/Drug-Discovery-Platform" prefetch={false}>
+                  <Link
+                    href="/Applications/Drug-Discovery-Platform"
+                    prefetch={false}
+                  >
                     Discover More
                   </Link>
                 </div>
@@ -78,7 +84,7 @@ const OurService = () => {
                           height={218}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          priority 
+                          priority
                         />
                       </div>
                       <p className="text-left font-weight-bolder content-services">
@@ -92,7 +98,9 @@ const OurService = () => {
 
               <div className="row">
                 <div className="mx-4 button button-services">
-                  <Link href="/Products" prefetch={false}>View Product</Link>
+                  <Link href="/Products" prefetch={false}>
+                    View Product
+                  </Link>
                 </div>
               </div>
             </div>
@@ -127,7 +135,7 @@ const OurService = () => {
                           height={218}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          priority 
+                          priority
                         />
                       </div>
                       <p className="text-left text-white font-weight-bolder content-services">
@@ -152,7 +160,9 @@ const OurService = () => {
               </div>
               <div className="row">
                 <div className="mx-4 button button-services">
-                  <Link href="/Services" prefetch={false}>Resources</Link>
+                  <Link href="/Services" prefetch={false}>
+                    Resources
+                  </Link>
                 </div>
               </div>
             </div>
@@ -181,7 +191,7 @@ const OurService = () => {
                             height={218}
                             placeholder="blur"
                             blurDataURL="/static/image/blurred.png"
-                            priority 
+                            priority
                           />
                         </div>
                         <p className=" text-left text-white font-weight-bolder content-services">
@@ -195,7 +205,15 @@ const OurService = () => {
                 </div>
                 <div className="row">
                   <div className="mx-4 button button-services">
-                    <Link href="/Services" prefetch={false} aria-label="Learn More about Services">Learn More</Link>
+                    <Link
+                      href="/Services"
+                      prefetch={false}
+                    >
+                      <div>
+                        Learn More
+                        <span className="visually-hidden">Learn More about Services</span>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>

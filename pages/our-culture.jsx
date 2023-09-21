@@ -123,7 +123,7 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Learn More
+                          Learn More <span className="visually-hidden">Learn More About Us</span>
                         </div>
                       </Link>
                     </div>
@@ -162,7 +162,7 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Learn More
+                          Learn More <span className="visually-hidden">Learn More About Us</span>
                         </div>
                       </Link>
                     </div>

@@ -97,7 +97,7 @@ const CaseStudy = () => {
                   <div>
                     Read More
                     <span className="visually-hidden">
-                      Read More About Our Blog News
+                      Read More About Blog News
                     </span>
                   </div>
                 </Link>

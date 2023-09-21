@@ -8,7 +8,7 @@ import { HiArrowSmRight } from "react-icons/hi"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import Image from '~/components/elements/Image'
+import Image from "~/components/elements/Image"
 import dynamic from "next/dynamic"
 // import Container from "~/components/layouts/Container"
 // import BreadCrumb from "~/components/elements/BreadCrumb"
@@ -101,22 +101,35 @@ const EventsDetails = ({ EventsData }) => {
             EventsData.data.map((data, key) => (
               <div key={key}>
                 <div className="position-relative text-center">
-                  <Image
-                    src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
-                    alt="IMG"
-                    width={2000}
-                    height={230}
-                    placeholder="blur"
-                    blurDataURL="/static/image/blurred.png"
-                    // style={{ width: "100%", height: "10em" }}
-                  />
+                  <div className="d-none d-md-flex">
+                    <Image
+                      src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
+                      alt="IMG"
+                      width={2000}
+                      height={230}
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                      // style={{ width: "100%", height: "10em" }}
+                    />
+                  </div>
+                  <div className="d-flex d-md-none">
+                    <Image
+                      src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
+                      alt="IMG"
+                      width={1341}
+                      height={500}
+                      // objectFit='cover'
+                      placeholder="blur"
+                      blurDataURL="/static/image/blurred.png"
+                    />
+                  </div>
                   <div className="container">
                     <div className="top-left-event-details">
                       <BreadCrumb breacrumb={breadcrumb} />
                     </div>
 
                     <div className="centered">
-                      <h1 className="text-center h1  text-white p-2">
+                      <h1 className="text-center h1  text-white p-2 ">
                         <strong>{data.title}</strong>
                       </h1>
                     </div>
