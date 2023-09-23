@@ -2,7 +2,7 @@ import React, { useState } from "react"
 // import Container from "~/components/layouts/Container"
 import { Form, Input, Button, Modal, Checkbox, Tooltip } from "antd"
 import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
-import { ToastContainer, toast } from "react-toastify"
+import { toast } from "react-toastify"
 import { Row, Col, Select } from "antd"
 const { Option } = Select
 import { signIn } from "next-auth/react"

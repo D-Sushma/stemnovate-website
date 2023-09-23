@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Link from "next/link";
-// import Collapse from "~/components/elements/basic/Collapse";
 import dynamic from "next/dynamic"
 
 const Collapse = dynamic(
@@ -8,7 +7,7 @@ const Collapse = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-const MenuAccordion = ({ data, classes = "menu", parent, is_page }) => {
+const MenuAccordion = ({ data, classes = "menu", parent }) => {
     const [isOpen, setIsOpen] = useState(null);
     const handleToggleAccordion = (index) => {
         if (index !== isOpen) {
@@ -24,7 +23,7 @@ const MenuAccordion = ({ data, classes = "menu", parent, is_page }) => {
                 if (item.modules) {
                     return (
                         <li className={`menu__item menu__item--has-children ${isOpen === item.key || item.key === true ? "active" : ""}`} key={item.key}>
-                            <a href="#" className="menu__toggle" onClick={(e) => handleToggleAccordion(item.key)}>
+                            <a href="#" className="menu__toggle" onClick={() => handleToggleAccordion(item.key)}>
                                 <a href={item.is_page ? `${item.url}` : `${parent}${item.url}`}>
                                     <span className="menu__text">{item.name}</span>
                                 </a>
@@ -38,7 +37,7 @@ const MenuAccordion = ({ data, classes = "menu", parent, is_page }) => {
                 } else if (item.megaContent) {
                     return (
                         <li className={`menu__item menu__item--has-children has-mega-menu ${isOpen === item.id || item.active === true ? "active" : ""}`} key={item.id}>
-                            <a href="#" className="menu__toggle" onClick={(e) => handleToggleAccordion(item.id)}>
+                            <a href="#" className="menu__toggle" onClick={() => handleToggleAccordion(item.id)}>
                                 <span className="menu__text">{item.text}</span>
                                 <i className="icon-chevron-down menu__icon--down" />
                             </a>
@@ -50,7 +49,7 @@ const MenuAccordion = ({ data, classes = "menu", parent, is_page }) => {
                 } else if (item.megaItems) {
                     return (
                         <li className={`menu__item menu__item--has-children ${isOpen === item.id || item.active === true ? "active" : ""}`} key={item.id}>
-                            <a href="#" className="menu__toggle" onClick={(e) => handleToggleAccordion(item.id)}>
+                            <a href="#" className="menu__toggle" onClick={() => handleToggleAccordion(item.id)}>
                                 <span className="menu__text">{item.heading}</span>
                                 <i className="icon-chevron-down menu__icon--down" />
                             </a>

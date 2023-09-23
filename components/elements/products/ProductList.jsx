@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-
 import { connect, useDispatch } from "react-redux";
 import { toggleDrawer } from "~/store/app/action";
-import { useRouter } from "next/router";
 import useProduct from "~/hooks/useProduct";
-import ModuleProductRating from "~/components/elements/products/modules/ModuleProductRating";
-import ModuleProductImages from "~/components/elements/products/modules/ModuleProductImages";
+// import ModuleProductImages from "~/components/elements/products/modules/ModuleProductImages";
 import useEcomerce from "~/hooks/useEcomerce";
-import { useSession, signIn } from "next-auth/react";
-import { ToastContainer, toast } from "react-toastify";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import dynamic from 'next/dynamic'
+
+const ModuleProductImages = dynamic(
+    () => import("~/components/elements/products/modules/ModuleProductImages"),
+   { loading: ()=> <p>Loading...</p>}
+  )
 
 const ProductList = ({ product, ecomerce }) => {
     const { price, badges } = useProduct();
     const [AddtoCart, setAddtoCart] = useState(1);
     const dispatch = useDispatch();
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
-    const { loading, addItem } = useEcomerce();
+    const { addItem } = useEcomerce();
 
     const handleAddItemToCart = (id, price) => {
         if (session) {
@@ -89,17 +92,12 @@ const ProductList = ({ product, ecomerce }) => {
             </div>
             <div className="ps-product__wrapper">
                 <div className="ps-product__content">
-                    {/* <div className="ps-product__categories">
-                        <Link href="/shop">
-                            <a>Thermometer Brand</a>
-                        </Link>
-                    </div> */}
+                    
                     <h4 className="ps-product__title">
                         <Link href={`/product/${product.product_slug}`} as={`/product/${product.product_slug}`}>
                             <a>{product.product_name}</a>
                         </Link>
                     </h4>
-                    {/* <ModuleProductRating /> */}
                     <div
                         className="p-2 w-72 bd-highlight  "
                         dangerouslySetInnerHTML={{
@@ -121,10 +119,7 @@ const ProductList = ({ product, ecomerce }) => {
                             }}>
                             Add to cart
                         </a>
-                        {/* <div className="ps-product__quick-actions">
-                            <a href="#">Add to wishlist</a>
-                            <a href="#">Add to compare</a>
-                        </div> */}
+                       
                     </div>
                 </div>
             </div>

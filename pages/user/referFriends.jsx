@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb2";
+import React, { useEffect } from "react"
 import { Form } from "antd"
 import { baseUrl } from "~/repositories/Repository"
 import { auth } from "~/lib/CheckUser"
@@ -34,8 +32,6 @@ const breadcrumb = [
 ]
 
 const referFriends = ({ UserData }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [ChangeCPass, setChangeCPass] = useState(false)
   const [form] = Form.useForm()
 
   const GanerateReffCode = async (ctx) => {

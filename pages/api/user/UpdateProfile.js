@@ -8,7 +8,7 @@ export default async function handle(req, res) {
         const {
             First,
             last,
-            Email,
+            // Email,
             changepassword,
             CPassword,
             password,

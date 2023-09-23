@@ -1,10 +1,27 @@
 import React from "react";
 import { generateTempArray } from "~/utilities/common-helpers";
-import SkeletonProduct from "~/components/elements/skeletons/SkeletonProduct";
-import SkeletonProductHorizontal from "~/components/elements/skeletons/SkeletonProductHorizontal";
-import ArticleList from "~/components/elements/articles/ArticleList";
-import ArticleStandard from "~/components/elements/articles/ArticleStandard";
-import ArticleGrid from "~/components/elements/articles/ArticleGrid";
+import dynamic from 'next/dynamic'
+
+const SkeletonProduct = dynamic(
+    () => import("~/components/elements/skeletons/SkeletonProduct"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const SkeletonProductHorizontal = dynamic(
+    () => import("~/components/elements/skeletons/SkeletonProductHorizontal"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const ArticleList = dynamic(
+    () => import("~/components/elements/articles/ArticleList"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const ArticleStandard = dynamic(
+    () => import("~/components/elements/articles/ArticleStandard"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const ArticleGrid = dynamic(
+    () => import("~/components/elements/articles/ArticleGrid"),
+    {loading: ()=> <p>Loading..</p>}
+)
 
 export default function usePostGroup() {
     function handleGetColumn(columns) {

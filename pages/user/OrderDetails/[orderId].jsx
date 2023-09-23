@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react"
-// import Container from "~/components/layouts/Container"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
@@ -20,12 +19,7 @@ function orderConfirmation({ UserData }) {
   const MySummery = useRef(null)
   const [resourcesData, setResourcesdata] = useState([])
   useEffect(() => {
-    // console.log("UserData", UserData.result);
-    // if (status) {
-    // removeItems("cart");
-    // updateStatus();
-    getOrderDetails()
-    // }
+     getOrderDetails()
   }, [])
 
   const getOrderDetails = async () => {
@@ -78,32 +72,7 @@ function orderConfirmation({ UserData }) {
     }
   }
 
-  const updateStatus = async () => {
-    var myHeaders = new Headers()
-    myHeaders.append("Content-Type", "application/json")
-    const fullName = UserData.result.firstname + " " + UserData.result.lastname
-    const Email = UserData.result.email
 
-    var raw = JSON.stringify({
-      orderId: orderId,
-      status: status,
-      name: fullName,
-      email: Email
-    })
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw
-    }
-    // Fetch data from external API
-    const res = await fetch(
-      `${process.env.NEXT_BASE_URL}api/orders/addOrders`,
-      requestOptions
-    )
-    var resp = await res.json()
-    // console.log(resp);
-  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -122,18 +91,7 @@ function orderConfirmation({ UserData }) {
       console.log(window.scrollY)
     })
   }, [])
-  const breadcrumb = [
-    {
-      id: 1,
-      text: "Home",
-      url: "/"
-    },
-
-    {
-      id: 2,
-      text: "Order Confirmation"
-    }
-  ]
+  
   return (
     <Container title="Order Confirmation">
       <div className="ps-page ps-page--shopping">

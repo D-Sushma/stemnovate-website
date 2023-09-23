@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react"
-// import NextArrow from "~/components/elements/carousel/NextArrow"
-// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
 import testimonials from "~/public/static/data/testimonials.json"
-// import TestimonialItem from "~/components/elements/TestimonialItem"
 import Image from "~/components/elements/Image"
 import newcambridge from "~/public/static/home-images/newcambridge.jpg"
 import Cambridge from "~/public/static/home-images/Cambridge-Independent.jpg"
@@ -91,12 +88,6 @@ const Testimonials = () => {
         <section className="container">
           <div className="row row-testimonials">
             <div className="col-md-12 col-sm-12 text-center">
-              {/* <h3 className="ps-section__title text-uppercase">
-                <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                  Latest reviews
-                </span>
-              </h3> */}
-              {/* py-5 */}
               <div className="ps-section__content">
                 <div className="container">
                   <Slider {...carouselSetting} className="ps-carousel">

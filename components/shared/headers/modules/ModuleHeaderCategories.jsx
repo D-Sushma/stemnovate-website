@@ -1,7 +1,13 @@
 import React from "react";
 import MegaMenu from "~/components/elements/menu/MegaMenu";
 import menu from "~/public/static/data/menu.json";
-import ModuleHeaderPartners from "~/components/shared/headers/modules/ModuleHeaderPartners";
+// import ModuleHeaderPartners from "~/components/shared/headers/modules/ModuleHeaderPartners";
+import dynamic from 'next/dynamic'
+
+const ModuleHeaderPartners = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderPartners"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleHeaderCategories = () => {
     return (

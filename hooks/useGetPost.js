@@ -5,7 +5,7 @@ import PostRepository from "~/repositories/PostRepository";
 export default function useGetPost() {
     const [loading, setLoading] = useState(false);
     const [postItems, setPostItems] = useState(null);
-    const [post, setPost] = useState(null);
+    // const [post, setPost] = useState(null);
 
     return {
         loading,

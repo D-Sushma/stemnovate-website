@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import { Card, Col, Row } from "antd"
 import { ToastContainer, toast } from "react-toastify"
 import { baseUrl } from "~/repositories/Repository"
 import { getSession } from "next-auth/react"
 import { auth } from "~/lib/CheckUser"
-// import Loader from "~/components/reuseable/Loader";
 import Link from "next/link"
 import { encode } from "hex-encode-decode"
 import { GrContactInfo, GrUserSettings, GrList, GrBasket } from "react-icons/gr"

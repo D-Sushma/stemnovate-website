@@ -1,7 +1,5 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { baseUrl } from "~/repositories/Repository"
 import Image from '~/components/elements/Image'
 // import NextArrow from "~/components/elements/carousel/NextArrow"
@@ -194,7 +192,6 @@ const AboutUsScreen = ({
                   </div>
                 </div>
 
-                {/* </Reveal> */}
               </section>
             </div>
 
@@ -502,7 +499,6 @@ const AboutUsScreen = ({
                                     </blockquote>
                                   </div>
                                   <div className="ps-review__review">
-                                    {/* <Rating /> */}
                                     <span className="ps-rating">
                                       <i className="fa fa-star"></i>
                                       <i className="fa fa-star"></i>
@@ -593,7 +589,6 @@ const AboutUsScreen = ({
                 </section>
               </div>
             </div>
-            {/* <Testimonials /> */}
             <Subscribe />
           </div>
         </div>

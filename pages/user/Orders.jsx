@@ -1,6 +1,4 @@
 import React, { useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { Table, Tag, Space } from "antd"

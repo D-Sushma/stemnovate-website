@@ -9,11 +9,6 @@ import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
 import dynamic from 'next/dynamic'
-// import Container from "~/components/layouts/Container"
-// import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Subscribe from "~/components/shared/sections/Subscribe"
-// import ProductList from "~/components/eventDetailList/productList"
 
 const Container = dynamic(
   () => import("~/components/layouts/Container"),
@@ -47,7 +42,7 @@ const EventsDetails = ({ EventsData }) => {
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [galleryIMG, setGalleryIMG] = useState([])
 
-  const openLightbox = useCallback((event, { galleryIMG, index }) => {
+  const openLightbox = useCallback(( {  index }) => {
     setCurrentImage(index)
     setViewerIsOpen(true)
   }, [])
@@ -102,20 +97,7 @@ const EventsDetails = ({ EventsData }) => {
           {EventsData &&
             EventsData.data.map((data, key) => (
               <div key={key}>
-                {/* <div
-                  className="ps-page__header  breadcrumb-h2 breadcrumb-bg"
-                  style={{
-                    backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${data?.banner})`,
-                    backgroundSize: "cover"
-                  }}
-                >
-                  <div className="container ">
-                    <BreadCrumb breacrumb={breadcrumb} />
-                    <h1 className="text-center h1  text-white p-2">
-                      <strong>{data.title}</strong>
-                    </h1>
-                  </div>
-                </div> */}
+                
                 <div className="position-relative text-center">
                   <img
                     src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
@@ -169,7 +151,6 @@ const EventsDetails = ({ EventsData }) => {
                       </div>
                       <div className="col-md-6">
                         <div className="ps-section__content text-center">
-                          {/* <h2 className="font-weight-bold">{data.title}</h2> */}
                           <div className="d-flex justify-content-center ">
                             {moment().unix() < moment(data.date).unix() ? (
                               <div className="card" style={{ width: "100%" }}>
@@ -208,7 +189,6 @@ const EventsDetails = ({ EventsData }) => {
                                                   width="300px"
                                                 />
                                               </a>
-                                              {/* <p className=" mr-3">{data.name}</p> */}
                                             </div>
                                           ))}
                                         </div>
@@ -253,7 +233,6 @@ const EventsDetails = ({ EventsData }) => {
                                               width="300px"
                                             />
                                           </a>
-                                          {/* <p className=" mr-3">{data.name}</p> */}
                                         </div>
                                       ))}
                                     </div>
@@ -318,10 +297,7 @@ const EventsDetails = ({ EventsData }) => {
           <div className="about-section">
             <div className="container">
                <ProductList slug="Applications" />
-              {/* { EventsData.data[0]?.id !== 7 ?
-              ( <ProductList slug="Applications" /> ) : null
-
-              } */}
+             
             </div>
           </div>
           <Subscribe />

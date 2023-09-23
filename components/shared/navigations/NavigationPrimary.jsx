@@ -1,9 +1,27 @@
 import React from "react";
-import ModuleHeaderContactNumber from "~/components/shared/headers/modules/ModuleHeaderContactNumber";
-import ModuleHeaderCategories from "~/components/shared/headers/modules/ModuleHeaderCategories";
-import ModuleHeaderSupplies from "~/components/shared/headers/modules/ModuleHeaderSupplies";
-import Menu from "~/components/elements/menu/Menu";
+// import ModuleHeaderContactNumber from "~/components/shared/headers/modules/ModuleHeaderContactNumber";
+// import ModuleHeaderCategories from "~/components/shared/headers/modules/ModuleHeaderCategories";
+// import ModuleHeaderSupplies from "~/components/shared/headers/modules/ModuleHeaderSupplies";
+// import Menu from "~/components/elements/menu/Menu";
 import menu from "~/public/static/data/menu.json";
+import dynamic from 'next/dynamic'
+
+const ModuleHeaderContactNumber = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderContactNumber"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleHeaderCategories = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderCategories"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleHeaderSupplies = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderSupplies"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const Menu = dynamic(
+    () => import("~/components/elements/menu/Menu"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const NavigationPrimary = () => {
     return (

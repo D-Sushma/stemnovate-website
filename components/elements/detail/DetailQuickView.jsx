@@ -1,14 +1,39 @@
-import React, { useEffect } from "react";
-
-import ModuleDetailTopInformation from "~/components/elements/detail/modules/ModuleDetailTopInformation";
-import ModuleProductDetailDescription from "~/components/elements/detail/modules/ModuleProductDetailDescription";
-import ModuleDetailShoppingActions from "~/components/elements/detail/modules/ModuleDetailShoppingActions";
-import ModuleProductDetailSharing from "~/components/elements/detail/modules/ModuleProductDetailSharing";
 import useProduct from "~/hooks/useProduct";
-import ModuleDetailMeta from "~/components/elements/detail/modules/ModuleDetailMeta";
-import ModuleDetailColors from "~/components/elements/detail/modules/ModuleDetailColors";
-import ModuleDetailSizes from "~/components/elements/detail/modules/ModuleDetailSizes";
-import ModuleDetailThumbnailSingle from "~/components/elements/detail/modules/ModuleDetailThumbnailSingle";
+import dynamic from 'next/dynamic'
+
+const ModuleDetailTopInformation = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailTopInformation"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleProductDetailDescription = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailShoppingActions"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleDetailShoppingActions = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailShoppingActions"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleProductDetailSharing = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleProductDetailSharing"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleDetailMeta = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailMeta"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleDetailColors = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailColors"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleDetailSizes = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailSizes"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  const ModuleDetailThumbnailSingle = dynamic(
+    () => import("~/components/elements/detail/modules/ModuleDetailThumbnailSingle"),
+    {loading: ()=> <p>Loading...</p>}
+  )
+  
 const DetailQuickView = ({ product }) => {
     const { price } = useProduct();
     return (

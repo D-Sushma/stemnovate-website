@@ -1,10 +1,5 @@
 import React, { useEffect } from "react"
-// import ModuleDetailDescription from "~/components/elements/detail/modules/ModuleDetailDescription"
-// import ModuleDetailSpecification from "~/components/elements/detail/modules/ModuleDetailSpecification"
 import { Tabs } from "antd"
-// import ModuleDetailViralScreening from "./ModuleDetailViralScreening"
-// import ModuleDetailPluripotency from "./ModuleDetailPluripotency"
-// import ModuleDetailDifferentiation from "./ModuleDetailDifferentiation"
 import dynamic from "next/dynamic"
 
 const ModuleDetailDescription = dynamic(

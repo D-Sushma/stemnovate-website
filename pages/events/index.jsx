@@ -1,11 +1,7 @@
 import React from "react"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
-// import EventsList from "~/components/elements/events/EventsList"
 import dynamic from 'next/dynamic'
 
 const Container = dynamic(

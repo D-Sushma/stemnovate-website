@@ -2,9 +2,6 @@ import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import dynamic from 'next/dynamic';
-// import HeaderDefault from "~/components/shared/headers/HeaderDefault";
-// import FooterDefault from "~/components/shared/footers/FooterDefault";
-// import HeaderMobile from "~/components/shared/mobiles/HeaderMobile";
 
 const HeaderDefault = dynamic(
     () => import("~/components/shared/headers/HeaderDefault"),

@@ -3,8 +3,6 @@ import React, { useEffect } from "react"
 import { baseUrl } from "~/repositories/Repository"
 import { ToastContainer } from "react-toastify"
 import dynamic from "next/dynamic"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
 

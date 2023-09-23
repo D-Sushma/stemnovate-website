@@ -1,5 +1,4 @@
 import React from "react";
-import ModuleCheckoutSummary from "~/components/shared/forms/modules/ModuleCheckoutSummary";
 import Countries from "~/public/static/data/AllCountries.json";
 
 const FormCheckout = ({ billingDetails }) => {
@@ -172,46 +171,6 @@ const FormCheckout = ({ billingDetails }) => {
                             />
                         </div>
                     </div>
-                    {/*<div className="col-sm-12">
-                        <div className="form-group create-account">
-                            <div className="ps-checkbox">
-                                <input
-                                    className="form-control"
-                                    type="checkbox"
-                                    id="createAccount"
-                                    name="createAccount"
-                                />
-                                <label htmlFor="createAccount">
-                                    Create An account
-                                </label>
-                            </div>
-                        </div>
-                    </div>*/}
-                    {/*<div className="col-sm-12">
-                        <div className="form-group shipping">
-                            <div className="ps-checkbox">
-                                <input
-                                    className="form-control"
-                                    type="checkbox"
-                                    id="shipping"
-                                    name="shipping"
-                                />
-                                <label htmlFor="shipping">
-                                    <strong>
-                                        Shipping to different Address
-                                    </strong>
-                                </label>
-                            </div>
-                        </div>
-                    </div>*/}
-                    {/* <div className="col-sm-12">
-                        <div className="form-group">
-                            <label>Order notes (optional)</label>
-                            <textarea
-                                className="form-control"
-                                rows="6"></textarea>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </form>

@@ -1,7 +1,4 @@
 import React from "react"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import Image from '~/components/elements/Image'
 import Link from "next/link"
 import dynamic from 'next/dynamic'

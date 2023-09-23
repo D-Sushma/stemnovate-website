@@ -25,7 +25,7 @@ const ModuleHeaderSocialLinks = () => {
         },
     ];
     // Views
-    let linksView = links.map((item) => (
+    const linksView = links.map((item) => (
         <li key={item.id}>
             <Link href="/">
                 <a>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import ProductRepository from "~/repositories/ProductRepository"
 import { useCookies } from "react-cookie"
 import { useDispatch } from "react-redux"

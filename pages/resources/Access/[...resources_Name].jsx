@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"

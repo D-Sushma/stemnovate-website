@@ -1,5 +1,11 @@
 import React from "react";
-import ListSocial from "~/components/elements/lists/ListSocial";
+// import ListSocial from "~/components/elements/lists/ListSocial";
+import dynamic from 'next/dynamic'
+
+const ListSocial = dynamic(
+    () => import("~/components/elements/lists/ListSocial"),
+    {loading: ()=> <p>Loading</p>}
+)
 
 const FormMyAccount = () => {
     return (

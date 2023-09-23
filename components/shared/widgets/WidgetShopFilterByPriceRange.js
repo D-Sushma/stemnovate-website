@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Slider, Checkbox } from "antd";
+import { Slider } from "antd";
 import { useRouter } from "next/router";
 
 const WidgetShopFilterByPriceRange = () => {

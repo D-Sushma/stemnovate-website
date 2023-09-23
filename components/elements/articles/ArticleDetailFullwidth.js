@@ -1,11 +1,16 @@
 import React from "react";
-import ModuleArticleComments from "~/components/elements/articles/modules/ModuleArticleComments";
-import Rating from "~/components/elements/Rating";
+// import Rating from "~/components/elements/Rating";
 import Link from "next/link";
 import usePost from "~/hooks/usePost";
+import dynamic from ' next/dynamic'
+
+const Rating = dynamic(
+    () => import("~/components/elements/Rating"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ArticleDetailFullwidth = ({ post }) => {
-    const { thumbnail, title, categories, createdBy, initPost } = usePost();
+    const { categories, createdBy} = usePost();
     return (
         <div className="ps-post ps-post--detail ps-post--detail-fullwidth">
             <div className="ps-post__header">

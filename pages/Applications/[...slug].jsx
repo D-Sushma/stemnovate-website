@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
-// import Container from "~/components/layouts/Container";
-// import Subscribe from "~/components/shared/sections/Subscribe";
 import { baseUrl } from "~/repositories/Repository";
 import { connect } from "react-redux";
 import dynamic from 'next/dynamic';
@@ -20,7 +17,7 @@ const Subscribe = dynamic(
   {loading: ()=> <p>Loading...</p>}
 )
 
-const Applications = ({ ProductData, ecomerce }) => {
+const Applications = ({ ProductData }) => {
     const Router = useRouter();
     const { slug } = Router.query;
     const [breadcrumb, setbreadcrumb] = React.useState([]);
@@ -110,7 +107,6 @@ const Applications = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
     const slug = query.slug;
     var ProductData = [];
-    var categoryListList = [];
     var data = "";
     if (slug != undefined) {
         data = slug[slug.length - 1];
@@ -130,7 +126,7 @@ export async function getServerSideProps({ query }) {
 
         const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions);
         const myProductData = await res.json();
-        (ProductData = myProductData), (categoryListList = myProductData.Products);
+        (ProductData = myProductData);
     }
 
     // // Pass data to the page via props

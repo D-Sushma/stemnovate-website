@@ -1,8 +1,18 @@
 import React from "react";
-import ModuleArticleComments from "~/components/elements/articles/modules/ModuleArticleComments";
-import Rating from "~/components/elements/Rating";
+// import ModuleArticleComments from "~/components/elements/articles/modules/ModuleArticleComments";
+// import Rating from "~/components/elements/Rating";
 import Link from "next/link";
 import usePost from "~/hooks/usePost";
+import dynamic from ' next/dynamic'
+
+const Rating = dynamic(
+    () => import("~/components/elements/Rating"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleArticleComments = dynamic(
+    () => import("~/components/elements/articles/modules/ModuleArticleComments"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ArticleDetail = ({ post }) => {
     const { categories, createdBy } = usePost();

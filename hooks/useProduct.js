@@ -1,47 +1,8 @@
 import React from "react";
 import LazyLoad from "react-lazyload";
-import { baseUrlProduct } from "~/repositories/Repository";
 import { formatCurrency } from "~/utilities/product-helper";
 import Link from "next/link";
 import Image from '~/components/elements/Image'
-
-function getImageURL(source, size) {
-    let image, imageURL;
-
-    if (source) {
-        if (size && size === "large") {
-            if (source.formats.large) {
-                image = source.formats.large.url;
-            } else {
-                image = source.url;
-            }
-        } else if (size && size === "medium") {
-            if (source.formats.medium) {
-                image = source.formats.medium.url;
-            } else {
-                image = source.url;
-            }
-        } else if (size && size === "thumbnail") {
-            if (source.formats.thumbnail) {
-                image = source.formats.source.url;
-            } else {
-                image = source.url;
-            }
-        } else if (size && size === "small") {
-            if (source.formats.small !== undefined) {
-                image = source.formats.small.url;
-            } else {
-                image = source.url;
-            }
-        } else {
-            image = source.url;
-        }
-        imageURL = `${baseUrlProduct}${image}`;
-    } else {
-        imageURL = `/static/img/undefined-product-thumbnail.jpg`;
-    }
-    return imageURL;
-}
 
 export default function useProduct() {
     return {
@@ -58,18 +19,7 @@ export default function useProduct() {
                                     width={1000}
                                     height={758}
                                 />
-                                {/* <img src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`} alt={payload?.product_name} /> */}
                             </LazyLoad>
-                            {/* <LazyLoad> */}
-                                {/* <Image
-                                    src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`}
-                                    className="second"
-                                    alt={payload?.product_name}
-                                    width={1000}
-                                    height={758}
-                                /> */}
-                                {/* <img src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`} className="second" alt={payload?.product_name} /> */}
-                            {/* </LazyLoad> */}
                         </div>
                     );
                 }

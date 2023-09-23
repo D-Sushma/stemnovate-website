@@ -1,9 +1,6 @@
 import React, { useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-// import Shop from "~/components/partials/shop/Shop";
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {

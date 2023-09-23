@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import Product from '~/components/elements/products/Product';
-import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
+// import Product from '~/compon/ents/elements/products/Product';
+// import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
 import ProductRepository from '~/repositories/ProductRepository';
+import dynamic from 'next/dynamic'
+
+const Product = dynamic(
+    () => import("~/components/elements/products/Product"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const SkeletonProduct = dynamic(
+    () => import("~/components/elements/skeletons/SkeletonProduct"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ShopGridItems = ({ queries }) => {
     const [productItems, setProductItems] = useState(null);

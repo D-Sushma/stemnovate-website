@@ -2,12 +2,8 @@ import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import { ToastContainer } from "react-toastify"
 import dynamic from "next/dynmaic"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-// import Shop from "~/components/partials/shop/Shop";
-// import SidebarShop from "~/components/shared/sidebar/SidebarShop";
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -76,7 +72,6 @@ const SearchResultScreen = () => {
               </div>
               <div className="ps-layout__right">
                 <Shop classes="ps-shop--grid">{products}</Shop>
-                {/* <PromotionSecureInformation /> */}
               </div>
             </div>
           </div>

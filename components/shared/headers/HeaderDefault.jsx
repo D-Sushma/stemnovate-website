@@ -3,11 +3,6 @@ import Menu from "./Menu"
 import fetch from "node-fetch"
 import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
-// import FormSearchHeader from "~/components/shared/forms/FormSearchHeader"
-// import ModuleHeaderActions from "~/components/shared/headers/modules/ModuleHeaderActions"
-// import Logo from "~/components/elements/basic/Logo"
-// import Loader from "~/components/reuseable/Loader"
-// import ModuleHeaderNotice from "./modules/ModuleHeaderNotice"
 import Link from "next/link"
 import dynamic from 'next/dynamic';
 

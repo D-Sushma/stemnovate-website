@@ -1,8 +1,22 @@
 import React from "react";
 import Link from "next/link";
-import MenuDropdown from "~/components/elements/menu/MenuDropdown";
-import MegaMenu from "~/components/elements/menu/MegaMenu";
-import ModuleMenuHomepages from "~/components/elements/menu/modules/ModuleMenuHomepages";
+// import MenuDropdown from "~/components/elements/menu/MenuDropdown";
+// import MegaMenu from "~/components/elements/menu/MegaMenu";
+// import ModuleMenuHomepages from "~/components/elements/menu/modules/ModuleMenuHomepages";
+import dynamic from 'next/dynamic'
+
+const MenuDropdown = dynamic(
+    () => import("~/components/elements/menu/MenuDropdown"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const MegaMenu = dynamic(
+    () => import("~/components/elements/menu/MegaMenu"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleMenuHomepages = dynamic(
+    () => import("~/components/elements/menu/modules/ModuleMenuHomepages"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const Menu = ({ source, className }) => {
     // Views

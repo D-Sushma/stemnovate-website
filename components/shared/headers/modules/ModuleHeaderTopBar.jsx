@@ -1,8 +1,22 @@
 import React from "react";
 import menu from "~/public/static/data/menu.json";
-import Menu from "~/components/elements/menu/Menu";
-import ModuleHeaderSocialLinks from "~/components/shared/headers/modules/ModuleHeaderSocialLinks";
-import ModuleHeaderSwichers from "~/components/shared/headers/modules/ModuleHeaderSwitcher";
+// import Menu from "~/components/elements/menu/Menu";
+// import ModuleHeaderSocialLinks from "~/components/shared/headers/modules/ModuleHeaderSocialLinks";
+// import ModuleHeaderSwichers from "~/components/shared/headers/modules/ModuleHeaderSwitcher";
+import dynamic from 'next/dynamic'
+
+const Menu = dynamic(
+    () => import("~/components/elements/menu/Menu"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleHeaderSocialLinks = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderSocialLinks"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ModuleHeaderSwichers = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderSwitcher"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleHeaderTopBar = ({ type = "primary" }) => {
     if (type === "second") {

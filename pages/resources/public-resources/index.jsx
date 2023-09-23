@@ -1,6 +1,4 @@
 import React, { useEffect } from "react"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
@@ -107,13 +105,6 @@ const Resources = ({ resourcesList }) => {
                 </div>
               </div>
             </div>
-
-            {/* <ResourcesList resources={resourcesList && resourcesList.data} /> */}
-            {/* <div className="about-section">
-                            <div className="container">
-                                <p className="text-center">Latest blog from Stemnovate</p>
-                            </div>
-                        </div> */}
 
             <Subscribe />
           </div>

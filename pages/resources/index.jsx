@@ -5,8 +5,6 @@ import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
 import Image from '~/components/elements/Image'
 import { baseUrl } from "~/repositories/Repository"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Container from "~/components/layouts/Container"
 import dynamic from 'next/dynamic'
 
 const Container = dynamic(

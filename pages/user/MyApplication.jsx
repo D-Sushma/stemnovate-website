@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import { Steps, Col, Row, Form, Input, Button, Select, Checkbox } from "antd"
 import {
   AiOutlineBank,
@@ -60,11 +58,6 @@ const MyApplication = ({ UserData }) => {
   const [Errors, setErrors] = useState("")
   const [form] = Form.useForm()
   const router = useRouter()
-
-  const refreshData = () => {
-    router.replace(router.asPath)
-    setisLoading(true)
-  }
 
   React.useEffect(() => {
     setisLoading(false)

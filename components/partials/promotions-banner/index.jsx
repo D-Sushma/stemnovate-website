@@ -1,7 +1,18 @@
 import React from "react";
 import Slider from "react-slick";
-import NextArrow from "~/components/elements/carousel/NextArrow";
-import PrevArrow from "~/components/elements/carousel/PrevArrow";
+// import NextArrow from "~/components/elements/carousel/NextArrow";
+// import PrevArrow from "~/components/elements/carousel/PrevArrow";
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const NextArrow = dynamic(
+    () => import("~/components/elements/carousel/NextArrow"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const PrevArrow = dynamic(
+    () => import("~/components/elements/carousel/PrevArrow"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const carouselSetting = {
     infinite: true,
@@ -35,14 +46,12 @@ const PromotionsBanner = () => {
                                             </div>
                                             <div className="ps-banner__desc  text-white">Don´t miss out on these enormous savings in human and animal fibroblasts.</div>
                                             <div>
-                                                <a className="bg-warning ps-banner__shop" href="/promotions-products/offers">
-                                                    Shop Now
-                                                </a>
+                                                <Link href="/promotions-products/offers">
+                                                    <div className="bg-warning ps-banner__shop">Shop Now</div>
+                                                </Link>
                                             </div>
                                         </div>
-                                        {/* <div className="d-flex flex-column">
-                                           
-                                        </div> */}
+                                       
                                     </div>
                                     <div className="ps-banner__thumnail ps-banner__fluid">
                                         <img className="ps-banner__image" src="/static/img/icon/promotion-one.jpg" alt="alt" />
@@ -64,9 +73,9 @@ const PromotionsBanner = () => {
                                             </div>
                                             <div className="ps-banner__desc  text-white">Don´t miss out on these enormous savings in human and animal fibroblasts.</div>
                                             <div>
-                                                <a className="bg-warning ps-banner__shop" href="/auth/UserReg">
-                                                    Signup Now
-                                                </a>
+                                                <Link href="/auth/UserReg">
+                                                    <div className="bg-warning ps-banner__shop">Signup Now</div>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>

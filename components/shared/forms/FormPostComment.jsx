@@ -1,6 +1,7 @@
 import React from "react";
 
-const FormPostComment = (props) => {
+// const FormPostComment = (props) => {
+const FormPostComment = () => {
     return (
         <form action="do_action" method="post" className="ps-form--review">
             <div className="ps-form__title">Write a comment</div>

@@ -1,6 +1,4 @@
 import React from "react"
-// import WidgetShopCategories from "~/components/shared/widgets/WidgetShopCategories"
-// import ModuleFilterBy from "~/components/partials/shop/modules/ModuleFilterBy"
 import { useRouter } from "next/router"
 import dynamic from 'next/dynamic'
 

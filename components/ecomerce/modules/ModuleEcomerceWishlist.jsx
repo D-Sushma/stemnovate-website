@@ -1,8 +1,14 @@
 import React from "react";
-import ProductOnCart from "~/components/elements/products/ProductOnCart";
+// import ProductOnCart from "~/components/elements/products/ProductOnCart";
 import useEcomerce from "~/hooks/useEcomerce";
 import { connect, useDispatch } from "react-redux";
 import { toggleDrawer } from "~/store/app/action";
+import dynamic from 'next/dynamic'
+
+const ProductOnCart = dynamic(
+    () => import("~/components/elements/products/ProductOnCart"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleEcomerceWishlist = ({ ecomerce, source }) => {
     const { addItem, removeItem } = useEcomerce();

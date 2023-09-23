@@ -1,12 +1,7 @@
 import React, { useEffect } from "react"
 import dynamic from "next/dynamic"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-// import SidebarShop from "~/components/shared/sidebar/SidebarShop";
-// import Shop from "~/components/partials/shop/Shop";
-// import PromotionSecureInformation from "~/components/shared/sections/PromotionSecureInformation";
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>

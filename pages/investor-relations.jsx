@@ -1,7 +1,4 @@
 import React, { useRef } from "react"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Investors from "~/components/shared/sections/Investors";
 import { IoIosArrowDown } from "react-icons/io"
 import { Tooltip } from "antd"
 import Link from "next/link"

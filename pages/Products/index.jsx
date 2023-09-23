@@ -1,11 +1,6 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Shop from "~/components/partials/shop/Shop"
-// import SidebarShop from "~/components/shared/sidebar/SidebarShop"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
 
@@ -75,8 +70,6 @@ const ProductScreen = () => {
       queries = Object.assign(queries, query)
     }
 
-    // console.log(queries)
-    // console.log("titleName", titleName)
     getProducts(queries)
   }, [query])
 

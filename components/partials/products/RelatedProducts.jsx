@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import CollectionRepository from '~/repositories/CollectionRepository';
 import ProductRepository from '~/repositories/ProductRepository';
-import Product from '~/components/elements/products/Product';
-import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
+// import Product from '~/components/elements/products/Product';
+// import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
+import dynamic from 'next/dynamic'
+
+const Product = dynamic(
+    () => import("~/components/elements/products/Product"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const SkeletonProduct = dynamic(
+    () => import("~/components/elements/skeletons/SkeletonProduct"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const RelatedProducts = ({ collectionSlug }) => {
     const [productItems, setProductItems] = useState(null);

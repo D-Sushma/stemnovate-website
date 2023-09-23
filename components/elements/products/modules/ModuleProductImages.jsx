@@ -4,7 +4,8 @@ import Link from "next/link";
 
 const ModuleProductImages = ({ product }) => {
     const offerData = product?.offers_details?.id;
-    const { thumbnailImages, price } = useProduct();
+    // const { thumbnailImages, price } = useProduct();
+    const { thumbnailImages } = useProduct();
     return (
         <div className="ps-product__images">
             <Link href={`/product/${product.product_slug}/${offerData ? offerData : ""}`} as={`/product/${product.product_slug}/${offerData ? offerData : ""}`}>

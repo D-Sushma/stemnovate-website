@@ -1,8 +1,4 @@
 import React, { useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
-// import Shop from "~/components/partials/shop/Shop";
-// import SidebarShop from "~/components/shared/sidebar/SidebarShop";
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
 import { useRouter } from "next/router"

@@ -78,27 +78,6 @@ const MyAccountScreen = () => {
         }
     };
 
-    const SendEmail = async (name, email) => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            name: name,
-            email: email,
-        });
-
-        var requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: raw,
-        };
-
-        fetch(process.env.NEXT_BASE_URL + "/api/Email/welcomeEmail", requestOptions)
-            .then((response) => response.text())
-            .then((result) => console.log(result))
-            .catch((error) => console.log("error", error));
-    };
-
     const Submitform = async (event) => {
         event.preventDefault();
         setisloading(true);
@@ -136,12 +115,6 @@ const MyAccountScreen = () => {
                                 draggable: true,
                                 progress: undefined,
                                 theme: "colored",
-                            });
-
-                            const res = await signIn("credentials", {
-                                username,
-                                password,
-                                callbackUrl: `${window.location.origin}/user/dashboard`,
                             });
 
                             console.log(json);

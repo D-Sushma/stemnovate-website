@@ -1,13 +1,9 @@
 import React, { useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import useEcomerce from "~/hooks/useEcomerce";
 import { connect } from "react-redux"
 import { caculateArrayQuantity } from "~/utilities/ecomerce-helpers"
 import { Result } from "antd"
 import dynamic from "next/dynamic"
-// import SkeletonTable from "~/components/elements/skeletons/SkeletonTable";
-// import EcomerceCompareTables from "~/components/ecomerce/EcomerceCompareTables";
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>

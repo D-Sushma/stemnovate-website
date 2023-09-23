@@ -1,10 +1,28 @@
 import React, { useEffect } from "react";
-import ModuleHeaderPromotions from "~/components/shared/headers/modules/ModuleHeaderPromotions";
-import Menu from "~/components/elements/menu/Menu";
 import header_supplies from "~/public/static/data/header_supplies.json";
-import CountDown from "~/components/elements/CountDown";
 import useGetProducts from "~/hooks/useGetProducts";
-import ProductWithAvaiable from "~/components/elements/products/ProductWithAvaiable";
+// import ModuleHeaderPromotions from "~/components/shared/headers/modules/ModuleHeaderPromotions";
+// import Menu from "~/components/elements/menu/Menu";
+// import CountDown from "~/components/elements/CountDown";
+// import ProductWithAvaiable from "~/components/elements/products/ProductWithAvaiable";
+import dynamic from 'next/dynamic'
+
+const ModuleHeaderPromotions = dynamic(
+    () => import("~/components/shared/headers/modules/ModuleHeaderPromotions"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const Menu = dynamic(
+    () => import("~/components/elements/menu/Menu"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const CountDown = dynamic(
+    () => import("~/components/elements/CountDown"),
+    {loading: ()=> <p>Loading...</p>}
+)
+const ProductWithAvaiable = dynamic(
+    () => import("~/components/elements/products/ProductWithAvaiable"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleHeaderSupplies = () => {
     const { product, getProductById } = useGetProducts();

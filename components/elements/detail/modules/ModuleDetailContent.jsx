@@ -1,11 +1,4 @@
 import React from "react";
-import ModuleDetailDescription from "~/components/elements/detail/modules/ModuleDetailDescription";
-import ModuleAdditionInformation from "~/components/elements/detail/modules/ModuleDetailAdditionInformation";
-import ModuleDetailSpecification from "~/components/elements/detail/modules/ModuleDetailSpecification";
-import ModuleDetailReviews from "~/components/elements/detail/modules/ModuleDetailReviews";
-import { Tabs } from "antd";
-
-const { TabPane } = Tabs;
 const ModuleDetailContent = () => {
     return (
         <div className="ps-product__description">

@@ -1,8 +1,16 @@
 import React from "react"
 import Link from "next/link"
-import ModuleProductActions from "~/components/elements/products/modules/ModuleProductActions"
 import useProduct from "~/hooks/useProduct"
-import ModuleProductImages from "~/components/elements/products/modules/ModuleProductImages"
+import dynamic from 'next/dynamic'
+
+const ModuleProductActions = dynamic(
+  () => import("~/components/elements/products/modules/ModuleProductActions"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ModuleProductImages = dynamic(
+  () => import("~/components/elements/products/modules/ModuleProductImages"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 const Product = ({ product, userData }) => {
   const { price, badges } = useProduct()

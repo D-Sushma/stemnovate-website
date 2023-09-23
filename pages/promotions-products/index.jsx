@@ -1,10 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react"
 import { ToastContainer } from "react-toastify"
-// import Container from "~/components/layouts/Container"
 import { FaArrowCircleRight } from "react-icons/fa"
 import Slider from "react-slick"
-// import NextArrow from "~/components/elements/carousel/NextArrow"
-// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
 import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic'

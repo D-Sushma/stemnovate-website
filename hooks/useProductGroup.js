@@ -1,15 +1,36 @@
 import React from "react"
-import Product from "~/components/elements/products/Product"
 import { generateTempArray } from "~/utilities/common-helpers"
-import SkeletonProduct from "~/components/elements/skeletons/SkeletonProduct"
-import ProductGridWithDetail from "~/components/elements/products/ProductGridWithDetail"
-import ProductList from "~/components/elements/products/ProductList"
-import SkeletonProductHorizontal from "~/components/elements/skeletons/SkeletonProductHorizontal"
 import { SwiperSlide } from "swiper/react"
+import dynamic from 'next/dynamic'
+
+const Product = dynamic(
+  () => import("~/components/elements/products/Product"),
+ { loading: ()=> <p>Loading...</p>}
+)
+const SkeletonProduct = dynamic(
+  () => import("~/components/elements/skeletons/SkeletonProduct"),
+ { loading: ()=> <p>Loading...</p>}
+)
+const ProductGridWithDetail = dynamic(
+  () => import("~/components/elements/products/ProductGridWithDetail"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const ProductList = dynamic(
+  () => import("~/components/elements/products/ProductList"),
+ { loading: ()=> <p>Loading...</p>}
+)
+const SkeletonProductHorizontal = dynamic(
+  () => import("~/components/elements/skeletons/SkeletonProductHorizontal"),
+ { loading: ()=> <p>Loading...</p>}
+)
 
 // import Swiper core and required modules
 import SwiperCore, { Navigation } from "swiper/core"
-import SwiperCarousel from "~/components/elements/carousel/SwiperCarousel"
+// import SwiperCarousel from "~/components/elements/carousel/SwiperCarousel"
+const SwiperCarousel = dynamic(
+  () => import("~/components/elements/carousel/SwiperCarousel"),
+ { loading: ()=> <p>Loading...</p>}
+)
 import { useSession } from "next-auth/react"
 
 // install Swiper modules

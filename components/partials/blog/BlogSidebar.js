@@ -1,12 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import PostRepository from '~/repositories/PostRepository';
-import ArticleGrid from '~/components/elements/articles/ArticleGrid';
-import SuproPagination from '~/components/elements/basic/SuproPagination';
-import ModuleBlogCategories from '~/components/partials/blog/modules/ModuleBlogCategories';
-import WidgetBlogSearch from '~/components/shared/widgets/WidgetBlogSearch';
-import WidgetBlogCategories from '~/components/shared/widgets/WidgetBlogCategories';
-import WidgetBlogTags from '~/components/shared/widgets/WidgetBlogTags';
-import WidgetBlogPromotions from '~/components/shared/widgets/WidgetBlogPromotions';
+// import ArticleGrid from '~/components/elements/articles/ArticleGrid';
+// import SuproPagination from '~/components/elements/basic/SuproPagination';
+// import ModuleBlogCategories from '~/components/partials/blog/modules/ModuleBlogCategories';
+// import WidgetBlogSearch from '~/components/shared/widgets/WidgetBlogSearch';
+// import WidgetBlogCategories from '~/components/shared/widgets/WidgetBlogCategories';
+// import WidgetBlogTags from '~/components/shared/widgets/WidgetBlogTags';
+// import WidgetBlogPromotions from '~/components/shared/widgets/WidgetBlogPromotions';
+import dynamic from 'next/dynamic'
+
+const ArticleGrid = dynamic(
+    () => import("~/components/elements/articles/ArticleGrid"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const SuproPagination = dynamic(
+    () => import("~/components/elements/basic/SuproPagination"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const ModuleBlogCategories = dynamic(
+    () => import("~/components/partials/blog/modules/ModuleBlogCategories"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const WidgetBlogSearch = dynamic(
+    () => import("~/components/shared/widgets/WidgetBlogSearch"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const WidgetBlogCategories = dynamic(
+    () => import("~/components/shared/widgets/WidgetBlogCategories"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const WidgetBlogTags = dynamic(
+    () => import("~/components/shared/widgets/WidgetBlogTags"),
+    {loading: ()=> <p>Loading..</p>}
+)
+const WidgetBlogPromotions = dynamic(
+    () => import("~/components/shared/widgets/WidgetBlogPromotions"),
+    {loading: ()=> <p>Loading..</p>}
+)
 
 const BlogSidebar = ({ collectionSlug, column }) => {
     const [loading, setLoading] = useState(true);

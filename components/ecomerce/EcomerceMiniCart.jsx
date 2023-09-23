@@ -1,13 +1,11 @@
 import React, { useEffect } from "react"
-import { connect, useDispatch } from "react-redux"
+import { connect } from "react-redux"
 import {
   calculateCartQuantity,
   calculateAmount
 } from "~/utilities/ecomerce-helpers"
-// import ProductOnCart from "~/components/elements/products/ProductOnCart"
 import { Alert } from "antd"
 import Link from "next/link"
-import { toggleDrawer } from "~/store/app/action"
 import useEcomerce from "~/hooks/useEcomerce"
 import { useSession } from "next-auth/react"
 import dynamic from "next/dynamic"
@@ -19,17 +17,11 @@ const ProductOnCart = dynamic(
 
 const EcomerceMiniCart = ({ ecomerce }) => {
   const { data: session } = useSession()
-  const dispatch = useDispatch()
   const { products, removeItem, removeItems, getProducts } = useEcomerce()
 
   function handleRemoveItem(e, productId) {
     e.preventDefault()
     removeItem({ id: productId }, ecomerce.cartItems, "cart")
-  }
-
-  function handleCloseDrawer(e) {
-    e.preventDefault()
-    dispatch(toggleDrawer(false))
   }
 
   function handleRemoveCart(e) {
@@ -104,9 +96,9 @@ const EcomerceMiniCart = ({ ecomerce }) => {
       )
       cartActionsView = (
         <div>
-          <a href="/Products" className="ps-btn ps-btn--primary">
+          <Link href="/Products" >
             Back to shop
-          </a>
+          </Link>
           <div className="ps-cart__clear-cart">
             <a
               href="#"

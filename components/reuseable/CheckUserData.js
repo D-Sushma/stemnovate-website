@@ -1,7 +1,3 @@
-import { ToastContainer, toast } from "react-toastify";
-
-import Router from "next/router";
-
 import { getSession } from "next-auth/react";
 
 export const getUserData = async (ctx) => {

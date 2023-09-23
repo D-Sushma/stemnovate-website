@@ -3,8 +3,6 @@ import { stickyHeaderModile } from "~/utilities/common-helpers";
 import { SetMainMenu } from "~/store/app/action";
 import { connect } from "react-redux";
 import dynamic from 'next/dynamic';
-// import Logo from "~/components/elements/basic/Logo";
-// import FormSearchHeader from "~/components/shared/forms/FormSearchHeader";
 
 const Logo = dynamic(
     () => import("~/components/elements/basic/Logo"),
@@ -15,7 +13,7 @@ const FormSearchHeader = dynamic(
     {loading: ()=> <p>Loading...</p>}
   )
 
-const HeaderMobile = (props) => {
+const HeaderMobile = () => {
     const [search, setSearch] = useState(false);
 
     function handleToggleSearch(e) {
@@ -24,10 +22,7 @@ const HeaderMobile = (props) => {
     }
 
     useEffect(() => {
-        // if (typeof window === "undefined") {
         window.addEventListener("scroll", stickyHeaderModile);
-        // }
-        // console.log(props);
     }, []);
 
     let searchView;

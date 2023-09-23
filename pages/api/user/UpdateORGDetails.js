@@ -8,7 +8,7 @@ export default async function handle(req, res) {
         const session = await getSession({ req });
         var response = "";
         if (session != null) {
-            const { Scope, Compliance, ContactEmail, Organization_type, Name, Website, Country, County, Address1, Address2, Town, ZIP, UserLoginId, VATExemption, VatNo } = req.body;
+            // const { Scope, Compliance, ContactEmail, Organization_type, Name, Website, Country, County, Address1, Address2, Town, ZIP, UserLoginId, VATExemption, VatNo } = req.body;
 
             const checkuser = await prisma.customer_application_details.findMany({
                 where: {

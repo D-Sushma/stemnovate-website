@@ -3,15 +3,11 @@ import React, { useCallback, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { baseUrl } from "~/repositories/Repository"
-// import Container from "~/components/layouts/Container"
 import moment from "moment"
 import { HiArrowSmRight } from "react-icons/hi"
-// import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
-// import Subscribe from "~/components/shared/sections/Subscribe"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import Image from '~/components/elements/Image'
 import dynamic from 'next/dynamic'
 

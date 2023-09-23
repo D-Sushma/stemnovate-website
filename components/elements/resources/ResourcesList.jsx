@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { HiArrowSmRight } from "react-icons/hi";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 

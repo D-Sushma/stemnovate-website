@@ -1,6 +1,4 @@
 import React from "react"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Container from "~/components/layouts/Container"
 import Image from '~/components/elements/Image'
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"

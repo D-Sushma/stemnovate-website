@@ -1,6 +1,4 @@
 import React from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import dynamic from "next/dynamic"

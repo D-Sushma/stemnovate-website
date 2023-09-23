@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import ActiveLink from "~/components/elements/basic/ActiveLink";
 import { Drawer } from "antd";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-// import MenuAccordion from "~/components/shared/menus/MenuAccordion";
-// import ModuleHeaderSwichers from "~/components/shared/headers/modules/ModuleHeaderSwitcher";
-// import ModuleHeaderContactNumber from "~/components/shared/headers/modules/ModuleHeaderContactNumber";
-// import FormSearchHeader from "~/components/shared/forms/FormSearchHeader";
 import { Menu, Dropdown, Button, Divider } from "antd";
 import { useSession, signOut } from "next-auth/react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineUserSwitch, AiOutlineUserAdd } from "react-icons/ai";
@@ -60,12 +55,9 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
     }, [pathname]);
 
     useEffect(() => {
-        // console.log("APP DATA", app);
         if (app.ismainmenu == undefined || app.ismainmenu.length == 0) {
-            // console.log("Get From API");
             getmenu();
         } else {
-            // console.log("Set From Redux");
             setavailableModules(app.ismainmenu);
         }
     }, []);
@@ -76,13 +68,12 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
         setisloading(true);
         const res = await fetch(`${process.env.NEXT_BASE_URL}api/menu/getmenu`);
         const data = await res.json();
-        // console.log(data);
         setavailableModules(data);
         SetMainMenu(data);
         setisloading(false);
     };
 
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
     const UserMenu = (
         <Menu>
@@ -99,10 +90,12 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
                             margin: "10px",
                             textAlign: "left",
                         }}>
-                        <a href="/user/dashboard">
+                        <Link href="/user/dashboard">
+                            <div>
                             <AiOutlineUserSwitch className="site-form-item-icon mr-1 mb-1" />
                             Dashboard
-                        </a>
+                            </div>
+                        </Link>
                     </Menu.Item>
                     {/* orders */}
 
@@ -113,10 +106,12 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
                             margin: "10px",
                             textAlign: "left",
                         }}>
-                        <a href="/user/Orders">
+                        <Link href="/user/Orders">
+                            <div>
                             <FiBox className="site-form-item-icon mr-1 mb-1" />
                             Orders
-                        </a>
+                            </div>
+                        </Link>
                     </Menu.Item>
                     {/* Edit Account */}
                     <Menu.Item
@@ -126,10 +121,12 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
                             margin: "10px",
                             textAlign: "left",
                         }}>
-                        <a href="/user/EditProfile">
+                        <Link href="/user/EditProfile">
+                            <div>
                             <FaUserEdit className="site-form-item-icon mr-1 mb-1" />
                             Edit Account
-                        </a>
+                            </div>
+                        </Link>
                     </Menu.Item>
                     {/* Application Form */}
                     <Menu.Item
@@ -139,10 +136,12 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
                             margin: "10px",
                             textAlign: "left",
                         }}>
-                        <a href="/user/MyApplication">
+                        <Link href="/user/MyApplication">
+                            <div>
                             <FaWpforms className="site-form-item-icon mr-1 mb-1" />
                             Application Form
-                        </a>
+                            </div>
+                        </Link>
                     </Menu.Item>
                     <Menu.Item
                         key="5"
@@ -180,7 +179,7 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
                             margin: "20px",
                             textAlign: "center",
                         }}>
-                        <p>Don't Have An Account?</p>
+                        <p>Don&apos;t Have An Account?</p>
                         <Link href="/auth/UserReg">
                             <Button size="large" style={{ width: "100%", margin: "5" }}>
                                 Register <AiOutlineUserAdd className="site-form-item-icon ml-2" />
@@ -255,13 +254,3 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
 };
 
 export default connect((state) => state)(NavigationBottom);
-
-// const mapStateToProps = state =>({
-//     mainmenu:state.app.ismainmenu
-// })
-// const mapDispathToProps = dispatch =>
-// ({
-//     SetMainMenuhandler:data=>dispatch(SetMainMenu(data))
-// })
-
-// export default connect(mapStateToProps,mapDispathToProps)(NavigationBottom);

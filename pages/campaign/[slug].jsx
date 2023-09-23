@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { useRouter } from "next/router"
 import { ToastContainer, toast } from "react-toastify"
 import {
@@ -26,21 +24,19 @@ import {
 } from "react-icons/tb"
 import PropTypes from "prop-types"
 import Link from "next/link"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
-  
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
+
 const breadcrumb = [
   {
     id: 1,
@@ -376,11 +372,9 @@ const CampaignPage = (props) => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                          <Image
+                          <img
                             src={`${process.env.AWS_S3BUCKET_URL}${productData.data[0].image}`}
                             alt={productData.data[0].title}
-                            width={700}
-                            height={475}
                           />
                         </div>
                       </Link>

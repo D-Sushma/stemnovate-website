@@ -6,12 +6,7 @@ import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
 import Link from "next/link";
 import { toggleDrawer } from "~/store/app/action";
-// import DrawerPrimary from "~/components/shared/drawers/DrawerPrimary";
-// BsArrowUp
 import { setCartItems, setCompareItems, setWishlistTtems } from "~/store/ecomerce/action";
-// import ModuleDrawerOverlay from "~/components/shared/drawers/modules/ModuleDrawerOverlay";
-// import NavigationBottom from "~/components/shared/navigations/NavigationBottom";
-// import ModuleCustomHead from "~/components/layouts/modules/ModuleCustomHead";
 import dynamic from 'next/dynamic'
 
 const DrawerPrimary = dynamic(
@@ -31,7 +26,7 @@ const ModuleCustomHead = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-function MasterLayout({ children, stars }, props) {
+function MasterLayout({ children }) {
     const dispatch = useDispatch();
     const router = useRouter();
     const [cookies] = useCookies(["cart", "compare", "wishlist"]);
@@ -71,7 +66,6 @@ function MasterLayout({ children, stars }, props) {
     }, []);
 
     return (
-        // <ParallaxProvider>
         <div>
             <ModuleCustomHead />
 

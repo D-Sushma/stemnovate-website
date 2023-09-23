@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import SPCollapse from '~/components/elements/Collapse';
+import dynamic from 'next/dynamic'
+
+const SPCollapse = dynamic(
+    () => import("~/components/elements/basic/Collapse"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleMenuCollapse = (data) => {
     const [isOpen, setIsOpen] = useState(null);
@@ -10,7 +15,7 @@ const ModuleMenuCollapse = (data) => {
     const menuItemsView = data.map((item) => {
         if (item.subMenu) {
             <li className="menu-item-has-children">
-                <a href="#" className="menu__toggle" onClick={(e) => handleToggleAccordion(index)}>
+                <a href="#" className="menu__toggle" onClick={() => handleToggleAccordion(index)}>
                     <span>{data.text}</span>
                 </a>
                 <SPCollapse
@@ -38,8 +43,7 @@ const ModuleMenuCollapse = (data) => {
                     )}
                 </SPCollapse>
             </li>;
-        } else {
-        }
+        } 
     });
 
     return <ul className="sub-menu menu--accordion">{menuItemsView}</ul>;

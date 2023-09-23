@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-// import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"
@@ -18,16 +17,6 @@ const Subscribe = dynamic(
   
 import jsPDF from "jspdf"
 import html2canvas from "html2canvas"
-
-import {
-  FaArrowRight,
-  FaRegArrowAltCircleDown,
-  FaRegArrowAltCircleUp
-} from "react-icons/fa"
-import moment from "moment"
-import AddToCartResources from "~/components/resources/AddToCartResources"
-import { ToastContainer } from "react-toastify"
-import Loader from "~/components/reuseable/Loader"
 import { decode, encode } from "hex-encode-decode"
 
 const ResourcesData = (props) => {
@@ -139,7 +128,6 @@ const ResourcesData = (props) => {
             setResources_sequence(seq)
           }
           console.log("file_count", file_count)
-          //  console.log("resources_structural", data.data[0].structural_variation)
           getURLLink(data.data[0].pdf_bottom_sign)
         }
       })
@@ -187,7 +175,6 @@ const ResourcesData = (props) => {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Session", data);
         if (data.code == 200) {
           setUserData(data.result)
         }
@@ -237,7 +224,6 @@ const ResourcesData = (props) => {
     html2canvas(input)
       .then((canvas) => {
        const imgData = canvas.toDataURL('image/png');
-       // const imgData1 = canvas.toDataURL('image/svg');
         const pdf = new jsPDF({
           orientation: 'portrait',
         });
@@ -282,7 +268,6 @@ const ResourcesData = (props) => {
                           
                         </div>
                         <div className="col-md-12 ">
-                          {/* <span class="border-top border-dark"></span> */}
 
                           <div
                             className="row mb-4"
@@ -339,21 +324,7 @@ const ResourcesData = (props) => {
                                   </tr>
                                 )
                               })}
-                                  {/* {orderData &&
-                                    orderData[1].map((item, key) => (
-                                      <tr key={key}>
-                                        <td width="10%"> {item.ProductName}</td>
-                                        <td width="46%">
-                                           <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                         
-                                        </td>
-                                        
-                                      </tr>
-                                    ))} */}
+                                 
                                 </tbody>
                               </table>
                             </div>
@@ -383,35 +354,13 @@ const ResourcesData = (props) => {
                                   </tr>
                                 )
                               })}
-                                  {/* {orderData &&
-                                    orderData[1].map((item, key) => (
-                                      <tr key={key}>
-                                        <td width="40%"> {item.ProductName}</td>
-                                        <td width="30%">
-                                           <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                          
-                                        </td>
-                                        <td width="30%">
-                                          <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                        </td>
-                                        
-                                      </tr>
-                                    ))} */}
+                                 
                                 </tbody>
                               </table>
                             </div>
                           </div>
                         </div>
                         <div className="col-md-12 ">
-                          {/* <span class="border-top border-dark"></span> */}
 
                           <div
                             className="row my-4"
@@ -428,7 +377,6 @@ const ResourcesData = (props) => {
                           </div>
 
                           <div className="col-md-12 ">
-                          {/* <span class="border-top border-dark"></span> */}
 
                           <div
                             className="row my-4"

@@ -4,8 +4,6 @@ import { connect } from "react-redux"
 import { calculateCartQuantity } from "~/utilities/ecomerce-helpers"
 import { Result } from "antd"
 import dynamic from "next/dynamic"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import useEcomerce from "~/hooks/useEcomerce";
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {

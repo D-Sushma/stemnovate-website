@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { wrapper } from "../store/store"
-// import MasterLayout from "~/components/layouts/MasterLayout"
 import { CookiesProvider } from "react-cookie"
 import "swiper/swiper-bundle.min.css"
 import "antd/dist/antd.compact.min.css"

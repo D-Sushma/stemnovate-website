@@ -1,13 +1,13 @@
 
 import prisma from "~/lib/prisma";
 import { getSession } from "next-auth/react"
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { Prisma } from '@prisma/client'
 
 export default async function handle(req, res) {
    try {
     const session = await getSession({ req })
-     var response=''
+    //  var response=''
     if(session!=null)
     {
 

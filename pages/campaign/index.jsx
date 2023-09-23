@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-// import Container from "~/components/layouts/Container"
 import { useRouter } from "next/router"
 import { ToastContainer } from "react-toastify"
 import { baseUrl } from "~/repositories/Repository"
@@ -25,7 +24,7 @@ const CampaignPage = ({ ProductData }) => {
     console.log("ProductData", ProductData)
   }, [])
 
-  const getcategoryListBySlug = async (params) => {
+  const getcategoryListBySlug = async () => {
     const newbreadcrumb = [
       {
         id: 1,
@@ -125,8 +124,9 @@ const CampaignPage = ({ ProductData }) => {
   )
 }
 
-export async function getServerSideProps({ query }) {
-  var slug = query.slug
+// export async function getServerSideProps({ query }) {
+export async function getServerSideProps() {
+  // var slug = query.slug
   var ProductData = []
 
   const res = await fetch(baseUrl + "/api/campaign/getallcampaign")

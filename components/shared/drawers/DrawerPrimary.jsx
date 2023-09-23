@@ -2,7 +2,6 @@ import React from "react";
 import { Drawer } from "antd";
 import { connect, useDispatch } from "react-redux";
 import { toggleDrawer } from "~/store/app/action";
-// import EcomerceMiniCart from "~/components/ecomerce/EcomerceMiniCart";
 import dynamic from "next/dynamic"
 
 const EcomerceMiniCart = dynamic(
@@ -11,9 +10,7 @@ const EcomerceMiniCart = dynamic(
 )
 
 const DrawerPrimary = ({
-    children,
     placement = "right",
-    title = "Drawer",
     isDrawerShow,
 }) => {
     const dispatch = useDispatch();

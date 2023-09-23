@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Container from "~/components/layouts/Container"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 import PropTypes from "prop-types"
-import Link from "next/link"
 
-import {
-  FaArrowRight,
-  FaRegArrowAltCircleDown,
-  FaRegArrowAltCircleUp
-} from "react-icons/fa"
-import moment from "moment"
-import AddToCartResources from "~/components/resources/AddToCartResources"
-import { ToastContainer } from "react-toastify"
-import Loader from "~/components/reuseable/Loader"
 import { decode, encode } from "hex-encode-decode"
 
 const ResourcesData = (props) => {
@@ -97,7 +84,6 @@ const ResourcesData = (props) => {
           } else {
             setIsActive(false)
           }
-          // setUserData(data.result)
         }
       })
   }
@@ -139,7 +125,6 @@ const ResourcesData = (props) => {
             setResources_sequence(seq)
           }
           console.log("file_count", file_count)
-          //  console.log("resources_structural", data.data[0].structural_variation)
           getURLLink(data.data[0].pdf_bottom_sign)
         }
       })
@@ -187,7 +172,6 @@ const ResourcesData = (props) => {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Session", data);
         if (data.code == 200) {
           setUserData(data.result)
         }
@@ -249,8 +233,11 @@ const ResourcesData = (props) => {
                           className="col-md-12 mb-3"
                           style={{ borderBottom: "1px solid black" }}
                         >
-                          <img src="/static/image/LogoFINAL-2.svg" alt="Stemnovate Limited" style={{width:"40%"}} />
-                          
+                          <img
+                            src="/static/image/LogoFINAL-2.svg"
+                            alt="Stemnovate Limited"
+                            style={{ width: "40%" }}
+                          />
                         </div>
                         <div className="col-md-12 ">
                           {/* <span class="border-top border-dark"></span> */}
@@ -261,74 +248,53 @@ const ResourcesData = (props) => {
                           >
                             <div className="col-md-6">
                               <h2>{resourcesData.data[0].resources_name}</h2>
-                              <p>
-                                {resourcesData.data[0].short_description}
-                              </p>
-
+                              <p>{resourcesData.data[0].short_description}</p>
                             </div>
                             <div className="col-md-6">
-                              <p>PO : {" "}
-                                {resourcesFiles.pdf_po}
+                              <p>PO : {resourcesFiles.pdf_po}</p>
+                              <p>Company : {resourcesFiles.pdf_company}</p>
+                              <p>
+                                Report Number : {resourcesFiles.pdf_reportno}
                               </p>
-                              <p>Company : {" "}
-                                {resourcesFiles.pdf_company}
-                              </p>
-                              <p>Report Number : {" "}
-                                {resourcesFiles.pdf_reportno}
-                              </p>
-                              <p>Catalogue Number : {" "}
+                              <p>
+                                Catalogue Number :{" "}
                                 {resourcesFiles.pdf_catalogue_no}
                               </p>
                             </div>
-                            
                           </div>
                           <div
                             className="row"
                             style={{ borderBottom: "1px solid black" }}
                           >
-                            <h4 className="my-3">{resourcesFiles.datasets_description}</h4>
+                            <h4 className="my-3">
+                              {resourcesFiles.datasets_description}
+                            </h4>
                             <div className="col-md-12">
                               <h4 className="my-3">Sequencing Details</h4>
                               <table className="table" width="100%">
                                 <tr>
                                   <th width="40%">Sequencing ID</th>
                                   <th width="45%">Alignment</th>
-                                  
                                 </tr>
                                 <tbody>
                                   {seqfile_count > 0
-                            ? seqfile_count
-                            : resources_sequence.map((sq, k) => {
-                                return (
-                                  <tr key={k}>
-                                    <th className="ps-table__th">
-                                      {sq.sequence_id}
-                                    </th>
-                                    <th className="ps-table__th">
-                                      {sq.alignment}
-                                    </th>
-                                  </tr>
-                                )
-                              })}
-                                  {/* {orderData &&
-                                    orderData[1].map((item, key) => (
-                                      <tr key={key}>
-                                        <td width="10%"> {item.ProductName}</td>
-                                        <td width="46%">
-                                           <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                         
-                                        </td>
-                                        
-                                      </tr>
-                                    ))} */}
+                                    ? seqfile_count
+                                    : resources_sequence.map((sq, k) => {
+                                        return (
+                                          <tr key={k}>
+                                            <th className="ps-table__th">
+                                              {sq.sequence_id}
+                                            </th>
+                                            <th className="ps-table__th">
+                                              {sq.alignment}
+                                            </th>
+                                          </tr>
+                                        )
+                                      })}
                                 </tbody>
                               </table>
                             </div>
-                             <div className="col-md-12">
+                            <div className="col-md-12">
                               <h4 className="my-3">Structural Variation</h4>
                               <table className="table" width="100%">
                                 <tr>
@@ -338,89 +304,57 @@ const ResourcesData = (props) => {
                                 </tr>
                                 <tbody>
                                   {file_count > 0
-                            ? file_count
-                            : resources_structural.map((struct, k) => {
-                                return (
-                                  <tr key={k}>
-                                    <th className="ps-table__th">
-                                      {struct.length}
-                                    </th>
-                                    <th className="ps-table__th">
-                                      {struct.location}
-                                    </th>
-                                    <th className="ps-table__th">
-                                      {struct.position}
-                                    </th>
-                                  </tr>
-                                )
-                              })}
-                                  {/* {orderData &&
-                                    orderData[1].map((item, key) => (
-                                      <tr key={key}>
-                                        <td width="40%"> {item.ProductName}</td>
-                                        <td width="30%">
-                                           <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                          
-                                        </td>
-                                        <td width="30%">
-                                          <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                        </td>
-                                        
-                                      </tr>
-                                    ))} */}
+                                    ? file_count
+                                    : resources_structural.map((struct, k) => {
+                                        return (
+                                          <tr key={k}>
+                                            <th className="ps-table__th">
+                                              {struct.length}
+                                            </th>
+                                            <th className="ps-table__th">
+                                              {struct.location}
+                                            </th>
+                                            <th className="ps-table__th">
+                                              {struct.position}
+                                            </th>
+                                          </tr>
+                                        )
+                                      })}
                                 </tbody>
                               </table>
                             </div>
                           </div>
                         </div>
                         <div className="col-md-12 ">
-                          {/* <span class="border-top border-dark"></span> */}
-
                           <div
                             className="row my-4"
                             style={{ borderBottom: "1px solid black" }}
                           >
-                              <div className="col-md-12">
-                                <h2>Result</h2>
-                                <p>
-                                  {resourcesFiles.pdf_result}
-                                </p>
-
-                              </div>
+                            <div className="col-md-12">
+                              <h2>Result</h2>
+                              <p>{resourcesFiles.pdf_result}</p>
                             </div>
                           </div>
+                        </div>
 
-                          <div className="col-md-12 ">
-                          {/* <span class="border-top border-dark"></span> */}
-
+                        <div className="col-md-12 ">
                           <div
                             className="row my-4"
                             style={{ borderBottom: "1px solid black" }}
                           >
                             <div className="col-md-9"></div>
-                              <div className="col-md-3">
-                                <h2>{resourcesFiles.pdf_bottom_name}</h2>
-                                <p>
-                                  <img
-                            src={`${filePath}`}
-                            className="rounded-lg"
-                            alt="Bottom_Sign"
-                          />
-                                  
-                                </p>
-
-                              </div>
+                            <div className="col-md-3">
+                              <h2>{resourcesFiles.pdf_bottom_name}</h2>
+                              <p>
+                                <img
+                                  src={`${filePath}`}
+                                  className="rounded-lg"
+                                  alt="Bottom_Sign"
+                                />
+                              </p>
                             </div>
                           </div>
-
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-const baseurl = process.env.BASE_PATH;
+// const baseurl = process.env.BASE_PATH;
 
 const ModuleHeaderPromotions = () => {
     return (

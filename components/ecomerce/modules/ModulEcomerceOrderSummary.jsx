@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { calculateAmount, calculateShipping, calculatePercentage } from "~/utilities/ecomerce-helpers";
 import useEcomerce from "~/hooks/useEcomerce";
-import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { loadStripe } from "@stripe/stripe-js";
@@ -31,7 +30,7 @@ const ModulEcomerceOrderSummary = ({ ecomerce, userStatus, UserData }) => {
         percentage,
         withVAT,
         amountView = "0.00";
-    var shippingCosts = [];
+    // var shippingCosts = [];
     if (products && products.length > 0) {
         amountView = calculateAmount(products);
         maxShippingCost = calculateShipping(products);
@@ -139,9 +138,7 @@ const ModulEcomerceOrderSummary = ({ ecomerce, userStatus, UserData }) => {
                             </label>
                         </div>
                     </div>
-                    {/* <Link href="/shop/PreviewPage">
-                        <a className="ps-btn ps-btn--warning">Place order</a>
-                    </Link> */}
+                  
                     <button disabled={userStatus ? (products.length === 0 || loading ? true : false) : true} onClick={createCheckOutSession} className="ps-btn ps-btn--warning">
                         {loading ? "Processing..." : "Buy"}
                     </button>

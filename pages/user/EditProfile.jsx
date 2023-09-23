@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react"
-// import Container from "~/components/layouts/Container";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
 import { Form, Input, Button, Row, Col, Checkbox } from "antd"
 import { baseUrl } from "~/repositories/Repository"
 import { auth } from "~/lib/CheckUser"

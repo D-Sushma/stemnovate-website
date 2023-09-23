@@ -1,5 +1,11 @@
 import React from "react";
-import Rating from "~/components/elements/Rating";
+// import Rating from "~/components/elements/Rating";
+import dynamic from 'next/dynamic'
+
+const Rating = dynamic(
+    () => import("~/components/elements/Rating"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const LatestReviews = () => {
     const reviews = [

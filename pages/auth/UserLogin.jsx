@@ -6,7 +6,7 @@ import { AiOutlineLock, AiOutlineUser } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
 import Link from "next/link"
 import Image from "~/components/elements/Image"
-import { signIn, getSession } from "next-auth/react"
+import { getSession } from "next-auth/react"
 
 const UserLogin = ({ reffrals }) => {
   const router = useRouter()
@@ -61,11 +61,6 @@ const UserLogin = ({ reffrals }) => {
           theme: "colored"
         })
 
-        const res = await signIn("credentials", {
-          username,
-          password,
-          callbackUrl: `${reffrals}`
-        })
       } else {
         toast.error(json.message, {
           position: "top-right",
@@ -119,17 +114,13 @@ const UserLogin = ({ reffrals }) => {
           <div className="ps-page__header"></div>
           <div className="ps-page__content ps-account">
             <div className="row">
-              {/* <div className="p-0 col-12 col-md-6 d-sm-none d-md-block bg-login-page"> */}
               <div className="col col-12 col-md-6 d-sm-none d-md-block">
                 <Image
                   src="/static/img/Home/sinup-img.jpg"
-                  // src="/static/img/Home/signin-img.jpg"
                   alt="Stemnovate Limited"
                   width={955}
                   height={1080}
-                  // width={1000}
-                  // height={789}
-                  //   style={{ width: "100%" }}
+                 //   style={{ width: "100%" }}
                 />
               </div>
               <div className="p-4 col-12 col-md-6 card">

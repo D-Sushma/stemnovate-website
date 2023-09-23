@@ -1,8 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react"
-// import ModuleFooterAddress from "~/components/shared/footers/modules/ModuleFooterAddress"
-// import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks"
-// import ModuleFooterBottom from "~/components/shared/footers/modules/ModuleFooterBottom"
 import FooterLinks from "~/public/static/data/footer.json"
 import Image from "next/image"
 import Link from "next/link"

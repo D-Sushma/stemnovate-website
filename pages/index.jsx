@@ -5,12 +5,11 @@ import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import Slider from "react-slick"
-import Image from '~/components/elements/Image'
+import Image from "~/components/elements/Image"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
 const HeaderDefault = dynamic(
   () => import("~/components/shared/headers/HeaderDefault"),
   { loading: () => <p>Loading...</p> }
@@ -31,12 +30,7 @@ const DynamicHowItsWork = dynamic(
     loading: () => <p>Loading...</p>
   }
 )
-// const DynamicWomenHealth = dynamic(
-//   () => import("~/components/shared/sections/WomenHealth"),
-//   {
-//     loading: () => <p>Loading...</p>
-//   }
-// )
+
 const DynamicCaseStudy = dynamic(
   () => import("~/components/shared/sections/CaseStudy"),
   {
@@ -69,11 +63,11 @@ const DynamicSubscribe = dynamic(
 )
 const NextArrow = dynamic(
   () => import("~/components/elements/carousel/NextArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const PrevArrow = dynamic(
   () => import("~/components/elements/carousel/PrevArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const carouselSetting = {
@@ -134,7 +128,6 @@ const HomeDefaultPage = (props) => {
       menus={props.menus}
       header={<HeaderDefault classes="without-border" menus={props.menus} />}
       description="Stemnovate page on drug discovery. The platforms provide solutions for next gen liver, heart and brain cell modelling. "
-      // style={{ maxWidth: '100%', margin: '0 auto', padding: '16px'}}
     >
       <main id="homepage-one">
         <div className="ps-top-banners">
@@ -185,21 +178,13 @@ const HomeDefaultPage = (props) => {
                                 </div>
                                 <div className="d-md-none position-absolute top-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center ">
                                   <Image
-                                    // style={{minWidth:"60%",maxWidth:"60%", minHeight:"200px",maxHeight:"200px"}}
-                                    // src="/static/image/Partnership.png"
                                     src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
                                     alt="alt"
-                                    width={390}
-                                    height={219}
+                                    width={405}
+                                    height={255}
                                     placeholder="blur"
                                     blurDataURL="/static/image/blurred.png"
                                   />
-                                  {/* <img
-                                  // style={{minWidth:"60%",maxWidth:"60%", minHeight:"200px",maxHeight:"200px"}}
-                                    // src="/static/image/Partnership.png"
-                                    src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
-                                    alt="alt"
-                                  /> */}
                                 </div>
                                 <div
                                   className="d-none d-md-flex ps-banner__title text-white "
@@ -239,11 +224,6 @@ const HomeDefaultPage = (props) => {
                               placeholder="blur"
                               blurDataURL="/static/image/blurred.png"
                             />
-                            {/* <img
-                              className="ps-banner__image"
-                              src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
-                              alt="alt"
-                            /> */}
                           </div>
                         </div>
                       </div>
@@ -258,7 +238,6 @@ const HomeDefaultPage = (props) => {
         <DynamicOurService />
         <DynamicCaseStudy />
         <DynamicHowItsWork />
-        {/* <DynamicWomenHealth /> */}
         <DynamicTestimonials />
         <DynamicOurClients />
         <DynamicBlogGrid />

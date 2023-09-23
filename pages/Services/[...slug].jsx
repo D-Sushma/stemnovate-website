@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useRouter } from "next/router"
-import useGetProducts from "~/hooks/useGetProducts";
-import useProductGroup from "~/hooks/useProductGroup";
-// import BreadCrumb from "~/components/elements/BreadCrumb";
-// import Container from "~/components/layouts/Container";
 import { baseUrl } from "~/repositories/Repository"
-import { connect, useDispatch } from "react-redux"
-import { toggleDrawer } from "~/store/app/action"
-import useEcomerce from "~/hooks/useEcomerce"
+import { connect } from "react-redux"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
@@ -21,61 +15,12 @@ const Subscribe = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-const Applications = ({ ProductData, ecomerce }) => {
+const Applications = ({ ProductData }) => {
   const Router = useRouter()
   const { slug } = Router.query
-  const { proload, product, getProductById } = useGetProducts()
-  // const [categoryList, setcategoryList] = React.useState([]);
-  // const [ProductData, setProductData] = React.useState([]);
-  const [isLoading, setisLoading] = React.useState(false)
   const [breadcrumb, setbreadcrumb] = React.useState([])
-  const [searchterms, setsearchterms] = React.useState("")
   const [searchUrl, setsearchUrl] = React.useState("")
-  const { withGrid } = useProductGroup()
-  const [AddtoCart, setAddtoCart] = useState(0)
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const dispatch = useDispatch()
-  const [quantity, setQuantity] = useState(1)
-  const { loading, addItem } = useEcomerce()
-
-  const handleAddItemToCart = (id, price) => {
-    console.log("handleAddItemToCart", id)
-    addItem(
-      { id: id, quantity: AddtoCart, price: price },
-      ecomerce.cartItems,
-      "cart"
-    )
-    dispatch(toggleDrawer(true))
-  }
-
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
-
-  const AddCart = (index) => {
-    let cartval = parseInt(AddtoCart)
-    var newval = cartval + parseInt(1)
-    setAddtoCart(newval)
-  }
-
-  const RemoveCart = (index) => {
-    if (AddtoCart) {
-      let cartval = parseInt(AddtoCart)
-      var newval = cartval - parseInt(1)
-      setAddtoCart(newval)
-      console.log(newval)
-    }
-  }
-
+  
   useEffect(() => {
     var serarchdata = ""
     var serachurl = "/Applications"
@@ -92,7 +37,7 @@ const Applications = ({ ProductData, ecomerce }) => {
     }
   }, [slug])
 
-  const getcategoryListBySlug = async (params) => {
+  const getcategoryListBySlug = async () => {
     const newbreadcrumb = [
       {
         id: 1,
@@ -123,12 +68,7 @@ const Applications = ({ ProductData, ecomerce }) => {
     setbreadcrumb(newbreadcrumb)
   }
 
-  //
-
-  const myLoader = ({ src }) => {
-    return src
-  }
-
+  
   return (
     <>
       <Container title={ProductData ? ProductData.categoryList_name : slug}>
@@ -161,7 +101,6 @@ const Applications = ({ ProductData, ecomerce }) => {
             </div>
           </div>
         </main>
-        {/* <ProductList slug="Biobanking" /> */}
       </Container>
     </>
   )
@@ -170,7 +109,6 @@ const Applications = ({ ProductData, ecomerce }) => {
 export async function getServerSideProps({ query }) {
   const slug = query.slug
   var ProductData = []
-  var categoryListList = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -190,7 +128,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData), (categoryListList = myProductData.Products)
+    ;(ProductData = myProductData)
   }
 
   // // Pass data to the page via props

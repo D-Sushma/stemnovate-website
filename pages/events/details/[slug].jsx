@@ -10,11 +10,6 @@ import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
 import Image from "~/components/elements/Image"
 import dynamic from "next/dynamic"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import UpcomingEvents from "~/components/elements/events/UpcomingEvents"
-// import Subscribe from "~/components/shared/sections/Subscribe"
-// import ProductList from "~/components/eventDetailList/productList"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -45,7 +40,7 @@ const EventsDetails = ({ EventsData }) => {
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [galleryIMG, setGalleryIMG] = useState([])
 
-  const openLightbox = useCallback((event, { galleryIMG, index }) => {
+  const openLightbox = useCallback(( { index }) => {
     setCurrentImage(index)
     setViewerIsOpen(true)
   }, [])
@@ -109,7 +104,6 @@ const EventsDetails = ({ EventsData }) => {
                       height={230}
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      // style={{ width: "100%", height: "10em" }}
                     />
                   </div>
                   <div className="d-flex d-md-none">
@@ -170,7 +164,6 @@ const EventsDetails = ({ EventsData }) => {
                       </div>
                       <div className="col-md-6">
                         <div className="ps-section__content text-center">
-                          {/* <h2 className="font-weight-bold">{data.title}</h2> */}
                           <div className="d-flex justify-content-center ">
                             {moment().unix() < moment(data.date).unix() ? (
                               <div className="card" style={{ width: "100%" }}>
@@ -321,10 +314,7 @@ const EventsDetails = ({ EventsData }) => {
           <div className="about-section">
             <div className="container">
               <ProductList slug="Applications" />
-              {/* { EventsData.data[0]?.id !== 7 ?
-              ( <ProductList slug="Applications" /> ) : null
-
-              } */}
+             
             </div>
           </div>
           <Subscribe />

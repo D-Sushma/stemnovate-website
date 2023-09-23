@@ -57,7 +57,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     percentage,
     withVAT,
     amountView = "0.00"
-  var shippingCosts = []
+  // var shippingCosts = []
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
     maxShippingCost = calculateShipping(products)

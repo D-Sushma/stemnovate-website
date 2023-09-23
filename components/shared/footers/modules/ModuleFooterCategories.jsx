@@ -1,6 +1,12 @@
 import React from "react";
-import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks";
 import FooterLinks from "~/public/static/data/footer.json";
+// import WidgetFooterLinks from "~/components/shared/widgets/footer/WidgetFooterLinks";
+import dynamic from 'next/dynamic'
+
+const WidgetFooterLinks = dynamic(
+    () => import("~/components/shared/widgets/footer/WidgetFooterLinks"),
+    {loading: ()=> <p>Loading...</p>}
+)
 
 const ModuleFooterCategories = () => {
     return (

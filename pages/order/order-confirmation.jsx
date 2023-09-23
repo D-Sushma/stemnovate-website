@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState, useRef } from "react"
-// import Container from "~/components/layouts/Container"
 import { getSession } from "next-auth/react"
 import useEcomerce from "~/hooks/useEcomerce"
 import { baseUrl } from "~/repositories/Repository"
@@ -137,7 +136,6 @@ function OrderConfirmation({ UserData }) {
                           </h5>
                         </div>
                         <div className="col-md-8 ">
-                          {/* <span class="border-top border-dark"></span> */}
 
                           <div
                             className="row mb-2"
