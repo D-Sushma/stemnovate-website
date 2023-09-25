@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react"
 import { connect } from "react-redux"
-import Image from "~/components/elements/Image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 
@@ -9,6 +8,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Subscribe = dynamic(
@@ -236,7 +238,8 @@ const texicologyScreen = () => {
                           >
                             Read More
                             <span className="visually-hidden">
-                              Read more about the scientific discovery on ScienceDaily
+                              Read more about the scientific discovery on
+                              ScienceDaily
                             </span>
                           </a>
                         </p>

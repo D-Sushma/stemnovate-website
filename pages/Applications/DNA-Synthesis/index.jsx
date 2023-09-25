@@ -1,21 +1,21 @@
 import React from "react"
-import Image from '~/components/elements/Image'
-import Link from 'next/link'
+import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const texicologyScreen = () => {
@@ -39,9 +39,9 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container 
+      <Container
         title="DNA-Synthesis"
-        description="Stemnovate page is for new developments and innovation in field of DNA synthesis."  
+        description="Stemnovate page is for new developments and innovation in field of DNA synthesis."
       >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
@@ -75,12 +75,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/DNA-synthesis-update.jpg"
-                          alt="Applications"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/DNA-synthesis-update.jpg"
+                            alt="Applications"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -127,7 +127,6 @@ const texicologyScreen = () => {
                         <Image
                           width="75"
                           height="75"
-                          // className="mb-5"
                           src="/static/img/applications/accuracy.svg"
                           alt="Accuracy"
                         />
@@ -143,7 +142,6 @@ const texicologyScreen = () => {
                         <Image
                           width="75"
                           height="75"
-                          // className="mb-5"
                           src="/static/img/applications/scalability.svg"
                           alt="Scalability"
                         />
@@ -159,7 +157,6 @@ const texicologyScreen = () => {
                         <Image
                           width="75"
                           height="75"
-                          // className="mb-5"
                           src="/static/img/applications/ecofriendly.svg"
                           alt="Eco-Friendly"
                         />
@@ -175,7 +172,6 @@ const texicologyScreen = () => {
                         <Image
                           width="75"
                           height="75"
-                          // className="mb-5"
                           src="/static/img/applications/speed.svg"
                           alt="Speed"
                         />
@@ -208,7 +204,7 @@ const texicologyScreen = () => {
                         width="100%"
                         height="100%"
                       ></video>
-                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -272,7 +268,7 @@ const texicologyScreen = () => {
             </div>
           </div>
         </main>
-        </Container>
+      </Container>
     </>
   )
 }
@@ -299,7 +295,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

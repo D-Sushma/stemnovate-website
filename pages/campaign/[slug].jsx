@@ -80,7 +80,6 @@ const CampaignPage = (props) => {
     const InputForm = JSON.parse(productData.data[0].form_details)
     InputForm.forEach((element) => {
       var mydata = {}
-      // console.log(element.name.replace(/\s+/g, "_"));
       const inputName = element.name.replace(/\s+/g, "_")
       mydata["value"] = ""
       mydata["file"] = ""
@@ -158,7 +157,6 @@ const CampaignPage = (props) => {
                 })
 
                 sendVerifyLink(json.userData.name, json.userData.email)
-                // router.push("/Campaign");
               } else if (json.code == "201") {
                 toast.info(json.message, {
                   position: "top-right",
@@ -192,7 +190,6 @@ const CampaignPage = (props) => {
               setIsLoading(false)
             })
         } else {
-          // console.log("Please fill Requred Field..", "Please fill Requred Field..");
           toast.warning("Please fill required Field..", {
             position: "top-right",
             autoClose: 5000,

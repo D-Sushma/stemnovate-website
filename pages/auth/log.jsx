@@ -1,8 +1,5 @@
-import React from 'react'
+import React from "react"
 
 export default function log() {
-    return (
-        <div>Admin Dashboard Page</div>
-    )
+  return <div>Admin Dashboard Page</div>
 }
-

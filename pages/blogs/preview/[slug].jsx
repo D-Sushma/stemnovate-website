@@ -13,29 +13,27 @@ import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import moment from "moment"
-// import Loader from "~/components/reuseable/Loader"
 import { scroller } from "react-scroll"
 import { TbEdit, TbCalendarEvent } from "react-icons/tb"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const Loader = dynamic(
-  () => import("~/components/reuseable/Loader"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Loader = dynamic(() => import("~/components/reuseable/Loader"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const breadcrumb = [
   {
@@ -117,14 +115,14 @@ const Blogs = (props) => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                      <Image
-                        src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
-                        alt={blogData?.name}
-                        width={1200}
-                        height={675}
-                        placeholder={blur}
-                        blurDataURl="/static/image/blurred.png"
-                      />
+                        <Image
+                          src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
+                          alt={blogData?.name}
+                          width={1200}
+                          height={675}
+                          placeholder={blur}
+                          blurDataURl="/static/image/blurred.png"
+                        />
                       </div>
                     </Link>
                   </div>

@@ -3,17 +3,18 @@ import { useRouter } from "next/router"
 import { ToastContainer } from "react-toastify"
 import { baseUrl } from "~/repositories/Repository"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const CampaignPage = ({ ProductData }) => {
   const Router = useRouter()
@@ -126,7 +127,6 @@ const CampaignPage = ({ ProductData }) => {
 
 // export async function getServerSideProps({ query }) {
 export async function getServerSideProps() {
-  // var slug = query.slug
   var ProductData = []
 
   const res = await fetch(baseUrl + "/api/campaign/getallcampaign")

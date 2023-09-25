@@ -503,5 +503,4 @@ const ProductList = ({ ecomerce, slug }) => {
   )
 }
 
-// export default categoryListScreen;
 export default connect((state) => state)(ProductList)

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import dynamic from 'next/dynamic'
 
 const ArticleGrid = dynamic(
-    () => import("~/components/elements/articles/ArticleGrid-New-1"),
+    () => import("~/components/elements/articles/ArticleGridNew"),
     { loading: () => <p>Loading...</p> }
 )
 

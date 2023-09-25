@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { IoIosArrowDown } from "react-icons/io"
 import { Tooltip } from "antd"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
+import Image from "~/components/elements/Image"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
@@ -16,10 +16,8 @@ const Investors = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 const BlogGrid = dynamic(
-  () => import("~/components/partials/blog/BlogGrid-New-1"),
-  {
-    loading: () => <p>Loading...</p>
-  }
+  () => import("~/components/partials/blog/BlogGridNew"),
+  { loading: () => <p>Loading...</p> }
 )
 
 const breadcrumb = [
@@ -171,7 +169,6 @@ const InvestorRelationScreen = () => {
                         <Image
                           className="rounded"
                           src="/static/img/investors/STEM-EDUCATION.jpg"
-                          // style={{ height: "342px", width: "auto" }}
                           alt="Stem Education"
                           width={270}
                           height={350}

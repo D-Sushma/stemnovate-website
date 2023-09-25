@@ -1,20 +1,20 @@
 import React from "react"
-import Image from '~/components/elements/Image'
 import Link from "next/link"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const breadcrumb = [
   {
@@ -55,7 +55,9 @@ const Blogs = () => {
                       <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid">
                           <div className="ps-post__thumbnail">
-                            <Link href="#"><div className="ps-post__overlay link-hover-thumb-shape"></div></Link>
+                            <Link href="#">
+                              <div className="ps-post__overlay link-hover-thumb-shape"></div>
+                            </Link>
                             <Image
                               src="/static/img/Blog/1.jpg"
                               alt="ENHANCED MICROFLUIDIC DEVICES FOR BIOMEDICAL APPLICATIONS"
@@ -70,7 +72,10 @@ const Blogs = () => {
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
+                              <Link
+                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
+                                prefetch={false}
+                              >
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
                                   ENHANCED MICROFLUIDIC DEVICES FOR BIOMEDICAL
                                   APPLICATIONS.....
@@ -81,7 +86,9 @@ const Blogs = () => {
                                   Sep 18, 2019
                                 </span>
                                 <Link href="/blogs">
-                                  <span className="ps-post__author span-with-link">Ruchi Sharma</span>
+                                  <span className="ps-post__author span-with-link">
+                                    Ruchi Sharma
+                                  </span>
                                 </Link>
                               </div>
                             </div>
@@ -92,7 +99,9 @@ const Blogs = () => {
                       <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid">
                           <div className="ps-post__thumbnail">
-                          <Link href="#"><div className="ps-post__overlay link-hover-thumb-shape"></div></Link>
+                            <Link href="#">
+                              <div className="ps-post__overlay link-hover-thumb-shape"></div>
+                            </Link>
                             <Image
                               src="/static/img/Blog/2.jpg"
                               alt="THE CREATION OF NEW SCALABLE MANUFACTURING PROCESS"
@@ -100,15 +109,20 @@ const Blogs = () => {
                               height={675}
                             />
                             <div className="ps-post__categories">
-                              <div className="div-with-link link-hover-thumb-shape">PRODUCT</div>
+                              <div className="div-with-link link-hover-thumb-shape">
+                                PRODUCT
+                              </div>
                             </div>
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
+                              <Link
+                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
+                                prefetch={false}
+                              >
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
-                                THE CREATION OF NEW SCALABLE MANUFACTURING
-                                PROCESS.....
+                                  THE CREATION OF NEW SCALABLE MANUFACTURING
+                                  PROCESS.....
                                 </div>
                               </Link>
                               <div className="ps-post__meta justify-content-center">
@@ -116,7 +130,9 @@ const Blogs = () => {
                                   May 05, 2020
                                 </span>
                                 <Link href="/blogs" prefetch={false}>
-                                  <span className="ps-post__author span-with-link" >Ruchi Sharma</span>
+                                  <span className="ps-post__author span-with-link">
+                                    Ruchi Sharma
+                                  </span>
                                 </Link>
                               </div>
                             </div>
@@ -127,7 +143,9 @@ const Blogs = () => {
                       <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid">
                           <div className="ps-post__thumbnail">
-                          <Link href="#"><div className="ps-post__overlay link-hover-thumb-shape"></div></Link>
+                            <Link href="#">
+                              <div className="ps-post__overlay link-hover-thumb-shape"></div>
+                            </Link>
                             <Image
                               src="/static/img/Blog/3.jpg"
                               alt="HOW STEMNOVATE WILL CHANGE DRUG DEVELOPMENT"
@@ -135,16 +153,20 @@ const Blogs = () => {
                               height={675}
                             />
                             <div className="ps-post__categories">
-                              <div className="div-with-link link-hover-thumb-shape">SCIENCE</div>
+                              <div className="div-with-link link-hover-thumb-shape">
+                                SCIENCE
+                              </div>
                             </div>
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
-                                
+                              <Link
+                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
+                                prefetch={false}
+                              >
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
-                                HOW STEMNOVATE WILL CHANGE DRUG DEVELOPMENT
-                                .....
+                                  HOW STEMNOVATE WILL CHANGE DRUG DEVELOPMENT
+                                  .....
                                 </div>
                               </Link>
                               <div className="ps-post__meta justify-content-center">
@@ -152,7 +174,9 @@ const Blogs = () => {
                                   Aug 24, 2019
                                 </span>
                                 <Link href="/blogs" prefetch={false}>
-                                  <span className="ps-post__author span-with-link">Ruchi Sharma</span>
+                                  <span className="ps-post__author span-with-link">
+                                    Ruchi Sharma
+                                  </span>
                                 </Link>
                               </div>
                             </div>
@@ -165,7 +189,9 @@ const Blogs = () => {
                       <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                         <article className="ps-post ps-post--grid">
                           <div className="ps-post__thumbnail">
-                          <Link href="#"><div className="ps-post__overlay link-hover-thumb-shape"></div></Link>
+                            <Link href="#">
+                              <div className="ps-post__overlay link-hover-thumb-shape"></div>
+                            </Link>
                             <Image
                               src="/static/img/Blog/4.jpg"
                               alt="HOW A ‘CYP OF COFFEE’ CAN HELP US TO UNDERSTAND"
@@ -173,15 +199,20 @@ const Blogs = () => {
                               height={675}
                             />
                             <div className="ps-post__categories">
-                              <div className="div-with-link link-hover-thumb-shape">PRODUCT</div>
+                              <div className="div-with-link link-hover-thumb-shape">
+                                PRODUCT
+                              </div>
                             </div>
                           </div>
                           <div className="ps-post__wrapper justify-content-center">
                             <div className="ps-post__content justify-content-center">
-                              <Link href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards" prefetch={false}>
+                              <Link
+                                href="/post/the-latest-tests-of-popular-masks-in-accordance-with-cv2s-standards"
+                                prefetch={false}
+                              >
                                 <div className="ps-post__title text-center link-hover-thumb-shape">
-                                HOW A ‘CYP OF COFFEE’ CAN HELP US TO
-                                UNDERSTAND....
+                                  HOW A ‘CYP OF COFFEE’ CAN HELP US TO
+                                  UNDERSTAND....
                                 </div>
                               </Link>
                               <div className="ps-post__meta justify-content-center">
@@ -189,7 +220,9 @@ const Blogs = () => {
                                   Aug 24, 2019
                                 </span>
                                 <Link href="/blogs" prefetch={false}>
-                                  <span className="ps-post__author span-with-link">Ruchi Sharma</span>
+                                  <span className="ps-post__author span-with-link">
+                                    Ruchi Sharma
+                                  </span>
                                 </Link>
                               </div>
                             </div>

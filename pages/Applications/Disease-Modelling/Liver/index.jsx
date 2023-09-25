@@ -2,21 +2,21 @@ import React from "react"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { Tooltip } from "antd"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic';
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const texicologyScreen = () => {
@@ -45,9 +45,9 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container 
+      <Container
         title="Stemnovate | Liver"
-        description="Stemnovate Liver page shows our platform capability for cellular reprogramming and liver modelling."  
+        description="Stemnovate Liver page shows our platform capability for cellular reprogramming and liver modelling."
       >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
@@ -77,12 +77,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Liver/PLATFORM-FEATURES.jpg"
-                          alt="PLATFORM FEATURES"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/Liver/PLATFORM-FEATURES.jpg"
+                            alt="PLATFORM FEATURES"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -117,13 +117,13 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Liver/Hepatitis-C.jpg"
-                          alt="Hepatitis C"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/applications/Liver/Hepatitis-C.jpg"
+                            alt="Hepatitis C"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -156,13 +156,13 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Liver/Diagnostics.jpg"
-                          alt="NASH"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/applications/Liver/Diagnostics.jpg"
+                            alt="NASH"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -202,12 +202,12 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Liver/Grants-for-liver-platform.jpg"
-                          alt="Stemnovate won an NC3R Grant"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/Liver/Grants-for-liver-platform.jpg"
+                            alt="Stemnovate won an NC3R Grant"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -275,7 +275,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

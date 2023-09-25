@@ -165,19 +165,6 @@ const ProductList = ({ ecomerce, slug }) => {
                         className="rounded"
                         alt={post.category_name}
                       />
-                      {/* <Image
-                        src={
-                          post.image == null
-                            ? `/no-image.png`
-                            : `${process.env.AWS_S3BUCKET_URL}${post.image}`
-                        }
-                        className="rounded"
-                        alt={post.category_name}
-                        width={1200}
-                        height={675}
-                        placeholder="blur"
-                        blurDataURL="/static/image/blurred.png"
-                      /> */}
                       <div className="card-body  rounded-lg p-0 overlay-content-p">
                         <div className="p-5">
                           <Link href={`${slug}/${post.slug}`}>

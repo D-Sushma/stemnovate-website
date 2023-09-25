@@ -8,13 +8,15 @@ import { HiArrowSmRight } from "react-icons/hi"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import Image from "~/components/elements/Image"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const UpcomingEvents = dynamic(
@@ -40,7 +42,7 @@ const EventsDetails = ({ EventsData }) => {
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [galleryIMG, setGalleryIMG] = useState([])
 
-  const openLightbox = useCallback(( { index }) => {
+  const openLightbox = useCallback(({ index }) => {
     setCurrentImage(index)
     setViewerIsOpen(true)
   }, [])
@@ -314,7 +316,6 @@ const EventsDetails = ({ EventsData }) => {
           <div className="about-section">
             <div className="container">
               <ProductList slug="Applications" />
-             
             </div>
           </div>
           <Subscribe />

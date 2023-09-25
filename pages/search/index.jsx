@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import { ToastContainer } from "react-toastify"
-import dynamic from "next/dynmaic"
+import dynamic from "next/dynamic"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
 

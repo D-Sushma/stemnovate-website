@@ -1,22 +1,22 @@
 import React from "react"
-import Image from "~/components/elements/Image"
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { Tooltip } from "antd"
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const texicologyScreen = () => {
@@ -45,9 +45,9 @@ const texicologyScreen = () => {
 
   return (
     <>
-      <Container 
-      title="Neuron"
-      description="Stemnovate page for IPSC neuronal differentiation and disease modelling."
+      <Container
+        title="Neuron"
+        description="Stemnovate page for IPSC neuronal differentiation and disease modelling."
       >
         <main className="ps-page ps-page--inner">
           <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
@@ -112,13 +112,13 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Neuron/01.jpg"
-                          alt="HUMAN iPSC-DERIVED SENSORY NEURONS FOR HEARING LOSS"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/applications/Neuron/01.jpg"
+                            alt="HUMAN iPSC-DERIVED SENSORY NEURONS FOR HEARING LOSS"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -166,18 +166,18 @@ const texicologyScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Neuron/02.jpg"
-                          alt="HUMAN iPSC-DERIVED SENSORY NEURONS"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/applications/Neuron/02.jpg"
+                            alt="HUMAN iPSC-DERIVED SENSORY NEURONS"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
                     <div className="ps-section__content">
                       <div className="ps-section__desc">
-                       <h2 className="  font-weight-bold">
+                        <h2 className="  font-weight-bold">
                           Human IPSC-Derived Sensory Neurons For Neuropathic
                           Pain
                         </h2>
@@ -220,13 +220,13 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Neuron/03.jpg"
-                          alt="HUMAN iPSC-DERIVED MICROGLIA"
-                          width={1200}
-                          height={675}
-                        />
+                        <div className="ps-section__image link-hover-thumb-shape">
+                          <Image
+                            src="/static/img/applications/Neuron/03.jpg"
+                            alt="HUMAN iPSC-DERIVED MICROGLIA"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -283,7 +283,7 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props

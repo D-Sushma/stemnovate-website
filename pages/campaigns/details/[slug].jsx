@@ -8,25 +8,25 @@ import { HiArrowSmRight } from "react-icons/hi"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const UpcomingEvents = dynamic(
   () => import("~/components/elements/events/UpcomingEvents"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const EventsDetails = ({ EventsData }) => {
   console.log("EventsData", EventsData)
@@ -93,14 +93,12 @@ const EventsDetails = ({ EventsData }) => {
           {EventsData &&
             EventsData.data.map((data, key) => (
               <div key={key}>
-                
                 <div className="position-relative text-center">
                   <Image
                     src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
                     alt="IMG"
                     width={1200}
                     height={675}
-                    // style={{ width: "100%" }}
                   />
                   <div className="container">
                     <div className="top-left">
@@ -190,7 +188,7 @@ const EventsDetails = ({ EventsData }) => {
                                                   height="auto"
                                                 />
                                               </a>
-                                               </div>
+                                            </div>
                                           ))}
                                         </div>
                                       </div>
@@ -235,7 +233,7 @@ const EventsDetails = ({ EventsData }) => {
                                               height="auto"
                                             />
                                           </a>
-                                           </div>
+                                        </div>
                                       ))}
                                     </div>
                                   </div>

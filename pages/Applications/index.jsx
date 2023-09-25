@@ -1,24 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic';
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
   () => import("~/components/productList/productList"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const breadcrumb = [
@@ -36,9 +36,9 @@ const breadcrumb = [
 
 const Applications = () => {
   return (
-    <Container 
-    title="Applications"
-    description="Stemnovate page on disesae modelling, in vitro assays and new innovations for liver, heart and brain."
+    <Container
+      title="Applications"
+      description="Stemnovate page on disesae modelling, in vitro assays and new innovations for liver, heart and brain."
     >
       <main className="ps-page ps-page--inner">
         <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
@@ -68,12 +68,12 @@ const Applications = () => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                      <Image
-                        src="/static/img/applications/Drug-Discovery.jpg"
-                        alt="Drug Discovery Platform"
-                        width={1200}
-                        height={675}
-                      />
+                        <Image
+                          src="/static/img/applications/Drug-Discovery.jpg"
+                          alt="Drug Discovery Platform"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -92,13 +92,20 @@ const Applications = () => {
                         that, we are creating heart and brain cells in the
                         laboratory. These novel models have the potential to
                         predict human drug response and ensure patient safety...{" "}
-                        <Link href="/Applications/Drug-Discovery-Platform" prefetch={false}>
-                          <span className="text-white font-weight-bold span-with-link">Discover More</span>
+                        <Link
+                          href="/Applications/Drug-Discovery-Platform"
+                          prefetch={false}
+                        >
+                          <span className="text-white font-weight-bold span-with-link">
+                            Discover More
+                          </span>
                         </Link>
                       </p>
                       <p className="">
                         <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">
+                            Request A Quote
+                          </button>
                         </Link>
                       </p>
                     </div>
@@ -112,12 +119,12 @@ const Applications = () => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                      <Image
-                        src="/static/img/applications/Disease-modelling.jpg"
-                        alt="Disease Modelling"
-                        width={1200}
-                        height={675}
-                      />
+                        <Image
+                          src="/static/img/applications/Disease-modelling.jpg"
+                          alt="Disease Modelling"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -132,13 +139,20 @@ const Applications = () => {
                         71% of all deaths worldwide. We provide innovative
                         solutions for discovering new medicines and therapies
                         for non-communicable diseases....{" "}
-                        <Link href="/Applications/Disease-Modelling" prefetch={false}>
-                          <span className=" font-weight-bold span-with-link">Read More</span>
+                        <Link
+                          href="/Applications/Disease-Modelling"
+                          prefetch={false}
+                        >
+                          <span className=" font-weight-bold span-with-link">
+                            Read More
+                          </span>
                         </Link>
                       </p>
                       <p className="">
                         <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">
+                            Request A Quote
+                          </button>
                         </Link>
                       </p>
                     </div>
@@ -152,12 +166,12 @@ const Applications = () => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                      <Image
-                        src="/static/img/applications/Diagnostics.jpg"
-                        alt="Diagnostics"
-                        width={1200}
-                        height={675}
-                      />
+                        <Image
+                          src="/static/img/applications/Diagnostics.jpg"
+                          alt="Diagnostics"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -174,12 +188,16 @@ const Applications = () => {
                         we also developed new technology and assays for rapid
                         diagnostic ....{" "}
                         <Link href="/Applications/Diagnostics" prefetch={false}>
-                          <span className="text-white font-weight-bold span-with-link">View More</span>
+                          <span className="text-white font-weight-bold span-with-link">
+                            View More
+                          </span>
                         </Link>
                       </p>
                       <p className="">
                         <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">
+                            Request A Quote
+                          </button>
                         </Link>
                       </p>
                     </div>
@@ -193,12 +211,12 @@ const Applications = () => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                      <Image
-                        src="/static/img/applications/DNA-synthesis.jpg"
-                        alt="DNA Synthesis"
-                        width={1200}
-                        height={675}
-                      />
+                        <Image
+                          src="/static/img/applications/DNA-synthesis.jpg"
+                          alt="DNA Synthesis"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -214,13 +232,20 @@ const Applications = () => {
                         therapeutics developing in the pharmaceutical sector,
                         e.g. antibody research, drug bio-production and RNAi
                         based therapeutics.....{" "}
-                        <Link href="/Applications/DNA-Synthesis" prefetch={false}>
-                          <span className=" font-weight-bold span-with-link">Read More</span>
+                        <Link
+                          href="/Applications/DNA-Synthesis"
+                          prefetch={false}
+                        >
+                          <span className=" font-weight-bold span-with-link">
+                            Read More
+                          </span>
                         </Link>
                       </p>
                       <p className="">
-                       <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">Request A Quote</button>
+                        <Link href="/contact-us" prefetch={false}>
+                          <button className="btn btn-lg button-orange text-white m-4 m-5">
+                            Request A Quote
+                          </button>
                         </Link>
                       </p>
                     </div>

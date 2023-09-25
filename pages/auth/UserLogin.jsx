@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react"
-import Container from "~/components/layouts/Container"
 import { useRouter } from "next/router"
 import { Form, Input, Button, Checkbox } from "antd"
 import { AiOutlineLock, AiOutlineUser } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
 import { getSession } from "next-auth/react"
+import dynamic from "next/dynamic"
+
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const UserLogin = ({ reffrals }) => {
   const router = useRouter()
@@ -60,7 +66,6 @@ const UserLogin = ({ reffrals }) => {
           progress: undefined,
           theme: "colored"
         })
-
       } else {
         toast.error(json.message, {
           position: "top-right",
@@ -92,10 +97,6 @@ const UserLogin = ({ reffrals }) => {
     }
   }
 
-  const onFinishFailed = () => {
-    // console.log("Failed:", errorInfo);
-  }
-
   return (
     <Container title="My Account">
       <ToastContainer
@@ -120,7 +121,6 @@ const UserLogin = ({ reffrals }) => {
                   alt="Stemnovate Limited"
                   width={955}
                   height={1080}
-                 //   style={{ width: "100%" }}
                 />
               </div>
               <div className="p-4 col-12 col-md-6 card">
@@ -133,7 +133,6 @@ const UserLogin = ({ reffrals }) => {
                     id="CollectedForms-5456750"
                     className="login-form"
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                     autoComplete="off"
                   >
                     <Form.Item

@@ -1,7 +1,6 @@
 import React from "react";
 import Link from 'next/link'
 import dynamic from 'next/dynamic';
-// import ModuleFooterCopyright from "~/components/shared/footers/modules/ModuleFooterCopyright";
 const ModuleFooterCopyright = dynamic(
     () => import("~/components/shared/footers/modules/ModuleFooterCopyright"),
     {loading: ()=> <p>Loading...</p>}

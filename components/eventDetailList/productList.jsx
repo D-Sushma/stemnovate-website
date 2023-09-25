@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Input, Button } from "antd"
 import { connect, useDispatch } from "react-redux"
@@ -12,14 +11,14 @@ import { ToastContainer, toast } from "react-toastify"
 import { FaArrowRight } from "react-icons/fa"
 
 const ProductList = ({ ecomerce, slug }) => {
-   const { price } = useProduct()
+  const { price } = useProduct()
   const [ProductData, setProductData] = useState("")
   const [isLoading, setisLoading] = React.useState(false)
   const [AddtoCart, setAddtoCart] = useState([])
-  
+
   const dispatch = useDispatch()
   const { loading, addItem } = useEcomerce()
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   const handleAddItemToCart = (id, price, key) => {
     if (session) {
@@ -37,13 +36,17 @@ const ProductList = ({ ecomerce, slug }) => {
             Please{"  "}
             <Link href={"/auth/UserLogin"}>
               <u>
-                <div className="Toast-link font-weight-bolder link-hover-thumb-shape">Login</div>
+                <div className="Toast-link font-weight-bolder link-hover-thumb-shape">
+                  Login
+                </div>
               </u>
             </Link>
             {"  "}/{"  "}
             <Link href={"/auth/UserReg"}>
               <u>
-                <div className="Toast-link font-weight-bolder link-hover-thumb-shape">Signup</div>
+                <div className="Toast-link font-weight-bolder link-hover-thumb-shape">
+                  Signup
+                </div>
               </u>
             </Link>{" "}
             to proceed
@@ -142,7 +145,6 @@ const ProductList = ({ ecomerce, slug }) => {
             <div className=" row d-flex my-4 justify-content-center">
               {ProductData.Products &&
                 ProductData.Products.map((post, key) =>
-                 
                   post.slug == "Drug-Discovery-Platform" ||
                   post.slug == "Disease-Modelling" ||
                   post.slug == "Animal-Health" ? (
@@ -159,28 +161,13 @@ const ProductList = ({ ecomerce, slug }) => {
                           }
                           className="rounded"
                           alt={post.category_name}
-                          />
-                        {/* <Image
-                          src={
-                            post.image == null
-                              ? `/no-image.png`
-                              : `${process.env.AWS_S3BUCKET_URL}${post.image}`
-                          }
-                          className="rounded"
-                          alt={post.category_name}
-                          width="1200"
-                          height="675"
-                          placeholder="blur"
-                          blurDataURL="/static/image/blurred.png"
-                        /> */}
+                        />
                         <div className="card-body  rounded-lg p-0 overlay-content-p">
                           <div className="p-5">
                             <Link href={`${slug}/${post.slug}`}>
-                              
-                                <h2 className="h2 text-white link-hover-thumb-shape">
-                                  <b>{post.category_name}</b>
-                                </h2>
-                              
+                              <h2 className="h2 text-white link-hover-thumb-shape">
+                                <b>{post.category_name}</b>
+                              </h2>
                             </Link>
 
                             <Link href={`${slug}/${post.slug}`}>
@@ -224,19 +211,7 @@ const ProductList = ({ ecomerce, slug }) => {
                                 }`}
                                 unoptimized={false}
                                 alt={value?.product_slug}
-                                />
-                              {/* <Image
-                                loader={myLoader}
-                                src={`${process.env.AWS_S3BUCKET_URL}${
-                                  value?.product_image.split(",")[0]
-                                }`}
-                                unoptimized={false}
-                                alt={value?.product_slug}
-                                width="480"
-                                height="360"
-                                placeholder="blur"
-                                blurDataURL="/static/image/blurred.png"
-                              /> */}
+                              />
                             </div>
                           </Link>
 
@@ -316,7 +291,9 @@ const ProductList = ({ ecomerce, slug }) => {
                                 href={`/product/${value.product_slug}`}
                                 as={`/product/${value.product_slug}`}
                               >
-                                <span className="span-with-link">{value && value.CatalogueNumber}</span>
+                                <span className="span-with-link">
+                                  {value && value.CatalogueNumber}
+                                </span>
                               </Link>
                             </div>
                             <div
@@ -386,7 +363,9 @@ const ProductList = ({ ecomerce, slug }) => {
                                     href={`/product/${value.product_slug}`}
                                     as={`/product/${value.product_slug}`}
                                   >
-                                    <span className="span-with-link">{value && value.CatalogueNumber}</span>
+                                    <span className="span-with-link">
+                                      {value && value.CatalogueNumber}
+                                    </span>
                                   </Link>
                                 </div>
                                 <div className="p-2 bd-highlight w-15  ">
@@ -486,7 +465,7 @@ const ProductList = ({ ecomerce, slug }) => {
                                   {AddtoCart[key] > 0 ? (
                                     <Button
                                       type="primary"
-                                      onClick={(e) => {
+                                      onClick={() => {
                                         !loading
                                           ? handleAddItemToCart(
                                               value.id,
@@ -521,5 +500,4 @@ const ProductList = ({ ecomerce, slug }) => {
   )
 }
 
-// export default categoryListScreen;
 export default connect((state) => state)(ProductList)

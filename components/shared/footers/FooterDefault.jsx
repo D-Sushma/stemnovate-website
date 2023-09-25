@@ -44,7 +44,6 @@ const FooterDefault = () => {
                     height={500}
                     style={{
                       width: "150px",
-                      // height: "22%",
                       marginBottom: "10px"
                     }}
                   />
@@ -55,9 +54,7 @@ const FooterDefault = () => {
                     height={500}
                     style={{
                       width: "150px"
-                      // height: "22%"
-                      // height: "fit-content"
-                    }}
+                     }}
                   />
                 </div>
                 <div className="d-flex">
@@ -70,7 +67,6 @@ const FooterDefault = () => {
                       height={500}
                       style={{
                         width: "150px"
-                        // height: "100%",
                       }}
                     />
                   </p>

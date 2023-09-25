@@ -1,16 +1,16 @@
 import React, { useState } from "react"
-// import Container from "~/components/layouts/Container"
-import { Form, Input, Button} from "antd"
+import { Form, Input, Button } from "antd"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
-import {AiOutlineUser} from "react-icons/ai"
+import { AiOutlineUser } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const ForgotPassword = () => {
   const [isLoading, setisLoading] = useState(false)
@@ -131,7 +131,6 @@ const ForgotPassword = () => {
                   alt="Stemnovate Limited"
                   width={1000}
                   height={788}
-                  //   style={{ width: "100%" }}
                 />
               </div>
               <div className="p-4 col-12 col-md-6 card">

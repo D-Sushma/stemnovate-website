@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-// import Container from "~/components/layouts/Container"
 import { Form, Input, Button, Modal, Checkbox, Tooltip } from "antd"
 import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
 import { toast } from "react-toastify"
@@ -9,13 +8,14 @@ import { signIn } from "next-auth/react"
 import Countries from "../../public/static/data/AllCountries.json"
 import { encode } from "hex-encode-decode"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const UserReg = ({ reffrals }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -142,7 +142,6 @@ const UserReg = ({ reffrals }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined
-            // theme: "colored",
           })
         } else {
           toast.danger("something went to wrong", {
@@ -226,16 +225,11 @@ const UserReg = ({ reffrals }) => {
     }
   }
 
-  const onFinishFailed = () => {
-    // console.log("Failed:", errorInfo);
-  }
-
   return (
     <Container
       title="My Account"
       description="Stemnovate page for new sign up, registartion. Check our term of use"
     >
-      {/* <ToastContainer /> */}
       <div className="ps-page ps-page--inner ">
         <div className="container">
           <div className="ps-page__header"></div>
@@ -247,7 +241,6 @@ const UserReg = ({ reffrals }) => {
                   alt="Stemnovate Limited"
                   width={955}
                   height={1080}
-                  //   style={{ width: "100%" }}
                 />
               </div>
               <div className="p-4 col-12 col-md-6 card">
@@ -257,7 +250,6 @@ const UserReg = ({ reffrals }) => {
                     layout="vertical"
                     size={"large"}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                     autoComplete="off"
                   >
                     <Row>

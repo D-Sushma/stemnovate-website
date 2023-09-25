@@ -4,8 +4,6 @@ import PropTypes from "prop-types"
 import { useState } from "react"
 import Image from "next/image"
 import Slider from "react-slick"
-// import NextArrow from "~/components/elements/carousel/NextArrow"
-// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 
