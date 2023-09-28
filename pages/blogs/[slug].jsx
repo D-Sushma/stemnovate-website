@@ -178,15 +178,14 @@ const Blogs = (props) => {
                           quote={blogData?.name}
                           hashtag={"#Stemnovate"}
                         >
-                          <WhatsappIcon size={42} round />
-                        </WhatsappShareButton>
+                          <WhatsappIcon size={44} round />
                       </div>
                       <div className="col-md-12"></div>
                     </div>
                   </div>
                 </section>
               </div>
-              <div className="container">
+              <div className="container-test">
                 <div
                   className="center-box"
                   dangerouslySetInnerHTML={{
@@ -195,7 +194,12 @@ const Blogs = (props) => {
                 ></div>
               </div>
             </div>
-
+            <ol>
+              <li>the stemnovate listed</li>
+              <li>the stemnovate listed</li>
+              <li>the stemnovate listed</li>
+              <li>the stemnovate listed</li>
+            </ol>
             <Subscribe />
           </div>
         </div>
