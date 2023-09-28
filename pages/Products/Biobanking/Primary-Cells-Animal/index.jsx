@@ -1,6 +1,5 @@
 import React from "react"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
 import EthicalTissueSourcing from "~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg"
 import OurAnimalCellPlatform from "~/public/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif"
 import InternationalShipping from "~/public/static/img/products/Primary-Cells-Animal/International-Shipping.jpg"
@@ -14,6 +13,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const ProductList = dynamic(
@@ -298,7 +300,10 @@ const categoryListScreen = () => {
                           world through scientific aptitude and discoveries for
                           our furry friends.
                         </p>
-                        <Link href="/Applications/Animal-Health" prefetch={false}>
+                        <Link
+                          href="/Applications/Animal-Health"
+                          prefetch={false}
+                        >
                           <button className="btn btn-lg button-orange text-white m-4 m-5">
                             Find Out More
                           </button>
@@ -368,5 +373,4 @@ export async function getServerSideProps({ query }) {
   return { props: { ProductData } }
 }
 
-// export default categoryListScreen;
 export default connect((state) => state)(categoryListScreen)

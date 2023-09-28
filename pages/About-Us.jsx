@@ -1,9 +1,6 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
-import Image from '~/components/elements/Image'
-// import NextArrow from "~/components/elements/carousel/NextArrow"
-// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Slider from "react-slick"
 import dynamic from "next/dynamic"
 
@@ -19,6 +16,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Subscribe = dynamic(
@@ -191,7 +191,6 @@ const AboutUsScreen = ({
                     ></div>
                   </div>
                 </div>
-
               </section>
             </div>
 
@@ -214,8 +213,7 @@ const AboutUsScreen = ({
                                 height={675}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                                priority
-                                layout="responsive"
+                                //layout="responsive"
                               />
                             </div>
                           </Link>
@@ -264,8 +262,6 @@ const AboutUsScreen = ({
                                 height={245}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                                priority
-                                // layout="responsive"
                               />
                             </div>
                           </a>
@@ -293,7 +289,9 @@ const AboutUsScreen = ({
                             className="h3 py-4 float-right "
                           >
                             <span className="button-link">{data.btn_text}</span>
-                            <span className="visually-hidden">{data.history_content}</span>
+                            <span className="visually-hidden">
+                              {data.history_content}
+                            </span>
                           </a>
                         </div>
                       </div>
@@ -329,8 +327,7 @@ const AboutUsScreen = ({
                                     height={675}
                                     placeholder="blur"
                                     blurDataURL="/static/image/blurred.png"
-                                    priority
-                                    layout="responsive"
+                                    //layout="responsive"
                                   />
                                 </div>
                               </Link>
@@ -379,8 +376,7 @@ const AboutUsScreen = ({
                                     height={675}
                                     placeholder="blur"
                                     blurDataURL="/static/image/blurred.png"
-                                    priority
-                                    layout="responsive"
+                                    //layout="responsive"
                                   />
                                 </div>
                               </Link>
@@ -429,8 +425,7 @@ const AboutUsScreen = ({
                                 height={675}
                                 placeholder="blur"
                                 blurDataURL="/static/image/blurred.png"
-                                priority
-                                layout="responsive"
+                                //layout="responsive"
                               />
                             </div>
                           </Link>
@@ -550,8 +545,7 @@ const AboutUsScreen = ({
                                       height={219}
                                       placeholder="blur"
                                       blurDataURL="/static/image/blurred.png"
-                                      priority
-                                      layout="responsive"
+                                      //layout="responsive"
                                     />
                                   </a>
 
@@ -575,7 +569,9 @@ const AboutUsScreen = ({
                                       <span className="button-link">
                                         READ MORE
                                       </span>
-                                      <span className="visually-hidden">Read more about {data.title}</span>
+                                      <span className="visually-hidden">
+                                        Read more about {data.title}
+                                      </span>
                                     </a>
                                   </div>
                                 </div>

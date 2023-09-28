@@ -5,9 +5,11 @@ import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import Slider from "react-slick"
-import Image from "~/components/elements/Image"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const HeaderDefault = dynamic(
@@ -30,7 +32,6 @@ const DynamicHowItsWork = dynamic(
     loading: () => <p>Loading...</p>
   }
 )
-
 const DynamicCaseStudy = dynamic(
   () => import("~/components/shared/sections/CaseStudy"),
   {
@@ -50,7 +51,7 @@ const DynamicOurClients = dynamic(
   }
 )
 const DynamicBlogGrid = dynamic(
-  () => import("~/components/partials/blog/BlogGrid-New-1"),
+  () => import("~/components/partials/blog/BlogGridNew"),
   {
     loading: () => <p>Loading...</p>
   }

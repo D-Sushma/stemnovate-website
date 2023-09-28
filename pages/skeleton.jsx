@@ -1,7 +1,4 @@
 import React from "react"
-// import Container from "~/components/layouts/Container";
-// import SkeletonProduct from "~/components/elements/skeletons/SkeletonProduct";
-// import SkeletonTable from "~/components/elements/skeletons/SkeletonTable"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {

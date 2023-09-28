@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PostRepository from '~/repositories/PostRepository';
-// import ArticleList from '~/components/elements/articles/ArticleList';
 import dynamic from 'next/dynamic'
 
 const ArticleList = dynamic(
     () => import("~/components/elements/articles/ArticleList"),
-    {loading: ()=> <p>Loading..</p>}
+    { loading: () => <p>Loading..</p> }
 )
 
 const BlogGrid = ({ collectionSlug }) => {

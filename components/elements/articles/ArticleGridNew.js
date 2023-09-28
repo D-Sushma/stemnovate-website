@@ -11,8 +11,8 @@ const ArticleGrid = ({ post }) => {
 
     return (
         <>
-            <div className="card mt-3 align-items-center p-1 " 
-            style={{width:"308px", height:"auto"}}>
+            <div className="card mt-3 align-items-center p-1 "
+                style={{ width: "308px", height: "auto" }}>
                 <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`} prefetch={false}>
                     <div className="link-hover-thumb-shape">{thumbnail}</div>
                 </Link>

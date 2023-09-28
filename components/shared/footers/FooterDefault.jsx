@@ -3,19 +3,19 @@ import React from "react"
 import FooterLinks from "~/public/static/data/footer.json"
 import Image from "next/image"
 import Link from "next/link"
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic"
 
 const ModuleFooterAddress = dynamic(
   () => import("~/components/shared/footers/modules/ModuleFooterAddress"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const WidgetFooterLinks = dynamic(
   () => import("~/components/shared/widgets/footer/WidgetFooterLinks"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const ModuleFooterBottom = dynamic(
   () => import("~/components/shared/footers/modules/ModuleFooterBottom"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const FooterDefault = () => {
@@ -54,7 +54,7 @@ const FooterDefault = () => {
                     height={500}
                     style={{
                       width: "150px"
-                     }}
+                    }}
                   />
                 </div>
                 <div className="d-flex">

@@ -96,9 +96,7 @@ const EcomerceMiniCart = ({ ecomerce }) => {
       )
       cartActionsView = (
         <div>
-          <Link href="/Products" >
-            Back to shop
-          </Link>
+          <Link href="/Products">Back to shop</Link>
           <div className="ps-cart__clear-cart">
             <a
               href="#"

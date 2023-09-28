@@ -1,13 +1,15 @@
 import React, { useState } from "react"
 import { Modal } from "antd"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const ProductList = dynamic(
@@ -88,7 +90,10 @@ const ServicesScreen = () => {
                         the potential for testing drugs and developing
                         treatments for currently incurable diseases affecting
                         the liver, heart and brain, and even diabetes...{" "}
-                        <Link href="/Services/Cell-Reprogramming" prefetch={false}>
+                        <Link
+                          href="/Services/Cell-Reprogramming"
+                          prefetch={false}
+                        >
                           <span className="text-white font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -136,7 +141,10 @@ const ServicesScreen = () => {
                         reprogramming to form liver, heart and brain cells.
                         Interestingly, the differentiation process in our
                         laboratory reveals some of the development ...{" "}
-                        <Link href="/Services/Cell-Differentiation" prefetch={false}>
+                        <Link
+                          href="/Services/Cell-Differentiation"
+                          prefetch={false}
+                        >
                           <span className=" font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -184,7 +192,10 @@ const ServicesScreen = () => {
                         clinical applications. We use bioinformatics and
                         molecular technology for disease modelling for early
                         diagnosis and to help develop better treatments...
-                        <Link href="/Services/Molecular-Analysis" prefetch={false}>
+                        <Link
+                          href="/Services/Molecular-Analysis"
+                          prefetch={false}
+                        >
                           <span className="text-white font-weight-bold span-with-link">
                             {" "}
                             Read More
@@ -230,7 +241,10 @@ const ServicesScreen = () => {
                         genotyping services to understand the role of cytochrome
                         P450s and predict human drug response from the early
                         stages of drug development...
-                        <Link href="/Services/In-vitro-toxicology" prefetch={false}>
+                        <Link
+                          href="/Services/In-vitro-toxicology"
+                          prefetch={false}
+                        >
                           <span className="font-weight-bold span-with-link">
                             {" "}
                             Read More

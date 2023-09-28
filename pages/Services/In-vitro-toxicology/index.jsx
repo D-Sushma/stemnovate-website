@@ -1,5 +1,4 @@
 import React from "react"
-import Image from '~/components/elements/Image'
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
@@ -9,6 +8,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Subscribe = dynamic(
@@ -114,7 +116,10 @@ const texicologyScreen = () => {
                   <div className="py-5">
                     <section className="ps-section--block-grid">
                       <div className="col-md-4">
-                        <Link href="/Applications/Disease-Modelling/Liver" prefetch={false}>
+                        <Link
+                          href="/Applications/Disease-Modelling/Liver"
+                          prefetch={false}
+                        >
                           <div className="ion-wrapper text-center span-with-link">
                             <Image
                               width="100"
@@ -130,7 +135,10 @@ const texicologyScreen = () => {
                         </Link>
                       </div>
                       <div className="col-md-4">
-                        <Link href="/Applications/Disease-Modelling/Heart" prefetch={false}>
+                        <Link
+                          href="/Applications/Disease-Modelling/Heart"
+                          prefetch={false}
+                        >
                           <div className="ion-wrapper text-center span-with-link">
                             <Image
                               width="100"
@@ -146,7 +154,10 @@ const texicologyScreen = () => {
                         </Link>
                       </div>
                       <div className="col-md-4">
-                        <Link href="/Applications/Disease-Modelling/Neuron" prefetch={false}>
+                        <Link
+                          href="/Applications/Disease-Modelling/Neuron"
+                          prefetch={false}
+                        >
                           <div className="ion-wrapper text-center span-with-link">
                             <Image
                               width="100"
@@ -259,5 +270,4 @@ export async function getServerSideProps({ query }) {
   return { props: { ProductData } }
 }
 
-// export default texicologyScreen;
 export default connect((state) => state)(texicologyScreen)

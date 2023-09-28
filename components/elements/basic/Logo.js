@@ -1,6 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic'
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+    loading: () => <p>Loading...</p>
+})
+
 const baseurl = "";
 
 const Logo = ({ url = "/", type = "default" }) => {
@@ -21,17 +26,10 @@ const Logo = ({ url = "/", type = "default" }) => {
         return (
             <Link href={url} prefetch={false}>
                 <div className="ps-logo" title="Stemnovate Limited" style={{ width: "150px", height: "auto" }}>
-                    {/* <Image
-                        src={baseurl + "/static/image/LogoFINAL.svg"}
-                        alt="Stemnovate Limited"
-                        width={300}
-                        height={88}
-                        // style={{ width: "150px", height: "auto", objectFit: "cover" }}
-                    /> */}
                     <img
                         src={baseurl + "/static/image/LogoFINAL.svg"}
                         alt="Stemnovate Limited"
-                        style={{ width:"150px",height:"auto", objectFit: "cover" }}
+                        style={{ width: "150px", height: "auto", objectFit: "cover" }}
                     />
                 </div>
             </Link>
@@ -45,7 +43,6 @@ const Logo = ({ url = "/", type = "default" }) => {
                         alt="Stemnovate Limited"
                         width={1000}
                         height={300}
-                    // style={{ width: "100%", height: "100%" }} 
                     />
                 </dic>
             </Link>

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import Image from '~/components/elements/Image'
 import { useRouter } from "next/router";
 import dynamic from 'next/dynamic'
 
+const Image = dynamic(() => import("~/components/elements/Image"), {
+    loading: () => <p>Loading...</p>
+})
 const ModuleShopSortBy = dynamic(
     () => import("~/components/partials/shop/modules/ModuleShopSortBy"),
-    {loading: ()=> <p>Loading...</p>}
+    { loading: () => <p>Loading...</p> }
 )
 const ModuleShopPaginationRange = dynamic(
     () => import("~/components/partials/shop/modules/ModuleShopPaginationRange"),
-    {loading: ()=> <p>Loading...</p>}
+    { loading: () => <p>Loading...</p> }
 )
 
 const ModuleShopActions = () => {

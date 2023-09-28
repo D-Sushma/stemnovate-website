@@ -24,7 +24,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   const handleUpdate = (index, name, todo) => {
     console.log("billing", myBillingdetails.customer_address_details)
     if (myBillingdetails[index] && myBillingdetails[index][name] != null) {
-       var newDetails = myBillingdetails.customer_address_details
+      var newDetails = myBillingdetails.customer_address_details
       if (myBillingdetails.customer_address_details != null) {
         newDetails[name] = myBillingdetails[index][name]
       } else {
@@ -38,11 +38,11 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
       newDetailsAdd[index] = {}
       newDetailsAdd[index][name] = todo
       setMybillingDetails(newDetailsAdd)
-       }
+    }
   }
 
   const { products, getProducts } = useEcomerce()
-  
+
   const [loading, setLoading] = useState(false)
   const [checkTnC, setCheckTnC] = useState(false)
   const [pONumber, setPONumber] = useState("")
@@ -57,7 +57,6 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     percentage,
     withVAT,
     amountView = "0.00"
-  // var shippingCosts = []
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
     maxShippingCost = calculateShipping(products)
@@ -205,13 +204,11 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
               sessionId: checkoutSession.data.id
             })
             if (result.error) {
-              // alert(result.error.message);
               setLoading(false)
             }
             setLoading(false)
           }
         } else {
-          // console.log("Some Filled Empty");
           toast.warning("Please Filled " + blankField() + " fields.", {
             position: "top-right",
             autoClose: 5000,
@@ -510,7 +507,9 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
           </form>
         ) : (
           <Link href="/auth/UserLogin">
-            <button className="ps-btn ps-btn--warning link-hover-thumb-shape">Login</button>
+            <button className="ps-btn ps-btn--warning link-hover-thumb-shape">
+              Login
+            </button>
           </Link>
         )}
       </div>
@@ -560,13 +559,15 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
                   {" "}
                   I have read and agree to the website{" "}
                   <Link target={"_blank"} href="/terms-of-use">
-                    <u className="text-info link-hover-thumb-shape">terms and conditions</u>
+                    <u className="text-info link-hover-thumb-shape">
+                      terms and conditions
+                    </u>
                   </Link>{" "}
                   *
                 </label>
               </div>
             </div>
-           
+
             <button
               disabled={
                 userStatus

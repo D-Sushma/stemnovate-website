@@ -5,26 +5,26 @@ import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
 import PropTypes from "prop-types"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 const ProductList = dynamic(
-    () => import("~/components/productList/resourcesRecommendedProductList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/productList/resourcesRecommendedProductList"),
+  { loading: () => <p>Loading...</p> }
+)
 
 import {
   FaArrowRight,
@@ -340,7 +340,10 @@ const ResourcesData = (props) => {
                                   }}
                                 ></p>
                               ) : null}
-                              <Link href={`/resources/r/${myRes.resources_name}`} prefetch={false}>
+                              <Link
+                                href={`/resources/r/${myRes.resources_name}`}
+                                prefetch={false}
+                              >
                                 <div
                                   className="link-btn-b"
                                   style={{ cursor: "pointer" }}
@@ -413,7 +416,6 @@ export async function getServerSideProps({ query }) {
   return { props: { resourcesData } }
 }
 
-// export default ResourcesData;
 export default connect((state) => state)(ResourcesData)
 ResourcesData.propTypes = {
   resourcesData: PropTypes.array

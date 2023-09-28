@@ -19,7 +19,7 @@ function orderConfirmation({ UserData }) {
   const MySummery = useRef(null)
   const [resourcesData, setResourcesdata] = useState([])
   useEffect(() => {
-     getOrderDetails()
+    getOrderDetails()
   }, [])
 
   const getOrderDetails = async () => {
@@ -72,8 +72,6 @@ function orderConfirmation({ UserData }) {
     }
   }
 
-
-
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 83 && window.scrollY < 750) {
@@ -91,7 +89,7 @@ function orderConfirmation({ UserData }) {
       console.log(window.scrollY)
     })
   }, [])
-  
+
   return (
     <Container title="Order Confirmation">
       <div className="ps-page ps-page--shopping">

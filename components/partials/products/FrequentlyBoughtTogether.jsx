@@ -3,15 +3,16 @@ import React, { useEffect } from "react"
 import { useSession } from "next-auth/react"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
-// import AddResourcesModule from "~/components/elements/products/modules/AddResourcesModule"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
 const AddResourcesModule = dynamic(
   () => import("~/components/elements/products/modules/AddResourcesModule"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
   const {
@@ -28,7 +29,6 @@ const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
 
   React.useEffect(() => {
     if (session) {
-      // console.log(session);
       if (userData !== null) {
         getUserData()
       }
@@ -53,7 +53,6 @@ const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Session", data);
         if (data.code == 200) {
           setUserData(data.result)
         }

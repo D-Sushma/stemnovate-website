@@ -4,28 +4,23 @@ import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 import PropTypes from "prop-types"
 import Link from "next/link"
 
-import {
-  FaRegArrowAltCircleDown,
-  FaRegArrowAltCircleUp
-} from "react-icons/fa"
+import { FaRegArrowAltCircleDown, FaRegArrowAltCircleUp } from "react-icons/fa"
 import moment from "moment"
 import AddToCartResources from "~/components/resources/AddToCartResources"
 import { ToastContainer } from "react-toastify"
@@ -62,13 +57,11 @@ const ResourcesData = (props) => {
 
   React.useEffect(() => {
     if (session) {
-      // console.log(session);
       getResourcesAccess()
       if (userData !== null) {
         getUserData()
       }
     } else {
-      // console.log("Not Session");
     }
   }, [session, userData])
 
@@ -99,7 +92,7 @@ const ResourcesData = (props) => {
           } else {
             setIsActive(false)
           }
-          }
+        }
       })
   }
 
@@ -140,7 +133,6 @@ const ResourcesData = (props) => {
             setResources_sequence(seq)
           }
           console.log("file_count", file_count)
-          //  console.log("resources_structural", data.data[0].structural_variation)
           getURLLink(data.data[0].datasheet_files)
         }
       })
@@ -188,7 +180,7 @@ const ResourcesData = (props) => {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-         if (data.code == 200) {
+        if (data.code == 200) {
           setUserData(data.result)
         }
       })
@@ -275,14 +267,14 @@ const ResourcesData = (props) => {
                           "DD-MMM-YYYY"
                         )}
                       </p>
-                     <div className="my-3">
+                      <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
                             <Link
                               href={`/resources/Download/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
                               prefetch={false}
                             >
-                              <div style={{cursor:"pointer"}}>
+                              <div style={{ cursor: "pointer" }}>
                                 <button className="button button--green mr-2">
                                   View & Download PDF
                                 </button>
@@ -364,7 +356,7 @@ const ResourcesData = (props) => {
                             <th className="ps-table__th">Sequence ID</th>
                             <th className="ps-table__th">Alignment</th>
                           </tr>
-                          
+
                           {seqfile_count > 0
                             ? seqfile_count
                             : resources_sequence.map((sq, k) => {
@@ -395,7 +387,7 @@ const ResourcesData = (props) => {
                             <th className="ps-table__th">Location</th>
                             <th className="ps-table__th">Position</th>
                           </tr>
-                          
+
                           {file_count > 0
                             ? file_count
                             : resources_structural.map((struct, k) => {
@@ -472,7 +464,6 @@ export async function getServerSideProps({ query }) {
   return { props: { resourcesData } }
 }
 
-// export default ResourcesData;
 export default connect((state) => state)(ResourcesData)
 ResourcesData.propTypes = {
   resourcesData: PropTypes.array

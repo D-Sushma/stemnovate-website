@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "~/components/elements/Image"
 import brand1 from "~/public/brand/1.png"
 import brand2 from "~/public/brand/2.png"
 import brand3 from "~/public/brand/3.png"
@@ -10,6 +9,11 @@ import brand7 from "~/public/brand/7.png"
 import brand8 from "~/public/brand/8.png"
 import brand9 from "~/public/brand/9.png"
 import brand10 from "~/public/brand/10.png"
+import dynamic from "next/dynamic"
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+
 export default function OurClients() {
   return (
     <>
@@ -30,7 +34,6 @@ export default function OurClients() {
                       alt="rvc"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -48,7 +51,6 @@ export default function OurClients() {
                       alt="cam"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -66,7 +68,6 @@ export default function OurClients() {
                       alt="babraham"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -84,7 +85,6 @@ export default function OurClients() {
                       alt="ed"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -102,7 +102,6 @@ export default function OurClients() {
                       alt="ed"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -120,7 +119,6 @@ export default function OurClients() {
                       alt="qkine"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -139,7 +137,6 @@ export default function OurClients() {
                       alt="tcd"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -157,7 +154,6 @@ export default function OurClients() {
                       alt="unibe"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -175,7 +171,6 @@ export default function OurClients() {
                       alt="nhs"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>
@@ -193,7 +188,6 @@ export default function OurClients() {
                       alt="ox"
                       placeholder="blur"
                       blurDataURL="/static/image/blurred.png"
-                      priority
                     />
                   </div>
                 </a>

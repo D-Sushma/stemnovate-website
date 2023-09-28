@@ -125,7 +125,6 @@ const CampaignPage = ({ ProductData }) => {
   )
 }
 
-// export async function getServerSideProps({ query }) {
 export async function getServerSideProps() {
   var ProductData = []
 

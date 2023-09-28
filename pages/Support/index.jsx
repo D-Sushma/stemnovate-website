@@ -1,14 +1,12 @@
-import React from "react";
-// import ContactUsScreen from "../contact-us";
-import dynamic from 'next/dynamic'
+import React from "react"
+import dynamic from "next/dynamic"
 
-const ContactUsScreen = dynamic(
-    () => import("../contact-us"),
-    {loading: ()=> <p>Loading...</p>}
-)
+const ContactUsScreen = dynamic(() => import("../contact-us"), {
+  loading: () => <p>Loading...</p>
+})
 
 const SupportScreen = () => {
-    return <ContactUsScreen mytitile="Support" />;
-};
+  return <ContactUsScreen mytitile="Support" />
+}
 
-export default SupportScreen;
+export default SupportScreen

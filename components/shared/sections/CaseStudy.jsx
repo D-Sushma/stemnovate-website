@@ -1,8 +1,12 @@
-import Image from "~/components/elements/Image"
 import React from "react"
 import Link from "next/link"
 import Partnership from "~/public/static/home-images/Partnerships.jpg"
 import TaleOfTwinCities from "~/public/static/home-images/Featured-Blog.jpg"
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const CaseStudy = () => {
   return (
     <section className="about-section">
@@ -31,7 +35,6 @@ const CaseStudy = () => {
                         height={218}
                         placeholder="blur"
                         blurDataURL="/static/image/blurred.png"
-                        priority
                       />
                     </div>
                     <p className="text-left font-weight-bolder content-services">
@@ -81,7 +84,6 @@ const CaseStudy = () => {
                         height={218}
                         placeholder="blur"
                         blurDataURL="/static/image/blurred.png"
-                        priority
                       />
                     </div>
                     <p className=" text-left font-weight-bolder content-services">

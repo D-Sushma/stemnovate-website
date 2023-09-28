@@ -5,16 +5,15 @@ import useEcomerce from "~/hooks/useEcomerce"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
 import moment from "moment"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 function OrderConfirmation({ UserData }) {
   const router = useRouter()
@@ -24,7 +23,6 @@ function OrderConfirmation({ UserData }) {
   const { removeItems } = useEcomerce()
 
   useEffect(() => {
-    // console.log("UserData", UserData.result);
     if (status) {
       if (status == "success") {
         removeItems("cart")
@@ -69,7 +67,6 @@ function OrderConfirmation({ UserData }) {
       requestOptions
     )
     const userOrders = await response.json()
-    // console.log("userOrders", userOrders.userOrders);
     setOrderdata(userOrders.userOrders)
   }
 
@@ -136,7 +133,6 @@ function OrderConfirmation({ UserData }) {
                           </h5>
                         </div>
                         <div className="col-md-8 ">
-
                           <div
                             className="row mb-2"
                             style={{ borderBottom: "1px solid black" }}
@@ -425,7 +421,6 @@ export async function getServerSideProps(ctx) {
   if (session) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    // myHeaders.append("cookie", ctx.req.headers.cookie);
 
     var raw = JSON.stringify({
       UserLoginId: session.id

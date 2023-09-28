@@ -201,7 +201,6 @@ const EventsDetails = ({ EventsData }) => {
                                                 <Image
                                                   src={data.file}
                                                   alt={data.name}
-                                                  // width="300px"
                                                   width={300}
                                                   height={100}
                                                 />
@@ -247,7 +246,6 @@ const EventsDetails = ({ EventsData }) => {
                                             <Image
                                               src={data.file}
                                               alt={data.name}
-                                              // width="300px"
                                               width={300}
                                               height={100}
                                             />

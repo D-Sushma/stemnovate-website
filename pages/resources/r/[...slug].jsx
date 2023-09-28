@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 import PropTypes from "prop-types"
 import Link from "next/link"
@@ -301,7 +301,10 @@ const ResourcesData = (props) => {
                           className="col-md-3 my-6 col-sm-3 col-6 d-flex flex-column flex-grow-1"
                           key={index}
                         >
-                          <Link href={`/resources/r/${myCat.slug}`} prefetch={false}>
+                          <Link
+                            href={`/resources/r/${myCat.slug}`}
+                            prefetch={false}
+                          >
                             <div className="card  d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
                               <Image
                                 src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
@@ -330,7 +333,10 @@ const ResourcesData = (props) => {
                                     {myCat.short_description &&
                                       myCat.short_description.substring(0, 90)}
                                   </p>
-                                  <Link href={`/resources/r/${myCat.slug}`} prefetch={false}>
+                                  <Link
+                                    href={`/resources/r/${myCat.slug}`}
+                                    prefetch={false}
+                                  >
                                     <div className="link-btn-b">
                                       <b>
                                         Get Resources <FaArrowRight />
@@ -391,7 +397,6 @@ export async function getServerSideProps({ query }) {
   return { props: { resourcesData } }
 }
 
-// export default ResourcesData;
 export default connect((state) => state)(ResourcesData)
 ResourcesData.propTypes = {
   resourcesData: PropTypes.array

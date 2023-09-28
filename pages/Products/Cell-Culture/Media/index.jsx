@@ -1,26 +1,26 @@
 import React from "react"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
-    () => import("~/components/productList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/productList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const categoryListScreen = () => {
   const breadcrumb = [
@@ -131,12 +131,12 @@ const categoryListScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
-                          alt="CLASSICAL CELL CULTURE MEDIA"
-                          width={1000}
-                          height={563}
-                        />
+                          <Image
+                            src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
+                            alt="CLASSICAL CELL CULTURE MEDIA"
+                            width={1000}
+                            height={563}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -194,12 +194,11 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props
   return { props: { ProductData } }
 }
 
-// export default categoryListScreen;
 export default connect((state) => state)(categoryListScreen)

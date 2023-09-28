@@ -47,9 +47,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           </p>
           <p>
             <span>VAT (20%)</span>
-            <span>
-              £ {percentage !== "NaN" ? percentage : "0.00"}
-            </span>
+            <span>£ {percentage !== "NaN" ? percentage : "0.00"}</span>
           </p>
           <p className="total">
             <span>Total</span>

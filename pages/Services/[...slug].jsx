@@ -20,7 +20,7 @@ const Applications = ({ ProductData }) => {
   const { slug } = Router.query
   const [breadcrumb, setbreadcrumb] = React.useState([])
   const [searchUrl, setsearchUrl] = React.useState("")
-  
+
   useEffect(() => {
     var serarchdata = ""
     var serachurl = "/Applications"
@@ -68,7 +68,6 @@ const Applications = ({ ProductData }) => {
     setbreadcrumb(newbreadcrumb)
   }
 
-  
   return (
     <>
       <Container title={ProductData ? ProductData.categoryList_name : slug}>
@@ -128,12 +127,11 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ;(ProductData = myProductData)
+    ProductData = myProductData
   }
 
   // // Pass data to the page via props
   return { props: { ProductData } }
 }
 
-// export default Applications;
 export default connect((state) => state)(Applications)

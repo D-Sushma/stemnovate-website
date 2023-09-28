@@ -1,26 +1,26 @@
 import React from "react"
 import { Collapse } from "antd"
 import { connect } from "react-redux"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
-    () => import("~/components/productList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/productList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 const IPSCellsScreen = () => {
   const { Panel } = Collapse
   const breadcrumb = [
@@ -78,12 +78,12 @@ const IPSCellsScreen = () => {
                     <div className="ps-section__thumbnail">
                       <Link href="#">
                         <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/services/Cell-Reprogramming.jpg"
-                          alt="Cell Reprogramming"
-                          width={1200}
-                          height={675}
-                        />
+                          <Image
+                            src="/static/img/services/Cell-Reprogramming.jpg"
+                            alt="Cell Reprogramming"
+                            width={1200}
+                            height={675}
+                          />
                         </div>
                       </Link>
                     </div>
@@ -113,7 +113,9 @@ const IPSCellsScreen = () => {
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
                     <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
-                      <span className="text-orange span-with-link">contact us.</span>
+                      <span className="text-orange span-with-link">
+                        contact us.
+                      </span>
                     </Link>
                   </p>
                   <p className="base-bg-primary text-white p-2">

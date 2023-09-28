@@ -4,17 +4,16 @@ import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import { useSession } from "next-auth/react"
 import PropTypes from "prop-types"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
-  
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
+
 import jsPDF from "jspdf"
 import html2canvas from "html2canvas"
 import { decode, encode } from "hex-encode-decode"
@@ -49,13 +48,11 @@ const ResourcesData = (props) => {
 
   React.useEffect(() => {
     if (session) {
-      // console.log(session);
       getResourcesAccess()
       if (userData !== null) {
         getUserData()
       }
     } else {
-      // console.log("Not Session");
     }
   }, [session, userData])
 
@@ -86,7 +83,6 @@ const ResourcesData = (props) => {
           } else {
             setIsActive(false)
           }
-          // setUserData(data.result)
         }
       })
   }
@@ -219,23 +215,21 @@ const ResourcesData = (props) => {
 
   /*  generate PDF */
   let handlePdf = () => {
-    const input = document.getElementById('page');
+    const input = document.getElementById("page")
 
-    html2canvas(input)
-      .then((canvas) => {
-       const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-        });
-        const imgProps= pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      //  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('download.pdf');
-      });
-  };
-    
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png")
+      const pdf = new jsPDF({
+        orientation: "portrait"
+      })
+      const imgProps = pdf.getImageProperties(imgData)
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight)
+      pdf.save("download.pdf")
+    })
+  }
+
   return (
     <Container
       title={
@@ -244,13 +238,17 @@ const ResourcesData = (props) => {
     >
       <div className="row">
         <div className="col-md-12 text-center my-5">
-             <div>
-              <button className="ps-btn ps-btn--warning ps-btn--curve" onClick={handlePdf}>Download PDF</button>
-            </div>
+          <div>
+            <button
+              className="ps-btn ps-btn--warning ps-btn--curve"
+              onClick={handlePdf}
+            >
+              Download PDF
+            </button>
+          </div>
         </div>
       </div>
-      
-      
+
       <div className="ps-page ps-page--shopping">
         <div className="ps-page__content">
           <div className="ps-about">
@@ -264,71 +262,66 @@ const ResourcesData = (props) => {
                           className="col-md-12 mb-3"
                           style={{ borderBottom: "1px solid black" }}
                         >
-                          <img src="/static/img/pdf_logo.png" alt="Stemnovate Limited" style={{width:"40%"}} />
-                          
+                          <img
+                            src="/static/img/pdf_logo.png"
+                            alt="Stemnovate Limited"
+                            style={{ width: "40%" }}
+                          />
                         </div>
                         <div className="col-md-12 ">
-
                           <div
                             className="row mb-4"
                             style={{ borderBottom: "1px solid black" }}
                           >
                             <div className="col-md-6">
                               <h2>{resourcesData.data[0].resources_name}</h2>
-                              <p>
-                                {resourcesData.data[0].short_description}
-                              </p>
-
+                              <p>{resourcesData.data[0].short_description}</p>
                             </div>
                             <div className="col-md-6">
-                              <p>PO : {" "}
-                                {resourcesFiles.pdf_po}
+                              <p>PO : {resourcesFiles.pdf_po}</p>
+                              <p>Company : {resourcesFiles.pdf_company}</p>
+                              <p>
+                                Report Number : {resourcesFiles.pdf_reportno}
                               </p>
-                              <p>Company : {" "}
-                                {resourcesFiles.pdf_company}
-                              </p>
-                              <p>Report Number : {" "}
-                                {resourcesFiles.pdf_reportno}
-                              </p>
-                              <p>Catalogue Number : {" "}
+                              <p>
+                                Catalogue Number :{" "}
                                 {resourcesFiles.pdf_catalogue_no}
                               </p>
                             </div>
-                            
                           </div>
                           <div
                             className="row"
                             style={{ borderBottom: "1px solid black" }}
                           >
-                            <h4 className="my-3">{resourcesFiles.datasets_description}</h4>
+                            <h4 className="my-3">
+                              {resourcesFiles.datasets_description}
+                            </h4>
                             <div className="col-md-12">
                               <h4 className="my-3">Sequencing Details</h4>
                               <table className="table" width="100%">
                                 <tr>
                                   <th width="40%">Sequencing ID</th>
                                   <th width="45%">Alignment</th>
-                                  
                                 </tr>
                                 <tbody>
                                   {seqfile_count > 0
-                            ? seqfile_count
-                            : resources_sequence.map((sq, k) => {
-                                return (
-                                  <tr key={k}>
-                                    <th className="ps-table__th">
-                                      {sq.sequence_id}
-                                    </th>
-                                    <th className="ps-table__th">
-                                      {sq.alignment}
-                                    </th>
-                                  </tr>
-                                )
-                              })}
-                                 
+                                    ? seqfile_count
+                                    : resources_sequence.map((sq, k) => {
+                                        return (
+                                          <tr key={k}>
+                                            <th className="ps-table__th">
+                                              {sq.sequence_id}
+                                            </th>
+                                            <th className="ps-table__th">
+                                              {sq.alignment}
+                                            </th>
+                                          </tr>
+                                        )
+                                      })}
                                 </tbody>
                               </table>
                             </div>
-                             <div className="col-md-12">
+                            <div className="col-md-12">
                               <h4 className="my-3">Structural Variation</h4>
                               <table className="table" width="100%">
                                 <tr>
@@ -338,66 +331,57 @@ const ResourcesData = (props) => {
                                 </tr>
                                 <tbody>
                                   {file_count > 0
-                            ? file_count
-                            : resources_structural.map((struct, k) => {
-                                return (
-                                  <tr key={k}>
-                                    <th className="ps-table__th">
-                                      {struct.length}
-                                    </th>
-                                    <th className="ps-table__th">
-                                      {struct.location}
-                                    </th>
-                                    <th className="ps-table__th">
-                                      {struct.position}
-                                    </th>
-                                  </tr>
-                                )
-                              })}
-                                 
+                                    ? file_count
+                                    : resources_structural.map((struct, k) => {
+                                        return (
+                                          <tr key={k}>
+                                            <th className="ps-table__th">
+                                              {struct.length}
+                                            </th>
+                                            <th className="ps-table__th">
+                                              {struct.location}
+                                            </th>
+                                            <th className="ps-table__th">
+                                              {struct.position}
+                                            </th>
+                                          </tr>
+                                        )
+                                      })}
                                 </tbody>
                               </table>
                             </div>
                           </div>
                         </div>
                         <div className="col-md-12 ">
-
                           <div
                             className="row my-4"
                             style={{ borderBottom: "1px solid black" }}
                           >
-                              <div className="col-md-12">
-                                <h2>Result</h2>
-                                <p>
-                                  {resourcesFiles.pdf_result}
-                                </p>
-
-                              </div>
+                            <div className="col-md-12">
+                              <h2>Result</h2>
+                              <p>{resourcesFiles.pdf_result}</p>
                             </div>
                           </div>
+                        </div>
 
-                          <div className="col-md-12 ">
-
+                        <div className="col-md-12 ">
                           <div
                             className="row my-4"
                             style={{ borderBottom: "1px solid black" }}
                           >
                             <div className="col-md-9"></div>
-                              <div className="col-md-3">
-                                <h2>{resourcesFiles.pdf_bottom_name}</h2>
-                                <p>
-                                  <img
-                            src={`${filePath}`}
-                            className="rounded-lg"
-                            alt="Bottom_Sign"
-                          />
-                                  
-                                </p>
-
-                              </div>
+                            <div className="col-md-3">
+                              <h2>{resourcesFiles.pdf_bottom_name}</h2>
+                              <p>
+                                <img
+                                  src={`${filePath}`}
+                                  className="rounded-lg"
+                                  alt="Bottom_Sign"
+                                />
+                              </p>
                             </div>
                           </div>
-
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -412,7 +396,7 @@ const ResourcesData = (props) => {
   )
 }
 
-export async function getServerSideProps({ req, res,query }) {
+export async function getServerSideProps({ req, res, query }) {
   const slug = query.resources_Name
   console.log("slug", slug)
   var resourcesData = []
@@ -449,7 +433,6 @@ export async function getServerSideProps({ req, res,query }) {
   return { props: { resourcesData } }
 }
 
-// export default ResourcesData;
 export default connect((state) => state)(ResourcesData)
 ResourcesData.propTypes = {
   resourcesData: PropTypes.array

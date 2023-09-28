@@ -1,84 +1,80 @@
-import React, { useEffect, useState } from 'react';
-import CollectionRepository from '~/repositories/CollectionRepository';
-import ProductRepository from '~/repositories/ProductRepository';
-// import Product from '~/components/elements/products/Product';
-// import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
-import dynamic from 'next/dynamic'
+import React, { useEffect, useState } from "react"
+import CollectionRepository from "~/repositories/CollectionRepository"
+import ProductRepository from "~/repositories/ProductRepository"
+import dynamic from "next/dynamic"
 
 const Product = dynamic(
-    () => import("~/components/elements/products/Product"),
-    {loading: ()=> <p>Loading...</p>}
+  () => import("~/components/elements/products/Product"),
+  { loading: () => <p>Loading...</p> }
 )
 const SkeletonProduct = dynamic(
-    () => import("~/components/elements/skeletons/SkeletonProduct"),
-    {loading: ()=> <p>Loading...</p>}
+  () => import("~/components/elements/skeletons/SkeletonProduct"),
+  { loading: () => <p>Loading...</p> }
 )
 
 const RelatedProducts = ({ collectionSlug }) => {
-    const [productItems, setProductItems] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [productItems, setProductItems] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-    async function getProduct() {
-        let queries, SPProducts;
-        if (collectionSlug !== undefined) {
-            SPProducts = await CollectionRepository.getProductsByCollectionSlug(
-                collectionSlug
-            );
-        } else {
-            queries = {
-                _limit: 4,
-            };
-            SPProducts = await ProductRepository.getProducts(queries);
-        }
-
-        if (SPProducts) {
-            setTimeout(function () {
-                setLoading(false);
-            }, 200);
-            setProductItems(SPProducts.items);
-            return SPProducts;
-        } else {
-            setProductItems(null);
-            return null;
-        }
-    }
-
-    useEffect(() => {
-        getProduct();
-    }, []);
-    let productItemsView;
-    if (!loading) {
-        if (productItems && productItems.length > 0) {
-            const products = productItems.map((item, index) => {
-                if (index < 6) {
-                    return (
-                        <div
-                            className="col-xl-3 col-lg-4 col-sm-3 col-6"
-                            key={item.id}>
-                            <Product product={item} />
-                        </div>
-                    );
-                }
-            });
-            productItemsView = <div className="row">{products}</div>;
-        } else {
-            productItemsView = <p>No product(s) found.</p>;
-        }
+  async function getProduct() {
+    let queries, SPProducts
+    if (collectionSlug !== undefined) {
+      SPProducts = await CollectionRepository.getProductsByCollectionSlug(
+        collectionSlug
+      )
     } else {
-        const tempArr = [1, 2, 3, 4];
-        const skeletonItems = tempArr.map((item) => (
-            <div className="col-xl-3 col-lg-4 col-sm-3 col-6" key={item}>
-                <SkeletonProduct />
-            </div>
-        ));
-        productItemsView = <div className="row">{skeletonItems}</div>;
+      queries = {
+        _limit: 4
+      }
+      SPProducts = await ProductRepository.getProducts(queries)
     }
-    return (
-        <div className="ps-related-products">
-            <h3>Related Products</h3>
-            {productItemsView}
-        </div>
-    );
-};
 
-export default RelatedProducts;
+    if (SPProducts) {
+      setTimeout(function () {
+        setLoading(false)
+      }, 200)
+      setProductItems(SPProducts.items)
+      return SPProducts
+    } else {
+      setProductItems(null)
+      return null
+    }
+  }
+
+  useEffect(() => {
+    getProduct()
+  }, [])
+  let productItemsView
+  if (!loading) {
+    if (productItems && productItems.length > 0) {
+      const products = productItems.map((item, index) => {
+        if (index < 6) {
+          return (
+            <div className="col-xl-3 col-lg-4 col-sm-3 col-6" key={item.id}>
+              <Product product={item} />
+            </div>
+          )
+        }
+      })
+      productItemsView = <div className="row">{products}</div>
+    } else {
+      productItemsView = <p>No product(s) found.</p>
+    }
+  } else {
+    const tempArr = [1, 2, 3, 4]
+    const skeletonItems = tempArr.map((item) => (
+      <div className="col-xl-3 col-lg-4 col-sm-3 col-6" key={item}>
+        <SkeletonProduct />
+      </div>
+    ))
+    productItemsView = <div className="row">{skeletonItems}</div>
+  }
+  return (
+    <div className="ps-related-products">
+      <h3>Related Products</h3>
+      {productItemsView}
+    </div>
+  )
+}
+
+export default RelatedProducts

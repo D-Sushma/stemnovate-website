@@ -9,8 +9,12 @@ import {
 } from "react-icons/tb"
 import moment from "moment"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
 import { HiArrowSmRight } from "react-icons/hi"
+import dynamic from "next/dynamic"
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+
 function CareersGrid({ postLists, internShip }) {
   return (
     <div className=" about-section ">

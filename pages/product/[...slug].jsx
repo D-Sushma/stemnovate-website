@@ -1,27 +1,21 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
-// import SkeletonProductDetail from "~/components/elements/skeletons/SkeletonProductDetail"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
-// import Container from "~/components/layouts/Container"
-// import DetailThree from "~/components/elements/detail/DetailThree"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const SkeletonProductDetail = dynamic(
   () => import("~/components/elements/skeletons/SkeletonProductDetail"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const DetailThree = dynamic(
   () => import("~/components/elements/detail/DetailThree"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const DetailLayoutThree = ({ ProductData }) => {
@@ -30,15 +24,15 @@ const DetailLayoutThree = ({ ProductData }) => {
   const htmlContent = ProductData?.ProductsList[0].short_description
   var stripedHtml = htmlContent.replace(/<[^>]+>/g, "")
 
-  var ogImage = "";
-  var images = [];
-  var products_img = ProductData?.ProductsList[0].product_image.split(",");
-        if (products_img && products_img.length > 0) {
-            products_img.map((item) => {
-                images.push(`${process.env.AWS_S3BUCKET_URL}${item}`);
-            });
-            ogImage = images[0];
-        }
+  var ogImage = ""
+  var images = []
+  var products_img = ProductData?.ProductsList[0].product_image.split(",")
+  if (products_img && products_img.length > 0) {
+    products_img.map((item) => {
+      images.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images[0]
+  }
 
   useEffect(() => {
     console.log("ProductData", ProductData)
@@ -52,7 +46,6 @@ const DetailLayoutThree = ({ ProductData }) => {
   let productView
   if (ProductData?.status == 200) {
     if (ProductData.status != 200) {
-      // if (1) {
       productView = (
         <div className="container">
           <SkeletonProductDetail />
@@ -118,7 +111,6 @@ export async function getServerSideProps({ query }) {
   console.log(slug)
   var ProductData = []
   if (slug != undefined) {
-    // slug = makeSlug(slug);
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 

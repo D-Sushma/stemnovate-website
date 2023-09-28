@@ -4,7 +4,11 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { HiArrowSmRight } from "react-icons/hi"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const EventsList = ({ resources }) => {
   return (

@@ -1,12 +1,15 @@
 import React from "react"
-import Image from '~/components/elements/Image'
 import HowitWorksmain from "~/public/static/img/how-it-work/how-it-works-white-main.png"
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const HowItsWork = () => {
   return (
     <div>
       <div className="plus-section">
         <div
-          // className="how-it-work-section"
           className="container-how-work d-flex flex-column justify-content-center align-items-center"
           style={{
             boxSizing: "border-box",

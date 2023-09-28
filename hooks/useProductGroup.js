@@ -5,31 +5,30 @@ import dynamic from 'next/dynamic'
 
 const Product = dynamic(
   () => import("~/components/elements/products/Product"),
- { loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const SkeletonProduct = dynamic(
   () => import("~/components/elements/skeletons/SkeletonProduct"),
- { loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const ProductGridWithDetail = dynamic(
   () => import("~/components/elements/products/ProductGridWithDetail"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const ProductList = dynamic(
   () => import("~/components/elements/products/ProductList"),
- { loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const SkeletonProductHorizontal = dynamic(
   () => import("~/components/elements/skeletons/SkeletonProductHorizontal"),
- { loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 // import Swiper core and required modules
 import SwiperCore, { Navigation } from "swiper/core"
-// import SwiperCarousel from "~/components/elements/carousel/SwiperCarousel"
 const SwiperCarousel = dynamic(
   () => import("~/components/elements/carousel/SwiperCarousel"),
- { loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 import { useSession } from "next-auth/react"
 
@@ -42,7 +41,6 @@ export default function useProductGroup() {
   const { data: session } = useSession()
   React.useEffect(() => {
     if (session) {
-      // console.log(session);
       if (userData !== null) {
         getUserData()
       }
@@ -67,7 +65,6 @@ export default function useProductGroup() {
     await fetch("/api/user/UserDetails", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Session", data);
         if (data.code == 200) {
           setUserData(data.result)
         }
@@ -78,7 +75,6 @@ export default function useProductGroup() {
     withCarousel: (source, loading, setting) => {
       let carousel
       if (!loading) {
-        // if (0) {
         if (source && source.length > 0) {
           const items = source.map((item) => (
             <SwiperSlide key={item.id}>

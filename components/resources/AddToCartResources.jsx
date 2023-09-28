@@ -38,7 +38,6 @@ const AddToCartResources = ({ product, ecomerce, userData }) => {
         if (checkDate(offerData.end_date) && offerData.status) {
           const userType = offerData?.customer_type
           if (offerData.customer_type === 0) {
-            // toast.error("this Offer is for " + UserType(userType));
             e.preventDefault()
             addItem(
               {
@@ -54,7 +53,6 @@ const AddToCartResources = ({ product, ecomerce, userData }) => {
             offerData.customer_type === 1 &&
             userData?.orders?.length >= 1
           ) {
-            // toast.error("this Offer is for " + UserType(userType));
             e.preventDefault()
             addItem(
               {
@@ -70,7 +68,6 @@ const AddToCartResources = ({ product, ecomerce, userData }) => {
             offerData.customer_type === 2 &&
             userData?.orders?.length === 0
           ) {
-            // toast.error("this Offer is for " + UserType(userType));
             e.preventDefault()
             addItem(
               {
@@ -85,11 +82,9 @@ const AddToCartResources = ({ product, ecomerce, userData }) => {
           } else {
             toast.error("Sorry ! this Offer is Not for " + UserType(userType))
           }
-          // console.log("userData", userData?.orders?.length);
         } else {
           toast.error("sorry ! this offer has expaired")
         }
-        // console.log(checkDate(offerData.end_date));
       } else {
         if (product.resources_status) {
           e.preventDefault()

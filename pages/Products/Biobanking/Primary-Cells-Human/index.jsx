@@ -2,27 +2,27 @@ import React from "react"
 import { Collapse } from "antd"
 import { connect } from "react-redux"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
 import FibroplastLiveCulture from "~/public/static/img/products/primary-human-fibroblasts/primary-Human-Fibroplast-Live-Culture.jpg"
 import FrozenFibroblasts from "~/public/static/img/products/human-fibroblast/Frozen-Fibroblasts.jpg"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
-    () => import("~/components/productList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/productList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 const categoryListScreen = () => {
   const { Panel } = Collapse
   const breadcrumb = [
@@ -109,7 +109,10 @@ const categoryListScreen = () => {
                           <br /> Our live cells are available in T-25 flasks
                           (~400,000 Cells)
                         </p>
-                        <Link href="/Products?Delivery_Type=Live&pType=13" prefetch={false}>
+                        <Link
+                          href="/Products?Delivery_Type=Live&pType=13"
+                          prefetch={false}
+                        >
                           <div className="btn btn-lg button-orange text-white m-4 m-5">
                             View Products
                           </div>
@@ -149,7 +152,10 @@ const categoryListScreen = () => {
                           cells per vial) and are available as single vials or
                           reserved lot.
                         </p>
-                        <Link href="/Products?Delivery_Type=Frozen&pType=13" prefetch={false}>
+                        <Link
+                          href="/Products?Delivery_Type=Frozen&pType=13"
+                          prefetch={false}
+                        >
                           <div className="btn btn-lg button-orange text-white m-4 m-5">
                             View Products
                           </div>

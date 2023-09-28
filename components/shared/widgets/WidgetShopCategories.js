@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ProductRepository from "~/repositories/ProductRepository";
 import { useRouter } from "next/router";
-import CategoryList from "./CategoryList";
+import dynamic from 'next/dynamic'
+
+const CategoryList = dynamic(() => import("./CategoryList"), {
+    loading: () => <p>Loading...</p>
+})
 
 const WidgetShopCategories = () => {
     const router = useRouter();
@@ -30,7 +34,7 @@ const WidgetShopCategories = () => {
     let categoriesView;
     if (!loading) {
         if (categories && categories.length > 0) {
-             categoriesView = categories.map((item, k) => <CategoryList key={k} getList={item.slug} type="main" categories={item.category_name} slug={slug} />);
+            categoriesView = categories.map((item, k) => <CategoryList key={k} getList={item.slug} type="main" categories={item.category_name} slug={slug} />);
         } else {
             categoriesView = <p>No category found.</p>;
         }

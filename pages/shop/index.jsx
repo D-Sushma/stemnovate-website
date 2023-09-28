@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
-import useGetProducts from "~/hooks/useGetProducts" 
+import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
@@ -73,7 +73,6 @@ const ProductScreen = () => {
   }, [query])
 
   if (productItems && productItems.length > 0) {
-    // console.log("productItems", productItems);
     if (query) {
       if (query.layout === "list") {
         products = withList(productItems, loading, 4)

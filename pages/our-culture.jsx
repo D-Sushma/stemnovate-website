@@ -1,12 +1,14 @@
 import React from "react"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Subscribe = dynamic(
@@ -121,7 +123,10 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Learn More <span className="visually-hidden">Learn More About Us</span>
+                          Learn More{" "}
+                          <span className="visually-hidden">
+                            Learn More About Us
+                          </span>
                         </div>
                       </Link>
                     </div>
@@ -160,7 +165,10 @@ const OurCulture = () => {
                           className=" btn btn-lg button-orange text-white m-4"
                           style={{ cursor: "pointer" }}
                         >
-                          Learn More <span className="visually-hidden">Learn More About Us</span>
+                          Learn More{" "}
+                          <span className="visually-hidden">
+                            Learn More About Us
+                          </span>
                         </div>
                       </Link>
                     </div>

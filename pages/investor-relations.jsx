@@ -2,13 +2,15 @@ import React, { useRef } from "react"
 import { IoIosArrowDown } from "react-icons/io"
 import { Tooltip } from "antd"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Investors = dynamic(

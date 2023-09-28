@@ -15,25 +15,23 @@ import PropTypes from "prop-types"
 import { TbCalendarTime, TbBuildingCommunity, TbLiveView } from "react-icons/tb"
 import moment from "moment"
 import { Divider } from "antd"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 const CareerForm = dynamic(
-    () => import("~/components/shared/forms/CareerForm"),
-    {loading: ()=> <p>Loading...</p>}
-  )
-  
+  () => import("~/components/shared/forms/CareerForm"),
+  { loading: () => <p>Loading...</p> }
+)
+
 const breadcrumb = [
   {
     id: 1,
@@ -71,7 +69,7 @@ const CareersList = (props) => {
   return (
     <Container
       title={JobsList.position_name}
-      description = "Stemnovate page on volunteering opportunities, apprenticeships, trainings and learning"
+      description="Stemnovate page on volunteering opportunities, apprenticeships, trainings and learning"
       cronical={"/careers"}
       ogimg={
         JobsList.image !== null
@@ -120,7 +118,7 @@ const CareersList = (props) => {
                           __html: JobsList.job_description
                         }}
                       ></p>
-                     </div>
+                    </div>
                     <div className="col-md-8 my-3">
                       <p className="text-left">
                         <TbBuildingCommunity className="mr-3 mb-1" />
@@ -134,7 +132,7 @@ const CareersList = (props) => {
                         <TbCalendarTime className="mr-3" />
                         {moment(JobsList.created_at).format("DD-MM-YYYY")}
                       </p>
-                       </div>
+                    </div>
 
                     <div className="col-md-4 my-3">
                       <FacebookShareButton

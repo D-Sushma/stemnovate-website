@@ -1,10 +1,9 @@
 import React from 'react';
-// import MenuCategories from '~/components/shared/headers/modules/MenuCategories';
 import dynamic from 'next/dynamic'
 
 const MenuCategories = dynamic(
     () => import("~/components/shared/headers/modules/MenuCategories"),
-    {loading: ()=> <p>Loading...</p>}
+    { loading: () => <p>Loading...</p> }
 )
 
 const MenuCategoriesDropdown = () => {

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
-// import Container from "~/components/layouts/Container"
 import { useRouter } from "next/router"
-// import LatestProducts from "~/components/partials/homepages/sections/LatestProducts"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const LatestProducts = dynamic(

@@ -1,4 +1,3 @@
-import Image from '~/components/elements/Image'
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
@@ -9,6 +8,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Subscribe = dynamic(
@@ -301,5 +303,4 @@ export async function getServerSideProps({ query }) {
   return { props: { ProductData } }
 }
 
-// export default texicologyScreen;
 export default connect((state) => state)(texicologyScreen)

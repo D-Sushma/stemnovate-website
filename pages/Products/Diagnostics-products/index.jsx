@@ -216,5 +216,4 @@ const texicologyScreen = () => {
   )
 }
 
-// export default texicologyScreen;
 export default connect((state) => state)(texicologyScreen)

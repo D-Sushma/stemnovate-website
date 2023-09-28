@@ -1,60 +1,60 @@
-import React, { useEffect } from "react";
-import header_supplies from "~/public/static/data/header_supplies.json";
-import useGetProducts from "~/hooks/useGetProducts";
-// import ModuleHeaderPromotions from "~/components/shared/headers/modules/ModuleHeaderPromotions";
-// import Menu from "~/components/elements/menu/Menu";
-// import CountDown from "~/components/elements/CountDown";
-// import ProductWithAvaiable from "~/components/elements/products/ProductWithAvaiable";
-import dynamic from 'next/dynamic'
+import React, { useEffect } from "react"
+import header_supplies from "~/public/static/data/header_supplies.json"
+import useGetProducts from "~/hooks/useGetProducts"
+import dynamic from "next/dynamic"
 
 const ModuleHeaderPromotions = dynamic(
-    () => import("~/components/shared/headers/modules/ModuleHeaderPromotions"),
-    {loading: ()=> <p>Loading...</p>}
+  () => import("~/components/shared/headers/modules/ModuleHeaderPromotions"),
+  { loading: () => <p>Loading...</p> }
 )
-const Menu = dynamic(
-    () => import("~/components/elements/menu/Menu"),
-    {loading: ()=> <p>Loading...</p>}
-)
-const CountDown = dynamic(
-    () => import("~/components/elements/CountDown"),
-    {loading: ()=> <p>Loading...</p>}
-)
+const Menu = dynamic(() => import("~/components/elements/menu/Menu"), {
+  loading: () => <p>Loading...</p>
+})
+const CountDown = dynamic(() => import("~/components/elements/CountDown"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductWithAvaiable = dynamic(
-    () => import("~/components/elements/products/ProductWithAvaiable"),
-    {loading: ()=> <p>Loading...</p>}
+  () => import("~/components/elements/products/ProductWithAvaiable"),
+  { loading: () => <p>Loading...</p> }
 )
 
 const ModuleHeaderSupplies = () => {
-    const { product, getProductById } = useGetProducts();
+  const { product, getProductById } = useGetProducts()
 
-    useEffect(() => {
-        getProductById(2);
-    }, []);
-    return (
-        <div className="header__supplies ps-dropdown--fullscreen">
-            <button className="header__categories-toggle">
-                <span>Applications</span>
-            </button>
-            <div className="ps-dropdown__content">
-                <div className="container">
-                    <div className="mega-menu__row">
-                        <div className="mega-menu__column col-12 col-sm-3">
-                            <Menu source={header_supplies.header_supplies} className="menu--single bold" />
-                        </div>
-                        <div className="mega-menu__column col-12 col-sm-5 col-md-6">
-                            <ModuleHeaderPromotions />
-                        </div>
-                        <div className="mega-menu__column col-12 col-sm-4 col-md-3">
-                            <div className="mega-menu__product">
-                                <CountDown time="12 31 2021, 6:00 am" format="MM DD YYYY, h:mm a" />
-                                {product && <ProductWithAvaiable product={product} />}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  useEffect(() => {
+    getProductById(2)
+  }, [])
+  return (
+    <div className="header__supplies ps-dropdown--fullscreen">
+      <button className="header__categories-toggle">
+        <span>Applications</span>
+      </button>
+      <div className="ps-dropdown__content">
+        <div className="container">
+          <div className="mega-menu__row">
+            <div className="mega-menu__column col-12 col-sm-3">
+              <Menu
+                source={header_supplies.header_supplies}
+                className="menu--single bold"
+              />
             </div>
+            <div className="mega-menu__column col-12 col-sm-5 col-md-6">
+              <ModuleHeaderPromotions />
+            </div>
+            <div className="mega-menu__column col-12 col-sm-4 col-md-3">
+              <div className="mega-menu__product">
+                <CountDown
+                  time="12 31 2021, 6:00 am"
+                  format="MM DD YYYY, h:mm a"
+                />
+                {product && <ProductWithAvaiable product={product} />}
+              </div>
+            </div>
+          </div>
         </div>
-    );
-};
+      </div>
+    </div>
+  )
+}
 
-export default ModuleHeaderSupplies;
+export default ModuleHeaderSupplies

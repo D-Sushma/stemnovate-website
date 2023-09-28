@@ -3,8 +3,13 @@
 import React, { useEffect } from "react"
 import { Alert } from "antd"
 import { scroller } from "react-scroll"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
+import Link from "next/link"
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+
 const ModuleHeaderNotice = ({ classes }) => {
   useEffect(() => {
     window.addEventListener("hashchange", onHashChanged)
@@ -26,7 +31,7 @@ const ModuleHeaderNotice = ({ classes }) => {
 
   return (
     <div className={`ps-noti header__notice ${classes}`}>
-     <Alert
+      <Alert
         className="text-center"
         message={
           <div className="d-flex flex-row justify-content-around">
@@ -37,13 +42,15 @@ const ModuleHeaderNotice = ({ classes }) => {
                   alt="new"
                   width={30}
                   height={30}
-                  />
-                </span>
+                />
+              </span>
               <h3 className="text-dark font-weight-bolder h3">
                 Stemnovate leading the way in building animal models for Pharma
                 drug discovery and animal health industry{" "}
                 <Link href="/#My-Announcements" prefetch={false}>
-                  <span className="button-link text-primary span-with-link" >Read more</span>
+                  <span className="button-link text-primary span-with-link">
+                    Read more
+                  </span>
                 </Link>
               </h3>
             </div>

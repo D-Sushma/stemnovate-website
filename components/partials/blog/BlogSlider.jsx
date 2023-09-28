@@ -1,17 +1,15 @@
 import React from "react"
 import Slider from "react-slick"
-// import NextArrow from "~/components/elements/carousel/NextArrow"
-// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
 const NextArrow = dynamic(
-    () => import("~/components/elements/carousel/NextArrow"),
-    {loading: ()=> <p>Loading..</p>}
+  () => import("~/components/elements/carousel/NextArrow"),
+  { loading: () => <p>Loading..</p> }
 )
 const PrevArrow = dynamic(
-    () => import("~/components/elements/carousel/PrevArrow"),
-    {loading: ()=> <p>Loading..</p>}
+  () => import("~/components/elements/carousel/PrevArrow"),
+  { loading: () => <p>Loading..</p> }
 )
 
 const carouselSetting = {

@@ -2,17 +2,19 @@
 import React from "react"
 import Slider from "react-slick"
 import testimonials from "~/public/static/data/testimonials.json"
-import Image from "~/components/elements/Image"
 import newcambridge from "~/public/static/home-images/newcambridge.jpg"
 import Cambridge from "~/public/static/home-images/Cambridge-Independent.jpg"
 import discoverymatters from "~/public/static/home-images/discoverymatters.jpg"
 import announcementimg from "~/public/static/home-images/announcement.jpg"
 import dynamic from "next/dynamic"
 import Link from "next/link"
+
 const Rating = dynamic(() => import("~/components/elements/Rating"), {
   loading: () => <p>Loading...</p>
 })
-
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const NextArrow = dynamic(
   () => import("~/components/elements/carousel/NextArrow"),
   { loading: () => <p>Loading...</p> }
@@ -363,7 +365,6 @@ const Testimonials = () => {
                             alt="Our 3Rs mission: Zero animal testing"
                             placeholder="blur"
                             blurDataURL="/static/image/blurred.png"
-                            priority
                           />
                         </a>
                         <div className="card-body  p-0 ps-btn-link-bottom">
@@ -372,7 +373,7 @@ const Testimonials = () => {
                             rel="noreferrer"
                             href="https://www.cambridgeindependent.co.uk/business/stemnovate-partners-with-babraham-institute-on-alzheimer-s-d-9296332/"
                           >
-                            <h5 className="card-title  pt-2 px-2">
+                            <h5 className="card-title pt-2 px-2">
                               Stemnovate partners with Babraham Institute on
                               Alzheimer’s disease project...
                             </h5>
@@ -407,7 +408,6 @@ const Testimonials = () => {
                                  drug discovery and animal health industry"
                             placeholder="blur"
                             blurDataURL="/static/image/blurred.png"
-                            priority
                           />
                         </a>
                         <div className="card-body p-0 ps-btn-link-bottom">
@@ -447,7 +447,6 @@ const Testimonials = () => {
                             alt="Ruchi Sharma-Women in Stem"
                             placeholder="blur"
                             blurDataURL="/static/image/blurred.png"
-                            priority
                           />
                         </a>
                         <div className="card-body p-0 ps-btn-link-bottom">
@@ -489,7 +488,6 @@ const Testimonials = () => {
                             alt="Our 3Rs mission: Zero animal testing"
                             placeholder="blur"
                             blurDataURL="/static/image/blurred.png"
-                            priority
                           />
                         </a>
                         <div className="card-body  p-0 ps-btn-link-bottom">

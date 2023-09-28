@@ -2,7 +2,10 @@ import React from "react";
 import LazyLoad from "react-lazyload";
 import { formatCurrency } from "~/utilities/product-helper";
 import Link from "next/link";
-import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic'
+const Image = dynamic(() => import("~/components/elements/Image"), {
+    loading: () => <p>Loading...</p>
+})
 
 export default function useProduct() {
     return {

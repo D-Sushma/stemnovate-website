@@ -107,7 +107,6 @@ const MyAccountScreen = () => {
               })
             })
             const json = await response.json()
-            // return json.movies;
             console.log(json)
             if (json.code == "200") {
               toast.success(json.message, {

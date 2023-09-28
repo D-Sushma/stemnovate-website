@@ -5,16 +5,16 @@ import dynamic from 'next/dynamic';
 
 const HeaderDefault = dynamic(
     () => import("~/components/shared/headers/HeaderDefault"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+    { loading: () => <p>Loading...</p> }
+)
 const FooterDefault = dynamic(
     () => import("~/components/shared/footers/FooterDefault"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+    { loading: () => <p>Loading...</p> }
+)
 const HeaderMobile = dynamic(
     () => import("~/components/shared/mobiles/HeaderMobile"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+    { loading: () => <p>Loading...</p> }
+)
 
 const Container = ({ children, ogimg, description, cronical, title = "Your Drug Discovery Partner", header = <HeaderDefault />, footer = <FooterDefault />, menus }) => {
     let titleView;

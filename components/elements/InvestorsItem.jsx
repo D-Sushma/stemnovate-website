@@ -1,6 +1,10 @@
 import React from "react"
-import Image from "~/components/elements/Image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const InvestorsItem = ({ source }) => {
   return (
@@ -14,10 +18,12 @@ const InvestorsItem = ({ source }) => {
                 alt={source?.name}
                 width={416}
                 height={255}
-               />
-              </div>
+              />
+            </div>
 
-            <div style={{ width: "100%", backgroundColor: "#fff", marginTop:-6 }}>
+            <div
+              style={{ width: "100%", backgroundColor: "#fff", marginTop: -6 }}
+            >
               <h2>{source.name}</h2>
               <h3>{source.rate}</h3>
             </div>

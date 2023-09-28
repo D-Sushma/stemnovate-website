@@ -86,7 +86,6 @@ const dashboard = ({ UserData }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined
-            // theme: "colored",
           })
         }
       })
@@ -217,7 +216,10 @@ const dashboard = ({ UserData }) => {
                   </Col>
 
                   <Col md={6} sm={24} style={{ width: "100%" }}>
-                    <Link href={`${baseUrl}${"/promotions-products"}`} prefetch={false}>
+                    <Link
+                      href={`${baseUrl}${"/promotions-products"}`}
+                      prefetch={false}
+                    >
                       <Card className="card-bg-color m-2" hoverable bordered>
                         <div className="d-flex justify-content-between flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
@@ -247,11 +249,8 @@ export async function getServerSideProps(ctx) {
   const session = await getSession(ctx)
   var UserData = ""
   if (session) {
-    // console.log("first", ctx.req.headers);
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-
-    // myHeaders.append("cookie", ctx.req.headers.cookie);
 
     var raw = JSON.stringify({
       UserLoginId: session.id

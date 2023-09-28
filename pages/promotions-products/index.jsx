@@ -3,25 +3,26 @@ import { ToastContainer } from "react-toastify"
 import { FaArrowCircleRight } from "react-icons/fa"
 import Slider from "react-slick"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const NextArrow = dynamic(
   () => import("~/components/elements/carousel/NextArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const PrevArrow = dynamic(
   () => import("~/components/elements/carousel/PrevArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const carouselSetting = {
   infinite: true,
@@ -134,7 +135,6 @@ const ProductScreen = ({ promotionDetails }) => {
                                 <div className="col-md-6 col-sm-6 d-flex flex-grow-1 mb-3">
                                   <div className="card ">
                                     <Image
-                                      // className="" style={{ width: "100%" }}
                                       src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                       alt="alt"
                                       width={1200}
@@ -198,7 +198,6 @@ export async function getServerSideProps() {
     requestOptions
   )
   const myPromotionData = await res.json()
-  // console.log("myPromotionData", myPromotionData);
   if (myPromotionData.status == 200) {
     promotionDetails = myPromotionData
   } else {

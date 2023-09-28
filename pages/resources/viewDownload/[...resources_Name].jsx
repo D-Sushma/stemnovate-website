@@ -22,7 +22,6 @@ const ResourcesData = (props) => {
   const { resources_Name } = Router.query
   const [breadCrumb, setBreadCrumb] = React.useState([])
   const { resourcesData } = props
-  const [readMore, setReadMore] = useState(false)
   const [userData, setUserData] = React.useState(null)
   const [isActive, setIsActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -47,13 +46,11 @@ const ResourcesData = (props) => {
 
   React.useEffect(() => {
     if (session) {
-      // console.log(session);
       getResourcesAccess()
       if (userData !== null) {
         getUserData()
       }
     } else {
-      // console.log("Not Session");
     }
   }, [session, userData])
 
@@ -240,8 +237,6 @@ const ResourcesData = (props) => {
                           />
                         </div>
                         <div className="col-md-12 ">
-                          {/* <span class="border-top border-dark"></span> */}
-
                           <div
                             className="row mb-4"
                             style={{ borderBottom: "1px solid black" }}
@@ -408,7 +403,6 @@ export async function getServerSideProps({ query }) {
   return { props: { resourcesData } }
 }
 
-// export default ResourcesData;
 export default connect((state) => state)(ResourcesData)
 ResourcesData.propTypes = {
   resourcesData: PropTypes.array

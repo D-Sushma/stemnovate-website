@@ -53,7 +53,6 @@ class Module extends React.Component {
       styles["color"] = "#000"
       textS["fontWeight"] = "700"
       icoS["fontWeight"] = "700"
-      // styles['borderRight'] = "1px solid #d3d3d3";
     }
 
     icoS["float"] = "right"
@@ -103,10 +102,8 @@ class ModuleG extends React.Component {
       bgStyle["borderLeft"] = `5px solid #5292A4`
       textS["fontWeight"] = "700"
       icoS["fontWeight"] = "700"
-      // bgStyle['borderRight'] = "2px solid #d3d3d3";
     }
 
-    // bgStyle['borderRight'] = "1px solid #d3d3d3";
     icoS["float"] = "right"
     icoS["color"] = "#000"
     return (
@@ -179,7 +176,6 @@ class ModuleGroup extends React.Component {
       icoS["fontWeight"] = "700"
     }
 
-    // bgStyle['borderRight'] = "1px solid #d3d3d3";
     icoS["float"] = "right"
     icoS["color"] = "#000"
     return (
@@ -246,18 +242,15 @@ class SubModuleGroup extends React.Component {
 
     // Only make bg color if on hover
     const bgStyle = {}
-    // const txtStyle = {}
     const textS = {}
     const icoS = {}
     if (this.state.isVisible) {
       bgStyle["backgroundColor"] = "#5292A414"
       bgStyle["borderLeft"] = `5px solid #5292A4`
       textS["fontWeight"] = "700"
-      // bgStyle['borderRight'] = "1px solid #d3d3d3";
       icoS["fontWeight"] = "700"
     }
 
-    // bgStyle['borderRight'] = "2px solid #d3d3d3";
     icoS["float"] = "right"
     icoS["color"] = "#000"
 
@@ -326,18 +319,15 @@ class ModuleGroupSelector extends React.Component {
   constructor(props) {
     super(props)
     this.toggleHidden = this.toggleHidden.bind(this)
-    // this.closemenu = this.closemenu.bind(this);
     this.state = {
       isVisible: false
     }
-    // console.log("Onchange Cursor", "false");
   }
 
   toggleHidden() {
     this.setState({
       isVisible: !this.state.isVisible
     })
-    // console.log("Onchange Cursor", this.state.isVisible);
   }
 
   render() {
@@ -361,10 +351,8 @@ class ModuleGroupSelector extends React.Component {
     txtStyle["fontWeight"] = "700"
     if (this.props.name == "Promotions") {
       txtStyle["color"] = "#fff"
-      // txtStyle["border"] = "1px solid #f06a34";
       txtStyle["paddingLeft"] = "5px"
       txtStyle["paddingRight"] = "5px"
-      // txtStyle["marginLeft"] = "3px";
     }
 
     return this.props.is_page ? (

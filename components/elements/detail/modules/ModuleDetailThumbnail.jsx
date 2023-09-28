@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from "react"
 import Slider from "react-slick"
 import Lightbox from "react-image-lightbox"
-// import NextArrow from "~/components/elements/carousel/NextArrow"
-// import PrevArrow from "~/components/elements/carousel/PrevArrow"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
 const NextArrow = dynamic(
   () => import("~/components/elements/carousel/NextArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const PrevArrow = dynamic(
   () => import("~/components/elements/carousel/PrevArrow"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const variantSetting = {
   slidesToShow: 6,
@@ -100,7 +100,7 @@ const ModuleDetailThumbnail = ({ product, vertical = true }) => {
               width={1000}
               height={750}
             />
-            </div>
+          </div>
         </Link>
       </div>
     ))

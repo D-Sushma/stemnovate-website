@@ -1,26 +1,26 @@
 import React from "react"
 import { connect } from "react-redux"
 import ReactPlayer from "react-player"
-import Link from 'next/link'
-import Image from '~/components/elements/Image'
-import dynamic from 'next/dynamic'
+import Link from "next/link"
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
-    () => import("~/components/productList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/productList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const categoryListScreen = () => {
   const breadcrumb = [
@@ -84,7 +84,7 @@ const categoryListScreen = () => {
                           width={1200}
                           height={675}
                         />
-                        </div>
+                      </div>
                       <h2 className="m-4">Chemically Defined Media</h2>
                       <p className="mx-4">
                         This media is for in vitro human or animal cell culture.
@@ -124,12 +124,12 @@ const categoryListScreen = () => {
                   <div className="ps-section__thumbnail">
                     <Link href="#">
                       <div className="ps-section__image link-hover-thumb-shape">
-                      <Image
-                        src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
-                        alt="CLASSICAL CELL CULTURE MEDIA"
-                        width={1200}
-                        height={675}
-                      />
+                        <Image
+                          src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
+                          alt="CLASSICAL CELL CULTURE MEDIA"
+                          width={1200}
+                          height={675}
+                        />
                       </div>
                     </Link>
                   </div>
@@ -154,8 +154,7 @@ const categoryListScreen = () => {
                 <div className="row">
                   <div className="col-md-12 text-left">
                     <div>
-                      <div className="overflow-hidden">
-                        </div>
+                      <div className="overflow-hidden"></div>
                       <h2>Cell Culture Handbook</h2>
                       <p>
                         Cell culture is a method used in biological research to
@@ -218,7 +217,7 @@ const categoryListScreen = () => {
                       <h3 className="text-left mb-5">
                         Advantages Of Stemnovate&apos;s ETFDS
                       </h3>
-
+                    
                       <table id="products">
                         <thead>
                           <tr>
@@ -257,12 +256,13 @@ const categoryListScreen = () => {
                           </tr>
                         </tbody>
                       </table>
+                    
                       <br />
 
                       <h3 className="text-left mb-5">
                         Useful Cell Culture Numbers
                       </h3>
-
+                      
                       <table id="products">
                         <thead>
                           <tr>
@@ -464,6 +464,7 @@ const categoryListScreen = () => {
                           </tr>
                         </tbody>
                       </table>
+                      
                       <small>
                         <strong>*</strong> Dishes and Flasks: cells per vessel;
                         Culture plates: cells per well
@@ -498,7 +499,7 @@ const categoryListScreen = () => {
                             height="100%"
                           />
                         </div>
-                        </div>
+                      </div>
                       <h2 className="m-4">Work With Us!</h2>
                       <p className="mx-4">
                         At Stemnovate we have developed ready-to-use cell
@@ -528,5 +529,4 @@ const categoryListScreen = () => {
   )
 }
 
-// export default categoryListScreen;
 export default connect((state) => state)(categoryListScreen)

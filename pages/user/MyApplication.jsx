@@ -1270,14 +1270,6 @@ const MyApplication = ({ UserData }) => {
                       </Col>
                       <Col md={12} sm={24}>
                         {current < steps.length - 1 && (
-                          // <Button
-                          //     type="primary"
-                          //     size={"large"}
-                          //     onClick={() => {
-                          //         next(), gotoTop();
-                          //     }}>
-                          //      Submit And Next
-                          // </Button>
                           <Form.Item>
                             {isLoading ? (
                               <Button
@@ -1342,7 +1334,6 @@ export async function getServerSideProps(ctx) {
   if (session) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    // myHeaders.append("cookie", ctx.req.headers.cookie);
 
     var raw = JSON.stringify({
       UserLoginId: session.id

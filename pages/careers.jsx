@@ -1,9 +1,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
-import Image from "~/components/elements/Image"
 import ourCulture from "~/public/static/img/our-culture/02.jpg"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { useEffect } from "react"
 import dynamic from "next/dynamic"
 
@@ -11,6 +8,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const Subscribe = dynamic(

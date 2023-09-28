@@ -1,5 +1,4 @@
 import React from "react"
-// import Container from "~/components/layouts/Container"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {

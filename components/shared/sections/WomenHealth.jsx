@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react"
-import Image from "~/components/elements/Image"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import FemaleHealth from "~/public/static/img/Home/focus-female-health-01-new.jpg"
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 export default function WomenHealth() {
   return (
     <div>
       {" "}
       <div className="womenHealth">
-        <div className="ps-section__image link-hover-thumb-shape" >
+        <div className="ps-section__image link-hover-thumb-shape">
           <div className="women-expander">
             <p className=" display-4 font-weight-bolder text-white">
               FOCUS - FEMALE HEALTH

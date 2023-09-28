@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Moment from "moment";
 import Link from "next/link";
 import LazyLoad from "react-lazyload";
-import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic'
+const Image = dynamic(() => import("~/components/elements/Image"), {
+    loading: () => <p>Loading...</p>
+})
 
 export default function usePost() {
     const [createdBy, setCreatedBy] = useState("Jan 1, 2021");
@@ -69,7 +72,6 @@ export default function usePost() {
                             width={1000}
                             height={759}
                         />
-                        {/* <img src={`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`} alt="img" /> */}
                     </LazyLoad>
                 );
                 setThumbnail(thumbnailImage);

@@ -1,9 +1,13 @@
-import Image from "~/components/elements/Image"
 import DataPlatform from "~/public/static/home-images/Data-Platform.jpg"
 import StemCells from "~/public/static/home-images/Stem-Cells-Cellular-Reprogramming.jpg"
 import Molecular from "~/public/static/home-images/Molecular-&-Microengineering.jpg"
 import Discovery from "~/public/static/home-images/Drug-Discovery-Platform.jpg"
 import Link from "next/link"
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const OurService = () => {
   return (
@@ -30,7 +34,6 @@ const OurService = () => {
                     <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
                       <div className="overflow-hidden link-hover-thumb-shape">
                         <Image
-                          // className="ps-banner__image"
                           className="zoom-in"
                           src={Discovery}
                           alt="Drug Discovery Platform"
@@ -38,7 +41,6 @@ const OurService = () => {
                           height={218}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          priority
                         />
                       </div>
                       <p className="text-left font-weight-bolder content-services">
@@ -76,7 +78,6 @@ const OurService = () => {
                     <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
                       <div className="overflow-hidden link-hover-thumb-shape">
                         <Image
-                          // className="ps-banner__image"
                           className="zoom-in"
                           src={StemCells}
                           alt="Stem Cells Cellular Reprogramming"
@@ -84,7 +85,6 @@ const OurService = () => {
                           height={218}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          priority
                         />
                       </div>
                       <p className="text-left font-weight-bolder content-services">
@@ -127,7 +127,6 @@ const OurService = () => {
                     <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
                       <div className="overflow-hidden link-hover-thumb-shape">
                         <Image
-                          // className="ps-banner__image"
                           className="zoom-in"
                           src={Molecular}
                           alt="Molecular and Microengineering"
@@ -135,7 +134,6 @@ const OurService = () => {
                           height={218}
                           placeholder="blur"
                           blurDataURL="/static/image/blurred.png"
-                          priority
                         />
                       </div>
                       <p className="text-left text-white font-weight-bolder content-services">
@@ -183,7 +181,6 @@ const OurService = () => {
                       <div className="mx-4 d-flex flex-column mt-2 flex-md-row-reverse">
                         <div className="overflow-hidden link-hover-thumb-shape">
                           <Image
-                            // className="ps-banner__image"
                             className="zoom-in"
                             src={DataPlatform}
                             alt="Data Platform"
@@ -191,7 +188,6 @@ const OurService = () => {
                             height={218}
                             placeholder="blur"
                             blurDataURL="/static/image/blurred.png"
-                            priority
                           />
                         </div>
                         <p className=" text-left text-white font-weight-bolder content-services">
@@ -205,13 +201,12 @@ const OurService = () => {
                 </div>
                 <div className="row">
                   <div className="mx-4 button button-services">
-                    <Link
-                      href="/Services"
-                      prefetch={false}
-                    >
+                    <Link href="/Services" prefetch={false}>
                       <div>
                         Learn More
-                        <span className="visually-hidden">Learn More about Services</span>
+                        <span className="visually-hidden">
+                          Learn More about Services
+                        </span>
                       </div>
                     </Link>
                   </div>

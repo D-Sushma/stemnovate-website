@@ -14,15 +14,11 @@ const AboutTop = () => {
                         <h2
                             style={{
                                 width: "fit-content",
-                                // borderBottom: "8px solid #68d8f7e8",
                             }}
                             className="p-1">
                             About Us
                         </h2>
 
-                        {/* <div className="ps-section__subtitle">
-                            Developed for over 30 years on the market
-                        </div> */}
                         <div className="ps-section__desc my-5 ">
                             Our Founder and CEO, Dr Ruchi Sharma, is driven by her passion for taking the benefits of research and applying them to products and technology to make a significant and positive difference in the real world. She is the ‘# 2 to watch’ entrepreneur of 2020 in the UK and is leading prestigious grants and international industrial partnerships. Dr Sharma obtained a PhD from the world-renowned Roslin Institute at the University of Edinburgh, followed by a post-doctorate in the exciting field of cellular reprogramming at the University of Cambridge. She is also a veterinarian and supports inventions for better animal health while reducing animal testing. With a firm focus on partnerships and collaboration, Dr Sharma believes that we can create a better world through
                             innovation
@@ -33,7 +29,6 @@ const AboutTop = () => {
                     <h2
                         style={{
                             width: "fit-content",
-                            // backgroundColor: "orange",
                             borderRadius: "5px",
                         }}
                         className="p-2">
@@ -46,7 +41,6 @@ const AboutTop = () => {
                     <h2
                         style={{
                             width: "fit-content",
-                            // backgroundColor: "orange",
                             borderRadius: "5px",
                         }}
                         className="p-2">
@@ -58,7 +52,6 @@ const AboutTop = () => {
                     <h2
                         style={{
                             width: "fit-content",
-                            // backgroundColor: "orange",
                             borderRadius: "5px",
                         }}
                         className="p-2">
@@ -70,7 +63,6 @@ const AboutTop = () => {
                     <h2
                         style={{
                             width: "fit-content",
-                            // backgroundColor: "orange",
                             borderRadius: "5px",
                         }}
                         className="p-2">
@@ -82,7 +74,6 @@ const AboutTop = () => {
                     <h2
                         style={{
                             width: "fit-content",
-                            // backgroundColor: "orange",
                             borderRadius: "5px",
                         }}
                         className="p-2">
@@ -95,7 +86,6 @@ const AboutTop = () => {
                     <h2
                         style={{
                             width: "fit-content",
-                            // backgroundColor: "orange",
                             borderRadius: "5px",
                         }}
                         className="p-2">

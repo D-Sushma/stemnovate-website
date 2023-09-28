@@ -4,27 +4,25 @@ import fetch from "node-fetch"
 import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
 import Link from "next/link"
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic"
 
 const FormSearchHeader = dynamic(
   () => import("~/components/shared/forms/FormSearchHeader"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const ModuleHeaderActions = dynamic(
   () => import("~/components/shared/headers/modules/ModuleHeaderActions"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
-const Logo = dynamic(
-  () => import("~/components/elements/basic/Logo"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const Loader = dynamic(
-  () => import("~/components/reuseable/Loader"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Logo = dynamic(() => import("~/components/elements/basic/Logo"), {
+  loading: () => <p>Loading...</p>
+})
+const Loader = dynamic(() => import("~/components/reuseable/Loader"), {
+  loading: () => <p>Loading...</p>
+})
 const ModuleHeaderNotice = dynamic(
   () => import("./modules/ModuleHeaderNotice"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 
 const HeaderDefault = (props, { classes = "" }) => {

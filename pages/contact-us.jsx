@@ -1,9 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import Image from '~/components/elements/Image'
 import vector from "~/public/static/img/Home/vector.png"
-// import Container from "~/components/layouts/Container"
-// import BreadCrumb from "~/components/elements/BreadCrumb"
 import { FiPhone, FiMail } from "react-icons/fi"
 import dynamic from "next/dynamic"
 
@@ -11,6 +8,9 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
+const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 const FooterAddress = dynamic(
@@ -51,7 +51,6 @@ const ContactUsScreen = ({ mytitile }) => {
               <Image
                 src={vector}
                 alt="stemnovate-Contact Us"
-                // style={{ width: "80%", height: "auto" }}
                 width={1588}
                 height={960}
               />
@@ -64,7 +63,7 @@ const ContactUsScreen = ({ mytitile }) => {
               </p>
 
               <HubspotContactForm />
-              <div className="section-about">
+              <div className="section-about mt-5 pt-5">
                 <div className="row">
                   <div className="col-md-12">
                     <h2 className="text-center mb-4 m-2">
@@ -93,7 +92,10 @@ const ContactUsScreen = ({ mytitile }) => {
                         </span>
                       </Link>
                       <br />
-                      <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
+                      <Link
+                        href="mailto:info@stemnovate.co.uk"
+                        prefetch={false}
+                      >
                         <span className="ps-footer__email span-with-link">
                           <FiMail /> info@stemnovate.co.uk
                         </span>
@@ -101,7 +103,10 @@ const ContactUsScreen = ({ mytitile }) => {
                     </div>
                     <ul className="ps-social ">
                       <li>
-                        <Link href="https://www.facebook.com/StemnovateL" prefetch={false}>
+                        <Link
+                          href="https://www.facebook.com/StemnovateL"
+                          prefetch={false}
+                        >
                           <div className="ps-social__link facebook">
                             <i className="fa fa-facebook"> </i>
                             <span className="ps-tooltip">Facebook</span>
@@ -109,7 +114,10 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.instagram.com/stemnovate" prefetch={false}>
+                        <Link
+                          href="https://www.instagram.com/stemnovate"
+                          prefetch={false}
+                        >
                           <div className="ps-social__link instagram">
                             <i className="fa fa-instagram"></i>
                             <span className="ps-tooltip">Instagram</span>
@@ -117,7 +125,10 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://twitter.com/StemnovateL" prefetch={false}>
+                        <Link
+                          href="https://twitter.com/StemnovateL"
+                          prefetch={false}
+                        >
                           <div className="ps-social__link facebook">
                             <i className="fa fa-twitter"></i>
                             <span className="ps-tooltip">Twitter</span>
@@ -125,7 +136,10 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.pinterest.co.uk/Stemnovate" prefetch={false}>
+                        <Link
+                          href="https://www.pinterest.co.uk/Stemnovate"
+                          prefetch={false}
+                        >
                           <div className="ps-social__link pinterest">
                             <i className="fa fa-pinterest-p"></i>
                             <span className="ps-tooltip">Pinterest</span>
@@ -133,7 +147,10 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link href="https://www.linkedin.com/company/stemnovate-limited" prefetch={false}>
+                        <Link
+                          href="https://www.linkedin.com/company/stemnovate-limited"
+                          prefetch={false}
+                        >
                           <div className="ps-social__link linkedin">
                             <i className="fa fa-linkedin"></i>
                             <span className="ps-tooltip">Linkedin</span>

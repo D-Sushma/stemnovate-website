@@ -379,7 +379,6 @@ export async function getServerSideProps(ctx) {
   if (session) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    // myHeaders.append("cookie", ctx.req.headers.cookie);
 
     var raw = JSON.stringify({
       UserLoginId: session.id

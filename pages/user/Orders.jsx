@@ -187,7 +187,6 @@ export async function getServerSideProps(ctx) {
       action: ord.order_id
     })
   })
-  // console.log(orderData)
   const myResponse = JSON.stringify(orderData)
   return {
     props: { userOrders: myResponse }

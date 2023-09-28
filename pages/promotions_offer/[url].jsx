@@ -55,11 +55,9 @@ function promotionOffer({ ProductData }) {
       queries = Object.assign(queries, myquery)
     }
     getPromotionalProducts(queries)
-    // console.log("productItems", productItems);
   }, [query])
 
   if (productItems && productItems.length > 0) {
-    // console.log("productItems", productItems);
     if (query) {
       if (query.layout === "list") {
         products = withList(productItems, loading, 4)

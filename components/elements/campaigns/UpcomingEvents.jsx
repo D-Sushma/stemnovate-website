@@ -1,14 +1,12 @@
 import moment from "moment"
 import React, { useEffect, useState } from "react"
 import { FaCalendarAlt, FaLocationArrow } from "react-icons/fa"
-// import Loader from "~/components/reuseable/Loader"
 import { baseUrl } from "~/repositories/Repository"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Loader = dynamic(
-  () => import("~/components/reuseable/Loader"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Loader = dynamic(() => import("~/components/reuseable/Loader"), {
+  loading: () => <p>Loading...</p>
+})
 
 function UpcomingEvents({ currentEvent }) {
   const [events, setEvents] = useState([])
