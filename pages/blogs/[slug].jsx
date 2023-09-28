@@ -195,7 +195,12 @@ const Blogs = (props) => {
                 ></div>
               </div>
             </div>
-
+            <ol>
+              <li>the stemnovate listed</li>
+              <li>the stemnovate listed</li>
+              <li>the stemnovate listed</li>
+              <li>the stemnovate listed</li>
+            </ol>
             <Subscribe />
           </div>
         </div>
