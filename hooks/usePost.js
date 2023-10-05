@@ -71,6 +71,8 @@ export default function usePost() {
                             alt="img"
                             width={1000}
                             height={759}
+                            placeholder="blur"
+                            blurDataURL="/static/image/blurred.png"
                         />
                     </LazyLoad>
                 );

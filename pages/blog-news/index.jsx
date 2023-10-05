@@ -212,7 +212,7 @@ const Blogs = (props) => {
                                     <div className="ps-post__author blog-author">
                                       <span className="h3 my-4 span-with-link">
                                         {" "}
-                                        Read More
+                                        Read More <span className="visually-hidden">Read More About {data.name}</span>
                                       </span>
                                     </div>
                                   </Link>

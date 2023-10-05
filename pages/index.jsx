@@ -132,7 +132,7 @@ const HomeDefaultPage = (props) => {
     >
       <main id="homepage-one">
         <div className="ps-top-banners">
-          <div className="ps-section--banner ps-banner--container">
+          <div className="ps-section--banner ps-banner--container mx-0">
             <div className="ps-section__overlay">
               <div className="ps-section__loading"></div>
             </div>
@@ -248,7 +248,7 @@ const HomeDefaultPage = (props) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const res = await fetch(baseUrl + "/api/menu/getmenu")
   const menus = await res.json()
 
@@ -270,7 +270,8 @@ export async function getServerSideProps() {
   }
 
   return {
-    props: { menus, promotionDetails } // will be passed to the page component as props
+    props: { menus, promotionDetails }, // will be passed to the page component as props
+    revalidate: 60,
   }
 }
 const mapStateToProps = (state) => ({

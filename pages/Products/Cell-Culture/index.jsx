@@ -217,254 +217,254 @@ const categoryListScreen = () => {
                       <h3 className="text-left mb-5">
                         Advantages Of Stemnovate&apos;s ETFDS
                       </h3>
-                    
-                      <table id="products">
-                        <thead>
-                          <tr>
-                            <th>Glucose</th>
-                            <th>Glutamine</th>
-                            <th>Serum</th>
-                            <th>Hepes</th>
-                            <th>Sodium pyruvate</th>
-                            <th>Phenol red</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>High</td>
-                            <td>GlutaMAX</td>
-                            <td>Standard</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                            <td>Yes</td>
-                          </tr>
-                          <tr>
-                            <td>Low</td>
-                            <td>L-glutamine</td>
-                            <td>Reduced serum</td>
-                            <td>No</td>
-                            <td>No</td>
-                            <td>No</td>
-                          </tr>
-                          <tr>
-                            <td>None</td>
-                            <td>-</td>
-                            <td>no serum</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    
+                      <div className="table-responsive">
+                        <table id="products">
+                          <thead>
+                            <tr>
+                              <th>Glucose</th>
+                              <th>Glutamine</th>
+                              <th>Serum</th>
+                              <th>Hepes</th>
+                              <th>Sodium pyruvate</th>
+                              <th>Phenol red</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>High</td>
+                              <td>GlutaMAX</td>
+                              <td>Standard</td>
+                              <td>Yes</td>
+                              <td>Yes</td>
+                              <td>Yes</td>
+                            </tr>
+                            <tr>
+                              <td>Low</td>
+                              <td>L-glutamine</td>
+                              <td>Reduced serum</td>
+                              <td>No</td>
+                              <td>No</td>
+                              <td>No</td>
+                            </tr>
+                            <tr>
+                              <td>None</td>
+                              <td>-</td>
+                              <td>no serum</td>
+                              <td>-</td>
+                              <td>-</td>
+                              <td>-</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <br />
 
                       <h3 className="text-left mb-5">
                         Useful Cell Culture Numbers
                       </h3>
-                      
-                      <table id="products">
-                        <thead>
-                          <tr>
-                            <th>-</th>
-                            <th>
-                              Surface area <br />
-                              (cm2)
-                            </th>
-                            <th>
-                              Seeding
-                              <br /> density <sup>*</sup>
-                            </th>
-                            <th>
-                              Cells at
-                              <br /> confluency<sup>+</sup>
-                            </th>
-                            <th>
-                              Trypsin <br />
-                              (mL of 0.05% trypsin, 0.53 mM EDTA)
-                            </th>
-                            <th>
-                              Cell medium <br />
-                              required (mL)
-                            </th>
-                          </tr>
-                          <tr>
-                            <th className="text-center" colSpan="6">
-                              FLASKS
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>T-25</td>
-                            <td>25</td>
-                            <td>
-                              0.7 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              2.8 x 10<sup>6</sup>
-                            </td>
-                            <td>3 </td>
-                            <td>3–5</td>
-                          </tr>
-                          <tr>
-                            <td>T-75</td>
-                            <td>75</td>
-                            <td>
-                              2.1 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              8.4 x 10<sup>6</sup>
-                            </td>
-                            <td>5</td>
-                            <td>8–15</td>
-                          </tr>
-                          <tr>
-                            <td>T-175</td>
-                            <td>175</td>
-                            <td>
-                              4.9 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              23.3 x 10<sup>6</sup>
-                            </td>
-                            <td>17</td>
-                            <td>35–53</td>
-                          </tr>
-                          <tr>
-                            <td>T-225</td>
-                            <td>225</td>
-                            <td>
-                              6.3 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              30 x 10<sup>6</sup>
-                            </td>
-                            <td>22</td>
-                            <td>45–68</td>
-                          </tr>
-                          <tr>
-                            <th className="text-center" colSpan="6">
-                              CULTURE PLATES
-                            </th>
-                          </tr>
+                      <div className="table-responsive">
+                        <table id="products">
+                          <thead>
+                            <tr>
+                              <th>-</th>
+                              <th>
+                                Surface area <br />
+                                (cm2)
+                              </th>
+                              <th>
+                                Seeding
+                                <br /> density <sup>*</sup>
+                              </th>
+                              <th>
+                                Cells at
+                                <br /> confluency<sup>+</sup>
+                              </th>
+                              <th>
+                                Trypsin <br />
+                                (mL of 0.05% trypsin, 0.53 mM EDTA)
+                              </th>
+                              <th>
+                                Cell medium <br />
+                                required (mL)
+                              </th>
+                            </tr>
+                            <tr>
+                              <th className="text-center" colSpan="6">
+                                FLASKS
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>T-25</td>
+                              <td>25</td>
+                              <td>
+                                0.7 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                2.8 x 10<sup>6</sup>
+                              </td>
+                              <td>3 </td>
+                              <td>3–5</td>
+                            </tr>
+                            <tr>
+                              <td>T-75</td>
+                              <td>75</td>
+                              <td>
+                                2.1 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                8.4 x 10<sup>6</sup>
+                              </td>
+                              <td>5</td>
+                              <td>8–15</td>
+                            </tr>
+                            <tr>
+                              <td>T-175</td>
+                              <td>175</td>
+                              <td>
+                                4.9 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                23.3 x 10<sup>6</sup>
+                              </td>
+                              <td>17</td>
+                              <td>35–53</td>
+                            </tr>
+                            <tr>
+                              <td>T-225</td>
+                              <td>225</td>
+                              <td>
+                                6.3 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                30 x 10<sup>6</sup>
+                              </td>
+                              <td>22</td>
+                              <td>45–68</td>
+                            </tr>
+                            <tr>
+                              <th className="text-center" colSpan="6">
+                                CULTURE PLATES
+                              </th>
+                            </tr>
 
-                          <tr>
-                            <td>6-well</td>
-                            <td>9.6</td>
-                            <td>
-                              0.3 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              1.2 x 10<sup>6</sup>
-                            </td>
-                            <td>1</td>
-                            <td>1 to 3</td>
-                          </tr>
-                          <tr>
-                            <td>12-well</td>
-                            <td>3.5</td>
-                            <td>
-                              0.1 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              0.5 x 10<sup>6</sup>
-                            </td>
-                            <td>0.4 to 1</td>
-                            <td>1 to 2</td>
-                          </tr>
-                          <tr>
-                            <td>24-well</td>
-                            <td>1.9</td>
-                            <td>
-                              0.05 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              0.24 x 10<sup>6</sup>
-                            </td>
-                            <td>0.2 to 0.3</td>
-                            <td>0.5 to 1.0</td>
-                          </tr>
-                          <tr>
-                            <td>48-well</td>
-                            <td>1.1</td>
-                            <td>
-                              0.03 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              0.12 x 10<sup>6</sup>
-                            </td>
-                            <td>0.1 to 0.2</td>
-                            <td>0.2 to 0.4</td>
-                          </tr>
-                          <tr>
-                            <td>96-well</td>
-                            <td>0.32</td>
-                            <td>
-                              0.01 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              0.04 x 10<sup>6</sup>
-                            </td>
-                            <td>0.05 to 0.1</td>
-                            <td>0.1 to 0.2</td>
-                          </tr>
-                          <tr>
-                            <th className="text-center" colSpan="6">
-                              DISHES
-                            </th>
-                          </tr>
-                          <tr>
-                            <td>35mm</td>
-                            <td>8.8</td>
-                            <td>
-                              0.04 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              1.2 x 10<sup>6</sup>
-                            </td>
-                            <td>1</td>
-                            <td>2</td>
-                          </tr>
-                          <tr>
-                            <td>60mm</td>
-                            <td>21.5</td>
-                            <td>
-                              0.8 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              3.2 x 10<sup>6</sup>
-                            </td>
-                            <td>3</td>
-                            <td>5</td>
-                          </tr>
-                          <tr>
-                            <td>100mm</td>
-                            <td>56.7</td>
-                            <td>
-                              2.2 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              8.8 x 10<sup>6</sup>
-                            </td>
-                            <td>5</td>
-                            <td>12</td>
-                          </tr>
-                          <tr>
-                            <td>150mm</td>
-                            <td>145</td>
-                            <td>
-                              5.0 x 10<sup>6</sup>
-                            </td>
-                            <td>
-                              20.0 x 10<sup>6</sup>
-                            </td>
-                            <td>10</td>
-                            <td>30</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      
+                            <tr>
+                              <td>6-well</td>
+                              <td>9.6</td>
+                              <td>
+                                0.3 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                1.2 x 10<sup>6</sup>
+                              </td>
+                              <td>1</td>
+                              <td>1 to 3</td>
+                            </tr>
+                            <tr>
+                              <td>12-well</td>
+                              <td>3.5</td>
+                              <td>
+                                0.1 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                0.5 x 10<sup>6</sup>
+                              </td>
+                              <td>0.4 to 1</td>
+                              <td>1 to 2</td>
+                            </tr>
+                            <tr>
+                              <td>24-well</td>
+                              <td>1.9</td>
+                              <td>
+                                0.05 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                0.24 x 10<sup>6</sup>
+                              </td>
+                              <td>0.2 to 0.3</td>
+                              <td>0.5 to 1.0</td>
+                            </tr>
+                            <tr>
+                              <td>48-well</td>
+                              <td>1.1</td>
+                              <td>
+                                0.03 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                0.12 x 10<sup>6</sup>
+                              </td>
+                              <td>0.1 to 0.2</td>
+                              <td>0.2 to 0.4</td>
+                            </tr>
+                            <tr>
+                              <td>96-well</td>
+                              <td>0.32</td>
+                              <td>
+                                0.01 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                0.04 x 10<sup>6</sup>
+                              </td>
+                              <td>0.05 to 0.1</td>
+                              <td>0.1 to 0.2</td>
+                            </tr>
+                            <tr>
+                              <th className="text-center" colSpan="6">
+                                DISHES
+                              </th>
+                            </tr>
+                            <tr>
+                              <td>35mm</td>
+                              <td>8.8</td>
+                              <td>
+                                0.04 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                1.2 x 10<sup>6</sup>
+                              </td>
+                              <td>1</td>
+                              <td>2</td>
+                            </tr>
+                            <tr>
+                              <td>60mm</td>
+                              <td>21.5</td>
+                              <td>
+                                0.8 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                3.2 x 10<sup>6</sup>
+                              </td>
+                              <td>3</td>
+                              <td>5</td>
+                            </tr>
+                            <tr>
+                              <td>100mm</td>
+                              <td>56.7</td>
+                              <td>
+                                2.2 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                8.8 x 10<sup>6</sup>
+                              </td>
+                              <td>5</td>
+                              <td>12</td>
+                            </tr>
+                            <tr>
+                              <td>150mm</td>
+                              <td>145</td>
+                              <td>
+                                5.0 x 10<sup>6</sup>
+                              </td>
+                              <td>
+                                20.0 x 10<sup>6</sup>
+                              </td>
+                              <td>10</td>
+                              <td>30</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                       <small>
                         <strong>*</strong> Dishes and Flasks: cells per vessel;
                         Culture plates: cells per well

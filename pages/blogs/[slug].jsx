@@ -186,7 +186,7 @@ const Blogs = (props) => {
                   </div>
                 </section>
               </div>
-              <div className="container">
+              <div className="container reference-link">
                 <div
                   className="center-box"
                   dangerouslySetInnerHTML={{
@@ -196,7 +196,7 @@ const Blogs = (props) => {
               </div>
             </div>
 
-            <Subscribe />
+         <Subscribe />
           </div>
         </div>
       </main>
