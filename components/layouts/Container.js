@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from "react";
 
 const HeaderDefault = dynamic(
     () => import("~/components/shared/headers/HeaderDefault"),
@@ -23,8 +24,31 @@ const Container = ({ children, ogimg, description, cronical, title = "Your Drug 
     } else {
         titleView = process.env.titleDescription;
     }
-
+    const router = useRouter();
     const site = "https://stemnovate.co.uk";
+
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    useEffect(() => {
+        const handleColorSchemeChange = (e) => {
+            setIsDarkMode(e.matches);
+        };
+
+        const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        setIsDarkMode(colorSchemeQuery.matches);
+
+        colorSchemeQuery.addEventListener("change", handleColorSchemeChange);
+
+        return () => {
+            colorSchemeQuery.removeEventListener("change", handleColorSchemeChange);
+        };
+    }, []);
+
+    const favicon = isDarkMode
+        ? "/static/img/favicon.png"
+        : "/static/img/favicon2.png";
+
+
 
     const canonicalURL = site + useRouter().asPath;
     const defaultDescription = `Our mission is to accelerate drug discovery from decades to years and from months to days.
@@ -32,9 +56,9 @@ We are StemnovateTM.`;
     return (
         <div className="ps-root">
             <Head>
-                {/* HTML Meta Tags  */}
+                {/* HTML Meta Tags  */} 
                 <title>{titleView}</title>
-                <link rel="shortcut icon" href="/static/img/favicon.png" />
+                <link rel="shortcut icon" href={favicon} />
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
