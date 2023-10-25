@@ -3499,7 +3499,8 @@ textarea.form-control {
 }
 
 .ps-banner--container .ps-banner {
-    min-height: 480px
+    /* min-height: 480px */
+    min-height: 0px;
 }
 
 .ps-banner--container .ps-banner__persen {
