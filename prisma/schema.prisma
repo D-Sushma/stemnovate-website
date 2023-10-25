@@ -398,6 +398,8 @@ model promotions_offer {
   title            String?   @db.Text
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
+  mobimage            String?   @db.VarChar(255)
+  shareimage         String?   @db.VarChar(255)
   start_date       DateTime? @db.Date
   end_date         DateTime? @db.Date
   customer_type    Int       @default(0)
@@ -412,6 +414,7 @@ model promotions_offer {
   btn_text         String?   @db.Text
   promo_content    String?   @db.Text
   promo_id         Int       @id @default(autoincrement())
+  share           Boolean   @default(false)
   delivery_type    String?   @db.LongText
   gender           String?   @db.LongText
   ethnicity        String?   @db.Text
@@ -423,10 +426,12 @@ model home_banner {
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
   mobimage            String?   @db.VarChar(255)
+  shareimage            String?   @db.VarChar(255)
   btn_text         String?   @db.Text
   banner_content    String?   @db.Text
   banner_id         Int       @id @default(autoincrement())
   published       Boolean   @default(false)
+  share       Boolean   @default(false)
   created_at      DateTime  @default(now()) @db.Timestamp(0)
   updated_at      DateTime? @default(now()) @db.Timestamp(0)
   deleted_at      DateTime? @db.DateTime(0)
