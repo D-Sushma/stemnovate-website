@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Form, Input, Button, Modal, Checkbox, Tooltip } from "antd"
 import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
-import { toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import { Row, Col, Select } from "antd"
 const { Option } = Select
 import { signIn } from "next-auth/react"
@@ -44,41 +44,30 @@ const UserReg = ({ reffrals }) => {
     setIsModalVisible(false)
   }
 
-  const CheckPassword = (p) => {
-    if (p.length < 8) {
-      return Promise.reject(new Error("password must be at least 8 characters"))
-    }
-    if (p.search(/[a-z]/) < 0) {
-      return Promise.reject(
-        new Error("password must contain at least one lower case letter.")
-      )
-    }
-
-    if (p.search(/[A-Z]/) < 0) {
-      return Promise.reject(
-        new Error("password must contain at least one upper case letter.")
-      )
-    }
-    if (p.search(/[!@#\$%\^&\*_]/) < 0) {
-      return Promise.reject(
-        new Error(
-          "Your password must contain at least special char from -[ ! @ # $ % ^ & * _ ]"
+  const CheckPassword = (rule, value) => {
+    return new Promise((resolve, reject) => {
+      if (value && value.length < 8) {
+        reject("Password must be at least 8 characters.")
+      } else if (!/[a-z]/.test(value)) {
+        reject("Password must contain at least one lowercase letter.")
+      } else if (!/[A-Z]/.test(value)) {
+        reject("Password must contain at least one uppercase letter.")
+      } else if (!/[!@#\$%\^&\*_]/.test(value)) {
+        reject(
+          "Password must contain at least one special character from -[ ! @ # $ % ^ & * _ ]."
         )
-      )
-    }
-    if (p.search(/[0-9]/) < 0) {
-      return Promise.reject(
-        new Error("password must contain at least one digit.")
-      )
-    }
-    if (p.length > 32) {
-      return Promise.reject(new Error("password must be at max 32 characters"))
-    }
-
-    return Promise.resolve()
+      } else if (!/[0-9]/.test(value)) {
+        reject("Password must contain at least one digit.")
+      } else if (value.length > 32) {
+        reject("Password must be at most 32 characters.")
+      } else {
+        resolve() // Password is valid, resolve the Promise
+      }
+    })
   }
 
   const SendEmail = async (name, email) => {
+    // console.log("name, email", name, email)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -99,7 +88,7 @@ const UserReg = ({ reffrals }) => {
     )
       .then((response) => response.json())
       .then(async (result) => {
-        console.log(result)
+        // console.log("result....", result)
         if (result.msg == "success") {
           sendVerifyLink(name, email)
         }
@@ -133,7 +122,7 @@ const UserReg = ({ reffrals }) => {
       .then(async (result) => {
         console.log(result)
 
-        if ((result.msg = "success")) {
+        if ((result.msg == "success")) {
           toast.success("Verification email send successfully", {
             position: "top-right",
             autoClose: 15000,
@@ -141,7 +130,8 @@ const UserReg = ({ reffrals }) => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            progress: undefined
+            progress: undefined,
+            theme: "colored"
           })
         } else {
           toast.danger("something went to wrong", {
@@ -151,7 +141,8 @@ const UserReg = ({ reffrals }) => {
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            progress: undefined
+            progress: undefined,
+            theme: "colored"
           })
         }
       })
@@ -160,9 +151,11 @@ const UserReg = ({ reffrals }) => {
 
   const onFinish = async (values) => {
     const username = values.Email
+    // console.log("username", username)
     const password = values.amex
-    const fullname = values.First
+    // console.log("password", password)
     const userFullName = values.First + " " + values.last
+    // console.log("userFullName", userFullName)
     setisLoading(true)
 
     try {
@@ -190,7 +183,7 @@ const UserReg = ({ reffrals }) => {
           theme: "colored"
         })
         await SendEmail(userFullName, username)
-        const res = await signIn("credentials", {
+        const signInRes = await signIn("credentials", {
           username,
           password,
           callbackUrl: reffrals
@@ -230,6 +223,18 @@ const UserReg = ({ reffrals }) => {
       title="My Account"
       description="Stemnovate page for new sign up, registartion. Check our term of use"
     >
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      /> */}
+       <ToastContainer />
       <div className="ps-page ps-page--inner ">
         <div className="container">
           <div className="ps-page__header"></div>
@@ -237,7 +242,7 @@ const UserReg = ({ reffrals }) => {
             <div className="row">
               <div className="col col-12 col-md-6 d-sm-none d-md-block">
                 <Image
-                  src="/static/img/Home/sinup-img.jpg"
+                  src="/static/img/Home/sign-up-new.jpg"
                   alt="Stemnovate Limited"
                   width={955}
                   height={1080}
@@ -363,7 +368,7 @@ const UserReg = ({ reffrals }) => {
                           wrapperCol={{
                             span: 23
                           }}
-                          label="Password&nbsp;&nbsp;"
+                          label="Password"
                           name="password"
                           tooltip={
                             <>

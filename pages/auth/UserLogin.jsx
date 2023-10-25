@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify"
 import Link from "next/link"
 import { getSession } from "next-auth/react"
 import dynamic from "next/dynamic"
-
+import { signIn } from "next-auth/react"
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
@@ -22,6 +22,7 @@ const UserLogin = ({ reffrals }) => {
   useEffect(() => {
     const auth = async () => {
       const session = await getSession()
+      // console.log("session",session)
       if (session) {
         router.push({
           pathname: reffrals
@@ -38,7 +39,7 @@ const UserLogin = ({ reffrals }) => {
     setisLoading(true)
     var username = values.username
     var password = values.password
-
+    
     try {
       const response = await fetch(
         process.env.NEXT_BASE_URL + "/api/auth/check-login",
@@ -66,6 +67,14 @@ const UserLogin = ({ reffrals }) => {
           progress: undefined,
           theme: "colored"
         })
+        const signInRes = await signIn("credentials", {
+          username,
+          password,
+          callbackUrl: `${reffrals}`,
+      });
+      // router.push(reffrals)
+      // window.location.reload()
+      // console.log(json);
       } else {
         toast.error(json.message, {
           position: "top-right",
@@ -117,7 +126,7 @@ const UserLogin = ({ reffrals }) => {
             <div className="row">
               <div className="col col-12 col-md-6 d-sm-none d-md-block">
                 <Image
-                  src="/static/img/Home/sinup-img.jpg"
+                  src="/static/img/Home/sign-up-new.jpg"
                   alt="Stemnovate Limited"
                   width={955}
                   height={1080}
