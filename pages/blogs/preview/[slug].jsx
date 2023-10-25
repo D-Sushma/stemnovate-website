@@ -120,7 +120,7 @@ const Blogs = (props) => {
                           alt={blogData?.name}
                           width={1200}
                           height={675}
-                          placeholder={blur}
+                          placeholder="blur"
                           blurDataURl="/static/image/blurred.png"
                         />
                       </div>
