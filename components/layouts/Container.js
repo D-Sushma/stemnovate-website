@@ -24,7 +24,6 @@ const Container = ({ children, ogimg, description, cronical, title = "Your Drug 
     } else {
         titleView = process.env.titleDescription;
     }
-    const router = useRouter();
     const site = "https://stemnovate.co.uk";
 
     const [isDarkMode, setIsDarkMode] = useState(true);
@@ -45,8 +44,8 @@ const Container = ({ children, ogimg, description, cronical, title = "Your Drug 
     }, []);
 
     const favicon = isDarkMode
-        ? "/static/img/favicon.png"
-        : "/static/img/favicon2.png";
+        ? "/static/img/favicon_dark.png"
+        : "/static/img/favicon_light.png";
 
 
 
