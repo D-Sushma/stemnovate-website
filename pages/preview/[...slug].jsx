@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import Slider from "react-slick"
-// import { useRouter } from 'next/router'
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -72,49 +71,8 @@ const PrevArrow = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-const carouselSetting = {
-  infinite: true,
-  speed: 1500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  fade: true,
-  autoplay: true,
-  dots: true,
-  initialSlide:0,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-}
-
 const HomeDefaultPage = (props) => {
-  // const router = useRouter()
-  // console.log("router", router)
+  console.log("props",props)
   useEffect(() => {
     props.SetMainMenuhandler(props.menus)
   }, [])
@@ -126,18 +84,61 @@ const HomeDefaultPage = (props) => {
       setPromotions(props.promotionDetails.data)
     }
   }, [])
-  // console.log("promotions----------------",promotions)
 
+  let home_banner_id = props.id
+  console.log("home_banner_id ---",home_banner_id )
   var ogImage = ""
+  var initialSlide = 0;
   var banner_imag_data = props?.promotionDetails?.data;
+  console.log("banner_imag_data",banner_imag_data)
   if(banner_imag_data.length>0){
     var newArr = banner_imag_data.map(function(val, index){ 
-       if(val.share){
+       if(val.id==home_banner_id[0]){
+          initialSlide = index
           var bn_img = val.shareimage
-          console.log("bn_img",bn_img)
           ogImage = `${process.env.AWS_S3BUCKET_URL}${bn_img}`
        }
     })
+  }
+
+  const carouselSetting = {
+    infinite: true,
+    speed: 1500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    fade: true,
+    autoplay: true,
+    dots: true,
+    initialSlide: initialSlide,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   }
 
   return (
@@ -161,7 +162,7 @@ const HomeDefaultPage = (props) => {
                     <div
                       className="ps-banner"
                       style={{ background: "#103178", minHeight: 0 }}
-                      >
+                    >
                       <div className="container-no-round">
                         <div className="ps-banner__block">
                           <div className="ps-banner__content">
@@ -237,8 +238,6 @@ const HomeDefaultPage = (props) => {
                               className="ps-banner__image"
                               src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                               alt={data?.title}
-                              width={1000}
-                              height={1000}
                               layout="fill"
                               placeholder="blur"
                               blurDataURL="/static/image/blurred.png"
@@ -266,7 +265,8 @@ const HomeDefaultPage = (props) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
+  var id = query.slug
   const res = await fetch(baseUrl + "/api/menu/getmenu")
   const menus = await res.json()
 
@@ -288,7 +288,7 @@ export async function getServerSideProps() {
   }
 
   return {
-    props: { menus, promotionDetails } // will be passed to the page component as props
+    props: { menus, promotionDetails, id } // will be passed to the page component as props
   }
 }
 const mapStateToProps = (state) => ({

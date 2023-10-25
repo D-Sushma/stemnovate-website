@@ -28,19 +28,6 @@ import Slider from "react-slick";
 import NextArrow from "~/components/elements/carousel/NextArrow";
 import PrevArrow from "~/components/elements/carousel/PrevArrow";
 
-const carouselSetting = {
-    infinite: true,
-    speed: 1500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    fade: true,
-    autoplay: true,
-    dots: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-};
-
 const HomeDefaultPage = (props) => {
   // const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -60,6 +47,19 @@ const HomeDefaultPage = (props) => {
     }, []);
     const boxStyle = {
         forP: { lineHeight: 1.3 },
+    };
+
+    const carouselSetting = {
+        infinite: true,
+        speed: 1500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        fade: true,
+        autoplay: true,
+        dots: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
     };
 
   return (
