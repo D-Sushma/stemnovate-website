@@ -127,7 +127,7 @@ const ForgotPassword = () => {
             <div className="row">
               <div className="p-0 col-12 col-md-6 d-sm-none d-md-block bg-login-page">
                 <Image
-                  src="/static/img/Home/signin-img.jpg"
+                  src="/static/img/Home/sign-up-new.jpg"
                   alt="Stemnovate Limited"
                   width={1000}
                   height={788}
