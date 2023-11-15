@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
@@ -16,6 +16,7 @@ function orderConfirmation({ UserData }) {
   const router = useRouter()
   const { status, orderId } = router.query
   const [orderData, setOrderdata] = useState("")
+  const MySummery = useRef(null)
   const [resourcesData, setResourcesdata] = useState([])
   useEffect(() => {
     getOrderDetails()
@@ -37,13 +38,16 @@ function orderConfirmation({ UserData }) {
       requestOptions
     )
     const userOrders = await response.json()
+    console.log("userOrders", userOrders.userOrders)
     setOrderdata(userOrders.userOrders)
     if (userOrders.userOrders.length > 0) {
       const orders_Array = userOrders.userOrders
       const orders_Details_Array = orders_Array[1]
       if (orders_Details_Array.length > 0) {
         var userResourcesArr = []
+        console.log("order_details", orders_Details_Array)
         for (let i = 0; i < orders_Details_Array.length; i++) {
+          console.log("product_id", orders_Details_Array[i].product_id)
           var resourcesID = orders_Details_Array[i].product_id
           var raw1 = JSON.stringify({ resourcesID: resourcesID })
 
@@ -57,14 +61,34 @@ function orderConfirmation({ UserData }) {
             requestOptions1
           )
           const userResources = await response1.json()
+          console.log("userResources", userResources)
           if (userResources.data.length > 0) {
             userResourcesArr.push(userResources.data)
           }
         }
+        console.log("userResourcesArr", userResourcesArr)
         setResourcesdata(userResourcesArr)
       }
     }
   }
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 83 && window.scrollY < 750) {
+        MySummery.current.scrollIntoView({ behavior: "smooth" })
+        MySummery.current.style.position = "fixed"
+        MySummery.current.style.right = "10px"
+        MySummery.current.style.top = "100px"
+      } else {
+        MySummery.current.scrollIntoView({ behavior: "smooth" })
+        MySummery.current.style.position = ""
+        MySummery.current.style.right = ""
+        MySummery.current.style.top = ""
+      }
+      console.log(MySummery.current.style)
+      console.log(window.scrollY)
+    })
+  }, [])
 
   return (
     <Container title="Order Confirmation">
@@ -114,18 +138,20 @@ function orderConfirmation({ UserData }) {
                               <h4>Primary Contact</h4>
                               <p>
                                 {
-                                  UserData?.result?.customer_application_details?.Organization_Name
+                                  UserData.result.customer_application_details
+                                    .Organization_Name
                                 }
                               </p>
 
                               <p>
-                                {UserData?.result?.firstname}{" "}
-                                {UserData?.result?.lastname}
+                                {UserData.result.firstname}{" "}
+                                {UserData.result.lastname}
                               </p>
-                              <p>{UserData?.result?.email}</p>
+                              <p>{UserData.result.email}</p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.B_PhoneNumber
+                                  UserData.result.customer_address_details
+                                    .B_PhoneNumber
                                 }
                               </p>
                             </div>
@@ -133,43 +159,52 @@ function orderConfirmation({ UserData }) {
                               <h4>Billing Address</h4>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.B_First
+                                  UserData.result.customer_address_details
+                                    .B_First
                                 }{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.B_last
+                                  UserData.result.customer_address_details
+                                    .B_last
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.B_Email
+                                  UserData.result.customer_address_details
+                                    .B_Email
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.B_PhoneNumber
+                                  UserData.result.customer_address_details
+                                    .B_PhoneNumber
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.B_Address1
+                                  UserData.result.customer_address_details
+                                    .B_Address1
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.B_Address2
+                                  UserData.result.customer_address_details
+                                    .B_Address2
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.B_Town
+                                  UserData.result.customer_address_details
+                                    .B_Town
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.B_County
+                                  UserData.result.customer_address_details
+                                    .B_County
                                 }
                                 ,{" "}
-                                {UserData?.result?.customer_address_details?.B_ZIP}
+                                {UserData.result.customer_address_details.B_ZIP}
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.B_Country
+                                  UserData.result.customer_address_details
+                                    .B_Country
                                 }
                               </p>
                             </div>
@@ -177,43 +212,52 @@ function orderConfirmation({ UserData }) {
                               <h4>Shipping Address</h4>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.S_First
+                                  UserData.result.customer_address_details
+                                    .S_First
                                 }{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.S_last
+                                  UserData.result.customer_address_details
+                                    .S_last
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.S_Email
+                                  UserData.result.customer_address_details
+                                    .S_Email
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.S_PhoneNumber
+                                  UserData.result.customer_address_details
+                                    .S_PhoneNumber
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details?.S_Address1
+                                  UserData.result.customer_address_details
+                                    .S_Address1
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.S_Address2
+                                  UserData.result.customer_address_details
+                                    .S_Address2
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.S_Town
+                                  UserData.result.customer_address_details
+                                    .S_Town
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.S_County
+                                  UserData.result.customer_address_details
+                                    .S_County
                                 }
                                 ,{" "}
-                                {UserData?.result?.customer_address_details?.S_ZIP}
+                                {UserData.result.customer_address_details.S_ZIP}
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details?.S_Country
+                                  UserData.result.customer_address_details
+                                    .S_Country
                                 }
                               </p>
                             </div>
@@ -292,7 +336,7 @@ function orderConfirmation({ UserData }) {
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-4" ref={MySummery}>
                           <div className="d-flex flex-column justify-content-center plus-section-new p-5">
                             <div className="">
                               <h2
