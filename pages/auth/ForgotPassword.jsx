@@ -124,13 +124,13 @@ const ForgotPassword = () => {
         <div className="container">
           <div className="ps-page__header"></div>
           <div className="ps-page__content ps-account">
-            <div className="row">
-              <div className="p-0 col-12 col-md-6 d-sm-none d-md-block bg-login-page">
+            <div className="row mb-5">
+              <div className="col col-12 col-md-6 d-sm-none d-md-block">
                 <Image
                   src="/static/img/Home/sign-up-new.jpg"
                   alt="Stemnovate Limited"
-                  width={1000}
-                  height={788}
+                  width={955}
+                  height={1080}
                 />
               </div>
               <div className="p-4 col-12 col-md-6 card">
