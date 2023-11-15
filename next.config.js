@@ -1,5 +1,5 @@
 const withPWA = require("next-pwa")
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const nextSettings = {
   reactStrictMode: false,
   optimizeFonts: false,
@@ -26,25 +26,25 @@ const nextSettings = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      // Add webpack-bundle-analyzer only in non-server (client) builds
-      config.plugins.push(new BundleAnalyzerPlugin());
-    }
-    if (!isServer) {
-      // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
-      config.resolve.fallback = {
-        // fs: false,
-        net: false,
-        tls: false,
-        crypto: false,
-        stream: false,
-        timers: false
-      }
-    }
+  // webpack: (config, { isServer }) => {
+  //   if (!isServer) {
+  //     // Add webpack-bundle-analyzer only in non-server (client) builds
+  //     config.plugins.push(new BundleAnalyzerPlugin());
+  //   }
+  //   if (!isServer) {
+  //     // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
+  //     config.resolve.fallback = {
+  //       // fs: false,
+  //       net: false,
+  //       tls: false,
+  //       crypto: false,
+  //       stream: false,
+  //       timers: false
+  //     }
+  //   }
 
-    return config
-  },
+  //   return config
+  // },
   images: {
     // minimumCacheTTL: 30,
     domains: [
