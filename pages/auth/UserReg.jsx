@@ -4,11 +4,12 @@ import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
 import { Row, Col, Select } from "antd"
 const { Option } = Select
-import { signIn } from "next-auth/react"
+// import { signIn } from "next-auth/react"
 import Countries from "../../public/static/data/AllCountries.json"
 import { encode } from "hex-encode-decode"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import {useRouter} from "next/router"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -17,11 +18,10 @@ const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 
-const UserReg = ({ reffrals }) => {
+const UserReg = () => {
+  const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false)
-
   const [Checktnc, setChecktnc] = useState(false)
-
   const [isLoading, setisLoading] = useState(false)
 
   function onChange(value) {
@@ -61,13 +61,12 @@ const UserReg = ({ reffrals }) => {
       } else if (value.length > 32) {
         reject("Password must be at most 32 characters.")
       } else {
-        resolve() // Password is valid, resolve the Promise
+        resolve() 
       }
     })
   }
 
   const SendEmail = async (name, email) => {
-    // console.log("name, email", name, email)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -88,7 +87,6 @@ const UserReg = ({ reffrals }) => {
     )
       .then((response) => response.json())
       .then(async (result) => {
-        // console.log("result....", result)
         if (result.msg == "success") {
           sendVerifyLink(name, email)
         }
@@ -120,7 +118,6 @@ const UserReg = ({ reffrals }) => {
     )
       .then((response) => response.json())
       .then(async (result) => {
-        console.log(result)
 
         if ((result.msg == "success")) {
           toast.success("Verification email send successfully", {
@@ -151,11 +148,8 @@ const UserReg = ({ reffrals }) => {
 
   const onFinish = async (values) => {
     const username = values.Email
-    // console.log("username", username)
-    const password = values.amex
-    // console.log("password", password)
+    // const password = values.amex
     const userFullName = values.First + " " + values.last
-    // console.log("userFullName", userFullName)
     setisLoading(true)
 
     try {
@@ -183,14 +177,16 @@ const UserReg = ({ reffrals }) => {
           theme: "colored"
         })
         await SendEmail(userFullName, username)
-        const signInRes = await signIn("credentials", {
-          username,
-          password,
-          callbackUrl: reffrals
-        })
+        router.push("/auth/UserLogin")
+        // const signInRes = await signIn("credentials", {
+        //   username,
+        //   password,
+        //   callbackUrl: reffrals
+        // })
         setisLoading(false)
-      } else {
-        toast.info(json.message, {
+      } 
+      else {
+        toast("Please choose another email to register", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -198,7 +194,6 @@ const UserReg = ({ reffrals }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored"
         })
         setisLoading(false)
       }
@@ -218,6 +213,52 @@ const UserReg = ({ reffrals }) => {
     }
   }
 
+  const handleEmailExistence = async (e) => {
+    console.log(e.target.value);
+    const userEmail = e.target.value;
+
+    try{
+      const response = await fetch(
+        process.env.NEXT_BASE_URL + "/api/auth/checkEmailExistence",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: userEmail
+          })
+        }
+      )
+      const json = await response.json()
+      console.log("exist email json",json)
+      if(json.code == "409"){
+        toast.info(json.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })
+        setisLoading(false)
+      }
+    }catch(error){
+      toast.error("Something Went to Wrong...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored"
+      })
+    }
+  }
   return (
     <Container
       title="My Account"
@@ -310,13 +351,13 @@ const UserReg = ({ reffrals }) => {
                           name="Email"
                           rules={[
                             {
+                              required: true,
+                              message: "Please input your Email!"
+                            },
+                            {
                               type: "email",
                               message: "The input is not valid E-mail!"
                             },
-                            {
-                              required: true,
-                              message: "Please input your Email!"
-                            }
                           ]}
                           label="Email"
                         >
@@ -325,6 +366,7 @@ const UserReg = ({ reffrals }) => {
                               <AiOutlineMail className="site-form-item-icon" />
                             }
                             placeholder="Email"
+                            onBlur={handleEmailExistence}
                           />
                         </Form.Item>
                       </Col>
