@@ -5,6 +5,7 @@ import { SetMainMenu } from "~/store/app/action"
 import { connect } from "react-redux"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { useSession } from "next-auth/react";
 
 const FormSearchHeader = dynamic(
   () => import("~/components/shared/forms/FormSearchHeader"),
@@ -27,7 +28,6 @@ const ModuleHeaderNotice = dynamic(
 
 const HeaderDefault = (props, { classes = "" }) => {
   var type = "white"
-
   useEffect(() => {
     if (props.menus !== undefined) {
       props.SetMainMenuhandler(props.menus)
@@ -84,6 +84,7 @@ const HeaderDefault = (props, { classes = "" }) => {
     setisloading(false)
   }
 
+  const { data: session } = useSession();
   return (
     <header
       className={`header--desktop header--one ${classes}`}
@@ -109,7 +110,8 @@ const HeaderDefault = (props, { classes = "" }) => {
               <FormSearchHeader />
             </div>
           </div>
-          <div className="header__right justify-content-center">
+          <div className="header__right justify-content-center d-flex align-items-center">
+            &nbsp;<span className="text-white">{session ? `Hello ${session.user.name}`:null}</span>
             <ModuleHeaderActions />
           </div>
         </div>
