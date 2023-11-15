@@ -38,7 +38,6 @@ const dashboard = ({ UserData }) => {
     auth()
   }, [])
   const [isLoading, setIsLoading] = useState(false)
-
   const sendVerifyLink = () => {
     setIsLoading(true)
     const myPlaintextPassword = UserData.result.email
@@ -120,12 +119,13 @@ const dashboard = ({ UserData }) => {
             <div className="ps-about">
               <div className="container">
                 <p className="py-4 font-weight-bold">
-                  Hello,{" "}
+                  Welcome,{" "}
                   {UserData &&
-                    UserData.result.firstname + " " + UserData.result.lastname}
+                    UserData?.result?.firstname + " " + UserData?.result?.lastname +"."} {" "}
+                    How can we help you?
                 </p>
 
-                {UserData && UserData.result.is_verified ? null : (
+                {UserData && UserData?.result?.is_verified ? null : (
                   <div className="alert alert-primary" role="alert">
                     Welcome to Stemnovate! We have sent you a verification
                     email. If you have not received it, please click the
@@ -141,7 +141,7 @@ const dashboard = ({ UserData }) => {
                   </div>
                 )}
 
-                {UserData && UserData.result.is_verified ? (
+                {UserData && UserData?.result?.is_verified ? (
                   <>
                     {UserData &&
                     UserData.result.is_verified &&
@@ -163,12 +163,35 @@ const dashboard = ({ UserData }) => {
                   </>
                 ) : null}
               </div>
+              {(!UserData?.result?.customer_address_details && !UserData?.result?.customer_application_details) ?
+                <div className="text-danger px-4 my-5" style={{fontWeight: "bolder"}}>
+                  NOTE: Add organization and shipping details for ordering.{" "}
+                    <Link href="/user/MyApplication">
+                      <span className="link-hover-thumb-shape" style={{fontWeight: "bolder", textDecoration: "underline"}}>
+                        Click link here
+                      </span>
+                    </Link>
+                </div>
+                : " "
+              }
+            {/* ----- OR ----- */}
+              {/* {(!UserData?.result?.customer_address_details && !UserData?.result?.customer_application_details) 
+              && <div className="text-danger px-4 my-5" style={{fontWeight: "bolder"}}>
+                NOTE: Add organization and shipping details for ordering.{" "}
+                  <Link href="/user/MyApplication">
+                    <span className="link-hover-thumb-shape" style={{fontWeight: "bolder", textDecoration: "underline"}}>
+                      Click link here
+                    </span>
+                  </Link>
+              </div>
+            } */}
+              
               <div className="site-card-wrapper my-5 flex-grow-1 row-eq-height">
                 <Row gutter={16}>
                   <Col md={6} sm={24} style={{ width: "100%" }}>
                     <Link href="/user/EditProfile" prefetch={false}>
                       <Card className="card-bg-color m-2 " hoverable bordered>
-                        <div className="d-flex justify-content-between flex-row">
+                        <div className="d-flex flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
                             <GrUserSettings size={40} color={"#003e4c"} />
                           </div>
@@ -185,7 +208,7 @@ const dashboard = ({ UserData }) => {
                   <Col md={6} sm={24} style={{ width: "100%" }}>
                     <Link href="/user/Orders" prefetch={false}>
                       <Card className="card-bg-color m-2" hoverable bordered>
-                        <div className="d-flex justify-content-between flex-row">
+                        <div className="d-flex flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
                             <GrList size={40} color={"#003e4c"} />
                           </div>
@@ -200,7 +223,7 @@ const dashboard = ({ UserData }) => {
                   <Col md={6} sm={24} style={{ width: "100%" }}>
                     <Link href={"/user/MyApplication"} prefetch={false}>
                       <Card className="card-bg-color m-2" hoverable bordered>
-                        <div className="d-flex justify-content-between flex-row">
+                        <div className="d-flex flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
                             <GrContactInfo size={40} color={"#003e4c"} />
                           </div>
@@ -214,14 +237,13 @@ const dashboard = ({ UserData }) => {
                       </Card>
                     </Link>
                   </Col>
-
                   <Col md={6} sm={24} style={{ width: "100%" }}>
                     <Link
                       href={`${baseUrl}${"/promotions-products"}`}
                       prefetch={false}
                     >
                       <Card className="card-bg-color m-2" hoverable bordered>
-                        <div className="d-flex justify-content-between flex-row">
+                        <div className="d-flex flex-row">
                           <div className="rounded-circle d-flex align-items-center m-2">
                             <GrBasket size={40} color="red" />
                           </div>
