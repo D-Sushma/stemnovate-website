@@ -16,13 +16,10 @@ const Image = dynamic(() => import("~/components/elements/Image"), {
 
 const UserLogin = ({ reffrals }) => {
   const router = useRouter()
-  console.log("router", router)
-  console.log("reffrals", reffrals)
-
+  
   useEffect(() => {
     const auth = async () => {
       const session = await getSession()
-      // console.log("session",session)
       if (session) {
         router.push({
           pathname: reffrals
@@ -70,11 +67,9 @@ const UserLogin = ({ reffrals }) => {
         const signInRes = await signIn("credentials", {
           username,
           password,
-          callbackUrl: `${reffrals}`,
+          callbackUrl: "/user/dashboard",
       });
-      // router.push(reffrals)
-      // window.location.reload()
-      // console.log(json);
+      setisLoading(false)
       } else {
         toast.error(json.message, {
           position: "top-right",
@@ -86,11 +81,9 @@ const UserLogin = ({ reffrals }) => {
           progress: undefined,
           theme: "colored"
         })
-
         setisLoading(false)
       }
     } catch (error) {
-      console.error(error)
       toast.error("Something Went to wrong", {
         position: "top-right",
         autoClose: 5000,
@@ -230,7 +223,7 @@ const UserLogin = ({ reffrals }) => {
   )
 }
 export async function getServerSideProps(context) {
-  var reffrals = context.req.headers.referer
+  var reffrals = context?.req?.headers?.referer
   return { props: { reffrals } }
 }
 export default UserLogin
