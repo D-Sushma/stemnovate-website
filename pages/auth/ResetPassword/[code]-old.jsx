@@ -9,9 +9,6 @@ import dynamic from "next/dynamic"
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
-const Image = dynamic(() => import("~/components/elements/Image"), {
-  loading: () => <p>Loading...</p>
-})
 
 function ResetPassword() {
   const [isLoading, setisLoading] = useState(false)
@@ -69,7 +66,7 @@ function ResetPassword() {
 
   const onFinish = async (values) => {
     values.code = code
-    // console.log(values)
+    console.log(values)
     setisLoading(true)
     try {
       const response = await fetch(
@@ -84,6 +81,7 @@ function ResetPassword() {
         }
       )
       const json = await response.json()
+      console.log(json)
       if (json.code == "200") {
         toast.success(json.result.message, {
           position: "top-right",
@@ -149,14 +147,37 @@ function ResetPassword() {
         <div className="container">
           <div className="ps-page__header"></div>
           <div className="ps-page__content ps-account">
-            <div className="row mb-5">
-              <div className="col col-12 col-md-6 d-sm-none d-md-block">
-              <Image
-                  src="/static/img/Home/sign-up-new.jpg"
-                  alt="Stemnovate Limited"
-                  width={955}
-                  height={1082}
-                />
+            <div className="row">
+              <div
+                className="p-4 col-12 col-md-6 d-sm-none d-md-block "
+                style={{
+                  color: "white",
+                  background: "#5292a4"
+                }}
+              >
+                <h2 className="ps-form__title">Personalize Your Experience</h2>
+                <p className="m-3">
+                  You are currently not signed in. For a better experience,
+                  please sign in or create an online profile.* This will allow
+                  you to find products and prices that are specific to the
+                  organization you work in. You will also be able to:
+                </p>
+                <ul className="m-3">
+                  <li>Get access to featured online tools</li>
+                  <li>Check out faster</li>
+                  <li>Save multiple shipping locations</li>
+                  <li>Access your order history</li>
+                  <li>Save items to a favorites list</li>
+                </ul>
+                <small>
+                  * Welcome to the new stemnovate.co.uk. As a security feature,
+                  all registered users must reset their password when logging
+                  into the new site for the first time. Please enter your
+                  profile email address and password to have a password reset
+                  link sent to your email account. This link will expire after
+                  24 hours. If you need support, please contact your local
+                  customer service team.
+                </small>
               </div>
               <div className="p-4 col-12 col-md-6 card">
                 <div className="ps-form--review m-5">
