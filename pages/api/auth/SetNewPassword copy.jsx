@@ -11,7 +11,7 @@ export default async function handle(req, res) {
                 if(password==confirm)
                 {
                     const HexToPlain = decode(code);
-                    console.log(HexToPlain);
+                    console.log("HexToPlain",HexToPlain);
                     const checkuser = await prisma.customers.findMany({
                         where: {
                             email: HexToPlain,
@@ -21,8 +21,10 @@ export default async function handle(req, res) {
                             password: true,
                         },
                     });
+        console.log("checkuser",checkuser)
                     if (checkuser.length > 0) {
                         const previousPassword = checkuser[0].password;
+                        console.log("previousPassword",previousPassword);
                         if (bcrypt.compareSync(confirm, previousPassword)) {
                             response = {
                                 code: "401",
@@ -32,7 +34,6 @@ export default async function handle(req, res) {
                             res.status(401).send(response);
                             return;
                           }
-
                         const hash = bcrypt.hashSync(confirm, 10);
         
                         const updateUser = await prisma.customers.update({
@@ -67,7 +68,7 @@ export default async function handle(req, res) {
                             message: "Something Went To Wrong. Please try after some time",
                         };
         
-                         response = {
+                        var response = {
                             code: "500",
                             result: resullt,
                         };
