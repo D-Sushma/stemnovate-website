@@ -2978,7 +2978,7 @@ textarea.form-control {
 }
 
 .ps-banner .ps-banner__shop {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     padding: 0 30px;
     border-radius: 10px;
@@ -15692,4 +15692,10 @@ html .bg--parallax {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-  }
+}
+
+@media (min-width:1025px) and (max-width:1200px) {
+    .ps-top-banners .ps-carousel{
+        height: 480px !important
+    }
+}

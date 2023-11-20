@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 import { baseUrl } from "~/repositories/Repository"
 import PropTypes from "prop-types"
 import Slider from "react-slick"
-// import { useRouter } from 'next/router'
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -113,8 +112,6 @@ const carouselSetting = {
 }
 
 const HomeDefaultPage = (props) => {
-  // const router = useRouter()
-  // console.log("router", router)
   useEffect(() => {
     props.SetMainMenuhandler(props.menus)
   }, [])
@@ -126,7 +123,6 @@ const HomeDefaultPage = (props) => {
       setPromotions(props.promotionDetails.data)
     }
   }, [])
-  // console.log("promotions----------------",promotions)
 
   var ogImage = ""
   var banner_imag_data = props?.promotionDetails?.data;
@@ -134,7 +130,6 @@ const HomeDefaultPage = (props) => {
     var newArr = banner_imag_data.map(function(val, index){ 
        if(val.share){
           var bn_img = val.shareimage
-          console.log("bn_img",bn_img)
           ogImage = `${process.env.AWS_S3BUCKET_URL}${bn_img}`
        }
     })
@@ -174,8 +169,8 @@ const HomeDefaultPage = (props) => {
                                   <div
                                     className="ps-banner__title text-white"
                                     style={{
-                                      marginTop: "20px",
-                                      marginBottom: "105px"
+                                      marginTop: "10px",
+                                      height: "100px"
                                     }}
                                     dangerouslySetInnerHTML={{
                                       __html: data?.banner_content
@@ -186,7 +181,8 @@ const HomeDefaultPage = (props) => {
                                       ""
                                     ) : (
                                       <a
-                                        className="bg-warning ps-banner__shop py-1 pl-30 pr-30 rounded-10"
+                                        className="bg-warning ps-banner__shop "
+                                        style={{marginTop:"100px"}}
                                         href={`${data?.url}`}
                                         rel="noreferrer"
                                       >
@@ -195,8 +191,9 @@ const HomeDefaultPage = (props) => {
                                     )}
                                   </div>
                                 </div>
-                                <div className="d-md-none position-absolute top-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center ">
+                                <div className="d-md-none position-absolute top-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center banner-img-container">
                                   <Image
+                                    className="banner-img-container"
                                     src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
                                     alt={data?.title}
                                     width={405}
@@ -206,7 +203,7 @@ const HomeDefaultPage = (props) => {
                                   />
                                 </div>
                                 <div
-                                  className="d-none d-md-flex ps-banner__title text-white "
+                                  className="d-none d-md-flex flex-column ps-banner__title text-white "
                                   dangerouslySetInnerHTML={{
                                     __html: data?.banner_content
                                   }}
@@ -232,7 +229,7 @@ const HomeDefaultPage = (props) => {
                             </div>
                           </div>
 
-                          <div className="ps-banner__thumnail ps-banner__fluid">
+                          <div className="ps-banner__thumnail ps-banner__fluid banner-img-container">
                             <Image
                               className="ps-banner__image"
                               src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}

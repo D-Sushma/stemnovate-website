@@ -16,8 +16,8 @@ $medium: 900px;
         }
     }
     .button-about-us{
-        background: linear-gradient(315deg, #d46a09 0%, #faad14 100%);
-        border-radius: 0;
+        background: #f49239;
+        border-radius: 8px;
         font-weight: normal;
         margin-top: 2.5rem;
         min-width: 32px;
@@ -290,4 +290,8 @@ $medium: 900px;
 }
 .reference-link a{
     word-wrap: break-word;
+}
+
+.banner-img-container span{
+    height: 100% !important;
 }

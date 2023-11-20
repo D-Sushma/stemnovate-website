@@ -47,7 +47,6 @@ const ProductScreen = ({ promotionDetails }) => {
       setPromotions(promotionDetails.data)
     }
   }, [])
-  console.log("promotions", promotions)
   var ogImage = ""
   var banner_imag_data = promotionDetails?.data
   if (banner_imag_data.length > 0) {
@@ -67,8 +66,6 @@ const ProductScreen = ({ promotionDetails }) => {
     >
       <ToastContainer />
       <main id="homepage-one">
-        <div className="ps-page ps-page--shopping">
-          <div className="ps-page__content">
             <div className="ps-about">
               <div className="ps-top-banners">
                 <div className="ps-section--banner ps-banner--container mx-0">
@@ -87,7 +84,7 @@ const ProductScreen = ({ promotionDetails }) => {
                               <div className="container-no-round">
                                 <div className="ps-banner__block">
                                   <div className="ps-banner__content d-flex  justify-content-between">
-                                    <div className="d-flex flex-column .content-section">
+                                    <div className="d-flex flex-column content-section">
                                       <div
                                         className="d-md-none position-relative"
                                         style={{ zIndex: "1" }}
@@ -95,8 +92,8 @@ const ProductScreen = ({ promotionDetails }) => {
                                         <div
                                           className="ps-banner__title text-white"
                                           style={{
-                                            marginTop: "15px",
-                                            fontSize: "14px", height:"100px"
+                                            marginTop: "10px",
+                                            height: "100px",
                                           }}
                                           dangerouslySetInnerHTML={{
                                             __html: data?.promo_content
@@ -107,7 +104,7 @@ const ProductScreen = ({ promotionDetails }) => {
                                         className="d-md-none position-relative"
                                         style={{ zIndex: "1" }}
                                       >
-                                        <div style={{ marginTop: "80px" }}>
+                                        <div style={{marginTop:"95px"}}>
                                           <Link
                                             href={`${
                                               data?.promo_type == "Promotions"
@@ -123,22 +120,20 @@ const ProductScreen = ({ promotionDetails }) => {
                                         </div>
                                       </div>
 
-                                      <div className="d-md-none w-100 h-100 position-absolute top-0 d-flex flex-column justify-content-center align-items-center">
+                                      <div className="d-md-none w-100 h-100 position-absolute top-0 d-flex flex-column justify-content-center align-items-center banner-img-container">
                                         <Image
-                                          className="ps-banner__image"
-                                          // src= "/static/home-images/demoimg.jpg"
+                                          className="banner-img-container"
                                           src={`${process.env.AWS_S3BUCKET_URL}${data.mobimage}`}
                                           alt="alt"
                                           width={405}
-                                          height={280}
-                                          layout="fill"
+                                          height={255}
                                           placeholder="blur"
                                           blurDataURL="/static/image/blurred.png"
                                         />
                                       </div>
 
                                       <div
-                                        className="d-none d-md-flex  flex-column ps-banner__title text-white"
+                                        className="d-none d-md-flex flex-column ps-banner__title text-white"
                                         dangerouslySetInnerHTML={{
                                           __html: data?.promo_content
                                         }}
@@ -152,7 +147,11 @@ const ProductScreen = ({ promotionDetails }) => {
                                           }${data.url}`}
                                           prefetch={false}
                                         >
-                                          <button className="bg-warning ps-banner__shop">
+                                          <button className="bg-warning ps-banner__shop"
+                                          style={{
+                                            marginLeft: "197px",
+                                            marginTop: "51px"
+                                          }}>
                                             {data.btn_text}
                                           </button>
                                         </Link>
@@ -180,6 +179,7 @@ const ProductScreen = ({ promotionDetails }) => {
                   </Slider>
                 </div>
               </div>
+
               <div className="blog-section py-5">
                 <h3 className="ps-section__title text-uppercase text-center">
                   <span className="font-weight-bolder  ">Offers</span>
@@ -241,9 +241,7 @@ const ProductScreen = ({ promotionDetails }) => {
               </div>
               <Subscribe />
             </div>
-          </div>
-        </div>
-      </main>
+         </main>
     </Container>
   )
 }
