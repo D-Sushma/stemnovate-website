@@ -84,7 +84,7 @@ const CheckoutScreen = ({ UserData }) => {
             <BreadCrumb breacrumb={breadcrumb} />
             <h1 className="ps-page__heading">Checkout</h1>
           </div>
-          <div className="ps-page__content">
+          <div className="ps-page__content mb-5">
             {status && status === "success" && (
               <Alert
                 message="Success "

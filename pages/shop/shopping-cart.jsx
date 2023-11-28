@@ -104,7 +104,7 @@ const ShoppingCart = ({ ecomerce }) => {
               {totalView ? <sup>({totalView})</sup> : ""}
             </h1>
           </div>
-          <div className="ps-page__content">{cartContentView}</div>
+          <div className="ps-page__content mb-5">{cartContentView}</div>
         </div>
       </div>
     </Container>
