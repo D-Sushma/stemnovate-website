@@ -7,7 +7,7 @@ import {
 import { Alert } from "antd"
 import Link from "next/link"
 import useEcomerce from "~/hooks/useEcomerce"
-import { useSession } from "next-auth/react"
+// import { useSession } from "next-auth/react"
 import dynamic from "next/dynamic"
 
 const ProductOnCart = dynamic(
@@ -16,7 +16,7 @@ const ProductOnCart = dynamic(
 )
 
 const EcomerceMiniCart = ({ ecomerce }) => {
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
   const { products, removeItem, removeItems, getProducts } = useEcomerce()
 
   function handleRemoveItem(e, productId) {
@@ -80,11 +80,11 @@ const EcomerceMiniCart = ({ ecomerce }) => {
             <Link href="/shop/shopping-cart">
               <a className="ps-btn ps-btn--primary">View Cart</a>
             </Link>
-            {session !== null ? (
+            {/* {session !== null ? (
               <Link href="/shop/checkout">
                 <a className="ps-btn ps-btn--orange">Checkout</a>
               </Link>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       )
