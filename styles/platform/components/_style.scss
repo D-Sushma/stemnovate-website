@@ -295,3 +295,19 @@ $medium: 900px;
 .banner-img-container span{
     height: 100% !important;
 }
+
+// coupon system css
+.coupon-container{
+    background-color: whitesmoke;
+    padding: 10px;
+    display: inline-block;
+    justify-content: space-around;
+    width: 100%;
+}
+.dotted-rounded-box {
+    border: 2px dotted #999;
+    border-radius: 10px;
+    padding: 5px;
+    display: inline-block;
+    width: 300px;
+}

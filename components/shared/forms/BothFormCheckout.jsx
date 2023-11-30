@@ -11,13 +11,18 @@ import axios from "axios"
 import { loadStripe } from "@stripe/stripe-js"
 import { toast } from "react-toastify"
 import Countries from "~/public/static/data/AllCountries.json"
+import { useRouter } from "next/router"
 
 function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   console.log("userData", UserData.result)
   const [myBillingdetails, setMybillingDetails] = useState("")
   const [deliveryAdd, setDeliveryAdd] = useState("")
+
+  const router = useRouter();
+  const {couponDiscount } = router.query;
+
   React.useEffect(() => {
-    setMybillingDetails(UserData.result)
+    setMybillingDetails(UserData?.result)
     setDeliveryAdd(UserData?.result?.customer_address_details?.B_County)
   }, [])
 
@@ -56,7 +61,8 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     allTotal,
     percentage,
     withVAT,
-    amountView = "0.00"
+    amountView = "0.00",
+    totalCouponDiscount = "0.00"
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
     maxShippingCost = calculateShipping(products)
@@ -65,8 +71,13 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     }
     allTotal = parseFloat(amountView) + parseFloat(maxShippingCost)
     percentage = calculatePercentage(20, allTotal)
-    withVAT = parseFloat(allTotal) + parseFloat(percentage)
-
+    if(couponDiscount>0){
+      totalCouponDiscount = couponDiscount
+      withVAT = parseFloat(allTotal) + parseFloat(percentage) - parseFloat(couponDiscount)
+    }else{
+      withVAT = parseFloat(allTotal) + parseFloat(percentage)
+    }
+    
     cartItemsView = products.map((item) => (
       <div className="ps-checkout__row ps-product" key={item.id}>
         <div className="ps-product__name">
@@ -81,6 +92,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     allTotal = "0.00"
     percentage = "0.00"
     withVAT = "0.00"
+    totalCouponDiscount = "0.00"
   }
 
   const blankField = () => {
@@ -227,392 +239,401 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   }
 
   return (
-    <div className="row">
-      <div className="col-md-8">
-        {UserData ? (
-          <form className="ps-form--checkout" action="/" method="get">
-            <div className="ps-form__billings">
-              <h4 className="ps-form__heading">Billing Details</h4>
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label>
-                      First Name <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="First Name"
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_First
-                      }
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_First",
-                          val.target.value
-                        )
-                      }}
-                    />
+    <>
+      <div className="row">
+        <div className="col-md-8">
+          {UserData ? (
+            <form className="ps-form--checkout" action="/" method="get">
+              <div className="ps-form__billings">
+                <h4 className="ps-form__heading">Billing Details</h4>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <div className="form-group">
+                      <label>
+                        First Name <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="First Name"
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_First
+                        }
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_First",
+                            val.target.value
+                          )
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label>
-                      Last Name <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Last Name"
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_last
-                      }
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_last",
-                          val.target.value
-                        )
-                      }}
-                    />
+                  <div className="col-sm-6">
+                    <div className="form-group">
+                      <label>
+                        Last Name <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Last Name"
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_last
+                        }
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_last",
+                            val.target.value
+                          )
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>Purchase Order Number (optional)</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Purchase Order Number"
-                      defaultValue={pONumber}
-                      onChange={(val) => {
-                        setPONumber(val.target.value)
-                      }}
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>Purchase Order Number (optional)</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Purchase Order Number"
+                        defaultValue={pONumber}
+                        onChange={(val) => {
+                          setPONumber(val.target.value)
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>Company Name (optional)</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Company Name"
-                      defaultValue={
-                        myBillingdetails?.customer_application_details &&
-                        myBillingdetails?.customer_application_details
-                          ?.Organization_Name
-                      }
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_application_details",
-                          "Organization_Name",
-                          val.target.value
-                        )
-                      }}
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>Company Name (optional)</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Company Name"
+                        defaultValue={
+                          myBillingdetails?.customer_application_details &&
+                          myBillingdetails?.customer_application_details
+                            ?.Organization_Name
+                        }
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_application_details",
+                            "Organization_Name",
+                            val.target.value
+                          )
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>
-                      Country <sup>*</sup>
-                    </label>
-                    <select
-                      className="ps-select form-control"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_Country",
-                          val.target.value
-                        )
-                      }}
-                      value={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_Country
-                      }
-                    >
-                      {Countries.map((data) => (
-                        <option key={data.name} defaultValue={data.name}>
-                          {data.name}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>
+                        Country <sup>*</sup>
+                      </label>
+                      <select
+                        className="ps-select form-control"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_Country",
+                            val.target.value
+                          )
+                        }}
+                        value={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_Country
+                        }
+                      >
+                        {Countries.map((data) => (
+                          <option key={data.name} defaultValue={data.name}>
+                            {data.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>
-                      County / States <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="County / States"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_County",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_County
-                      }
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>
+                        County / States <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="County / States"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_County",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_County
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>
-                      Address line 1 <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Address line 1"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_Address1",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_Address1
-                      }
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>
+                        Address line 1 <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Address line 1"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_Address1",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_Address1
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>Address line 2</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Address line 2"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_Address2",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_Address2
-                      }
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>Address line 2</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Address line 2"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_Address2",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_Address2
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>
-                      Town / City <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Town / City"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_Town",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_Town
-                      }
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>
+                        Town / City <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Town / City"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_Town",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_Town
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-12">
-                  <div className="form-group">
-                    <label>Postcode / ZIP</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Postcode / ZIP "
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_ZIP",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_ZIP
-                      }
-                    />
+                  <div className="col-sm-12">
+                    <div className="form-group">
+                      <label>Postcode / ZIP</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Postcode / ZIP "
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_ZIP",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_ZIP
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label>
-                      Email <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Email"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_Email",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details?.B_Email
-                      }
-                    />
+                  <div className="col-sm-6">
+                    <div className="form-group">
+                      <label>
+                        Email <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Email"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_Email",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details?.B_Email
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label>
-                      Phone <sup>*</sup>
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Phone"
-                      onChange={(val) => {
-                        handleUpdate(
-                          "customer_address_details",
-                          "B_PhoneNumber",
-                          val.target.value
-                        )
-                      }}
-                      defaultValue={
-                        myBillingdetails?.customer_address_details &&
-                        myBillingdetails?.customer_address_details
-                          ?.B_PhoneNumber
-                      }
-                    />
+                  <div className="col-sm-6">
+                    <div className="form-group">
+                      <label>
+                        Phone <sup>*</sup>
+                      </label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Phone"
+                        onChange={(val) => {
+                          handleUpdate(
+                            "customer_address_details",
+                            "B_PhoneNumber",
+                            val.target.value
+                          )
+                        }}
+                        defaultValue={
+                          myBillingdetails?.customer_address_details &&
+                          myBillingdetails?.customer_address_details
+                            ?.B_PhoneNumber
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
+            </form>
+          ) : (
+            <Link href="/auth/UserLogin">
+              <button className="ps-btn ps-btn--warning link-hover-thumb-shape">
+                Login
+              </button>
+            </Link>
+          )}
+        </div>
+        <div className="col-md-4">
+          <div className="ps-checkout__order">
+            <h3 className="ps-checkout__heading">Your order</h3>
+            <div className="ps-checkout__row">
+              <div className="ps-title">Product</div>
+              <div className="ps-title">Subtotal</div>
             </div>
-          </form>
-        ) : (
-          <Link href="/auth/UserLogin">
-            <button className="ps-btn ps-btn--warning link-hover-thumb-shape">
-              Login
-            </button>
-          </Link>
-        )}
-      </div>
-      <div className="col-md-4">
-        <div className="ps-checkout__order">
-          <h3 className="ps-checkout__heading">Your order</h3>
-          <div className="ps-checkout__row">
-            <div className="ps-title">Product</div>
-            <div className="ps-title">Subtotal</div>
-          </div>
-          {cartItemsView}
+            {cartItemsView}
 
-          <div className="ps-checkout__row">
-            <div className="ps-title">Cart Total</div>
-            <div className="ps-product__price">£ {amountView}</div>
-          </div>
-          <div className="ps-checkout__row">
-            <div className="ps-title">Shipping</div>
-            <span>
-              <div className="ps-product__price">£ {maxShippingCost}</div>
-            </span>
-          </div>
-          <div className="ps-checkout__row">
-            <div className="ps-title">Total</div>
-            <div className="ps-product__price">£ {allTotal}</div>
-          </div>
-          <div className="ps-checkout__row">
-            <div className="ps-title">VAT (20%)</div>
-            <div className="ps-product__price">£ {percentage}</div>
-          </div>
-
-          <div className="ps-checkout__row">
-            <div className="ps-title">Subtotal</div>
-            <div className="ps-product__price">£ {withVAT}</div>
-          </div>
-          <div className="ps-checkout__payment">
-            <div className="check-faq">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  onClick={(e) => setCheckTnC(e.target.checked)}
-                  checked={checkTnC}
-                  id="flexCheckDefault"
-                />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                  {" "}
-                  I have read and agree to the website{" "}
-                  <Link target={"_blank"} href="/terms-of-use">
-                    <u className="text-info link-hover-thumb-shape">
-                      terms and conditions
-                    </u>
-                  </Link>{" "}
-                  *
-                </label>
-              </div>
+            <div className="ps-checkout__row">
+              <div className="ps-title">Cart Total</div>
+              <div className="ps-product__price">£ {amountView}</div>
             </div>
-
-            <button
-              disabled={
-                userStatus
-                  ? products.length === 0 || loading
-                    ? true
-                    : false
-                  : true
-              }
-              onClick={createCheckOutSession}
-              className="ps-btn ps-btn--warning"
-            >
-              {loading ? "Processing..." : "Buy"}
-            </button>
-            {UserData && UserData.result.status ? null : (
-              <div className="my-3">
-                {UserData &&
-                UserData?.result?.is_verified &&
-                UserData?.result?.customer_address_details == null ? (
-                  <div className="alert alert-info" role="alert">
-                    Welcome to Stemnovate! Please complete your profile to get
-                    custom pricing.
-                  </div>
-                ) : null}
-
-                {UserData && UserData?.result?.is_verified == 0 ? (
-                  <div className="alert alert-info" role="alert">
-                    Welcome to Stemnovate! Please verify your email.
-                  </div>
-                ) : null}
-
-                {UserData &&
-                UserData?.result?.is_verified &&
-                UserData?.result?.customer_address_details !== null &&
-                UserData?.result?.status == 0 ? (
-                  <div className="alert alert-info" role="alert">
-                    We are reviewing your profile and we will be in touch with
-                    you soon.
-                  </div>
-                ) : null}
-              </div>
+            <div className="ps-checkout__row">
+              <div className="ps-title">Shipping</div>
+              <span>
+                <div className="ps-product__price">£ {maxShippingCost}</div>
+              </span>
+            </div>
+            <div className="ps-checkout__row">
+              <div className="ps-title">Total</div>
+              <div className="ps-product__price">£ {allTotal}</div>
+            </div>
+            <div className="ps-checkout__row">
+              <div className="ps-title">VAT (20%)</div>
+              <div className="ps-product__price">£ {percentage}</div>
+            </div>
+            
+            {(totalCouponDiscount > 0) && (
+              <div className="ps-checkout__row">
+              <div className="ps-title">Total Discount</div>
+              <div className="ps-product__price">- £ {totalCouponDiscount}</div>
+            </div>
             )}
+            
+            <div className="ps-checkout__row">
+              <div className="ps-title">Subtotal</div>
+              <div className="ps-product__price">£ {withVAT}</div>
+            </div>
+            <div className="ps-checkout__payment">
+              <div className="check-faq">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    onClick={(e) => setCheckTnC(e.target.checked)}
+                    checked={checkTnC}
+                    id="flexCheckDefault"
+                  />
+                  <label className="form-check-label" htmlFor="flexCheckDefault">
+                    {" "}
+                    I have read and agree to the website{" "}
+                    <Link target={"_blank"} href="/terms-of-use">
+                      <u className="text-info link-hover-thumb-shape">
+                        terms and conditions
+                      </u>
+                    </Link>{" "}
+                    *
+                  </label>
+                </div>
+              </div>
+
+              <button
+                disabled={
+                  userStatus
+                    ? products.length === 0 || loading
+                      ? true
+                      : false
+                    : true
+                }
+                onClick={createCheckOutSession}
+                className="ps-btn ps-btn--warning"
+              >
+                {loading ? "Processing..." : "Buy"}
+              </button>
+              {UserData && UserData?.result?.status ? null : (
+                <div className="my-3">
+                  {UserData &&
+                  UserData?.result?.is_verified &&
+                  UserData?.result?.customer_address_details == null ? (
+                    <div className="alert alert-info" role="alert">
+                      Welcome to Stemnovate! Please complete your profile to get
+                      custom pricing.
+                    </div>
+                  ) : null}
+
+                  {UserData && UserData?.result?.is_verified == 0 ? (
+                    <div className="alert alert-info" role="alert">
+                      Welcome to Stemnovate! Please verify your email.
+                    </div>
+                  ) : null}
+
+                  {UserData &&
+                  UserData?.result?.is_verified &&
+                  UserData?.result?.customer_address_details !== null &&
+                  UserData?.result?.status == 0 ? (
+                    <div className="alert alert-info" role="alert">
+                      We are reviewing your profile and we will be in touch with
+                      you soon.
+                    </div>
+                  ) : null}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
