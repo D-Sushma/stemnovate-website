@@ -358,11 +358,13 @@ model user {
 }
 
 model country_shipping_cost {
-  id            Int      @id @default(autoincrement())
-  country_name  String?  @db.VarChar(100)
-  shipping_cost Float?   @db.Float
-  created_at    DateTime @default(now()) @db.Timestamp(0)
-  deleted_at    DateTime @default(now()) @db.Timestamp(0)
+  id              Int       @id @default(autoincrement())
+  country_name    String?   @db.VarChar(100)
+  shipping_cost   Float?    @db.Float
+  country_region  String?   @db.VarChar(100)
+  delivery_type   String?   @db.VarChar(100)
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  deleted_at      DateTime  @default(now()) @db.Timestamp(0)
 }
 
 model tax_details {
@@ -731,4 +733,18 @@ model resources_structural_analysis {
   resources_data resources_data? @relation(fields: [rel_resources], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_stuctural")
 
   @@index([rel_resources], map: "FK_stuctural")
+}
+
+model coupons {
+  coupon_id         Int       @id @default(autoincrement())
+  coupon_code       String?    @db.VarChar(255)
+  discount_type     String     @db.VarChar(255)
+  expiry_date       DateTime?  @db.Date
+  discount          Float?     @db.Float
+}
+
+model regions {
+  Id                Int       @id @default(autoincrement())
+  Regions           String?   @db.VarChar(255)
+  Counties          String?   @db.VarChar(255)
 }
