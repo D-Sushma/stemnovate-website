@@ -93,27 +93,29 @@ const Testimonials = () => {
               <div className="ps-section__content">
                 <div className="container">
                   <Slider {...carouselSetting} className="ps-carousel">
-                    {items}
+                    {/* {items} */}
+                    {/* ============OR======== */}
+                    {items.map((item, index) => (
+                      <div key={index}>
+                        {item}
+                      </div>
+                    ))}
 
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                New Logo, New Savings!{" "}
-                                <span className="text-warning">
-                                  Buy 5 Cells or Media Mix and Match
-                                </span>{" "}
-                                Get Free Shipping
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              New Logo, New Savings!{" "}
+                              <span className="text-warning">
+                                Buy 5 Cells or Media Mix and Match
+                              </span>{" "}
+                              Get Free Shipping
+                            </i>
+                          </blockquote>
                           <Link href="/contact-us">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape ">
                               Request a Quote
@@ -126,24 +128,20 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                {" "}
-                                <span className="text-warning">
-                                  Get 20% multi-buy
-                                </span>{" "}
-                                discount on cells and cell culture media
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              {" "}
+                              <span className="text-warning">
+                                Get 20% multi-buy
+                              </span>{" "}
+                              discount on cells and cell culture media
+                            </i>
+                          </blockquote>
                           <Link href="/promotions_offer/easter">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Order Now
@@ -156,23 +154,19 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                Have you tried our primary cells or media yet?{" "}
-                                <span className="text-warning">buy 1</span> Get{" "}
-                                <span className="text-warning">50% off</span> on
-                                any cell line or cell culture media
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              Have you tried our primary cells or media yet?{" "}
+                              <span className="text-warning">buy 1</span> Get{" "}
+                              <span className="text-warning">50% off</span> on
+                              any cell line or cell culture media
+                            </i>
+                          </blockquote>
                           <Link href="/promotions_offer/have-you">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Order Now
@@ -185,26 +179,20 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                We are releasing{" "}
-                                <span className="text-warning">
-                                  Karyometrix
-                                </span>{" "}
-                                A new database-based service platform.{" "}
-                                <span className="text-warning">Now,</span> you
-                                have access to live interactive genomic data.
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              We are releasing{" "}
+                              <span className="text-warning">Karyometrix</span>{" "}
+                              A new database-based service platform.{" "}
+                              <span className="text-warning">Now,</span> you
+                              have access to live interactive genomic data.
+                            </i>
+                          </blockquote>
                           <Link href="/resources/r/karyotyping">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Know More
@@ -217,24 +205,20 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                Welcome back to the lab! Mix & match on any
-                                in-stock media and cell lines{" "}
-                                <span className="text-warning">
-                                  Buy three get 10% off
-                                </span>
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              Welcome back to the lab! Mix & match on any
+                              in-stock media and cell lines{" "}
+                              <span className="text-warning">
+                                Buy three get 10% off
+                              </span>
+                            </i>
+                          </blockquote>
                           <Link href="/promotions_offer/welcome-back">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Order Now
@@ -247,21 +231,17 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                Great News! We are now shipping our products to
-                                the EU and America
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              Great News! We are now shipping our products to
+                              the EU and America
+                            </i>
+                          </blockquote>
                           <Link href="/promotions_offer/great-news">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Order Now
@@ -274,23 +254,18 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                Buy any Human Primary fibroblasts - male or
-                                female And Get{" "}
-                                <span className="text-warning">25%</span>{" "}
-                                discount on Fibroblast Media
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              Buy any Human Primary fibroblasts - male or female
+                              And Get <span className="text-warning">25%</span>{" "}
+                              discount on Fibroblast Media
+                            </i>
+                          </blockquote>
                           <Link href="promotions_offer/media-discount">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Order Now
@@ -303,22 +278,18 @@ const Testimonials = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder px-4 py-2 heading-testimonials">
-                          Promotion Offer
-                        </span>
+                      <h3 className="ps-section__title text-uppercase font-weight-bolder px-4 py-2 heading-testimonials">
+                        Promotion Offer
                       </h3>
                       <div className="ps-review p-0 d-flex justify-content-center align-item-center">
                         <div className="container-testimonials">
-                          <div className="ps-review__text mt-5 text-testimonials">
-                            <blockquote>
-                              <i>
-                                We have some fantastic offers! Get{" "}
-                                <span className="text-warning">10% OFF</span>{" "}
-                                when you sign up to our website!
-                              </i>
-                            </blockquote>
-                          </div>
+                          <blockquote className="ps-review__text mt-5 text-testimonials">
+                            <i>
+                              We have some fantastic offers! Get{" "}
+                              <span className="text-warning">10% OFF</span> when
+                              you sign up to our website!
+                            </i>
+                          </blockquote>
                           <Link href="/auth/UserReg">
                             <div className="ps-review__name mb-1 py-1 pl-3 pr-3 name-testimonials link-hover-thumb-shape">
                               Sign-up
