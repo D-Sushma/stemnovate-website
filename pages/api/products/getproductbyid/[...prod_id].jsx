@@ -56,6 +56,7 @@ export default async function handle(req, res) {
                 stock: true,
                 product_image: true,
                 product_details: true,
+                deliver_type: true,
                 type: true,
                 category: {
                   select: {
