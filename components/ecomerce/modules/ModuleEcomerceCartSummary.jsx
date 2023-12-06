@@ -13,18 +13,15 @@ import { getSession } from "next-auth/react"
 import axios from "axios"
 
 const ModuleEcomerceCartSummary = ({ cartItems }) => {
-
   const [couponDetail, setCouponDetail] = useState([])
   const [couponApplied, setCouponApplied] = useState(false)
   const [showCouponAppliedMessage, setShowCouponAppliedMessage] =
     useState(false)
   const router = useRouter()
   const [customerCountry, setCustomerCountry] = useState("")
-  // const [shippingCost, setShippingCost] = useState([])
-  // const [deliveryType, setDeliveryType] = useState([])
   const [shippingDetail, setShippingDetail] = useState([])
 
-  const getCustomerDetail = async () => {
+  const getCustomerAddressDetail = async () => {
     try {
       const sessionData = await getSession()
       const response = await axios.post(
@@ -33,7 +30,6 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           customer_id: sessionData.id
         }
       )
-      // console.log("Customer detail response-----",response?.data?.result[0]);
       // console.log("User detail response-----",response?.data?.result[0]?.S_County);
       // console.log("User detail response-----",response?.data?.result[0]?.S_Country);
       setCustomerCountry(response?.data?.result[0]?.S_Country)
@@ -48,7 +44,6 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       const response = await axios.post("/api/shipping-cost/getCountyRegion", {
         county: county
       })
-      // console.log("county region response-----",response?.data);
       // console.log("county region response-----",response?.data?.result[0]?.Regions);
       return response?.data?.result[0]?.Regions
     } catch (error) {
@@ -57,60 +52,59 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   }
   const getShippingCost = async (customerData, region) => {
     const country = customerData?.S_Country
-    // console.log("country, region",country,region);
     try {
       const response = await axios.post("/api/shipping-cost/getShippingCost", {
         country: country,
         region: region
       })
-      // console.log("shipping cost response-----",response?.data);
-      // console.log("shipping cost response-----",response?.data?.result[0]?.delivery_type);
-      // console.log("shipping cost response-----",response?.data?.result[0]?.shipping_cost);
-      // setShippingCost(response?.data?.result[0]?.shipping_cost)
-      // setDeliveryType(response?.data?.result[0]?.delivery_type)
       setShippingDetail(response?.data?.result)
     } catch (error) {
       console.error(error)
     }
   }
-  // console.log("deliveryType,shippingCost", deliveryType, shippingCost)
-  console.log("shippingDetail", shippingDetail)
+
   useEffect(() => {
     async function fetchData() {
-      const customerData = await getCustomerDetail()
+      const customerData = await getCustomerAddressDetail()
       if (customerCountry == "United Kingdom") {
         const region = await getCountyRegion(customerData)
         getShippingCost(customerData, region)
       } else {
-        // console.log("call only getShippingCost()");
-        getShippingCost(customerData, null)
+        getShippingCost(customerData, "")
       }
     }
+
     fetchData()
   }, [customerCountry])
 
-  const deliveryTypeArray = [] 
-  const shippingCostArray = [] 
+  const deliveryTypeArray = []
+  const shippingCostArray = []
   shippingDetail.forEach((s_detail) => {
     deliveryTypeArray.push(s_detail?.delivery_type)
     shippingCostArray.push(s_detail?.shipping_cost)
   })
-  console.log( "deliveryTypeArray,shippingCostArray", deliveryTypeArray,shippingCostArray)
+  console.log(
+    "deliveryTypeArray,shippingCostArray",
+    deliveryTypeArray,
+    shippingCostArray
+  )
 
   const handleCouponExistChange = (exist) => {
-    setCouponDetail(exist)
-    // OR-----------------
+    // setCouponDetail(exist)
+    // =====OR=======
     // if (exist.length > 0) {
     //   setCouponDetail(exist)
     // } else {
     //   setCouponDetail([])
     // }
     if (exist.length > 0) {
+      setCouponDetail(exist)
       // Coupon successfully applied
       setCouponApplied(true)
       setShowCouponAppliedMessage(true)
     } else {
       setCouponApplied(false)
+      setCouponDetail([])
     }
   }
   // console.log("couponDetail====>", couponDetail)
@@ -120,7 +114,11 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     discount = item?.discount
     discountType = item?.discount_type
   })
-  // console.log("Discount,DiscountType", discount, discountType)
+  const handleCrossIconClick = () => {
+    setShowCouponAppliedMessage(false)
+    setCouponApplied(false)
+    setCouponDetail([])
+  }
 
   // view
   let totalView, maxShippingCost, withVAT, percentage, allTotal, couponDiscount
@@ -130,20 +128,25 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       let finalShippingCost = 0
       let finalShippingDeliveryType = ""
       cartItems.forEach((items) => {
-        // console.log("items==================",items?.deliver_type)
         const productDeliveryType = items?.deliver_type
-        console.log("productDeliveryType", productDeliveryType) // live frozen
+        // console.log("productDeliveryType", productDeliveryType) // live frozen
         if (deliveryTypeArray.includes(productDeliveryType)) {
-          const indexOfDeliveryType = deliveryTypeArray.indexOf(productDeliveryType)
+          const indexOfDeliveryType =
+            deliveryTypeArray.indexOf(productDeliveryType)
           const resultShippingCost = shippingCostArray[indexOfDeliveryType]
-          console.log("indexOfDeliveryType,resultShippingCost",indexOfDeliveryType,resultShippingCost) //0 50 1 40
-          if (resultShippingCost > finalShippingCost) {  // 50>0 50>40
+          // console.log("indexOfDeliveryType,resultShippingCost",indexOfDeliveryType,resultShippingCost) //0 50 1 40
+          if (resultShippingCost > finalShippingCost) {
+            // 50>0 50>40
             finalShippingCost = resultShippingCost
             finalShippingDeliveryType = productDeliveryType
           }
         }
       })
-      console.log("finalShippingDeliveryType,finalShippingCost",finalShippingDeliveryType,finalShippingCost) //0 50
+      console.log(
+        "finalShippingDeliveryType,finalShippingCost",
+        finalShippingDeliveryType,
+        finalShippingCost
+      ) //0 50
 
       totalView = calculateAmount(cartItems)
       // maxShippingCost = calculateShipping(cartItems)
@@ -156,14 +159,19 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
         allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
       }
       percentage = calculatePercentage(20, allTotal)
-      // console.log("maxShippingCost,allTotal,totalView",maxShippingCost,allTotal,totalView);
 
       if (discountType == "Percentage") {
         couponDiscount = calculateTotalDiscount(discount, totalView)
-        withVAT = parseFloat(allTotal) + parseFloat(percentage) - parseFloat(couponDiscount)
+        withVAT =
+          parseFloat(allTotal) +
+          parseFloat(percentage) -
+          parseFloat(couponDiscount)
       } else if (discountType == "Fixed") {
         couponDiscount = discount
-        withVAT = parseFloat(allTotal) + parseFloat(percentage) - parseFloat(couponDiscount)
+        withVAT =
+          parseFloat(allTotal) +
+          parseFloat(percentage) -
+          parseFloat(couponDiscount)
       } else {
         withVAT = withVAT = parseFloat(allTotal) + parseFloat(percentage)
       }
@@ -195,10 +203,23 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   return (
     <>
       {/* <CouponFormSystem onCouponExistChange={handleCouponExistChange} /> */}
-      {!couponApplied && (<CouponFormSystem onCouponExistChange={handleCouponExistChange} />)}
+      {!couponApplied && (
+        <CouponFormSystem onCouponExistChange={handleCouponExistChange} />
+      )}
       {showCouponAppliedMessage && (
-        <div className="alert alert-success font-weight-bold" role="alert" style={{ color: "green" }}>
-          Your coupon discount applied successfully!
+        <div
+          className="alert alert-success d-flex justify-content-between"
+          role="alert"
+        >
+          <span style={{ color: "green", fontWeight: "bold" }}>
+            Your coupon discount applied successfully!
+          </span>
+          {/* <span className="text-danger font-weight-bold">X</span> */}
+          <i
+            className="icon-cross text-danger font-weight-bold"
+            onClick={handleCrossIconClick}
+            style={{ cursor: "pointer" }}
+          ></i>
         </div>
       )}
 
