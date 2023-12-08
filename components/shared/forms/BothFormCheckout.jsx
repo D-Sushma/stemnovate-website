@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import {
   calculateAmount,
-  calculateShipping,
+  // calculateShipping,
   calculatePercentage
 } from "~/utilities/ecomerce-helpers"
 import useEcomerce from "~/hooks/useEcomerce"
@@ -14,18 +14,17 @@ import Countries from "~/public/static/data/AllCountries.json"
 import { useRouter } from "next/router"
 
 function BothFormCheckout({ ecomerce, userStatus, UserData }) {
-  console.log("userData", UserData.result)
+  // console.log("userData", UserData.result)
   const [myBillingdetails, setMybillingDetails] = useState("")
-  const [deliveryAdd, setDeliveryAdd] = useState("")
+  // const [deliveryAdd, setDeliveryAdd] = useState("")
 
   const router = useRouter();
-  const {couponDiscount } = router.query;
+  const {couponDiscount, maximumShippingCost } = router.query;
 
   React.useEffect(() => {
     setMybillingDetails(UserData?.result)
-    setDeliveryAdd(UserData?.result?.customer_address_details?.B_County)
+    // setDeliveryAdd(UserData?.result?.customer_address_details?.B_County)
   }, [])
-
   const handleUpdate = (index, name, todo) => {
     console.log("billing", myBillingdetails.customer_address_details)
     if (myBillingdetails[index] && myBillingdetails[index][name] != null) {
@@ -57,7 +56,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
 
   // Views
   let cartItemsView,
-    maxShippingCost,
+    // maxShippingCost,
     allTotal,
     percentage,
     withVAT,
@@ -65,11 +64,11 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     totalCouponDiscount = "0.00"
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
-    maxShippingCost = calculateShipping(products)
-    if (deliveryAdd == "cambridge" || deliveryAdd == "Cambridge") {
-      maxShippingCost = parseFloat(0)
-    }
-    allTotal = parseFloat(amountView) + parseFloat(maxShippingCost)
+    // maxShippingCost = calculateShipping(products)
+    // if (deliveryAdd == "cambridge" || deliveryAdd == "Cambridge") {
+    //   maxShippingCost = parseFloat(0)
+    // }
+    allTotal = parseFloat(amountView) + parseFloat(maximumShippingCost)
     percentage = calculatePercentage(20, allTotal)
     if(couponDiscount>0){
       totalCouponDiscount = couponDiscount
@@ -88,7 +87,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     ))
   } else {
     amountView = "0.00"
-    maxShippingCost = "0.00"
+    // maxShippingCost = "0.00"
     allTotal = "0.00"
     percentage = "0.00"
     withVAT = "0.00"
@@ -542,7 +541,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
             <div className="ps-checkout__row">
               <div className="ps-title">Shipping</div>
               <span>
-                <div className="ps-product__price">£ {maxShippingCost}</div>
+                <div className="ps-product__price">£ {maximumShippingCost ?? "0.00"}</div>
               </span>
             </div>
             <div className="ps-checkout__row">

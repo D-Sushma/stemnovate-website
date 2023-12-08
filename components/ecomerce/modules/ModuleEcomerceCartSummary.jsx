@@ -62,7 +62,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       console.error(error)
     }
   }
-
+  
   useEffect(() => {
     async function fetchData() {
       const customerData = await getCustomerAddressDetail()
@@ -83,12 +83,6 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     deliveryTypeArray.push(s_detail?.delivery_type)
     shippingCostArray.push(s_detail?.shipping_cost)
   })
-  console.log(
-    "deliveryTypeArray,shippingCostArray",
-    deliveryTypeArray,
-    shippingCostArray
-  )
-
   const handleCouponExistChange = (exist) => {
     // setCouponDetail(exist)
     // =====OR=======
@@ -126,7 +120,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   if (cartItems) {
     if (cartItems && cartItems.length > 0) {
       let finalShippingCost = 0
-      let finalShippingDeliveryType = ""
+      // let finalShippingDeliveryType = ""
       cartItems.forEach((items) => {
         const productDeliveryType = items?.deliver_type
         // console.log("productDeliveryType", productDeliveryType) // live frozen
@@ -138,15 +132,11 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           if (resultShippingCost > finalShippingCost) {
             // 50>0 50>40
             finalShippingCost = resultShippingCost
-            finalShippingDeliveryType = productDeliveryType
+            // finalShippingDeliveryType = productDeliveryType
           }
         }
       })
-      console.log(
-        "finalShippingDeliveryType,finalShippingCost",
-        finalShippingDeliveryType,
-        finalShippingCost
-      ) //0 50
+      // console.log("finalShippingDeliveryType,finalShippingCost",finalShippingDeliveryType,finalShippingCost) //0 50
 
       totalView = calculateAmount(cartItems)
       // maxShippingCost = calculateShipping(cartItems)
@@ -186,11 +176,12 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   }
 
   const handleProceedToCheckout = () => {
-    if (couponDiscount > 0) {
+    if (couponDiscount > 0 || maxShippingCost >= 0) {
       router.push({
         pathname: "/shop/checkout",
         query: {
-          couponDiscount: couponDiscount
+          couponDiscount: couponDiscount,
+          maximumShippingCost: maxShippingCost
         }
       })
     } else {
