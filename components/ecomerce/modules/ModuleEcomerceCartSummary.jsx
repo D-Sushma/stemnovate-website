@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
+import { toast, ToastContainer } from "react-toastify"
 import {
   calculateAmount,
   // calculateShipping,
@@ -92,42 +93,77 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     deliveryTypeArray.push(s_detail?.delivery_type)
     shippingCostArray.push(s_detail?.shipping_cost)
   })
-  const handleCouponExistCheck = async (couponData) => {
-    console.log("couponData=====",couponData?.coupon_code)
+  const handleCouponExistCheck = async (couponData, couponCode) => {
     if(couponData.length > 0){
       const coupon = couponData[0];
-      // console.log("coupon============",coupon,coupon?.published,coupon?.expiry_date)
+      // console.log("coupon",coupon,coupon?.published,coupon?.expiry_date)
       const currentDate = moment(new Date());
       const couponExpiryDate = moment(coupon?.expiry_date); 
       // console.log("currentDate,couponExpiryDate===",currentDate,couponExpiryDate)
-        if(coupon?.published && couponExpiryDate <= currentDate){
+        if(coupon?.published && couponExpiryDate >= currentDate){
       const sessionData = await getSession()
             const usedCoupon = await getCouponUsed(coupon?.coupon_code,sessionData.id);
-            console.log("usedCoupon",usedCoupon,!usedCoupon?.exist)
             if(!usedCoupon?.exist){
-              console.log("if reached!")
               setCouponApplied(true)
               setCouponDetail(couponData)
             }else{
+              toast.info(usedCoupon?.message,
+                {
+                  position: "top-right",
+                  autoClose: 2000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "colored",
+                  style: {
+                    fontSize: "12px", 
+                    height: "50px"
+                  },
+                })
               setCouponApplied(false)
               setCouponDetail([])
             }
           }else{
+            toast.error(`Coupon code "${coupon?.coupon_code}" has expired.`,
+        {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          style: {
+            fontSize: "12px", 
+            height: "50px",
+            backgroundColor:"gray"
+          },
+        })
           setCouponApplied(false)
           setCouponDetail([])
         }
     }else{
+      toast.error(`Coupon code "${couponCode}" not exist.`,
+      {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        style: {
+          fontSize: "12px", 
+          height: "50px"
+        },
+      })
       setCouponApplied(false)
       setCouponDetail([])
     }
-    // old ----------------------
-    // if (couponData.length > 0) {
-    //   setCouponDetail(couponData)
-    //   // Coupon successfully applied
-    //   setCouponApplied(true)
-    // } else {
-    //   setCouponApplied(false)
-    // }
   }
   const handleCrossIconClick = () => {
     setCouponApplied(false)
@@ -227,6 +263,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
 
   return (
     <>
+    <ToastContainer/>
       {/* <CouponFormSystem onCouponExistChange={handleCouponExistCheck} /> */}
       {!couponApplied ?
       (
