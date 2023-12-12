@@ -10,26 +10,28 @@ import { v1 as uuidv1 } from "uuid"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 async function CreateStripeSession(req, res) {
-  const { item, userData, pONumber, maximumShippingCost,customerCountry } = req.body
+  const { item, userData, pONumber, maximumShippingCost,customerCountry,couponDiscount } = req.body
   const mySession = await getSession({ req })
 
   console.log("item", item)
-  const userCountry = userData?.result?.customer_application_details?.Country
-  console.log("customerCountry,userCountry",customerCountry,userCountry)
 
   const todayDate = moment().format()
-  const amountView = calculateAmount(item)
+  const amountView = calculateAmount(item) 
   // const maxShippingCost = calculateShipping(item)
-  const maxShippingCost = maximumShippingCost
-  const allTotal = parseFloat(amountView) + parseFloat(maxShippingCost)
+  const maxShippingCost = maximumShippingCost 
+  const allTotal = parseFloat(amountView) + parseFloat(maxShippingCost) 
   let vatPercentage = 0
   if(customerCountry == "United Kingdom"){
     vatPercentage = calculatePercentage(20, allTotal)
   }
-  const withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
-  const totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
-  // const withVAT = (parseFloat(allTotal) + parseFloat(vatPercentage)).toFixed(2);
-  // const totalTax = (parseFloat(vatPercentage) + parseFloat(maxShippingCost)).toFixed(2);
+  const withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) 
+  let totalTax
+  // const totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
+  if(couponDiscount>0){
+    totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost) - parseFloat(couponDiscount)
+  }else{
+    totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
+  }
 
 
   const orderId = uuidv1()
@@ -214,11 +216,13 @@ async function CreateStripeSession(req, res) {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: parseInt(totalTax) * 100,
+            // amount: parseInt(totalTax) * 100,
+            amount: parseFloat(totalTax) * 100,
             currency: "gbp"
           },
-          display_name: (vatPercentage > 0) ? "Shipping Charge including VAT(20%)" : "Shipping Charge",
-          // display_name: "Shipping Charge including VAT(20%) amount: parseInt(totalTax) * 100,"
+          display_name: (vatPercentage > 0) ? ((couponDiscount > 0) ? "Shipping Charge+VAT(20%)-Coupon Discount" : "Shipping Charge + VAT(20%)") : "Shipping Charge",
+          // display_name: (vatPercentage > 0) ? "Shipping Charge including VAT(20%)" : "Shipping Charge",
+          // display_name: "Shipping Charge including VAT(20%)"
         }
       }
     ],
