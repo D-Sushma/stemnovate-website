@@ -2,9 +2,9 @@ import prisma from "~/lib/prisma"
 
 export default async function handleCouponUsed(req, res) {
   try {
-    const {coupon_code} = req.body;
+    const {coupon_code,customer_id} = req.body;
     const couponsUsed = await prisma.coupon_used.findMany({
-      where: { coupon_code: coupon_code },
+      where: { coupon_code: coupon_code, customer_id: customer_id },
     });
     console.log("coupon_code,couponsUsed",coupon_code,couponsUsed) //Test-Demo Get10
 
