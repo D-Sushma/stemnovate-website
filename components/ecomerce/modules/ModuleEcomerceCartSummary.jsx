@@ -138,7 +138,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   })
 
   // view
-  let totalView, maxShippingCost, withVAT, percentage, allTotal, couponDiscount
+  let totalView, maxShippingCost, withVAT, vatPercentage, allTotal, couponDiscount
   const { data: session } = useSession()
   if (cartItems) {
     if (cartItems && cartItems.length > 0) {
@@ -171,40 +171,46 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
         maxShippingCost = 0.0
         allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
       }
-      percentage = calculatePercentage(20, allTotal)
+      if(customerCountry == "United Kingdom"){
+        vatPercentage = calculatePercentage(20, allTotal)
+      }else{
+        // vatPercentage = calculatePercentage(0, allTotal)
+        vatPercentage = 0.00
+      }
 
       if (discountType == "Percentage") {
         couponDiscount = calculateTotalDiscount(discount, totalView)
         withVAT =
           parseFloat(allTotal) +
-          parseFloat(percentage) -
+          parseFloat(vatPercentage) -
           parseFloat(couponDiscount)
       } else if (discountType == "Fixed") {
         couponDiscount = discount
         withVAT =
           parseFloat(allTotal) +
-          parseFloat(percentage) -
+          parseFloat(vatPercentage) -
           parseFloat(couponDiscount)
       } else {
-        withVAT = withVAT = parseFloat(allTotal) + parseFloat(percentage)
+        withVAT =  parseFloat(allTotal) + parseFloat(vatPercentage)
       }
     } else {
       totalView = "0.00"
       maxShippingCost = "0.00"
       allTotal = "0.00"
-      percentage = "0.00"
+      vatPercentage = "0.00"
       withVAT = "0.00"
       couponDiscount = "0.00"
     }
   }
 
   const handleProceedToCheckout = () => {
-    if (couponDiscount > 0 || maxShippingCost >= 0) {
+    if ((couponDiscount > 0 || maxShippingCost >= 0) && customerCountry) {
       router.push({
         pathname: "/shop/checkout",
         query: {
           couponDiscount: couponDiscount,
-          maximumShippingCost: maxShippingCost
+          maximumShippingCost: maxShippingCost,
+          customerCountry:customerCountry
         }
       })
     } else {
@@ -254,10 +260,13 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
                 £ {maxShippingCost !== "NaN" ? maxShippingCost : "0.00"}
               </span>
             </p>
+            {customerCountry == "United Kingdom" ?(
             <p>
               <span>VAT (20%)</span>
-              <span>£ {percentage !== "NaN" ? percentage : "0.00"}</span>
+              <span>£ {vatPercentage !== "NaN" ? vatPercentage : "0.00"}</span>
             </p>
+            ):("")
+            }
             {discount ? (
               <p className="total">
                 <span>Coupon Discount</span>

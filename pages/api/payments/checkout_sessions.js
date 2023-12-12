@@ -2,7 +2,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 import {
   calculateAmount,
   calculatePercentage,
-  calculateShipping
+  // calculateShipping
 } from "~/utilities/ecomerce-helpers"
 import prisma from "~/lib/prisma"
 import moment from "moment"
@@ -10,18 +10,27 @@ import { v1 as uuidv1 } from "uuid"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 async function CreateStripeSession(req, res) {
-  const { item, userData, pONumber } = req.body
+  const { item, userData, pONumber, maximumShippingCost,customerCountry } = req.body
   const mySession = await getSession({ req })
 
   console.log("item", item)
+  const userCountry = userData?.result?.customer_application_details?.Country
+  console.log("customerCountry,userCountry",customerCountry,userCountry)
 
   const todayDate = moment().format()
   const amountView = calculateAmount(item)
-  const maxShippingCost = calculateShipping(item)
+  // const maxShippingCost = calculateShipping(item)
+  const maxShippingCost = maximumShippingCost
   const allTotal = parseFloat(amountView) + parseFloat(maxShippingCost)
-  const percentage = calculatePercentage(20, allTotal)
-  const withVAT = parseFloat(allTotal) + parseFloat(percentage)
-  const totalTax = parseFloat(percentage) + parseFloat(maxShippingCost)
+  let vatPercentage = 0
+  if(customerCountry == "United Kingdom"){
+    vatPercentage = calculatePercentage(20, allTotal)
+  }
+  const withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
+  const totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
+  // const withVAT = (parseFloat(allTotal) + parseFloat(vatPercentage)).toFixed(2);
+  // const totalTax = (parseFloat(vatPercentage) + parseFloat(maxShippingCost)).toFixed(2);
+
 
   const orderId = uuidv1()
   const purchaseId = uuidv1()
@@ -46,7 +55,7 @@ async function CreateStripeSession(req, res) {
       description: element.product_description,
       quantity: element.quantity
     })
-  })
+  });
   // add orders details to database
   const orderData = await prisma.orders.create({
     data: {
@@ -60,7 +69,7 @@ async function CreateStripeSession(req, res) {
       payment_status: null,
       transaction_id: "",
       vat_percent: parseFloat("20"),
-      vat_amount: parseFloat(percentage),
+      vat_amount: parseFloat(vatPercentage),
       total_shipping_cost: parseFloat(maxShippingCost),
       po_number: pONumber
     }
@@ -208,7 +217,8 @@ async function CreateStripeSession(req, res) {
             amount: parseInt(totalTax) * 100,
             currency: "gbp"
           },
-          display_name: "Shipping Charge"
+          display_name: (vatPercentage > 0) ? "Shipping Charge including VAT(20%)" : "Shipping Charge",
+          // display_name: "Shipping Charge including VAT(20%) amount: parseInt(totalTax) * 100,"
         }
       }
     ],

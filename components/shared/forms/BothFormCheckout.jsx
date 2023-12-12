@@ -19,7 +19,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   // const [deliveryAdd, setDeliveryAdd] = useState("")
 
   const router = useRouter();
-  const {couponDiscount, maximumShippingCost } = router.query;
+  const {couponDiscount, maximumShippingCost, customerCountry } = router.query;
 
   React.useEffect(() => {
     setMybillingDetails(UserData?.result)
@@ -58,7 +58,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   let cartItemsView,
     // maxShippingCost,
     allTotal,
-    percentage,
+    vatPercentage,
     withVAT,
     amountView = "0.00",
     totalCouponDiscount = "0.00"
@@ -69,12 +69,16 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     //   maxShippingCost = parseFloat(0)
     // }
     allTotal = parseFloat(amountView) + parseFloat(maximumShippingCost)
-    percentage = calculatePercentage(20, allTotal)
+    if(customerCountry == "United Kingdom"){
+      vatPercentage = calculatePercentage(20, allTotal)
+    }else{
+      vatPercentage = 0.00
+    }
     if(couponDiscount>0){
       totalCouponDiscount = couponDiscount
-      withVAT = parseFloat(allTotal) + parseFloat(percentage) - parseFloat(couponDiscount)
+      withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) - parseFloat(couponDiscount)
     }else{
-      withVAT = parseFloat(allTotal) + parseFloat(percentage)
+      withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
     }
     
     cartItemsView = products.map((item) => (
@@ -89,7 +93,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     amountView = "0.00"
     // maxShippingCost = "0.00"
     allTotal = "0.00"
-    percentage = "0.00"
+    vatPercentage = "0.00"
     withVAT = "0.00"
     totalCouponDiscount = "0.00"
   }
@@ -207,7 +211,9 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
               {
                 item: products,
                 userData: myBillingdetails,
-                pONumber: pONumber
+                pONumber: pONumber,
+                maximumShippingCost: maximumShippingCost,
+                customerCountry:customerCountry
               }
             )
 
@@ -544,24 +550,28 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
                 <div className="ps-product__price">£ {maximumShippingCost ?? "0.00"}</div>
               </span>
             </div>
+            {vatPercentage > 0 ?(
             <div className="ps-checkout__row">
-              <div className="ps-title">Total</div>
+              <div className="ps-title">Subtotal</div>
               <div className="ps-product__price">£ {allTotal}</div>
             </div>
+            ) : ("")}
+            {customerCountry == "United Kingdom" ?(
             <div className="ps-checkout__row">
               <div className="ps-title">VAT (20%)</div>
-              <div className="ps-product__price">£ {percentage}</div>
+              <div className="ps-product__price">£ {vatPercentage}</div>
             </div>
+            ):("")}
             
             {(totalCouponDiscount > 0) && (
               <div className="ps-checkout__row">
-              <div className="ps-title">Total Discount</div>
+              <div className="ps-title">Coupon Discount</div>
               <div className="ps-product__price">- £ {totalCouponDiscount}</div>
             </div>
             )}
             
             <div className="ps-checkout__row">
-              <div className="ps-title">Subtotal</div>
+              <div className="ps-title">Total</div>
               <div className="ps-product__price">£ {withVAT}</div>
             </div>
             <div className="ps-checkout__payment">
