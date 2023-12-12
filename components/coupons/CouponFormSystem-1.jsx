@@ -2,17 +2,18 @@ import React, { useState } from "react"
 import { toast, ToastContainer } from "react-toastify"
 import axios from "axios"
 import moment from "moment";
+import { getSession } from "next-auth/react"
 
 function CouponFormSystem({ onCouponExistChange }) {
   const [couponCode, setCouponCode] = useState("")
   const [applied, setApplied] = useState(false)
   const [showEmptyCouponError, setShowEmptyCouponError] = useState(false)
   // const [couponDetail, setCouponDetail] = useState(false)
-
+  
   const checkCouponExist = async () => {
     try {
       const response = await axios.post("/api/coupons/checkCoupons", {
-        coupon_code: couponCode
+        coupon_code: couponCode,
       })
       // setCouponDetail(response?.data)
       return response?.data;
@@ -20,11 +21,13 @@ function CouponFormSystem({ onCouponExistChange }) {
       console.log("error", error)
     }
   }
-  const getCouponUsed = async (coupon) => {
+  const getCouponUsed = async (coupon,sessionId) => {
     try {
       const response = await axios.post("/api/coupons/checkCouponUsed", {
               coupon_code: coupon,
+              customer_id: sessionId
           });
+          console.log("response==========",response?.data)
       return response?.data
     } catch (error) {
       console.error(error)
@@ -32,8 +35,8 @@ function CouponFormSystem({ onCouponExistChange }) {
   }
   
   const handleApplyClick = async () => {
+    const sessionData =  getSession();
     const couponDetail = await checkCouponExist();
-    // await checkCouponExist();
     console.log("CouponCode", couponCode)
     console.log("couponDetail 2", couponDetail)
     
@@ -58,16 +61,17 @@ function CouponFormSystem({ onCouponExistChange }) {
     if (couponDetail?.exist) {
       const currentDate = moment(new Date());
       const couponExpiryDate = moment(couponDetail?.result[0]?.expiry_date);
-      if(couponDetail?.result[0]?.published && couponExpiryDate >= currentDate){
-        const usedCoupon = await getCouponUsed(couponDetail?.result[0]?.coupon_code);
-            if(!usedCoupon?.exist){
+      if(couponDetail?.result[0]?.published && couponExpiryDate <= currentDate){
+        const usedCoupon = await getCouponUsed(couponDetail?.result[0]?.coupon_code,sessionData.id);
+        console.log("usedCoupon",usedCoupon)
+            if(usedCoupon && !usedCoupon?.exist){ //t=f  f=t
               setApplied(true);
               // toast.success(`Coupon code "${couponDetail?.result[0]?.coupon_code}" is applied successfully!`);
             }else{
-              toast.error(`Coupon code "${couponDetail?.result[0]?.coupon_code}" is already used.`,
+              toast.info(usedCoupon?.message,
               {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -87,7 +91,7 @@ function CouponFormSystem({ onCouponExistChange }) {
         toast.error(`Coupon code "${couponDetail?.result[0]?.coupon_code}" has expired.`,
         {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -109,7 +113,7 @@ function CouponFormSystem({ onCouponExistChange }) {
       toast.error(`Coupon code "${couponCode}" not exist.`,
       {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -124,15 +128,6 @@ function CouponFormSystem({ onCouponExistChange }) {
       // toast.error(`Coupon code "${couponCode}" not exist.`)
       setApplied(false)
     }
-
-    // old-1.------
-    // if (isCouponExist?.exist) {
-    //   toast.success(`Coupon code "${couponCode}" already exists.`)
-    //   setApplied(true)
-    // } else {
-    //   toast.error(`Coupon code "${couponCode}" not exist.`)
-    //   setApplied(false)
-    // }
   }
   return (
     <>
@@ -150,6 +145,8 @@ function CouponFormSystem({ onCouponExistChange }) {
               onChange={(e) => {
                 const enteredCode = e.target.value
                 setCouponCode(enteredCode)
+                // setCouponDetail(enteredCode)
+                // setCouponDetail((enteredCode !== "")? enteredCode : setApplied(false)) ;
               }}
             />
             <div

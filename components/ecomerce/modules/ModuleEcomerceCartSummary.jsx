@@ -60,10 +60,11 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       console.error(error)
     }
   }
-  const getCouponUsed = async (coupon) => {
+  const getCouponUsed = async (coupon, sessionId) => {
     try {
       const response = await axios.post("/api/coupons/checkCouponUsed", {
               coupon_code: coupon,
+              customer_id: sessionId
           });
       return response?.data
     } catch (error) {
@@ -92,15 +93,19 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     shippingCostArray.push(s_detail?.shipping_cost)
   })
   const handleCouponExistCheck = async (couponData) => {
+    console.log("couponData=====",couponData?.coupon_code)
     if(couponData.length > 0){
       const coupon = couponData[0];
       // console.log("coupon============",coupon,coupon?.published,coupon?.expiry_date)
       const currentDate = moment(new Date());
       const couponExpiryDate = moment(coupon?.expiry_date); 
       // console.log("currentDate,couponExpiryDate===",currentDate,couponExpiryDate)
-        if(coupon?.published && couponExpiryDate >= currentDate){
-            const usedCoupon = await getCouponUsed(coupon?.coupon_code);
+        if(coupon?.published && couponExpiryDate <= currentDate){
+      const sessionData = await getSession()
+            const usedCoupon = await getCouponUsed(coupon?.coupon_code,sessionData.id);
+            console.log("usedCoupon",usedCoupon,!usedCoupon?.exist)
             if(!usedCoupon?.exist){
+              console.log("if reached!")
               setCouponApplied(true)
               setCouponDetail(couponData)
             }else{
