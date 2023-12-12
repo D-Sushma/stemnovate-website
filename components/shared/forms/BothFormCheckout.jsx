@@ -76,7 +76,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     }
     if(couponDiscount>0){
       totalCouponDiscount = couponDiscount
-      withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) - parseFloat(couponDiscount)
+      withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) - parseFloat(totalCouponDiscount)
     }else{
       withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
     }
@@ -213,7 +213,8 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
                 userData: myBillingdetails,
                 pONumber: pONumber,
                 maximumShippingCost: maximumShippingCost,
-                customerCountry:customerCountry
+                customerCountry:customerCountry,
+                couponDiscount:couponDiscount
               }
             )
 

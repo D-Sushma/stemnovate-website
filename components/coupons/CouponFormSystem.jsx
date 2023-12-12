@@ -59,7 +59,7 @@ function CouponFormSystem({ onCouponExistChange }) {
     if (couponDetail?.exist) {
       const currentDate = moment(new Date());
       const couponExpiryDate = moment(couponDetail?.result[0]?.expiry_date);
-      if(couponDetail?.result[0]?.published && couponExpiryDate >= currentDate){
+      if(couponDetail?.result[0]?.published && couponExpiryDate <= currentDate){
         const usedCoupon = await getCouponUsed(couponDetail?.result[0]?.coupon_code);
         console.log("usedCoupon",usedCoupon)
             if(!usedCoupon?.exist){ 
