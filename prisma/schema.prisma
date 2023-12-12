@@ -737,14 +737,24 @@ model resources_structural_analysis {
 
 model coupons {
   coupon_id         Int       @id @default(autoincrement())
-  coupon_code       String?    @db.VarChar(255)
-  discount_type     String     @db.VarChar(255)
+  coupon_code       String?    @db.VarChar(50)
+  discount_type     String     @db.VarChar(50)
   expiry_date       DateTime?  @db.Date
   discount          Float?     @db.Float
+  published        Boolean    @default(true)
 }
 
 model regions {
   Id                Int       @id @default(autoincrement())
   Regions           String?   @db.VarChar(255)
   Counties          String?   @db.VarChar(255)
+}
+
+model coupon_used {
+  id               Int        @id @default(autoincrement())
+  coupon_code      String?    @db.VarChar(50)
+  discount_type    String     @db.VarChar(50)
+  discount         Float?     @db.Float
+  customer_id      Int?       
+  created_date     DateTime?  @db.Date
 }

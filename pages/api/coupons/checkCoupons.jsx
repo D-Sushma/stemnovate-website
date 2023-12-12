@@ -5,19 +5,33 @@ export default async function handleCheckCoupons(req, res) {
     const { coupon_code } = req.body
     console.log("{coupon_code}", { coupon_code })
     const couponCheck = await prisma.coupons.findMany({
-      where: {
-        coupon_code: coupon_code
-      }
+      where: { coupon_code: coupon_code },
     })
     console.log("couponCheck", couponCheck)
+    console.log("couponCheck couponCheck[0]?.coupon_code", couponCheck,couponCheck[0]?.coupon_code)
 
     let response = {}
     if (couponCheck.length > 0) {
-      response = {
-        code: "200",
-        message: "Coupon Already Exist",
-        exist: true,
-        result: couponCheck
+      // response = {
+      //   code: "200",
+      //   message: `Coupon ${couponCheck?.coupon_code} has Already Exist`,
+      //   exist: true,
+      //   result: couponCheck
+      // }
+      if(couponCheck[0]?.coupon_code === coupon_code){
+        response = {
+          code: "200",
+          message: `Coupon ${couponCheck[0]?.coupon_code} has Already Exist`,
+          exist: true,
+          result: couponCheck
+        }
+      }else{
+        response = {
+          code: "404",
+          message: `Coupon "${couponCheck[0]?.coupon_code}" Not Exist`,
+          exist: false,
+          result: []
+        }
       }
     } else {
       response = {

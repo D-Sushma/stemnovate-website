@@ -11,12 +11,11 @@ import { useSession } from "next-auth/react"
 import CouponFormSystem from "~/components/coupons/CouponFormSystem"
 import { getSession } from "next-auth/react"
 import axios from "axios"
+import moment from "moment"
 
 const ModuleEcomerceCartSummary = ({ cartItems }) => {
   const [couponDetail, setCouponDetail] = useState([])
   const [couponApplied, setCouponApplied] = useState(false)
-  const [showCouponAppliedMessage, setShowCouponAppliedMessage] =
-    useState(false)
   const router = useRouter()
   const [customerCountry, setCustomerCountry] = useState("")
   const [shippingDetail, setShippingDetail] = useState([])
@@ -24,8 +23,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   const getCustomerAddressDetail = async () => {
     try {
       const sessionData = await getSession()
-      const response = await axios.post(
-        "/api/shipping-cost/getCustomerAddressDetail",
+      const response = await axios.post( "/api/shipping-cost/getCustomerAddressDetail",
         {
           customer_id: sessionData.id
         }
@@ -62,6 +60,16 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       console.error(error)
     }
   }
+  const getCouponUsed = async (coupon) => {
+    try {
+      const response = await axios.post("/api/coupons/checkCouponUsed", {
+              coupon_code: coupon,
+          });
+      return response?.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
   
   useEffect(() => {
     async function fetchData() {
@@ -83,36 +91,51 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     deliveryTypeArray.push(s_detail?.delivery_type)
     shippingCostArray.push(s_detail?.shipping_cost)
   })
-  const handleCouponExistChange = (exist) => {
-    // setCouponDetail(exist)
-    // =====OR=======
-    // if (exist.length > 0) {
-    //   setCouponDetail(exist)
-    // } else {
-    //   setCouponDetail([])
-    // }
-    if (exist.length > 0) {
-      setCouponDetail(exist)
-      // Coupon successfully applied
-      setCouponApplied(true)
-      setShowCouponAppliedMessage(true)
-    } else {
+  const handleCouponExistCheck = async (couponData) => {
+    if(couponData.length > 0){
+      const coupon = couponData[0];
+      // console.log("coupon============",coupon,coupon?.published,coupon?.expiry_date)
+      const currentDate = moment(new Date());
+      const couponExpiryDate = moment(coupon?.expiry_date); 
+      // console.log("currentDate,couponExpiryDate===",currentDate,couponExpiryDate)
+        if(coupon?.published && couponExpiryDate >= currentDate){
+            const usedCoupon = await getCouponUsed(coupon?.coupon_code);
+            if(!usedCoupon?.exist){
+              setCouponApplied(true)
+              setCouponDetail(couponData)
+            }else{
+              setCouponApplied(false)
+              setCouponDetail([])
+            }
+          }else{
+          setCouponApplied(false)
+          setCouponDetail([])
+        }
+    }else{
       setCouponApplied(false)
       setCouponDetail([])
     }
+    // old ----------------------
+    // if (couponData.length > 0) {
+    //   setCouponDetail(couponData)
+    //   // Coupon successfully applied
+    //   setCouponApplied(true)
+    // } else {
+    //   setCouponApplied(false)
+    // }
   }
-  // console.log("couponDetail====>", couponDetail)
+  const handleCrossIconClick = () => {
+    setCouponApplied(false)
+    setCouponDetail([])
+  }
+
+  console.log("couponDetail====>", couponDetail)
   let discount = 0.0,
     discountType = ""
   couponDetail.forEach((item) => {
     discount = item?.discount
     discountType = item?.discount_type
   })
-  const handleCrossIconClick = () => {
-    setShowCouponAppliedMessage(false)
-    setCouponApplied(false)
-    setCouponDetail([])
-  }
 
   // view
   let totalView, maxShippingCost, withVAT, percentage, allTotal, couponDiscount
@@ -193,11 +216,12 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
 
   return (
     <>
-      {/* <CouponFormSystem onCouponExistChange={handleCouponExistChange} /> */}
-      {!couponApplied && (
-        <CouponFormSystem onCouponExistChange={handleCouponExistChange} />
-      )}
-      {showCouponAppliedMessage && (
+      {/* <CouponFormSystem onCouponExistChange={handleCouponExistCheck} /> */}
+      {!couponApplied ?
+      (
+        <CouponFormSystem onCouponExistChange={handleCouponExistCheck} />
+      ) :
+      (
         <div
           className="alert alert-success d-flex justify-content-between"
           role="alert"
@@ -205,7 +229,6 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           <span style={{ color: "green", fontWeight: "bold" }}>
             Your coupon discount applied successfully!
           </span>
-          {/* <span className="text-danger font-weight-bold">X</span> */}
           <i
             className="icon-cross text-danger font-weight-bold"
             onClick={handleCrossIconClick}

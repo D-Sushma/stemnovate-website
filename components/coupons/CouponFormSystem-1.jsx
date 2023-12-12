@@ -25,7 +25,6 @@ function CouponFormSystem({ onCouponExistChange }) {
       const response = await axios.post("/api/coupons/checkCouponUsed", {
               coupon_code: coupon,
           });
-          console.log("response==========",response?.data)
       return response?.data
     } catch (error) {
       console.error(error)
@@ -41,7 +40,7 @@ function CouponFormSystem({ onCouponExistChange }) {
     if (!couponCode) {
       // toast.info("Please enter a coupon code.", {
       //   position: "bottom-left",
-      //   autoClose: 3000,
+      //   autoClose: 15000,
       //   hideProgressBar: false,
       //   closeOnClick: true,
       //   pauseOnHover: true,
@@ -61,12 +60,11 @@ function CouponFormSystem({ onCouponExistChange }) {
       const couponExpiryDate = moment(couponDetail?.result[0]?.expiry_date);
       if(couponDetail?.result[0]?.published && couponExpiryDate >= currentDate){
         const usedCoupon = await getCouponUsed(couponDetail?.result[0]?.coupon_code);
-        console.log("usedCoupon",usedCoupon)
-            if(!usedCoupon?.exist){ 
+            if(!usedCoupon?.exist){
               setApplied(true);
               // toast.success(`Coupon code "${couponDetail?.result[0]?.coupon_code}" is applied successfully!`);
             }else{
-              toast.info(usedCoupon?.message,
+              toast.error(`Coupon code "${couponDetail?.result[0]?.coupon_code}" is already used.`,
               {
                 position: "top-right",
                 autoClose: 2000,
@@ -126,6 +124,15 @@ function CouponFormSystem({ onCouponExistChange }) {
       // toast.error(`Coupon code "${couponCode}" not exist.`)
       setApplied(false)
     }
+
+    // old-1.------
+    // if (isCouponExist?.exist) {
+    //   toast.success(`Coupon code "${couponCode}" already exists.`)
+    //   setApplied(true)
+    // } else {
+    //   toast.error(`Coupon code "${couponCode}" not exist.`)
+    //   setApplied(false)
+    // }
   }
   return (
     <>
