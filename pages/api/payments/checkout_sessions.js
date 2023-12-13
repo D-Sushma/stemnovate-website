@@ -220,7 +220,7 @@ async function CreateStripeSession(req, res) {
             amount: parseFloat(totalTax) * 100,
             currency: "gbp"
           },
-          display_name: (vatPercentage > 0) ? ((couponDiscount > 0) ? "Shipping Charge+VAT(20%)-Coupon Discount" : "Shipping Charge + VAT(20%)") : "Shipping Charge",
+          display_name: (vatPercentage > 0) ? ((couponDiscount > 0) ? "Shipping Charge+VAT(20%)-Coupon Discount" : "Shipping Charge + VAT(20%)") : (couponDiscount > 0) ? "Shipping Charge - Coupon Discount" : "Shipping Charge",
           // display_name: (vatPercentage > 0) ? "Shipping Charge including VAT(20%)" : "Shipping Charge",
           // display_name: "Shipping Charge including VAT(20%)"
         }
