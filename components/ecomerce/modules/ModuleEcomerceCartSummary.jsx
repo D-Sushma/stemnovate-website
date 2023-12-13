@@ -24,7 +24,8 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   const getCustomerAddressDetail = async () => {
     try {
       const sessionData = await getSession()
-      const response = await axios.post( "/api/shipping-cost/getCustomerAddressDetail",
+      const response = await axios.post(
+        "/api/shipping-cost/getCustomerAddressDetail",
         {
           customer_id: sessionData.id
         }
@@ -64,15 +65,15 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   const getCouponUsed = async (coupon, sessionId) => {
     try {
       const response = await axios.post("/api/coupons/checkCouponUsed", {
-              coupon_code: coupon,
-              customer_id: sessionId
-          });
+        coupon_code: coupon,
+        customer_id: sessionId
+      })
       return response?.data
     } catch (error) {
       console.error(error)
     }
   }
-  
+
   useEffect(() => {
     async function fetchData() {
       const customerData = await getCustomerAddressDetail()
@@ -94,40 +95,58 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     shippingCostArray.push(s_detail?.shipping_cost)
   })
   const handleCouponExistCheck = async (couponData, couponCode) => {
-    if(couponData.length > 0){
-      const coupon = couponData[0];
-      // console.log("coupon",coupon,coupon?.published,coupon?.expiry_date)
-      const currentDate = moment(new Date());
-      const couponExpiryDate = moment(coupon?.expiry_date); 
-      // console.log("currentDate,couponExpiryDate===",currentDate,couponExpiryDate)
-        if(coupon?.published && couponExpiryDate >= currentDate){
-      const sessionData = await getSession()
-            const usedCoupon = await getCouponUsed(coupon?.coupon_code,sessionData.id);
-            if(!usedCoupon?.exist){
-              setCouponApplied(true)
-              setCouponDetail(couponData)
-            }else{
-              toast.info(usedCoupon?.message,
-                {
-                  position: "top-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                  style: {
-                    fontSize: "12px", 
-                    height: "50px"
-                  },
-                })
-              setCouponApplied(false)
-              setCouponDetail([])
+    try {
+      if (couponData.length) {
+        const coupon = couponData[0]
+        // console.log("coupon",coupon,coupon?.published,coupon?.expiry_date)
+        const currentDate = moment(new Date())
+        const couponExpiryDate = moment(coupon?.expiry_date)
+        if (coupon?.published && couponExpiryDate >= currentDate) {
+          const sessionData = await getSession()
+          const usedCoupon = await getCouponUsed(
+            coupon?.coupon_code,
+            sessionData.id
+          )
+          if (!usedCoupon?.exist) {
+            setCouponApplied(true)
+            setCouponDetail(couponData)
+          } else {
+            toast.info(usedCoupon?.message, {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              style: {
+                fontSize: "12px",
+                height: "50px"
+              }
+            })
+            resetCouponState();
+          }
+        } else {
+          toast.error(`Coupon code "${coupon?.coupon_code}" has expired.`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            style: {
+              fontSize: "12px",
+              height: "50px",
+              backgroundColor: "gray"
             }
-          }else{
-            toast.error(`Coupon code "${coupon?.coupon_code}" has expired.`,
-        {
+          });
+          resetCouponState();
+        }
+      } else {
+        toast.error(`Coupon code "${couponCode}" not exist.`, {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -137,17 +156,15 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           progress: undefined,
           theme: "colored",
           style: {
-            fontSize: "12px", 
-            height: "50px",
-            backgroundColor:"gray"
-          },
-        })
-          setCouponApplied(false)
-          setCouponDetail([])
-        }
-    }else{
-      toast.error(`Coupon code "${couponCode}" not exist.`,
-      {
+            fontSize: "12px",
+            height: "50px"
+          }
+        });
+        resetCouponState();
+      }
+    } catch (error) {
+      console.error("Error in handleCouponExistCheck:", error)
+      toast.error("An error occurred while processing the coupon.", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -157,13 +174,16 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
         progress: undefined,
         theme: "colored",
         style: {
-          fontSize: "12px", 
+          fontSize: "12px",
           height: "50px"
-        },
+        }
       })
-      setCouponApplied(false)
-      setCouponDetail([])
+      resetCouponState();
     }
+  }
+  const resetCouponState = () => {
+    setCouponApplied(false)
+    setCouponDetail([])
   }
   const handleCrossIconClick = () => {
     setCouponApplied(false)
@@ -179,7 +199,12 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   })
 
   // view
-  let totalView, maxShippingCost, withVAT, vatPercentage, allTotal, couponDiscount
+  let totalView,
+    maxShippingCost,
+    withVAT,
+    vatPercentage,
+    allTotal,
+    couponDiscount
   const { data: session } = useSession()
   if (cartItems) {
     if (cartItems && cartItems.length > 0) {
@@ -192,7 +217,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           const indexOfDeliveryType =
             deliveryTypeArray.indexOf(productDeliveryType)
           const resultShippingCost = shippingCostArray[indexOfDeliveryType]
-          // console.log("indexOfDeliveryType,resultShippingCost",indexOfDeliveryType,resultShippingCost) //0 50 1 40
+          // console.log("indexOfDeliveryType,resultShippingCost",indexOfDeliveryType,resultShippingCost) 
           if (resultShippingCost > finalShippingCost) {
             // 50>0 50>40
             finalShippingCost = resultShippingCost
@@ -212,11 +237,11 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
         maxShippingCost = 0.0
         allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
       }
-      if(customerCountry == "United Kingdom"){
+      if (customerCountry == "United Kingdom") {
         vatPercentage = calculatePercentage(20, allTotal)
-      }else{
+      } else {
         // vatPercentage = calculatePercentage(0, allTotal)
-        vatPercentage = 0.00
+        vatPercentage = 0.0
       }
 
       if (discountType == "Percentage") {
@@ -232,7 +257,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           parseFloat(vatPercentage) -
           parseFloat(couponDiscount)
       } else {
-        withVAT =  parseFloat(allTotal) + parseFloat(vatPercentage)
+        withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
       }
     } else {
       totalView = "0.00"
@@ -251,7 +276,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
         query: {
           couponDiscount: couponDiscount,
           maximumShippingCost: maxShippingCost,
-          customerCountry:customerCountry
+          customerCountry: customerCountry
         }
       })
     } else {
@@ -263,13 +288,10 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
 
   return (
     <>
-    <ToastContainer/>
-      {/* <CouponFormSystem onCouponExistChange={handleCouponExistCheck} /> */}
-      {!couponApplied ?
-      (
+      <ToastContainer />
+      {!couponApplied ? (
         <CouponFormSystem onCouponExistChange={handleCouponExistCheck} />
-      ) :
-      (
+      ) : (
         <div
           className="alert alert-success d-flex justify-content-between"
           role="alert"
@@ -302,13 +324,16 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
                 £ {maxShippingCost !== "NaN" ? maxShippingCost : "0.00"}
               </span>
             </p>
-            {customerCountry == "United Kingdom" ?(
-            <p>
-              <span>VAT (20%)</span>
-              <span>£ {vatPercentage !== "NaN" ? vatPercentage : "0.00"}</span>
-            </p>
-            ):("")
-            }
+            {customerCountry == "United Kingdom" ? (
+              <p>
+                <span>VAT (20%)</span>
+                <span>
+                  £ {vatPercentage !== "NaN" ? vatPercentage : "0.00"}
+                </span>
+              </p>
+            ) : (
+              ""
+            )}
             {discount ? (
               <p className="total">
                 <span>Coupon Discount</span>
