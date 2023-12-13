@@ -278,7 +278,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           maximumShippingCost: maxShippingCost,
           customerCountry: customerCountry
         }
-      })
+      }, "/shop/checkout")
     } else {
       router.push({
         pathname: "/shop/checkout"
