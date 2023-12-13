@@ -14,7 +14,7 @@ import Countries from "~/public/static/data/AllCountries.json"
 import { useRouter } from "next/router"
 
 function BothFormCheckout({ ecomerce, userStatus, UserData }) {
-  // console.log("userData", UserData.result)
+  console.log("userData", UserData.result)
   const [myBillingdetails, setMybillingDetails] = useState("")
   // const [deliveryAdd, setDeliveryAdd] = useState("")
 
@@ -57,22 +57,20 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   // Views
   let cartItemsView,
     // maxShippingCost,
-    allTotal,
-    vatPercentage,
-    withVAT,
-    amountView = "0.00",
-    totalCouponDiscount = "0.00"
+    allTotal ,
+    vatPercentage = 0.00,
+    withVAT ,
+    amountView = 0.00,
+    totalCouponDiscount = 0.00
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
     // maxShippingCost = calculateShipping(products)
     // if (deliveryAdd == "cambridge" || deliveryAdd == "Cambridge") {
     //   maxShippingCost = parseFloat(0)
     // }
-    allTotal = parseFloat(amountView) + parseFloat(maximumShippingCost)
+    allTotal = parseFloat(amountView) + (maximumShippingCost ? parseFloat(maximumShippingCost) : 0.00)
     if(customerCountry == "United Kingdom"){
       vatPercentage = calculatePercentage(20, allTotal)
-    }else{
-      vatPercentage = 0.00
     }
     if(couponDiscount>0){
       totalCouponDiscount = couponDiscount
