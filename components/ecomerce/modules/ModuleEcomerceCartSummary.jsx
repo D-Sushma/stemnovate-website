@@ -248,9 +248,11 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   // console.log("couponDetail====>", couponDetail)
   let discount = 0.0
   let discountType = ""
+  let couponPromoCode = ''
   couponDetail.forEach((item) => {
     discount = item?.discount
     discountType = item?.discount_type
+    couponPromoCode = item?.coupon_code
   })
 
   // view
@@ -335,7 +337,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
   }
 
   const handleProceedToCheckout = () => {
-    if ((couponDiscount > 0 || maxShippingCost >= 0 || (couponProductData>0 && discount)) && customerCountry ) {
+    if ((couponDiscount > 0 || maxShippingCost >= 0 || (couponProductData>0 && discount) || discount || discountType) && customerCountry ) {
       // router.push(`/shop/checkout?couponDiscount=${couponDiscount}&maximumShippingCost=${maxShippingCost}&customerCountry=${customerCountry}&couponProductPrice=${couponProductData[0]?.price}&couponProductName=${couponProductData[0]?.product_name}&discount=${discount}&discountType=${discountType}&couponCode=${couponPromoCode}`)
       // or-----------------------
       router.push({
@@ -346,6 +348,9 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
           customerCountry: customerCountry,
           couponProductPrice: couponProductData[0]?.price,
           couponProductName: couponProductData[0]?.product_name,
+          discount: discount,
+          discountType: discountType,
+          couponCode: couponPromoCode
         }
       })
       // }, "/shop/checkout")

@@ -10,7 +10,7 @@ import { v1 as uuidv1 } from "uuid"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 async function CreateStripeSession(req, res) {
-  const { item, userData, pONumber, maximumShippingCost,customerCountry,couponDiscount } = req.body
+  const { item,userData,pONumber,maximumShippingCost,customerCountry,couponDiscount,discount,discountType,couponCode } = req.body
   const mySession = await getSession({ req })
 
   console.log("item", item)
@@ -83,6 +83,10 @@ async function CreateStripeSession(req, res) {
       vat_percent: parseFloat("20"),
       vat_amount: parseFloat(vatPercentage),
       total_shipping_cost: parseFloat(maxShippingCost),
+      discount: parseFloat(discount),
+      discount_amount: parseFloat(couponDiscount),
+      discount_type: discountType,
+      coupon_code: couponCode,
       po_number: pONumber
     }
   })

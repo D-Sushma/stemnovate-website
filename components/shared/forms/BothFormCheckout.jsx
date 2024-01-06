@@ -19,7 +19,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   // const [deliveryAdd, setDeliveryAdd] = useState("")
 
   const router = useRouter();
-  const {couponDiscount, maximumShippingCost, customerCountry, couponProductPrice, couponProductName} = router.query;
+  const {couponDiscount, maximumShippingCost, customerCountry, couponProductPrice, couponProductName,discount,discountType,couponCode } = router.query;
 console.log("couponProductPrice---",couponProductPrice)
 
   React.useEffect(() => {
@@ -167,7 +167,6 @@ console.log("couponProductPrice---",couponProductPrice)
 
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   const stripePromise = loadStripe(publishableKey)
-
   const createCheckOutSession = async () => {
     try {
       var cust_address_details = myBillingdetails.customer_address_details
@@ -220,7 +219,7 @@ console.log("couponProductPrice---",couponProductPrice)
             setLoading(true)
             const stripe = await stripePromise
             const checkoutSession = await axios.post(
-              "/api/payments/checkout_sessions", 
+              "/api/payments/checkout_sessions",
               {
                 item: products,
                 userData: myBillingdetails,
@@ -228,6 +227,9 @@ console.log("couponProductPrice---",couponProductPrice)
                 maximumShippingCost: maximumShippingCost,
                 customerCountry:customerCountry,
                 couponDiscount:couponDiscount,
+                discount:discount,
+                discountType:discountType,
+                couponCode:couponCode
               }
             )
 

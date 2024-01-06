@@ -207,6 +207,10 @@ model orders {
   total_shipping_cost   Float?          @default(0) @db.Float
   product_shipping_cost Float?          @default(0) @db.Float
   country_shipping_cost Float?          @default(0) @db.Float
+  discount              Float?          @db.Float
+  discount_amount       Float?          @db.Float
+  coupon_code           String?         @db.VarChar(100)
+  discount_type         String?         @db.VarChar(50)
   po_number             String?         @db.Text
   customers             customers       @relation(fields: [customer_id], references: [id], onDelete: Cascade, map: "customer_fk")
   order_details         order_details[]

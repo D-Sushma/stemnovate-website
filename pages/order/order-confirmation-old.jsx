@@ -6,7 +6,6 @@ import { baseUrl } from "~/repositories/Repository"
 import { useRouter } from "next/router"
 import moment from "moment"
 import dynamic from "next/dynamic"
-import axios from "axios"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -15,10 +14,6 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
-
-const Image = dynamic(() => import("~/components/elements/Image"), {
-  loading: () => <p>Loading...</p>
-})
 
 function OrderConfirmation({ UserData }) {
   const router = useRouter()
@@ -29,22 +24,21 @@ function OrderConfirmation({ UserData }) {
 
   useEffect(() => {
     if (status) {
-      const fetchDetails = async ()=> {
-        updateStatus()
-        const orderDetails = await getOrderDetails()
-        if (status == "success") {
-          removeItems("cart")
-          insertCouponUsedData(orderDetails)
-        }
+      if (status == "success") {
+        console.log("Order successful! Do something here.");
+        removeItems("cart")
       }
-      fetchDetails();
+
+      updateStatus()
+      getOrderDetails()
     }
   }, [status])
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 83 && window.scrollY < 350) {
         MySummery?.current.scrollIntoView({ behavior: "smooth" })
-        MySummery.current.style.position = "fixed"
+        MySummery.current.style.position = "static"
         MySummery.current.style.right = "10px"
         MySummery.current.style.top = "100px"
       } else {
@@ -75,27 +69,13 @@ function OrderConfirmation({ UserData }) {
     )
     const userOrders = await response.json()
     setOrderdata(userOrders.userOrders)
-    return userOrders.userOrders;
   }
-  const insertCouponUsedData = async (orderData) => {
-    try {
-        await axios.post("/api/coupons/insertUsedCoupon", {
-          coupon_code: orderData[0]?.coupon_code,
-          discount_type: orderData[0]?.discount_type,
-          discount: orderData[0]?.discount,
-          customer_id: orderData[0]?.customer_id
-        })
-    } catch (error) {
-      console.log("Error inserting coupon data",error)
-    }
-  }
-
+console.log("orderData--------",orderData)
   const updateStatus = async () => {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    const fullName =
-      UserData?.result?.firstname + " " + UserData?.result?.lastname
-    const Email = UserData?.result?.email
+    const fullName = UserData.result.firstname + " " + UserData.result.lastname
+    const Email = UserData.result.email
 
     var raw = JSON.stringify({
       orderId: orderId,
@@ -168,13 +148,13 @@ function OrderConfirmation({ UserData }) {
                               </p>
 
                               <p>
-                                {UserData?.result?.firstname}{" "}
-                                {UserData?.result?.lastname}
+                                {UserData.result.firstname}{" "}
+                                {UserData.result.lastname}
                               </p>
-                              <p>{UserData?.result?.email}</p>
+                              <p>{UserData.result.email}</p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_PhoneNumber
                                 }
                               </p>
@@ -183,54 +163,51 @@ function OrderConfirmation({ UserData }) {
                               <h4>Billing Address</h4>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_First
                                 }{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_last
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_Email
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_PhoneNumber
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_Address1
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_Address2
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_Town
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_County
                                 }
                                 ,{" "}
-                                {
-                                  UserData?.result?.customer_address_details
-                                    .B_ZIP
-                                }
+                                {UserData.result.customer_address_details.B_ZIP}
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .B_Country
                                 }
                               </p>
@@ -239,54 +216,51 @@ function OrderConfirmation({ UserData }) {
                               <h4>Shipping Address</h4>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_First
                                 }{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_last
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_Email
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_PhoneNumber
                                 }
                               </p>
                               <p>
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_Address1
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_Address2
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_Town
                                 }
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_County
                                 }
                                 ,{" "}
-                                {
-                                  UserData?.result?.customer_address_details
-                                    .S_ZIP
-                                }
+                                {UserData.result.customer_address_details.S_ZIP}
                                 ,{" "}
                                 {
-                                  UserData?.result?.customer_address_details
+                                  UserData.result.customer_address_details
                                     .S_Country
                                 }
                               </p>
@@ -306,7 +280,7 @@ function OrderConfirmation({ UserData }) {
                             </div>
                             <div className="col-md-6">
                               <h4 className="my-3">Invoice Terms</h4>
-                              <p>Terms Incoterms: Delivered At Place (DAP).</p>
+                              <p>TermsIncoterms: Delivered At Place (DAP).</p>
                               <p>Payment Terms: 30 days from date of order.</p>
                             </div>
                           </div>
@@ -318,7 +292,7 @@ function OrderConfirmation({ UserData }) {
                               <h4 className="my-3">ORDER SUMMARY</h4>
                               <table className="table" width="100%">
                                 <tr>
-                                  <th width="60%">Product Description</th>
+                                  <th width="60%">product Description</th>
                                   <th width="16%">Price</th>
                                   <th width="8%">Quantity</th>
                                   <th width="16%">Total</th>
@@ -329,27 +303,14 @@ function OrderConfirmation({ UserData }) {
                                       <tr key={key}>
                                         <td width="60%">
                                           <div className="d-flex justify-content-start flex-row ">
-                                            {/* <img
+                                            <img
                                               className="d-flex m-2"
                                               src={item.imgUrl}
-                                              // width="100px"
-                                              // height={"70px"}
+                                              width="100px"
+                                              height={"70px"}
                                               alt={item.ProductName}
-                                            /> */}
-                                            <Image
-                                              className="d-flex m-2"
-                                              src={item.imgUrl}
-                                              alt={item.ProductName}
-                                              width={70}
-                                              height={70}
-                                              objectFit="cover"
-                                              placeholder="blur"
-                                              blurDataURL="/static/image/blurred.png"
                                             />
-                                            <div
-                                              style={{ marginLeft: "5%" }}
-                                              className="d-flex flex-column"
-                                            >
+                                            <div className="d-flex flex-column">
                                               {item.ProductName}
                                               <br />
 
@@ -377,9 +338,7 @@ function OrderConfirmation({ UserData }) {
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-4">
-                          {" "}
-                          {/* <div className="col-md-4" ref={MySummery}> */}
+                        <div className="col-md-4"> {/* <div className="col-md-4" ref={MySummery}> */}
                           <div className="d-flex flex-column justify-content-center plus-section-new p-5">
                             <div className="">
                               <h2
@@ -391,35 +350,14 @@ function OrderConfirmation({ UserData }) {
                             </div>
                             <div className="d-flex flex-row justify-content-between">
                               <div className="d-flex">
-                                <p className="text-white">Product Total</p>{" "}
-                              </div>
-                              <div className="d-flex ml-3">
-                                <p className="text-white">
-                                  £{orderData &&
-                                    (parseFloat(orderData[0].total_amount) -
-                                      parseFloat(orderData[0].total_tax)).toFixed(2)}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row justify-content-between">
-                              <div className="d-flex">
-                                <p className="text-white">Discount</p>
-                              </div>
-                              <div className="d-flex mr-3">
-                                <p className="text-white">
-                                  - £{orderData && (orderData[0].discount_amount).toFixed(2)}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row justify-content-between">
-                              <div className="d-flex">
                                 <p className="text-white">Subtotal</p>{" "}
                               </div>
-                              <div className="d-flex ml-3">
+                              <div className="d-flex">
                                 <p className="text-white">
-                                  £{orderData &&
-                                    (parseFloat(orderData[0].total_amount) -
-                                      parseFloat(orderData[0].total_tax) - orderData[0].discount_amount).toFixed(2) }
+                                  £
+                                  {orderData &&
+                                    parseFloat(orderData[0].total_amount) -
+                                      parseFloat(orderData[0].total_tax)}
                                 </p>
                               </div>
                             </div>
@@ -427,10 +365,11 @@ function OrderConfirmation({ UserData }) {
                               <div className="d-flex">
                                 <p className="text-white">Shipping</p>
                               </div>
-                              <div className="d-flex ml-3">
+                              <div className="d-flex">
                                 <p className="text-white">
-                                  £{orderData &&
-                                    (orderData[0].total_shipping_cost).toFixed(2)}
+                                  £{" "}
+                                  {orderData &&
+                                    orderData[0].total_shipping_cost}
                                 </p>
                               </div>
                             </div>
@@ -438,9 +377,9 @@ function OrderConfirmation({ UserData }) {
                               <div className="d-flex">
                                 <p className="text-white">VAT (20%)</p>
                               </div>
-                              <div className="d-flex ml-3">
+                              <div className="d-flex">
                                 <p className="text-white">
-                                  £{orderData && (orderData[0].vat_amount).toFixed(2)}
+                                  £ {orderData && orderData[0].vat_amount}
                                 </p>
                               </div>
                             </div>
@@ -455,9 +394,9 @@ function OrderConfirmation({ UserData }) {
                               <div className="d-flex">
                                 <p className="text-white">Total</p>
                               </div>
-                              <div className="d-flex ml-3">
+                              <div className="d-flex">
                                 <p className="text-white">
-                                  £{orderData && (orderData[0].total_amount).toFixed(2)}
+                                  £ {orderData && orderData[0].total_amount}
                                 </p>
                               </div>
                             </div>
