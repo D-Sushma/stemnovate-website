@@ -84,6 +84,16 @@ const CheckoutScreen = ({ UserData }) => {
             <BreadCrumb breacrumb={breadcrumb} />
             <h1 className="ps-page__heading">Checkout</h1>
           </div>
+          {(!UserData?.result?.customer_address_details || !UserData?.result?.customer_application_details) 
+              && <div className="text-danger" style={{fontWeight: "bolder"}}>
+                NOTE: Please fill organization and shipping details before proceeding.{" "}
+                  <Link href="/user/MyApplication">
+                    <span className="link-hover-thumb-shape" style={{fontWeight: "bolder", textDecoration: "underline"}}>
+                      Click link here
+                    </span>
+                  </Link>
+            </div>
+          }
           <div className="ps-page__content mb-5">
             {status && status === "success" && (
               <Alert
