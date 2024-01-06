@@ -14,13 +14,15 @@ import { getSession } from "next-auth/react"
 import axios from "axios"
 import moment from "moment"
 
+const myArr = [];
 const ModuleEcomerceCartSummary = ({ cartItems }) => {
   const [couponDetail, setCouponDetail] = useState([])
   const [couponApplied, setCouponApplied] = useState(false)
   const router = useRouter()
   const [customerCountry, setCustomerCountry] = useState("")
   const [shippingDetail, setShippingDetail] = useState([])
-
+  const [couponProductData, setCouponProductData] = useState(myArr)
+  
   const getCustomerAddressDetail = async () => {
     try {
       const sessionData = await getSession()
@@ -38,7 +40,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       console.error("Error in getCustomerAddressDetail:", error)
     }
   }
-  var getCountyRegion = async (customerData) => {
+  const getCountyRegion = async (customerData) => {
     const county = customerData?.S_County
     try {
       const response = await axios.post("/api/shipping-cost/getCountyRegion", {
@@ -73,15 +75,18 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       console.error(error)
     }
   }
-
   useEffect(() => {
     async function fetchData() {
-      const customerData = await getCustomerAddressDetail()
-      if (customerCountry == "United Kingdom") {
-        const region = await getCountyRegion(customerData)
-        getShippingCost(customerData, region)
-      } else {
-        getShippingCost(customerData, "")
+      try{
+        const customerData = await getCustomerAddressDetail()
+        if (customerCountry == "United Kingdom") {
+          const region = await getCountyRegion(customerData)
+          await getShippingCost(customerData, region)
+        } else {
+          await getShippingCost(customerData, "")
+        }
+      }catch(error){
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -98,7 +103,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     try {
       if (couponData.length) {
         const coupon = couponData[0]
-        // console.log("coupon",coupon,coupon?.published,coupon?.expiry_date)
+        // console.log("coupon",coupon,coupon?.published,coupon?.expiry_date,coupon?.coupon_code)
         const currentDate = moment(new Date())
         const couponExpiryDate = moment(coupon?.expiry_date)
         if (coupon?.published && couponExpiryDate >= currentDate) {
@@ -108,8 +113,58 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
             sessionData.id
           )
           if (!usedCoupon?.exist) {
-            setCouponApplied(true)
-            setCouponDetail(couponData)
+            const productArray = []
+            if (cartItems && cartItems.length > 0) {
+              productArray.push(...cartItems)
+            }
+            let isProductFound = false
+            // var coupon_product = [];
+            // productArray.forEach((item) => {
+            //   if (coupon?.coupon_code === item?.coupon_code) {
+            //     console.log("YES product has coupon ------------------")
+            //     isProductFound = true
+            //     console.log("isProductFound", isProductFound)
+            //     coupon_product.push(item)
+            //     myArr.push(item);
+            //   }
+            // })
+            // setCouponProductData(coupon_product);
+            let maxAmount = 0
+            let maxAmountCouponProduct = null
+            productArray.forEach((item) => {
+              if (coupon?.coupon_code === item?.coupon_code) {
+                isProductFound = true
+                if(item?.price > maxAmount){
+                  maxAmount = item?.price
+                  maxAmountCouponProduct = item
+                }
+              }
+            })
+            myArr.push(maxAmountCouponProduct);
+            setCouponProductData(myArr);
+            // console.log("couponProductData", couponProductData)
+            
+            if (isProductFound) {
+              setCouponApplied(true)
+              setCouponDetail(couponData)
+            } else {
+              toast.warning(`Coupon "${coupon?.coupon_code}" is not available for this product.`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                style: {
+                  fontSize: "12px",
+                  height: "50px"
+                }
+              })
+            }
+            // setCouponApplied(true)
+            // setCouponDetail(couponData)
           } else {
             toast.info(usedCoupon?.message, {
               position: "top-right",
@@ -190,23 +245,26 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
     setCouponDetail([])
   }
 
-  console.log("couponDetail====>", couponDetail)
-  let discount = 0.0,
-    discountType = ""
+  // console.log("couponDetail====>", couponDetail)
+  let discount = 0.0
+  let discountType = ""
   couponDetail.forEach((item) => {
     discount = item?.discount
     discountType = item?.discount_type
   })
 
   // view
-  let totalView,
-    maxShippingCost,
-    withVAT,
-    vatPercentage,
-    allTotal,
-    couponDiscount
+  let totalView = 0.00,
+    maxShippingCost = 0.00,
+    withVAT = 0.00,
+    vatPercentage = 0.00,
+    allTotal = 0.00,
+    couponDiscount = 0.00,
+    // discountCouponProduct = 0.00,
+    discountTotalView = 0.00
   const { data: session } = useSession()
-  if (cartItems) {
+
+  if (cartItems) { 
     if (cartItems && cartItems.length > 0) {
       let finalShippingCost = 0
       // let finalShippingDeliveryType = ""
@@ -214,51 +272,56 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
         const productDeliveryType = items?.deliver_type
         // console.log("productDeliveryType", productDeliveryType) // live frozen
         if (deliveryTypeArray.includes(productDeliveryType)) {
-          const indexOfDeliveryType =
-            deliveryTypeArray.indexOf(productDeliveryType)
+          const indexOfDeliveryType = deliveryTypeArray.indexOf(productDeliveryType)
           const resultShippingCost = shippingCostArray[indexOfDeliveryType]
           // console.log("indexOfDeliveryType,resultShippingCost",indexOfDeliveryType,resultShippingCost) 
-          if (resultShippingCost > finalShippingCost) {
-            // 50>0 50>40
+          if (resultShippingCost > finalShippingCost) { 
             finalShippingCost = resultShippingCost
             // finalShippingDeliveryType = productDeliveryType
           }
         }
       })
-      // console.log("finalShippingDeliveryType,finalShippingCost",finalShippingDeliveryType,finalShippingCost) //0 50
+      // console.log("finalShippingDeliveryType,finalShippingCost",finalShippingDeliveryType,finalShippingCost) 
 
-      totalView = calculateAmount(cartItems)
+        totalView = calculateAmount(cartItems)
+
       // maxShippingCost = calculateShipping(cartItems)
-
-      if (finalShippingCost > 0) {
-        maxShippingCost = finalShippingCost
-        allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
-      } else {
-        maxShippingCost = 0.0
-        allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
-      }
-      if (customerCountry == "United Kingdom") {
-        vatPercentage = calculatePercentage(20, allTotal)
-      } else {
-        // vatPercentage = calculatePercentage(0, allTotal)
-        vatPercentage = 0.0
-      }
+      // if (finalShippingCost > 0) {
+      //   maxShippingCost = finalShippingCost
+      //   allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
+      // } else {
+      //   maxShippingCost = 0.0
+      //   allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
+      // }
+      maxShippingCost = (finalShippingCost).toFixed(2)
 
       if (discountType == "Percentage") {
-        couponDiscount = calculateTotalDiscount(discount, totalView)
-        withVAT =
-          parseFloat(allTotal) +
-          parseFloat(vatPercentage) -
-          parseFloat(couponDiscount)
+        // couponDiscount = calculateTotalDiscount(discount, totalView)
+        couponDiscount = calculateTotalDiscount(discount, couponProductData[0]?.price)
+        // discountCouponProduct = parseFloat(couponProductData[0]?.price) - parseFloat(couponDiscount)
+        discountTotalView = (parseFloat(totalView) -  parseFloat(couponDiscount)).toFixed(2)
       } else if (discountType == "Fixed") {
         couponDiscount = discount
-        withVAT =
-          parseFloat(allTotal) +
-          parseFloat(vatPercentage) -
-          parseFloat(couponDiscount)
+        // discountCouponProduct = parseFloat(couponProductData[0]?.price) - parseFloat(couponDiscount)
+        discountTotalView = (parseFloat(totalView) -  parseFloat(couponDiscount)).toFixed(2)
       } else {
-        withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
+        couponDiscount = 0
+        // discountCouponProduct = parseFloat(couponProductData[0]?.price) - parseFloat(couponDiscount)
+        discountTotalView = (parseFloat(totalView) -  parseFloat(couponDiscount)).toFixed(2)
       }
+
+      if(finalShippingCost > 0 && discount > 0){
+        allTotal = parseFloat(discountTotalView) + parseFloat(maxShippingCost)
+      } else if(finalShippingCost > 0){
+        allTotal = parseFloat(totalView) + parseFloat(maxShippingCost)
+      }
+
+      if ((customerCountry == "United Kingdom" && discount)||(customerCountry == "United Kingdom")) {
+        vatPercentage = calculatePercentage(20, allTotal) 
+      }
+
+      withVAT = (parseFloat(allTotal) + parseFloat(vatPercentage)).toFixed(2) 
+
     } else {
       totalView = "0.00"
       maxShippingCost = "0.00"
@@ -266,26 +329,33 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
       vatPercentage = "0.00"
       withVAT = "0.00"
       couponDiscount = "0.00"
+      // discountCouponProduct = "0.00"
+      discountTotalView = "0.00"
     }
   }
 
   const handleProceedToCheckout = () => {
-    if ((couponDiscount > 0 || maxShippingCost >= 0) && customerCountry) {
+    if ((couponDiscount > 0 || maxShippingCost >= 0 || (couponProductData>0 && discount)) && customerCountry ) {
+      // router.push(`/shop/checkout?couponDiscount=${couponDiscount}&maximumShippingCost=${maxShippingCost}&customerCountry=${customerCountry}&couponProductPrice=${couponProductData[0]?.price}&couponProductName=${couponProductData[0]?.product_name}&discount=${discount}&discountType=${discountType}&couponCode=${couponPromoCode}`)
+      // or-----------------------
       router.push({
         pathname: "/shop/checkout",
         query: {
           couponDiscount: couponDiscount,
           maximumShippingCost: maxShippingCost,
-          customerCountry: customerCountry
+          customerCountry: customerCountry,
+          couponProductPrice: couponProductData[0]?.price,
+          couponProductName: couponProductData[0]?.product_name,
         }
-      }, "/shop/checkout")
+      })
+      // }, "/shop/checkout")
     } else {
       router.push({
         pathname: "/shop/checkout"
       })
     }
   }
-
+  
   return (
     <>
       <ToastContainer />
@@ -314,36 +384,56 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
 
         <div className="ps-block__content">
           <div className="ps-block__records">
+
+          {discount ? (
+              <p className="total">
+                <span>Product Total</span>
+                <strong>£{totalView}</strong>
+              </p>
+            ) : ("")}
+
+          {discount ? (
+              <p className="total">
+                <span>Coupon Discount<br/><span className="text-success">{couponProductData[0]?.product_name}</span></span>
+                <strong>- £{couponDiscount ?? "0.00"}</strong>
+              </p>
+            ) : ("")}
+
+            {/* {discount ? (
             <p>
+              <span>{couponProductData[0]?.product_name} <br/> (Discount Added)</span>
+              <strong>£{discountCouponProduct}</strong>
+            </p>
+            ) : (
+              ""
+            )} */}
+            {discount ? (
+            <p>
+              <span>Subtotal</span>
+              <strong>£{discountTotalView}</strong>
+            </p>
+            ) : (
+              <p>
               <span>Subtotal</span>
               <strong>£{totalView}</strong>
             </p>
+            )}
             <p>
               <span>Shipping</span>
               <span>
-                £ {maxShippingCost !== "NaN" ? maxShippingCost : "0.00"}
+                £{maxShippingCost !== "NaN" ? maxShippingCost : "0.00"}
               </span>
-            </p>
-            {customerCountry == "United Kingdom" ? (
+            </p> 
+            {(customerCountry == "United Kingdom" && discount)||(customerCountry == "United Kingdom")  ? (
               <p>
                 <span>VAT (20%)</span>
                 <span>
-                  £ {vatPercentage !== "NaN" ? vatPercentage : "0.00"}
-                </span>
+                  £{vatPercentage !== "NaN" ? vatPercentage : "0.00"}
+                </span> 
               </p>
-            ) : (
-              ""
-            )}
-            {discount ? (
-              <p className="total">
-                <span>Coupon Discount</span>
-                <strong>- £{couponDiscount ?? "0.00"}</strong>
-              </p>
-            ) : (
-              ""
-            )}
+            ) : ("")}
 
-            <p className="total">
+          <p className="total">
               <span>Pay Total</span>
               <strong>£{withVAT}</strong>
             </p>
@@ -351,6 +441,7 @@ const ModuleEcomerceCartSummary = ({ cartItems }) => {
 
           {session !== null ? (
             <div className="ps-block__bottom">
+              
               {/* <Link href="/shop/checkout"> */}
               <button
                 onClick={handleProceedToCheckout}

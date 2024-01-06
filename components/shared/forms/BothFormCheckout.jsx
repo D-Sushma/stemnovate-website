@@ -19,7 +19,8 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   // const [deliveryAdd, setDeliveryAdd] = useState("")
 
   const router = useRouter();
-  const {couponDiscount, maximumShippingCost, customerCountry } = router.query;
+  const {couponDiscount, maximumShippingCost, customerCountry, couponProductPrice, couponProductName} = router.query;
+console.log("couponProductPrice---",couponProductPrice)
 
   React.useEffect(() => {
     setMybillingDetails(UserData?.result)
@@ -46,47 +47,57 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   }
 
   const { products, getProducts } = useEcomerce()
-
+  
   const [loading, setLoading] = useState(false)
   const [checkTnC, setCheckTnC] = useState(false)
   const [pONumber, setPONumber] = useState("")
   useEffect(() => {
-    getProducts(ecomerce.cartItems, "cart")
+    getProducts(ecomerce?.cartItems, "cart")
   }, [ecomerce])
 
   // Views
   let cartItemsView,
     // maxShippingCost,
-    allTotal ,
+    allTotal = 0.00,
     vatPercentage = 0.00,
-    withVAT ,
+    withVAT = 0.00,
     amountView = 0.00,
-    totalCouponDiscount = 0.00
+    totalCouponDiscount = 0.00,
+    // discountCouponProduct = 0.00,
+    discountAmountView = 0.00
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
     // maxShippingCost = calculateShipping(products)
     // if (deliveryAdd == "cambridge" || deliveryAdd == "Cambridge") {
     //   maxShippingCost = parseFloat(0)
     // }
-    allTotal = parseFloat(amountView) + (maximumShippingCost ? parseFloat(maximumShippingCost) : 0.00)
-    if(customerCountry == "United Kingdom"){
-      vatPercentage = calculatePercentage(20, allTotal)
-    }
+
     if(couponDiscount>0){
       totalCouponDiscount = couponDiscount
-      withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) - parseFloat(totalCouponDiscount)
+      // discountCouponProduct = parseFloat(couponProductPrice) - parseFloat(totalCouponDiscount)
+      discountAmountView = (parseFloat(amountView) -  parseFloat(totalCouponDiscount)).toFixed(2)
+      allTotal = (parseFloat(discountAmountView) + (maximumShippingCost ? parseFloat(maximumShippingCost) : 0.00)).toFixed(2)
+      // withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) - parseFloat(totalCouponDiscount)
     }else{
-      withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
+      allTotal = (parseFloat(amountView) + (maximumShippingCost ? parseFloat(maximumShippingCost) : 0.00)).toFixed(2)
+      // withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
+    }
+
+    if ((customerCountry == "United Kingdom" && couponDiscount>0)||(customerCountry == "United Kingdom")){
+      vatPercentage = calculatePercentage(20, allTotal) 
     }
     
+    withVAT = (parseFloat(allTotal) + parseFloat(vatPercentage)).toFixed(2) 
+  
     cartItemsView = products.map((item) => (
       <div className="ps-checkout__row ps-product" key={item.id}>
         <div className="ps-product__name">
           <span>{item.product_name}</span> x <span>{item.quantity}</span>
         </div>
-        <div className="ps-product__price">£{item.price}</div>
+        <div className="ps-product__price">£{(item.price).toFixed(2)}</div>
       </div>
     ))
+    // style={{textDecoration: (totalCouponDiscount && item.product_name === couponProductName) ? 'line-through' : "none"}}
   } else {
     amountView = "0.00"
     // maxShippingCost = "0.00"
@@ -94,6 +105,9 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
     vatPercentage = "0.00"
     withVAT = "0.00"
     totalCouponDiscount = "0.00"
+    totalCouponDiscount = "0.00"
+    // discountCouponProduct = "0.00"
+    discountAmountView = "0.00"
   }
 
   const blankField = () => {
@@ -153,6 +167,7 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
 
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   const stripePromise = loadStripe(publishableKey)
+
   const createCheckOutSession = async () => {
     try {
       var cust_address_details = myBillingdetails.customer_address_details
@@ -205,14 +220,14 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
             setLoading(true)
             const stripe = await stripePromise
             const checkoutSession = await axios.post(
-              "/api/payments/checkout_sessions",
+              "/api/payments/checkout_sessions", 
               {
                 item: products,
                 userData: myBillingdetails,
                 pONumber: pONumber,
                 maximumShippingCost: maximumShippingCost,
                 customerCountry:customerCountry,
-                couponDiscount:couponDiscount
+                couponDiscount:couponDiscount,
               }
             )
 
@@ -539,39 +554,62 @@ function BothFormCheckout({ ecomerce, userStatus, UserData }) {
             </div>
             {cartItemsView}
 
+            {(totalCouponDiscount > 0) && (
+              <div className="ps-checkout__row">
+                <div className="ps-title">Product Total</div>
+                <div className="ps-product__price">£{amountView}</div>
+              </div>
+            )}
+
+            {(totalCouponDiscount > 0) && (
+              <div className="ps-checkout__row">
+                <div className="ps-title">Coupon Discount <br/><span className="text-success">[{couponProductName}]</span></div>
+                <div className="ps-product__price">- £{totalCouponDiscount}</div>
+              </div>
+            )}
+
+            {/* {(totalCouponDiscount) ? (
+              <div className="ps-checkout__row">
+                <div className="ps-title">{couponProductName} <br/> (Discount Added)</div>
+                <div className="ps-product__price">£ {discountCouponProduct}</div>
+              </div>
+            ) : ("")} */}
+            {(totalCouponDiscount) ?(
             <div className="ps-checkout__row">
               <div className="ps-title">Cart Total</div>
-              <div className="ps-product__price">£ {amountView}</div>
+              <div className="ps-product__price">£{discountAmountView}</div>
             </div>
+            ) : (
+            <div className="ps-checkout__row">
+              <div className="ps-title">Cart Total</div>
+              <div className="ps-product__price">£{amountView}</div>
+            </div>
+            )}
+
             <div className="ps-checkout__row">
               <div className="ps-title">Shipping</div>
               <span>
-                <div className="ps-product__price">£ {maximumShippingCost ?? "0.00"}</div>
-              </span>
+                <div className="ps-product__price">£{maximumShippingCost ?? "0.00"}</div>
+              </span> 
             </div>
-            {vatPercentage > 0 ?(
+
+            {(vatPercentage > 0 && totalCouponDiscount) || (vatPercentage > 0)?(
             <div className="ps-checkout__row">
               <div className="ps-title">Subtotal</div>
-              <div className="ps-product__price">£ {allTotal}</div>
+              <div className="ps-product__price">£{allTotal}</div>
             </div>
             ) : ("")}
-            {customerCountry == "United Kingdom" ?(
+
+            {(customerCountry == "United Kingdom" && couponDiscount>0) || (customerCountry == "United Kingdom") ?(
             <div className="ps-checkout__row">
               <div className="ps-title">VAT (20%)</div>
-              <div className="ps-product__price">£ {vatPercentage}</div>
+              <div className="ps-product__price">£{vatPercentage}</div>
             </div>
-            ):("")}
-            
-            {(totalCouponDiscount > 0) && (
-              <div className="ps-checkout__row">
-              <div className="ps-title">Coupon Discount</div>
-              <div className="ps-product__price">- £ {totalCouponDiscount}</div>
-            </div>
-            )}
-            
+            ) : ("")}
+
             <div className="ps-checkout__row">
               <div className="ps-title">Total</div>
-              <div className="ps-product__price">£ {withVAT}</div>
+              <div className="ps-product__price">£{withVAT}</div>
             </div>
             <div className="ps-checkout__payment">
               <div className="check-faq">

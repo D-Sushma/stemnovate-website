@@ -49,6 +49,7 @@ export default async function handle(req, res) {
               select: {
                 id: true,
                 product_name: true,
+                coupon_code: true,
                 product_slug: true,
                 LotNumber: true,
                 short_description: true,

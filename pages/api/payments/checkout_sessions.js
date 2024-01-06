@@ -15,25 +15,35 @@ async function CreateStripeSession(req, res) {
 
   console.log("item", item)
 
+  let allTotal = 0
+  let totalTax = 0
+  let vatPercentage = 0
+  let discountAmountView = 0
+  let withVAT = 0
   const todayDate = moment().format()
   const amountView = calculateAmount(item) 
   // const maxShippingCost = calculateShipping(item)
   const maxShippingCost = maximumShippingCost 
-  const allTotal = parseFloat(amountView) + parseFloat(maxShippingCost) 
-  let vatPercentage = 0
-  if(customerCountry == "United Kingdom"){
+
+  if (couponDiscount > 0) {
+    discountAmountView = parseFloat(amountView) - parseFloat(couponDiscount) 
+    allTotal = parseFloat(discountAmountView) + parseFloat(maxShippingCost) 
+  } else {
+    allTotal = parseFloat(amountView) + parseFloat(maxShippingCost)
+  }
+  
+  if ((customerCountry == "United Kingdom" && couponDiscount > 0)||(customerCountry == "United Kingdom")) {
     vatPercentage = calculatePercentage(20, allTotal)
   }
-  const withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) 
-  let totalTax
-  // const totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
-  if(couponDiscount>0){
+
+  withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
+
+  if (couponDiscount > 0) {
     totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost) - parseFloat(couponDiscount)
-  }else{
+  } else {
     totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
   }
-
-
+  
   const orderId = uuidv1()
   const purchaseId = uuidv1()
   const paymentId = uuidv1()
@@ -220,7 +230,11 @@ async function CreateStripeSession(req, res) {
             amount: parseFloat(totalTax) * 100,
             currency: "gbp"
           },
-          display_name: (vatPercentage > 0) ? ((couponDiscount > 0) ? "Shipping Charge+VAT(20%)-Coupon Discount" : "Shipping Charge + VAT(20%)") : (couponDiscount > 0) ? "Shipping Charge - Coupon Discount" : "Shipping Charge",
+          display_name: (vatPercentage > 0) ? 
+          ((couponDiscount > 0) ? `Shipping Charge(${maxShippingCost})+VAT(20%)(${vatPercentage})-Coupon Discount(${couponDiscount})`
+          : `Shipping Charge(${maxShippingCost}) + VAT(20%)(${vatPercentage})`) 
+          : (couponDiscount > 0) ? `Shipping Charge(${maxShippingCost}) - Coupon Discount(${couponDiscount})` : `Shipping Charge(${maxShippingCost})`,
+          // display_name: (vatPercentage > 0) ? ((couponDiscount > 0) ? "Shipping Charge+VAT(20%)-Coupon Discount" : "Shipping Charge + VAT(20%)") : (couponDiscount > 0) ? "Shipping Charge - Coupon Discount" : "Shipping Charge",
           // display_name: (vatPercentage > 0) ? "Shipping Charge including VAT(20%)" : "Shipping Charge",
           // display_name: "Shipping Charge including VAT(20%)"
         }

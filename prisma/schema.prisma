@@ -35,6 +35,8 @@ model products {
   id                          Int                          @id @default(autoincrement())
   prod_id                     String?                      @db.VarChar(225)
   product_name                String?                      @db.VarChar(255)
+  coupon_code                 String?                      @db.VarChar(50)
+  coupon_text                 String?                      @db.VarChar(255)
   product_description         String?                      @db.Text
   CatalogueNumber             String?                      @db.VarChar(255)
   LotNumber                   String?                      @db.VarChar(255)
@@ -736,12 +738,12 @@ model resources_structural_analysis {
 }
 
 model coupons {
-  coupon_id         Int       @id @default(autoincrement())
-  coupon_code       String?    @db.VarChar(50)
-  discount_type     String     @db.VarChar(50)
-  expiry_date       DateTime?  @db.Date
-  discount          Float?     @db.Float
-  published        Boolean    @default(true)
+  coupon_id         Int         @id @default(autoincrement())
+  coupon_code       String?     @db.VarChar(50)
+  discount_type     String?     @db.VarChar(50)
+  expiry_date       DateTime?   @db.Date
+  discount          Float?      @db.Float
+  published         Boolean     @default(true)
 }
 
 model regions {
@@ -751,10 +753,10 @@ model regions {
 }
 
 model coupon_used {
-  id               Int        @id @default(autoincrement())
-  coupon_code      String?    @db.VarChar(50)
-  discount_type    String     @db.VarChar(50)
-  discount         Float?     @db.Float
+  id               Int          @id @default(autoincrement())
+  coupon_code      String?      @db.VarChar(50)
+  discount_type    String?      @db.VarChar(50)
+  discount         Float?       @db.Float
   customer_id      Int?       
-  created_date     DateTime?  @db.Date
+  created_date     DateTime?    @db.Date
 }
