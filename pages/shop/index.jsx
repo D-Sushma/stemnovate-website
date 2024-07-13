@@ -46,8 +46,6 @@ const ProductScreen = () => {
   let products = ""
 
   useEffect(() => {
-    console.log("query", query)
-
     var queries = {
       _limit: 10
     }
@@ -67,8 +65,6 @@ const ProductScreen = () => {
     if (pType) {
       queries = Object.assign(queries, query)
     }
-
-    console.log(queries)
     getProducts(queries)
   }, [query])
 

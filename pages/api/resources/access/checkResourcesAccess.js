@@ -6,6 +6,10 @@ export default async function handler(req, res) {
     if (ResourcesID !== "") {
       if (UserId) {
         var ResourcesData = await prisma.resorces_purchese_details.findMany({
+          take: 1,
+          orderBy: {
+              id: "desc",
+          },
           where: {
             deleted_at: null,
             user_id: parseInt(UserId),

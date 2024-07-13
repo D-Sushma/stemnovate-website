@@ -1,14 +1,13 @@
 import React from "react"
 import Link from "next/link"
-import EthicalTissueSourcing from "~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.jpg"
+import EthicalTissueSourcing from "~/public/static/img/products/Primary-Cells-Animal/Ethical-Tissue-sourcing.svg"
 import OurAnimalCellPlatform from "~/public/static/img/products/Primary-Cells-Animal/Our-animal-cell-platform.gif"
-import InternationalShipping from "~/public/static/img/products/Primary-Cells-Animal/International-Shipping.jpg"
-import AnimalCellCultureMedium from "~/public/static/img/products/Primary-Cells-Animal/Animal-Cell-Culture-Medium-and-reagents.jpg"
-import AnimalWelfare from "~/public/static/img/products/Primary-Cells-Animal/Animal-welfare.jpg"
+import InternationalShipping from "~/public/static/img/products/Primary-Cells-Animal/International-Shipping.svg"
+import AnimalCellCultureMedium from "~/public/static/img/products/Primary-Cells-Animal/Animal-Cell-Culture-Medium-and-reagents.svg"
+import AnimalWelfare from "~/public/static/img/products/Primary-Cells-Animal/Animal-welfare.svg"
 import { baseUrl } from "~/repositories/Repository"
 import { connect } from "react-redux"
 import dynamic from "next/dynamic"
-
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
@@ -16,6 +15,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
   loading: () => <p>Loading...</p>
 })
 const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
   loading: () => <p>Loading...</p>
 })
 const ProductList = dynamic(
@@ -26,7 +28,7 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
-const categoryListScreen = () => {
+const categoryListScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -45,25 +47,47 @@ const categoryListScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <>
       <Container
-        title="Primary Cells Animal"
-        description={`We have animal fibroblasts frozen and live primary dermal cells derived from dogs of different types like`}
+        title="Primary Cells Animal | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h product-primary-animal-breadcrumb-bg">
+          <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="primary-animal-banner"
+              src={bgImage}
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />
             </div>
             <h1 className="text-center  text-white p-2">
-              Primary Cells Animals
+              {ProductData?.ProductData?.data[0]?.banner_content}
             </h1>
           </div>
 
           <div className="ps-page__content">
             <div className="ps-about">
-              <div className=" about-section ">
+              <div className=" about-section mt-2 mx-2">
                 <div className="container">
                   <div className="center-box">
                     <p className=" vertical-center">
@@ -97,18 +121,17 @@ const categoryListScreen = () => {
                 <div className="container">
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
-                      <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container  mx-2">
                           <Image
                             src={EthicalTissueSourcing}
                             alt="ANIMAL PRIMARY DERMAL CELLS"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
-                      </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mx-2 rm_m customStyles">
                       <div className="ps-section__desc ">
                         <h2 className="text-white">ETHICAL TISSUE SOURCING</h2>
                         <p className="text-white">
@@ -130,22 +153,21 @@ const categoryListScreen = () => {
                 </div>
               </div>
 
-              <div className="about-section">
+              <div className="about-section mt-4">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
-                      <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                           <Image
                             src={OurAnimalCellPlatform}
                             alt="LIVE PRIMARY DERMAL CELLS"
-                            width={400}
-                            height={220}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
-                      </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mx-2 rm_m customStyles">
                       <div className="ps-section__desc">
                         <h2>ANIMAL CELL PLATFORM</h2>
                         <p>
@@ -173,8 +195,11 @@ const categoryListScreen = () => {
                     </div>
                   </section>
                 </div>
+              </div>
+
+              <div className="about-section mt-2 mx-2">
                 <div className="container">
-                  <h2>APPLICATIONS</h2>
+                  <h2 className="mt-4">APPLICATIONS</h2>
                   <p>
                     Our animal cell products are for cell-based assays for
                     industry and academia. We routinely reprogram cells from
@@ -208,20 +233,21 @@ const categoryListScreen = () => {
 
               <div className="bg-02-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container  mx-2">
                           <Image
                             src={InternationalShipping}
                             alt="INTERNATIONAL SHIPPING"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mx-2 rm_m customStyles">
                       <div className="ps-section__desc">
                         <h2>INTERNATIONAL SHIPPING</h2>
                         <p>
@@ -238,22 +264,23 @@ const categoryListScreen = () => {
                 </div>
               </div>
 
-              <div className="about-section">
+              <div className="about-section my-4">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                           <Image
                             src={AnimalCellCultureMedium}
                             alt="ANIMAL CELL CULTURE MEDIUM AND REAGENTS"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mx-2 rm_m customStyles">
                       <div className="ps-section__desc">
                         <h2>ANIMAL CELL CULTURE MEDIUM AND REAGENTS</h2>
                         <p>
@@ -271,22 +298,23 @@ const categoryListScreen = () => {
                 </div>
               </div>
 
-              <div className="bg-02-section">
+              <div className="bg-02-section my-4">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                           <Image
                             src={AnimalWelfare}
                             alt="ANIMAL WELFARE"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mx-2 rm_m customStyles">
                       <div className="ps-section__desc">
                         <h2>ANIMAL WELFARE</h2>
                         <p>
@@ -346,7 +374,7 @@ const categoryListScreen = () => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.slug
-  var ProductData = []
+  var ProductData1 = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -366,10 +394,32 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ProductData = myProductData
+    ProductData1 = myProductData
   }
 
-  // // Pass data to the page via props
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Primary Cells Animal"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   return { props: { ProductData } }
 }
 

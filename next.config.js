@@ -1,5 +1,4 @@
 const withPWA = require("next-pwa")
-// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const nextSettings = {
   reactStrictMode: false,
   optimizeFonts: false,
@@ -21,51 +20,53 @@ const nextSettings = {
   pwa: {
     dest: "public",
     register: true,
-    disable: process.env.NODE_ENV === "development",
+    disable: process.env.NODE_ENV === "development"
   },
   eslint: {
     ignoreDuringBuilds: true
   },
-  // webpack: (config, { isServer }) => {
-  //   if (!isServer) {
-  //     // Add webpack-bundle-analyzer only in non-server (client) builds
-  //     config.plugins.push(new BundleAnalyzerPlugin());
-  //   }
-  //   if (!isServer) {
-  //     // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
-  //     config.resolve.fallback = {
-  //       // fs: false,
-  //       net: false,
-  //       tls: false,
-  //       crypto: false,
-  //       stream: false,
-  //       timers: false
-  //     }
-  //   }
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
+      config.resolve.fallback = {
+        // fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+        stream: false,
+        timers: false
+      }
+    }
 
-  //   return config
-  // },
+    return config
+  },
   images: {
-    // minimumCacheTTL: 30,
     domains: [
       "stemnovate.co.uk",
       "localhost:3000",
       "3.141.24.147",
       "stemnovateimages.s3.us-east-2.amazonaws.com"
-    ]
+    ],
+    minimumCacheTTL: 60
   },
   i18n: {
     locales: ["en"],
     defaultLocale: "en"
   },
-  // optimization:{
-  //   splitChunks:{
-  //     chunks:"all",
-  //   },
-  //   minimize: true,
-  //   runtimeChunk: "single",
-  //   usedExports: true,
-  // },
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|png|jpeg|gif|mp4)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, immutable',
+          }
+        ],
+      },
+    ]
+  }
 }
 
 module.exports = withPWA(nextSettings)

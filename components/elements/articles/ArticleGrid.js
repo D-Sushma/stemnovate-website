@@ -11,27 +11,47 @@ const ArticleGrid = ({ post }) => {
 
     return (
         <>
-            <article className="ps-post ps-post--grid">
-                <div className="ps-post__thumbnail image-article-blog rounded-0">
-                    <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
-                        <div className="ps-post__overlay link-hover-thumb-shape" ></div>
-                        {/* <a className="ps-post__overlay" ></a> */}
-                    </Link>
-                    {thumbnail}
 
-                </div>
-                <div className="">
-                    <div className="ps-post__content text-white px-2 mb-3 pt-0">
-                        <div className="title-article-blog">{title}</div>
-                        <div className="ps-post__meta mt-3">
-                            <span className="created-at-article-blog">{createdBy},</span>
-                            <Link href="/blog">
-                                <span className="author-article-blog ml-1">{author}</span>
-                            </Link>
-                        </div>
+            {/* <div className="card mt-3 align-items-center p-1 "
+                style={{ width: "308px", height: "auto" }}>
+                <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`} prefetch={false}>
+                    <div className="link-hover-thumb-shape">{thumbnail}</div>
+                </Link>
+                <div className="card-body  p-0 ps-btn-link-bottom">
+                    <h5 className="card-title pt-2 px-2 text-center">
+                        {title}
+                    </h5>
+                    <div className="h5 text-center">
+                        <span className="">{createdBy}</span>
+                        <Link href="/blog" prefetch={false}>
+                            <span className="button-link link-hover-thumb-shape">{author}</span>
+                        </Link>
                     </div>
                 </div>
-            </article>
+            </div> */}
+
+
+            <div className="mt-3 card col-xl-12 col-lg-12 col-md-12 col-sm-12 align-items-center p-1">
+                <article >
+                    <div className="ps-post__thumbnail">
+                        <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`} prefetch={false}>
+                            <div className="link-hover-thumb-shape">{thumbnail}</div>
+                        </Link>
+                    </div>
+                    <div className="ps-post__wrapper justify-content-center text-center">
+                        <h5 className="px-0">
+                            {title}
+                            {/* {title?.substring(0, 90)} */}
+                        </h5>
+                    </div>
+                </article>
+                {/* <div className="h5 text-center">
+                    <span >{createdBy}</span>
+                    <Link href="/blog" prefetch={false}>
+                        <span className="button-link link-hover-thumb-shape">{author}</span>
+                    </Link>
+                </div> */}
+            </div>
         </>
     );
 };

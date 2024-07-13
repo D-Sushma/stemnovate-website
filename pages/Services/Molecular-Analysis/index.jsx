@@ -13,12 +13,15 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
 
-const texicologyScreen = () => {
+const texicologyScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -37,17 +40,43 @@ const texicologyScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
+
   return (
     <>
       <Container
-        title="Molecular Analysis"
-        description="Stemnovate page on molecular technology and advancements"
+        title="Molecular Analysis | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h service-breadcrumb-bg">
-            <div className="container ">
+          <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="molecular-analysis-image"
+              src={bgImage}
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              style={{
+                zIndex: -1
+              }}
+            />
+            <div className="container">
               <BreadCrumb breacrumb={breadcrumb} />
-              <h1 className="text-center  text-white ">Molecular Analysis</h1>
+              <h1 className="text-center  text-white ">
+                {ProductData?.ProductData?.data[0]?.banner_content}
+              </h1>
             </div>
           </div>
 
@@ -67,23 +96,24 @@ const texicologyScreen = () => {
                 </div>
               </div>
 
-              <div className=" bg-02-section">
+              <div className="bg-02-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
                             className="ps-banner__image"
-                            src="/static/img/services/Whole-transcriptomics.jpg"
+                            src="/static/img/services/Whole-transcriptomics.svg"
                             alt="Whole transcriptomics"
-                            width={1200}
-                            height={675}
+                            width={500}
+                            height={275}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc ">
                         <div className="center-box">
                           <div className="vertical-center">
@@ -136,15 +166,15 @@ const texicologyScreen = () => {
                 </div>
               </div>
 
-              <div className=" about-section">
+              <div className="about-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container  mx-2 image-box-container-mb">
                           <Image
                             className="ps-banner__image"
-                            src="/static/img/services/Bioinformatics.jpg"
+                            src="/static/img/services/Bioinformatics.svg"
                             alt="BIOINFORMATICS"
                             width={1200}
                             height={675}
@@ -152,7 +182,7 @@ const texicologyScreen = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc ">
                         <div className="center-box">
                           <div className="vertical-center">
@@ -197,7 +227,7 @@ const texicologyScreen = () => {
                   </section>
                 </div>
               </div>
-              <div className=" bg-02-section ">
+              <div className="bg-02-section">
                 <div className="container">
                   <h2 className="p-1  text-center font-weight-bold">
                     Genotyping
@@ -217,14 +247,14 @@ const texicologyScreen = () => {
                 </div>
               </div>
 
-              <div className=" about-section">
+              <div className="about-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/services/Genotyping.jpg"
+                            src="/static/img/services/main/GENOTYPING.svg"
                             alt="Genotyping"
                             width={1200}
                             height={675}
@@ -232,7 +262,7 @@ const texicologyScreen = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc ">
                         <div className="center-box">
                           <div className="vertical-center">
@@ -276,7 +306,6 @@ const texicologyScreen = () => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.slug
-  var ProductData = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -296,10 +325,32 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ProductData = myProductData
+    ProductData1 = myProductData
   }
 
-  // // Pass data to the page via props
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Molecular Analysis"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   return { props: { ProductData } }
 }
 

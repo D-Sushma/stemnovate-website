@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
@@ -7,6 +6,7 @@ import { useSession } from "next-auth/react"
 import Link from "next/link"
 import PropTypes from "prop-types"
 import dynamic from "next/dynamic"
+import { ToastContainer, toast } from "react-toastify"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -31,21 +31,21 @@ import {
   FaRegArrowAltCircleDown,
   FaRegArrowAltCircleUp
 } from "react-icons/fa"
-import moment from "moment"
 import AddToCartResources from "~/components/resources/AddToCartResources"
-import { ToastContainer } from "react-toastify"
 
 const ResourcesData = (props) => {
   const Router = useRouter()
   const { resources_Name } = Router.query
   const [breadCrumb, setBreadCrumb] = React.useState([])
   const { resourcesData } = props
-  console.log("resourcesData", resourcesData)
   const [resourcesFiles] = useState([])
   const [readMore, setReadMore] = useState(false)
   const [userData, setUserData] = React.useState(null)
   const [isActive, setIsActive] = useState(false)
+  const [isCount, setIsCount] = useState(false)
+  const [Count, setCount] = useState(0)
   const { data: session } = useSession()
+
   useEffect(() => {
     var searchURL = "/resources"
     if (resources_Name != undefined) {
@@ -59,12 +59,14 @@ const ResourcesData = (props) => {
   }, [resources_Name])
 
   React.useEffect(() => {
-    if (session) {
+      if (session) {
+      countAccessResources()
       getResourcesAccess()
       if (userData !== null) {
         getUserData()
       }
     }
+    
   }, [session, userData])
 
   const getResourcesAccess = async () => {
@@ -72,7 +74,6 @@ const ResourcesData = (props) => {
       UserId: session?.id,
       ResourcesID: JSON.stringify(resourcesData.data[0].id)
     })
-    console.log("raw", raw)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -85,9 +86,8 @@ const ResourcesData = (props) => {
     await fetch("/api/resources/access/checkResourcesAccess", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("checkResourcesAccess", data)
         if (data.status == 200) {
-          if (data.data.length > 0) {
+          if (data.data.length > 0 && data.data[0].is_access == true) {
             setIsActive(true)
           } else {
             setIsActive(false)
@@ -153,6 +153,122 @@ const ResourcesData = (props) => {
     setBreadCrumb(newBreadCrumb)
   }
 
+  const requestToAccessData = async () => {
+    if (Count >= 3) {
+      toast.error(
+        " Please Contact Administrator for Further Resource Access Data , Because You Exceeded More than 3 request to access data...",
+        {
+          position: "top-center",
+          autoClose: 15000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored"
+        }
+      )
+    } else {
+      var name = session?.user?.name
+      var email = session?.user?.email
+      var url = `https://stemnovate.co.uk/resources/Access/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`
+     
+      var myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json")
+
+      var raw = JSON.stringify({
+        name: name,
+        email: email,
+        link: url
+      })
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw
+      }
+
+      await fetch(
+        process.env.NEXT_BASE_URL + "/api/Email/requestAccessData",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then(async (result) => {
+          if (result.msg == "success") {
+            await onRequest()
+          }
+        })
+        .catch((error) => console.log("error", error))
+    }
+  }
+
+  const onRequest = async () => {
+    var userid = session?.id
+    var resourcesId = resourcesData.data[0].id
+
+    var myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
+
+    var raw = JSON.stringify({
+      UserIdId: userid,
+      resources_id: resourcesId
+    })
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw
+    }
+
+    await fetch("/api/resources/resourcesAccessRequest", requestOptions)
+      .then((response) => response.json())
+      .then(async (result) => {
+        if (result.code == "200") {
+          toast.success(
+            "send request successfully! Check Your Email For More Details",
+            {
+              position: "top-center",
+              autoClose: 15000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored"
+            }
+          )
+          await countAccessResources()
+        }
+      })
+      .catch((error) => console.log("error", error))
+  }
+
+  const countAccessResources = async () => {
+    var raw = JSON.stringify({
+      UserId: session?.id,
+      ResourcesID: resourcesData.data[0].id
+    })
+    var myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw
+    }
+
+    await fetch("/api/resources/getAccessData", requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status == 200 && data.data.length >= 3) {
+          setIsCount(true)
+          setCount(data?.data?.length)
+        } else {
+          setIsCount(false)
+        }
+      })
+  }
+
   return (
     <Container
       title={
@@ -162,7 +278,11 @@ const ResourcesData = (props) => {
     >
       <ToastContainer />
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div 
+         style={{
+          backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${props?.ProductData?.data[0]?.banner_img})`
+        }}
+        className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">
             <BreadCrumb breacrumb={breadCrumb} />
             <h1 className="text-center  text-white p-2">
@@ -178,47 +298,55 @@ const ResourcesData = (props) => {
             <div className=" about-section ">
               <div className="container">
                 <div className="row">
-                  <div className="col-md-6 my-3">
+                  <div className="col-md-6 my-3 image-box-container rounded ">
                     <Image
                       src={`${process.env.AWS_S3BUCKET_URL}${resourcesData.data[0].resources_preview}`}
-                      className="rounded"
+                      className="zoom-in"
                       alt={resourcesData.data[0].resources_name}
                       width={1200}
                       height={675}
-                      placeholder="blur"
-                      blurDataURL="/static/image/blurred.png"
                     />
                   </div>
 
                   <div className="col-md-6 my-3">
                     <h2>{resourcesData.data[0].resources_name}</h2>
                     <div className="download-option ">
-                      <p>
-                        File type - {resourcesData.data[0].resourcesFileType}
-                      </p>
                       <p className="ps-product__price sale">
-                        Price - <span>£</span>{" "}
+                        Price - <span>£</span>
+                        {""}
                         {resourcesData.data[0].resources_price}
-                      </p>
-                      <p>
-                        Published -{" "}
-                        {moment(resourcesData.data[0].created_at).format(
-                          "DD-MMM-YYYY"
-                        )}
                       </p>
                       <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
-                            <Link
-                              href={`/resources/Access/${resourcesData.data[0].resources_category_resourcesToresources_category.slug}/${resourcesData.data[0].resources_id}/${resourcesData.data[0].access_type}`}
-                              prefetch={false}
-                            >
+                            <>
                               <div style={{ cursor: "pointer" }}>
-                                <button className="button button--green mr-2">
-                                  Access Data
+                                <button
+                                  onClick={requestToAccessData}
+                                  className="button button--green mr-2"
+                                >
+                                  Request to Access Data
                                 </button>
                               </div>
-                            </Link>
+
+                              {isCount ? (
+                                <div
+                                  style={{
+                                    marginTop: "5%",
+                                    marginBottom: "5%"
+                                  }}
+                                >
+                                  <div className="image-box-container access-data">
+                                    <p>
+                                      Please Contact Administrator for Further
+                                      Resource Access Data , Because You
+                                      Exceeded More than 3 request to access
+                                      data...
+                                    </p>
+                                  </div>
+                                </div>
+                              ) : null}
+                            </>
                           ) : (
                             <AddToCartResources
                               userData={userData}
@@ -226,23 +354,17 @@ const ResourcesData = (props) => {
                             />
                           )
                         ) : (
-                          <Link
-                            href={`/resources/Access/${resourcesData.data[0].resources_name}`}
-                            prefetch={false}
-                          >
-                            <div style={{ cursor: "pointer" }}>
-                              <button className="button button--green mr-2">
-                                Access Data
-                              </button>
-                            </div>
-                          </Link>
+                          <></>
                         )}
                       </div>
                     </div>
 
-                    <p className="text-dark">
-                      {resourcesData.data[0].short_description}
-                    </p>
+                    <div
+                      className="text-dark"
+                      dangerouslySetInnerHTML={{
+                        __html: resourcesData?.data[0]?.short_description
+                      }}
+                    ></div>
                   </div>
                 </div>
                 <div>
@@ -382,7 +504,6 @@ const ResourcesData = (props) => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.resources_Name
-  console.log("slug", slug)
   var resourcesData = []
   var tokenId = ""
   var resources_token = ""
@@ -412,8 +533,30 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  // // Pass data to the page via props
-  return { props: { resourcesData } }
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Resources"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return { props: { resourcesData, ProductData } }
 }
 
 export default connect((state) => state)(ResourcesData)

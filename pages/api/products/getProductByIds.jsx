@@ -2,15 +2,13 @@ import { Prisma } from "@prisma/client";
 import prisma from "~/lib/prisma";
 
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     try {
         if (req.method === "POST") {
             const { slug } = req.body;
             var related_products = []
-           
             if (slug !='') {
                 var slug1 = JSON.parse(slug)
-                var ans = Array.isArray(slug1);
-                
                 if(slug1.length>0){
                     for(var i=0;i<slug1.length;i++){
                         related_products.push(slug1[i].id)
@@ -19,7 +17,6 @@ export default async (req, res) => {
                 }else{
                     const getProducts = []
                 }
-              
                 const getProducts = await prisma.products.findMany({
                                         where: {
                                             id: { in: related_products },
@@ -73,11 +70,9 @@ export default async (req, res) => {
             res.status(400).json("Bad Request");
         }
     } catch (e) {
-        // res.status(500).json({ status: 500, data: error });
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            // The .code property can be accessed in a type-safe manner
             if (e.code === "P2002") {
-                console.log("There is a unique constraint violation, a new user cannot be created with this email");
+              
             }
         }
         throw e;

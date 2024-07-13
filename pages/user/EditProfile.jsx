@@ -6,6 +6,7 @@ import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
 import { getSession } from "next-auth/react"
 import dynamic from "next/dynamic"
+import { useRouter } from "next/router"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -31,9 +32,8 @@ const EditProfile = ({ UserData }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [ChangeCPass, setChangeCPass] = useState(false)
   const [form] = Form.useForm()
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo)
-  }
+  const router = useRouter()
+  const onFinishFailed = (errorInfo) => {}
 
   const onFinish = async (values) => {
     const session = await getSession()
@@ -69,6 +69,7 @@ const EditProfile = ({ UserData }) => {
         })
 
         setIsLoading(false)
+        router.push("/user/dashboard")
       } else {
         toast.info(json.message, {
           position: "top-right",
@@ -83,7 +84,6 @@ const EditProfile = ({ UserData }) => {
         setIsLoading(false)
       }
     } catch (error) {
-      console.log(error)
       toast.error("Something Went to Wrong...", {
         position: "top-right",
         autoClose: 5000,
@@ -389,12 +389,10 @@ export async function getServerSideProps(ctx) {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(`${baseUrl}/api/user/UserDetails`, requestOptions)
     UserData = await res.json()
   }
 
-  // Pass data to the page via props
   return { props: { UserData } }
 }
 

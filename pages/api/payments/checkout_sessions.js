@@ -10,7 +10,7 @@ import { v1 as uuidv1 } from "uuid"
 import { getSession } from "next-auth/react"
 import { baseUrl } from "~/repositories/Repository"
 async function CreateStripeSession(req, res) {
-  const { item,userData,pONumber,maximumShippingCost,customerCountry,couponDiscount,discount,discountType,couponCode } = req.body
+  const { item, userData, pONumber, maximumShippingCost, customerCountry, couponDiscount, discount, discountType, couponCode } = req.body
   const mySession = await getSession({ req })
 
   console.log("item", item)
@@ -21,18 +21,18 @@ async function CreateStripeSession(req, res) {
   let discountAmountView = 0
   let withVAT = 0
   const todayDate = moment().format()
-  const amountView = calculateAmount(item) 
+  const amountView = calculateAmount(item)
   // const maxShippingCost = calculateShipping(item)
-  const maxShippingCost = maximumShippingCost 
+  const maxShippingCost = maximumShippingCost
 
   if (couponDiscount > 0) {
-    discountAmountView = parseFloat(amountView) - parseFloat(couponDiscount) 
-    allTotal = parseFloat(discountAmountView) + parseFloat(maxShippingCost) 
+    discountAmountView = parseFloat(amountView) - parseFloat(couponDiscount)
+    allTotal = parseFloat(discountAmountView) + parseFloat(maxShippingCost)
   } else {
     allTotal = parseFloat(amountView) + parseFloat(maxShippingCost)
   }
-  
-  if ((customerCountry == "United Kingdom" && couponDiscount > 0)||(customerCountry == "United Kingdom")) {
+
+  if ((customerCountry == "United Kingdom" && couponDiscount > 0) || (customerCountry == "United Kingdom")) {
     vatPercentage = calculatePercentage(20, allTotal)
   }
 
@@ -43,7 +43,7 @@ async function CreateStripeSession(req, res) {
   } else {
     totalTax = parseFloat(vatPercentage) + parseFloat(maxShippingCost)
   }
-  
+
   const orderId = uuidv1()
   const purchaseId = uuidv1()
   const paymentId = uuidv1()
@@ -53,7 +53,7 @@ async function CreateStripeSession(req, res) {
   var myProducts = []
 
   item.forEach((element) => {
-    var images = element.product_image.split(",")
+    var images = element.primary_product_image.split(",")
     const proImg = process.env.AWS_S3BUCKET_URL + images[0]
     myProducts.push({
       price_data: {
@@ -230,17 +230,13 @@ async function CreateStripeSession(req, res) {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            // amount: parseInt(totalTax) * 100,
             amount: parseFloat(totalTax) * 100,
             currency: "gbp"
           },
-          display_name: (vatPercentage > 0) ? 
-          ((couponDiscount > 0) ? `Shipping Charge(${maxShippingCost})+VAT(20%)(${vatPercentage})-Coupon Discount(${couponDiscount})`
-          : `Shipping Charge(${maxShippingCost}) + VAT(20%)(${vatPercentage})`) 
-          : (couponDiscount > 0) ? `Shipping Charge(${maxShippingCost}) - Coupon Discount(${couponDiscount})` : `Shipping Charge(${maxShippingCost})`,
-          // display_name: (vatPercentage > 0) ? ((couponDiscount > 0) ? "Shipping Charge+VAT(20%)-Coupon Discount" : "Shipping Charge + VAT(20%)") : (couponDiscount > 0) ? "Shipping Charge - Coupon Discount" : "Shipping Charge",
-          // display_name: (vatPercentage > 0) ? "Shipping Charge including VAT(20%)" : "Shipping Charge",
-          // display_name: "Shipping Charge including VAT(20%)"
+          display_name: (vatPercentage > 0) ?
+            ((couponDiscount > 0) ? `Shipping Charge(${maxShippingCost})+VAT(20%)(${vatPercentage})-Coupon Discount(${couponDiscount})`
+              : `Shipping Charge(${maxShippingCost}) + VAT(20%)(${vatPercentage})`)
+            : (couponDiscount > 0) ? `Shipping Charge(${maxShippingCost}) - Coupon Discount(${couponDiscount})` : `Shipping Charge(${maxShippingCost})`,
         }
       }
     ],
@@ -265,20 +261,27 @@ async function CreateStripeSession(req, res) {
 
   var ProductData = []
   item.forEach((pd) => {
-    var images = pd.product_image.split(",")
+    var images = pd.primary_product_image.split(",")
     const proImg = `${process.env.AWS_S3BUCKET_URL}${images[0]}`
-    ProductData.push({
-      order_id: orderData.id,
-      product_id: parseInt(pd.id),
-      product_price: parseFloat(pd.price),
-      product_quantity: parseInt(pd.quantity),
-      total_amount: parseFloat(pd.price * pd.quantity),
-      total_tax: parseFloat(0),
-      product_order_status: "-",
-      imgUrl: proImg,
-      ProductName: pd.product_name,
-      description: pd.short_description
-    })
+    var chk_res_id = Object.keys(pd).some((key) => key === "resources_id")
+    var is_resource = false;
+    if (chk_res_id) {
+     is_resource = true;
+    }
+     ProductData.push({
+        order_id: orderData.id,
+        product_id: parseInt(pd.id),
+        product_price: parseFloat(pd.price),
+        product_quantity: parseInt(pd.quantity),
+        total_amount: parseFloat(pd.price * pd.quantity),
+        total_tax: parseFloat(0),
+        product_order_status: "-",
+        imgUrl: proImg,
+        ProductName: pd.product_name,
+        description: pd.short_description,
+        is_resource: is_resource
+      })
+
   })
 
   await prisma.order_details.createMany({

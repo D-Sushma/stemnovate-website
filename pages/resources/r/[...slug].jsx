@@ -17,6 +17,9 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 
 import PropTypes from "prop-types"
 import Link from "next/link"
@@ -33,6 +36,8 @@ const ResourcesData = (props) => {
   const { resourcesData } = props
   const [resourcesFiles, setResourcesFiles] = useState([])
   const [readMore, setReadMore] = useState(false)
+
+  var ogImage = `${process.env.AWS_S3BUCKET_URL}${resourcesData.data[0].shareimage}`
 
   useEffect(() => {
     var searchData = ""
@@ -113,11 +118,24 @@ const ResourcesData = (props) => {
       setResourcesFiles(resourcesFilesData.data)
     }
   }
-
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${props?.ProductData?.data[0]?.banner_img}`
   return (
-    <Container title={resourcesData ? resourcesData.data[0].cat_name : slug}>
+    <Container
+      title={resourcesData ? resourcesData.data[0].cat_name : slug}
+      ogimg={ogImage}
+    >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+          <BannerImage
+            alt="resources-banner"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadCrumb} />
             <h1 className="text-center  text-white p-2">
@@ -133,19 +151,21 @@ const ResourcesData = (props) => {
             <div className=" about-section ">
               <div className="container">
                 <div className="row">
-                  <div className="col-md-6 my-2">
+                  <div className="col-md-6 col-lg-6 col-sm-6">
+                    <div className=" rounded image-box-container-resources ">
                     <Image
                       src={`${process.env.AWS_S3BUCKET_URL}${resourcesData.data[0].category_image}`}
-                      className="rounded"
+                      className="zoom-in"
                       alt={resourcesData.data[0].cat_name}
-                      width={1200}
-                      height={675}
-                      placeholder="blur"
-                      blurDataURL="/static/image/blurred.png"
+                      priority={true}
+                      width={480}
+                      height={360}
+                      quality={80}
                     />
+                    </div>
                   </div>
 
-                  <div className="col-md-6 my-2">
+                  <div style={{marginTop:'2%'}} className="col-md-6 col-lg-6">
                     <h2>{resourcesData.data[0].cat_name}</h2>
                     <div className="download-option d-none">
                       <p>Image type - JPG</p>
@@ -162,7 +182,12 @@ const ResourcesData = (props) => {
                         </button>
                       </div>
                     </div>
-                    <p>{resourcesData.data[0].short_description}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: resourcesData.data[0].short_description
+                      }}
+                    />
+                    {/* <p>{resourcesData.data[0].short_description}</p> */}
                   </div>
                 </div>
                 <div>
@@ -206,7 +231,6 @@ const ResourcesData = (props) => {
                     </div>
                   ) : null}
                 </div>
-                {/* Resources Details Section */}
               </div>
             </div>
 
@@ -233,15 +257,13 @@ const ResourcesData = (props) => {
                             alt={myRes.resources_name}
                             width={1200}
                             height={675}
-                            placeholder="blur"
-                            blurDataURL="/static/image/blurred.png"
                           />
                           <div className="card-body p-0 container-fluid">
                             <div className="p-3">
                               <h3 className="h3 text-dark">
                                 <b>{myRes.resources_name}</b>
                               </h3>
-                              <p>{myRes.resourcesFileType}</p>
+                              {/* <p>{myRes.resourcesFileType}</p> */}
                               {myRes.resources_price > 0 ? (
                                 <span className="badge badge-pill badge-primary">
                                   Subscription Access
@@ -251,7 +273,8 @@ const ResourcesData = (props) => {
                                   Free
                                 </span>
                               )}
-                              {myRes.resources_content !== "null" ? (
+
+                              {myRes?.resources_content !== "" ? (
                                 <p
                                   className=" bd-highlight mt-3 "
                                   style={{ minHeight: "50px" }}
@@ -263,6 +286,11 @@ const ResourcesData = (props) => {
                                   }}
                                 ></p>
                               ) : null}
+                              <h3 className="ps-product__price sale">
+                                <span>£</span>
+                                {""}
+                                {myRes?.resources_price}
+                              </h3>
                               <Link
                                 href={`/resources/details/${resourcesData.data[0].slug}/${myRes.resources_id}/${myRes.access_type}`}
                                 prefetch={false}
@@ -298,55 +326,55 @@ const ResourcesData = (props) => {
                     {resourcesData.data[0].other_resources_category.map(
                       (myCat, index) => (
                         <div
-                          className="col-md-3 my-6 col-sm-3 col-6 d-flex flex-column flex-grow-1"
+                          className="col-md-4 col-lg-3 my-6 col-sm-6 mt-4 d-flex flex-column flex-grow-1"
                           key={index}
                         >
-                          <Link
-                            href={`/resources/r/${myCat.slug}`}
-                            prefetch={false}
-                          >
-                            <div className="card  d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
-                              <Image
-                                src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
-                                className="rounded"
-                                alt={myCat.cat_name}
-                                width={1200}
-                                height={675}
-                                placeholder="blur"
-                                blurDataURL="/static/image/blurred.png"
-                              />
-                              <div className="card-body p-0 container-fluid">
-                                <div className="p-3">
-                                  <h3 className="h3 text-dark">
-                                    <b>{myCat.cat_name}</b>
-                                  </h3>
-                                  {myCat.cat_access ? (
-                                    <span className="badge badge-pill badge-primary">
-                                      Member only
-                                    </span>
-                                  ) : (
-                                    <span className="badge badge-pill badge-success">
-                                      Free
-                                    </span>
-                                  )}
-                                  <p>
-                                    {myCat.short_description &&
-                                      myCat.short_description.substring(0, 90)}
-                                  </p>
-                                  <Link
-                                    href={`/resources/r/${myCat.slug}`}
-                                    prefetch={false}
-                                  >
-                                    <div className="link-btn-b">
-                                      <b>
-                                        Get Resources <FaArrowRight />
-                                      </b>
-                                    </div>
-                                  </Link>
-                                </div>
+                          <div className="card d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
+                            <Image
+                              src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
+                              className="rounded"
+                              alt={myCat.cat_name}
+                              width={1200}
+                              height={675}
+                              quality={80}
+                            />
+                            <div className="card-body p-0 container-fluid">
+                              <div className="p-3">
+                                <h3 className="h3 text-dark">
+                                  <b>{myCat.cat_name}</b>
+                                </h3>
+                                {myCat.cat_access ? (
+                                  <span className="badge badge-pill badge-primary">
+                                    Member only
+                                  </span>
+                                ) : (
+                                  <span className="badge badge-pill badge-success">
+                                    Free
+                                  </span>
+                                )}
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html:
+                                      myCat.short_description &&
+                                      myCat.short_description.substring(0, 90) +
+                                        "....."
+                                  }}
+                                ></div>
                               </div>
                             </div>
-                          </Link>
+                            <div>
+                              <Link
+                                href={`/resources/r/${myCat.slug}`}
+                                prefetch={false}
+                              >
+                                <div className="link-btn-b">
+                                  <b>
+                                    Get Resources <FaArrowRight />
+                                  </b>
+                                </div>
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       )
                     )}
@@ -393,8 +421,30 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  // // Pass data to the page via props
-  return { props: { resourcesData } }
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Resources"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return { props: { resourcesData, ProductData } }
 }
 
 export default connect((state) => state)(ResourcesData)

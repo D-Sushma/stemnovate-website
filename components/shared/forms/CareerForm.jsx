@@ -1,10 +1,14 @@
 import React, { useEffect } from "react"
 
-const CareerForm = () => {
+const CareerForm = (props) => {
   useEffect(() => {
     const script = document.createElement("script")
     script.src = "https://js.hsforms.net/forms/v2.js"
     document.body.appendChild(script)
+
+    var portal_id = props?.portal_id?.toString();
+    var form_id = props?.form_id?.toString();
+    console.log('portal_id,form_id', portal_id,form_id)
 
     script.addEventListener("load", () => {
       // @TS-ignore
@@ -12,8 +16,8 @@ const CareerForm = () => {
         // @TS-ignore
         window.hbspt.forms.create({
           region: "na1",
-          portalId: "5456750",
-          formId: "d056eb88-4e62-40b9-a908-a88bfbfaa87f",
+          portalId: portal_id,
+          formId: form_id,
           target: "#hubspotForm"
         })
       }

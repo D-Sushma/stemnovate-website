@@ -45,7 +45,7 @@ const BlogGrid = ({ collectionSlug, column }) => {
             if (index <= 3) {
                 if (column === "3") {
                     return (
-                        <div className=" col-md-4 col-sm-6" key={item.id}>
+                        <div className="col-md-4 col-sm-6" key={item.id}>
                             <ArticleGrid post={item} />
                         </div>
                     );
@@ -57,10 +57,10 @@ const BlogGrid = ({ collectionSlug, column }) => {
                     );
                 } else {
                     return (
-                        <div className="col-md-3 d-flex flex-grow-1 p-2" key={item.id}>
-                            <div className="p-0  m-1 ">
+                        <div className="col-md-3 col-sm-6 d-flex flex-grow-1" key={item.id}>
+                            {/* <div className="p-0  m-1 "> */}
                                 <ArticleGrid post={item} />
-                            </div>
+                            {/* </div> */}
                         </div>
                     );
                 }
@@ -69,17 +69,18 @@ const BlogGrid = ({ collectionSlug, column }) => {
     }
 
     return (
-        <div className="ps-blog ps-blog--grid plus-section">
+        <div className="ps-blog ps-blog--grid plus-section plus-section-lcp-image">
             <div className="container container-blog">
-                <div className="ps-blog__content">
+                <div className="ps-blog__content mb-5">
                     <div className="ps-page__header header-blog text-center mb-3 ">
                         <h4 className="font-weight-bolder text-uppercase text-white">Recent posts</h4>
                     </div>
-                    <div className="ps-post-items">
-                        <div className="row d-flex justify-content-center">{viewPostItems}</div>
+                    <div className="ps-section__content">
+                        <div className="container d-flex justify-content-center align-items-center">
+                            <div className="row d-flex justify-content-center">{viewPostItems}</div>
+                        </div>
                     </div>
                 </div>
-                <div className="mb-5"></div>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import Slider from "react-slick"
+import blurredimg from "~/public/static/image/blurred.png"
 import dynamic from "next/dynamic"
 
 const NextArrow = dynamic(
@@ -25,6 +26,21 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
+const DynamicAnnouncementGrid = dynamic(
+  () => import("~/components/partials/blog/AnnouncementGrid"),
+  {
+    loading: () => <p>Loading...</p>
+  }
+)
+const DynamicTestimonials_review = dynamic(
+  () => import("~/components/shared/sections/Testimonials_review"),
+  {
+    loading: () => <p>Loading...</p>
+  }
+)
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 
 const carouselreviewSetting = {
   infinite: true,
@@ -83,7 +99,7 @@ const carouselSetting = {
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: true,
-  dots: true,
+  dots: false,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   responsive: [
@@ -92,7 +108,7 @@ const carouselSetting = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots: true,
+        dots: false,
         arrows: true
       }
     },
@@ -101,7 +117,7 @@ const carouselSetting = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots: true,
+        dots: false,
         arrows: true
       }
     },
@@ -110,7 +126,7 @@ const carouselSetting = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots: true,
+        dots: false,
         arrows: true
       }
     },
@@ -119,7 +135,7 @@ const carouselSetting = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        dots: true,
+        dots: false,
         arrows: true
       }
     }
@@ -145,40 +161,55 @@ const AboutUsScreen = ({
   PartnerData,
   TeamData,
   ReviewData,
-  AnnounceData
+  AnnounceData,
+  BannerData,
+  reviewsDetails
 }) => {
-  useEffect(() => {
-    console.log("ProductData", ProductData)
-    console.log("HistoryData", HistoryData)
-    console.log("PartnerData", PartnerData)
-    console.log("ReviewData", ReviewData)
-  }, [])
+  useEffect(() => {}, [])
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = BannerData?.data[0]?.og_img?.split(",")
+  var ogDesc = BannerData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${BannerData?.data[0]?.banner_img}`
   return (
     <Container
-      title="About Us"
-      description="Stemnovate page for founders, mission, vission and values"
+      title="About Us | Your Drug Discovery Platform"
+      ogimg={ogImage}
+      description={ogDesc}
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div className="ps-page__header  breadcrumb-h  banner-breadcrumb-bg">
+          <BannerImage
+            alt="about-us-banner-image"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
+            <h1 className="text-center h1 text-white p-2 ">
+              {BannerData?.data[0]?.banner_content}
+            </h1>
           </div>
-          <h2 className="text-center text-white p-2">
-            <div
-              className="center-box text-white"
-              dangerouslySetInnerHTML={{
-                __html: ProductData.data[0].banner_title
-              }}
-            ></div>
-          </h2>
         </div>
+
         <div className="ps-page__content">
           <div className="ps-about">
             <div className="about-section">
-              <h1 className="text-center m-4 font-weight-bolder">
+              {/* <h1 className="text-center m-4 font-weight-bolder">
                 Our People - Our Story
-              </h1>
+              </h1> */}
 
               <section className="container">
                 <div className="center-box">
@@ -199,11 +230,11 @@ const AboutUsScreen = ({
                 <Slider {...carouselSetting} className="ps-carousel">
                   {TeamData.data.map((data, key) => (
                     <div className="ps-carousel__item" key={key}>
-                      <section className="ps-section--block-grid ">
+                      <section className="ps-section--block-grid mt-3">
                         <div className="ps-section__thumbnail">
                           <Link href="#">
                             <div
-                              className="ps-section__image link-hover-thumb-shape"
+                              className="ps-section__image link-hover-thumb-shape mr-5"
                               style={{ width: "100%", height: "auto" }}
                             >
                               <Image
@@ -211,17 +242,14 @@ const AboutUsScreen = ({
                                 alt={key}
                                 width={1200}
                                 height={675}
-                                placeholder="blur"
-                                blurDataURL="/static/image/blurred.png"
-                                //layout="responsive"
+                                layout="responsive"
                               />
                             </div>
                           </Link>
                         </div>
-                        <div className="ps-section__content">
+                        <div className="ps-section__content mt-0">
                           <div className="ps-section__desc ">
                             <div
-                              className="center-box"
                               dangerouslySetInnerHTML={{
                                 __html: data.team_content
                               }}
@@ -237,22 +265,21 @@ const AboutUsScreen = ({
 
             <div className="about-section">
               <div className="container">
-                <div className=" row d-flex justify-content-center">
-                  {/* /* ---------------------------------- first --------------------------------- */}
+                <div className=" row d-flex justify-content-center mx-2">
                   {HistoryData.data.map((data, key) => (
                     <div
                       key={key}
-                      className="col-md-2 col-sm-6 d-flex flex-grow-1"
+                      className="col-md-3 col-lg-2 col-sm-4 d-flex flex-grow-1"
                     >
                       <div className="card mt-3  align-items-center p-1">
-                        <div className="card card-h-min-about-us align-items-center p-1 justify-content-center ">
+                        <div className="card-h-min-about-us align-items-center p-1 justify-content-center ">
                           <a
                             href={`${data.url}`}
                             target="_blank"
                             rel="noreferrer"
                           >
                             <div
-                              className="d-flex align-items-center our-client-images"
+                              className="card-body d-flex align-items-center our-client-images "
                               style={{ width: "100%", height: "auto" }}
                             >
                               <Image
@@ -260,13 +287,11 @@ const AboutUsScreen = ({
                                 alt={data.title}
                                 width={1000}
                                 height={245}
-                                placeholder="blur"
-                                blurDataURL="/static/image/blurred.png"
                               />
                             </div>
                           </a>
                         </div>
-                        <div className="card-body  p-0 ps-btn-about-bottom">
+                        <div className="p-0 ps-btn-about-bottom">
                           <a
                             href={`${data.url}`}
                             target="_blank"
@@ -277,7 +302,7 @@ const AboutUsScreen = ({
                             </h4>
                             <h6
                               className="card-title  px-2"
-                              style={{ height: "50%" }}
+                              style={{ height: "36%" }}
                             >
                               {data.history_content}
                             </h6>
@@ -313,27 +338,23 @@ const AboutUsScreen = ({
                     {data.is_feature ? (
                       <Slider {...carouselSetting} className="ps-carousel">
                         <div className="ps-carousel__item">
-                          <section className="ps-section--block-grid ">
+                          <section className="ps-section--block-grid mt-3">
                             <div className="ps-section__thumbnail">
-                              <Link href="#">
-                                <div
-                                  className="ps-section__image link-hover-thumb-shape"
-                                  style={{ width: "100%", height: "auto" }}
-                                >
-                                  <Image
-                                    src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
-                                    alt={data.title}
-                                    width={1200}
-                                    height={675}
-                                    placeholder="blur"
-                                    blurDataURL="/static/image/blurred.png"
-                                    //layout="responsive"
-                                  />
-                                </div>
-                              </Link>
+                              <div
+                                className="ps-section__image link-hover-thumb-shape mr-5"
+                                style={{ width: "100%", height: "auto" }}
+                              >
+                                <Image
+                                  src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
+                                  alt={data.title}
+                                  width={1200}
+                                  height={675}
+                                  layout="responsive"
+                                />
+                              </div>
                             </div>
-                            <div className="ps-section__content">
-                              <h2 className="">
+                            <div className="ps-section__content mt-0">
+                              <h2>
                                 <u>
                                   <a
                                     href={`${data.url}`}
@@ -356,36 +377,33 @@ const AboutUsScreen = ({
                             </div>
                           </section>
                         </div>
+
                         <div className="ps-carousel__item">
-                          <section className="ps-section__desc my-2 text-left ">
+                          <section className="ps-section__desc text-left ">
                             <h2 className={key % 2 ? "p-2" : "p-2 text-white"}>
                               Featured Project
                             </h2>
                           </section>
-                          <section className="ps-section--block-grid ">
+                          <section className="ps-section--block-grid mt-3">
                             <div className="ps-section__thumbnail">
-                              <Link href="#">
-                                <div
-                                  className="ps-section__image link-hover-thumb-shape"
-                                  style={{ width: "100%", height: "auto" }}
-                                >
-                                  <Image
-                                    src={`${process.env.AWS_S3BUCKET_URL}${data.feature_image}`}
-                                    alt={data.feature_title}
-                                    width={1200}
-                                    height={675}
-                                    placeholder="blur"
-                                    blurDataURL="/static/image/blurred.png"
-                                    //layout="responsive"
-                                  />
-                                </div>
-                              </Link>
+                              <div
+                                className="ps-section__image link-hover-thumb-shape mr-5"
+                                style={{ width: "100%", height: "auto" }}
+                              >
+                                <Image
+                                  src={`${process.env.AWS_S3BUCKET_URL}${data.feature_image}`}
+                                  alt={data.feature_title}
+                                  width={1200}
+                                  height={675}
+                                  layout="responsive"
+                                />
+                              </div>
                             </div>
-                            <div className="ps-section__content">
-                              <h2 className="">
+                            <div className="ps-section__content mt-0">
+                              <h2>
                                 <u>
                                   <a
-                                    href={`${data.feature_url}`}
+                                    href={`${data.url}`}
                                     target={"_blank"}
                                     rel="noreferrer"
                                     className="font-weight-bold"
@@ -394,12 +412,14 @@ const AboutUsScreen = ({
                                   </a>
                                 </u>{" "}
                               </h2>
-                              <div
-                                className="center-box"
-                                dangerouslySetInnerHTML={{
-                                  __html: data.feature_content
-                                }}
-                              ></div>
+                              <div className="ps-section__desc">
+                                <div
+                                  className="center-box"
+                                  dangerouslySetInnerHTML={{
+                                    __html: data.feature_content
+                                  }}
+                                ></div>
+                              </div>
                             </div>
                           </section>
                         </div>
@@ -408,30 +428,26 @@ const AboutUsScreen = ({
                       <section
                         className={
                           key % 2
-                            ? "ps-section--block-grid flex-wrap"
-                            : "ps-section--block-grid"
+                            ? "ps-section--block-grid flex-wrap mt-3"
+                            : "ps-section--block-grid mt-3"
                         }
                       >
                         <div className="ps-section__thumbnail">
-                          <Link href="#">
-                            <div
-                              className="ps-section__image link-hover-thumb-shape"
-                              style={{ width: "100%", height: "auto" }}
-                            >
-                              <Image
-                                src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
-                                alt={data.title}
-                                width={1200}
-                                height={675}
-                                placeholder="blur"
-                                blurDataURL="/static/image/blurred.png"
-                                //layout="responsive"
-                              />
-                            </div>
-                          </Link>
+                          <div
+                            className="ps-section__image link-hover-thumb-shape image-box-container mr-5"
+                            style={{ width: "100%", height: "auto" }}
+                          >
+                            <Image
+                              src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
+                              alt={data.title}
+                              width={1200}
+                              height={675}
+                              layout="responsive"
+                            />
+                          </div>
                         </div>
-                        <div className="ps-section__content">
-                          <h2 className="">
+                        <div className="ps-section__content mt-0">
+                          <h2>
                             <u>
                               <a
                                 href={`${data.url}`}
@@ -459,132 +475,9 @@ const AboutUsScreen = ({
               </>
             ))}
 
-            <div>
-              <div className="about-section">
-                <section className="container">
-                  <div className="row">
-                    <div className="col-md-12 col-sm-12 text-center  mt-5">
-                      <h3 className="ps-section__title text-uppercase">
-                        <span className="font-weight-bolder  px-4 py-2">
-                          Latest reviews
-                        </span>
-                      </h3>
-                      <div className="ps-section__content py-5">
-                        <div className="container">
-                          <Slider
-                            {...carouselreviewSetting}
-                            className="ps-carousel"
-                          >
-                            {ReviewData.data.map((data, key) => (
-                              <div className="ps-carousel__item" key={key}>
-                                <div className="ps-review">
-                                  <div className="ps-review__name">
-                                    {data.title}
-                                  </div>
-                                  <div className="ps-review__text mt-2">
-                                    <blockquote>
-                                      <i>
-                                        <div
-                                          className="center-box"
-                                          dangerouslySetInnerHTML={{
-                                            __html: data.review_content
-                                          }}
-                                        ></div>
-                                      </i>
-                                    </blockquote>
-                                  </div>
-                                  <div className="ps-review__review">
-                                    <span className="ps-rating">
-                                      <i className="fa fa-star"></i>
-                                      <i className="fa fa-star"></i>
-                                      <i className="fa fa-star"></i>
-                                      <i className="fa fa-star"></i>
-                                      <i className="fa fa-star"></i>
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </Slider>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
+            <DynamicTestimonials_review reviewsDetails={reviewsDetails} />
 
-              <div className="plus-section My-Announcements">
-                <section className="container">
-                  <div className="row">
-                    <div className="col-md-12 col-sm-12 text-center mt-5">
-                      <h3 className="ps-section__title text-uppercase ">
-                        <span className="font-weight-bolder text-white  px-4 py-2">
-                          Announcements
-                        </span>
-                      </h3>
-                      <div className="ps-section__content py-5">
-                        <div className="container">
-                          <div className=" row d-flex justify-content-center">
-                            {AnnounceData.data.map((data, key) => (
-                              <div
-                                key={key}
-                                className="col-md-3 col-sm-6 d-flex flex-grow-1"
-                              >
-                                <div className="card mt-3  align-items-center p-1">
-                                  <a
-                                    href={`${data.url}`}
-                                    target={"_blank"}
-                                    rel="noreferrer"
-                                    className="font-weight-bold"
-                                    style={{ width: "100%", height: "auto" }}
-                                  >
-                                    <Image
-                                      src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
-                                      alt={data.title}
-                                      width={263}
-                                      height={219}
-                                      placeholder="blur"
-                                      blurDataURL="/static/image/blurred.png"
-                                      //layout="responsive"
-                                    />
-                                  </a>
-
-                                  <div className="card-body  p-0 ps-btn-link-bottom">
-                                    <a
-                                      href={`${data.url}`}
-                                      target={"_blank"}
-                                      rel="noreferrer"
-                                    >
-                                      <h5 className="card-title  pt-2 px-2">
-                                        {data.title}
-                                      </h5>
-                                    </a>
-
-                                    <a
-                                      href={`${data.url}`}
-                                      target={"_blank"}
-                                      rel="noreferrer"
-                                      className="h5"
-                                    >
-                                      <span className="button-link">
-                                        READ MORE
-                                      </span>
-                                      <span className="visually-hidden">
-                                        Read more about {data.title}
-                                      </span>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
+            <DynamicAnnouncementGrid />
             <Subscribe />
           </div>
         </div>
@@ -597,7 +490,6 @@ export async function getServerSideProps() {
   var ProductData = []
 
   const res = await fetch(baseUrl + "/api/aboutus/getdetails")
-  console.log(res)
   const myProductData = await res.json()
 
   if (myProductData.status == 200) {
@@ -666,7 +558,50 @@ export async function getServerSideProps() {
     AnnounceData = []
   }
 
-  // // Pass data to the page via props
+  var BannerData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "About Us"
+    })
+  }
+  const res_banner = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductDataBanner = await res_banner.json()
+
+  if (myProductDataBanner.status == 200) {
+    BannerData = myProductDataBanner
+  } else {
+    BannerData = []
+  }
+
+  var sectionDetails = []
+  var serviceDetails = []
+  var promotionOfferDetails = []
+  var reviewsDetails = []
+  var clientDetails = []
+  const res_section = await fetch(baseUrl + "/api/home_sections/getDetails")
+  const sectionData = await res_section.json()
+  if (sectionData.status == 200) {
+    sectionDetails = sectionData?.data
+    serviceDetails = sectionData?.serviceData
+    promotionOfferDetails = sectionData?.promotionOfferData
+    reviewsDetails = sectionData?.reviewsData
+    clientDetails = sectionData?.clientsData
+  } else {
+    sectionDetails = []
+    serviceDetails = []
+    promotionOfferDetails = []
+    reviewsDetails = []
+    clientDetails = []
+  }
+
   return {
     props: {
       ProductData,
@@ -674,7 +609,9 @@ export async function getServerSideProps() {
       PartnerData,
       TeamData,
       ReviewData,
-      AnnounceData
+      AnnounceData,
+      BannerData,
+      reviewsDetails
     }
   }
 }

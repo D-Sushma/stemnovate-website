@@ -65,11 +65,9 @@ const ModuleEcomerceWishlist = ({ ecomerce, source }) => {
   } else {
     wishlistItemsViews = (
       <tbody>
-        <tr>
-          <td colSpan={5} className="text-left">
+          <td colSpan={5} >
             No product found.
           </td>
-        </tr>
       </tbody>
     )
   }

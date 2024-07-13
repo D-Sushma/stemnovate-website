@@ -1,0 +1,633 @@
+customer {
+    id: 'cus_PKrZ8yeFBMGENn',
+    object: 'customer',
+    address: {
+      city: 'Dorchester',
+      country: 'United Kingdom',
+      line1: 'Dorchester',
+      line2: '',
+      postal_code: 'DT1',
+      state: 'Dorset'
+    },
+    balance: 0,
+    created: 1704693474,
+    currency: null,
+    default_currency: null,
+    default_source: null,
+    delinquent: false,
+    description: '124',
+    discount: null,
+    email: 'dew.sushma203@gmail.com',
+    invoice_prefix: 'B81F6B2D',
+    invoice_settings: {
+      custom_fields: null,
+      default_payment_method: null,
+      footer: null,
+      rendering_options: null
+    },
+    livemode: false,
+    metadata: {},
+    name: 'Sushma',
+    phone: '9876543298',
+    preferred_locales: [],
+    shipping: {
+      address: {
+        city: 'Dorchester',
+        country: 'United Kingdom',
+        line1: 'Dorchester',
+        line2: '',
+        postal_code: 'DT1',
+        state: 'Dorset'
+      },
+      name: 'pharma paradise',
+      phone: '9876543298'
+    },
+    tax_exempt: 'none',
+    test_clock: null
+  }
+  
+  taxRate {
+    id: 'txr_1OWYfAJFLYT9TlXvroQbM8od',
+    object: 'tax_rate',
+    active: true,
+    country: null,
+    created: 1704781188,
+    description: 'Value Added Tax',
+    display_name: 'VAT',
+    effective_percentage: 20,
+    inclusive: false,
+    jurisdiction: 'GB',
+    livemode: false,
+    metadata: {},
+    percentage: 20,
+    state: null,
+    tax_type: null
+  }
+  taxRate {
+    id: 'txr_1OWZV4JFLYT9TlXv4wPiOMKS',
+    object: 'tax_rate',
+    active: true,
+    country: 'GB',
+    created: 1704784406,
+    description: 'Value Added Tax',
+    display_name: 'VAT',
+    effective_percentage: 20,
+    inclusive: false,
+    jurisdiction: 'GB',
+    livemode: false,
+    metadata: {},
+    percentage: 20,
+    state: null,
+    tax_type: 'vat'
+  }
+  
+  taxCode {
+    id: 'txcd_99999999',
+    object: 'tax_code',
+    description: 'A physical good that can be moved or touched. Also known as tangible personal property.',
+    name: 'General - Tangible Goods'
+  }
+  
+  coupon {
+    id: 'HGpF1zHj',
+    object: 'coupon',
+    amount_off: null,
+    created: 1704894134,
+    currency: null,
+    duration: 'once',
+    duration_in_months: null,
+    livemode: false,
+    max_redemptions: null,
+    metadata: {},
+    name: null,
+    percent_off: 20,
+    redeem_by: null,
+    times_redeemed: 0,
+    valid: true
+  }
+  
+  const promotionCode = await stripe.promotionCodes.create({
+      coupon: coupon.id,
+      code: 'ALICE20',
+      customer: customer.id,
+    });
+    console.log("promotionCode",promotionCode)
+    allow_promotion_codes: true,
+  promotionCode {
+    id: 'promo_1OXMHnJFLYT9TlXvAQSzb1vp',
+    object: 'promotion_code',
+    active: true,
+    code: 'ALICE20',
+    coupon: {
+      id: 'mUtFvIpX',
+      object: 'coupon',
+      amount_off: null,
+      created: 1704971938,
+      currency: 'gbp',
+      duration: 'once',
+      duration_in_months: null,
+      livemode: false,
+      max_redemptions: null,
+      metadata: {},
+      name: null,
+      percent_off: 10,
+      redeem_by: null,
+      times_redeemed: 0,
+      valid: true
+    },
+    created: 1704971939,
+    customer: 'cus_PM4QTeFMEXmSBO',
+    expires_at: null,
+    livemode: false,
+    max_redemptions: null,
+    metadata: {},
+    restrictions: {
+      first_time_transaction: false,
+      minimum_amount: null,
+      minimum_amount_currency: null
+    },
+    times_redeemed: 0
+  }
+  
+  
+  paymentIntent {
+    id: 'pi_3OXfC5JFLYT9TlXv1325FthX',
+    object: 'payment_intent',
+    amount: 6500,
+    amount_capturable: 0,
+    amount_details: { tip: {} },
+    amount_received: 0,
+    application: null,
+    application_fee_amount: null,
+    automatic_payment_methods: null,
+    canceled_at: null,
+    cancellation_reason: null,
+    capture_method: 'automatic',
+    charges: {
+      object: 'list',
+      data: [],
+      has_more: false,
+      total_count: 0,
+      url: '/v1/charges?payment_intent=pi_3OXfC5JFLYT9TlXv1325FthX'
+    },
+    client_secret: 'pi_3OXfC5JFLYT9TlXv1325FthX_secret_Y5MWkTrsRGN965s1xgbcYHFZi',
+    confirmation_method: 'automatic',
+    created: 1705044621,
+    currency: 'gbp',
+    customer: null,
+    description: 'Your payment description',
+    invoice: null,
+    last_payment_error: null,
+    latest_charge: null,
+    livemode: false,
+    metadata: {},
+    next_action: null,
+    on_behalf_of: null,
+    payment_method: null,
+    payment_method_configuration_details: null,
+    payment_method_options: {
+      card: {
+        installments: null,
+        mandate_options: null,
+        network: null,
+        request_three_d_secure: 'automatic'
+      }
+    },
+    payment_method_types: [ 'card' ],
+    processing: null,
+    receipt_email: null,
+    review: null,
+    setup_future_usage: null,
+    shipping: null,
+    source: null,
+    statement_descriptor: null,
+    statement_descriptor_suffix: null,
+    status: 'requires_payment_method',
+    transfer_data: null,
+    transfer_group: null
+  }
+  # ====================================================================================
+  # ====================================================================================
+  myProducts [
+    {
+      price_data: { currency: 'gbp', product_data: [Object], unit_amount: 75000 },
+      description: undefined,
+      quantity: 1,
+      tax_rates: [ 'txr_1OXjSfJFLYT9TlXv58kkuXWB' ]
+    }
+  ]
+  # ========================================================================================
+  item [
+    {
+      id: 9,
+      product_name: 'Primary Human Fibroblasts (SV-HF-1-500-L)',
+      coupon_code: 'Get10',
+      product_slug: 'primary-human-fibroblasts-sv-hf-1-500-l',
+      LotNumber: '',
+      short_description: '<p><span style="font-size: 16px;">Human Fibroblasts, Dermal (skin) derived, Caucasian, Female, 71</span></p>',
+      category_id: 13,
+      stock: 'In Stock',
+      product_image: '1704519715431.jpg',
+      product_details: {
+        id: 5,
+        product_id: 9,
+        SKU: '',
+        MRP: 0,
+        regular_price: 0,
+        sale_price: 750,
+        currency: 'GBP',
+        product_unit: '500K / vial',
+        shipping_cost: 50,
+        offer_price: 700
+      },
+      deliver_type: 'Live',
+      type: 'Primary Cells',
+      category: { category_name: 'Primary Cells  Human' },
+      quantity: 1,
+      price: 750
+    }
+  ]
+  item [
+  {
+    id: 9,
+    product_name: 'Primary Human Fibroblasts (SV-HF-1-500-L)',
+    coupon_code: 'Get10',
+    product_slug: 'primary-human-fibroblasts-sv-hf-1-500-l',
+    LotNumber: '',
+    short_description: '<p><span style="font-size: 16px;">Human Fibroblasts, Dermal (skin) derived, Caucasian, Female, 71</span></p>',
+    category_id: 13,
+    stock: 'In Stock',
+    product_image: '1704519715431.jpg',
+    product_details: {
+      id: 5,
+      product_id: 9,
+      SKU: '',
+      MRP: 0,
+      regular_price: 0,
+      sale_price: 750,
+      currency: 'GBP',
+      product_unit: '500K / vial',
+      shipping_cost: 50,
+      offer_price: 700
+    },
+    deliver_type: 'Live',
+    type: 'Primary Cells',
+    category: { category_name: 'Primary Cells  Human' },
+    quantity: 1,
+    price: 750
+  },
+  {
+    id: 11,
+    product_name: 'Primary Human Fibroblasts (SV-HF-1-500-F)',
+    coupon_code: 'null',
+    product_slug: 'primary-human-fibroblasts-sv-hf-1-500-f',
+    LotNumber: '',
+    short_description: '<p><span style="font-size: 16px;">Human Fibroblasts, Dermal (skin) derived, Caucasian, Female, 71</span></p>',
+    category_id: 13,
+    stock: 'In Stock',
+    product_image: '1704535771014.jpg',
+    product_details: {
+      id: 7,
+      product_id: 11,
+      SKU: '',
+      MRP: 0,
+      regular_price: 0,
+      sale_price: 499,
+      currency: 'GBP',
+      product_unit: '500k/vial',
+      shipping_cost: 80,
+      offer_price: 0
+    },
+    deliver_type: 'Frozen',
+    type: 'Primary Cells',
+    category: { category_name: 'Primary Cells  Human' },
+    quantity: 1,
+    price: 499
+  }
+]
+  # ========================================================================================
+  myProducts [
+    {
+      price_data: { currency: 'gbp', product_data: [Object], unit_amount: 75000 },
+      description: undefined,
+      quantity: 1,
+      tax_rates: [ 'txr_1OY1YyJFLYT9TlXvgnpfgFAs' ]
+    },
+    {
+      price_data: { currency: 'gbp', product_data: [Object], unit_amount: 10000 },
+      quantity: 1,
+      tax_rates: [ 'txr_1OY1YyJFLYT9TlXvgnpfgFAs' ]
+    }
+  ]
+  # ========================================================================================
+  productPrice 75000
+  # ========================================================================================
+  element {
+    id: 9,
+    product_name: 'Primary Human Fibroblasts (SV-HF-1-500-L)',
+    coupon_code: 'Get10',
+    product_slug: 'primary-human-fibroblasts-sv-hf-1-500-l',
+    LotNumber: '',
+    short_description: '<p><span style="font-size: 16px;">Human Fibroblasts, Dermal (skin) derived, Caucasian, Female, 71</span></p>',
+    category_id: 13,
+    stock: 'In Stock',
+    product_image: '1704519715431.jpg',
+    product_details: {
+      id: 5,
+      product_id: 9,
+      SKU: '',
+      MRP: 0,
+      regular_price: 0,
+      sale_price: 750,
+      currency: 'GBP',
+      product_unit: '500K / vial',
+      shipping_cost: 50,
+      offer_price: 700
+    },
+    deliver_type: 'Live',
+    type: 'Primary Cells',
+    category: { category_name: 'Primary Cells  Human' },
+    quantity: 1,
+    price: 750
+  }
+  # ========================================================================================
+  productDiscountId Promise { <pending> }
+  coupon inside function {
+    id: 'Vn1bTdnB',
+    object: 'coupon',
+    amount_off: null,
+    created: 1705133295,
+    currency: 'gbp',
+    duration: 'once',
+    duration_in_months: null,
+    livemode: false,
+    max_redemptions: null,
+    metadata: {},
+    name: null,
+    percent_off: 10,
+    redeem_by: null,
+    times_redeemed: 0,
+    valid: true
+  }
+  # ========================================================================================
+  session {
+    id: 'cs_test_b1vsUPoT61xHhYc3HGttrr0fh1xDvVig4iIdjuy3Yv7YYiE7mBzca3UQTU',
+    object: 'checkout.session',
+    after_expiration: null,
+    allow_promotion_codes: null,
+    amount_subtotal: 85000,
+    amount_total: 91800,
+    automatic_tax: { enabled: false, status: null },
+    billing_address_collection: null,
+    cancel_url: 'http://localhost:3000/order/order-confirmation/?status=cancel&orderId=5253c4c0-b147-11ee-beb2-39b726141b9d',
+    client_reference_id: null,
+    client_secret: null,
+    consent: null,
+    consent_collection: null,
+    created: 1705063046,
+    currency: 'gbp',
+    currency_conversion: null,
+    custom_fields: [],
+    custom_text: {
+      after_submit: null,
+      shipping_address: null,
+      submit: null,
+      terms_of_service_acceptance: null
+    },
+    customer: 'cus_PMSvyd8SE0Vf7N',
+    customer_creation: null,
+    customer_details: {
+      address: null,
+      email: 'dew.sushma203@gmail.com',
+      name: null,
+      phone: null,
+      tax_exempt: 'none',
+      tax_ids: null
+    },
+    customer_email: null,
+    expires_at: 1705149446,
+    invoice: null,
+    invoice_creation: {
+      enabled: false,
+      invoice_data: {
+        account_tax_ids: null,
+        custom_fields: null,
+        description: null,
+        footer: null,
+        metadata: {},
+        rendering_options: null
+      }
+    },
+    livemode: false,
+    locale: null,
+    metadata: {},
+    mode: 'payment',
+    payment_intent: 'pi_3OXjzGJFLYT9TlXv1ctAYxzX',
+    payment_link: null,
+    payment_method_collection: 'always',
+    payment_method_configuration_details: { id: 'pmc_1L5QaQJFLYT9TlXvtYc6E60h', parent: null },
+    payment_method_options: {},
+    payment_method_types: [ 'card' ],
+    payment_status: 'unpaid',
+    phone_number_collection: { enabled: false },
+    recovered_from: null,
+    setup_intent: null,
+    shipping: null,
+    shipping_address_collection: {
+      allowed_countries: [
+        'GB', 'US', 'AE', 'AR', 'AT', 'AU', 'BE', 'BG',
+        'BO', 'CA', 'CH', 'CL', 'CO', 'CR', 'CY', 'CZ',
+        'DE', 'DK', 'DO', 'EE', 'EG', 'ES', 'FI', 'FR',
+        'GM', 'GR', 'HK', 'HR', 'HU', 'ID', 'IE', 'IL',
+        'IS', 'IT', 'KE', 'KR', 'LI', 'LT', 'LU', 'LV',
+        'MT', 'MX', 'NL', 'NO', 'NZ', 'PE', 'PH', 'PL',
+        'PT', 'PY', 'RO', 'SA', 'SE', 'SG', 'SI', 'SK',
+        'TH', 'TR', 'TT', 'UY', 'ZA', 'BD', 'BJ', 'CI',
+        'JM', 'JP', 'MA', 'MC', 'NE', 'RS', 'SN', 'TN',
+        'AG', 'BH', 'GH', 'GT', 'GY', 'KW', 'LC', 'MU',
+        'NA', 'SM'
+      ]
+    },
+    shipping_options: [],
+    shipping_rate: null,
+    status: 'open',
+    submit_type: null,
+    subscription: null,
+    success_url: 'http://localhost:3000/order/order-confirmation/?status=success&orderId=5253c4c0-b147-11ee-beb2-39b726141b9d',
+    total_details: { amount_discount: 8500, amount_shipping: 0, amount_tax: 15300 },
+    ui_mode: 'hosted',
+    url: 'https://checkout.stripe.com/c/pay/cs_test_b1vsUPoT61xHhYc3HGttrr0fh1xDvVig4iIdjuy3Yv7YYiE7mBzca3UQTU#fidkdWxOYHwnPyd1blpxYHZxWjA0STBKND1PQ0lcUTxRaV1zRmhGN3Y0PDVGYG9BcG9kdDVASEFqSmlUdDJoU3J0MVRhczdqNmptaExgMGk2PWNVSGpKTTFQRlFRdVVRbkx2THNTSUhCdzwwNTV1TEhmN2tWUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl'
+  }
+  # =====================================================================================
+  session {
+    id: 'cs_test_b1jPQj7v4tAZHHTCPWZkTCYre8pxVofLuWDLqRGNnYxrDrS8z323J3paaB',
+    object: 'checkout.session',
+    after_expiration: null,
+    allow_promotion_codes: null,
+    amount_subtotal: 85000,
+    amount_total: 102000,
+    automatic_tax: { enabled: false, status: null },
+    billing_address_collection: null,
+    cancel_url: 'http://localhost:3000/order/order-confirmation/?status=cancel&orderId=0b416510-b14c-11ee-beb2-39b726141b9d',
+    client_reference_id: null,
+    client_secret: null,
+    consent: null,
+    consent_collection: null,
+    created: 1705065073,
+    currency: 'gbp',
+    currency_conversion: null,
+    custom_fields: [],
+    custom_text: {
+      after_submit: null,
+      shipping_address: null,
+      submit: null,
+      terms_of_service_acceptance: null
+    },
+    customer: 'cus_PMTSF8loVWlAKE',
+    customer_creation: null,
+    customer_details: {
+      address: null,
+      email: 'dew.sushma203@gmail.com',
+      name: null,
+      phone: null,
+      tax_exempt: 'none',
+      tax_ids: null
+    },
+    customer_email: null,
+    expires_at: 1705151473,
+    invoice: null,
+    invoice_creation: {
+      enabled: false,
+      invoice_data: {
+        account_tax_ids: null,
+        custom_fields: null,
+        description: null,
+        footer: null,
+        metadata: {},
+        rendering_options: null
+      }
+    },
+    livemode: false,
+    locale: null,
+    metadata: {},
+    mode: 'payment',
+    payment_intent: 'pi_3OXkVxJFLYT9TlXv0dIR0fi7',
+    payment_link: null,
+    payment_method_collection: 'always',
+    payment_method_configuration_details: { id: 'pmc_1L5QaQJFLYT9TlXvtYc6E60h', parent: null },
+    payment_method_options: {},
+    payment_method_types: [ 'card' ],
+    payment_status: 'unpaid',
+    phone_number_collection: { enabled: false },
+    recovered_from: null,
+    setup_intent: null,
+    shipping: null,
+    shipping_address_collection: {
+      allowed_countries: [
+        'GB', 'US', 'AE', 'AR', 'AT', 'AU', 'BE', 'BG',
+        'BO', 'CA', 'CH', 'CL', 'CO', 'CR', 'CY', 'CZ',
+        'DE', 'DK', 'DO', 'EE', 'EG', 'ES', 'FI', 'FR',
+        'GM', 'GR', 'HK', 'HR', 'HU', 'ID', 'IE', 'IL',
+        'IS', 'IT', 'KE', 'KR', 'LI', 'LT', 'LU', 'LV',
+        'MT', 'MX', 'NL', 'NO', 'NZ', 'PE', 'PH', 'PL',
+        'PT', 'PY', 'RO', 'SA', 'SE', 'SG', 'SI', 'SK',
+        'TH', 'TR', 'TT', 'UY', 'ZA', 'BD', 'BJ', 'CI',
+        'JM', 'JP', 'MA', 'MC', 'NE', 'RS', 'SN', 'TN',
+        'AG', 'BH', 'GH', 'GT', 'GY', 'KW', 'LC', 'MU',
+        'NA', 'SM'
+      ]
+    },
+    shipping_options: [],
+    shipping_rate: null,
+    status: 'open',
+    submit_type: null,
+    subscription: null,
+    success_url: 'http://localhost:3000/order/order-confirmation/?status=success&orderId=0b416510-b14c-11ee-beb2-39b726141b9d',
+    total_details: { amount_discount: 0, amount_shipping: 0, amount_tax: 17000 },
+    ui_mode: 'hosted',
+    url: 'https://checkout.stripe.com/c/pay/cs_test_b1jPQj7v4tAZHHTCPWZkTCYre8pxVofLuWDLqRGNnYxrDrS8z323J3paaB#fidkdWxOYHwnPyd1blpxYHZxWjA0STBKND1PQ0lcUTxRaV1zRmhGN3Y0PDVGYG9BcG9kdDVASEFqSmlUdDJoU3J0MVRhczdqNmptaExgMGk2PWNVSGpKTTFQRlFRdVVRbkx2THNTSUhCdzwwNTV1TEhmN2tWUCcpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPydocGlxbFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl'
+  }
+  # =======================================================================================
+  rd:  {
+    id: 9,
+    product_name: 'Primary Human Fibroblasts (SV-HF-1-500-L)',
+    coupon_code: 'Get10',
+    product_slug: 'primary-human-fibroblasts-sv-hf-1-500-l',
+    LotNumber: '',
+    short_description: '<p><span style="font-size: 16px;">Human Fibroblasts, Dermal (skin) derived, Caucasian, Female, 71</span></p>',
+    category_id: 13,
+    stock: 'In Stock',
+    product_image: '1704519715431.jpg',
+    product_details: {
+      id: 5,
+      product_id: 9,
+      SKU: '',
+      MRP: 0,
+      regular_price: 0,
+      sale_price: 750,
+      currency: 'GBP',
+      product_unit: '500K / vial',
+      shipping_cost: 50,
+      offer_price: 700
+    },
+    deliver_type: 'Live',
+    type: 'Primary Cells',
+    category: { category_name: 'Primary Cells  Human' },
+    quantity: 1,
+    price: 750
+  }
+  
+  //==================================================================================
+  shippingRate {
+  id: 'shr_1OaHnNJFLYT9TlXvb21MCDjA',
+  object: 'shipping_rate',
+  active: true,
+  created: 1705669661,
+  delivery_estimate: {
+    maximum: { unit: 'business_day', value: 7 },
+    minimum: { unit: 'business_day', value: 5 }
+  },
+  display_name: 'Ground shipping',
+  fixed_amount: { amount: 10000, currency: 'gbp' },
+  livemode: false,
+  metadata: {},
+  tax_behavior: 'unspecified',
+  tax_code: null,
+  type: 'fixed_amount'
+}
+//======================================================================
+updateShippingRate {
+  id: 'shr_1OaHnNJFLYT9TlXvb21MCDjA',
+  object: 'shipping_rate',
+  active: true,
+  created: 1705669661,
+  delivery_estimate: {
+    maximum: { unit: 'business_day', value: 7 },
+    minimum: { unit: 'business_day', value: 5 }
+  },
+  display_name: 'Ground shipping',
+  fixed_amount: { amount: 10000, currency: 'gbp' },
+  livemode: false,
+  metadata: {},
+  tax_behavior: 'inclusive',
+  tax_code: null,
+  type: 'fixed_amount'
+}
+//======================================================================
+retrievedShippingRate {
+  id: 'shr_1OaHnNJFLYT9TlXvb21MCDjA',
+  object: 'shipping_rate',
+  active: true,
+  created: 1705669661,
+  delivery_estimate: {
+    maximum: { unit: 'business_day', value: 7 },
+    minimum: { unit: 'business_day', value: 5 }
+  },
+  display_name: 'Ground shipping',
+  fixed_amount: { amount: 10000, currency: 'gbp' },
+  livemode: false,
+  metadata: {},
+  tax_behavior: 'inclusive',
+  tax_code: null,
+  type: 'fixed_amount'
+}

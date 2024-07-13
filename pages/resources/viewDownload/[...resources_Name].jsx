@@ -14,7 +14,6 @@ const Subscribe = dynamic(
 )
 
 import PropTypes from "prop-types"
-
 import { decode, encode } from "hex-encode-decode"
 
 const ResourcesData = (props) => {
@@ -59,7 +58,6 @@ const ResourcesData = (props) => {
       UserId: session?.id,
       ResourcesID: JSON.stringify(resourcesData.data[0].id)
     })
-    console.log("raw", raw)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -72,7 +70,6 @@ const ResourcesData = (props) => {
     await fetch("/api/resources/access/checkResourcesAccess", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("checkResourcesAccess", data)
         if (data.status == 200) {
           if (data.data.length > 0) {
             setIsActive(true)
@@ -90,7 +87,6 @@ const ResourcesData = (props) => {
       UserId: session?.id,
       ResourcesID: resourcesData.data[0].id
     })
-    console.log("newraw", raw)
 
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
@@ -104,15 +100,12 @@ const ResourcesData = (props) => {
     await fetch("/api/resources/access/getResourcesFiles", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("getResourcesFiles", data)
         setIsLoading(false)
         if (data.status == 200) {
           setResourcesFiles(data.data[0])
           setIsActive(true)
-          console.log("resourcesFiles_new", data.data[0])
           const sv = JSON.parse(data.data[0].structural_variation)
           const seq = JSON.parse(data.data[0].sequencing)
-          console.log("sv : ", data.data[0].structural_variation)
           file_count = sv.filter((item) => item.type !== "").length
           if (file_count > 0) {
             setResources_structural(sv)
@@ -121,18 +114,15 @@ const ResourcesData = (props) => {
           if (seqfile_count > 0) {
             setResources_sequence(seq)
           }
-          console.log("file_count", file_count)
           getURLLink(data.data[0].pdf_bottom_sign)
         }
       })
   }
 
   const getURLLink = async (val) => {
-    console.log("val", val)
     var raw = JSON.stringify({
       key: encode(val)
     })
-    console.log("raw", raw)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -145,7 +135,6 @@ const ResourcesData = (props) => {
     await fetch("/api/resources/access/getLink", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("urlLink", data)
         if (data.code == 200) {
           setFilePath(decode(data.url))
         }
@@ -366,15 +355,12 @@ const ResourcesData = (props) => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.resources_Name
-  console.log("slug", slug)
   var resourcesData = []
   var tokenId = ""
   var resources_token = ""
   if (slug != undefined) {
     resources_token = slug[slug.length - slug.length + 1]
     tokenId = slug[slug.length - 1]
-    console.log("resources_token", resources_token)
-    console.log("tokenId", tokenId)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -399,7 +385,6 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  // // Pass data to the page via props
   return { props: { resourcesData } }
 }
 

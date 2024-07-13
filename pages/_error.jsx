@@ -5,9 +5,17 @@ const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
 
+const HeaderDefault = dynamic(
+  () => import("~/components/shared/headers/HeaderDefault"),
+  { loading: () => <p>Loading...</p> }
+)
+
 export default function _error() {
   return (
-    <Container title="Our team is adding new features for a better user experience">
+    <Container 
+      title="Our team is adding new features for a better user experience"
+      header={<HeaderDefault classes="without-border" />}
+      >
       <div>
         <div id="imgDiv">
           <div id="msgtext">

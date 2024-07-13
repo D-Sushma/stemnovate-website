@@ -3,11 +3,49 @@ import React, { useState } from "react"
 const Subscribe = () => {
   const [showMessage, setShowMessage] = useState(false)
   const [email, setemail] = useState("")
-  const submitNewsletter = () => {
+  // const submitNewsletter = () => {
+  //   if (email !== "") {
+  //     setShowMessage(true)
+  //   }
+  // }
+
+  const submitNewsletter = async () => {
     if (email !== "") {
-      setShowMessage(true)
+      // var toEmail1 = "customer-support@stemnovate.co.uk";
+      var toEmail = "info@stemnovate.co.uk"
+      var msg = email.target.value;
+      var myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json")
+
+      var raw = JSON.stringify({
+        Email: toEmail,
+        message: msg,
+        link: 'https://stemnovate.co.uk/'
+      })
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw
+      }
+
+      await fetch(
+        process.env.NEXT_BASE_URL + "/api/Email/subscribeEmail",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then(async (result) => {
+          console.log("result_subscribe", result)
+          setShowMessage(true)
+          setemail('')
+          if (result.msg == "success") {
+           
+          }
+        })
+        .catch((error) => console.log("error", error))
     }
   }
+
   return (
     <>
       <section className="ps-section--newsletter newsletter-section">
@@ -23,11 +61,7 @@ const Subscribe = () => {
             </div>
           </div>
           <div className="form-container-subscribe">
-            <form
-              onSubmit={submitNewsletter}
-              method="post"
-              id="subscribe-newsletter"
-            >
+        
               <div className="">
                 <input
                   className="form-input-subscribe mb-3"
@@ -36,9 +70,7 @@ const Subscribe = () => {
                   placeholder="E-mail Address"
                   required
                 />
-                <button
-                  className="button-subscribe text-white text-center"
-                >
+                <button onClick={submitNewsletter} className="button-subscribe text-white text-center">
                   Subscribe
                 </button>
               </div>
@@ -49,7 +81,6 @@ const Subscribe = () => {
                   </div>
                 </>
               )}
-            </form>
           </div>
         </div>
       </section>

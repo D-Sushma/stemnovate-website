@@ -16,7 +16,6 @@ import { TbCalendarTime, TbBuildingCommunity, TbLiveView } from "react-icons/tb"
 import moment from "moment"
 import { Divider } from "antd"
 import dynamic from "next/dynamic"
-
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
@@ -31,6 +30,9 @@ const CareerForm = dynamic(
   () => import("~/components/shared/forms/CareerForm"),
   { loading: () => <p>Loading...</p> }
 )
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 
 const breadcrumb = [
   {
@@ -51,7 +53,6 @@ const CareersList = (props) => {
   const router = useRouter()
   const { PostList } = props
   const [JobsList] = useState(PostList.data[0])
-  console.log("PostList", PostList)
 
   useEffect(() => {
     const host = window.location.host
@@ -66,44 +67,36 @@ const CareersList = (props) => {
     }
   }, [router.pathname])
 
+  // console.log('JobsList',JobsList)
+
+  const bgImage = `${process.env.AWS_S3BUCKET_URL}${JobsList?.banner_img}`
+
   return (
     <Container
-      title={JobsList.position_name}
+      title={JobsList?.position_name}
       description="Stemnovate page on volunteering opportunities, apprenticeships, trainings and learning"
       cronical={"/careers"}
-      ogimg={
-        JobsList.image !== null
-          ? process.env.AWS_S3BUCKET_URL + "/" + JobsList.image
-          : "https://stemnovate.co.uk/static/img/our-culture/02.png"
-      }
+      ogimg={JobsList?.shareimage}
     >
       <main className="ps-page ps-page--inner">
-        {JobsList.image !== null ? (
-          <div
-            className="breadcrumb-h breadcrumb-bg"
+      <div className="ps-page__header  breadcrumb-h  banner-breadcrumb-bg">
+          <BannerImage
+            alt={`${JobsList?.position_name} 'banner-image'`}
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
             style={{
-              backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${JobsList.image})`,
-              height: "20em",
-              backgroundPosition: "0 29%"
+              zIndex: -1
             }}
-          >
-            <div className="container ">
-              <BreadCrumb breacrumb={breadcrumb} />
-              <h1 className="text-center h1 text-white p-2">
-                {JobsList.position_name}
-              </h1>
-            </div>
+          />
+          <div className="container ">
+            <BreadCrumb breacrumb={breadcrumb} />
+            <h1 className="text-center h1 text-white p-2 ">
+              {JobsList?.position_name}
+            </h1>
           </div>
-        ) : (
-          <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
-            <div className="container ">
-              <BreadCrumb breacrumb={breadcrumb} />
-              <h1 className="text-center h1 text-white p-2">
-                {JobsList.position_name}
-              </h1>
-            </div>
-          </div>
-        )}
+        </div>
 
         <div className="ps-page__content">
           <div className="ps-about">
@@ -112,25 +105,25 @@ const CareersList = (props) => {
                 <div className="card-body">
                   <div className="row px-5">
                     <div className="col-md-12 ">
-                      <h2>{JobsList.position_name}</h2>
+                      <h2>{JobsList?.position_name}</h2>
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: JobsList.job_description
+                          __html: JobsList?.job_description
                         }}
                       ></p>
                     </div>
                     <div className="col-md-8 my-3">
                       <p className="text-left">
                         <TbBuildingCommunity className="mr-3 mb-1" />
-                        {JobsList.company}
+                        {JobsList?.company}
                       </p>
                       <p>
                         <TbLiveView className="mr-3 mb-1" />
-                        {JobsList.location}
+                        {JobsList?.location}
                       </p>
                       <p className="text-left">
                         <TbCalendarTime className="mr-3" />
-                        {moment(JobsList.created_at).format("DD-MM-YYYY")}
+                        {moment(JobsList?.created_at).format("DD-MM-YYYY")}
                       </p>
                     </div>
 
@@ -179,7 +172,7 @@ const CareersList = (props) => {
                   </div>
                   <Divider />
                   <div className="m-5">
-                    <CareerForm />
+                    <CareerForm portal_id={JobsList.portal_id} form_id={JobsList.form_id} />
                   </div>
                 </div>
               </div>
@@ -193,7 +186,6 @@ const CareersList = (props) => {
 }
 
 export async function getServerSideProps({ query }) {
-  // Fetch data from external API
   const slug = query.slug
 
   var myHeaders = new Headers()
@@ -214,7 +206,6 @@ export async function getServerSideProps({ query }) {
     requestOptions
   )
   const PostList = await response.json()
-  // Pass data to the page via props
   return { props: { PostList } }
 }
 

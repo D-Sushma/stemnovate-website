@@ -41,7 +41,6 @@ const ProductScreen = () => {
   let products = ""
 
   useEffect(() => {
-    console.log("query", query)
     var queries = {
       _limit: 10
     }

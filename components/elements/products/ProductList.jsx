@@ -49,13 +49,13 @@ const ProductList = ({ product, ecomerce }) => {
             Please{"  "}
             <Link href={"/auth/UserLogin"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Login</a>
+                <a href={"/auth/UserLogin"} className="Toast-link font-weight-bolder">Login</a>
               </u>
             </Link>
             {"  "}/{"  "}
             <Link href={"/auth/UserReg"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Signup</a>
+                <a href={"/auth/UserReg"} className="Toast-link font-weight-bolder">Signup</a>
               </u>
             </Link>{" "}
             to proceed
@@ -100,7 +100,7 @@ const ProductList = ({ product, ecomerce }) => {
               href={`/product/${product.product_slug}`}
               as={`/product/${product.product_slug}`}
             >
-              <a>{product.product_name}</a>
+              <a href={`/product/${product.product_slug}`}>{product.product_name}</a>
             </Link>
           </h4>
           <div
@@ -123,7 +123,7 @@ const ProductList = ({ product, ecomerce }) => {
                 placeholder={AddtoCart}
               />
             </div>
-            <a
+            <a href="#"
               className="ps-btn"
               onClick={() => {
                 handleAddItemToCart(

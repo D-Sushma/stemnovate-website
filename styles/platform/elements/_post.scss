@@ -50,7 +50,8 @@
     .ps-post__categories {
         background-color: transparent;
 
-        a, .div-link {
+        a,
+        .div-link {
             font-size: 12px;
             font-weight: 600;
             line-height: 1.2em;
@@ -62,6 +63,7 @@
             text-transform: uppercase;
             background-color: $color-1st;
         }
+
         .div-with-link {
             font-size: 12px;
             font-weight: 600;
@@ -195,6 +197,10 @@
 
     .ps-post__content {
         padding: 20px 0 0;
+    }
+
+    .ps-post__content1 {
+        padding: 10px 0 0;
     }
 
     &:hover {

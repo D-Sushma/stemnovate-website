@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react"
 import { connect } from "react-redux"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { baseUrl } from "~/repositories/Repository"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -13,12 +13,15 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
 
-const texicologyScreen = () => {
+const texicologyScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -37,18 +40,42 @@ const texicologyScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
+
   return (
     <>
       <Container
-        title="Animal-Health"
-        description="Stemnovate page on animal drug discovery, research and development. In vitro solution reducing animal testing."
+        title="Animal-Health | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+          <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="Animal-Health-Banner"
+              src={bgImage}
+              layout="fill"
+              priority={true}
+              objectFit="cover"
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />
               <h1 className="text-center  text-white ">
-                NEW INSIGHTS PLATFORM - ANIMAL HEALTH
+                {ProductData?.ProductData?.data[0]?.banner_content}
               </h1>
             </div>
           </div>
@@ -57,126 +84,130 @@ const texicologyScreen = () => {
             <div className="ps-about">
               <div className=" about-section ">
                 <div className="container">
-                  <div className="about-section">
-                    <div className="container">
-                      <section className="ps-section--block-grid ">
-                        <div className="ps-section__thumbnail ">
-                          <Link href="#">
-                            <div className="ps-section__image">
-                              <Image
-                                className="p-4 link-hover-thumb-shape"
-                                src="/static/img/applications/Neurons.jpg"
-                                alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
-                                width={1200}
-                                height={675}
-                              />
-                            </div>
-                          </Link>
-                        </div>
-                        <div className="ps-section__content">
-                          <div className="ps-section__desc ">
-                            <h2>PIONEERING ANIMAL STEM CELL TECHNOLOGY</h2>
-                            <h2>
-                              We are creating first in class models for dogs,
-                              cats, cows, horses and pigs.
-                            </h2>
-                            <p className=" " style={{ fontSize: "1.17em" }}>
-                              Animal research has been an essential contributor
-                              to improved human health. We owe several
-                              vaccinations and understanding of diseases and
-                              treatments to animal sacrifices. But there is an
-                              urgent need to reconsider and reduce animal
-                              testing.
-                            </p>
-                          </div>
-                        </div>
-                      </section>
+                  <section className="ps-section--block-grid pt-3">
+                    <div className="ps-section__thumbnail">
+                      <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
+                        <Image
+                          src="/static/img/applications/Neurons.svg"
+                          alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
+                          width={640}
+                          height={360}
+                          quality={80}
+                        />
+                      </div>
                     </div>
-                    <div className="container">
-                      <Link
-                        href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/"
-                        prefetch={false}
-                      >
+                    <div className="ps-section__content mt-0">
+                      <div className="ps-section__desc  mx-2">
+                        <h2>PIONEERING ANIMAL STEM CELL TECHNOLOGY</h2>
+                        <h2>
+                          We are creating first in class models for dogs, cats,
+                          cows, horses and pigs.
+                        </h2>
+                        <p>
+                          Animal research has been an essential contributor to
+                          improved human health. We owe several vaccinations and
+                          understanding of diseases and treatments to animal
+                          sacrifices. But there is an urgent need to reconsider
+                          and reduce animal testing.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section className="ps-section--block-grid pt-3">
+                    <div className="ps-section__thumbnail">
+                      <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
+                        <Link
+                          href="https://www.cambridgeindependent.co.uk/business/stemnovate-creates-neurons-from-skin-cells-of-dogs-cats-and-9283791/"
+                          prefetch={false}
+                        >
+                          <Image
+                            src="/static/img/applications/news.svg"
+                            alt="REDUCE"
+                            width={640}
+                            height={360}
+                            quality={80}
+                          />
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="ps-section__content mt-0">
+                      <div className="ps-section__desc  mx-2">
+                        <h2>Stemnovate in animal cell first</h2>
+                        <p>
+                          Stemnovate has created neurons from the skin cells of
+                          dogs, cats and horses in what is thought to be a world
+                          first. The Babraham Research Campus company revealed
+                          to the Cambridge Independent that it has been
+                          developing the models for more than a year and a half
+                          for projects with a leading pharmaceutical company.
+                          Its work on the animal cell models. and on human cell
+                          models, provide valuable alternatives to the testing
+                          of new drugs on live animals.
+                        </p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <div className="row">
+                    <div className="col-md-4 col-lg-4 col-sm-4 mb-4">
+                      <div className="ps-section__thumbnail plus-section-new">
                         <div className="ps-section__image">
                           <Image
-                            className="p-3 link-hover-thumb-shape"
-                            src="/static/img/applications/news.jpg"
+                            className="p-1 link-hover-thumb-shape"
+                            src="/static/img/animal-health/Reduce.svg"
                             alt="REDUCE"
-                            width={1302}
-                            height={722}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
+
+                          <div className="animal-h2-container">
+                            <h2>REDUCE</h2>
+                          </div>
                         </div>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <div className="ps-section__thumbnail plus-section-new">
-                        <Link href="#">
-                          <div className="ps-section__image">
-                            <Image
-                              className="p-3 link-hover-thumb-shape"
-                              src="/static/img/animal-health/Reduce.jpg"
-                              alt="REDUCE"
-                              width={1200}
-                              height={675}
-                            />
-
-                            <div style={{ width: "100%" }}>
-                              <h2 className="text-white text-center link-hover-thumb-shape">
-                                REDUCE
-                              </h2>
-                            </div>
-                          </div>
-                        </Link>
                       </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-4 mb-4">
                       <div className="ps-section__thumbnail plus-section-new">
-                        <Link href="#">
-                          <div className="ps-section__image">
-                            <Image
-                              className="p-3 link-hover-thumb-shape"
-                              src="/static/img/animal-health/Replace.jpg"
-                              alt="REPLACE"
-                              width={1200}
-                              height={675}
-                            />
+                        <div className="ps-section__image">
+                          <Image
+                            className="p-1 link-hover-thumb-shape"
+                            src="/static/img/animal-health/Replace.svg"
+                            alt="REPLACE"
+                            width={640}
+                            height={360}
+                            quality={80}
+                          />
 
-                            <div style={{ width: "100%" }}>
-                              <h2 className="text-white text-center link-hover-thumb-shape">
-                                REPLACE
-                              </h2>
-                            </div>
+                          <div className="animal-h2-container">
+                            <h2>REPLACE</h2>
                           </div>
-                        </Link>
+                        </div>
                       </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 col-lg-4 col-sm-4">
                       <div className="ps-section__thumbnail plus-section-new">
-                        <Link href="#">
-                          <div className="ps-section__image">
-                            <Image
-                              className="p-3 link-hover-thumb-shape"
-                              src="/static/img/animal-health/Refine.jpg"
-                              alt="REFINE"
-                              width={1200}
-                              height={675}
-                            />
+                        <div className="ps-section__image">
+                          <Image
+                            className="p-1 link-hover-thumb-shape"
+                            src="/static/img/animal-health/Refine.svg"
+                            alt="REFINE"
+                            width={640}
+                            height={360}
+                            quality={80}
+                          />
 
-                            <div style={{ width: "100%" }}>
-                              <h2 className="text-white text-center link-hover-thumb-shape">
-                                REFINE
-                              </h2>
-                            </div>
+                          <div className="animal-h2-container">
+                            <h2>REFINE</h2>
                           </div>
-                        </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div className="center-box">
-                    <div className="vertical-center mt-5">
-                      <p className=" " style={{ fontSize: "1.17em" }}>
+                    <div className="vertical-center mt-5 animal-text">
+                      <p>
                         <b>
                           IN 2020 IN GREAT BRITAIN, 2.88 MILLION PROCEDURES
                           INVOLVED LIVING ANIMALS.
@@ -192,30 +223,26 @@ const texicologyScreen = () => {
 
               <div className="about-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
-                    <div className="ps-section__thumbnail plus-section-new">
-                      <Link href="#">
-                        <div className="ps-section__image">
-                          <Image
-                            className="p-4 link-hover-thumb-shape"
-                            src="/static/img/animal-health/Multispecies-stem.jpg"
-                            alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
-                            width={1200}
-                            height={675}
-                          />
-                          <div style={{ width: "100%" }}>
-                            <h2 className="text-white text-center link-hover-thumb-shape">
-                              MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS,
-                              LIVER & HEART CELLS
-                            </h2>
-                          </div>
-                        </div>
-                      </Link>
+                  <section className="ps-section--block-grid pt-3">
+                    <div className=" mx-2">
+                      <div className="ps-section__image link-hover-thumb-shape plus-section-new-animal">
+                        <Image className="zoom-in"
+                          src="/static/img/animal-health/Multispecies-stem.svg"
+                          alt="MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS, LIVER & HEART CELLS"
+                          width={640}
+                          height={360}
+                          quality={80}
+                        />
+                        <h2 className="text-white text-center link-hover-thumb-shape">
+                          MULTISPECIES STEM CELL DIFFERENTIATION TO NEURONS,
+                          LIVER & HEART CELLS
+                        </h2>
+                      </div>
                     </div>
-                    <div className="ps-section__content">
-                      <div className="ps-section__desc ">
+                    <div>
+                      <div className="ps-section__desc_animal mx-2">
                         <h2>REDUCE</h2>
-                        <p className="">
+                        <p>
                           Our team has over ten years of experience creating
                           unique stem cell models that can reduce animal
                           testing. In 2014 the first functional neurons were
@@ -251,14 +278,11 @@ const texicologyScreen = () => {
                       </div>
                     </div>
                   </section>
-                </div>
-              </div>
-              <div className="about-section">
-                <div className="container">
-                  <section className="ps-section--block-grid ">
-                    <div className="ps-section__content">
-                      <div className="ps-section__desc ">
-                        <h2>REFINE</h2>
+
+                  <section className="ps-section--block-grid mt-4 pt-3">
+                  <div>
+                      <div className="ps-section__desc_animal mx-2 ">
+                      <h2>REFINE</h2>
                         <p className="">
                           Stem cells hold great potential for cellular
                           therapies, drug discovery and disease modelling.
@@ -276,55 +300,42 @@ const texicologyScreen = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="ps-section__thumbnail plus-section-new">
-                      <Link href="#">
-                        <div className="ps-section__image">
-                          <Image
-                            className="p-4 link-hover-thumb-shape"
-                            src="/static/img/animal-health/Refine-section.jpg"
-                            alt="BIOINFORMATICS AND ANALYSIS OF PLURIPOTENCY-ASSOCIATED BIOMARKERS"
-                            width={1200}
-                            height={675}
-                          />
-
-                          <div style={{ width: "100%" }}>
-                            <h2 className="text-white text-center link-hover-thumb-shape">
-                              BIOINFORMATICS AND ANALYSIS OF
-                              PLURIPOTENCY-ASSOCIATED BIOMARKERS
-                            </h2>
-                          </div>
-                        </div>
-                      </Link>
+                    <div className="mx-2 my-2">
+                      <div className="ps-section__image link-hover-thumb-shape plus-section-new-animal">
+                      <Image className="zoom-in"
+                          src="/static/img/animal-health/Refine-section.svg"
+                          alt="BIOINFORMATICS AND ANALYSIS OF PLURIPOTENCY-ASSOCIATED BIOMARKERS"
+                          width={640}
+                          height={360}
+                          quality={80}
+                        />
+                        <h2 className="text-white text-center link-hover-thumb-shape">
+                        BIOINFORMATICS AND ANALYSIS OF
+                            PLURIPOTENCY-ASSOCIATED BIOMARKERS
+                        </h2>
+                      </div>
                     </div>
                   </section>
-                </div>
-              </div>
-              <div className="about-section">
-                <div className="container">
-                  <section className="ps-section--block-grid ">
-                    <div className="ps-section__thumbnail plus-section-new">
-                      <Link href="#">
-                        <div className="ps-section__image">
-                          <Image
-                            className="p-4 link-hover-thumb-shape"
-                            src="/static/img/animal-health/Functionality-assessment-through.jpg"
-                            alt="FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE ARRAY OR CHIP STUDY"
-                            width={1200}
-                            height={675}
-                          />
 
-                          <div style={{ width: "100%" }}>
-                            <h2 className="text-white text-center link-hover-thumb-shape">
-                              FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE
-                              ARRAY OR CHIP STUDY
-                            </h2>
-                          </div>
-                        </div>
-                      </Link>
+                  <section className="ps-section--block-grid mt-4  pt-3">
+                    <div className=" mx-2">
+                      <div className="ps-section__image link-hover-thumb-shape plus-section-new-animal">
+                      <Image className="zoom-in"
+                          src="/static/img/animal-health/Functionality-assessment-through.svg"
+                          alt="FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE ARRAY OR CHIP STUDY"
+                          width={640}
+                          height={360}
+                          quality={80}
+                        />
+                        <h2 className="text-white text-center link-hover-thumb-shape">
+                        FUNCTIONALITY ASSESSMENT THROUGH MICROELECTRODE
+                            ARRAY OR CHIP STUDY
+                        </h2>
+                      </div>
                     </div>
-                    <div className="ps-section__content">
-                      <div className="ps-section__desc ">
-                        <h2>REPLACE</h2>
+                    <div>
+                      <div className="ps-section__desc_animal  mx-2  my-2">
+                      <h2>REPLACE</h2>
                         <p className="">
                           Animal models often fail to predict human responses
                           due to interspecies differences. However, as there is
@@ -355,6 +366,7 @@ const texicologyScreen = () => {
                     </div>
                   </section>
                 </div>
+                
               </div>
 
               <Subscribe />
@@ -366,5 +378,35 @@ const texicologyScreen = () => {
   )
 }
 
-// export default texicologyScreen;
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Animal Health"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return {
+    props: {
+      ProductData
+    }
+  }
+}
+
 export default connect((state) => state)(texicologyScreen)

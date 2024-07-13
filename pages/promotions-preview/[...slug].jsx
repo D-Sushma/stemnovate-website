@@ -26,8 +26,7 @@ const Subscribe = dynamic(
 
 import { baseUrl } from "~/repositories/Repository"
 
-const ProductScreen = ({ promotionDetails }) => {
-    console.log("promotionDetails", promotionDetails)
+const ProductScreen = ({ promotionDetails, promid }) => {
   const [promotions, setPromotions] = useState([])
 
   useEffect(() => {
@@ -35,35 +34,36 @@ const ProductScreen = ({ promotionDetails }) => {
       setPromotions(promotionDetails.data)
     }
   }, [])
-
-  const promotion_banner_id = promotionDetails.id
-  console.log("promotion_banner_id----",promotion_banner_id)
+  
+  let home_banner_id = promid
   var ogImage = ""
-  var initialSlide = 0;  
-  var banner_imag_data =promotionDetails?.data;
+  var initialSlide = 0;
+  var banner_imag_data = promotionDetails?.data;
   if(banner_imag_data.length>0){
-    var newArr = banner_imag_data.map(function(val, index){
-        if(val.id==promotion_banner_id){
-            initialSlide = index
-            var bn_img = val.shareimage
-            ogImage = `${process.env.AWS_S3BUCKET_URL}${bn_img}`
-         } 
+    var newArr = banner_imag_data.map(function(val, index){ 
+        if(val.id==home_banner_id){
+          initialSlide = index
+          var bn_img = val.shareimage
+          if(bn_img !== null){ 
+              ogImage = `${process.env.AWS_S3BUCKET_URL}${bn_img}`
+          }
+        }
     })
   }
 
   const carouselSetting = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    fade: true,
-    autoplay: false,
-    dots: true,
-    initialSlide: initialSlide,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
-  }
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true,
+  fade: true,
+  autoplay: true,
+  dots: false,
+  initialSlide: initialSlide,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />
+}
 
   return (
     <Container
@@ -121,11 +121,7 @@ const ProductScreen = ({ promotionDetails }) => {
                                       className="ps-banner__image"
                                       src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                                       alt="alt"
-                                      width={1000}
-                                      height={1000}
                                       layout="fill"
-                                      placeholder="blur"
-                                      blurDataURL="/static/image/blurred.png"
                                     />
                                   </div>
                                 </div>
@@ -157,8 +153,6 @@ const ProductScreen = ({ promotionDetails }) => {
                                       alt="alt"
                                       width={1200}
                                       height={675}
-                                      placeholder="blur"
-                                      blurDataURL="/static/image/blurred.png"
                                     />
                                     <div className="card-body p-0 mb-3">
                                       <h2 className="card-title mt-3">
@@ -205,7 +199,8 @@ const ProductScreen = ({ promotionDetails }) => {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
+  var promid = query.slug
   var promotionDetails = []
   var requestOptions = {
     method: "GET"
@@ -222,8 +217,7 @@ export async function getServerSideProps() {
     promotionDetails = []
   }
 
-  // Pass data to the page via props
-  return { props: { promotionDetails } }
+  return { props: { promotionDetails, promid } }
 }
 
 export default ProductScreen

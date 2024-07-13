@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { calculateCartQuantity } from "~/utilities/ecomerce-helpers"
 import { Result } from "antd"
 import dynamic from "next/dynamic"
-import useEcomerce from "~/hooks/useEcomerce";
+import useEcomerce from "~/hooks/useEcomerce"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -48,7 +48,6 @@ const ShoppingCart = ({ ecomerce }) => {
     }
   }, [ecomerce])
 
-  // Views
   let cartContentView, totalView
   if (products && products.length > 0) {
     totalView = calculateCartQuantity(products)
@@ -104,7 +103,7 @@ const ShoppingCart = ({ ecomerce }) => {
               {totalView ? <sup>({totalView})</sup> : ""}
             </h1>
           </div>
-          <div className="ps-page__content mb-5">{cartContentView}</div>
+          <div className="ps-page__content">{cartContentView}</div>
         </div>
       </div>
     </Container>

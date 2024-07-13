@@ -25,7 +25,6 @@ const breadcrumb = [
 
 const TermsAndCondition = (props) => {
   const { termsData } = props
-  console.log("termsData", termsData)
   return (
     <Container title="Terms Of Use">
       <main className="ps-page ps-page--inner">
@@ -252,7 +251,6 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  // // Pass data to the page via props
   return { props: { termsData } }
 }
 

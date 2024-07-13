@@ -43,7 +43,8 @@ const texicologyScreen = () => {
   return (
     <>
       <Container
-        title="Stemnovate | Diagnostics"
+        title="Stemnovate | Diagnostics | Your Drug Discovery Platform"
+        ogimg={`https://stemnovate.co.uk/static/img/applications/Rapid--Diagnostics.jpg`}
         description="Stemnovate page for  diagnostic products and reserach and development."
       >
         <main className="ps-page ps-page--inner">
@@ -74,9 +75,9 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container  mx-2">
                           <Image
-                            src="/static/img/applications/Rapid--Diagnostics.jpg"
+                            src="/static/img/applications/Rapid-01.svg"
                             alt="RAPID DIAGNOSTICS"
                             width={1200}
                             height={675}
@@ -120,7 +121,7 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container  mx-2">
                           <Image
                             src="/static/img/applications/Early-Diagnosis-of-heart-conditions.jpg"
                             alt="EARLY DIAGNOSIS OF HEART CONDITIONS<"
@@ -167,7 +168,7 @@ const texicologyScreen = () => {
                   <section className="ps-section--block-grid ">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                           <Image
                             src="/static/img/applications/New-Diagnostics-Assays.jpg"
                             alt="NEW DIAGNOSTICS ASSAYS"
@@ -207,14 +208,14 @@ const texicologyScreen = () => {
                 <div className="container">
                   <h2>OUR PARTNERSHIPS</h2>
                   <section className="ps-section--block-grid ">
-                    <div className="ps-section__thumbnail">
+                    <div className="ps-section__thumbnail image-box-container mx-2">
                       <a
                         rel="noopener noreferrer"
                         target={"_blank"}
                         title="Click here to read more"
                         href="https://www.npl.co.uk/news/m4r-supports-development-of-rapid-covid-test"
                       >
-                        <Image
+                        <Image className="mt-2"
                           src="/static/img/applications/our-partner.jpeg"
                           alt="m4r-supports-development-of-rapid-covid-test"
                           width={1000}
@@ -222,7 +223,7 @@ const texicologyScreen = () => {
                         />
                       </a>
                     </div>
-                    <div className="ps-section__thumbnail">
+                    <div className="ps-section__thumbnail image-box-container mx-2 ">
                       <a
                         rel="noopener noreferrer"
                         target={"_blank"}
@@ -255,5 +256,4 @@ const texicologyScreen = () => {
   )
 }
 
-// export default texicologyScreen;
 export default connect((state) => state)(texicologyScreen)

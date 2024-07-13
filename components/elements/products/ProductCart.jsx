@@ -7,12 +7,12 @@ const ProductCart = ({ product }) => {
         <div className="ps-product--cart">
             <div className="ps-product__thumbnail">
                 <Link href="/product/[id]" as={`/product/${product.id}`}>
-                    <a>{imageThumbnail}</a>
+                    <a href="/product/[id]">{imageThumbnail}</a>
                 </Link>
             </div>
             <div className="ps-product__content">
                 <Link href="/product/[id]" as={`/product/${product.id}`}>
-                    <a className="ps-product__title">{product.name}</a>
+                    <a href="/product/[id]" className="ps-product__title">{product.name}</a>
                 </Link>
             </div>
         </div>

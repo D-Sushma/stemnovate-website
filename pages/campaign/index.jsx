@@ -22,7 +22,6 @@ const CampaignPage = ({ ProductData }) => {
   const [breadcrumb, setbreadcrumb] = useState([])
   useEffect(() => {
     getcategoryListBySlug()
-    console.log("ProductData", ProductData)
   }, [])
 
   const getcategoryListBySlug = async () => {
@@ -39,7 +38,6 @@ const CampaignPage = ({ ProductData }) => {
         url: "/campaign"
       }
     ]
-    console.log(campaignID, "campaignID")
     var urldata = "/campaign"
     for (let index = 0; index < campaignID?.length; index++) {
       const element = campaignID[index]
@@ -52,7 +50,6 @@ const CampaignPage = ({ ProductData }) => {
         id: 3 + index,
         text: element
       }
-      console.log(bdc)
       newbreadcrumb.push(bdc)
     }
     setbreadcrumb(newbreadcrumb)
@@ -137,7 +134,6 @@ export async function getServerSideProps() {
     ProductData = []
   }
 
-  // // Pass data to the page via props
   return { props: { ProductData } }
 }
 

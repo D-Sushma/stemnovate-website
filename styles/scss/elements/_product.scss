@@ -21,7 +21,7 @@
     }
 
     &.ps-badge--sold {
-        background-color: rgba(214,216,219,1);
+        background-color: rgba(214, 216, 219, 1);
     }
 
     &.ps-badge--outstock {
@@ -201,10 +201,12 @@
     &__desc {
         display: none;
         margin-bottom: 6px;
+
         li {
             font-size: 14px;
             color: $color-1st;
             padding: 3px 0;
+
             &::before {
                 content: '\f00c';
                 color: $color-success;
@@ -221,6 +223,7 @@
     .ps-product__quantity {
         min-width: 172px;
         display: none;
+
         .number-input {
             background-color: $color-border;
             display: flex;
@@ -228,11 +231,13 @@
             border-radius: 2px;
             justify-content: space-between;
             border-radius: 40px;
+
             input[type="number"] {
                 -webkit-appearance: textfield;
                 -moz-appearance: textfield;
                 appearance: textfield;
             }
+
             input[type=number] {
                 text-align: center;
                 max-width: 50%;
@@ -240,14 +245,17 @@
                 color: $color-1st;
                 flex-grow: 1;
                 background-color: transparent;
+
                 &:focus {
                     box-shadow: none;
                 }
             }
+
             input[type=number]::-webkit-inner-spin-button,
             input[type=number]::-webkit-outer-spin-button {
                 -webkit-appearance: none;
             }
+
             button {
                 background-color: transparent;
                 border: none;
@@ -257,6 +265,7 @@
                 font-size: 13px;
                 padding: 15px;
                 cursor: pointer;
+
                 i {
                     color: $color-contrast;
                     font-weight: 600;
@@ -306,6 +315,7 @@
     .ps-product__thumbnail {
         width: auto;
         padding: 0;
+
         .ps-product__image {
             display: block;
 
@@ -341,6 +351,7 @@
         display: block;
         transition: 600ms ease 0s;
         border-radius: 4px;
+
         figure {
             position: relative;
             z-index: 2;
@@ -372,6 +383,7 @@
                     &:first-child {
                         opacity: 0;
                     }
+
                     &:last-child {
                         opacity: 1;
                     }
@@ -390,13 +402,16 @@
 
         .ps-product__item {
             margin: 0 4px 10px;
+
             &:first-child {
                 margin-left: 0;
             }
         }
     }
+
     .ps-product__cart {
         display: none;
+
         .ps-btn {
             text-transform: initial;
             padding: 4px 15px;
@@ -418,6 +433,7 @@
         padding-right: 50px;
         border-top: 1px solid $color-border;
         color: $color-contrast;
+
         span {
             min-width: 38px;
             height: 38px;
@@ -518,6 +534,7 @@
     .ps-product__badge {
         position: initial;
         margin-bottom: 20px;
+
         .ps-badge {
             display: inline-block;
             font-weight: 600;
@@ -582,6 +599,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+
         .ps-product__review {
             line-height: 18px;
             margin-left: 10px;
@@ -628,6 +646,7 @@
         padding: 11px 0 0;
         list-style: none;
         border-top: 1px solid $color-border;
+
         li {
             font-size: 14px;
             color: $color-1st;
@@ -659,6 +678,7 @@
 
         .ps-product__quantity {
             width: 100%;
+
             .number-input {
                 background-color: white;
             }
@@ -674,7 +694,7 @@
 
     .ps-product__group {
         margin-bottom: 10px;
-        
+
         .ps-select--feature {
             a {
                 display: inline-block;
@@ -711,6 +731,7 @@
 
             &.active {
                 position: relative;
+
                 &::before {
                     content: '\f00c';
                     position: absolute;
@@ -743,7 +764,7 @@
             color: $color-1st;
             font-size: 14px;
             padding: 5px 20px 5px 10px;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='https://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 10px center;
             appearance: none;
@@ -769,11 +790,13 @@
             border-radius: 2px;
             justify-content: space-between;
             border-radius: 40px;
+
             input[type="number"] {
                 -webkit-appearance: textfield;
                 -moz-appearance: textfield;
                 appearance: textfield;
             }
+
             input[type=number] {
                 text-align: center;
                 max-width: 50%;
@@ -781,14 +804,17 @@
                 color: $color-1st;
                 flex-grow: 1;
                 background-color: transparent;
+
                 &:focus {
                     box-shadow: none;
                 }
             }
+
             input[type=number]::-webkit-inner-spin-button,
             input[type=number]::-webkit-outer-spin-button {
                 -webkit-appearance: none;
             }
+
             button {
                 background-color: transparent;
                 border: none;
@@ -798,6 +824,7 @@
                 font-size: 13px;
                 padding: 16px;
                 cursor: pointer;
+
                 i {
                     color: $color-contrast;
                     font-weight: 600;
@@ -831,13 +858,15 @@
                 }
             }
         }
-       
-        .ps-product__variations, .ps-product__quantity {
+
+        .ps-product__variations,
+        .ps-product__quantity {
             display: inline-block;
         }
 
         .ps-product__quantity {
             padding-bottom: 0;
+
             .ps-btn {
                 width: 200px;
                 margin-bottom: 20px;
@@ -889,6 +918,7 @@
                 font-size: 16px;
                 color: $color-1st;
                 padding: 8px 0;
+
                 span {
                     font-weight: 500;
                 }
@@ -902,6 +932,7 @@
 
         .ps-item {
             margin-bottom: 50px;
+
             img {
                 width: 100%;
                 border-radius: 4px;
@@ -921,8 +952,10 @@
     .ps-tab-list {
         border: none;
         margin-bottom: 10px;
+
         li {
             margin: 0 35px 20px 0;
+
             a {
                 font-size: 22px;
                 line-height: 26px;
@@ -942,7 +975,8 @@
                     bottom: 0;
                 }
 
-                &:hover, &.active {
+                &:hover,
+                &.active {
                     &::after {
                         width: 100%;
                     }
@@ -960,6 +994,7 @@
             margin: 0 0 15px 0;
             text-align: center;
             font-weight: 600;
+
             span {
                 font-size: 30px;
                 line-height: 36px;
@@ -981,6 +1016,7 @@
 
     .ps-product__tabreview {
         margin-bottom: 60px;
+
         .ps-review--product {
             &:not(:last-child) {
                 border-bottom: none;
@@ -1006,6 +1042,7 @@
         .ps-product__feature {
             margin-top: 0;
         }
+
         .ps-document {
             border: 1px solid $color-border;
             padding: 20px;
@@ -1025,6 +1062,7 @@
                 flex-direction: row-reverse;
                 position: relative;
             }
+
             .ps-document__thumbnail {
                 position: absolute;
                 right: -4px;
@@ -1040,6 +1078,7 @@
                     display: block;
                 }
             }
+
             .col-12:not(:last-child) {
                 .ps-document__review {
                     border-right: 1px solid $color-border;
@@ -1061,6 +1100,7 @@
                     margin-bottom: 0;
                     margin-right: 15px;
                 }
+
                 .number-input {
                     max-width: 150px;
                     margin-bottom: 0;
@@ -1103,6 +1143,7 @@
         .ps-product__del {
             font-size: 22px;
         }
+
         .ps-tab-list {
             li {
                 a {
@@ -1114,10 +1155,12 @@
 
         .ps-document {
             padding: 50px;
+
             .ps-document__title {
                 font-size: 50px;
                 line-height: 60px;
             }
+
             .ps-document__subtitle {
                 font-size: 24px;
             }
@@ -1134,6 +1177,7 @@
 
             .ps-document__review {
                 font-size: 16px;
+
                 span {
                     font-size: 50px;
                     line-height: 60px;
@@ -1145,6 +1189,7 @@
 
 .ps-product--gallery {
     margin-bottom: 80px;
+
     .ps-product__thumbnail {
         display: none;
     }
@@ -1209,6 +1254,7 @@
 
 .ps-product--extension {
     margin-bottom: 60px;
+
     .ps-product__delivery {
         background-color: $color-border;
         padding: 40px;
@@ -1220,6 +1266,7 @@
         color: $color-1st;
         font-weight: 500;
         font-size: 14px;
+
         &:not(:last-child) {
             margin-bottom: 20px;
         }
@@ -1282,7 +1329,8 @@
             }
         }
 
-        .ps-product__delivery, .ps-product__payment {
+        .ps-product__delivery,
+        .ps-product__payment {
             padding: 20px;
         }
 
@@ -1297,7 +1345,8 @@
 
     @media (min-width: 1280px) {
 
-        .ps-product__delivery, .ps-product__payment {
+        .ps-product__delivery,
+        .ps-product__payment {
             padding: 40px;
         }
     }
@@ -1394,6 +1443,7 @@
         color: $color-1st;
         line-height: 20px;
         margin-bottom: 5px;
+
         &:hover {
             color: $color-warning;
         }
@@ -1404,7 +1454,8 @@
         font-size: 18px;
         font-weight: 600;
     }
-    .ps-product__is-price{
+
+    .ps-product__is-price {
         color: $color-text;
         font-size: 14px;
         text-decoration: line-through;
@@ -1416,7 +1467,7 @@
         color: $color-1st;
         height: fit-content;
         margin-left: 10px;
-        
+
         i {
             font-weight: bold;
         }
@@ -1428,6 +1479,7 @@
 
     .ps-product__thumbnail {
         width: 100px;
+
         img {
             max-width: 60px;
         }
@@ -1454,6 +1506,7 @@
         padding: 15px;
         margin-bottom: 0;
     }
+
     .ps-product__image {
         display: block;
         width: 100%;
@@ -1470,6 +1523,7 @@
 
             img {
                 width: 100%;
+
                 &:last-child {
                     position: absolute;
                     right: 0;
@@ -1511,6 +1565,7 @@
     .ps-product__title {
         margin-bottom: 15px;
         line-height: 24px;
+
         a {
             font-weight: 600;
         }
@@ -1545,11 +1600,13 @@
             justify-content: space-between;
             border-radius: 40px;
             margin-bottom: 10px;
+
             input[type="number"] {
                 -webkit-appearance: textfield;
                 -moz-appearance: textfield;
                 appearance: textfield;
             }
+
             input[type=number] {
                 text-align: center;
                 max-width: 50%;
@@ -1557,14 +1614,17 @@
                 color: $color-1st;
                 flex-grow: 1;
                 background-color: transparent;
+
                 &:focus {
                     box-shadow: none;
                 }
             }
+
             input[type=number]::-webkit-inner-spin-button,
             input[type=number]::-webkit-outer-spin-button {
                 -webkit-appearance: none;
             }
+
             button {
                 background-color: transparent;
                 border: none;
@@ -1574,6 +1634,7 @@
                 font-size: 16px;
                 padding: 13px 10px;
                 cursor: pointer;
+
                 i {
                     color: $color-contrast;
                     font-weight: 600;
@@ -1691,6 +1752,7 @@
         transition: 600ms ease 0s;
         max-width: 90px;
         margin: auto;
+
         figure {
             position: relative;
             z-index: 2;
@@ -1719,12 +1781,14 @@
     .ps-product__thumbnail {
         border-top: 1px solid $color-border;
         padding: 15px 0;
+
         &:hover {
             figure {
                 img {
                     &:first-child {
                         opacity: 0;
                     }
+
                     &:last-child {
                         opacity: 1;
                     }
@@ -1736,6 +1800,7 @@
     .ps-product__remove {
         text-align: right;
         padding-bottom: 12px;
+
         a {
             display: inline-block;
             width: 25px;
@@ -1808,6 +1873,7 @@
 
     .ps-product__quantity {
         display: none;
+
         .ps-product__value {
             font-size: 18px;
             color: $color-1st;
@@ -1824,5 +1890,3 @@
         }
     }
 }
-
-

@@ -68,8 +68,9 @@ We are StemnovateTM.`;
                 <meta property="og:url" content={canonicalURL} />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={titleView} />
-                <meta property="og:image" content={ogimg ? ogimg : "https://stemnovate.co.uk/static/img/Home/new-web-site.jpg"} />
-                <meta property="og:image:secure_url" content={ogimg ? ogimg : "https://stemnovate.co.uk/static/img/Home/new-web-site.jpg"} />
+                <meta property="og:image" content={ogimg ? ogimg : "https://stemnovate.co.uk/static/home-images/Drug-Discovery-Platform.jpg"} />
+                <meta property="og:description" content={description ? description : defaultDescription} />
+                <meta property="og:image:secure_url" content={ogimg ? ogimg : "https://stemnovate.co.uk/static/home-images/Drug-Discovery-Platform.jpg"} />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="675" />
                 {/* <!-- Twitter Meta Tags --> */}
@@ -77,7 +78,7 @@ We are StemnovateTM.`;
                 <meta property="twitter:domain" content="stemnovate.co.uk" />
                 <meta name="twitter:title" content={titleView} />
                 <meta name="twitter:description" content={description ? description : defaultDescription} />
-                <meta name="twitter:image" content={ogimg ? ogimg : "https://stemnovate.co.uk/static/img/Home/new-web-site.jpg"} />
+                <meta name="twitter:image" content={ogimg ? ogimg : "https://stemnovate.co.uk/static/home-images/Drug-Discovery-Platform.jpg"} />
                 {/* canonical */}
                 <link rel="canonical" href={cronical ? site + cronical : canonicalURL} />
             </Head>

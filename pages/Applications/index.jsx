@@ -1,6 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react"
+import { connect } from "react-redux"
+import PropTypes from "prop-types"
+import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
+import { baseUrl } from "~/repositories/Repository"
 import dynamic from "next/dynamic"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
@@ -12,14 +15,13 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
-const ProductList = dynamic(
-  () => import("~/components/productList/productList"),
-  { loading: () => <p>Loading...</p> }
-)
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 
 const breadcrumb = [
   {
@@ -34,232 +36,288 @@ const breadcrumb = [
   }
 ]
 
-const Applications = () => {
+function Applications(ProductData) {
+  var text_human =
+    "Stemnovate core value is to advance science for the benefit of humanity. The subscription to our platform creates a unique partnership between the customers and us, where they benefit from services tailored to their needs. Here you have access to karyotyping, genotyping and R&D platforms."
+
+  var text_animal =
+    "Our team has over ten years of experience creating unique stem cell models that can reduce animal testing. In 2014 the first functional neurons were reported from horses by Sharma et al. Now, our CEO Dr Ruchi leads an industrial partnership creating multi-species neuronal models."
+
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <Container
-      title="Applications"
-      description="Stemnovate page on disesae modelling, in vitro assays and new innovations for liver, heart and brain."
+      title="Applications | Your Drug Discovery Platform"
+      ogimg={ogImage}
+      description={ogDesc}
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+          <BannerImage
+            alt="application-banner-image"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1 className="text-center  text-white p-2">Applications</h1>
+            <h1 className="text-center  text-white p-2">
+              {" "}
+              {ProductData?.ProductData?.data[0]?.banner_content}
+            </h1>
           </div>
         </div>
+
         <div className="ps-page__content">
           <div className="ps-about">
-            <div className="about-section">
+            <div className="category-section p-4">
               <div className="container">
-                <p className="text-center">
-                  Stemnovate aims to fast translate research to clinical
-                  applications. Our iPSCs represent valuable tools for drug
-                  discovery, disease modeling, and investigation into the
-                  underlying biology of cells. Differentiated PSCs can be used
-                  to assess cardiac and hepatic toxicity, two major causes of
-                  pharmaceutical-associated morbidity and mortality leading to
-                  loss of productivity in the drug development pipeline.
-                </p>
-              </div>
-            </div>
-            <div className="bg-02-section">
-              <div className="container">
-                <section className="ps-section--block-grid ">
-                  <div className="ps-section__thumbnail">
-                    <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                <div className="about-section py-0">
+                  <div className="row d-flex justify-content-around align-self-center mt-5">
+                    <div className="col-md-5 col-sm-5 col-12 d-flex flex-column flex-grow-1 p-4 image-box-container-application ">
+                      <div className="align-items-center d-flex flex-column flex-grow-1 rounded-lg ">
                         <Image
-                          src="/static/img/applications/Drug-Discovery.jpg"
+                          src="/static/img/applications/Drug-Discovery.svg"
+                          className="rounded-lg zoom-in"
                           alt="Drug Discovery Platform"
-                          width={1200}
-                          height={675}
+                          // width={1000}
+                          // height={563}
+                          width={540}
+                          height={304}
+                          priority={true}
+                          quality={80}
                         />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="ps-section__content">
-                    <div className="ps-section__desc ">
-                      <h2 className="text-white font-weight-bold">
-                        Drug Discovery Platform
-                      </h2>
-                      <p className="text-white">
-                        Drug-induced liver injury is the leading cause of acute
-                        liver failure and is an important safety issue when new
-                        drugs undergo clinical trials. Liver cells do not
-                        proliferate outside the body and are a limited resource.
-                        <br />
-                        We provide liver modelling for drug discovery, and with
-                        that, we are creating heart and brain cells in the
-                        laboratory. These novel models have the potential to
-                        predict human drug response and ensure patient safety...{" "}
-                        <Link
-                          href="/Applications/Drug-Discovery-Platform"
-                          prefetch={false}
-                        >
-                          <span className="text-white font-weight-bold span-with-link">
-                            Discover More
-                          </span>
-                        </Link>
-                      </p>
-                      <p className="">
-                        <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">
-                            Request A Quote
-                          </button>
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-            <div className="about-section">
-              <div className="container">
-                <section className="ps-section--block-grid">
-                  <div className="ps-section__thumbnail">
-                    <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Disease-modelling.jpg"
-                          alt="Disease Modelling"
-                          width={1200}
-                          height={675}
-                        />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="ps-section__content">
-                    <div className="ps-section__desc">
-                      {" "}
-                      <h2 className="  font-weight-bold">Disease Modelling</h2>
-                      <p>
-                        Non-communicable diseases such as liver and
-                        cardiovascular diseases, neuronal degeneration, and
-                        cancer kill 41 million people each year; this reflects
-                        71% of all deaths worldwide. We provide innovative
-                        solutions for discovering new medicines and therapies
-                        for non-communicable diseases....{" "}
-                        <Link
-                          href="/Applications/Disease-Modelling"
-                          prefetch={false}
-                        >
-                          <span className=" font-weight-bold span-with-link">
-                            Read More
-                          </span>
-                        </Link>
-                      </p>
-                      <p className="">
-                        <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">
-                            Request A Quote
-                          </button>
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-            <div className="bg-02-section">
-              <div className="container">
-                <section className="ps-section--block-grid">
-                  <div className="ps-section__thumbnail">
-                    <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/Diagnostics.jpg"
-                          alt="Diagnostics"
-                          width={1200}
-                          height={675}
-                        />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="ps-section__content">
-                    <div className="ps-section__desc ">
-                      <h2 className="text-white font-weight-bold">
-                        Diagnostics
-                      </h2>
+                        <div className="card-body d-flex flex-column flex-grow-1 p-2 container-fluid ">
+                          <div className="pt-3">
+                            <h3 className="h3 text-dark">
+                              <b>Human</b>
+                            </h3>
+                            <p>{text_human?.substring(0, 150) + "..."}</p>
 
-                      <p className="text-white">
-                        At Stemnovate, we integrate advanced bioinformatics with
-                        our cellular platform to identify biomarkers that help
-                        diagnose liver and heart diseases early. During COVID,
-                        we also developed new technology and assays for rapid
-                        diagnostic ....{" "}
-                        <Link href="/Applications/Diagnostics" prefetch={false}>
-                          <span className="text-white font-weight-bold span-with-link">
-                            View More
-                          </span>
-                        </Link>
-                      </p>
-                      <p className="">
-                        <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">
-                            Request A Quote
-                          </button>
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-            <div className="about-section">
-              <div className="container">
-                <section className="ps-section--block-grid ">
-                  <div className="ps-section__thumbnail">
-                    <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/applications/DNA-synthesis.jpg"
-                          alt="DNA Synthesis"
-                          width={1200}
-                          height={675}
-                        />
+                            <Link
+                              href="/Applications/Drug-Discovery-Platform"
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get More Details <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
                       </div>
-                    </Link>
-                  </div>
-                  <div className="ps-section__content">
-                    <div className="ps-section__desc">
-                      {" "}
-                      <h2 className="  font-weight-bold">DNA Synthesis</h2>
-                      <p>
-                        Stemnovate´s novel enzymatic DNA synthesis technology
-                        improves productivity and costs to enable numerous novel
-                        and exciting applications. This game-changing technology
-                        has the potential for DNA data storage and new
-                        therapeutics developing in the pharmaceutical sector,
-                        e.g. antibody research, drug bio-production and RNAi
-                        based therapeutics.....{" "}
-                        <Link
-                          href="/Applications/DNA-Synthesis"
-                          prefetch={false}
-                        >
-                          <span className=" font-weight-bold span-with-link">
-                            Read More
-                          </span>
-                        </Link>
-                      </p>
-                      <p className="">
-                        <Link href="/contact-us" prefetch={false}>
-                          <button className="btn btn-lg button-orange text-white m-4 m-5">
-                            Request A Quote
-                          </button>
-                        </Link>
-                      </p>
+                    </div>
+
+                    <div className=" col-md-5 col-sm-5 col-12 d-flex flex-column p-4 flex-grow-1 image-box-container-application ">
+                      <div className="rounded-lg align-items-center  rounded-lg">
+                        <Image
+                          src="/static/img/animal-health/Refine-section.svg"
+                          className="rounded-lg zoom-in"
+                          alt="Animal"
+                          // width={1000}
+                          // height={563}
+                          width={540}
+                          height={304}
+                          priority={true}
+                          quality={80}
+                        />
+                        <div className="card-body  rounded-lg ">
+                          <div>
+                            <h3 className="h3 text-dark">
+                              <b>Animal</b>
+                            </h3>
+                            <p>{text_animal?.substring(0, 150) + "..."}</p>
+
+                            <Link
+                              href="/Applications/animal-application"
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get More Details <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </section>
-              </div>
-            </div>
-            <div className="about-section">
-              <div className="container">
-                <ProductList slug="Applications" />
-              </div>
-            </div>
+                </div>
+                <div className="about-section pt-0">
+                  <div className="row mt-5">
+                    <div className=" col-md-4 col-sm-6 my-2 col-6 d-flex flex-column flex-grow-1 p-2">
+                      <div className="card align-items-center p-0 d-flex flex-column flex-grow-1 rounded-lg image-box-container2">
+                        <Image
+                          src={`/static/img/applications/Drug-Discovery.svg`}
+                          className="rounded-lg"
+                          alt={"img"}
+                          width={1000}
+                          height={563}
+                          quality={80}
+                        />
+                        <div className="card-body d-flex flex-column flex-grow-1 p-2 container-fluid ">
+                          <div className="p-3">
+                            <h3 className="h3 text-dark">
+                              <b>Drug Discovery Platform</b>
+                            </h3>
+                            <span className="badge badge-pill badge-primary">
+                              Human
+                            </span>
+                            <p>
+                              Only less than one in 10,000 potential drug
+                              compounds reach the clinic. As a result, drug
+                              discovery remains a complicated process. We
+                              provide phenotypic screening
+                            </p>
 
-            <Subscribe />
+                            <Link
+                              href="/Applications/Drug-Discovery-Platform"
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get More Details <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className=" col-md-4 col-sm-6 my-2 col-6 d-flex flex-column flex-grow-1 p-2">
+                      <div className="card align-items-center p-0 d-flex flex-column flex-grow-1 image-box-container2 rounded-lg">
+                        <Image
+                          src={`/static/img/applications/Disease-modelling.svg`}
+                          className="rounded-lg"
+                          alt={"img"}
+                          width={1000}
+                          height={563}
+                          quality={80}
+                        />
+                        <div className="card-body d-flex flex-column flex-grow-1 p-2 container-fluid ">
+                          <div className="p-3">
+                            <h3 className="h3 text-dark">
+                              <b>Disease Modelling</b>
+                            </h3>
+                            <span className="badge badge-pill badge-primary">
+                              Human
+                            </span>
+                            <p>
+                              According to the FDA, Drug-Induced Liver Injury
+                              has been the most frequent single cause of
+                              safety-related drug marketing withdrawals for the
+                              past 50 years.
+                            </p>
+                            <Link
+                              href="/Applications/Disease-Modelling"
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get More Details <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className=" col-md-4 col-sm-6 my-2 col-6 d-flex flex-column flex-grow-1 p-2">
+                      <div className="card align-items-center p-0 d-flex flex-column flex-grow-1 image-box-container2 rounded-lg">
+                        <Image
+                          src={`/static/img/applications/DNA-synthesis.svg`}
+                          className="rounded-lg"
+                          alt={"img"}
+                          width={1000}
+                          height={563}
+                          quality={80}
+                        />
+                        <div className="card-body d-flex flex-column flex-grow-1 p-2 container-fluid ">
+                          <div className="p-3">
+                            <h3 className="h3 text-dark">
+                              <b>DNA Synthesis</b>
+                            </h3>
+                            <span className="badge badge-pill badge-primary">
+                              Human
+                            </span>
+                            <p>
+                              Stemnovate is soon introducing a microfluidic
+                              platform for DNA synthesis. This disruptive
+                              technology allows template free DNA/RNA synthesis.
+                            </p>
+
+                            <Link
+                              href="/Applications/DNA-Synthesis"
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get More Details <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className=" col-md-4 col-sm-6 my-2 col-6 d-flex flex-column flex-grow-1 p-2">
+                      <div className="card align-items-center p-0 d-flex flex-column flex-grow-1 image-box-container2 rounded-lg">
+                        <Image
+                          src={`/static/img/animal-health/Multispecies-stem.svg`}
+                          className="rounded-lg"
+                          alt={"img"}
+                          width={1000}
+                          height={563}
+                          quality={80}
+                        />
+                        <div className="card-body d-flex flex-column flex-grow-1 p-2 container-fluid ">
+                          <div className="p-3">
+                            <h3 className="h3 text-dark">
+                              <b>Animal Health</b>
+                            </h3>
+                            <span className="badge badge-pill badge-primary">
+                              Animal
+                            </span>
+                            <p>
+                              Our team has over ten years of experience creating
+                              unique stem cell models that can reduce animal
+                              testing.
+                            </p>
+                            <Link
+                              href="/Applications/Animal-Health"
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get More Details <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Subscribe />
+            </div>
           </div>
         </div>
       </main>
@@ -267,4 +325,34 @@ const Applications = () => {
   )
 }
 
-export default Applications
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Applications"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return { props: { ProductData } }
+}
+
+export default connect((state) => state)(Applications)
+Applications.propTypes = {
+  resourcesList: PropTypes.any
+}

@@ -34,7 +34,7 @@ const breadcrumb = [
   }
 ]
 
-const Resources = ({ resourcesList }) => {
+const Resources = ({ resourcesList, ProductData }) => {
   const [privateList, setPrivateList] = useState([])
 
   useEffect(() => {
@@ -47,7 +47,12 @@ const Resources = ({ resourcesList }) => {
       description="Stemnovate resources page is for information on techniques, learning materials, updates, blogs and newsletters."
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div
+          style={{
+            backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${ProductData?.data[0]?.banner_img})`
+          }}
+          className="ps-page__header  breadcrumb-h application-breadcrumb-bg"
+        >
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
             <h1 className="text-center  text-white p-2">Subscription Access</h1>
@@ -58,25 +63,23 @@ const Resources = ({ resourcesList }) => {
             <div className="category-section mb-5">
               <div className="container">
                 <div className="about-section py-0">
-                  <div className="row   mt-5" data-columns="4">
+                  <div className="row mt-5" data-columns="4">
                     {privateList.map((myCat, index) => (
                       <div
-                        className="col-md-6  mb-3 p-2 d-flex flex-column flex-grow-1"
+                        className="card col-md-6 col-lg-6 col-sm-6 mb-3 p-2 flex-column flex-grow-1"
                         key={index}
                       >
-                        <div className="card rounded-lg align-items-center p-0 ">
+                        <div className="align-items-center p-0 ">
                           <Image
                             src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
-                            className="rounded"
                             alt={myCat.cat_name}
-                            width={1200}
-                            height={675}
-                            placeholder="blur"
-                            blurDataURL="/static/image/blurred.png"
+                            width={558}
+                            height={314}
+                            priority={true}
                           />
-                          <div className="card-body  rounded-lg p-0 overlay-content">
+                          <div className="card-body rounded-lg p-0 overlay-content">
                             <div className="p-5">
-                              <h2 className="h1 text-white">
+                              <h2 className="h3 text-white">
                                 <b>{myCat.cat_name}</b>
                               </h2>
                               {myCat.cat_access ? (
@@ -88,20 +91,28 @@ const Resources = ({ resourcesList }) => {
                                   Free
                                 </span>
                               )}
-                              <p className="text-white">
-                                {myCat.short_description}
-                              </p>
-                              <Link
-                                href={`/resources/r/${myCat.slug}`}
-                                prefetch={false}
-                              >
-                                <div className="link-btn">
-                                  <b>
-                                    Get Resources <FaArrowRight />
-                                  </b>
-                                </div>
-                              </Link>
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html:
+                                    myCat.short_description &&
+                                    myCat.short_description.substring(0, 120) +
+                                      "....."
+                                }}
+                                className="text-white"
+                              ></div>
                             </div>
+                          </div>
+                          <div>
+                            <Link
+                              href={`/resources/r/${myCat.slug}`}
+                              prefetch={false}
+                            >
+                              <div className="link-btn">
+                                <b>
+                                  Get Resources <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -120,8 +131,6 @@ const Resources = ({ resourcesList }) => {
 }
 
 export async function getServerSideProps() {
-  // Fetch data from external API
-
   var myHeaders = new Headers()
   myHeaders.append("Content-Type", "application/json")
 
@@ -140,9 +149,32 @@ export async function getServerSideProps() {
     baseUrl + "/api/resources/getResources",
     requestOptions
   )
+
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Resources"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   const resourcesList = await response.json()
-  // Pass data to the page via props
-  return { props: { resourcesList } }
+  return { props: { resourcesList, ProductData } }
 }
 
 export default connect((state) => state)(Resources)

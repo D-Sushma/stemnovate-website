@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Input, Button } from "antd"
 import { connect, useDispatch } from "react-redux"
@@ -9,6 +8,11 @@ import useProduct from "~/hooks/useProduct"
 import { useSession } from "next-auth/react"
 import { ToastContainer, toast } from "react-toastify"
 import { FaArrowRight } from "react-icons/fa"
+import dynamic from "next/dynamic"
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const ProductList = ({ ecomerce, slug }) => {
   const { price } = useProduct()
@@ -118,7 +122,7 @@ const ProductList = ({ ecomerce, slug }) => {
     fetch(process.env.NEXT_BASE_URL + "/api/products/catbyname", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
+        console.log("result_catbyname", result)
         if (result.status == 200) {
           const procount = result.ProductsList
           const NoofItem = AddtoCart.slice()
@@ -138,25 +142,20 @@ const ProductList = ({ ecomerce, slug }) => {
       })
   }
 
-  const myLoader = ({ src, width, quality }) => {
-    return `${src}?w=${width}&q=${quality || 55}`
-  }
-
   return (
     <>
       {ProductData !== null ? (
-        <div className="">
           <div className="container">
             <ToastContainer position="top-right" />
-            <div className=" row d-flex my-4 justify-content-center">
+            <div className=" row d-flex my-4 justify-content-center mx-2">
               {ProductData.Products &&
                 ProductData.Products.map((post, key) => (
                   <div
-                    className="col-md-3 mb-3 p-2 d-flex flex-column flex-grow-1"
+                    className="col-md-3 col-sm-4 col-lg-3 mb-4 p-2 d-flex flex-column flex-grow-1"
                     key={key}
                   >
-                    <div className="card d-flex flex-column flex-grow-1 rounded-lg align-items-center p-0 ">
-                      <img
+                    <div className=" card d-flex flex-column p-2 flex-grow-1 rounded-lg align-items-center">
+                      <Image
                         src={
                           post.image == null
                             ? `/no-image.png`
@@ -164,30 +163,36 @@ const ProductList = ({ ecomerce, slug }) => {
                         }
                         className="rounded"
                         alt={post.category_name}
+                        // layout="fill"
+                        // objectFit="cover"
+                        // width="272"
+                        // height="150"
+                        width="386"
+                        height="218"
                       />
-                      <div className="card-body  rounded-lg p-0 overlay-content-p">
+                      <div className="card-body rounded-lg p-0 overlay-content-p">
                         <div className="p-5">
                           <Link href={`${slug}/${post.slug}`}>
-                            <h2 className="h2 text-white span-with-link">
+                            <h2 className="h5 text-white span-with-link">
                               <b>{post.category_name}</b>
                             </h2>
                           </Link>
-
-                          <Link href={`${slug}/${post.slug}`}>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                         <Link href={`${slug}/${post.slug}`}>
                             <span className="link-btn-c span-with-link">
                               <b>
                                 Read More <FaArrowRight />
                               </b>
                             </span>
                           </Link>
-                        </div>
                       </div>
-                    </div>
                   </div>
                 ))}
             </div>
-          </div>
-
+         
           {/* ----------------------------- Product Section ---------------------------- */}
           {ProductData.ProductsList && ProductData.ProductsList.length > 0 ? (
             <div className="product-container">
@@ -203,31 +208,14 @@ const ProductList = ({ ecomerce, slug }) => {
                             href={`/product/${value.product_slug}`}
                             as={`/product/${value.product_slug}`}
                           >
-                            <div>
-                              <img
-                                loader={myLoader}
-                                src={`${process.env.AWS_S3BUCKET_URL}${
-                                  value?.product_image.split(",")[0]
-                                }`}
-                                unoptimized={false}
-                                alt={value?.product_slug}
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "cover"
-                                }}
-                              />
+                            <div className="d-flex justify-content-center">
                               <Image
-                                loader={myLoader}
                                 src={`${process.env.AWS_S3BUCKET_URL}${
                                   value?.product_image.split(",")[0]
                                 }`}
-                                unoptimized={false}
                                 alt={value?.product_slug}
-                                width="480"
-                                height="360"
-                                placeholder="blur"
-                                blurDataURL="/static/image/blurred.png"
+                                width="386"
+                                height="218"
                               />
                             </div>
                           </Link>
@@ -515,7 +503,7 @@ const ProductList = ({ ecomerce, slug }) => {
                             </div>
                           </div>
                         </div>
-                      ))}
+                      ))}s
                     </div>
                   </div>
                 </div>

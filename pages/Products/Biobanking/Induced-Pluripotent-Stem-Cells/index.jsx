@@ -1,9 +1,9 @@
 import React from "react"
 import { Collapse } from "antd"
 import { connect } from "react-redux"
+import { baseUrl } from "~/repositories/Repository"
 import Link from "next/link"
 import dynamic from "next/dynamic"
-
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
@@ -11,6 +11,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
   loading: () => <p>Loading...</p>
 })
 const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
   loading: () => <p>Loading...</p>
 })
 const ProductList = dynamic(
@@ -21,7 +24,7 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
-const IPSCellsScreen = () => {
+const IPSCellsScreen = (ProductData) => {
   const { Panel } = Collapse
   const breadcrumb = [
     {
@@ -44,22 +47,46 @@ const IPSCellsScreen = () => {
       text: "Induced Pluripotent Stem-Cells"
     }
   ]
+
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <>
       <Container
         title="Induced Pluripotent Stem-Cells"
-        description={`We provide the best quality human Induced Pluripotent Stem Cells (iPSC), Dermal (skin) derived`}
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h product-breadcrumb-bg">
+          <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="banner"
+              src={bgImage}
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />
-              <h1>Induced Pluripotent Stem-Cells</h1>
+              <h1>{ProductData?.ProductData?.data[0]?.banner_content}</h1>
             </div>
           </div>
+
           <div className="ps-page__content ">
             <div className="ps-about">
-              <div className=" about-section ">
+              <div className=" about-section my-2 ">
                 <div className="container">
                   <div className="center-box">
                     <p className=" vertical-center">
@@ -72,23 +99,25 @@ const IPSCellsScreen = () => {
                   </div>
                 </div>
               </div>
+
               <div className=" bg-02-section">
                 <div className="container">
-                  <section className="ps-section--block-grid py-5">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                           <Image
-                            src="/static/img/services/Cell-Reprogramming.jpg"
+                            src="/static/img/services/Cell-Reprogramming.svg"
                             alt="Cell Reprogramming"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
-                      <div className="ps-section__desc ">
+                    <div className="ps-section__content rm_m customStyles">
+                      <div className="ps-section__desc mx-2">
                         <h2 className="p-1 text-white font-weight-bold">
                           Cell Reprogramming
                         </h2>
@@ -97,7 +126,8 @@ const IPSCellsScreen = () => {
                           within drug development and research. Generating
                           induced pluripotent stem cells can often be a costly
                           and time-consuming process.
-                          <br />
+                        </p>
+                        <p>
                           Stemnovate offers custom reprogramming services,
                           saving you the time which can be better spent
                           performing valuable research.
@@ -107,9 +137,10 @@ const IPSCellsScreen = () => {
                   </section>
                 </div>
               </div>
+
               <div className="about-section">
                 <div className="container">
-                  <p className="p-1">
+                  <p className="p-1 mt-4">
                     We are flexible in the service we can provide so if you are
                     curious how else we can support your project please{" "}
                     <Link href="mailto:info@stemnovate.co.uk" prefetch={false}>
@@ -236,4 +267,36 @@ animal species?`}
     </>
   )
 }
+
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Induced Pluripotent Stem Cells"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return {
+    props: {
+      ProductData
+    }
+  }
+}
+
 export default connect((state) => state)(IPSCellsScreen)

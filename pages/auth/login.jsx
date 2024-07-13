@@ -31,9 +31,7 @@ const MyAccountScreen = () => {
         password,
         callbackUrl: `${window.location.origin}/`
       })
-      console.log(res)
     } catch (error) {
-      console.error(error)
       setloading(false)
     }
   })

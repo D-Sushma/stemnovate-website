@@ -43,6 +43,7 @@ const texicologyScreen = () => {
   return (
     <Container
       title="Stemnovate || rapid diagnostics and new diagnosis assay products"
+      ogimg={`https://stemnovate.co.uk/static/img/applications/Rapid--Diagnostics.jpg`}
       description={`Stemnovate has rapid diagnostics and new diagnosis assay products and we are developing a product for the early diagnosis of heart conditions as well`}
     >
       <main className="ps-page ps-page--inner">
@@ -73,9 +74,9 @@ const texicologyScreen = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image link-hover-thumb-shape image-box-container mr-5">
                         <Image
-                          src="/static/img/applications/Rapid--Diagnostics.jpg"
+                          src="/static/img/applications/Rapid-01.svg"
                           alt="RAPID DIAGNOSTICS"
                           width={1000}
                           height={563}
@@ -118,9 +119,9 @@ const texicologyScreen = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image link-hover-thumb-shape  image-box-container mr-5">
                         <Image
-                          src="/static/img/applications/Early-Diagnosis-of-heart-conditions.jpg"
+                          src="/static/img/applications/Early-Diagnosis-of-heart-conditions.svg"
                           alt="EARLY DIAGNOSIS OF HEART CONDITIONS"
                           width={1000}
                           height={563}
@@ -165,9 +166,9 @@ const texicologyScreen = () => {
                 <section className="ps-section--block-grid ">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image link-hover-thumb-shape  image-box-container mr-5">
                         <Image
-                          src="/static/img/applications/New-Diagnostics-Assays.jpg"
+                          src="/static/img/applications/New-Diagnostics-Assays.svg"
                           alt="NEW DIAGNOSTICS ASSAYS"
                           width={1000}
                           height={563}

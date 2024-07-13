@@ -1,10 +1,8 @@
 import prisma from "~/lib/prisma";
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     if (req.method == "GET") {
         const { _limit, _orderBy, pType, type } = req.query;
-
-        console.log("pType", pType);
-
         var getProducts = await prisma.products.findMany({
             where: {
                 NOT: [
@@ -28,6 +26,7 @@ export default async (req, res) => {
                 stock: true,
                 deliver_type: true,
                 product_image: true,
+                primary_product_image: true,
                 Product_details_pdf: true,
                 description_tab: true,
                 specification_tab: true,
@@ -51,8 +50,6 @@ export default async (req, res) => {
                 },
             },
         });
-
-        // console.log(getProducts);
         res.status(200).json(getProducts);
     } else {
         res.status(400).json("Bad Request");

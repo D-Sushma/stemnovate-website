@@ -12,12 +12,17 @@ const InvestorsItem = ({ source }) => {
       <div className="ps-section__thumbnail">
         <Link href="#">
           <div className="ps-section__image">
-            <div className="overflow-hidden link-hover-thumb-shape">
+            <div className="overflow-hidden link-hover-thumb-shape"
+              style={{
+                      width: "400px",
+                      height: "250px"
+                    }}
+            >
               <Image
                 src={source.avatar}
                 alt={source?.name}
-                width={416}
-                height={255}
+                width={400}
+                height={250}
               />
             </div>
 

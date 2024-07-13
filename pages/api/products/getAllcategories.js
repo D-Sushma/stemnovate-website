@@ -1,6 +1,7 @@
 import prisma from "~/lib/prisma";
 import { Prisma } from "@prisma/client";
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     try {
         if (req.method == "GET") {
             var whereIs = {
@@ -23,7 +24,6 @@ export default async (req, res) => {
                 select: {
                     id: true,
                     category_name: true,
-                    // short_description: true,
                     urllink: true,
                     slug: true,
                     other_category: {
@@ -31,7 +31,6 @@ export default async (req, res) => {
                         select: {
                             id: true,
                             category_name: true,
-                            // short_description: true,
                             urllink: true,
                             slug: true,
                         },
@@ -49,11 +48,9 @@ export default async (req, res) => {
             res.status(400).json("Bad Request");
         }
     } catch (e) {
-        // res.status(500).json({ status: 500, data: error });
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            // The .code property can be accessed in a type-safe manner
             if (e.code === "P2002") {
-                console.log("There is a unique constraint violation, a new user cannot be created with this email");
+             
             }
         }
         throw e;

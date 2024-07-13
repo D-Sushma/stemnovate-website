@@ -9,13 +9,13 @@ import {
 } from "react-icons/tb"
 import moment from "moment"
 import Link from "next/link"
-import { HiArrowSmRight } from "react-icons/hi"
 import dynamic from "next/dynamic"
+import ourCulture from "~/public/static/img/our-culture/02.svg"
+
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
-
-function CareersGrid({ postLists, internShip }) {
+function CareersGrid({ postLists, internShip, campaignList }) {
   return (
     <div className=" about-section ">
       <div className="container">
@@ -33,8 +33,6 @@ function CareersGrid({ postLists, internShip }) {
 
       <div className="container">
         <div className="ps-blog-items row row-reverse my-5" data-columns="4">
-          {/* ------------------------------ map All Blog ------------------------------  */}
-
           {postLists.map((data, key) => (
             <div
               className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3 d-flex flex-grow-1"
@@ -89,107 +87,142 @@ function CareersGrid({ postLists, internShip }) {
               </div>
             </div>
           ))}
-
-          {/* ------------------------------ map All Blog ------------------------------  */}
         </div>
       </div>
 
-      <div className="ps-blog-items my-5" data-columns="4">
-        {/* ------------------------------ map All Blog ------------------------------  */}
-        <div className="resources-list p-2">
-          <div className="container">
-            <section className="ps-section--block-grid ">
-              <div className="ps-section__thumbnail">
-                <Link href="#">
-                  <div className="ps-section__image link-hover-thumb-shape">
-                    <Image
-                      src="static/image/research-campaign.webp"
-                      alt="Sharing pictures of your work could win you an Amazon voucher"
-                      width={1200}
-                      height={675}
-                    />
-                  </div>
-                </Link>
-              </div>
-              <div className="ps-section__content">
-                <Link href="https://stemnovate.co.uk/campaign/monthly-shine-through-your-research-campaign">
-                  <h2
-                    className="font-weight-bold"
-                    style={{ cursor: "pointer" }}
-                  >
-                    Sharing pictures of your work could win you an Amazon
-                    voucher
-                  </h2>
-                </Link>
-                <div className="ps-section__desc ">
-                  <p>
-                    Sharing pictures of your work could win you an Amazon
-                    voucher
-                  </p>
-
-                  <Link href="https://stemnovate.co.uk/campaign/monthly-shine-through-your-research-campaign">
-                    <div className="btn btn-lg button-orange text-white m-4 m-5">
-                      Get More details <HiArrowSmRight size={25} />
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        {/* ------------------------------ map All Blog ------------------------------  */}
-      </div>
-
-      <div className="" data-columns="4">
-        {/* ------------------------------ map All Blog ------------------------------  */}
-
-        {internShip.map((data, key) => (
-          <div className="resources-list p-2" key={key}>
-            <div className="container">
-              <section className="ps-section--block-grid ">
-                <div className="ps-section__thumbnail">
-                  <Link href="#">
-                    <div className="ps-section__image link-hover-thumb-shape">
+      <div className="container">
+        <div style={{ marginTop: "-5%" }} className="ps-page__content">
+          <div className="ps-blog">
+            <div
+              className="row d-flex justify-content-center align-self-center"
+              data-columns="3"
+            >
+              {campaignList?.map((data, key) => (
+                <div
+                  key={key}
+                  className="card col-xl-3 col-lg-6 col-md-4 col-sm-12  m-5 image-box-container-careergrid"
+                >
+                  <article className="card-body ps-post ps-post--grid blog-news">
+                    <div className="ps-post__thumbnail">
                       <Image
                         src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
-                        alt={data.position_name}
-                        width={1200}
-                        height={676}
-                        placeholder="blur"
-                        blurDataURL="/static/image/blurred.png"
+                        alt={data?.title}
+                        layout="responsive"
+                        width={1000}
+                        height={545}
                       />
                     </div>
-                  </Link>
-                </div>
-                <div className="ps-section__content">
-                  <Link href={`/jobdetails/${data.job_id}`}>
-                    <h2
-                      className="font-weight-bold"
-                      style={{ cursor: "pointer" }}
-                    >
-                      {data.position_name}
-                    </h2>
-                  </Link>
-                  <div className="ps-section__desc ">
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: data.job_description
-                      }}
-                    ></p>
-                    <Link href={`/jobdetails/${data.job_id}`}>
-                      <div className="btn btn-lg button-orange text-white m-4 m-5">
-                        Get More details <HiArrowSmRight size={25} />
+                    <div className="ps-post__wrapper justify-content-center">
+                      <div className="ps-post__content justify-content-center">
+                        <h5 className=" pt-2 px-2">
+                          {data?.campaign_description}
+                        </h5>
+                      </div>
+                    </div>
+                  </article>
+                  <div className="ps-post__meta align-self-center justify-content-center">
+                    <Link href={`/campaign/${data.slug}`}>
+                      <div className="btn btn-lg button-orange text-white my-3">
+                        Get More details
                       </div>
                     </Link>
                   </div>
                 </div>
-              </section>
+              ))}
+              {internShip?.map((data, key) => (
+                <div
+                  key={key}
+                  className="card col-xl-3 col-lg-6 col-md-4 col-sm-12 m-5 image-box-container-careergrid"
+                >
+                  <article className="card-body ps-post ps-post--grid blog-news">
+                    <div className="ps-post__thumbnail">
+                      <Image
+                        src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
+                        alt={data.position_name}
+                        width={1000}
+                        height={545}
+                        layout="responsive"
+                      />
+                    </div>
+                    <div className="ps-post__wrapper justify-content-center">
+                      <div className="ps-post__content justify-content-center">
+                        <h5 className="pt-2 px-2">{data?.position_name}</h5>
+                      </div>
+                    </div>
+                  </article>
+                  <div className="ps-post__meta  align-self-center justify-content-center">
+                    <Link href={`/jobdetails/${data.job_id}`}>
+                      <div className="btn btn-lg button-orange text-white my-3">
+                        Get More details
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+
+              <div className="card col-xl-3 col-lg-6 col-md-4 col-sm-12 m-5 image-box-container-careergrid">
+                <article className="card-body ps-post ps-post--grid blog-news">
+                  <div className="ps-post__thumbnail">
+                    <Image
+                      src={ourCulture}
+                      alt="our-culture"
+                      width={1000}
+                      height={545}
+                      layout="responsive"
+                    />
+                  </div>
+                  <div className="ps-post__wrapper justify-content-center">
+                    <div className="ps-post__content justify-content-center text-center">
+                      <h5 className=" pt-2 px-2 align-self-center">JOIN US!</h5>
+                    </div>
+                  </div>
+                </article>
+                <div className="ps-post__meta  align-self-center justify-content-center">
+                  <Link href="#">
+                    <div className="btn btn-lg button-orange text-white my-3">
+                      Get More details
+                    </div>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
+        </div>
+      </div>
 
-        {/* ------------------------------ map All Blog ------------------------------  */}
+      <div className="container mt-5">
+        <h2 className=" text-uppercase">Our culture</h2>
+        <p className="my-4">
+          Our company, Stemnovate, is dedicated to developing innovative,
+          high-quality products to prevent and treat diseases while reducing
+          animal testing. Our team comprises scientic and technical experts who
+          focus on research and development.
+        </p>
+        <p className="my-4">
+          Our culture is built on our commitment to our people. We believe in
+          equality and inclusion, and we strive to build a diverse and skilled
+          team. We understand that by doing so, we increase our chances of
+          achieving our mission.
+        </p>
+        <p className="my-4">
+          We aim to create an environment where our sta can thrive and innovate.
+          If you want to join our team, please visit our careers page.
+        </p>
+        <p className="my-4">
+          We support our sta through any challenges they may face. We provide
+          mental health training, and exible working arrangements to all our
+          employees.
+        </p>
+        <p className="my-4">
+          We also encourage our sta to keep learning through training courses
+          and collaborations within and outside the company. We work with the
+          industry's best and most fascinating people and institutions.
+        </p>
+        <p className="my-4">
+          At Stemnovate, we believe in equality and opportunity for all. To
+          advance science, we must create equality and opportunity for all, and
+          the diversity of our team helps us achieve this.
+        </p>
       </div>
     </div>
   )
@@ -198,5 +231,6 @@ function CareersGrid({ postLists, internShip }) {
 export default CareersGrid
 CareersGrid.propTypes = {
   postLists: PropTypes.array,
-  internShip: PropTypes.array
+  internShip: PropTypes.array,
+  campaignList: PropTypes.array
 }

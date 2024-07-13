@@ -62,10 +62,13 @@ const ModuleDetailThumbnail = ({ product, vertical = true }) => {
   const [productImages, setProductImages] = useState([])
 
   useEffect(() => {
-    console.log(product)
+    console.log("Detail Thumbnail : ",product)
 
     const images = []
-    var products = product.product_image.split(",")
+    var prod_primary_img = product?.primary_product_image?.split(",")
+    var prod_img = product?.product_image?.split(",")
+    var Array = prod_primary_img?.concat(prod_img);
+    var products = Array;
     if (products && products.length > 0) {
       products.map((item) => {
         images.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
@@ -80,25 +83,31 @@ const ModuleDetailThumbnail = ({ product, vertical = true }) => {
   let lightboxView, variantCarouselView, imagesView, galleryImagesView
   if (productImages.length > 0) {
     imagesView = productImages.map((item, key) => (
-      <div className="item" key={key}>
-        <Image
+      <div style={{marginLeft:2,marginRight:2}} className="item" key={key}>
+        <div className="image-box-container2">
+           <Image
           src={item}
           alt={product?.product_name}
-          width={1000}
-          height={750}
+          width={"386"}
+          height={"218"}
         />
+        </div>
+       
       </div>
     ))
     galleryImagesView = productImages.map((item, index) => (
       <div className="item" key={index}>
         <Link href="#">
-          <div className="link-hover-thumb-shape">
+          <div className="link-hover-thumb-shape ">
             <Image
               src={item}
-              className="hover-zoom"
+              className="hover-zoom "
               alt={product?.product_name}
-              width={1000}
-              height={750}
+              width={576}
+              height={432}
+              priority={true}
+              // width={1000}
+              // height={750}
             />
           </div>
         </Link>
@@ -118,7 +127,7 @@ const ModuleDetailThumbnail = ({ product, vertical = true }) => {
         infinite={false}
         focusOnSelect={true}
         {...variantSetting}
-        className="ps-product__variants"
+        className="ps-product__variants mt-5 "
       >
         {imagesView}
       </Slider>
@@ -135,7 +144,7 @@ const ModuleDetailThumbnail = ({ product, vertical = true }) => {
         centered={true}
         infinite={false}
         focusOnSelect={true}
-        className="ps-product__variants"
+        className="ps-product__variants "
       >
         {imagesView}
       </Slider>
@@ -172,7 +181,7 @@ const ModuleDetailThumbnail = ({ product, vertical = true }) => {
       data-vertical={vertical ? "true" : "false"}
     >
       <figure>
-        <div className="ps-wrapper">
+        <div className="ps-wrapper image-box-container">
           <Slider
             {...gallerySetting}
             ref={(slider) => (galleryCarousel.current = slider)}

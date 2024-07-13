@@ -25,7 +25,10 @@ const Product = ({ product, userData }) => {
           }`}
           as={`/product/${product.product_slug}/${offerData ? offerData : ""}`}
         >
-          <a className="ps-product__overlay"></a>
+          <a  href={`/product/${product.product_slug}/${
+            offerData ? offerData : ""
+          }`}
+           className="ps-product__overlay"></a>
         </Link>
         <ModuleProductImages product={product} />
         <ModuleProductActions userData={userData} product={product} />
@@ -41,7 +44,9 @@ const Product = ({ product, userData }) => {
               offerData ? offerData : ""
             }`}
           >
-            <a>{product.product_name}</a>
+            <a  href={`/product/${product.product_slug}/${
+              offerData ? offerData : ""
+            }`}>{product.product_name}</a>
           </Link>
         </h4>
         {price(product.product_details)}

@@ -1,5 +1,6 @@
 import React from "react"
 import dynamic from "next/dynamic"
+import { baseUrl } from "~/repositories/Repository"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -21,14 +22,18 @@ const breadcrumb = [
   }
 ]
 
-const TermsUse = () => {
+const TermsUse = (ProductData) => {
   return (
     <Container
       title="Terms Of Use"
       description="On this page you will find the terms and conditions governing Stemnovate's website, products and services."
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div 
+         style={{
+          backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img})`
+        }}
+        className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
           </div>
@@ -222,6 +227,31 @@ const TermsUse = () => {
       </main>
     </Container>
   )
+}
+
+export async function getServerSideProps() {
+
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: 'Applications'
+    })
+  }
+  const res = await fetch(baseUrl + "/api/header_banners/getBanners",requestParam)
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+  
+  return { props: { ProductData } }
 }
 
 export default TermsUse

@@ -24,9 +24,7 @@ function orderConfirmation({ UserData }) {
   const getOrderDetails = async () => {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-
     var raw = JSON.stringify({ orderId: orderId })
-
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -46,7 +44,6 @@ function orderConfirmation({ UserData }) {
         for (let i = 0; i < orders_Details_Array.length; i++) {
           var resourcesID = orders_Details_Array[i].product_id
           var raw1 = JSON.stringify({ resourcesID: resourcesID })
-
           var requestOptions1 = {
             method: "POST",
             headers: myHeaders,
@@ -386,12 +383,10 @@ export async function getServerSideProps(ctx) {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(`${baseUrl}/api/user/UserDetails`, requestOptions)
     UserData = await res.json()
   }
 
-  // Pass data to the page via props
   return { props: { UserData } }
 }
 

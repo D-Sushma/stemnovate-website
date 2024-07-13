@@ -12,25 +12,21 @@ const Image = dynamic(() => import("~/components/elements/Image"), {
 
 const EventsList = ({ resources }) => {
   return (
-    <div className="">
+    <div >
       {resources &&
         resources.map((data, key) => (
           <div className="resources-list " key={key}>
             <div className="container">
-              <section className="ps-section--block-grid ">
+              <section className="ps-section--block-grid pt-3">
                 <div className="ps-section__thumbnail">
-                  <Link href="#">
-                    <div className="ps-section__image link-hover-thumb-shape">
+                    <div className="ps-section__image link-hover-thumb-shape image-box-container mr-4 image-box-container-mb">
                       <Image
                         src={`${process.env.AWS_S3BUCKET_URL}${data.image}`}
                         alt={data.title}
                         width={1200}
                         height={675}
-                        placeholder="blur"
-                        blurDataURL="/static/image/blurred.png"
                       />
                     </div>
-                  </Link>
                 </div>
                 <div className="ps-section__content">
                   <h2 className="font-weight-bold">{data.title}</h2>

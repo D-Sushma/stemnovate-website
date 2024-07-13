@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -8,32 +7,29 @@ import { HiArrowSmRight } from "react-icons/hi"
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 import { Divider } from "antd"
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic"
 
-const Container = dynamic(
-  () => import("~/components/layouts/Container"),
-  {loading: ()=> <p>Loading...</p>}
-)
-const BreadCrumb = dynamic(
-  () => import("~/components/elements/BreadCrumb"),
-  {loading: ()=> <p>Loading...</p>}
-)
+const Container = dynamic(() => import("~/components/layouts/Container"), {
+  loading: () => <p>Loading...</p>
+})
+const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
+  loading: () => <p>Loading...</p>
+})
 const UpcomingEvents = dynamic(
   () => import("~/components/elements/events/UpcomingEvents"),
-  {loading: ()=> <p>Loading...</p>}
+  { loading: () => <p>Loading...</p> }
 )
 const Subscribe = dynamic(
-    () => import("~/components/shared/sections/Subscribe"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/shared/sections/Subscribe"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const ProductList = dynamic(
-    () => import("~/components/eventDetailList/productList"),
-    {loading: ()=> <p>Loading...</p>}
-  )
+  () => import("~/components/eventDetailList/productList"),
+  { loading: () => <p>Loading...</p> }
+)
 
 const EventsDetails = ({ EventsData }) => {
-  console.log("EventsData", EventsData)
   var sponsor = JSON.parse(EventsData.data[0].Sponsor)
   var galleryPhotos =
     EventsData.data[0].gallery && EventsData.data[0].gallery.split(",")
@@ -42,7 +38,7 @@ const EventsDetails = ({ EventsData }) => {
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [galleryIMG, setGalleryIMG] = useState([])
 
-  const openLightbox = useCallback(( {  index }) => {
+  const openLightbox = useCallback(({ index }) => {
     setCurrentImage(index)
     setViewerIsOpen(true)
   }, [])
@@ -97,7 +93,6 @@ const EventsDetails = ({ EventsData }) => {
           {EventsData &&
             EventsData.data.map((data, key) => (
               <div key={key}>
-                
                 <div className="position-relative text-center">
                   <img
                     src={`${process.env.AWS_S3BUCKET_URL}${data?.banner}`}
@@ -273,16 +268,16 @@ const EventsDetails = ({ EventsData }) => {
                       <div className="col-md-12">
                         <div className="ps-section__content">
                           <div className="d-flex justify-content-center flex-col">
-                              <div style={{ width: "100%" }}>
-                                <div className="ps-section__desc ">
-                                  <p
-                                    className=""
-                                    dangerouslySetInnerHTML={{
-                                      __html: data.longcontent
-                                    }}
-                                  ></p>
-                                </div>
+                            <div style={{ width: "100%" }}>
+                              <div className="ps-section__desc ">
+                                <p
+                                  className=""
+                                  dangerouslySetInnerHTML={{
+                                    __html: data.longcontent
+                                  }}
+                                ></p>
                               </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -296,8 +291,7 @@ const EventsDetails = ({ EventsData }) => {
           </div>
           <div className="about-section">
             <div className="container">
-               <ProductList slug="Applications" />
-             
+              <ProductList slug="Applications" />
             </div>
           </div>
           <Subscribe />
@@ -325,10 +319,8 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/events/getEvents", requestOptions)
     EventsData = await res.json()
-    console.log("Events : ",EventsData)
   }
 
-  // // Pass data to the page via props
   return { props: { EventsData } }
 }
 export default connect((state) => state)(EventsDetails)

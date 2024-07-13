@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import useEcomerce from "~/hooks/useEcomerce";
+import useEcomerce from "~/hooks/useEcomerce"
 import { connect } from "react-redux"
 import { caculateArrayQuantity } from "~/utilities/ecomerce-helpers"
 import { Result } from "antd"
@@ -42,7 +42,6 @@ const CompareScreen = ({ ecomerce }) => {
     }
   }, [ecomerce])
 
-  // view
   let totalView, wishListView
 
   if (products && products.length > 0) {
@@ -57,7 +56,6 @@ const CompareScreen = ({ ecomerce }) => {
       )
     }
   }
-  //view
 
   return (
     <Container title="Compare">

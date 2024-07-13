@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { baseUrl } from "~/repositories/Repository"
@@ -19,9 +18,7 @@ const Subscribe = dynamic(
 
 import PropTypes from "prop-types"
 import Link from "next/link"
-
 import { FaRegArrowAltCircleDown, FaRegArrowAltCircleUp } from "react-icons/fa"
-import moment from "moment"
 import AddToCartResources from "~/components/resources/AddToCartResources"
 import { ToastContainer } from "react-toastify"
 import Loader from "~/components/reuseable/Loader"
@@ -61,18 +58,53 @@ const ResourcesData = (props) => {
       if (userData !== null) {
         getUserData()
       }
-    } else {
     }
   }, [session, userData])
 
   const getResourcesAccess = async () => {
-    var raw = JSON.stringify({
-      UserId: session?.id,
-      ResourcesID: JSON.stringify(resourcesData.data[0].id)
-    })
-    console.log("raw", raw)
+    if (session == null || session?.id == undefined) {
+      alert("Please Login first otherwise you cannot access data!")
+      Router.push("/auth/UserLogin")
+    } else {
+      updateIsAccess(session?.id, resourcesData?.data[0]?.id)
+
+      var raw = JSON.stringify({
+        UserId: session?.id,
+        ResourcesID: JSON.stringify(resourcesData.data[0].id)
+      })
+      var myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json")
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw
+      }
+
+      await fetch("/api/resources/access/checkResourcesAccess", requestOptions)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status == 200) {
+            if (data.data.length > 0) {
+              setIsActive(true)
+              setIsLoading(true)
+              getResourcesFiles()
+            } else {
+              setIsActive(false)
+            }
+          }
+        })
+    }
+  }
+
+  const updateIsAccess = async (userId, resourceId) => {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
+
+    var raw = JSON.stringify({
+      UserIdId: userId,
+      resources_id: resourceId
+    })
 
     var requestOptions = {
       method: "POST",
@@ -80,20 +112,13 @@ const ResourcesData = (props) => {
       body: raw
     }
 
-    await fetch("/api/resources/access/checkResourcesAccess", requestOptions)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("checkResourcesAccess", data)
-        if (data.status == 200) {
-          if (data.data.length > 0) {
-            setIsActive(true)
-            setIsLoading(true)
-            getResourcesFiles()
-          } else {
-            setIsActive(false)
-          }
+    await fetch("/api/resources/access/updateAccessResources", requestOptions)
+      .then((response) => response.json())
+      .then(async (result) => {
+        if (result.code == "200") {
         }
       })
+      .catch((error) => console.log("error", error))
   }
 
   const getResourcesFiles = async () => {
@@ -101,7 +126,6 @@ const ResourcesData = (props) => {
       UserId: session?.id,
       ResourcesID: resourcesData.data[0].id
     })
-    console.log("newraw", raw)
 
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
@@ -115,15 +139,12 @@ const ResourcesData = (props) => {
     await fetch("/api/resources/access/getResourcesFiles", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("getResourcesFiles", data)
         setIsLoading(false)
         if (data.status == 200) {
           setResourcesFiles(data.data[0])
           setIsActive(true)
-          console.log("resourcesFiles_new", data.data[0])
           const sv = JSON.parse(data.data[0].structural_variation)
           const seq = JSON.parse(data.data[0].sequencing)
-          console.log("sv : ", data.data[0].structural_variation)
           file_count = sv.filter((item) => item.type !== "").length
           if (file_count > 0) {
             setResources_structural(sv)
@@ -132,18 +153,15 @@ const ResourcesData = (props) => {
           if (seqfile_count > 0) {
             setResources_sequence(seq)
           }
-          console.log("file_count", file_count)
           getURLLink(data.data[0].datasheet_files)
         }
       })
   }
 
   const getURLLink = async (val) => {
-    console.log("val", val)
     var raw = JSON.stringify({
       key: encode(val)
     })
-    console.log("raw", raw)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -156,7 +174,6 @@ const ResourcesData = (props) => {
     await fetch("/api/resources/access/getLink", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log("urlLink", data)
         if (data.code == 200) {
           setFilePath(decode(data.url))
         }
@@ -231,7 +248,11 @@ const ResourcesData = (props) => {
       {isLoading ? <Loader /> : null}
       <ToastContainer />
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div 
+         style={{
+          backgroundImage: `url(${process.env.AWS_S3BUCKET_URL}${props?.ProductData?.data[0]?.banner_img})`
+        }}
+        className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
           <div className="container ">
             <BreadCrumb breacrumb={breadCrumb} />
             <h1 className="text-center  text-white p-2">
@@ -258,15 +279,6 @@ const ResourcesData = (props) => {
                   <div className="col-md-6 my-3">
                     <h2>{resourcesData.data[0].resources_name}</h2>
                     <div className="download-option ">
-                      <p>
-                        File type - {resourcesData.data[0].resourcesFileType}
-                      </p>
-                      <p>
-                        Published -{" "}
-                        {moment(resourcesData.data[0].created_at).format(
-                          "DD-MMM-YYYY"
-                        )}
-                      </p>
                       <div className="my-3">
                         {resourcesData.data[0].resources_price > 0 ? (
                           isActive ? (
@@ -294,9 +306,12 @@ const ResourcesData = (props) => {
                       </div>
                     </div>
 
-                    <p className="text-dark">
-                      {resourcesData.data[0].short_description}
-                    </p>
+                    <div
+                      className="text-dark"
+                      dangerouslySetInnerHTML={{
+                        __html: resourcesData?.data[0]?.short_description
+                      }}
+                    ></div>
                   </div>
                 </div>
                 <div>
@@ -427,15 +442,12 @@ const ResourcesData = (props) => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.resources_Name
-  console.log("slug", slug)
   var resourcesData = []
   var tokenId = ""
   var resources_token = ""
   if (slug != undefined) {
     resources_token = slug[slug.length - slug.length + 1]
     tokenId = slug[slug.length - 1]
-    console.log("resources_token", resources_token)
-    console.log("tokenId", tokenId)
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -460,8 +472,30 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  // // Pass data to the page via props
-  return { props: { resourcesData } }
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Resources"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return { props: { resourcesData,ProductData } }
 }
 
 export default connect((state) => state)(ResourcesData)

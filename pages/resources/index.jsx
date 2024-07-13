@@ -5,7 +5,6 @@ import { FaArrowRight } from "react-icons/fa"
 import Link from "next/link"
 import { baseUrl } from "~/repositories/Repository"
 import dynamic from "next/dynamic"
-
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
 })
@@ -19,6 +18,9 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 
 const breadcrumb = [
   {
@@ -33,33 +35,61 @@ const breadcrumb = [
   }
 ]
 
-function Resources({ resourcesList }) {
+function Resources({ resourcesList, ProductData }) {
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+
+  const bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.data[0]?.banner_img}`
+
   return (
     <Container
-      title="Resources"
-      description="Stemnovate page on resources for scientists, PhD students. Follow up for trainings, webinars and create progrressive scientific community"
+      title="Resources | Your Drug Discovery Platform"
+      ogimg={ogImage}
+      description={ogDesc}
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+        <div className="ps-page__header  breadcrumb-h  banner-breadcrumb-bg">
+          <BannerImage
+            alt={'resources-banner-image'}
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1 className="text-center  text-white p-2">Resources</h1>
+            <h1 className="text-center h1 text-white p-2 ">
+              {ProductData?.data[0]?.banner_content}
+            </h1>
           </div>
         </div>
+
         <div className="ps-page__content">
           <div className="ps-about">
             <div className="category-section">
               <div className="container">
-                <div className="about-section py-0">
+                <div className="about-section py-0 mb-5">
                   <div className="row mt-5" data-columns="4">
                     <div className="col-md-6  mb-3 p-2 d-flex flex-column flex-grow-1">
                       <div className="card rounded-lg align-items-center p-0 ">
                         <Image
-                          src="https://stemnovateimages.s3.us-east-2.amazonaws.com/learn1662019838689.jpg"
-                          className="rounded-lg"
+                          src="/static/img/resources/Karyotyping.svg"
                           alt="Stemnovate Karyotyping"
-                          width={1000}
-                          height={563}
+                          width={558}
+                          height={314}
+                          quality={80}
+                          priority={true}
                         />
                         <div className="card-body  rounded-lg p-0 overlay-content">
                           <div className="p-2 p-md-5 card-resource">
@@ -93,11 +123,11 @@ function Resources({ resourcesList }) {
                     <div className="col-md-6  mb-3 p-2 d-flex flex-column flex-grow-1">
                       <div className="card rounded-lg align-items-center p-0 ">
                         <Image
-                          src="https://stemnovateimages.s3.us-east-2.amazonaws.com/test-public1662015244812.jpg"
-                          className="rounded-lg"
+                          src="/static/img/resources/LearningResources.svg"
                           alt="Stemnovate Public Resources"
-                          width={1000}
-                          height={563}
+                          width={558}
+                          height={314}
+                          quality={80}
                         />
                         <div className="card-body rounded-lg p-0 overlay-content">
                           <div className="p-2 p-md-5 card-resource">
@@ -129,24 +159,26 @@ function Resources({ resourcesList }) {
                     </div>
                   </div>
                 </div>
-                <div className="about-section pt-0">
-                  <div className="row mt-5">
+              </div>
+
+              <div className="container">
+                <div className="about-section2 pt-0.5">
+                  <div className="row mt-5 mx-1">
                     {resourcesList.data.map((myCat, index) => (
                       <div
-                        className="col-md-4 col-sm-6 my-2 col-6 d-flex flex-column flex-grow-1 p-2"
+                        className="col-md-4 col-lg-4 col-sm-12 my-2 d-flex flex-column flex-grow-1 p-2"
                         key={index}
                       >
-                        <div className="card align-items-center p-0 d-flex flex-column flex-grow-1  rounded-lg">
+                        <div className="card p-0 d-flex flex-column flex-grow-1  rounded-lg">
                           <Image
                             src={`${process.env.AWS_S3BUCKET_URL}${myCat.category_image}`}
                             className="rounded-lg"
                             alt={myCat.cat_name}
-                            width={1000}
-                            height={563}
-                            placeholder="blur"
-                            blurDataURL="/static/image/blurred.png"
+                            width={369}
+                            height={207}
+                            quality={80}
                           />
-                          <div className="card-body d-flex flex-column flex-grow-1 p-2 container-fluid ">
+                          <div className="card-body align-items-center d-flex flex-column flex-grow-1 p-2 container-fluid ">
                             <div className="p-3">
                               <h3 className="h3 text-dark">
                                 <b>{myCat.cat_name}</b>
@@ -160,21 +192,27 @@ function Resources({ resourcesList }) {
                                   Open Access
                                 </span>
                               )}
-                              <p>
-                                {myCat.short_description &&
-                                  myCat.short_description.substring(0, 90)}
-                              </p>
-                              <Link
-                                href={`/resources/r/${myCat.slug}`}
-                                prefetch={false}
-                              >
-                                <div className="link-btn-b">
-                                  <b>
-                                    Get Resources <FaArrowRight />
-                                  </b>
-                                </div>
-                              </Link>
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html:
+                                    myCat.short_description &&
+                                    myCat.short_description.substring(0, 100) +
+                                      "....."
+                                }}
+                              />
                             </div>
+                          </div>
+                          <div className="mx-4">
+                            <Link
+                              href={`/resources/r/${myCat.slug}`}
+                              prefetch={false}
+                            >
+                              <div className="link-btn-b">
+                                <b>
+                                  Get Resources <FaArrowRight />
+                                </b>
+                              </div>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -193,8 +231,6 @@ function Resources({ resourcesList }) {
 }
 
 export async function getServerSideProps() {
-  // Fetch data from external API
-
   const myHeaders = new Headers()
   myHeaders.append("Content-Type", "application/json")
 
@@ -211,8 +247,31 @@ export async function getServerSideProps() {
     requestOptions
   )
   const resourcesList = await response.json()
-  // Pass data to the page via props
-  return { props: { resourcesList } }
+
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Resources"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return { props: { resourcesList, ProductData } }
 }
 
 export default connect((state) => state)(Resources)

@@ -123,13 +123,13 @@ const ModuleProductActions = ({
             Please{"  "}
             <Link href={"/auth/UserLogin"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Login</a>
+                <a href={"/auth/UserLogin"} className="Toast-link font-weight-bolder">Login</a>
               </u>
             </Link>
             {"  "}/{"  "}
             <Link href={"/auth/UserReg"}>
               <u>
-                <a className="Toast-link font-weight-bolder">Signup</a>
+                <a href={"/auth/UserReg"} className="Toast-link font-weight-bolder">Signup</a>
               </u>
             </Link>{" "}
             to proceed
@@ -164,7 +164,7 @@ const ModuleProductActions = ({
     return (
       <>
         <div className="ps-product__actions">
-          <a
+          <a href="#"
             className="ps-product__action"
             title="Add to cart"
             onClick={(e) => handleAddItemToCart(e)}
@@ -188,10 +188,10 @@ const ModuleProductActions = ({
             </a>
           </div>
           <div className="ps-product__other-actions">
-            <a onClick={(e) => handleAddItemToWishlist(e)}>
+            <a href="#" onClick={(e) => handleAddItemToWishlist(e)}>
               <i className="icon-heart"></i>
             </a>
-            <a onClick={(e) => handleAddItemToWishlist(e)}>
+            <a href="#" onClick={(e) => handleAddItemToWishlist(e)}>
               <i className="icon-signal"></i>
             </a>
           </div>

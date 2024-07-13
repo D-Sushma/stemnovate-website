@@ -21,7 +21,7 @@ const ArticleList = ({ post }) => {
                     {categories}
                     <div className="ps-post__meta">
                         <span className="ps-post__created">May 15, 2021</span>
-                        <a className="ps-post__author">Thomas Charlson</a>
+                        <a href="#" className="ps-post__author">Thomas Charlson</a>
                     </div>
                     {title}
                     <p className="ps-post__desc">

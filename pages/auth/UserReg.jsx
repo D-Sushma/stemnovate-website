@@ -1,15 +1,23 @@
 import React, { useState } from "react"
-import { Form, Input, Button, Modal, Checkbox, Tooltip } from "antd"
+import {
+  Form,
+  Input,
+  Button,
+  Modal,
+  Checkbox,
+  Tooltip,
+  Row,
+  Col,
+  Select
+} from "antd"
 import { AiOutlineLock, AiOutlineUser, AiOutlineMail } from "react-icons/ai"
 import { ToastContainer, toast } from "react-toastify"
-import { Row, Col, Select } from "antd"
 const { Option } = Select
-// import { signIn } from "next-auth/react"
 import Countries from "../../public/static/data/AllCountries.json"
 import { encode } from "hex-encode-decode"
 import Link from "next/link"
 import dynamic from "next/dynamic"
-import {useRouter} from "next/router"
+import { useRouter } from "next/router"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -19,18 +27,14 @@ const Image = dynamic(() => import("~/components/elements/Image"), {
 })
 
 const UserReg = () => {
-  const router = useRouter();
+  const router = useRouter()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [Checktnc, setChecktnc] = useState(false)
   const [isLoading, setisLoading] = useState(false)
 
-  function onChange(value) {
-    console.log(`selected ${value}`)
-  }
+  function onChange(value) {}
 
-  function onSearch(val) {
-    console.log("search:", val)
-  }
+  function onSearch(val) {}
 
   const showModal = () => {
     setIsModalVisible(true)
@@ -61,7 +65,7 @@ const UserReg = () => {
       } else if (value.length > 32) {
         reject("Password must be at most 32 characters.")
       } else {
-        resolve() 
+        resolve()
       }
     })
   }
@@ -118,8 +122,7 @@ const UserReg = () => {
     )
       .then((response) => response.json())
       .then(async (result) => {
-
-        if ((result.msg == "success")) {
+        if (result.msg == "success") {
           toast.success("Verification email send successfully", {
             position: "top-right",
             autoClose: 15000,
@@ -148,7 +151,6 @@ const UserReg = () => {
 
   const onFinish = async (values) => {
     const username = values.Email
-    // const password = values.amex
     const userFullName = values.First + " " + values.last
     setisLoading(true)
 
@@ -178,14 +180,8 @@ const UserReg = () => {
         })
         await SendEmail(userFullName, username)
         router.push("/auth/UserLogin")
-        // const signInRes = await signIn("credentials", {
-        //   username,
-        //   password,
-        //   callbackUrl: reffrals
-        // })
         setisLoading(false)
-      } 
-      else {
+      } else {
         toast("Please choose another email to register", {
           position: "top-right",
           autoClose: 5000,
@@ -193,7 +189,7 @@ const UserReg = () => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined,
+          progress: undefined
         })
         setisLoading(false)
       }
@@ -214,10 +210,9 @@ const UserReg = () => {
   }
 
   const handleEmailExistence = async (e) => {
-    console.log(e.target.value);
-    const userEmail = e.target.value;
+    const userEmail = e.target.value
 
-    try{
+    try {
       const response = await fetch(
         process.env.NEXT_BASE_URL + "/api/auth/checkEmailExistence",
         {
@@ -232,8 +227,7 @@ const UserReg = () => {
         }
       )
       const json = await response.json()
-      console.log("exist email json",json)
-      if(json.code == "409"){
+      if (json.code == "409") {
         toast.info(json.message, {
           position: "top-right",
           autoClose: 5000,
@@ -242,11 +236,11 @@ const UserReg = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: "colored"
         })
         setisLoading(false)
       }
-    }catch(error){
+    } catch (error) {
       toast.error("Something Went to Wrong...", {
         position: "top-right",
         autoClose: 5000,
@@ -264,18 +258,7 @@ const UserReg = () => {
       title="My Account"
       description="Stemnovate page for new sign up, registartion. Check our term of use"
     >
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      /> */}
-       <ToastContainer />
+      <ToastContainer />
       <div className="ps-page ps-page--inner ">
         <div className="container">
           <div className="ps-page__header"></div>
@@ -357,7 +340,7 @@ const UserReg = () => {
                             {
                               type: "email",
                               message: "The input is not valid E-mail!"
-                            },
+                            }
                           ]}
                           label="Email"
                         >

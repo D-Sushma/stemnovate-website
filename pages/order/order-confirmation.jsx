@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState, useRef } from "react"
 import { getSession } from "next-auth/react"
 import useEcomerce from "~/hooks/useEcomerce"
@@ -29,15 +28,15 @@ function OrderConfirmation({ UserData }) {
 
   useEffect(() => {
     if (status) {
-      const fetchDetails = async ()=> {
+      const fetchDetails = async () => {
         updateStatus()
-        const orderDetails = await getOrderDetails()
+        const orderDetails = await getOrderDetails(status)
         if (status == "success") {
           removeItems("cart")
           insertCouponUsedData(orderDetails)
         }
       }
-      fetchDetails();
+      fetchDetails()
     }
   }, [status])
   useEffect(() => {
@@ -53,12 +52,10 @@ function OrderConfirmation({ UserData }) {
         MySummery.current.style.right = ""
         MySummery.current.style.top = ""
       }
-      console.log(MySummery.current.style)
-      console.log(window.scrollY)
     })
   }, [])
 
-  const getOrderDetails = async () => {
+  const getOrderDetails = async (status) => {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
 
@@ -74,19 +71,31 @@ function OrderConfirmation({ UserData }) {
       requestOptions
     )
     const userOrders = await response.json()
+    var list = userOrders?.userOrders[1];
+    var arr = []
+    list?.forEach((element) => {
+      if (element?.is_resource == true) {
+        arr.push({ resourceId: element?.product_id, userId: userOrders?.userOrders[0]?.customer_id })
+      }
+    })
+
+    if(status=='success'){
+        updateIsAccess(arr);
+    }
+   
+
     setOrderdata(userOrders.userOrders)
-    return userOrders.userOrders;
+    return userOrders.userOrders
   }
   const insertCouponUsedData = async (orderData) => {
     try {
-        await axios.post("/api/coupons/insertUsedCoupon", {
-          coupon_code: orderData[0]?.coupon_code,
-          discount_type: orderData[0]?.discount_type,
-          discount: orderData[0]?.discount,
-          customer_id: orderData[0]?.customer_id
-        })
+      await axios.post("/api/coupons/insertUsedCoupon", {
+        coupon_code: orderData[0]?.coupon_code,
+        discount_type: orderData[0]?.discount_type,
+        discount: orderData[0]?.discount,
+        customer_id: orderData[0]?.customer_id
+      })
     } catch (error) {
-      console.log("Error inserting coupon data",error)
     }
   }
 
@@ -114,8 +123,31 @@ function OrderConfirmation({ UserData }) {
       `${process.env.NEXT_BASE_URL}api/orders/addOrders`,
       requestOptions
     )
-    var resp = await res.json()
-    console.log(resp)
+  }
+
+  const updateIsAccess = async (arr) => {
+  var myHeaders = new Headers()
+  myHeaders.append("Content-Type", "application/json")
+
+  var raw = JSON.stringify({
+    UserIdId: arr[0].userId,
+    resources_id: arr[0]?.resourceId
+  })
+
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw
+  }
+
+  await fetch("/api/orders/updateAccessResource", requestOptions)
+    .then((response) => response.json())
+    .then(async (result) => {
+      if (result.code == "200") {
+       
+      }
+    })
+    .catch((error) => console.log("error", error))
   }
 
   return (
@@ -148,7 +180,7 @@ function OrderConfirmation({ UserData }) {
                           </h3>
                           <h5>
                             Order Date:{" "}
-                            {moment(orderData[0]?.order_date).format(
+                            {moment(orderData[0]?.order_date)?.format(
                               "MMMM Do YYYY"
                             )}
                           </h5>
@@ -318,47 +350,40 @@ function OrderConfirmation({ UserData }) {
                               <h4 className="my-3">ORDER SUMMARY</h4>
                               <table className="table" width="100%">
                                 <tr>
-                                  <th width="60%">Product Description</th>
-                                  <th width="16%">Price</th>
-                                  <th width="8%">Quantity</th>
+                                  <th width="15%"></th>
+                                  <th width="45%">Product Description</th>
+                                  <th width="8%">Price</th>
+                                  <th width="13%">Quantity</th>
                                   <th width="16%">Total</th>
                                 </tr>
                                 <tbody>
                                   {orderData &&
                                     orderData[1].map((item, key) => (
                                       <tr key={key}>
-                                        <td width="60%">
-                                          <div className="d-flex justify-content-start flex-row ">
-                                            {/* <img
-                                              className="d-flex m-2"
-                                              src={item.imgUrl}
-                                              // width="100px"
-                                              // height={"70px"}
-                                              alt={item.ProductName}
-                                            /> */}
+                                        <td width="15%">
+                                          <div>
                                             <Image
-                                              className="d-flex m-2"
+                                              className="hover-zoom d-flex m-2"
                                               src={item.imgUrl}
                                               alt={item.ProductName}
-                                              width={70}
-                                              height={70}
-                                              objectFit="cover"
-                                              placeholder="blur"
-                                              blurDataURL="/static/image/blurred.png"
+                                              width={100}
+                                              height={100}
+                                              objectFit="contain"
                                             />
-                                            <div
-                                              style={{ marginLeft: "5%" }}
-                                              className="d-flex flex-column"
-                                            >
-                                              {item.ProductName}
-                                              <br />
+                                          </div>
+                                        </td>
+                                        <td width="45%">
+                                          <div
+                                            style={{ marginRight: "5%" }}
+                                          >
+                                            {item.ProductName}
+                                            <br />
 
-                                              <span
-                                                dangerouslySetInnerHTML={{
-                                                  __html: item.description
-                                                }}
-                                              />
-                                            </div>
+                                            <span
+                                              dangerouslySetInnerHTML={{
+                                                __html: item.description
+                                              }}
+                                            />
                                           </div>
                                         </td>
                                         <td width="16%">
@@ -379,7 +404,6 @@ function OrderConfirmation({ UserData }) {
                         </div>
                         <div className="col-md-4">
                           {" "}
-                          {/* <div className="col-md-4" ref={MySummery}> */}
                           <div className="d-flex flex-column justify-content-center plus-section-new p-5">
                             <div className="">
                               <h2
@@ -395,9 +419,12 @@ function OrderConfirmation({ UserData }) {
                               </div>
                               <div className="d-flex ml-3">
                                 <p className="text-white">
-                                  £{orderData &&
-                                    (parseFloat(orderData[0].total_amount) -
-                                      parseFloat(orderData[0].total_tax)).toFixed(2)}
+                                  £
+                                  {orderData &&
+                                    (
+                                      parseFloat(orderData[0].total_amount) -
+                                      parseFloat(orderData[0].total_tax)
+                                    ).toFixed(2)}
                                 </p>
                               </div>
                             </div>
@@ -407,7 +434,9 @@ function OrderConfirmation({ UserData }) {
                               </div>
                               <div className="d-flex mr-3">
                                 <p className="text-white">
-                                  - £{orderData && (orderData[0].discount_amount).toFixed(2)}
+                                  - £
+                                  {orderData &&
+                                    orderData[0].discount_amount.toFixed(2)}
                                 </p>
                               </div>
                             </div>
@@ -417,9 +446,13 @@ function OrderConfirmation({ UserData }) {
                               </div>
                               <div className="d-flex ml-3">
                                 <p className="text-white">
-                                  £{orderData &&
-                                    (parseFloat(orderData[0].total_amount) -
-                                      parseFloat(orderData[0].total_tax) - orderData[0].discount_amount).toFixed(2) }
+                                  £
+                                  {orderData &&
+                                    (
+                                      parseFloat(orderData[0].total_amount) -
+                                      parseFloat(orderData[0].total_tax) -
+                                      orderData[0].discount_amount
+                                    ).toFixed(2)}
                                 </p>
                               </div>
                             </div>
@@ -429,8 +462,9 @@ function OrderConfirmation({ UserData }) {
                               </div>
                               <div className="d-flex ml-3">
                                 <p className="text-white">
-                                  £{orderData &&
-                                    (orderData[0].total_shipping_cost).toFixed(2)}
+                                  £
+                                  {orderData &&
+                                    orderData[0].total_shipping_cost.toFixed(2)}
                                 </p>
                               </div>
                             </div>
@@ -440,7 +474,9 @@ function OrderConfirmation({ UserData }) {
                               </div>
                               <div className="d-flex ml-3">
                                 <p className="text-white">
-                                  £{orderData && (orderData[0].vat_amount).toFixed(2)}
+                                  £
+                                  {orderData &&
+                                    orderData[0].vat_amount.toFixed(2)}
                                 </p>
                               </div>
                             </div>
@@ -457,7 +493,9 @@ function OrderConfirmation({ UserData }) {
                               </div>
                               <div className="d-flex ml-3">
                                 <p className="text-white">
-                                  £{orderData && (orderData[0].total_amount).toFixed(2)}
+                                  £
+                                  {orderData &&
+                                    orderData[0].total_amount.toFixed(2)}
                                 </p>
                               </div>
                             </div>

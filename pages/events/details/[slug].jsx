@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -33,7 +32,6 @@ const ProductList = dynamic(
 )
 
 const EventsDetails = ({ EventsData }) => {
-  console.log("EventsData", EventsData)
   var sponsor = JSON.parse(EventsData.data[0].Sponsor)
   var galleryPhotos =
     EventsData.data[0].gallery && EventsData.data[0].gallery.split(",")
@@ -90,7 +88,8 @@ const EventsDetails = ({ EventsData }) => {
     <Container
       title={EventsData.data[0].title}
       cronical={"/events"}
-      ogimg={`${process.env.AWS_S3BUCKET_URL}${EventsData.data[0].image}`}
+      ogimg={`${process.env.AWS_S3BUCKET_URL}${EventsData?.data[0]?.shareimage}`}
+      // ogimg={`${process.env.AWS_S3BUCKET_URL}${EventsData.data[0].image}`}
     >
       <main className="ps-page ps-page--inner">
         <div className="">
@@ -115,8 +114,6 @@ const EventsDetails = ({ EventsData }) => {
                       width={1341}
                       height={500}
                       // objectFit='cover'
-                      placeholder="blur"
-                      blurDataURL="/static/image/blurred.png"
                     />
                   </div>
                   <div className="container">
@@ -343,7 +340,6 @@ export async function getServerSideProps({ query }) {
     EventsData = await res.json()
   }
 
-  // // Pass data to the page via props
   return { props: { EventsData } }
 }
 export default connect((state) => state)(EventsDetails)

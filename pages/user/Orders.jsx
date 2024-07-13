@@ -28,7 +28,6 @@ const breadcrumb = [
 
 const Orders = ({ userOrders }) => {
   useEffect(() => {
-    console.log("userOrders", JSON.parse(userOrders))
   }, [])
 
   const columns = [
@@ -143,8 +142,8 @@ const Orders = ({ userOrders }) => {
               <div className="card">
                 <h5 className="card-header">Order Details</h5>
                 <div className="card-body">
-                  {console.log("data", userOrders)}
                   <Table
+                    className="table-responsive"
                     columns={columns}
                     dataSource={userOrders && JSON.parse(userOrders)}
                   />

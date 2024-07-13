@@ -17,8 +17,6 @@ function CouponFormSystem({ onCouponExistChange }) {
   
   const handleApplyClick = async () => {
     const couponDetail = await checkCouponExist();
-    // console.log("CouponCode", couponCode)
-    // console.log("couponDetail", couponDetail)
     
     onCouponExistChange(couponDetail?.result, couponCode)
   }

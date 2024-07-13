@@ -1,13 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import dynamic from 'next/dynamic'
-
 const Image = dynamic(() => import("~/components/elements/Image"), {
     loading: () => <p>Loading...</p>
 })
-
 const baseurl = "";
-
 const Logo = ({ url = "/", type = "default" }) => {
     if (type == "white") {
         return (
@@ -18,6 +15,7 @@ const Logo = ({ url = "/", type = "default" }) => {
                         alt="Stemnovate Limited"
                         width={1000}
                         height={300}
+                        priority={true}
                     />
                 </div>
             </Link>
@@ -25,11 +23,15 @@ const Logo = ({ url = "/", type = "default" }) => {
     } else if (type == "mobile") {
         return (
             <Link href={url} prefetch={false}>
-                <div className="ps-logo" title="Stemnovate Limited" style={{ width: "150px", height: "auto" }}>
-                    <img
+                <div className="ps-logo p-2" title="Stemnovate Limited" style={{ width: "150px", height: "auto" }}>
+                    <Image
                         src={baseurl + "/static/image/LogoFINAL.svg"}
                         alt="Stemnovate Limited"
-                        style={{ width: "150px", height: "auto", objectFit: "cover" }}
+                        width={1000}
+                        // height={150}
+                        height={200}
+                        objectFit= "cover"
+                        priority={true}
                     />
                 </div>
             </Link>
@@ -43,6 +45,7 @@ const Logo = ({ url = "/", type = "default" }) => {
                         alt="Stemnovate Limited"
                         width={1000}
                         height={300}
+                        priority={true}
                     />
                 </dic>
             </Link>

@@ -1,5 +1,6 @@
 import prisma from "~/lib/prisma";
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     try {
         if (req.method == "GET") {
             var getProducts = await prisma.products.findMany({
@@ -40,7 +41,6 @@ export default async (req, res) => {
             res.status(400).json("Bad Request");
         }
     } catch (error) {
-        // res.status(500).json({ status: 500, data: error });
         throw error;
     }
 };

@@ -54,8 +54,6 @@ const Events = ({ resourcesList }) => {
 }
 
 export async function getServerSideProps() {
-  // Fetch data from external API
-
   var myHeaders = new Headers()
   myHeaders.append("Content-Type", "application/json")
 
@@ -72,8 +70,6 @@ export async function getServerSideProps() {
     requestOptions
   )
   const resourcesList = await response.json()
-  console.log("campaign", resourcesList)
-  // Pass data to the page via props
   return { props: { resourcesList } }
 }
 

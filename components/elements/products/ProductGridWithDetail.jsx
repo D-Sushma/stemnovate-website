@@ -28,12 +28,12 @@ const ProductGridWithDetail = ({ product }) => {
       <div className="ps-product__content">
         <div className="ps-product__categories">
           <Link href="/shop">
-            <a>Thermometer Brand</a>
+            <a href="/shop">Thermometer Brand</a>
           </Link>
         </div>
         <h4 className="ps-product__title">
           <Link href="/product/[pid]" as={`/product/${product.id}`}>
-            <a>{product.name}</a>
+            <a href="/product/[pid]">{product.name}</a>
           </Link>
         </h4>
         {price(product)}

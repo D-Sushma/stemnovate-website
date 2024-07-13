@@ -66,13 +66,11 @@ const CheckoutScreen = ({ UserData }) => {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(
       `${process.env.NEXT_BASE_URL}api/orders/addOrders`,
       requestOptions
     )
     var resp = await res.json()
-    console.log(resp)
   }
 
   return (
@@ -84,16 +82,43 @@ const CheckoutScreen = ({ UserData }) => {
             <BreadCrumb breacrumb={breadcrumb} />
             <h1 className="ps-page__heading">Checkout</h1>
           </div>
-          {(!UserData?.result?.customer_address_details || !UserData?.result?.customer_application_details) 
-              && <div className="text-danger" style={{fontWeight: "bolder"}}>
-                NOTE: Please fill organization and shipping details before proceeding.{" "}
-                  <Link href="/user/MyApplication">
-                    <span className="link-hover-thumb-shape" style={{fontWeight: "bolder", textDecoration: "underline"}}>
-                      Click link here
-                    </span>
-                  </Link>
+          {(!UserData?.result?.customer_address_details ||
+            !UserData?.result?.customer_application_details) && (
+            <div className="text-danger" style={{ fontWeight: "bolder" }}>
+              NOTE: Please fill organization and shipping details before
+              proceeding.{" "}
+              <Link href="/user/MyApplication">
+                <span
+                  className="link-hover-thumb-shape"
+                  style={{ fontWeight: "bolder", textDecoration: "underline" }}
+                >
+                  Click link here
+                </span>
+              </Link>
             </div>
-          }
+          )}
+
+          {UserData && UserData?.result?.is_mat !== 1 ? (
+            <div className="alert alert-danger" role="alert">
+              Welcome to Stemnovate! Please complete your MAT (Material
+              Agreement Transfer) Form to proceed.{" "}
+              <Link href="/user/Mta">
+                <span
+                  className="link-hover-thumb-shape"
+                  style={{
+                    fontWeight: "bolder",
+                    textDecoration: "underline"
+                  }}
+                >
+                  Click link here
+                </span>
+              </Link>
+              {/* <a target="_blank" href="/user/Mta" rel="noopener noreferrer">
+                Click link here
+              </a> */}
+            </div>
+          ) : null}
+
           <div className="ps-page__content mb-5">
             {status && status === "success" && (
               <Alert
@@ -113,6 +138,7 @@ const CheckoutScreen = ({ UserData }) => {
                 closable
               />
             )}
+
             <div className="ps-checkout">
               <div className="ps-checkout__wapper">
                 {mySession ? (
@@ -128,6 +154,7 @@ const CheckoutScreen = ({ UserData }) => {
                           get custom pricing.
                         </div>
                       ) : null}
+
 
                       {UserData && UserData?.result?.is_verified == 0 ? (
                         <div className="alert alert-info" role="alert">
@@ -185,12 +212,10 @@ export async function getServerSideProps(ctx) {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(`${baseUrl}/api/user/UserDetails`, requestOptions)
     UserData = await res.json()
   }
 
-  // Pass data to the page via props
   return { props: { UserData } }
 }
 

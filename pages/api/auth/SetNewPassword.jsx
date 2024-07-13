@@ -1,13 +1,13 @@
 import prisma from "~/lib/prisma";
 import bcrypt from "bcrypt";
 import { decode } from "hex-encode-decode";
+
 export default async function handle(req, res) {
     if (req.method == "POST") {
         try {
             const { code, password, confirm } = req.body;
             if(code!==null)
             {
-
                 if(password==confirm)
                 {
                     const HexToPlain = decode(code);
@@ -32,9 +32,7 @@ export default async function handle(req, res) {
                             res.status(401).send(response);
                             return;
                           }
-
                         const hash = bcrypt.hashSync(confirm, 10);
-        
                         const updateUser = await prisma.customers.update({
                             where: {
                                 id: checkuser[0].id,
@@ -43,7 +41,6 @@ export default async function handle(req, res) {
                                 password: hash,
                             },
                         });
-
                       if(updateUser!==null)
                       {
                         const resullt = {
@@ -52,13 +49,11 @@ export default async function handle(req, res) {
                             
                             message: "Password Changed Successfully. Please Login With New Password",
                         };
-        
                         var response = {
                             code: "200",
                             result: resullt,
                         };
                         res.status(200).send(response);
-
                       }
                       else{
                         const resullt = {
@@ -66,15 +61,12 @@ export default async function handle(req, res) {
                             firstname: checkuser[0].firstname,
                             message: "Something Went To Wrong. Please try after some time",
                         };
-        
                          response = {
                             code: "500",
                             result: resullt,
                         };
                         res.status(500).send(response);
                       }
-        
-                       
                     } else {
                         response = {
                             code: "401",
@@ -83,7 +75,6 @@ export default async function handle(req, res) {
                         };
                         res.status(401).send(response);
                     }
-
                 }
                 else{
                     response = {
@@ -93,8 +84,6 @@ export default async function handle(req, res) {
                     };
                     res.status(401).send(response);
                 }
-              
-
             }
             else{
                 response = {
@@ -104,16 +93,9 @@ export default async function handle(req, res) {
                 };
                 res.status(401).send(response);
             }
-
-          
         } catch (error) {
             res.status(500).send({ error: true, message: error });
         }
-
-        // } else {
-
-        //     res.status(401).send({msg: "Unauthorized Access"});
-        // }
     } else {
         res.status(500).send({ error: true, message: "Bed Request" });
     }

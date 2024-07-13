@@ -5,6 +5,7 @@ import React, {useEffect} from "react";
         useEffect(() => {
             const script = document.createElement('script');
             script.src='https://js.hsforms.net/forms/v2.js';
+            script.async = true;
             document.body.appendChild(script);
     
             script.addEventListener('load', () => {

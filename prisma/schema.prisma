@@ -35,19 +35,24 @@ model products {
   id                          Int                          @id @default(autoincrement())
   prod_id                     String?                      @db.VarChar(225)
   product_name                String?                      @db.VarChar(255)
+  prod_meta_desc              String?                      @db.VarChar(255)
   coupon_code                 String?                      @db.VarChar(50)
   coupon_text                 String?                      @db.VarChar(255)
   product_description         String?                      @db.Text
+  important_notes             String?                      @db.Text
   CatalogueNumber             String?                      @db.VarChar(255)
   LotNumber                   String?                      @db.VarChar(255)
   short_description           String?                      @db.VarChar(255)
   Differentiation_tab         String?                      @db.VarChar(20)
   Pluripotency_tab            String?                      @db.VarChar(20)
   Product_details_pdf         String?                      @db.Text
+  privacy_policy_pdf          String?                      @db.Text
   ViralScreening_tab          String?                      @db.VarChar(20)
   category_id                 Int?
   description_tab             String?                      @db.VarChar(20)
   product_image               String?                      @db.Text
+  primary_product_image       String?                      @db.VarChar(255)
+  shareimage                  String?                      @db.VarChar(255)
   specification_tab           String?                      @db.VarChar(20)
   deliver_type                String?                      @db.VarChar(255)
   stock                       String?                      @db.VarChar(255)
@@ -56,7 +61,6 @@ model products {
   product_slug                String?                      @unique(map: "slug") @db.VarChar(255)
   resources_id                Int?                         @default(0)
   category                    category?                    @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "FK_category")
-  prod_meta_desc              String?                      @db.VarChar(255)
   microbiology_viralscreening microbiology_viralscreening?
   product_details             product_details?
   productdescription          productdescription?
@@ -175,6 +179,7 @@ model order_details {
   product_id           Int
   product_price        Float?   @db.Float
   product_quantity     Int?
+  is_resource          Boolean  @default(false)
   total_amount         Float?   @db.Float
   total_tax            Float?   @db.Float
   product_order_status String?  @db.VarChar(100)
@@ -275,6 +280,7 @@ model customers {
   created_at                   DateTime?                     @default(now()) @db.Timestamp(0)
   deleted_at                   DateTime?                     @db.Timestamp(0)
   is_verified                  Int?                          @default(0)
+  is_mat                       Int?                          @default(2)
   referral_link                String?                       @db.VarChar(50)
   customer_address_details     customer_address_details?
   customer_application_details customer_application_details?
@@ -314,9 +320,11 @@ model post {
   id              Int       @id @default(autoincrement())
   slug            String?   @db.Text
   name            String    @db.VarChar(255)
+  blog_meta_desc  String?   @db.Text
   description     String?   @db.Text
   thumbnail       String?   @db.Text
   banner_img      String?   @db.Text
+  shareimage      String?   @db.Text
   content         String?   @db.LongText
   post_categories Int?
   authorId        String    @db.VarChar(100)
@@ -328,7 +336,6 @@ model post {
   features        Boolean?  @default(false)
   authorName      String?   @db.VarChar(100)
   banner_title    String?   @db.VarChar(255)
-  blog_meta_desc  String?   @db.Text
 }
 
 model profile {
@@ -344,7 +351,6 @@ model session {
   sessionToken String   @unique(map: "UNIQUE") @db.VarChar(255)
   userId       Int
   user         user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "SessionUser")
-
   @@index([userId], map: "SessionUser")
 }
 
@@ -389,6 +395,11 @@ model campaign_data {
   slug                                     String?        @db.Text
   title                                    String?        @db.Text
   image                                    String?        @db.VarChar(100)
+  banner_img                               String?        @db.VarChar(100)
+  shareimage                               String?        @db.VarChar(100)
+  form_type                                String?        @db.VarChar(100)
+  portal_id                                String?        @db.VarChar(100)
+  form_id                                  String?        @db.VarChar(255)
   content                                  String?        @db.LongText
   created_by                               String?        @db.Text
   posted_at                                DateTime       @default(now()) @db.Timestamp(0)
@@ -406,8 +417,8 @@ model promotions_offer {
   title            String?   @db.Text
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
-  mobimage            String?   @db.VarChar(255)
-  shareimage         String?   @db.VarChar(255)
+  mobimage         String?   @db.VarChar(255)
+  shareimage       String?   @db.VarChar(255)
   start_date       DateTime? @db.Date
   end_date         DateTime? @db.Date
   customer_type    Int       @default(0)
@@ -422,27 +433,93 @@ model promotions_offer {
   btn_text         String?   @db.Text
   promo_content    String?   @db.Text
   promo_id         Int       @id @default(autoincrement())
-  share           Boolean   @default(false)
+  share            Boolean   @default(false)
+  published        Boolean   @default(false)
   delivery_type    String?   @db.LongText
   gender           String?   @db.LongText
   ethnicity        String?   @db.Text
 }
 
+
 model home_banner {
-  id               String    @unique(map: "id") @db.VarChar(200)
-  title            String?   @db.Text
-  url              String?   @db.Text
-  image            String?   @db.VarChar(255)
-  mobimage            String?   @db.VarChar(255)
-  shareimage            String?   @db.VarChar(255)
-  btn_text         String?   @db.Text
-  banner_content    String?   @db.Text
-  banner_id         Int       @id @default(autoincrement())
-  published       Boolean   @default(false)
-  share       Boolean   @default(false)
-  created_at      DateTime  @default(now()) @db.Timestamp(0)
-  updated_at      DateTime? @default(now()) @db.Timestamp(0)
-  deleted_at      DateTime? @db.DateTime(0)
+  id                         String     @unique(map: "id") @db.VarChar(200)
+  title                      String?    @db.Text
+  url                        String?    @db.Text
+  image                      String?    @db.VarChar(255)
+  mobimage                   String?    @db.VarChar(255)
+  shareimage                 String?    @db.VarChar(255)
+  btn_text                   String?    @db.Text
+  banner_content             String?    @db.Text
+  mobile_content             String?    @db.Text
+  btn_position               String?    @db.VarChar(50)
+  banner_content_position    String?    @db.VarChar(50)
+  left_margin_content        String?    @db.VarChar(50)
+  right_margin_content       String?    @db.VarChar(50)
+  top_margin_content         String?    @db.VarChar(50)
+  bottom_margin_content      String?    @db.VarChar(50)
+  left_margin_btn            String?    @db.VarChar(50)
+  right_margin_btn           String?    @db.VarChar(50)
+  top_margin_btn             String?    @db.VarChar(50)
+  bottom_margin_btn          String?    @db.VarChar(50)
+  banner_id                  Int        @id @default(autoincrement())
+  published                  Boolean    @default(false)
+  share                      Boolean    @default(false)
+  created_at                 DateTime   @default(now()) @db.Timestamp(0)
+  updated_at                 DateTime?  @default(now()) @db.Timestamp(0)
+  deleted_at                 DateTime?  @db.DateTime(0)
+}
+
+model coupons {
+  coupon_id         Int       @id @default(autoincrement())
+  coupon_code      String?    @db.VarChar(50)
+  discount_type    String     @db.VarChar(50)
+  expiry_date      DateTime?  @db.Date
+  discount         Float?     @db.Float
+  published        Boolean    @default(true)
+}
+
+model coupon_used {
+  id               Int        @id @default(autoincrement())
+  coupon_code      String?    @db.VarChar(50)
+  discount_type    String     @db.VarChar(50)
+  discount         Float?     @db.Float
+  customer_id      Int?       
+  created_date     DateTime?  @db.Date
+}
+
+model regions {
+  Id                Int       @id @default(autoincrement())
+  Regions           String?   @db.VarChar(255)
+  Counties          String?   @db.VarChar(255)
+}
+
+model home_video_banner {
+  id                     String       @unique(map: "id") @db.VarChar(200)
+  title                  String?      @db.Text
+  btn_text               String?      @db.Text
+  btn_position           String?      @db.VarChar(50)
+  video_text             String?      @db.Text
+  video_text_position    String?      @db.VarChar(50)
+  left_margin_text       String?      @db.VarChar(50)
+  right_margin_text      String?      @db.VarChar(50)
+  top_margin_text        String?      @db.VarChar(50)
+  bottom_margin_text     String?      @db.VarChar(50)
+  left_margin_btn        String?      @db.VarChar(50)
+  right_margin_btn       String?      @db.VarChar(50)
+  top_margin_btn         String?      @db.VarChar(50)
+  bottom_margin_btn      String?      @db.VarChar(50)
+  url                    String?      @db.Text
+  video                  String?      @db.VarChar(255)
+  mobvideo               String?      @db.VarChar(255)
+  shareimage             String?      @db.VarChar(255)
+  start_date             DateTime?    @db.Date
+  end_date               DateTime?    @db.Date
+  banner_id              Int          @id @default(autoincrement())
+  published              Boolean      @default(false)
+  share                  Boolean      @default(false)
+  created_at             DateTime     @default(now()) @db.Timestamp(0)
+  updated_at             DateTime?    @default(now()) @db.Timestamp(0)
+  deleted_at             DateTime?    @db.DateTime(0)
 }
 
 model blog_news {
@@ -463,11 +540,13 @@ model about_us {
   id               String    @unique(map: "id") @db.VarChar(200)
   intro            String?   @db.Text
   banner_img       String?   @db.VarChar(255)
+  shareimage       String?   @db.VarChar(255)
   banner_title     String?   @db.Text
   created_at       DateTime  @default(now()) @db.Timestamp(0)
   updated_at       DateTime? @default(now()) @db.Timestamp(0)
   deleted_at       DateTime? @db.DateTime(0)
   created_by       String?   @db.VarChar(255)
+  published        Boolean   @default(false)
 }
 
 model aboutus_team {
@@ -487,8 +566,8 @@ model aboutus_history {
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
   btn_text         String?   @db.Text
-  history_content     String?   @db.Text
-  history_id          Int       @id @default(autoincrement())
+  history_content  String?   @db.Text
+  history_id       Int       @id @default(autoincrement())
   published        Boolean   @default(false)
   created_at       DateTime  @default(now()) @db.Timestamp(0)
   updated_at       DateTime? @default(now()) @db.Timestamp(0)
@@ -500,13 +579,13 @@ model aboutus_partners {
   title            String?   @db.Text
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
-  partners_content     String?   @db.Text
+  partners_content String?   @db.Text
   is_feature       Boolean   @default(false)
-  feature_title     String?   @db.Text
-  feature_url       String?   @db.Text
-  feature_image     String?   @db.VarChar(255)
-  feature_content     String?   @db.Text
-  partners_id          Int       @id @default(autoincrement())
+  feature_title    String?   @db.Text
+  feature_url      String?   @db.Text
+  feature_image    String?   @db.VarChar(255)
+  feature_content  String?   @db.Text
+  partners_id      Int       @id @default(autoincrement())
   published        Boolean   @default(false)
   created_at       DateTime  @default(now()) @db.Timestamp(0)
   updated_at       DateTime? @default(now()) @db.Timestamp(0)
@@ -519,7 +598,7 @@ model aboutus_announce {
   url              String?   @db.Text
   image            String?   @db.VarChar(255)
   btn_text         String?   @db.Text
-  announce_id          Int       @id @default(autoincrement())
+  announce_id      Int       @id @default(autoincrement())
   published        Boolean   @default(false)
   created_at       DateTime  @default(now()) @db.Timestamp(0)
   updated_at       DateTime? @default(now()) @db.Timestamp(0)
@@ -579,6 +658,8 @@ model job_openings {
   company         String?   @db.VarChar(255)
   location        String?   @db.VarChar(255)
   salary          String?   @db.VarChar(255)
+  portal_id       String?   @db.VarChar(100)
+  form_id         String?   @db.VarChar(255)
   Job_type        String?   @db.Text
   Qualifications  String?   @db.Text
   job_details     String?   @db.LongText
@@ -588,6 +669,8 @@ model job_openings {
   created_at      DateTime? @default(now()) @db.DateTime(0)
   internship      Boolean?  @default(false)
   image           String?   @db.Text
+  banner_img      String?   @db.VarChar(100)
+  shareimage      String?   @db.VarChar(100)
 }
 
 model resorces_purchese_details {
@@ -597,6 +680,7 @@ model resorces_purchese_details {
   resources_id     Int?
   txn_id           String?    @db.Text
   payment_id       String?    @db.Text
+  is_access        Boolean    @default(false)
   collected_amount Float?     @db.Float
   strated_from     DateTime?  @default(now()) @db.DateTime(0)
   expiry_date      DateTime?  @db.DateTime(0)
@@ -653,7 +737,9 @@ model resources_category {
   deleted_at               DateTime?            @db.DateTime(0)
   created_by               String?              @db.VarChar(50)
   category_image           String?              @db.Text
+  shareimage               String?              @db.Text
   category_content         String?              @db.Text
+  published                Boolean              @default(false)
   master_id                Int?
   resources_category       resources_category?  @relation("resources_categoryToresources_category", fields: [master_id], references: [cat_id], onDelete: Cascade, map: "FK_MasterKey")
   resources                resources[]
@@ -667,10 +753,12 @@ model events_details {
   title       String    @db.Text
   slug        String    @db.Text
   image       String?   @db.Text
+  shareimage  String?   @db.VarChar(100)
   location    String?   @db.Text
   event_type  String?   @db.Text
   application String?   @db.Text
   content     String?   @db.LongText
+  longcontent     String?   @db.LongText
   date        DateTime  @db.DateTime(0)
   timing      String?   @db.Text
   start       DateTime? @db.DateTime(0)
@@ -684,6 +772,7 @@ model events_details {
   featured    Boolean?  @default(false)
   gallery     String?   @db.LongText
   banner      String?   @db.Text
+  published        Boolean   @default(false)
   status      Int?      @default(0)
 }
 
@@ -741,26 +830,131 @@ model resources_structural_analysis {
   @@index([rel_resources], map: "FK_stuctural")
 }
 
-model coupons {
-  coupon_id         Int         @id @default(autoincrement())
-  coupon_code       String?     @db.VarChar(50)
-  discount_type     String?     @db.VarChar(50)
-  expiry_date       DateTime?   @db.Date
-  discount          Float?      @db.Float
-  published         Boolean     @default(true)
+model home_footer_image {
+  id                         String       @unique(map: "id") @db.VarChar(200)
+  bottom_img                 String?      @db.VarChar(255)
+  published                  Boolean      @default(false)
+  created_at                 DateTime     @default(now()) @db.Timestamp(0)
+  updated_at                 DateTime?    @default(now()) @db.Timestamp(0)
+  deleted_at                 DateTime?    @db.DateTime(0)
 }
 
-model regions {
-  Id                Int       @id @default(autoincrement())
-  Regions           String?   @db.VarChar(255)
-  Counties          String?   @db.VarChar(255)
+model announcements {
+  id              Int       @id @default(autoincrement())
+  slug            String?   @db.Text
+  name            String    @db.VarChar(255)
+  blog_meta_desc  String?   @db.Text
+  description     String?   @db.Text
+  thumbnail       String?   @db.Text
+  banner_img      String?   @db.Text
+  content         String?   @db.LongText
+  post_categories Int?
+  authorId        String    @db.VarChar(100)
+  published       Boolean   @default(false)
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  updated_at      DateTime? @default(now()) @db.Timestamp(0)
+  deleted_at      DateTime? @db.DateTime(0)
+  tag             String?   @db.VarChar(200)
+  features        Boolean?  @default(false)
+  authorName      String?   @db.VarChar(100)
+  banner_title    String?   @db.VarChar(255)
 }
 
-model coupon_used {
-  id               Int          @id @default(autoincrement())
-  coupon_code      String?      @db.VarChar(50)
-  discount_type    String?      @db.VarChar(50)
-  discount         Float?       @db.Float
-  customer_id      Int?       
-  created_date     DateTime?    @db.Date
+model header_banners {
+  id                   Int            @id @default(autoincrement())
+  page_name            String         @db.VarChar(100)
+  banner_img           String?        @db.Text
+  og_img               String?        @db.Text
+  banner_content       String?        @db.Text
+  og_desc              String?        @db.Text
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  updated_at           DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at           DateTime?      @db.DateTime(0)
+}
+
+model resources_requestaccess {
+  id                                               Int                         @id @default(autoincrement())
+  user_id                                          Int                         @default(11)
+  resources_id                                     Int                         @default(11)
+  published                                        Boolean                     @default(true)
+  created_at                                       DateTime?                   @default(now()) @db.DateTime(0)
+  deleted_at                                       DateTime?                   @db.DateTime(0)
+  updated_at                                       DateTime?                   @db.DateTime(0)
+}
+
+model imp_policies {
+  id                      Int            @id @default(autoincrement())
+  privacy_policy          String?        @db.LongText
+  cookies_policy          String?        @db.LongText
+  created_at              DateTime       @default(now()) @db.Timestamp(0)
+  updated_at              DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at              DateTime?      @db.DateTime(0)
+}
+
+model home_about_section {
+  id                   String         @unique(map: "id") @db.VarChar(200)
+  btn_url              String?        @db.Text
+  section_title        String?        @db.VarChar(255)
+  btn_text             String?        @db.VarChar(255)
+  content              String?        @db.Text
+  published            Boolean        @default(false)
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  updated_at           DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at           DateTime?      @db.DateTime(0)
+}
+model home_services {
+  id                   String         @unique(map: "id") @db.VarChar(200)
+  title1               String?        @db.VarChar(255)
+  title2               String?        @db.VarChar(255)
+  content1             String?        @db.Text
+  content2             String?        @db.Text
+  content3             String?        @db.Text
+  content4             String?        @db.Text
+  image1               String?        @db.Text
+  image2               String?        @db.Text
+  btn_text1            String?        @db.VarChar(255)
+  btn_text2            String?        @db.VarChar(255)
+  btn_url1             String?        @db.Text
+  btn_url2             String?        @db.Text
+  section              String         @db.VarChar(100)
+  published            Boolean        @default(false)
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  updated_at           DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at           DateTime?      @db.DateTime(0)
+}
+model home_clients {
+  id                   String         @unique(map: "id") @db.VarChar(200)
+  image                String?        @db.Text
+  image_url            String?        @db.Text
+  published            Boolean        @default(false)
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  updated_at           DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at           DateTime?      @db.DateTime(0)
+}
+
+model home_promotion_reviews {
+  id                   String         @unique(map: "id") @db.VarChar(200)
+  section_title        String?        @db.VarChar(255)
+  content              String?        @db.Text
+  btn_text             String?        @db.VarChar(255)
+  btn_url              String?        @db.Text
+  rating               Int            
+  section_type         String         @db.VarChar(100)
+  published            Boolean        @default(false)
+  created_at           DateTime       @default(now()) @db.Timestamp(0)
+  updated_at           DateTime?      @default(now()) @db.Timestamp(0)
+  deleted_at           DateTime?      @db.DateTime(0)
+}
+
+model home_top_trending {
+  id             Int             @id @default(autoincrement())
+  section_type   String?         @db.VarChar(255)
+  section_title  String?         @db.Text
+  image          String?         @db.Text
+  btn_url        String?         @db.Text
+  section_order  Int             @default(0)
+  status         Int             @default(0)
+  created_at     DateTime        @default(now()) @db.Timestamp(0)
+  updated_at     DateTime        @default(now()) @db.Timestamp(0)
+  deleted_at     DateTime?       @db.DateTime(0)
 }

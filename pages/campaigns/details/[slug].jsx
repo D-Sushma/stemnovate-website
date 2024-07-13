@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -29,7 +28,6 @@ const Subscribe = dynamic(
 )
 
 const EventsDetails = ({ EventsData }) => {
-  console.log("EventsData", EventsData)
   var sponsor = JSON.parse(EventsData.data[0].Sponsor)
   var galleryPhotos =
     EventsData.data[0].gallery && EventsData.data[0].gallery.split(",")
@@ -305,7 +303,6 @@ export async function getServerSideProps({ query }) {
     EventsData = await res.json()
   }
 
-  // // Pass data to the page via props
   return { props: { EventsData } }
 }
 export default connect((state) => state)(EventsDetails)

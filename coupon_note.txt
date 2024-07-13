@@ -1,0 +1,127 @@
+const productArray = [];
+if (cartItems && cartItems.length > 0) {
+  productArray.push(...cartItems);
+}
+
+let isProductFound = false;
+
+const filteredProducts = productArray.filter(
+  (item) => coupon?.coupon_code === item?.coupon_code
+);
+
+const maxAmountProduct = filteredProducts.reduce((maxProduct, item) => {
+  if (!maxProduct || item.amount > maxProduct.amount) {
+    // Update maxProduct if the current item has a higher amount
+    return item;
+  }
+  return maxProduct;
+}, null);
+
+if (maxAmountProduct) {
+  myArr.push(maxAmountProduct);
+  setCouponProductData(myArr);
+  setCouponApplied(true);
+  setCouponDetail(couponData);
+} else {
+  toast.warning("Coupon is not available for this product.");
+}
+
+console.log("couponProductData", couponProductData);
+
+
+
+
+
+
+const productArray = [];
+if (cartItems && cartItems.length > 0) {
+  productArray.push(...cartItems);
+}
+
+let isProductFound = false;
+
+const maxAmountProduct = productArray.reduce((maxProduct, item) => {
+  if (coupon?.coupon_code === item?.coupon_code) {
+    console.log("YES product has coupon ------------------");
+    isProductFound = true;
+    console.log("isProductFound", isProductFound);
+
+    if (!maxProduct || item.amount > maxProduct.amount) {
+      // Update maxProduct if the current item has a higher amount
+      return item;
+    }
+  }
+  return maxProduct;
+}, null);
+
+if (maxAmountProduct) {
+  myArr.push(maxAmountProduct);
+  setCouponProductData(myArr);
+  setCouponApplied(true);
+  setCouponDetail(couponData);
+} else {
+  toast.warning("Coupon is not available for this product.");
+}
+
+console.log("couponProductData", couponProductData);
+
+
+
+
+
+
+
+const productArray = [];
+if (cartItems && cartItems.length > 0) {
+  productArray.push(...cartItems);
+}
+
+let isProductFound = false;
+let maxAmountProduct = null;
+
+productArray.forEach((item) => {
+  if (coupon?.coupon_code === item?.coupon_code) {
+    console.log("YES product has coupon ------------------");
+    isProductFound = true;
+    console.log("isProductFound", isProductFound);
+
+    if (maxAmountProduct === null || item.amount > maxAmountProduct.amount) {
+      // Update maxAmountProduct if the current item has a higher amount
+      maxAmountProduct = item;
+    }
+  }
+});
+
+if (maxAmountProduct !== null) {
+  myArr.push(maxAmountProduct);
+  setCouponProductData(myArr);
+  setCouponApplied(true);
+  setCouponDetail(couponData);
+} else {
+  toast.warning("Coupon is not available for this product.");
+}
+
+console.log("couponProductData", couponProductData);
+
+
+
+
+// my logic--------------------
+// if (item?.price > maxAmount) {
+                //   maxAmount = item?.price;
+                //   // maxAmountProduct = item;
+                //   myArr = [item];
+                // }else if (item.amount === maxAmount) {
+                //   myArr.push(item); 
+                // }
+                if(myArr.length === 0 || item?.price > myArr[0]?.price){ 
+                  myArr = [item];
+                } else if(item?.price === myArr[0]?.price){
+                  myArr.push(item);
+                }
+                // myArr.push(item);
+                console.log("myArr.length, myArr[0]?.price", myArr.length, myArr[0]?.price)
+              }
+            })
+            // myArr.push(maxAmountProduct);
+            setCouponProductData(myArr);

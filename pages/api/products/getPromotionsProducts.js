@@ -17,16 +17,15 @@ const addPrice = (getProducts, promotionsData) => {
     return getProducts;
 };
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     try {
         if (req.method == "GET") {
-            var is_promotions = 0;
             const { promoId } = req.query;
             const newQuery = {};
             if (promoId) {
                 const promotionsData = await prisma.promotions_offer.findMany({
                     where: { id: promoId },
                 });
-
                 if (promotionsData.length > 0) {
                     const element = promotionsData[0].product_category;
                     var str_array = JSON.parse(element);
@@ -46,13 +45,9 @@ export default async (req, res) => {
                             product_id.push(parseInt(element.id));
                         }
                     }
-
-
                     const delivery_type = promotionsData[0].delivery_type;
                     const gender = promotionsData[0].gender;
                     const ethnicity = promotionsData[0].ethnicity;
-                    const discount_percent = promotionsData[0].discount_percent;
-
 
                     if (product_id.length > 0) {
                         newQuery["id"] = { in: product_id };
@@ -78,8 +73,6 @@ export default async (req, res) => {
                         }
                     }
 
-                    console.log("newQuery", newQuery);
-
                     var getProducts = await prisma.products.findMany({
                         where: newQuery,
                         select: {
@@ -89,6 +82,7 @@ export default async (req, res) => {
                             product_description: true,
                             short_description: true,
                             product_image: true,
+                            primary_product_image: true,
                             product_details: true,
                             category: {
                                 select: {
@@ -101,7 +95,6 @@ export default async (req, res) => {
                     res.status(200).json(mydata);
 
                 } else {
-                    console.log("Error");
                     res.status(200).json({ status: 201, data: [] });
                 }
             }
@@ -109,7 +102,6 @@ export default async (req, res) => {
             res.status(400).json("Bad Request");
         }
     } catch (error) {
-        // res.status(500).json({ status: 500, data: error });
         throw error;
     }
 };

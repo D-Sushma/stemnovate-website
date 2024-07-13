@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react"
 import FooterLinks from "~/public/static/data/footer.json"
-import Image from "next/image"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 
@@ -17,6 +16,10 @@ const ModuleFooterBottom = dynamic(
   () => import("~/components/shared/footers/modules/ModuleFooterBottom"),
   { loading: () => <p>Loading...</p> }
 )
+
+const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
 
 const FooterDefault = () => {
   return (
@@ -42,19 +45,12 @@ const FooterDefault = () => {
                     alt="QMS"
                     width={1000}
                     height={500}
-                    style={{
-                      width: "150px",
-                      marginBottom: "10px"
-                    }}
                   />
                   <Image
                     src="/static/image/HTA.svg"
                     alt="HTA"
                     width={1000}
                     height={500}
-                    style={{
-                      width: "150px"
-                    }}
                   />
                 </div>
                 <div className="d-flex">
@@ -65,9 +61,6 @@ const FooterDefault = () => {
                       alt="secure"
                       width={1000}
                       height={500}
-                      style={{
-                        width: "150px"
-                      }}
                     />
                   </p>
                 </div>

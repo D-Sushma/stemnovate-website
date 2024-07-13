@@ -13,12 +13,15 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
 
-const texicologyScreen = () => {
+const texicologyScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -37,18 +40,42 @@ const texicologyScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
+
   return (
     <>
       <Container
-        title="Cellular Differentiation"
-        description={`We use mechanical and chemical stimuli to direct IPSC to the liver, heart, neurons, bone and muscle cells, to name a few`}
+        title="Cellular Differentiation | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h service-breadcrumb-bg">
+          <div className="ps-page__header breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="cell-differentiation-banner"
+              src={bgImage}
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />{" "}
               <h1 className="text-center  text-white ">
-                Cellular Differentiation
+                {ProductData?.ProductData?.data[0]?.banner_content}
               </h1>
             </div>
           </div>
@@ -56,57 +83,64 @@ const texicologyScreen = () => {
           <div className="ps-page__content ">
             <div className="ps-about">
               <div className=" about-section ">
-                <div className="container center-box">
-                  <p className=" vertical-center">
-                    Cell differentiation is known as a process in which cells
-                    become specialized. Stem cells have the potential to become
-                    any cell type at the beginning, but this capability is
-                    slowly lost as the cell differentiates and gains unique
-                    functions. The differentiation process also changes shape,
-                    size, and energy requirements. Interestingly, reprogramming
-                    can manipulate cells back to stemness.
-                    <br />
-                    We differentiate cells through the integration of different
-                    stimuli that can be both mechanical and chemical.
-                  </p>
+                <div className="container">
+                  <div>
+                    <p>
+                      Cell differentiation is known as a process in which cells
+                      become specialized. Stem cells have the potential to
+                      become any cell type at the beginning, but this capability
+                      is slowly lost as the cell differentiates and gains unique
+                      functions. The differentiation process also changes shape,
+                      size, and energy requirements. Interestingly,
+                      reprogramming can manipulate cells back to stemness.
+                    </p>
+                    <p>
+                      We differentiate cells through the integration of
+                      different stimuli that can be both mechanical and
+                      chemical.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className=" bg-02-section">
+              <div className="plus-section">
                 <div className="container">
-                  <section className="ps-section--block-grid py-5">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/services/cellular-differentiation.jpg"
+                            src="/static/img/services/cellular-differentiation.svg"
                             alt="Cellular Differentiation"
-                            width={1200}
-                            height={675}
+                            width={488}
+                            height={275}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc ">
                         <h2 className="p-1 text-white font-weight-bold">
                           Cellular Differentiation
                         </h2>
-                        <p className="text-white ">
-                          All cells are derived from stem cells and obtain their
-                          functions as they mature. Cell differentiation is how
-                          progenitor cells change their functional or
-                          phenotypical type.
-                          <br />
-                          <br />
-                          Interestingly, the differentiation process alters the
-                          cell&apos;s shape, size, and energy requirements.
-                          <br />
-                          <br />
-                          We use mechanical and chemical stimuli to direct IPSC
-                          to the liver, heart, neurons, bone and muscle cells,
-                          to name a few.
-                        </p>
+                        <div>
+                          <p className="text-white ">
+                            All cells are derived from stem cells and obtain
+                            their functions as they mature. Cell differentiation
+                            is how progenitor cells change their functional or
+                            phenotypical type.
+                          </p>
+                          <p className="text-white ">
+                            Interestingly, the differentiation process alters
+                            the cell's shape, size, and energy requirements.
+                          </p>
+                          <p className="text-white ">
+                            We use mechanical and chemical stimuli to direct
+                            IPSC to the liver, heart, neurons, bone and muscle
+                            cells, to name a few.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </section>
@@ -121,24 +155,28 @@ const texicologyScreen = () => {
                       <h2 className="p-1 text-center font-weight-bold">
                         More Information
                       </h2>
-                      <p>
-                        Our differentiation processes are guided by several
-                        years of research, in-depth understanding of principles
-                        of development, advanced gene and protein expression
-                        studies along with novel methods of microengineering and
-                        computational data analysis.
+                      <div>
+                        <p style={{ fontSize: 17 }}>
+                          Our differentiation processes are guided by several
+                          years of research, in-depth understanding of
+                          principles of development, advanced gene and protein
+                          expression studies along with novel methods of
+                          microengineering and computational data analysis.
+                        </p>
                         <br />
+                        <p>
+                          Stemnovate has established protocols that have higher
+                          efficiency of differentiation as well as
+                          reproducibility. This saves effort reinventing the
+                          wheel and ensures efficiency for the application
+                          development.{" "}
+                        </p>
                         <br />
-                        Stemnovate has established protocols that have higher
-                        efficiency of differentiation as well as
-                        reproducibility. This saves effort reinventing the wheel
-                        and ensures efficiency for the application development.{" "}
-                        <br />
-                        <br />
-                        You can request a quote to learn more about our
-                        application development.
-                        {/* You can build your project here and request a quote to learn more about our application development. */}
-                      </p>
+                        <p>
+                          You can request a quote to learn more about our
+                          application development.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -179,7 +217,7 @@ const texicologyScreen = () => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.slug
-  var ProductData = []
+  var ProductData1 = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -199,10 +237,32 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ProductData = myProductData
+    ProductData1 = myProductData
   }
 
-  // // Pass data to the page via props
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Cell Differentiation"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   return { props: { ProductData } }
 }
 

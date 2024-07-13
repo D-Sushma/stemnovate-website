@@ -27,7 +27,6 @@ const CategoryScreen = () => {
   const { withGrid } = useProductGroup()
 
   useEffect(() => {
-    console.log(slug)
     slug && getCategoryBySlug(slug)
   }, [slug])
 

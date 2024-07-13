@@ -40,7 +40,6 @@ const breadcrumb = [
 function promotionOffer({ ProductData }) {
   const router = useRouter()
   const query = router.query
-  console.log("ProductData", ProductData.data[0].title)
   const { loading, productItems, getPromotionalProducts } = useGetProducts()
   const { withGrid, withList } = useProductGroup()
   let products = ""
@@ -149,7 +148,6 @@ export async function getServerSideProps({ query }) {
     }
   }
 
-  // // Pass data to the page via props
   return { props: { ProductData } }
 }
 

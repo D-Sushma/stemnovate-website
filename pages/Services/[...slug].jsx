@@ -130,7 +130,6 @@ export async function getServerSideProps({ query }) {
     ProductData = myProductData
   }
 
-  // // Pass data to the page via props
   return { props: { ProductData } }
 }
 

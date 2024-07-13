@@ -1,9 +1,9 @@
 import prisma from "~/lib/prisma"
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 's-maxage=86400')
   if (req.method == "POST") {
     const { tokenId, resources_token } = req.body
-    console.log(" req.body", req.body)
     if (resources_token) {
       if (tokenId !== "") {
         var ResourcesData = await prisma.resources.findMany({
@@ -33,7 +33,6 @@ export default async function handler(req, res) {
         if (ResourcesData.length > 0) {
           res.status(200).json({ status: 200, data: ResourcesData })
         } else {
-          console.log("Error")
           res.status(200).json({ status: 201, data: [] })
         }
       } else {

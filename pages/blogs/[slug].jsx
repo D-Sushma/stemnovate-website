@@ -17,6 +17,7 @@ import { scroller } from "react-scroll"
 import { TbEdit, TbCalendarEvent } from "react-icons/tb"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { FaInstagram } from "react-icons/fa"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -60,6 +61,14 @@ const Blogs = (props) => {
     }
   }, [])
 
+  var shareimage = blogData.shareimage
+ // console.log("share",resourcesData.data[0])
+  if(shareimage !== undefined || shareimage !== null){
+     var ogImage = `${process.env.AWS_S3BUCKET_URL}${blogData.shareimage}`
+  }else{
+     var ogImage = `${process.env.AWS_S3BUCKET_URL}${blogData.thumbnail}`
+  }
+
   const onHashChanged = () => {
     const hash = window.location.hash.substring(1)
     scroller.scrollTo(hash, {
@@ -97,7 +106,7 @@ const Blogs = (props) => {
       title={blogData?.name}
       description={blogData?.blog_meta_desc}
       cronical={"/blog-news"}
-      ogimg={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
+      ogimg={ogImage}
     >
       <main className="ps-page ps-page--inner">
         <div
@@ -108,7 +117,7 @@ const Blogs = (props) => {
         >
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1 className="text-center h1 text-white p-2">
+            <h1 className="text-center h1 text-white p-2 ">
               {blogData?.banner_title}
             </h1>
           </div>
@@ -117,10 +126,10 @@ const Blogs = (props) => {
           <div className="ps-about">
             <div className="">
               <div className="container">
-                <section className="ps-section--block-grid ">
+                <section className="ps-section--block-grid pt-3">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image w-100 h-100 link-hover-thumb-shape image-box-container mb-0 mx-2 image-box-container-mb">
                         <img
                           src={`${process.env.AWS_S3BUCKET_URL}${blogData?.thumbnail}`}
                           alt={blogData?.name}
@@ -173,13 +182,23 @@ const Blogs = (props) => {
                         >
                           <LinkedinIcon size={42} round />
                         </LinkedinShareButton>
-                        <WhatsappShareButton
-                          url={url}
-                          quote={blogData?.name}
-                          hashtag={"#Stemnovate"}
+                        <a
+                          target="_blank"
+                          className="ps-social__link instagram"
+                          href={"https://www.instagram.com/?share=" + url}
+                          rel="noreferrer"
                         >
-                          <WhatsappIcon size={42} round />
-                        </WhatsappShareButton>
+                          <FaInstagram
+                            style={{
+                              backgroundColor: "#fa7e1e",
+                              borderRadius: 25,
+                              padding: 5
+                            }}
+                            className="m-1"
+                            color="#ffffff"
+                            size={40}
+                          />
+                        </a>
                       </div>
                       <div className="col-md-12"></div>
                     </div>
@@ -196,7 +215,7 @@ const Blogs = (props) => {
               </div>
             </div>
 
-         <Subscribe />
+            <Subscribe />
           </div>
         </div>
       </main>
@@ -205,7 +224,6 @@ const Blogs = (props) => {
 }
 
 export async function getServerSideProps({ query }) {
-  // Fetch data from external API
   const slug = query.slug
 
   var myHeaders = new Headers()
@@ -223,7 +241,6 @@ export async function getServerSideProps({ query }) {
 
   const response = await fetch(baseUrl + "/api/blog/getBlogs", requestOptions)
   const PostList = await response.json()
-  // Pass data to the page via props
   return { props: { PostList } }
 }
 

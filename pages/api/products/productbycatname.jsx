@@ -1,17 +1,15 @@
 import prisma from "~/lib/prisma";
 import { Prisma } from "@prisma/client";
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     try {
         if (req.method == "POST") {
             var { slug } = req.body;
-            console.log(decodeURIComponent(slug));
-
             const categorie = await prisma.category.findMany({
                 where: {
                     slug: slug,
                     status: 1,
                     deleted_at: null,
-                    // is_perent: 1,
                 },
                 select: {
                     id: true,
@@ -21,7 +19,6 @@ export default async (req, res) => {
                     slug: true,
                 },
             });
-
             const categories = await prisma.category.findMany({
                 where: {
                     parentcategory: categorie[0].id,
@@ -47,7 +44,6 @@ export default async (req, res) => {
                     },
                 },
             });
-
             var getProducts = await prisma.products.findMany({
                 where: {
                     category_id: parseInt(categorie[0].id),
@@ -64,6 +60,7 @@ export default async (req, res) => {
                     stock: true,
                     deliver_type: true,
                     product_image: true,
+                    primary_product_image: true,
                     Product_details_pdf: true,
                     description_tab: true,
                     specification_tab: true,
@@ -99,7 +96,7 @@ export default async (req, res) => {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
             // The .code property can be accessed in a type-safe manner
             if (e.code === "P2002") {
-                console.log("There is a unique constraint violation, a new user cannot be created with this email");
+               
             }
         }
         throw e;

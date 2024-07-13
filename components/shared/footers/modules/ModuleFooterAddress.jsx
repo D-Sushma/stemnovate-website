@@ -9,22 +9,22 @@ const ModuleFooterAddress = () => {
                     <p className=" font-weight-bold">
                         <FaMapMarkerAlt className="mb-1" /> Trading address
                     </p>
-                    <p className="text-left">
-                        Stemnovate Limited <br />
-                        IdeaSpace West <br />
-                        Entrepreneurship Centre <br /> 3 Charles Babbage Road <br /> Cambridge <br />
-                        CB3 OGT
-                    </p>
+                    <p>Stemnovate Limited</p>
+                    <p>IdeaSpace West</p>
+                    <p>Entrepreneurship Centre</p>
+                    <p>3 Charles Babbage Road</p>
+                    <p>Cambridge</p>
+                    <p>CB3 OGT</p>
                 </div>
                 <div className="d-flex flex-column text-capitalize">
                     <p className=" font-weight-bold">
                         <FaMapMarkerAlt className="mb-1" /> Laboratory Address
                     </p>
-                    <p className="text-left">
-                        Stemnovate Limited <br /> Maia Building (270) <br /> Babraham research campus <br /> Cambridge
-                        <br />
-                        CB22 3AT
-                    </p>
+                    <p>Stemnovate Limited</p>
+                    <p>Maia Building (270)</p>
+                    <p>Babraham research campus</p>
+                    <p>Cambridge</p>
+                    <p>CB22 3AT</p>
                 </div>
             </div>
         </div>

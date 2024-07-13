@@ -3,7 +3,8 @@ import Link from "next/link"
 import useProduct from "~/hooks/useProduct"
 const ProductOnCart = ({ product, children, simple = false }) => {
   const { price } = useProduct()
-  const images = product.product_image.split(",")
+  const images = product.primary_product_image?.split(",")
+  // const images = product.product_image.split(",")
   if (simple) {
     return (
       <div className="ps-product--on-cart simple">
@@ -13,14 +14,14 @@ const ProductOnCart = ({ product, children, simple = false }) => {
               href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
               as={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
             >
-              <a className="ps-product__overlay"></a>
+              <a href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`} className="ps-product__overlay"></a>
             </Link>
           ) : (
             <Link
               href={`/product/${product.product_slug}`}
               as={`/product/${product.product_slug}`}
             >
-              <a className="ps-product__overlay"></a>
+              <a href={`/product/${product.product_slug}`} className="ps-product__overlay"></a>
             </Link>
           )}
 
@@ -36,14 +37,14 @@ const ProductOnCart = ({ product, children, simple = false }) => {
                 href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
                 as={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
               >
-                <a>{product.product_name}</a>
+                <a  href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}>{product.product_name}</a>
               </Link>
             ) : (
               <Link
                 href={`/product/${product.product_slug}`}
                 as={`/product/${product.product_slug}`}
               >
-                <a>{product.product_name}</a>
+                <a href={`/product/${product.product_slug}`}>{product.product_name}</a>
               </Link>
             )}
           </h4>
@@ -59,14 +60,14 @@ const ProductOnCart = ({ product, children, simple = false }) => {
               href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
               as={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
             >
-              <a className="ps-product__overlay"></a>
+              <a href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`} className="ps-product__overlay"></a>
             </Link>
           ) : (
             <Link
               href={`/product/${product.product_slug}`}
               as={`/product/${product.product_slug}`}
             >
-              <a className="ps-product__overlay"></a>
+              <a href={`/product/${product.product_slug}`} className="ps-product__overlay"></a>
             </Link>
           )}
 
@@ -82,14 +83,14 @@ const ProductOnCart = ({ product, children, simple = false }) => {
                 href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
                 as={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}
               >
-                <a>{product.product_name}</a>
+                <a  href={`/resources/details/${product.resources_category_resourcesToresources_category.slug}/${product.resources_id}/${product.access_type}`}>{product.product_name}</a>
               </Link>
             ) : (
               <Link
                 href={`/product/${product.product_slug}`}
                 as={`/product/${product.product_slug}`}
               >
-                <a>{product.product_name}</a>
+                <a href={`/product/${product.product_slug}`} >{product.product_name}</a>
               </Link>
             )}
           </h4>

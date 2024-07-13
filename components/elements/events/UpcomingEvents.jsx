@@ -3,14 +3,18 @@ import React, { useEffect, useState } from "react"
 import { FaCalendarAlt, FaLocationArrow } from "react-icons/fa"
 import { baseUrl } from "~/repositories/Repository"
 import Link from "next/link"
-import dynamic from "next/dynamic"
+// import Loader from "~/components/reuseable/Loader"
+// import Image from '~/components/elements/Image'
+import dynamic from 'next/dynamic'
 
-const Image = dynamic(() => import("~/components/elements/Image"), {
-  loading: () => <p>Loading...</p>
-})
-const Loader = dynamic(() => import("~/components/reuseable/Loader"), {
-  loading: () => <p>Loading...</p>
-})
+const Image = dynamic(
+  () => import("~/components/elements/Image"),
+  {loading: ()=> <p>Loading...</p>}
+)
+const Loader = dynamic(
+  () => import("~/components/reuseable/Loader"),
+  {loading: ()=> <p>Loading...</p>}
+)
 
 function UpcomingEvents({ currentEvent }) {
   const [events, setEvents] = useState([])
@@ -71,7 +75,6 @@ function UpcomingEvents({ currentEvent }) {
                               alt={data.title}
                               width={1200}
                               height={675}
-                              priority
                             />
                             <h3 className="  mt-3">{data.title}</h3>
                             <div className="d-flex m-2">

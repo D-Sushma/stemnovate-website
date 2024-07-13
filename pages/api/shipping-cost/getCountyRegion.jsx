@@ -8,7 +8,6 @@ export default async function handleCountyRegion (req,res) {
                 Counties: county
             }
         })
-        console.log("countyRegion",countyRegion);
 
         res.status(200).json({
             code: "200",

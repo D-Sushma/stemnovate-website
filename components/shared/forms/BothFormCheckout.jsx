@@ -15,16 +15,15 @@ import { useRouter } from "next/router"
 
 function BothFormCheckout({ ecomerce, userStatus, UserData }) {
   console.log("userData", UserData.result)
+  console.log("userData----------", UserData.result.is_mat, UserData.result.is_verified, userStatus)
   const [myBillingdetails, setMybillingDetails] = useState("")
-  // const [deliveryAdd, setDeliveryAdd] = useState("")
 
   const router = useRouter();
   const {couponDiscount, maximumShippingCost, customerCountry, couponProductPrice, couponProductName,discount,discountType,couponCode } = router.query;
 console.log("couponProductPrice---",couponProductPrice)
-
+  // isButtonDisabled();
   React.useEffect(() => {
     setMybillingDetails(UserData?.result)
-    // setDeliveryAdd(UserData?.result?.customer_address_details?.B_County)
   }, [])
   const handleUpdate = (index, name, todo) => {
     console.log("billing", myBillingdetails.customer_address_details)
@@ -63,24 +62,18 @@ console.log("couponProductPrice---",couponProductPrice)
     withVAT = 0.00,
     amountView = 0.00,
     totalCouponDiscount = 0.00,
-    // discountCouponProduct = 0.00,
     discountAmountView = 0.00
+    console.log("products length---------------",products?.length)
   if (products && products.length > 0) {
     amountView = calculateAmount(products)
     // maxShippingCost = calculateShipping(products)
-    // if (deliveryAdd == "cambridge" || deliveryAdd == "Cambridge") {
-    //   maxShippingCost = parseFloat(0)
-    // }
 
     if(couponDiscount>0){
       totalCouponDiscount = couponDiscount
-      // discountCouponProduct = parseFloat(couponProductPrice) - parseFloat(totalCouponDiscount)
       discountAmountView = (parseFloat(amountView) -  parseFloat(totalCouponDiscount)).toFixed(2)
       allTotal = (parseFloat(discountAmountView) + (maximumShippingCost ? parseFloat(maximumShippingCost) : 0.00)).toFixed(2)
-      // withVAT = parseFloat(allTotal) + parseFloat(vatPercentage) - parseFloat(totalCouponDiscount)
     }else{
       allTotal = (parseFloat(amountView) + (maximumShippingCost ? parseFloat(maximumShippingCost) : 0.00)).toFixed(2)
-      // withVAT = parseFloat(allTotal) + parseFloat(vatPercentage)
     }
 
     if ((customerCountry == "United Kingdom" && couponDiscount>0)||(customerCountry == "United Kingdom")){
@@ -97,7 +90,6 @@ console.log("couponProductPrice---",couponProductPrice)
         <div className="ps-product__price">£{(item.price).toFixed(2)}</div>
       </div>
     ))
-    // style={{textDecoration: (totalCouponDiscount && item.product_name === couponProductName) ? 'line-through' : "none"}}
   } else {
     amountView = "0.00"
     // maxShippingCost = "0.00"
@@ -106,7 +98,6 @@ console.log("couponProductPrice---",couponProductPrice)
     withVAT = "0.00"
     totalCouponDiscount = "0.00"
     totalCouponDiscount = "0.00"
-    // discountCouponProduct = "0.00"
     discountAmountView = "0.00"
   }
 
@@ -258,6 +249,26 @@ console.log("couponProductPrice---",couponProductPrice)
       setLoading(false)
     }
   }
+
+  const isButtonDisabled = ()=>{
+    const userDataIsMat = UserData && UserData?.result?.is_mat !== 1;
+    const userDataVerified = UserData && UserData?.result?.is_verified == 0
+    const userDataCustomerAddressDetails = UserData && UserData?.result?.is_verified && UserData?.result?.customer_address_details == null
+    const userDataStatus = UserData && UserData?.result?.is_verified && UserData?.result?.customer_address_details !== null && UserData?.result?.status == 0
+    const isUserStatus = userStatus ? products.length === 0 || loading ? true : false : true 
+    // !userStatus || 
+    //     products.length === 0 ||
+    return (
+      userDataIsMat ||
+      userDataVerified ||
+      userDataCustomerAddressDetails ||
+      userDataStatus ||
+      isUserStatus   ||
+      loading ||
+      !checkTnC ||
+      !checkAllFelids()
+      );
+    }
 
   return (
     <>
@@ -547,6 +558,7 @@ console.log("couponProductPrice---",couponProductPrice)
             </Link>
           )}
         </div>
+        
         <div className="col-md-4">
           <div className="ps-checkout__order">
             <h3 className="ps-checkout__heading">Your order</h3>
@@ -570,12 +582,6 @@ console.log("couponProductPrice---",couponProductPrice)
               </div>
             )}
 
-            {/* {(totalCouponDiscount) ? (
-              <div className="ps-checkout__row">
-                <div className="ps-title">{couponProductName} <br/> (Discount Added)</div>
-                <div className="ps-product__price">£ {discountCouponProduct}</div>
-              </div>
-            ) : ("")} */}
             {(totalCouponDiscount) ?(
             <div className="ps-checkout__row">
               <div className="ps-title">Cart Total</div>
@@ -613,6 +619,7 @@ console.log("couponProductPrice---",couponProductPrice)
               <div className="ps-title">Total</div>
               <div className="ps-product__price">£{withVAT}</div>
             </div>
+
             <div className="ps-checkout__payment">
               <div className="check-faq">
                 <div className="form-check">
@@ -636,21 +643,31 @@ console.log("couponProductPrice---",couponProductPrice)
                 </div>
               </div>
 
+
               <button
-                disabled={
-                  userStatus
-                    ? products.length === 0 || loading
-                      ? true
-                      : false
-                    : true
-                }
+                // disabled={
+                //   userStatus
+                //     ? products.length === 0 || loading
+                //       ? true
+                //       : false
+                //     : true
+                // }
                 onClick={createCheckOutSession}
                 className="ps-btn ps-btn--warning"
+                disabled = {isButtonDisabled()}
               >
                 {loading ? "Processing..." : "Buy"}
               </button>
+
               {UserData && UserData?.result?.status ? null : (
                 <div className="my-3">
+
+                  {UserData && UserData?.result?.is_mat !== 1 ? (
+                    <div className="alert alert-info" role="alert">
+                      Welcome to Stemnovate! Please complete your MAT (Material Agreement Transfer) Form to proceed.
+                    </div>
+                  ) : null} 
+
                   {UserData &&
                   UserData?.result?.is_verified &&
                   UserData?.result?.customer_address_details == null ? (
@@ -675,6 +692,7 @@ console.log("couponProductPrice---",couponProductPrice)
                       you soon.
                     </div>
                   ) : null}
+ 
                 </div>
               )}
             </div>

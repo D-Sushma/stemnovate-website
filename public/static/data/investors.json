@@ -3,7 +3,7 @@
         {
             "name": "RUCHI SHARMA",
             "images": ["img/reviews/testimonial1.jpg", "img/reviews/testimonial2.jpg"],
-            "avatar": "/static/img/investors/CEO-Image.jpg",
+            "avatar": "/static/img/investors/CEO-Image.svg",
             "date": "October 30",
             "rate": "OUR CEO",
             "text": "Our Founder and CEO, Dr Ruchi Sharma, is one to watch entrepreneurs of 2020 in the UK. The award recognizes people setting the standards in cutting-edge innovation and entrepreneurship in Cambridge, often known as the Silicon Valley of the United Kingdom.<br /> Dr Sharma obtained a PhD from the world-renowned Roslin Institute at the University of Edinburgh, followed by a post-doctorate in the exciting field of cellular reprogramming at the University of Cambridge. With a firm focus on partnerships and collaboration, Dr Sharma firmly believes that we can create a better world. "
@@ -11,7 +11,7 @@
         {
             "name": "Dr. David Hay",
             "images": ["img/reviews/testimonial1.jpg", "img/reviews/testimonial2.jpg"],
-            "avatar": "/static/img/investors/David.jpg",
+            "avatar": "/static/img/investors/David.svg",
             "date": "October 30",
             "rate": "Co founder",
             "text": "A Professor of Tissue Engineering at the University of Edinburgh, co-Founder and Director Dr David Hay has earned a long-standing reputation for his work in stem cell biology and hepatocyte differentiation. Dr Hay believes that a trans-disciplinary approach is needed to solve the failings that currently exist in the cell microenviornment.<br /> Dr Hay with extensive industry network is actively involved in the translation of stem cell derived hepatocytes into scalable manufacturing processes, by defining culture conditions and developing physiologically relevant models. "

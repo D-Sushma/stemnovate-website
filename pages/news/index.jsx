@@ -35,7 +35,6 @@ const BlogGridScreen = () => {
     }
   ]
 
-  // View
   const postsView = withGrid(postItems, loading, 3)
   return (
     <Container title="Blog">

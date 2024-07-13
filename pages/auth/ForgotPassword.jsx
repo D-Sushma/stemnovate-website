@@ -37,13 +37,11 @@ const ForgotPassword = () => {
     )
       .then((response) => response.text())
       .then(async (result) => {
-        console.log(result)
       })
       .catch((error) => console.log("error", error))
   }
 
   const onFinish = async (values) => {
-    console.log(values)
     setisLoading(true)
     try {
       const response = await fetch(
@@ -58,7 +56,6 @@ const ForgotPassword = () => {
         }
       )
       const json = await response.json()
-      console.log(json)
       if (json.code == "200") {
         toast.success(json.result.message, {
           position: "top-right",
@@ -87,7 +84,6 @@ const ForgotPassword = () => {
         setisLoading(false)
       }
     } catch (error) {
-      console.error(error)
       toast.error("Something Went to wrong", {
         position: "top-right",
         autoClose: 5000,
@@ -104,7 +100,6 @@ const ForgotPassword = () => {
   }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo)
   }
 
   return (

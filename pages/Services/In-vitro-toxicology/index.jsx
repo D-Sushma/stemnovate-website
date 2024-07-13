@@ -13,12 +13,15 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
 
-const texicologyScreen = () => {
+const texicologyScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -37,21 +40,48 @@ const texicologyScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
+
   return (
     <>
       <Container
-        title="In-vitro toxicology"
-        description="Stemnovate page on in vitro solutions for liver, heart and brain."
+        title="In-vitro toxicology | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h service-breadcrumb-bg">
+          <div
+            className="ps-page__header breadcrumb-h banner-breadcrumb-bg"
+          >
+            <BannerImage
+              alt="In-vitro toxicology-image"
+              src={bgImage}
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />
               <h1 className="text-center  text-white p-2">
-                In-vitro toxicology
+                {ProductData?.ProductData?.data[0]?.banner_content}
               </h1>
             </div>
           </div>
+
           <div className="ps-page__content ">
             <div className="ps-about">
               <div className=" about-section ">
@@ -65,28 +95,30 @@ const texicologyScreen = () => {
                     biological information, molecular and metabolite profiles.
                     The computational modelling can correlate, assimilate and
                     connect the data more rapidly to help discover patterns.
-                    <br />
+                  </p>
+                  <p className=" vertical-center">
                     We aim to automate the prediction of toxicity and that will
                     be a game-changing technology for precision drug discovery.
                   </p>
                 </div>
               </div>
-              <div className="bg-02-section">
+              <div className="plus-section">
                 <div className="container">
-                  <section className="ps-section--block-grid">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/services/In-vitro-toxicology-assay.jpg"
+                            src="/static/img/services/In-vitro-toxicology-assay.svg"
                             alt="In-vitro toxicology"
-                            width={1200}
-                            height={675}
+                            height={360}
+                          width={640}
+                          quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc center-box">
                         <h3 className="text-white font-weight-bold">
                           Platform features
@@ -113,18 +145,18 @@ const texicologyScreen = () => {
               </div>
               <div className="about-section">
                 <div className="container">
-                  <div className="py-5">
+                  <div className="pt-5">
                     <section className="ps-section--block-grid">
                       <div className="col-md-4">
                         <Link
                           href="/Applications/Disease-Modelling/Liver"
                           prefetch={false}
                         >
-                          <div className="ion-wrapper text-center span-with-link">
+                          <div className="ion-wrapper text-center span-with-link image-box-container  mx-2">
                             <Image
                               width="100"
-                              height="100px"
-                              src="/static/img/services/Liver-Platform.jpg"
+                              height="100"
+                              src="/static/img/services/Liver-Platform.svg"
                               alt="Liver Platform Hepatotoxicity"
                             />
                             <h3>
@@ -139,11 +171,11 @@ const texicologyScreen = () => {
                           href="/Applications/Disease-Modelling/Heart"
                           prefetch={false}
                         >
-                          <div className="ion-wrapper text-center span-with-link">
+                          <div className="ion-wrapper text-center span-with-link image-box-container mx-2">
                             <Image
                               width="100"
-                              height="100px"
-                              src="/static/img/services/Heart-cell-Platform.jpg"
+                              height="100"
+                              src="/static/img/services/Heart-cell-Platform.svg"
                               alt="Heart cell Platform Cardiac toxicity"
                             />
                             <h3>
@@ -158,11 +190,11 @@ const texicologyScreen = () => {
                           href="/Applications/Disease-Modelling/Neuron"
                           prefetch={false}
                         >
-                          <div className="ion-wrapper text-center span-with-link">
+                          <div className="ion-wrapper text-center span-with-link image-box-container mx-2">
                             <Image
                               width="100"
-                              height="100px"
-                              src="/static/img/services/Neuron.jpg"
+                              height="100"
+                              src="/static/img/services/Neuron.svg"
                               alt="Neuronal cell Platform Neurotoxicity"
                             />
                             <h3>
@@ -176,22 +208,23 @@ const texicologyScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className=" bg-02-section">
+              <div className="plus-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/services/Stemnovate-in-vitro-toxicology.jpg"
+                            src="/static/img/services/Stemnovate-in-vitro-toxicology.svg"
                             alt="Stemnovate in vitro toxicology"
-                            width={1200}
-                            height={675}
+                            height={360}
+                            width={640}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content ">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc">
                         <h3 className="p-1 text-white font-weight-bold">
                           Stemnovate in vitro toxicology
@@ -243,7 +276,6 @@ const texicologyScreen = () => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.slug
-  var ProductData = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -263,10 +295,32 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ProductData = myProductData
+    ProductData1 = myProductData
   }
 
-  // // Pass data to the page via props
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "In-vitro toxicology"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   return { props: { ProductData } }
 }
 

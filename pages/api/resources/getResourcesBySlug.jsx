@@ -23,7 +23,8 @@ export default async function handler(req, res) {
           short_description: true,
           category_content: true,
           master_id: true,
-          other_resources_category: true
+          other_resources_category: true,
+          shareimage: true
         }
       })
 

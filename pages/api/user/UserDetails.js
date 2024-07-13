@@ -23,6 +23,7 @@ export default async function handle(req, res) {
                     customer_application_details: true,
                     orders: true,
                     referral_link: true,
+                    is_mat: true,
                 },
             });
 

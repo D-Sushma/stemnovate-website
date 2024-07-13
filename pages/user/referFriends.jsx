@@ -43,7 +43,6 @@ const referFriends = ({ UserData }) => {
           requestParama
         )
         const result = RequestData.then((res = res.json()))
-        console.log(result)
       } catch (error) {}
     }
   }
@@ -118,12 +117,10 @@ export async function getServerSideProps(ctx) {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(`${baseUrl}/api/user/UserDetails`, requestOptions)
     UserData = await res.json()
   }
 
-  // Pass data to the page via props
   return { props: { UserData } }
 }
 

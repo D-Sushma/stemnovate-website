@@ -1,11 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import prisma from "~/lib/prisma";
-
 import bcrypt from "bcrypt";
 
 export default NextAuth({
-    // adapter: PrismaAdapter(prisma),
     providers: [
         CredentialProvider({
             name: "credentials",
@@ -37,19 +35,16 @@ export default NextAuth({
                         return null;
                     }
                 }
-                // login failed
                 return null;
             },
         }),
     ],
     debug: process.env.NODE_ENV === "development",
     session: {
-        // Set to jwt in order to CredentialsProvider works properly
         strategy: "jwt",
     },
     callbacks: {
         jwt: ({ token, user }) => {
-            // first time jwt callback is run, user object is available
             if (user) {
                 token.id = user.id;
             }
@@ -58,7 +53,6 @@ export default NextAuth({
         session: ({ session, token }) => {
             if (token) {
                 session.id = token.id;
-                // session.accessToken = token.accessToken
                 return session;
             }
             return session;

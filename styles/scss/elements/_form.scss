@@ -914,7 +914,7 @@ textarea.form-control {
         }
 
         &::after {
-            content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8'%3E%3Cpath fill='%23fff' d='M9.942 1.35L3.535 7.758 0 4.209l1.353-1.348 2.185 2.193L8.59 0l1.35 1.35z'/%3E%3C/svg%3E");
+            content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='https://www.w3.org/2000/svg' width='10' height='8'%3E%3Cpath fill='%23fff' d='M9.942 1.35L3.535 7.758 0 4.209l1.353-1.348 2.185 2.193L8.59 0l1.35 1.35z'/%3E%3C/svg%3E");
             position: absolute;
             left: 3px;
             top: 0;

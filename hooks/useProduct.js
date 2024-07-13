@@ -10,9 +10,10 @@ const Image = dynamic(() => import("~/components/elements/Image"), {
 export default function useProduct() {
     return {
         thumbnailImages: (payload) => {
+            // console.log("payload..........",payload)
             if (payload) {
-                if (payload.product_image) {
-                    const images = payload.product_image.split(",");
+                if (payload?.primary_product_image) {
+                    const images = payload?.primary_product_image?.split(",");
                     return (
                         <div>
                             <LazyLoad>
@@ -20,7 +21,8 @@ export default function useProduct() {
                                     src={`${process.env.AWS_S3BUCKET_URL}${images[0]}`}
                                     alt={payload?.product_name}
                                     width={1000}
-                                    height={758}
+                                    height={1000}
+                                    // height={758}
                                 />
                             </LazyLoad>
                         </div>
@@ -34,11 +36,11 @@ export default function useProduct() {
                 view = (
                     <p className="ps-product__price sale">
                         <span>£</span>
-                        {formatCurrency(payload.sale_price)}
-                        {formatCurrency(payload.sale_price) < formatCurrency(payload.MRP) ? (
+                        {payload.sale_price}
+                        {(payload.sale_price) < (payload.MRP) ? (
                             <del className="ml-2">
                                 <span>£</span>
-                                {formatCurrency(payload.MRP)}
+                                {payload.MRP}
                             </del>
                         ) : null}
                     </p>
@@ -46,12 +48,13 @@ export default function useProduct() {
             } else {
                 view = (
                     <p className="ps-product__price sale">
+
                         <span>£</span>
-                        {formatCurrency(payload.price)}
-                        {formatCurrency(payload.price) < formatCurrency(payload.product_details.sale_price) ? (
+                        {(payload.price)}
+                        {(payload.price) < (payload.product_details.sale_price) ? (
                             <del className="ml-2">
                                 <span>£</span>
-                                {formatCurrency(payload.product_details.sale_price)}
+                                {payload.product_details.sale_price}
                             </del>
                         ) : null}
                     </p>

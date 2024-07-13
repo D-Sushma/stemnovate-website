@@ -14,7 +14,13 @@ const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
 
-const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
+const FrequentlyBoughtTogether = ({
+  pType,
+  type,
+  resources_id,
+  imp_notes,
+  share_img
+}) => {
   const {
     loading,
     relateProducts,
@@ -69,6 +75,20 @@ const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
   const products = withCarousel(relateProducts, loading)
   return (
     <section className="ps-bought">
+       {console.log("imp_notes", imp_notes== null, imp_notes=='null',imp_notes=="")}
+      {imp_notes !== null ? (
+        <div style={{ marginBottom: "5%" }}>
+          <h3 className="ps-bought__title1">Important Notes</h3>
+          <div className="ps-bought__wapper1 image-box-container">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: imp_notes
+              }}
+            ></div>
+          </div>
+        </div>
+      ) : null}
+      
       {resources && resources.length > 0 ? (
         <div>
           <h3 className="ps-bought__title">Recommended Resources</h3>
@@ -101,7 +121,7 @@ const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
                               {data.resources_name}
                             </p>
                             <p className="ps-product__price sale text-center">
-                              <span>£</span> {data.resources_price}
+                              <span>£</span>{data.resources_price}
                             </p>
                           </div>
                         </Link>
@@ -118,6 +138,7 @@ const FrequentlyBoughtTogether = ({ pType, type, resources_id }) => {
           </div>
         </div>
       ) : null}
+
       <h3 className="ps-bought__title">Recommended Products</h3>
       <div className="ps-bought__wapper">
         <div className="container">

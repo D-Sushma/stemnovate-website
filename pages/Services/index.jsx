@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Modal } from "antd"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { baseUrl } from "~/repositories/Repository"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -10,6 +11,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
   loading: () => <p>Loading...</p>
 })
 const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
   loading: () => <p>Loading...</p>
 })
 const ProductList = dynamic(
@@ -34,19 +38,44 @@ const breadcrumb = [
   }
 ]
 
-const ServicesScreen = () => {
+const ServicesScreen = (ProductData) => {
   const [visible, setvisible] = useState(false)
   const [visible1, setvisible1] = useState(false)
+
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <Container
-      title="Services"
-      description={`Stemnovate provides cellular reprogramming and differentiation methods that can be adapted for diverse applications`}
+      title="Services | Your Drug Discovery Platform"
+      ogimg={ogImage}
+      description={ogDesc}
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header pb-0 breadcrumb-h service-breadcrumb-bg">
+        <div className="ps-page__header breadcrumb-h banner-breadcrumb-bg">
+          <BannerImage
+            alt="services-banner"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1>Services</h1>
+            <h1 className="text-center  text-white ">
+              {ProductData?.ProductData?.data[0]?.banner_content}
+            </h1>
           </div>
         </div>
         <div className="ps-page__content my-5">
@@ -64,22 +93,23 @@ const ServicesScreen = () => {
                 </div>
               </div>
             </div>
-            <div className=" bg-02-section">
+            <div className="plus-section">
               <div className="container">
-                <section className="ps-section--block-grid ">
+                <section className="ps-section--block-grid pt-3">
                   <div className="ps-section__thumbnail">
-                    <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/services/main/CELL-REPROGRAMMING-IPSCS.jpg"
-                          alt="CELL REPROGRAMMING-IPSCS"
-                          width={1200}
-                          height={675}
-                        />
-                      </div>
-                    </Link>
+                    <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
+                      <Image
+                        src="/static/img/services/Cell-Reprogramming.svg"
+                        alt="CELL REPROGRAMMING-IPSCS"
+                        // width={1200}
+                        // height={675}
+                        height={360}
+                        width={640}
+                        quality={80}
+                      />
+                    </div>
                   </div>
-                  <div className="ps-section__content">
+                  <div className="ps-section__content mt-0">
                     <div className="ps-section__desc ">
                       <h2 className="p-1 text-white font-weight-bold">
                         CELL REPROGRAMMING-IPSCS
@@ -112,22 +142,21 @@ const ServicesScreen = () => {
                 </section>
               </div>
             </div>
-            <div className=" about-section ">
+            <div className="about-section">
               <div className="container">
-                <section className="ps-section--block-grid ">
+                <section className="ps-section--block-grid pt-3">
                   <div className="ps-section__thumbnail">
-                    <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
-                        <Image
-                          src="/static/img/services/main/Cell-DIFFERENTIATION.jpg"
-                          alt="CELL DIFFERENTIATION"
-                          width={1200}
-                          height={675}
-                        />
-                      </div>
-                    </Link>
+                    <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
+                      <Image
+                        src="/static/img/services/cellular-differentiation.svg"
+                        alt="CELL DIFFERENTIATION"
+                        height={675}
+                        width={1200}
+                        quality={80}
+                      />
+                    </div>
                   </div>
-                  <div className="ps-section__content">
+                  <div className="ps-section__content mt-0">
                     <div className="ps-section__desc">
                       <h2 className="p-1 blue-text base-text-secondary font-weight-bold">
                         CELL DIFFERENTIATION
@@ -136,7 +165,8 @@ const ServicesScreen = () => {
                         It is challenging to obtain liver, heart, or brain cells
                         for testing drugs or for research. Hence, the animal
                         testing requirement remains.
-                        <br />
+                      </p>
+                      <p>
                         Instead, we use skin cells through cellular
                         reprogramming to form liver, heart and brain cells.
                         Interestingly, the differentiation process in our
@@ -164,22 +194,23 @@ const ServicesScreen = () => {
               </div>
             </div>
 
-            <div className="bg-02-section">
+            <div className="plus-section">
               <div className="container">
-                <section className="ps-section--block-grid ">
+                <section className="ps-section--block-grid pt-3">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                         <Image
-                          src="/static/img/services/main/Molecular-Biology-And-Bioinformatics.jpg"
+                          src="/static/img/services/main/Molecular-Biology-And-Bioinformatics.svg"
                           alt="MOLECULAR BIOLOGY AND BIOINFORMATICS"
-                          width={1200}
                           height={675}
+                          width={1200}
+                          quality={80}
                         />
                       </div>
                     </Link>
                   </div>
-                  <div className="ps-section__content">
+                  <div className="ps-section__content mt-0">
                     <div className="ps-section__desc">
                       <h2 className="p-1 text-white font-weight-bold">
                         MOLECULAR BIOLOGY AND BIOINFORMATICS
@@ -216,20 +247,21 @@ const ServicesScreen = () => {
             </div>
             <div className="about-section">
               <div className="container">
-                <section className="ps-section--block-grid ">
+                <section className="ps-section--block-grid pt-3">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                         <Image
-                          src="/static/img/services/main/GENOTYPING.jpg"
+                          src="/static/img/services/main/GENOTYPING.svg"
                           alt="IN-VITRO-TOXICOLOGY"
-                          width={1200}
                           height={675}
+                          width={1200}
+                          quality={80}
                         />
                       </div>
                     </Link>
                   </div>
-                  <div className="ps-section__content">
+                  <div className="ps-section__content mt-0">
                     <div className="ps-section__desc">
                       <h2 className="p-1 y font-weight-bold">
                         IN-VITRO-TOXICOLOGY
@@ -671,6 +703,37 @@ const ServicesScreen = () => {
       </Modal>
     </Container>
   )
+}
+
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Services"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return {
+    props: {
+      ProductData
+    }
+  }
 }
 
 export default ServicesScreen

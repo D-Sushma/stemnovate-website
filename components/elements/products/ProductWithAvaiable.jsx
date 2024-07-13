@@ -23,7 +23,7 @@ const ProductWithAvailable = ({ product }) => {
     <div className="ps-product ps-product--grid">
       <div className="ps-product__thumbnail">
         <Link href="/product/[id]" as={`/product/${product.id}`}>
-          <a className="ps-product__overlay"></a>
+          <a href="/product/[id]" className="ps-product__overlay"></a>
         </Link>
         <ModuleProductImages product={product} />
         <ModuleProductActions product={product} />
@@ -32,7 +32,7 @@ const ProductWithAvailable = ({ product }) => {
       <div className="ps-product__content">
         <h4 className="ps-product__title">
           <Link href="/product/[id]" as={`/product/${product.id}`}>
-            <a>{product.name}</a>
+            <a href="/product/[id]" >{product.name}</a>
           </Link>
         </h4>
         {price(product)}

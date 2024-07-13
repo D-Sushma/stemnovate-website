@@ -3,6 +3,8 @@ import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import useGetProducts from "~/hooks/useGetProducts"
 import useProductGroup from "~/hooks/useProductGroup"
+import { ToastContainer } from "react-toastify"
+import { baseUrl } from "~/repositories/Repository"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -21,8 +23,9 @@ const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
-
-import { ToastContainer } from "react-toastify"
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 
 const breadcrumb = [
   {
@@ -37,7 +40,7 @@ const breadcrumb = [
   }
 ]
 
-const ProductScreen = () => {
+const ProductScreen = (ProductData) => {
   const { loading, productItems, getProducts } = useGetProducts()
   const { withGrid, withList } = useProductGroup()
   const router = useRouter()
@@ -46,10 +49,8 @@ const ProductScreen = () => {
   let products = ""
 
   var titleName = "Our Products "
-  var ogImg = "https://stemnovate.co.uk/static/img/products/Products_Image.jpeg"
 
   useEffect(() => {
-    console.log("query", query)
     var queries = {
       _limit: 10
     }
@@ -115,20 +116,44 @@ const ProductScreen = () => {
     }
   }
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <Container
-      title={titleName}
-      ogimg={ogImg}
-      description="Stemnovate cell products are ethically sourced and quality assured for commercial use. Check product features on our pages."
+      title={titleName + " | Your Drug Discovery Platform"}
+      ogimg={ogImage}
+      description={ogDesc}
     >
       <ToastContainer />
       <div className="ps-page ps-page--shopping">
-        <div className="ps-page__header breadcrumb-h product-breadcrumb-bg">
-          <div className="container">
+        <div className="ps-page__header  breadcrumb-h  banner-breadcrumb-bg">
+          <BannerImage
+            alt="products-image"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
+          <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1>Products</h1>
+            <h1 className="text-center h1 text-white p-2 ">
+              {ProductData?.ProductData?.data[0]?.banner_content}
+            </h1>
           </div>
         </div>
+
         <div className="ps-page__content">
           <div className="ps-about">
             <div className="about-section">
@@ -151,6 +176,37 @@ const ProductScreen = () => {
       </div>
     </Container>
   )
+}
+
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Products"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return {
+    props: {
+      ProductData
+    }
+  }
 }
 
 export default ProductScreen

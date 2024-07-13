@@ -34,6 +34,7 @@ const HeaderMobile = () => {
     )
   }
   const { data: session } = useSession();
+ // console.log("{ data: session }",{ data: session })
   return (
     <header
       className="header header--mobile"
@@ -44,6 +45,7 @@ const HeaderMobile = () => {
         <Logo type="mobile" />
       </div>
       <div className="header__right">
+      {/* <span className="text-white">hello, sushma</span> */}
         <span className="text-white">{session ? `Hello ${session.user.name}`:null}</span>
         <span>
           <a

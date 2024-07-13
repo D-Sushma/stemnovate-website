@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import vector from "~/public/static/img/Home/vector.png"
+import vector from "~/public/static/img/Home/vector.svg"
 import { FiPhone, FiMail } from "react-icons/fi"
 import dynamic from "next/dynamic"
 
@@ -37,7 +37,8 @@ const breadcrumb = [
 const ContactUsScreen = ({ mytitile }) => {
   return (
     <Container
-      title={mytitile ? mytitile : "Contact Us"}
+      title={mytitile ? mytitile : "Contact Us | Your Drug Discovery Platform"}
+      ogimg={`https://stemnovate.co.uk/static/home-images/Drug-Discovery-Platform.jpg`}
       description="Stemnovate page to contact for information, enquire about company, product and services"
     >
       <div className="ps-page ps-page--inner">
@@ -51,27 +52,28 @@ const ContactUsScreen = ({ mytitile }) => {
               <Image
                 src={vector}
                 alt="stemnovate-Contact Us"
-                width={1588}
-                height={960}
+                priority={true}
+                fill="true"
+                quality={80}
               />
             </div>
             <div className="ps-contact mt-5">
               <h1 className=" text-center m-3">GET IN TOUCH</h1>
               <p className="text-center mb-5">
-                “Our business is to provide you with the best services and
-                solutions to share with us your experiences and expectations”
+                "Our business is to provide you with the best services and
+                solutions to share with us your experiences and expectations"
               </p>
 
               <HubspotContactForm />
               <div className="section-about mt-5 pt-5">
                 <div className="row">
-                  <div className="col-md-12">
+                  <div className="col-md-12 col-sm-6">
                     <h2 className="text-center mb-4 m-2">
                       CONTACT INFORMATION
                     </h2>
                   </div>
                   <div
-                    className="col-12 col-lg-6"
+                    className="col-12 col-sm-6 col-lg-6"
                     style={{
                       borderRight: "5px solid gray"
                     }}
@@ -84,9 +86,9 @@ const ContactUsScreen = ({ mytitile }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-12 col-lg-6 text-center">
+                  <div className="col-12 col-sm-6 col-lg-6 text-center">
                     <div className="m-2 h3">
-                      <Link href="telto:+44 (0)1223830192" prefetch={false}>
+                      <Link href="telto:+44 (0)1223830192">
                         <span className="ps-footer__email span-with-link">
                           <FiPhone /> +44 (0)1223830192
                         </span>
@@ -103,10 +105,7 @@ const ContactUsScreen = ({ mytitile }) => {
                     </div>
                     <ul className="ps-social ">
                       <li>
-                        <Link
-                          href="https://www.facebook.com/StemnovateL"
-                          prefetch={false}
-                        >
+                        <Link href="https://www.facebook.com/StemnovateL">
                           <div className="ps-social__link facebook">
                             <i className="fa fa-facebook"> </i>
                             <span className="ps-tooltip">Facebook</span>
@@ -114,10 +113,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          href="https://www.instagram.com/stemnovate"
-                          prefetch={false}
-                        >
+                        <Link href="https://www.instagram.com/stemnovate">
                           <div className="ps-social__link instagram">
                             <i className="fa fa-instagram"></i>
                             <span className="ps-tooltip">Instagram</span>
@@ -125,10 +121,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          href="https://twitter.com/StemnovateL"
-                          prefetch={false}
-                        >
+                        <Link href="https://twitter.com/StemnovateL">
                           <div className="ps-social__link facebook">
                             <i className="fa fa-twitter"></i>
                             <span className="ps-tooltip">Twitter</span>
@@ -136,10 +129,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          href="https://www.pinterest.co.uk/Stemnovate"
-                          prefetch={false}
-                        >
+                        <Link href="https://www.pinterest.co.uk/Stemnovate">
                           <div className="ps-social__link pinterest">
                             <i className="fa fa-pinterest-p"></i>
                             <span className="ps-tooltip">Pinterest</span>
@@ -147,10 +137,7 @@ const ContactUsScreen = ({ mytitile }) => {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          href="https://www.linkedin.com/company/stemnovate-limited"
-                          prefetch={false}
-                        >
+                        <Link href="https://www.linkedin.com/company/stemnovate-limited">
                           <div className="ps-social__link linkedin">
                             <i className="fa fa-linkedin"></i>
                             <span className="ps-tooltip">Linkedin</span>
@@ -159,9 +146,10 @@ const ContactUsScreen = ({ mytitile }) => {
                       </li>
                     </ul>
                   </div>
-                  <div className="col-12 col-lg-12 mt-5">
+                  <div className="col-12 col-sm-12 col-lg-12 mt-5">
                     <div className="ps-contact__map">
                       <iframe
+                        loading="lazy"
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.145415040379!2d0.2059292154407564!3d52.13167627974247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8659d4aac2ba3%3A0x12ca6a2021fc411a!2sStemnovate%20Limited!5e0!3m2!1sen!2sin!4v1650268128355!5m2!1sen!2sin"
                         width="600"
                         height="450"

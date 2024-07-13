@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Moment from "moment";
 import Link from "next/link";
-import LazyLoad from "react-lazyload";
-import dynamic from 'next/dynamic'
-const Image = dynamic(() => import("~/components/elements/Image"), {
-    loading: () => <p>Loading...</p>
-})
+import Image from "next/image"
 
 export default function usePost() {
     const [createdBy, setCreatedBy] = useState("Jan 1, 2021");
@@ -34,6 +30,7 @@ export default function usePost() {
             if (post.authorId) {
                 setAuthor(post.authorId);
             }
+            
             if (post.name) {
                 titleView = (
                     <Link href="/blogs/[slug]" as={`/blogs/${post.slug}`}>
@@ -48,7 +45,6 @@ export default function usePost() {
                 );
             }
             setTitle(titleView);
-
             if (post.created_at) {
                 setCreatedBy(Moment(post.created_at).format("MMM DD, YYYY"));
             }
@@ -64,17 +60,13 @@ export default function usePost() {
             }
             if (post.thumbnail) {
                 const thumbnailImage = (
-                    <LazyLoad>
-                        <Image
-                            className="zoom-in"
-                            src={`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`}
-                            alt="img"
-                            width={1000}
-                            height={759}
-                            placeholder="blur"
-                            blurDataURL="/static/image/blurred.png"
-                        />
-                    </LazyLoad>
+                    <Image
+                        className="zoom-in"
+                        src={`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`}
+                        alt="img"
+                        width={386}
+                        height={218}
+                    />
                 );
                 setThumbnail(thumbnailImage);
                 setThumbImageUrl(`${process.env.AWS_S3BUCKET_URL}${post.thumbnail}`);

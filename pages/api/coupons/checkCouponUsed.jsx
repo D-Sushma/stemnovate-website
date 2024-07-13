@@ -6,7 +6,6 @@ export default async function handleCouponUsed(req, res) {
     const couponsUsed = await prisma.coupon_used.findMany({
       where: { coupon_code: coupon_code, customer_id: customer_id },
     });
-    // console.log("coupon_code,couponsUsed",coupon_code,couponsUsed) 
     let response = {}
     if(couponsUsed.length > 0){
       if(couponsUsed[0]?.coupon_code === coupon_code){

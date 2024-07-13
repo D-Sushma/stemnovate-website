@@ -20,29 +20,34 @@ const DetailThree = dynamic(
 
 const DetailLayoutThree = ({ ProductData }) => {
   const router = useRouter()
-
   const htmlContent = ProductData?.ProductsList[0].short_description
   var stripedHtml = htmlContent.replace(/<[^>]+>/g, "")
 
   var ogImage = ""
   var images = []
-  var products_img = ProductData?.ProductsList[0].product_image.split(",")
+  var images1 = []
+  var products_img =
+    ProductData?.ProductsList[0].primary_product_image.split(",")
   if (products_img && products_img.length > 0) {
     products_img.map((item) => {
       images.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
     })
-    ogImage = images[0]
+  }
+
+  var products_img1 = ProductData?.ProductsList[0]?.shareimage?.split(",")
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
   }
 
   useEffect(() => {
-    console.log("ProductData", ProductData)
     if (ProductData.status == undefined) {
       router.push("/Products")
     }
-    console.log("stripedHtml", stripedHtml)
   }, [ProductData])
 
-  // View area
   let productView
   if (ProductData?.status == 200) {
     if (ProductData.status != 200) {
@@ -84,7 +89,6 @@ const DetailLayoutThree = ({ ProductData }) => {
   } else if (ProductData?.ProductsList[0]?.category.id == 56) {
     myConical = "/Products/Diagnostics-products"
   }
-
   return (
     <Container
       title={ProductData?.ProductsList[0]?.product_name}
@@ -108,29 +112,24 @@ const DetailLayoutThree = ({ ProductData }) => {
 
 export async function getServerSideProps({ query }) {
   var slug = query.slug
-  console.log(slug)
   var ProductData = []
   if (slug != undefined) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-
     var raw = JSON.stringify({
       slug: slug[0],
       promoId: slug[1]
     })
-
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: raw
     }
-
     const res = await fetch(
       baseUrl + "/api/products/productname",
       requestOptions
     )
     const myProductData = await res.json()
-
     if (myProductData.status == 200) {
       ProductData = myProductData
     } else {

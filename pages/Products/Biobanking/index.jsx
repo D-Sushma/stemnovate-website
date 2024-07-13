@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { Tooltip } from "antd"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { baseUrl } from "~/repositories/Repository"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -13,6 +14,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
   () => import("~/components/productList/productList"),
   { loading: () => <p>Loading...</p> }
@@ -20,8 +24,8 @@ const ProductList = dynamic(
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
-)
-const categoryListScreen = () => {
+)  
+const categoryListScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -38,58 +42,81 @@ const categoryListScreen = () => {
       text: "Biobanking"
     }
   ]
+
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <>
       <Container
-        title="Biobanking"
-        description={
-          "Stemnovate has the world’s first commercial biobank for human iPS cells with complete genotype information"
-        }
+        title="Biobanking | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h product-breadcrumb-bg">
+          <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="products-image"
+              src={bgImage}
+              layout="fill"
+              objectFit="cover"
+              priority={true}
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
-              <BreadCrumb breacrumb={breadcrumb} />{" "}
-              <h1 className="text-center  text-white p-2">BIOBANKING</h1>
+              <BreadCrumb breacrumb={breadcrumb} />
+              <h1 className="text-center h1 text-white p-2 ">
+                {ProductData?.ProductData?.data[0]?.banner_content}
+              </h1>
             </div>
           </div>
+
           <div className="ps-page__content">
             <div className="ps-about ">
-              <div className="about-section ">
-                <div className="container">
-                  <p className="">
-                    Stemnovate has the world’s first commercial biobank for
+              <div className="container">
+                <div className="center-box mt-2">
+                  <p className=" vertical-center">
+                    Stemnovate has the world's first commercial biobank for
                     human iPS cells with complete genotype information. We pride
-                    ourselves in supplying high quality cells but that’s not all
+                    ourselves in supplying high quality cells but that's not all
                     we offer. Our research and development technology can save
                     precious time and cost ensuring success and our partnerships
-                    with top tier pharmaceutical companies and world’s top
+                    with top tier pharmaceutical companies and world's top
                     research institutes allows for new technologies and
                     applications development at a pace not imagined before.
                   </p>
                 </div>
               </div>
               <ProductList slug="Biobanking" />
-              <div className=" bg-02-section">
+
+              <div className="bg-02-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
-                      <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 ">
                           <Image
-                            src="/static/img/products/bio-banking/Compliant-_-Ethical-biobanking.jpg"
+                            src="/static/img/products/bio-banking/Compliant-_-Ethical-biobanking.svg"
                             alt="Compliant & Ethical biobanking"
-                            width={1200}
-                            height={675}
+                            width={488}
+                            height={275}
                           />
                         </div>
-                      </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content rm_m customStyles">
                       <h2 className="p-1 text-white font-weight-bold">
                         Compliant & Ethical biobanking
                       </h2>
-                      <div className="ps-section__desc ">
+                      <div className="ps-section__desc mx-2">
                         <p className="text-white">
                           Through commercial brokers, cells could be coming from
                           anywhere - In a recent survey, the{" "}
@@ -119,21 +146,21 @@ const categoryListScreen = () => {
                   </section>
                 </div>
               </div>
+              
               <div className="about-section">
                 <div className="container">
                   <div className="row py-5">
-                    <div className="col-md-6 text-center">
+                    <div style={{marginBottom:'10%'}} className="col-md-6 text-center">
                       <div>
-                        <div className="overflow-hidden ">
+                        <div  className="overflow-hidden ps-banner__image image-box-container mx-2">
                           <Image
-                            className="ps-banner__image"
-                            src="/static/img/products/bio-banking/Quality-Assured.jpg"
+                            src="/static/img/products/bio-banking/Quality-Assured.svg"
                             alt="Quality Assured"
-                            width={1200}
-                            height={675}
+                            width={518}
+                            height={292}
                           />
                         </div>
-                        <h3 className="m-4">Quality Assured</h3>
+                        <h3 className="rm_m">Quality Assured</h3>
                         <p className="mx-4 text-left">
                           With Stemnovate you can be sure of the quality of our
                           cells, we have a dedicated team growing and testing
@@ -148,18 +175,18 @@ const categoryListScreen = () => {
                         </p>
                       </div>
                     </div>
+
                     <div className="col-md-6 text-center">
                       <div>
-                        <div className="overflow-hidden ">
+                        <div className="overflow-hidden ps-banner__image image-box-container mx-2">
                           <Image
-                            className="ps-banner__image"
-                            src="/static/img/products/bio-banking/Gender-_-Ethnic-Diversity.jpg"
+                            src="/static/img/products/bio-banking/Gender-_-Ethnic-Diversity.svg"
                             alt="Gender & Ethnic Diversity"
-                            width={1200}
-                            height={675}
+                            width={518}
+                            height={292}
                           />
                         </div>
-                        <h3 className=" m-4">Gender & Ethnic Diversity</h3>
+                        <h3 className="rm_m">Gender & Ethnic Diversity</h3>
                         <p className="mx-4 text-left ">
                           According to a{" "}
                           <Tooltip title="Gender-based differences in the toxicity of pharmaceuticals--the Food and Drug Administration's perspective - PubMed (nih.gov)">
@@ -172,7 +199,7 @@ const categoryListScreen = () => {
                               2001 article by Margaret Ann Miller
                             </a>
                           </Tooltip>{" "}
-                          from the Office of women’s health (OWH), Food and Drug
+                          from the Office of women's health (OWH), Food and Drug
                           Administration (FDA), women experience more adverse
                           reactions to treatment with therapeutic drugs than men
                           because of differences in drug metabolism. Stemnovate
@@ -188,26 +215,24 @@ const categoryListScreen = () => {
                   </div>
                 </div>
               </div>
-              <div className=" bg-02-section">
+              <div className="bg-02-section">
                 <div className="container">
-                  <section className="ps-section--block-grid py-5">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
-                      <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                           <Image
-                            src="/static/img/products/bio-banking/Reducing-Animal-Testing.jpg"
+                            src="/static/img/products/bio-banking/Reducing-Animal-Testing.svg"
                             alt="Reducing Animal Testing"
-                            width={1200}
-                            height={675}
+                            width={488}
+                            height={275}
                           />
                         </div>
-                      </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content rm_m customStyles">
                       <h2 className="p-1 text-white font-weight-bold">
                         Reducing Animal Testing
                       </h2>
-                      <div className="ps-section__desc ">
+                      <div className="ps-section__desc mx-2">
                         <p className=" text-white">
                           In 2020,{" "}
                           <span className="font-weight-bolder">
@@ -243,6 +268,37 @@ const categoryListScreen = () => {
       </Container>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Biobanking"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return {
+    props: {
+      ProductData
+    }
+  }
 }
 
 export default connect((state) => state)(categoryListScreen)

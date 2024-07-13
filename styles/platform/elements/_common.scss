@@ -10,7 +10,8 @@
 
 .resources-list {
     &:nth-child(even) {
-        background-image: url("/static/image/aboutb1.webp");
+        // background-image: url("/static/image/aboutb1.webp");
+        background-color: #fff;
         background-size: cover;
         background-position: 0 0%;
         background-repeat: no-repeat;

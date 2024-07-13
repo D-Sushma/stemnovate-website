@@ -54,6 +54,7 @@ const MyApplication = ({ UserData }) => {
   const [BSameAsOrg, setBSameAsOrg] = React.useState(false)
   const [SSameAsOrg, setSSameAsOrg] = React.useState(false)
   const [isLoading, setisLoading] = React.useState(false)
+  const [isMobile, setIsMobile] = useState(false);
   const [Scope, setScope] = React.useState("Research")
   const [Errors, setErrors] = useState("")
   const [form] = Form.useForm()
@@ -65,77 +66,73 @@ const MyApplication = ({ UserData }) => {
 
   useEffect(() => {
     const setFields = async () => {
-      console.log(UserData, "userdata")
-      console.log(
-        UserData.result.customer_application_details,
-        "application details"
-      )
-      if (UserData.result.customer_application_details !== null) {
-        form.setFieldsValue(UserData.result.customer_application_details)
+      if (UserData?.result?.customer_application_details !== null) {
+        form.setFieldsValue(UserData?.result?.customer_application_details)
       }
 
-      if (UserData.result.customer_address_details !== null) {
-        form.setFieldsValue(UserData.result.customer_address_details)
-        setBSameAsOrg(UserData.result.customer_address_details.B_SameAsOrg)
+      if (UserData?.result?.customer_address_details !== null) {
+        form.setFieldsValue(UserData?.result?.customer_address_details)
+        setBSameAsOrg(UserData?.result?.customer_address_details?.B_SameAsOrg)
 
-        setSSameAsOrg(UserData.result.customer_address_details.S_SameAsOrg)
+        setSSameAsOrg(UserData?.result?.customer_address_details?.S_SameAsOrg)
       }
 
-      console.log(UserData.result.customer_address_details == null, BSameAsOrg)
-      if (UserData.result.customer_address_details == null || BSameAsOrg) {
-        form.setFieldsValue({ B_First: UserData.result.firstname })
-        form.setFieldsValue({ B_last: UserData.result.lastname })
-        form.setFieldsValue({ B_Email: UserData.result.email })
+      if (UserData?.result?.customer_address_details == null || BSameAsOrg) {
+        form.setFieldsValue({ B_First: UserData?.result?.firstname })
+        form.setFieldsValue({ B_last: UserData?.result?.lastname })
+        form.setFieldsValue({ B_Email: UserData?.result?.email })
 
-        if (UserData.result.customer_application_details !== null) {
+        if (UserData?.result?.customer_application_details !== null) {
           form.setFieldsValue({
-            B_Country: UserData.result.customer_application_details.Country
+            B_Country: UserData?.result?.customer_application_details?.Country
           })
           form.setFieldsValue({
-            B_County: UserData.result.customer_application_details.County_States
+            B_County:
+              UserData?.result?.customer_application_details?.County_States
           })
           form.setFieldsValue({
-            B_Town: UserData.result.customer_application_details.Town_City
+            B_Town: UserData?.result?.customer_application_details?.Town_City
           })
           form.setFieldsValue({
-            B_ZIP: UserData.result.customer_application_details.Postcode_ZIP
+            B_ZIP: UserData?.result?.customer_application_details?.Postcode_ZIP
           })
           form.setFieldsValue({
             B_Address1:
-              UserData.result.customer_application_details.Address_line1
+              UserData?.result?.customer_application_details?.Address_line1
           })
           form.setFieldsValue({
             B_Address2:
-              UserData.result.customer_application_details.Address_line2
+              UserData?.result?.customer_application_details?.Address_line2
           })
         }
       }
 
-      if (UserData.result.customer_address_details == null || SSameAsOrg) {
-        form.setFieldsValue({ S_First: UserData.result.firstname })
-        form.setFieldsValue({ S_last: UserData.result.lastname })
-        form.setFieldsValue({ S_Email: UserData.result.email })
+      if (UserData?.result?.customer_address_details == null || SSameAsOrg) {
+        form.setFieldsValue({ S_First: UserData?.result?.firstname })
+        form.setFieldsValue({ S_last: UserData?.result?.lastname })
+        form.setFieldsValue({ S_Email: UserData?.result?.email })
 
-        if (UserData.result.customer_application_details !== null) {
+        if (UserData?.result?.customer_application_details !== null) {
           form.setFieldsValue({
-            S_Country: UserData.result.customer_application_details.Country
+            S_Country: UserData?.result?.customer_application_details?.Country
           })
           form.setFieldsValue({
-            S_County: UserData.result.customer_application_details.County_States
+            S_County:
+              UserData?.result?.customer_application_details?.County_States
           })
           form.setFieldsValue({
-            S_Town: UserData.result.customer_application_details.Town_City
+            S_Town: UserData?.result?.customer_application_details?.Town_City
           })
           form.setFieldsValue({
-            S_ZIP: UserData.result.customer_application_details.Postcode_ZIP
+            S_ZIP: UserData?.result?.customer_application_details?.Postcode_ZIP
           })
           form.setFieldsValue({
             S_Address1:
-              UserData.result.customer_application_details.Address_line1
+              UserData?.result?.customer_application_details?.Address_line1
           })
           form.setFieldsValue({
             S_Address2:
-              UserData.result.customer_application_details.Address_line2
+              UserData?.result?.customer_application_details?.Address_line2
           })
         }
       }
@@ -169,8 +166,6 @@ const MyApplication = ({ UserData }) => {
         }
       )
       const json = await response.json()
-
-      console.log(json)
 
       if (json.code == "200") {
         toast.success(json.message, {
@@ -220,8 +215,6 @@ const MyApplication = ({ UserData }) => {
       )
       const json = await response.json()
 
-      console.log(json)
-
       if (json.code == "200") {
         toast.success(json.message, {
           position: "top-right",
@@ -250,29 +243,21 @@ const MyApplication = ({ UserData }) => {
         setisLoading(false)
         gotoTop()
       }
-
-      console.log("Shhiping")
     }
   }
 
   const onFinishFailed = () => {
     if (current === 0) {
-      console.log("Orgination")
     }
 
     if (current === 1) {
-      console.log("Shhiping")
     }
     setErrors("error")
   }
 
-  function onChange(value) {
-    console.log(`selected ${value}`)
-  }
+  function onChange(value) {}
 
-  function onSearch(val) {
-    console.log("search:", val)
-  }
+  function onSearch(val) {}
 
   const gotoTop = () => {
     window.scrollTo({
@@ -281,6 +266,20 @@ const MyApplication = ({ UserData }) => {
       behavior: "smooth"
     })
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // Check screen size initially
+    window.addEventListener('resize', handleResize); // Add resize event listener
+
+    return () => {
+      window.removeEventListener('resize', handleResize); // Clean up event listener
+    };
+  }, []);
+
   return (
     <Container title="My Application">
       <ToastContainer
@@ -303,15 +302,18 @@ const MyApplication = ({ UserData }) => {
         <div className="ps-page__content">
           <div className="ps-about m-5 p-3">
             <Row>
-              <Col md={24} sm={24}>
+              <Col md={24} sm={24} xs={24}>
                 <Steps
                   type="navigation"
-                  size="default"
+                  size="small" 
+                  direction={isMobile ? 'vertical' : 'horizontal'} // Conditionally set direction
+                  // size="default"
                   onChange={(cur) => {
                     setCurrent(cur)
                   }}
                   current={current}
                   status={Errors}
+                  responsive // Enable responsive behavior
                 >
                   {steps.map((item) => (
                     <Step key={item.title} title={item.title} />
@@ -1330,7 +1332,6 @@ const MyApplication = ({ UserData }) => {
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx)
   var UserData = ""
-  console.log(session, "session")
   if (session) {
     var myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
@@ -1344,12 +1345,10 @@ export async function getServerSideProps(ctx) {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(`${baseUrl}/api/user/UserDetails`, requestOptions)
     UserData = await res.json()
   }
 
-  // Pass data to the page via props
   return { props: { session, UserData } }
 }
 export default MyApplication

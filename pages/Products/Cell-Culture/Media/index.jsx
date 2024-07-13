@@ -13,6 +13,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const ProductList = dynamic(
   () => import("~/components/productList/productList"),
   { loading: () => <p>Loading...</p> }
@@ -22,7 +25,7 @@ const Subscribe = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-const categoryListScreen = () => {
+const categoryListScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -47,17 +50,43 @@ const categoryListScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <>
       <Container
-        title="Media"
-        description={`Choose from various formats of cell culture media chemically defined, animal component-free, and classical cell culture media`}
+        title="Media | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h product-breadcrumb-bg">
+          <div
+            className="ps-page__header  breadcrumb-h banner-breadcrumb-bg"
+          >
+            <BannerImage
+            alt="media-banner"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />{" "}
-              <h1 className="text-center  text-white p-2">Media</h1>
+              <h1 className="text-center  text-white p-2">
+                {ProductData?.ProductData?.data[0]?.banner_content}
+              </h1>
             </div>
           </div>
 
@@ -80,16 +109,16 @@ const categoryListScreen = () => {
 
               <div className=" bg-02-section">
                 <div className="container">
-                  <div className="row">
-                    <div className="col-md-6 text-center">
+                  <div className="row pt-3">
+                    <div className="col-md-6 text-center mb-15">
                       <div>
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden ps-banner__image image-box-container mx-2 image-box-container-mb">
                           <Image
-                            className="ps-banner__image"
-                            src="/static/img/products/cell-culture/Chemically-Defined-Media.jpg"
+                            src="/static/img/products/cell-culture/Chemically-Defined-Media.svg"
                             alt="CHEMICALLY DEFINED MEDIA"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                         <h2 className="m-4">CHEMICALLY DEFINED MEDIA</h2>
@@ -103,16 +132,17 @@ const categoryListScreen = () => {
                     </div>
                     <div className="col-md-6 text-center">
                       <div>
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden ps-banner__image image-box-container mx-2 image-box-container-mb">
                           <Image
-                            className="ps-banner__image"
-                            src="/static/img/products/cell-culture/Animal-Component-Free-Media.jpg"
+                            // className="ps-banner__image"
+                            src="/static/img/products/cell-culture/Animal-Component-Free-Media.svg"
                             alt="ANIMAL COMPONENT FREE MEDIA"
-                            width="500px"
-                            height="285px"
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
-                        <h2 className=" m-4">ANIMAL COMPONENT FREE MEDIA</h2>
+                        <h2 className="m-4">ANIMAL COMPONENT FREE MEDIA</h2>
                         <p className="mx-4  ">
                           The animal component free media is suitable for human
                           cell culture such as drug testing, mechanism of action
@@ -127,15 +157,16 @@ const categoryListScreen = () => {
 
               <div className=" about-section">
                 <div className="container">
-                  <section className="ps-section--block-grid ">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
                             src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
                             alt="CLASSICAL CELL CULTURE MEDIA"
-                            width={1000}
-                            height={563}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
@@ -174,7 +205,6 @@ const categoryListScreen = () => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.slug
-  var ProductData = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -194,10 +224,32 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ProductData = myProductData
+    ProductData1 = myProductData
   }
 
-  // // Pass data to the page via props
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Media"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   return { props: { ProductData } }
 }
 

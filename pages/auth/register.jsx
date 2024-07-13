@@ -107,7 +107,6 @@ const MyAccountScreen = () => {
               })
             })
             const json = await response.json()
-            console.log(json)
             if (json.code == "200") {
               toast.success(json.message, {
                 position: "top-right",
@@ -120,7 +119,6 @@ const MyAccountScreen = () => {
                 theme: "colored"
               })
 
-              console.log(json)
             } else {
               window.scroll({
                 top: 0,
@@ -130,7 +128,6 @@ const MyAccountScreen = () => {
               setmessage(json.message)
             }
           } catch (error) {
-            console.error(error)
           }
         } else {
           setpasswordwarnig("Please fill all the felids")

@@ -8,6 +8,7 @@ import Link from "next/link"
 import { encode } from "hex-encode-decode"
 import { GrContactInfo, GrUserSettings, GrList, GrBasket } from "react-icons/gr"
 import dynamic from "next/dynamic"
+import bannerImg from "~/public/static/img/banners/dashboard-banner.svg"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -16,6 +17,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
   loading: () => <p>Loading...</p>
 })
 const Loader = dynamic(() => import("~/components/reuseable/Loader"), {
+  loading: () => <p>Loading...</p>
+})
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
   loading: () => <p>Loading...</p>
 })
 
@@ -34,7 +38,6 @@ const breadcrumb = [
 
 const dashboard = ({ UserData }) => {
   useEffect(() => {
-    console.log("UserData", UserData)
     auth()
   }, [])
   const [isLoading, setIsLoading] = useState(false)
@@ -62,8 +65,6 @@ const dashboard = ({ UserData }) => {
     fetch(process.env.NEXT_BASE_URL + "/api/Email/verifyEmail", requestOptions)
       .then((response) => response.json())
       .then(async (result) => {
-        console.log(result)
-
         if (result.msg == "success") {
           setIsLoading(false)
           toast.success("Verification email send successfully", {
@@ -90,7 +91,6 @@ const dashboard = ({ UserData }) => {
       })
       .catch((error) => {
         setIsLoading(false)
-        console.log("error", error)
       })
   }
 
@@ -108,10 +108,20 @@ const dashboard = ({ UserData }) => {
         pauseOnHover
       />
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header pb-0 breadcrumb-h application-breadcrumb-bg">
+        <div className="ps-page__header breadcrumb-h banner-breadcrumb-bg">
+          <BannerImage
+            alt="dashboard-banner-image"
+            src={bannerImg}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />
-            <h1>Dashboard</h1>
+            <h1 className="text-center  text-white p-2">Dashboard</h1>
           </div>
         </div>
         <div className="ps-page__content">
@@ -121,8 +131,11 @@ const dashboard = ({ UserData }) => {
                 <p className="py-4 font-weight-bold">
                   Welcome,{" "}
                   {UserData &&
-                    UserData?.result?.firstname + " " + UserData?.result?.lastname +"."} {" "}
-                    How can we help you?
+                    UserData?.result?.firstname +
+                      " " +
+                      UserData?.result?.lastname +
+                      "."}{" "}
+                  How can we help you?
                 </p>
 
                 {UserData && UserData?.result?.is_verified ? null : (
@@ -163,29 +176,29 @@ const dashboard = ({ UserData }) => {
                   </>
                 ) : null}
               </div>
-              {(!UserData?.result?.customer_address_details && !UserData?.result?.customer_application_details) ?
-                <div className="text-danger px-4 my-5" style={{fontWeight: "bolder"}}>
+              {!UserData.result?.customer_address_details &&
+              !UserData.result?.customer_application_details ? (
+                <div
+                  className="text-danger px-4 my-5"
+                  style={{ fontWeight: "bolder" }}
+                >
                   NOTE: Add organization and shipping details for ordering.{" "}
-                    <Link href="/user/MyApplication">
-                      <span className="link-hover-thumb-shape" style={{fontWeight: "bolder", textDecoration: "underline"}}>
-                        Click link here
-                      </span>
-                    </Link>
-                </div>
-                : " "
-              }
-            {/* ----- OR ----- */}
-              {/* {(!UserData?.result?.customer_address_details && !UserData?.result?.customer_application_details) 
-              && <div className="text-danger px-4 my-5" style={{fontWeight: "bolder"}}>
-                NOTE: Add organization and shipping details for ordering.{" "}
                   <Link href="/user/MyApplication">
-                    <span className="link-hover-thumb-shape" style={{fontWeight: "bolder", textDecoration: "underline"}}>
+                    <span
+                      className="link-hover-thumb-shape"
+                      style={{
+                        fontWeight: "bolder",
+                        textDecoration: "underline"
+                      }}
+                    >
                       Click link here
                     </span>
                   </Link>
-              </div>
-            } */}
-              
+                </div>
+              ) : (
+                ""
+              )}
+
               <div className="site-card-wrapper my-5 flex-grow-1 row-eq-height">
                 <Row gutter={16}>
                   <Col md={6} sm={24} style={{ width: "100%" }}>
@@ -283,12 +296,10 @@ export async function getServerSideProps(ctx) {
       headers: myHeaders,
       body: raw
     }
-    // Fetch data from external API
     const res = await fetch(`${baseUrl}/api/user/UserDetails`, requestOptions)
     UserData = await res.json()
   }
 
-  // Pass data to the page via props
   return { props: { UserData } }
 }
 

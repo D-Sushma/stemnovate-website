@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import ReactPlayer from "react-player"
 import Link from "next/link"
 import dynamic from "next/dynamic"
+import { baseUrl } from "~/repositories/Repository"
 
 const Container = dynamic(() => import("~/components/layouts/Container"), {
   loading: () => <p>Loading...</p>
@@ -11,6 +12,9 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
   loading: () => <p>Loading...</p>
 })
 const Image = dynamic(() => import("~/components/elements/Image"), {
+  loading: () => <p>Loading...</p>
+})
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
   loading: () => <p>Loading...</p>
 })
 const ProductList = dynamic(
@@ -22,7 +26,7 @@ const Subscribe = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-const categoryListScreen = () => {
+const categoryListScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -41,16 +45,42 @@ const categoryListScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
+
   return (
     <Container
-      title="Cell Culture"
-      description={`Stemnovate cell culture media are customized for skin, liver, keratinocytes, heart and brain in vitro modelling`}
+      title="Cell Culture | Your Drug Discovery Platform"
+      ogimg={ogImage}
+      description={ogDesc}
     >
       <main className="ps-page ps-page--inner">
-        <div className="ps-page__header  breadcrumb-h product-breadcrumb-bg">
+        <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+          <BannerImage
+            alt="cell-culture-banner"
+            src={bgImage}
+            layout="fill"
+            objectFit="cover"
+            priority={true}
+            style={{
+              zIndex: -1
+            }}
+          />
           <div className="container ">
             <BreadCrumb breacrumb={breadcrumb} />{" "}
-            <h1 className="text-center  text-white p-2">Cell Culture</h1>
+            <h1 className="text-center  text-white p-2">
+              {ProductData?.ProductData?.data[0]?.banner_content}
+            </h1>
           </div>
         </div>
 
@@ -73,19 +103,19 @@ const categoryListScreen = () => {
 
             <div className=" bg-02-section">
               <div className="container">
-                <div className="row">
-                  <div className="col-md-6 text-center">
+                <div className="row pt-3">
+                  <div className="col-md-6 text-center mb-15">
                     <div>
-                      <div className="overflow-hidden">
+                      <div className="overflow-hidden ps-banner__image image-box-container mx-2 image-box-container-mb">
                         <Image
-                          className="ps-banner__image"
-                          src="/static/img/products/cell-culture/Chemically-Defined-Media.jpg"
+                          className="zoom-in"
+                          src="/static/img/products/cell-culture/Chemically-Defined-Media.svg"
                           alt="CHEMICALLY DEFINED MEDIA"
-                          width={1200}
-                          height={675}
+                          width={490}
+                          height={294}
                         />
                       </div>
-                      <h2 className="m-4">Chemically Defined Media</h2>
+                      <h2 className=" m-4">Chemically Defined Media</h2>
                       <p className="mx-4">
                         This media is for in vitro human or animal cell culture.
                         As we optimize all the chemical components this type of
@@ -96,13 +126,13 @@ const categoryListScreen = () => {
                   </div>
                   <div className="col-md-6 text-center">
                     <div>
-                      <div className="overflow-hidden">
+                      <div className="overflow-hidden ps-banner__image image-box-container mx-2 image-box-container-mb">
                         <Image
-                          className="ps-banner__image"
-                          src="/static/img/products/cell-culture/Animal-Component-Free-Media.jpg"
+                          className="zoom-in"
+                          src="/static/img/products/cell-culture/Animal-Component-Free-Media.svg"
                           alt="ANIMAL COMPONENT FREE MEDIA"
-                          width={1200}
-                          height={675}
+                          width={490}
+                          height={294}
                         />
                       </div>
                       <h2 className=" m-4">Animal Component Free Media</h2>
@@ -120,15 +150,15 @@ const categoryListScreen = () => {
 
             <div className=" about-section">
               <div className="container">
-                <section className="ps-section--block-grid ">
+                <section className="ps-section--block-grid pt-3">
                   <div className="ps-section__thumbnail">
                     <Link href="#">
-                      <div className="ps-section__image link-hover-thumb-shape">
+                      <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2">
                         <Image
                           src="/static/img/products/cell-culture/Classical-cell-culture-Media.jpg"
                           alt="CLASSICAL CELL CULTURE MEDIA"
-                          width={1200}
-                          height={675}
+                          width={500}
+                          height={300}
                         />
                       </div>
                     </Link>
@@ -485,10 +515,10 @@ const categoryListScreen = () => {
                 <div className="row">
                   <div className="col-md-12 text-center">
                     <div>
-                      <div className="overflow-hidden">
+                      <div className="overflow-hidden mt-3 video-container-parent">
                         <div
-                          className="ps-banner__image ml-auto mr-auto"
-                          style={{ width: "500px" }}
+                          className="ps-banner__image mx-auto image-box-container video-container"
+                          // style={{ width: "500px" }}
                         >
                           <ReactPlayer
                             playing
@@ -501,7 +531,7 @@ const categoryListScreen = () => {
                         </div>
                       </div>
                       <h2 className="m-4">Work With Us!</h2>
-                      <p className="mx-4">
+                      <p className="mx-4 mb-3">
                         At Stemnovate we have developed ready-to-use cell
                         culture media, but we can also customize your media to
                         fit your project (and your budget). We can provide
@@ -527,6 +557,37 @@ const categoryListScreen = () => {
       </main>
     </Container>
   )
+}
+
+export async function getServerSideProps() {
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Cell Culture"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
+  return {
+    props: {
+      ProductData
+    }
+  }
 }
 
 export default connect((state) => state)(categoryListScreen)

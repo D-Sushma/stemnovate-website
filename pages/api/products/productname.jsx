@@ -12,13 +12,12 @@ const addPrice = (getProducts, promotionsData) => {
         const element = getProducts[index];
         getProducts[index].product_details.MRP = parseFloat(element.product_details.sale_price);
         getProducts[index].product_details.sale_price = parseFloat(getDiscountedAmaount(element.product_details.sale_price, promotionsData[0].discount_percent));
-        // eslint-disable-next-line prefer-destructuring
         getProducts[index].offers_details = promotionsData[0];
     }
-
     return getProducts;
 };
 export default async (req, res) => {
+    res.setHeader('Cache-Control', 's-maxage=86400')
     try {
         if (req.method == "POST") {
             const { slug, promoId } = req.body;
@@ -28,10 +27,6 @@ export default async (req, res) => {
                     where: { id: promoId },
                 });
                 if (promotionsData.length > 0) {
-                    const element = promotionsData[0].product_category;
-                    const str_array = JSON.parse(element);
-                    const category_id = [];
-
                     var getProducts = await prisma.products.findMany({
                         where: {
                             product_slug: slug,
@@ -41,14 +36,20 @@ export default async (req, res) => {
                             product_name: true,
                             product_slug: true,
                             product_description: true,
+                            important_notes: true,
                             CatalogueNumber: true,
                             LotNumber: true,
                             short_description: true,
                             category_id: true,
+                            coupon_code: true,
+                            coupon_text: true,
                             stock: true,
                             deliver_type: true,
                             product_image: true,
+                            primary_product_image: true,
+                            shareimage: true,
                             Product_details_pdf: true,
+                            privacy_policy_pdf: true,
                             description_tab: true,
                             specification_tab: true,
                             ViralScreening_tab: true,
@@ -70,14 +71,11 @@ export default async (req, res) => {
                     });
                     if (getProducts.length > 0) {
                         const mydata = await addPrice(getProducts, promotionsData);
-                        // console.log("PROMOPRO", mydata);
-
                         var response = {
                             status: 200,
                             slug: slug.replace(/-/g, " "),
                             ProductsList: mydata,
                         };
-
                         res.status(200).json(response);
                     } else {
                         var response = {
@@ -85,11 +83,9 @@ export default async (req, res) => {
                             slug: slug.replace(/-/g, " "),
                             ProductsList: [],
                         };
-
                         res.status(501).json(response);
                     }
                 } else {
-                    console.log("Error");
                     res.status(200).json({ status: 201, data: [] });
                 }
             } else {
@@ -102,14 +98,20 @@ export default async (req, res) => {
                         product_name: true,
                         product_slug: true,
                         product_description: true,
+                        important_notes: true,
                         CatalogueNumber: true,
                         LotNumber: true,
                         short_description: true,
                         category_id: true,
+                        coupon_code: true,
+                        coupon_text: true,
                         stock: true,
                         deliver_type: true,
                         product_image: true,
+                        primary_product_image: true,
+                        shareimage: true,
                         Product_details_pdf: true,
+                        privacy_policy_pdf: true,
                         description_tab: true,
                         specification_tab: true,
                         ViralScreening_tab: true,
@@ -136,7 +138,6 @@ export default async (req, res) => {
                         slug: slug.replace(/-/g, " "),
                         ProductsList: getProducts,
                     };
-
                     res.status(200).json(response);
                 } else {
                     var response = {
@@ -144,7 +145,6 @@ export default async (req, res) => {
                         slug: slug.replace(/-/g, " "),
                         ProductsList: [],
                     };
-
                     res.status(501).json(response);
                 }
             }
@@ -152,7 +152,6 @@ export default async (req, res) => {
             res.status(400).json("Bad Request");
         }
     } catch (error) {
-        // res.status(500).json({ status: 500, data: error });
         throw error;
     }
 };

@@ -15,7 +15,6 @@ function ResetPassword() {
   const router = useRouter()
   const { Code } = router.query
   useEffect(() => {
-    console.log("code", Code)
     if (Code) {
       var email = decode(Code)
       setIsLoading(true)

@@ -12,10 +12,10 @@ import { ToastContainer, toast } from "react-toastify"
 import { FaArrowRight } from "react-icons/fa"
 
 const ProductList = ({ ecomerce, slug }) => {
- const { price } = useProduct()
+  const { price } = useProduct()
   const [ProductData, setProductData] = useState("")
   const [isLoading, setisLoading] = React.useState(false)
- const [AddtoCart, setAddtoCart] = useState([])
+  const [AddtoCart, setAddtoCart] = useState([])
   const dispatch = useDispatch()
   const { loading, addItem } = useEcomerce()
   const { data: session } = useSession()
@@ -167,11 +167,9 @@ const ProductList = ({ ecomerce, slug }) => {
                       <div className="card-body  rounded-lg p-0 overlay-content-p">
                         <div className="p-5">
                           <Link href={`${slug}/${post.slug}`}>
-                           
-                              <h2 className="h2 text-white span-with-link">
-                                <b>{post.category_name}</b>
-                              </h2>
-                          
+                            <h2 className="h2 text-white span-with-link">
+                              <b>{post.category_name}</b>
+                            </h2>
                           </Link>
 
                           <Link href={`${slug}/${post.slug}`}>
@@ -204,7 +202,7 @@ const ProductList = ({ ecomerce, slug }) => {
                             href={`/product/${value.product_slug}`}
                             as={`/product/${value.product_slug}`}
                           >
-                            <div style={{cursor:"pointer"}}>
+                            <div style={{ cursor: "pointer" }}>
                               <Image
                                 loader={myLoader}
                                 src={`${process.env.AWS_S3BUCKET_URL}${
@@ -225,7 +223,10 @@ const ProductList = ({ ecomerce, slug }) => {
                                   href={`/product/${value.product_slug}`}
                                   as={`/product/${value.product_slug}`}
                                 >
-                                  <div className="reference-website" style={{cursor:"pointer"}}>
+                                  <div
+                                    className="reference-website"
+                                    style={{ cursor: "pointer" }}
+                                  >
                                     {value && value.CatalogueNumber}
                                   </div>
                                 </Link>
@@ -246,7 +247,10 @@ const ProductList = ({ ecomerce, slug }) => {
                                     href={`/product/${value.product_slug}`}
                                     as={`/product/${value.product_slug}`}
                                   >
-                                    <div className=" reference-website" style={{cursor:"pointer"}}>
+                                    <div
+                                      className=" reference-website"
+                                      style={{ cursor: "pointer" }}
+                                    >
                                       View Details
                                     </div>
                                   </Link>
@@ -294,7 +298,9 @@ const ProductList = ({ ecomerce, slug }) => {
                                 href={`/product/${value.product_slug}`}
                                 as={`/product/${value.product_slug}`}
                               >
-                                <span className="span-with-link">{value && value.CatalogueNumber}</span>
+                                <span className="span-with-link">
+                                  {value && value.CatalogueNumber}
+                                </span>
                               </Link>
                             </div>
                             <div
@@ -503,4 +509,5 @@ const ProductList = ({ ecomerce, slug }) => {
   )
 }
 
+// export default categoryListScreen;
 export default connect((state) => state)(ProductList)

@@ -122,8 +122,27 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
 
                     </Menu.Item>
 
+                    {/* MTA */}
                     <Menu.Item
                         key="5"
+                        style={{
+                            width: 200,
+                            margin: "0 10px",
+                            marginBottom: "10px",
+                            textAlign: "left",
+                            cursor: "pointer",
+                        }}>
+                        <Link href="/user/Mta">
+                            <p>
+                                <FaWpforms className="site-form-item-icon mr-2 mb-1" />
+                                MTA
+                            </p>
+                        </Link>
+
+                    </Menu.Item>
+
+                    <Menu.Item
+                        key="6"
                         style={{
                             width: 200,
                             margin: "0 10px",
@@ -191,14 +210,14 @@ const ModuleHeaderActions = ({ reffrals, ecomerce, search = false }) => {
                 </Link>
 
             </li>
-            <li>
+            {/* <li>
                 <Link href="/shop/wishlist">
                     <div className="header__action link-hover-thumb-shape">
                         <RiHeartAddLine />
                         <span className="header__action-badge">{wishlistTotal ? wishlistTotal : 0}</span>
                     </div>
                 </Link>
-            </li>
+            </li> */}
             <li>
                 <Link href="#">
                     <div id="cart-mini" onClick={(e) => handleOpenDrawer(e)}>

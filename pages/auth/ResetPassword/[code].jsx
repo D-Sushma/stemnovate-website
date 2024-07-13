@@ -69,7 +69,6 @@ function ResetPassword() {
 
   const onFinish = async (values) => {
     values.code = code
-    // console.log(values)
     setisLoading(true)
     try {
       const response = await fetch(
@@ -112,7 +111,6 @@ function ResetPassword() {
         setisLoading(false)
       }
     } catch (error) {
-      console.error(error)
       toast.error("Something Went to wrong", {
         position: "top-right",
         autoClose: 5000,
@@ -129,7 +127,6 @@ function ResetPassword() {
   }
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo)
   }
 
   return (

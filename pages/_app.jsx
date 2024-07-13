@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { wrapper } from "../store/store"
 import { CookiesProvider } from "react-cookie"
 import "swiper/swiper-bundle.min.css"
@@ -21,6 +21,7 @@ import { SessionProvider } from "next-auth/react"
 import NextNProgress from "nextjs-progressbar"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import dynamic from "next/dynamic"
+import { baseUrl } from "~/repositories/Repository"
 
 const MasterLayout = dynamic(
   () => import("~/components/layouts/MasterLayout"),
@@ -28,6 +29,9 @@ const MasterLayout = dynamic(
 )
 
 function App({ Component, pageProps: { ...pageProps } }) {
+  const [details, setDetails] = React.useState("");
+  const btnRef = useRef(null);
+
   useEffect(() => {
     setTimeout(function () {
       document.getElementById("__next").classList.add("ps-loaded")
@@ -35,8 +39,25 @@ function App({ Component, pageProps: { ...pageProps } }) {
   })
 
   useEffect(() => {
+    getFooterImage();
     import("bootstrap/dist/js/bootstrap")
   }, [])
+
+  const getFooterImage = async () => {
+    var requestParam = {
+      method: "GET"
+    }
+    const response = await fetch(
+      baseUrl + "api/footer/getFooterImage",
+      requestParam
+    )
+    const resData = await response.json()
+
+    if (resData.status == 200) {
+      var url = resData?.data
+      setDetails(url)
+    }
+  }
 
   function ErrorFallback({ error, resetErrorBoundary }) {
     return (
@@ -59,7 +80,7 @@ function App({ Component, pageProps: { ...pageProps } }) {
           showOnShallow={true}
         />
         <CookiesProvider>
-          <MasterLayout>
+          <MasterLayout ref={btnRef} details={details}>
             <Component {...pageProps} />
           </MasterLayout>
         </CookiesProvider>

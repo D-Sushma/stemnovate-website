@@ -1,20 +1,18 @@
 import prisma from "~/lib/prisma"
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 's-maxage=86400')
   if (req.method == "POST") {
     const { slug } = req.body
-
     var blogDetails = await prisma.post.findMany({
       orderBy: {
         id: "desc"
       },
       where: { deleted_at: null, slug: slug }
     })
-
     if (blogDetails.length > 0) {
       res.status(200).json({ status: 200, data: blogDetails })
     } else {
-      console.log("Error")
       res.status(200).json({ status: 201, data: [] })
     }
   } else {
@@ -38,7 +36,6 @@ export default async function handler(req, res) {
         featuredBlog: featuredBlogDetails
       })
     } else {
-      console.log("Error")
       res.status(200).json({ status: 201, data: [], featuredBlog: [] })
     }
   }

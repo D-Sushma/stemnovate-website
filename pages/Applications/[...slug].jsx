@@ -127,9 +127,7 @@ export async function getServerSideProps({ query }) {
     ProductData = myProductData
   }
 
-  // // Pass data to the page via props
   return { props: { ProductData } }
 }
 
-// export default Applications;
 export default connect((state) => state)(Applications)

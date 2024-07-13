@@ -32,7 +32,7 @@ const FormSearchHeader = dynamic(
   { loading: () => <p>Loading...</p> }
 )
 
-const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
+const NavigationBottom = ({ ecomerce, app, classes, isActive = true, ref }) => {
     const [isMenu, setIsMenu] = useState(false);
 
     const [availableModules, setavailableModules] = useState([]);
@@ -66,7 +66,7 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
     const getmenu = async () => {
         // Fetch data from external API
         setisloading(true);
-        const res = await fetch(`${process.env.NEXT_BASE_URL}api/menu/getmenu`);
+        const res = await fetch(`${process.env.NEXT_BASE_URL}api/menu/getmenu`, { next: { revalidate: 3600 } });
         const data = await res.json();
         setavailableModules(data);
         SetMainMenu(data);
@@ -90,7 +90,7 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
                             margin: "10px",
                             textAlign: "left",
                         }}>
-                        <Link href="/user/dashboard">
+                        <Link ref={ref} href="/user/dashboard">
                             <div>
                             <AiOutlineUserSwitch className="site-form-item-icon mr-1 mb-1" />
                             Dashboard
@@ -195,29 +195,29 @@ const NavigationBottom = ({ ecomerce, app, classes, isActive = true }) => {
         <div>
             <nav className={`navigation--bottom ${classes} ${isActive && "active"}`}>
                 <div className="navigation__content">
-                    <a className="navigation__item" onClick={(e) => handleOpenMenu(e)}>
+                    <a href="#" className="navigation__item" onClick={(e) => handleOpenMenu(e)}>
                         <i className="icon-menu"></i>
                     </a>
                     <ActiveLink activeClassName="active" href="/">
-                        <a className="navigation__item">
+                        <a href="/" className="navigation__item">
                             <i className="icon-home2"></i>
                         </a>
                     </ActiveLink>
                     <ActiveLink activeClassName="active" href="#">
                         <Dropdown overlay={UserMenu} trigger={["click"]} placement="top" arrow={{ pointAtCenter: true }}>
-                            <a className="navigation__item ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                            <a href="#" className="navigation__item ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                                 <i className="icon-user"></i>
                             </a>
                         </Dropdown>
                     </ActiveLink>
 
-                    <ActiveLink activeClassName="active" href="/shop/wishlist">
-                        <a className="navigation__item">
+                    {/* <ActiveLink activeClassName="active" href="/shop/wishlist">
+                        <a href="/shop/wishlist" className="navigation__item">
                             <i className="icon-heart"></i>
                         </a>
-                    </ActiveLink>
+                    </ActiveLink> */}
                     <ActiveLink activeClassName="active" href="/Products">
-                        <a className="navigation__item cart">
+                        <a href="/Products" className="navigation__item cart">
                             <i className="icon-bag2"></i>
                             <span>{ecomerce.cartItems && ecomerce.cartItems.length > 0 ? ecomerce.cartItems.length : "0"}</span>
                         </a>

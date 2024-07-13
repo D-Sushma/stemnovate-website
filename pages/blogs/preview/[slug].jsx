@@ -121,7 +121,7 @@ const Blogs = (props) => {
                           width={1200}
                           height={675}
                           placeholder="blur"
-                          blurDataURl="/static/image/blurred.png"
+                          blurDataURL="/static/image/blurred.png"
                         />
                       </div>
                     </Link>
@@ -203,7 +203,6 @@ const Blogs = (props) => {
 }
 
 export async function getServerSideProps({ query }) {
-  // Fetch data from external API
   const slug = query.slug
 
   var myHeaders = new Headers()
@@ -224,7 +223,6 @@ export async function getServerSideProps({ query }) {
     requestOptions
   )
   const PostList = await response.json()
-  // Pass data to the page via props
   return { props: { PostList } }
 }
 

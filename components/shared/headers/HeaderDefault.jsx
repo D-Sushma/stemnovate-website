@@ -28,6 +28,7 @@ const ModuleHeaderNotice = dynamic(
 
 const HeaderDefault = (props, { classes = "" }) => {
   var type = "white"
+
   useEffect(() => {
     if (props.menus !== undefined) {
       props.SetMainMenuhandler(props.menus)
@@ -77,7 +78,7 @@ const HeaderDefault = (props, { classes = "" }) => {
   const getmenu = async () => {
     // Fetch data from external API
     setisloading(true)
-    const res = await fetch(`${process.env.NEXT_BASE_URL}api/menu/getmenu`)
+    const res = await fetch(`${process.env.NEXT_BASE_URL}api/menu/getmenu`, { next: { revalidate: 3600 } })
     const data = await res.json()
     setavailableModules(data)
     props.SetMainMenuhandler(data)

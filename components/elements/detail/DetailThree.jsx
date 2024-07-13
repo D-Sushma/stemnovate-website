@@ -83,47 +83,89 @@ const DetailThree = ({ product }) => {
           <div className="ps-product__left">
             <ModuleDetailTopInformation product={product} />
             <ModuleProductDetailDescription product={product} />
-            <div className="ps-product__ecomerce-actions">
-              <strong>SDS</strong>
-              <br />
-              {session ? (
-                <Link
-                  href={
-                    product.Product_details_pdf != ""
-                      ? `${process.env.AWS_S3BUCKET_URL}${product.Product_details_pdf}`
-                      : "#"
-                  }
-                  passHref
-                >
-                  <a
-                    target={
-                      product.Product_details_pdf != "" ? `_blank` : "_self"
+            <div className="d-flex justify-content-between">
+              <div className="ps-product__ecomerce-actions">
+                <strong>SDS</strong>
+                <br />
+                {session ? (
+                  <Link
+                    href={
+                      product?.Product_details_pdf != ""
+                        ? `${process.env.AWS_S3BUCKET_URL}${product?.Product_details_pdf}`
+                        : "#"
                     }
-                    rel="noopener noreferrer"
+                    passHref
+                  >
+                    <a
+                      target={
+                        product?.Product_details_pdf != "" ? `_blank` : "_self"
+                      }
+                      rel="noopener noreferrer"
+                    >
+                      <Tooltip title="SDS" placement="bottom">
+                        <HiDownload size={30} />
+                      </Tooltip>
+                    </a>
+                  </Link>
+                ) : (
+                  <a
+                    href="#"
+                    onClick={() => {
+                      showEmail()
+                    }}
                   >
                     <Tooltip title="SDS" placement="bottom">
                       <HiDownload size={30} />
                     </Tooltip>
                   </a>
-                </Link>
-              ) : (
-                <a
-                  onClick={() => {
-                    showEmail()
-                  }}
-                >
-                  <Tooltip title="SDS" placement="bottom">
-                    <HiDownload size={30} />
-                  </Tooltip>
-                </a>
-              )}
+                )}
+              </div>
+              <div className="ps-product__ecomerce-actions">
+                <strong>Privacy Policy Doc</strong>
+                <br />
+                {session ? (
+                  <Link
+                    href={
+                      product?.privacy_policy_pdf != "" && product?.privacy_policy_pdf != null
+                        ? `${process.env.AWS_S3BUCKET_URL}${product?.privacy_policy_pdf}`
+                        : "#"
+                    }
+                    passHref
+                  >
+                    <a
+                      target={
+                        product?.privacy_policy_pdf != "" && product?.privacy_policy_pdf != null ? `_blank` : "_self"
+                      }
+                      rel="noopener noreferrer"
+                    >
+                      <Tooltip title="Privacy Policy Doc" placement="bottom">
+                        <HiDownload size={30} />
+                      </Tooltip>
+                    </a>
+                  </Link>
+                ) : (
+                  <a
+                    href="#"
+                    onClick={() => {
+                      showEmail()
+                    }}
+                  >
+                    <Tooltip title="Privacy Policy Doc" placement="bottom">
+                      <HiDownload size={30} />
+                    </Tooltip>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
+
           <div className="ps-product__right">
+            {/* <div className="ps-product__coupon_r"> */}
             <div className="ps-product__shopping-wrapper">
               {price(product.product_details)}
               <ModuleDetailShoppingActions product={product} />
             </div>
+            {/* </div> */}
           </div>
         </div>
       </div>
@@ -133,6 +175,8 @@ const DetailThree = ({ product }) => {
           resources_id={product.resources_id}
           pType={product?.productspecification?.Sex}
           type={product?.type}
+          imp_notes={product?.important_notes}
+          share_img={product?.shareimage}
         />
         <ModuleDetailTabs product={product} />
       </div>

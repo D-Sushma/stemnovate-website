@@ -14,12 +14,15 @@ const BreadCrumb = dynamic(() => import("~/components/elements/BreadCrumb"), {
 const Image = dynamic(() => import("~/components/elements/Image"), {
   loading: () => <p>Loading...</p>
 })
+const BannerImage = dynamic(() => import("~/components/elements/BannerImage"), {
+  loading: () => <p>Loading...</p>
+})
 const Subscribe = dynamic(
   () => import("~/components/shared/sections/Subscribe"),
   { loading: () => <p>Loading...</p> }
 )
 
-const texicologyScreen = () => {
+const texicologyScreen = (ProductData) => {
   const breadcrumb = [
     {
       id: 1,
@@ -43,17 +46,41 @@ const texicologyScreen = () => {
     }
   ]
 
+  var ogImage = ""
+  var images1 = []
+  var products_img1 = ProductData?.ProductData?.data[0]?.og_img?.split(",")
+  var ogDesc = ProductData?.ProductData?.data[0]?.og_desc
+  if (products_img1 && products_img1.length > 0) {
+    products_img1.map((item) => {
+      images1.push(`${process.env.AWS_S3BUCKET_URL}${item}`)
+    })
+    ogImage = images1[0]
+  }
+  var bgImage = `${process.env.AWS_S3BUCKET_URL}${ProductData?.ProductData?.data[0]?.banner_img}`
   return (
     <>
       <Container
-        title="Neuron"
-        description="Stemnovate page for IPSC neuronal differentiation and disease modelling."
+        title="Neuron | Your Drug Discovery Platform"
+        ogimg={ogImage}
+        description={ogDesc}
       >
         <main className="ps-page ps-page--inner">
-          <div className="ps-page__header  breadcrumb-h application-breadcrumb-bg">
+          <div className="ps-page__header  breadcrumb-h banner-breadcrumb-bg">
+            <BannerImage
+              alt="heart-Banner"
+              src={bgImage}
+              layout="fill"
+              priority={true}
+              objectFit="cover"
+              style={{
+                zIndex: -1
+              }}
+            />
             <div className="container ">
               <BreadCrumb breacrumb={breadcrumb} />
-              <h1 className="text-center  text-white p-2">Neuron</h1>
+              <h1 className="text-center  text-white p-2">
+                {ProductData?.ProductData?.data[0]?.banner_content}
+              </h1>
             </div>
           </div>
 
@@ -109,20 +136,21 @@ const texicologyScreen = () => {
               </div>
               <div className="about-section">
                 <div className="container">
-                  <section className="ps-section--block-grid">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/applications/Neuron/01.jpg"
+                            src="/static/img/applications/Neuron/01.svg"
                             alt="HUMAN iPSC-DERIVED SENSORY NEURONS FOR HEARING LOSS"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc">
                         <h2 className="  font-weight-bold">
                           Human IPSC-Derived Sensory Neurons For Hearing Loss
@@ -162,20 +190,21 @@ const texicologyScreen = () => {
               </div>
               <div className="bg-02-section">
                 <div className="container">
-                  <section className="ps-section--block-grid">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/applications/Neuron/02.jpg"
+                            src="/static/img/applications/Neuron/02.svg"
                             alt="HUMAN iPSC-DERIVED SENSORY NEURONS"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc">
                         <h2 className="  font-weight-bold">
                           Human IPSC-Derived Sensory Neurons For Neuropathic
@@ -217,20 +246,21 @@ const texicologyScreen = () => {
               </div>
               <div className="about-section">
                 <div className="container">
-                  <section className="ps-section--block-grid">
+                  <section className="ps-section--block-grid pt-3">
                     <div className="ps-section__thumbnail">
                       <Link href="#">
-                        <div className="ps-section__image link-hover-thumb-shape">
+                        <div className="ps-section__image link-hover-thumb-shape image-box-container mx-2 image-box-container-mb">
                           <Image
-                            src="/static/img/applications/Neuron/03.jpg"
+                            src="/static/img/applications/Neuron/03.svg"
                             alt="HUMAN iPSC-DERIVED MICROGLIA"
-                            width={1200}
-                            height={675}
+                            width={640}
+                            height={360}
+                            quality={80}
                           />
                         </div>
                       </Link>
                     </div>
-                    <div className="ps-section__content">
+                    <div className="ps-section__content mt-0">
                       <div className="ps-section__desc">
                         <h2 className="  font-weight-bold">
                           Human IPSC-Derived Microglia For Neurological Diseases
@@ -263,7 +293,7 @@ const texicologyScreen = () => {
 
 export async function getServerSideProps({ query }) {
   const slug = query.slug
-  var ProductData = []
+  var ProductData1 = []
   var data = ""
   if (slug != undefined) {
     data = slug[slug.length - 1]
@@ -283,12 +313,33 @@ export async function getServerSideProps({ query }) {
 
     const res = await fetch(baseUrl + "/api/products/catbyname", requestOptions)
     const myProductData = await res.json()
-    ProductData = myProductData
+    ProductData1 = myProductData
   }
 
-  // // Pass data to the page via props
+  var ProductData = []
+  var requestParam = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      page_name: "Brain"
+    })
+  }
+  const res = await fetch(
+    baseUrl + "/api/header_banners/getBanners",
+    requestParam
+  )
+  const myProductData = await res.json()
+
+  if (myProductData.status == 200) {
+    ProductData = myProductData
+  } else {
+    ProductData = []
+  }
+
   return { props: { ProductData } }
 }
 
-// export default texicologyScreen;
 export default connect((state) => state)(texicologyScreen)
